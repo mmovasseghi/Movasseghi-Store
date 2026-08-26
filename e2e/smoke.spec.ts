@@ -21,6 +21,18 @@ test.describe('storefront smoke', () => {
     await expect(page.getByRole('button', { name: /سبد|افزودن/i }).first()).toBeVisible()
   })
 
+  test('add to cart and reach checkout', async ({ page }) => {
+    await page.goto('/shop')
+    const hasPriced = await page.getByText('تومان').first().isVisible().catch(() => false)
+    test.skip(!hasPriced, 'Catalog is phone-quote only (no displayed prices)')
+    const pricedProduct = page.locator('a[href^="/product/"]').filter({ hasText: 'تومان' }).first()
+    await pricedProduct.click()
+    await page.getByRole('button', { name: /افزودن به سبد/i }).first().click()
+    await page.goto('/checkout')
+    await expect(page.getByRole('heading', { name: 'تسویه حساب' })).toBeVisible()
+    await expect(page.getByText(/خلاصه سفارش/i)).toBeVisible()
+  })
+
   test('cart page', async ({ page }) => {
     await page.goto('/cart')
     await expect(page.getByRole('heading', { name: 'سبد خرید' })).toBeVisible()
