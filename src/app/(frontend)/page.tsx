@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { ProductCard } from '@/components/shop/ProductCard'
 import { getPayloadClient } from '@/lib/payload'
@@ -5,83 +6,180 @@ import { productCardProps } from '@/lib/products'
 
 export const dynamic = 'force-dynamic'
 
+const TRUST = [
+  { title: '۱۰۰٪ گیاهی', desc: 'ظروف آملون بر پایه نشاسته ذرت — دوستدار محیط زیست' },
+  { title: 'عمده و خرده', desc: 'فروش B2B برای رستوران، کترینگ و سازمان‌ها' },
+  { title: 'ارسال سراسری', desc: 'تحویل در تهران و ارسال به سراسر ایران' },
+  { title: 'مشاوره خرید', desc: 'تماس مستقیم با تیم فروش برای انتخاب محصول' },
+]
+
 export default async function HomePage() {
   let featured: ReturnType<typeof productCardProps>[] = []
+  let categories: { slug: string; name: string; productCount?: number | null }[] = []
 
   try {
     const payload = await getPayloadClient()
-    const { docs } = await payload.find({
-      collection: 'products',
-      where: { status: { equals: 'published' } },
-      limit: 8,
-      sort: '-updatedAt',
-      depth: 1,
-    })
-    featured = docs.map(productCardProps)
+    const [productResult, categoryResult] = await Promise.all([
+      payload.find({
+        collection: 'products',
+        where: { status: { equals: 'published' } },
+        limit: 8,
+        sort: '-updatedAt',
+        depth: 1,
+      }),
+      payload.find({
+        collection: 'categories',
+        limit: 30,
+        sort: 'sortOrder',
+        depth: 0,
+      }),
+    ])
+    featured = productResult.docs.map(productCardProps)
+    categories = categoryResult.docs
+      .filter((c) => !c.parent)
+      .map((c) => ({
+        slug: c.slug,
+        name: c.name,
+        productCount: c.productCount,
+      }))
   } catch {
-    // DB may be unavailable during static export / first boot
+    // graceful empty
   }
+
+  const mainCategory = categories.find((c) => c.slug.includes('آملون')) ?? categories[0]
 
   return (
     <main>
-      <section className="bg-gradient-to-b from-brand-aqua-pale to-brand-off-white px-4 py-16">
-        <div className="mx-auto max-w-6xl text-center">
-          <h1 className="text-3xl font-extrabold leading-tight text-brand-ink md:text-5xl">
+      {/* Hero — legacy picMain-1 + commercial SEO H1 */}
+      <section className="relative overflow-hidden bg-brand-ink">
+        <div className="absolute inset-0">
+          <Image
+            src="/brand/hero.png"
+            alt="ظروف یکبار مصرف گیاهی آملون"
+            fill
+            className="object-cover opacity-40"
+            priority
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-l from-brand-ink/95 via-brand-ink/70 to-brand-ink/30" />
+        </div>
+        <div className="relative mx-auto max-w-6xl px-4 py-16 md:py-24">
+          <p className="text-sm font-medium text-brand-aqua">فروشگاه موثقی</p>
+          <h1 className="mt-3 max-w-2xl text-3xl font-extrabold leading-tight text-white md:text-5xl">
             ظروف یکبار مصرف گیاهی آملون
           </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-brand-muted md:text-lg">
-            تولید و توزیع ظروف پایدار برای رستوران، کافه، فست‌فود و catering — با کیفیت ثابت و ارسال
+          <p className="mt-4 max-w-xl text-base leading-relaxed text-white/85 md:text-lg">
+            تولید و توزیع ظروف پایدار برای رستوران، کافه، فست‌فود و catering — کیفیت ثابت، ارسال
             سراسر ایران.
           </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
+          <div className="mt-8 flex flex-wrap gap-3">
             <Link
-              href="/shop"
-              className="rounded-lg bg-brand-green px-6 py-3 font-medium text-white hover:bg-brand-green-light"
+              href={mainCategory ? `/shop/${mainCategory.slug}` : '/shop'}
+              className="rounded-xl bg-brand-green px-6 py-3.5 text-base font-semibold text-white hover:bg-brand-green-light"
             >
-              مشاهده محصولات
+              {mainCategory ? mainCategory.name : 'مشاهده محصولات'}
             </Link>
             <Link
               href="/b2b"
-              className="rounded-lg border border-brand-green px-6 py-3 font-medium text-brand-green hover:bg-brand-aqua-pale"
+              className="rounded-xl border-2 border-white/30 px-6 py-3.5 text-base font-semibold text-white hover:bg-white/10"
             >
               سفارش عمده
             </Link>
+            <a
+              href="tel:09125199105"
+              className="rounded-xl bg-white/10 px-6 py-3.5 text-base font-semibold text-white backdrop-blur hover:bg-white/20"
+            >
+              ۰۹۱۲۵۱۹۹۱۰۵
+            </a>
           </div>
         </div>
       </section>
 
+      {/* Categories */}
+      {categories.length > 0 && (
+        <section className="border-b border-border bg-white px-4 py-8">
+          <div className="mx-auto max-w-6xl">
+            <h2 className="text-lg font-bold text-brand-ink">دسته‌بندی محصولات</h2>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {categories.map((cat) => (
+                <Link
+                  key={cat.slug}
+                  href={`/shop/${cat.slug}`}
+                  className="rounded-full border border-border bg-brand-off-white px-4 py-2 text-sm font-medium text-brand-ink transition hover:border-brand-green hover:text-brand-green"
+                >
+                  {cat.name}
+                  {cat.productCount != null && cat.productCount > 0 && (
+                    <span className="ms-1.5 text-brand-muted">({cat.productCount})</span>
+                  )}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Featured products — bordered grid DNA */}
       <section className="mx-auto max-w-6xl px-4 py-12">
-        <div className="mb-6 flex items-end justify-between">
-          <h2 className="text-xl font-bold text-brand-ink">محصولات منتخب</h2>
-          <Link href="/shop" className="text-sm text-brand-green hover:underline">
-            همه محصولات
+        <div className="mb-6 flex items-end justify-between gap-4">
+          <div>
+            <h2 className="text-xl font-bold text-brand-ink md:text-2xl">محصولات منتخب</h2>
+            <p className="mt-1 text-sm text-brand-muted">ظرف یکبار مصرف گیاهی — آماده سفارش</p>
+          </div>
+          <Link href="/shop" className="shrink-0 text-sm font-medium text-brand-green hover:underline">
+            همه محصولات ←
           </Link>
         </div>
         {featured.length > 0 ? (
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+          <div className="grid grid-cols-2 divide-x divide-y divide-border overflow-hidden rounded-xl border border-border md:grid-cols-4">
             {featured.map((p) => (
-              <ProductCard key={p.slug} {...p} />
+              <ProductCard key={p.slug} {...p} variant="grid" />
             ))}
           </div>
         ) : (
-          <p className="rounded-lg border border-dashed border-border bg-white p-8 text-center text-brand-muted">
-            پس از راه‌اندازی دیتابیس و import محصولات، لیست اینجا نمایش داده می‌شود.
+          <p className="rounded-xl border border-dashed border-border bg-white p-8 text-center text-brand-muted">
+            محصولات پس از import نمایش داده می‌شوند.
           </p>
         )}
       </section>
 
+      {/* Trust */}
       <section className="border-t border-border bg-white px-4 py-12">
-        <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-3">
-          {[
-            { title: 'جنس آملون', desc: 'ظروف گیاهی پایدار و مناسب سرو غذا' },
-            { title: 'عمده و خرده', desc: 'فروش B2B با MOQ و قیمت عمده' },
-            { title: 'ارسال ایران', desc: 'تحویل به سراسر کشور' },
-          ].map((item) => (
-            <div key={item.title} className="rounded-lg border border-border p-6">
+        <div className="mx-auto grid max-w-6xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {TRUST.map((item) => (
+            <div
+              key={item.title}
+              className="rounded-xl border border-border bg-brand-off-white p-5 transition hover:border-brand-aqua"
+            >
               <h3 className="font-bold text-brand-ink">{item.title}</h3>
-              <p className="mt-2 text-sm text-brand-muted">{item.desc}</p>
+              <p className="mt-2 text-sm leading-relaxed text-brand-muted">{item.desc}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* CTA band */}
+      <section className="bg-brand-green px-4 py-12">
+        <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 text-center md:flex-row md:text-start">
+          <div className="flex-1">
+            <h2 className="text-2xl font-bold text-white">سفارش عمده یا فاکتور سازمانی؟</h2>
+            <p className="mt-2 text-white/85">
+              برای رستوران‌ها، catering و توزیع‌کنندگان — MOQ و قیمت عمده با هماهنگی مستقیم.
+            </p>
+          </div>
+          <div className="flex shrink-0 flex-wrap justify-center gap-3">
+            <Link
+              href="/b2b"
+              className="rounded-xl bg-white px-6 py-3 font-semibold text-brand-green hover:bg-brand-aqua-pale"
+            >
+              درخواست B2B
+            </Link>
+            <a
+              href="tel:09125199105"
+              className="rounded-xl border-2 border-white px-6 py-3 font-semibold text-white hover:bg-white/10"
+            >
+              تماس فروش
+            </a>
+          </div>
         </div>
       </section>
     </main>

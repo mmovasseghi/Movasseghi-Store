@@ -85,7 +85,7 @@ export function CartView() {
         href="/checkout"
         className="block rounded-xl bg-brand-green py-3.5 text-center font-semibold text-white hover:bg-brand-green-light"
       >
-        ادامه خرید — به‌زودی
+        ادامه به تسویه حساب
       </Link>
     </div>
   )
