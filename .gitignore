@@ -56,5 +56,5 @@ scripts/legacy/_debug_prices.py
 *.tsbuildinfo
 next-env.d.ts
 
-# Vercel
-.vercel
+release.tar
+
