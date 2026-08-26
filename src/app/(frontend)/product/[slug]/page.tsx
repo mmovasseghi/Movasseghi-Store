@@ -62,7 +62,7 @@ export default async function ProductPage({ params }: Props) {
             <h1 className="text-2xl font-bold text-brand-ink">{product.name}</h1>
             {product.sku && <p className="mt-1 text-sm text-brand-muted">کد: {product.sku}</p>}
             <p className="mt-4 text-2xl font-bold tabular-nums text-brand-green">
-              {formatIrt(price)}
+              {price > 0 ? formatIrt(price) : 'تماس برای قیمت'}
             </p>
             {product.salePrice && product.salePrice < product.regularPrice && (
               <p className="text-sm text-brand-muted line-through tabular-nums">

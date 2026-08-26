@@ -6,6 +6,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function formatPrice(amount: number): string {
+  if (!amount || amount <= 0) return 'تماس بگیرید'
   return new Intl.NumberFormat('fa-IR').format(amount)
 }
 

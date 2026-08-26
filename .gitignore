@@ -42,7 +42,11 @@ Thumbs.db
 **/*.sql.gz
 **/*.tar.gz
 
-# Playwright (optional)
+# Python
+**/__pycache__/
+*.pyc
+scripts/legacy/debug_prices*.py
+scripts/legacy/_debug_prices.py
 /test-results/
 /playwright-report/
 /blob-report/

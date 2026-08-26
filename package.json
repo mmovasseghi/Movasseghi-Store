@@ -16,7 +16,9 @@
     "format": "biome format --write .",
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "seed:legacy": "cross-env NODE_OPTIONS=--no-deprecation tsx scripts/import/seed-from-legacy.ts",
+    "export:legacy": "python scripts/legacy/export-migration-bundle.py"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "3.88.0",
@@ -42,6 +44,7 @@
     "@types/react-dom": "19.2.3",
     "rimraf": "^6.0.1",
     "tailwindcss": "^4.1.8",
+    "tsx": "^4.22.4",
     "typescript": "5.7.3"
   },
   "engines": {

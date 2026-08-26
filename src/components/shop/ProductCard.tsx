@@ -39,13 +39,19 @@ export function ProductCard({ slug, name, price, salePrice, imageUrl }: ProductC
           {name}
         </h3>
         <div className="mt-auto flex items-baseline gap-2">
-          <span className="font-bold tabular-nums text-brand-ink">
-            {formatPrice(displayPrice)} تومان
-          </span>
-          {hasDiscount && (
-            <span className="text-xs text-brand-muted line-through tabular-nums">
-              {formatPrice(price)}
-            </span>
+          {price > 0 ? (
+            <>
+              <span className="font-bold tabular-nums text-brand-ink">
+                {formatPrice(displayPrice)} تومان
+              </span>
+              {hasDiscount && (
+                <span className="text-xs text-brand-muted line-through tabular-nums">
+                  {formatPrice(price)}
+                </span>
+              )}
+            </>
+          ) : (
+            <span className="text-sm font-medium text-brand-green">تماس برای قیمت</span>
           )}
         </div>
       </div>
