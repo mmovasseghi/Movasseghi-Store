@@ -59,4 +59,7 @@ next-env.d.ts
 release.tar
 media-master.tar
 
+# Legacy media masters (not in Git — copy from backup)
+media-master/
+
 
