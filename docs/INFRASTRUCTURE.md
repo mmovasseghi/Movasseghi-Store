@@ -28,15 +28,17 @@
 git push → GitHub Actions → build → SSH deploy user → staging path
 ```
 
-Workflow: `.github/workflows/deploy-staging.yml` (enabled after app bootstrap)
+Workflow: `.github/workflows/deploy.yml`
+
+> **Note:** Push workflows requires GitHub token with `workflow` scope. Set secrets: `DEPLOY_HOST`, `DEPLOY_USER`, `DEPLOY_SSH_KEY`.
 
 ## Secrets (GitHub Actions)
 
 | Secret | Purpose |
 |---|---|
-| `STAGING_SSH_KEY` | Deploy private key |
-| `STAGING_HOST` | 91.107.181.79 |
-| `STAGING_USER` | deploy |
+| `DEPLOY_SSH_KEY` | Deploy private key |
+| `DEPLOY_HOST` | 91.107.181.79 |
+| `DEPLOY_USER` | root or deploy |
 | `DATABASE_URL` | Postgres connection |
 | Payment keys | NextPay/ZarinPal — staging vs prod separate |
 
