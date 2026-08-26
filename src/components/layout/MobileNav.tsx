@@ -71,6 +71,13 @@ export function MobileNav() {
                   {item.label}
                 </Link>
               ))}
+              <Link
+                href="/shop"
+                className="rounded-lg px-4 py-3 text-base font-medium text-brand-green hover:bg-brand-aqua-pale"
+                onClick={() => setOpen(false)}
+              >
+                جستجوی محصول
+              </Link>
             </nav>
             <div className="border-t border-border p-4">
               <Link

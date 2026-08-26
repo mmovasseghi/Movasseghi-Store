@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { formatIrt } from '@/commerce/cart'
 import { getPayloadClient } from '@/lib/payload'
 import { productDisplayPrice } from '@/lib/products'
+import { canonicalUrl } from '@/lib/site-url'
 
 export const dynamic = 'force-dynamic'
 
@@ -9,6 +10,7 @@ export const metadata = {
   title: 'قیمت آنلاین محصولات آملون',
   description:
     'لیست قیمت به‌روز ظروف یکبار مصرف گیاهی آملون — تمامی قیمت‌های نمایش‌داده‌شده آخرین قیمت‌های اعلام‌شده هستند.',
+  alternates: { canonical: canonicalUrl('/pricing') },
 }
 
 type Props = {

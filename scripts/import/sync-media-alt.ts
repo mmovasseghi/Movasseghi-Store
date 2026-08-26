@@ -57,7 +57,8 @@ async function main() {
     if (!legacyId) continue
     const nextAlt = altByLegacyId.get(legacyId)
     if (!nextAlt || nextAlt === media.alt) continue
-    if (media.alt && media.alt !== 'تصویر محصول' && media.alt.length > 10) continue
+    if (media.alt && media.alt !== 'تصویر محصول' && media.alt.length > 10 && media.alt === nextAlt)
+      continue
     await payload.update({
       collection: 'media',
       id: media.id,

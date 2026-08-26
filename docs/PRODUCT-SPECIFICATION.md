@@ -286,13 +286,13 @@ Optimized images, minimal JS, SSR, code split, reduced-motion safe animations.
 ## 18. Open gaps (auto-queue)
 
 1. Payment provider real adapters (credentials gate)
-2. WebP/AVIF image pipeline
+2. ~~WebP/AVIF image pipeline~~ → Next.js `formats` enabled; CDN derivatives optional
 3. 12 products without images (no fabrication)
 4. Domain + TLS + SEO regression on cutover
 5. GitHub Actions deploy secrets + workflow scope
 6. Admin ops UI beyond Payload default
-7. Merchant Center feed
-8. Alt-text sync investigation (0 updates on last run)
+7. ~~Merchant Center feed~~ → `/feed/products` ✅
+8. Alt-text sync — script fix applied; re-run on server deploy
 
 ---
 

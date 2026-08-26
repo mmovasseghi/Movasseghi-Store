@@ -1,8 +1,10 @@
 import Link from 'next/link'
+import { canonicalUrl } from '@/lib/site-url'
 
 export const metadata = {
   title: 'عمده‌فروشی',
   description: 'سفارش عمده ظروف یکبار مصرف گیاهی — فروشگاه موثقی',
+  alternates: { canonical: canonicalUrl('/b2b') },
 }
 
 export default function B2BPage() {

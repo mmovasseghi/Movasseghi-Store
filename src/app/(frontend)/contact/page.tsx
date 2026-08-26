@@ -1,8 +1,10 @@
 import Link from 'next/link'
+import { canonicalUrl } from '@/lib/site-url'
 
 export const metadata = {
   title: 'تماس با ما',
   description: 'تماس با فروشگاه موثقی — سفارش تلفنی ظروف یکبار مصرف گیاهی آملون',
+  alternates: { canonical: canonicalUrl('/contact') },
 }
 
 export default function ContactPage() {

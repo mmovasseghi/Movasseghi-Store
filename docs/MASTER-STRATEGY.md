@@ -20,13 +20,13 @@ Production-grade Persian RTL ecommerce for **ظروف یکبار مصرف گیا
 | 1 Forensics | `docs/audit/*`, `docs/knowledge/*` | ✅ Complete |
 | 1b Infra | Hetzner, GitHub, PM2 | ✅ Live http://91.107.181.79 |
 | 2 Architecture | Payload + Next commerce | ✅ [`decisions/ARCHITECTURE-DECISION.md`](decisions/ARCHITECTURE-DECISION.md) |
-| 3 Design system | Reference matrix + SSOT + UI elevation | 🔄 3B in progress |
+| 3 Design system | Reference matrix + SSOT + UI elevation | ✅ Phase 3B |
 | 4 Catalog migration | 95 products, media, HTML | ✅ Server synced |
 | 5 Storefront core | Product, shop, cart, checkout | ✅ Complete |
 | 6 Commerce hardening | Server cart validation, search, analytics | ✅ [`decisions/20260826-phase-6-commerce-hardening.md`](decisions/20260826-phase-6-commerce-hardening.md) |
 | 7 Payments | NextPay/ZarinPal adapters | ⏸ Needs credentials |
-| 8 SEO validation | Redirects, canonicals, robots | 🔄 Partial — canonicals + dynamic robots |
-| 9 QA | Playwright smoke | ✅ 5 tests |
+| 8 SEO validation | Canonicals, robots, merchant feed | 🔄 [`decisions/20260826-phase-8-seo-merchant.md`](decisions/20260826-phase-8-seo-merchant.md) |
+| 9 QA | Playwright smoke | 🔄 8 tests |
 | 10 Launch | Domain, TLS, GSC | ⏸ Blocked on domain |
 
 ---

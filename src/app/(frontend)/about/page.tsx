@@ -1,12 +1,14 @@
 import Link from 'next/link'
 import { LegacyProductContent } from '@/components/shop/LegacyProductContent'
 import { getPayloadClient } from '@/lib/payload'
+import { canonicalUrl } from '@/lib/site-url'
 
 export const dynamic = 'force-dynamic'
 
 export const metadata = {
   title: 'درباره ما',
   description: 'فروشگاه موثقی — تأمین‌کننده ظروف یکبار مصرف گیاهی آملون برای رستوران، کافه و فست‌فود',
+  alternates: { canonical: canonicalUrl('/about') },
 }
 
 async function getAboutContent() {

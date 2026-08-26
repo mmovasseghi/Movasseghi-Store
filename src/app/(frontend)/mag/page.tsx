@@ -1,11 +1,13 @@
 import Link from 'next/link'
 import { getPayloadClient } from '@/lib/payload'
+import { canonicalUrl } from '@/lib/site-url'
 
 export const dynamic = 'force-dynamic'
 
 export const metadata = {
   title: 'مجله',
   description: 'مقالات فروشگاه موثقی — ظروف یکبار مصرف گیاهی آملون',
+  alternates: { canonical: canonicalUrl('/mag') },
 }
 
 export default async function MagArchivePage() {
