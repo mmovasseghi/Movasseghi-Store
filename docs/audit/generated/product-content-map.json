@@ -1,0 +1,1712 @@
+[
+  {
+    "legacyProductId": 268,
+    "name": "لیوان 500 سی سی آملون",
+    "slug": "%d9%84%db%8c%d9%88%d8%a7%d9%86-500-%d8%b3%db%8c-%d8%b3%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d9%84%db%8c%d9%88%d8%a7%d9%86-500-%d8%b3%db%8c-%d8%b3%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3406,
+      "plainTextChars": 2048,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "لیوان 500 سی سی آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 272,
+    "name": "لیوان 350 سی سی آملون",
+    "slug": "%d9%84%db%8c%d9%88%d8%a7%d9%86-350-%d8%b3%db%8c-%d8%b3%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d9%84%db%8c%d9%88%d8%a7%d9%86-350-%d8%b3%db%8c-%d8%b3%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3316,
+      "plainTextChars": 1891,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "لیوان 350 سی سی آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 273,
+    "name": "لیوان 250 سی سی آملون",
+    "slug": "%d9%84%db%8c%d9%88%d8%a7%d9%86-250-%d8%b3%db%8c-%d8%b3%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d9%84%db%8c%d9%88%d8%a7%d9%86-250-%d8%b3%db%8c-%d8%b3%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3299,
+      "plainTextChars": 1892,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "لیوان 250 سی سی آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 274,
+    "name": "لیوان 200 سی سی آملون",
+    "slug": "%d9%84%db%8c%d9%88%d8%a7%d9%86-200-%d8%b3%db%8c-%d8%b3%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d9%84%db%8c%d9%88%d8%a7%d9%86-200-%d8%b3%db%8c-%d8%b3%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3336,
+      "plainTextChars": 1976,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "لیوان 200 سی سی آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 275,
+    "name": "لیوان 170 سی سی آملون",
+    "slug": "%d9%84%db%8c%d9%88%d8%a7%d9%86-170-%d8%b3%db%8c-%d8%b3%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d9%84%db%8c%d9%88%d8%a7%d9%86-170-%d8%b3%db%8c-%d8%b3%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 4999,
+      "plainTextChars": 2996,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "لیوان 170 سی سی آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 284,
+    "name": "پایه فنجان آملون",
+    "slug": "%d9%be%d8%a7%db%8c%d9%87-%d9%81%d9%86%d8%ac%d8%a7%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d9%be%d8%a7%db%8c%d9%87-%d9%81%d9%86%d8%ac%d8%a7%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 4524,
+      "plainTextChars": 2653,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": false,
+      "focusKeyword": "پایه فنجان آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 289,
+    "name": "فنجان آملون",
+    "slug": "%d9%81%d9%86%d8%ac%d8%a7%d9%86-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d9%81%d9%86%d8%ac%d8%a7%d9%86-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3952,
+      "plainTextChars": 2287,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": false,
+      "focusKeyword": "فنجان آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 290,
+    "name": "کاسه صدفی 1000 سی سی آملون",
+    "slug": "%da%a9%d8%a7%d8%b3%d9%87-%d8%b5%d8%af%d9%81%db%8c-1000-%d8%b3%db%8c-%d8%b3%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%da%a9%d8%a7%d8%b3%d9%87-%d8%b5%d8%af%d9%81%db%8c-1000-%d8%b3%db%8c-%d8%b3%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 4021,
+      "plainTextChars": 2450,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "کاسه صدفی 1000 سی سی آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 294,
+    "name": "کاسه صدفی 500 سی سی آملون",
+    "slug": "%da%a9%d8%a7%d8%b3%d9%87-%d8%b5%d8%af%d9%81%db%8c-1000-%d8%b3%db%8c-%d8%b3%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86-2",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%da%a9%d8%a7%d8%b3%d9%87-%d8%b5%d8%af%d9%81%db%8c-1000-%d8%b3%db%8c-%d8%b3%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86-2/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 4841,
+      "plainTextChars": 3147,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "کاسه صدفی 500 سی سی آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 296,
+    "name": "کاسه صدفی 300 سی سی آملون",
+    "slug": "%da%a9%d8%a7%d8%b3%d9%87-%d8%b5%d8%af%d9%81%db%8c-300-%d8%b3%db%8c-%d8%b3%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%da%a9%d8%a7%d8%b3%d9%87-%d8%b5%d8%af%d9%81%db%8c-300-%d8%b3%db%8c-%d8%b3%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3274,
+      "plainTextChars": 1828,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "کاسه صدفی 300 سی سی آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 298,
+    "name": "کاسه 550 سی سی آملون",
+    "slug": "%da%a9%d8%a7%d8%b3%d9%87-550-%d8%b3%db%8c-%d8%b3%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%da%a9%d8%a7%d8%b3%d9%87-550-%d8%b3%db%8c-%d8%b3%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3339,
+      "plainTextChars": 1930,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "کاسه 550 سی سی آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 301,
+    "name": "کاسه 280 سی سی آملون",
+    "slug": "%da%a9%d8%a7%d8%b3%d9%87-280-%d8%b3%db%8c-%d8%b3%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%da%a9%d8%a7%d8%b3%d9%87-280-%d8%b3%db%8c-%d8%b3%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3324,
+      "plainTextChars": 1926,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "کاسه 280 سی سی آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 303,
+    "name": "کاسه 400 سی سی آملون",
+    "slug": "%da%a9%d8%a7%d8%b3%d9%87-400-%d8%b3%db%8c-%d8%b3%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%da%a9%d8%a7%d8%b3%d9%87-400-%d8%b3%db%8c-%d8%b3%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3354,
+      "plainTextChars": 1972,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": false,
+      "focusKeyword": "کاسه 400 سی سی آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 304,
+    "name": "کاسه 1300 سی سی آملون",
+    "slug": "%da%a9%d8%a7%d8%b3%d9%87-1300-%d8%b3%db%8c-%d8%b3%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%da%a9%d8%a7%d8%b3%d9%87-1300-%d8%b3%db%8c-%d8%b3%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 4402,
+      "plainTextChars": 2669,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "کاسه 1300 سی سی آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 307,
+    "name": "کاسه 200 سی سی آملون",
+    "slug": "%da%a9%d8%a7%d8%b3%d9%87-200-%d8%b3%db%8c-%d8%b3%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%da%a9%d8%a7%d8%b3%d9%87-200-%d8%b3%db%8c-%d8%b3%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3420,
+      "plainTextChars": 1898,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "کاسه 200 سی سی آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 309,
+    "name": "کاسه چهارگوش آملون",
+    "slug": "%da%a9%d8%a7%d8%b3%d9%87-%da%86%d9%87%d8%a7%d8%b1%da%af%d9%88%d8%b4-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%da%a9%d8%a7%d8%b3%d9%87-%da%86%d9%87%d8%a7%d8%b1%da%af%d9%88%d8%b4-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3537,
+      "plainTextChars": 2002,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "کاسه چهارگوش آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 312,
+    "name": "سیب زمینی خوری آملون",
+    "slug": "%d8%b3%db%8c%d8%a8-%d8%b2%d9%85%db%8c%d9%86%db%8c-%d8%ae%d9%88%d8%b1%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%b3%db%8c%d8%a8-%d8%b2%d9%85%db%8c%d9%86%db%8c-%d8%ae%d9%88%d8%b1%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3459,
+      "plainTextChars": 1931,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "سیب زمینی خوری آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 318,
+    "name": "کاسه صدفی 500 سی سی آملون",
+    "slug": "%da%a9%d8%a7%d8%b3%d9%87-%d8%b5%d8%af%d9%81%db%8c-500-%d8%b3%db%8c-%d8%b3%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%da%a9%d8%a7%d8%b3%d9%87-%d8%b5%d8%af%d9%81%db%8c-500-%d8%b3%db%8c-%d8%b3%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3717,
+      "plainTextChars": 2039,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "کاسه صدفی 500 سی سی آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 321,
+    "name": "کاسه صدفی 1000 سی سی آملون",
+    "slug": "%da%a9%d8%a7%d8%b3%d9%87-%d8%b5%d8%af%d9%81%db%8c-1000-%d8%b3%db%8c-%d8%b3%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86-3",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%da%a9%d8%a7%d8%b3%d9%87-%d8%b5%d8%af%d9%81%db%8c-1000-%d8%b3%db%8c-%d8%b3%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86-3/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3326,
+      "plainTextChars": 1901,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "کاسه صدفی 1000 سی سی آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 323,
+    "name": "کاسه صدفی 300 سی سی آملون",
+    "slug": "%da%a9%d8%a7%d8%b3%d9%87-%d8%b5%d8%af%d9%81%db%8c-300-%d8%b3%db%8c-%d8%b3%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86-2",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%da%a9%d8%a7%d8%b3%d9%87-%d8%b5%d8%af%d9%81%db%8c-300-%d8%b3%db%8c-%d8%b3%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86-2/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3323,
+      "plainTextChars": 1925,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "کاسه صدفی 300 سی سی آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 325,
+    "name": "بشقاب بزرگ آملون",
+    "slug": "%d8%a8%d8%b4%d9%82%d8%a7%d8%a8-%d8%a8%d8%b2%d8%b1%da%af-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%a8%d8%b4%d9%82%d8%a7%d8%a8-%d8%a8%d8%b2%d8%b1%da%af-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 4385,
+      "plainTextChars": 2392,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "بشقاب بزرگ آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 327,
+    "name": "بشقاب آملون",
+    "slug": "%d8%a8%d8%b4%d9%82%d8%a7%d8%a8-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%a8%d8%b4%d9%82%d8%a7%d8%a8-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3551,
+      "plainTextChars": 2163,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "بشقاب آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 331,
+    "name": "پیش دستی آملون",
+    "slug": "%d9%be%db%8c%d8%b4-%d8%af%d8%b3%d8%aa%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d9%be%db%8c%d8%b4-%d8%af%d8%b3%d8%aa%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3970,
+      "plainTextChars": 1963,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "پیش دستی آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 333,
+    "name": "کیک خوری آملون",
+    "slug": "%da%a9%db%8c%da%a9-%d8%ae%d9%88%d8%b1%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%da%a9%db%8c%da%a9-%d8%ae%d9%88%d8%b1%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 2996,
+      "plainTextChars": 1889,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "کیک خوری آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 335,
+    "name": "دیس کوچک آملون",
+    "slug": "%d8%af%db%8c%d8%b3-%da%a9%d9%88%da%86%da%a9-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%af%db%8c%d8%b3-%da%a9%d9%88%da%86%da%a9-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3995,
+      "plainTextChars": 2068,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "دیس کوچک آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 337,
+    "name": "دیس متوسط آملون",
+    "slug": "%d8%af%db%8c%d8%b3-%d9%85%d8%aa%d9%88%d8%b3%d8%b7-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%af%db%8c%d8%b3-%d9%85%d8%aa%d9%88%d8%b3%d8%b7-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3829,
+      "plainTextChars": 1989,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "دیس متوسط آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 339,
+    "name": "دیس بزرگ آملون",
+    "slug": "%d8%af%db%8c%d8%b3-%d8%a8%d8%b2%d8%b1%da%af-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%af%db%8c%d8%b3-%d8%a8%d8%b2%d8%b1%da%af-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3505,
+      "plainTextChars": 1866,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "دیس بزرگ آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 341,
+    "name": "ظرف غذا طرح آلومینیوم آملون",
+    "slug": "%d8%b8%d8%b1%d9%81-%d8%ba%d8%b0%d8%a7-%d8%b7%d8%b1%d8%ad-%d8%a2%d9%84%d9%88%d9%85%db%8c%d9%86%db%8c%d9%88%d9%85-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%b8%d8%b1%d9%81-%d8%ba%d8%b0%d8%a7-%d8%b7%d8%b1%d8%ad-%d8%a2%d9%84%d9%88%d9%85%db%8c%d9%86%db%8c%d9%88%d9%85-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3565,
+      "plainTextChars": 1921,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "ظرف غذا طرح آلومینیوم آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 343,
+    "name": "ظرف غذا تک خانه آملون",
+    "slug": "%d8%b8%d8%b1%d9%88%d9%81-%d8%ba%d8%b0%d8%a7-%d8%aa%da%a9-%d8%ae%d8%a7%d9%86%d9%87-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%b8%d8%b1%d9%88%d9%81-%d8%ba%d8%b0%d8%a7-%d8%aa%da%a9-%d8%ae%d8%a7%d9%86%d9%87-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3550,
+      "plainTextChars": 1982,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "ظرف غذا تک خانه آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 345,
+    "name": "ظرف غذا دوخانه آملون",
+    "slug": "%d8%b8%d8%b1%d9%81-%d8%ba%d8%b0%d8%a7-%d8%af%d9%88%d8%ae%d8%a7%d9%86%d9%87-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%b8%d8%b1%d9%81-%d8%ba%d8%b0%d8%a7-%d8%af%d9%88%d8%ae%d8%a7%d9%86%d9%87-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 4701,
+      "plainTextChars": 2640,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "ظرف غذا دوخانه آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 347,
+    "name": "ظرف تک پرسی آملون",
+    "slug": "%d8%b8%d8%b1%d9%81-%d8%aa%da%a9-%d9%be%d8%b1%d8%b3%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%b8%d8%b1%d9%81-%d8%aa%da%a9-%d9%be%d8%b1%d8%b3%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 4314,
+      "plainTextChars": 2502,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "ظرف تک پرسی آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 349,
+    "name": "ظرف سه خانه بسته بندی آملون",
+    "slug": "%d8%b8%d8%b1%d9%81-%d8%b3%d9%87-%d8%ae%d8%a7%d9%86%d9%87-%d8%a8%d8%b3%d8%aa%d9%87-%d8%a8%d9%86%d8%af%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%b8%d8%b1%d9%81-%d8%b3%d9%87-%d8%ae%d8%a7%d9%86%d9%87-%d8%a8%d8%b3%d8%aa%d9%87-%d8%a8%d9%86%d8%af%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 5104,
+      "plainTextChars": 3075,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "ظرف سه خانه آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 351,
+    "name": "ظرف دوخانه بسته بندی آملون",
+    "slug": "%d8%b8%d8%b1%d9%81-%d8%af%d9%88%d8%ae%d8%a7%d9%86%d9%87-%d8%a8%d8%b3%d8%aa%d9%87-%d8%a8%d9%86%d8%af%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%b8%d8%b1%d9%81-%d8%af%d9%88%d8%ae%d8%a7%d9%86%d9%87-%d8%a8%d8%b3%d8%aa%d9%87-%d8%a8%d9%86%d8%af%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3464,
+      "plainTextChars": 1910,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "ظرف دوخانه بسته بندی آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 353,
+    "name": "قاشق چنگال آملون",
+    "slug": "%d9%82%d8%a7%d8%b4%d9%82-%da%86%d9%86%da%af%d8%a7%d9%84-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d9%82%d8%a7%d8%b4%d9%82-%da%86%d9%86%da%af%d8%a7%d9%84-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3083,
+      "plainTextChars": 1698,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "قاشق چنگال آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 355,
+    "name": "چنگال آملون",
+    "slug": "%da%86%d9%86%da%af%d8%a7%d9%84-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%da%86%d9%86%da%af%d8%a7%d9%84-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3049,
+      "plainTextChars": 1661,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "چنگال آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 357,
+    "name": "کارد 12 تایی آملون",
+    "slug": "%da%a9%d8%a7%d8%b1%d8%af-12-%d8%aa%d8%a7%db%8c%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%da%a9%d8%a7%d8%b1%d8%af-12-%d8%aa%d8%a7%db%8c%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3865,
+      "plainTextChars": 2083,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "کارد ۱۲ عددی آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 359,
+    "name": "قاشق 12 عددی آملون",
+    "slug": "%d9%82%d8%a7%d8%b4%d9%82-12-%d8%b9%d8%af%d8%af%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d9%82%d8%a7%d8%b4%d9%82-12-%d8%b9%d8%af%d8%af%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 2691,
+      "plainTextChars": 1415,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "قاشق 12 عددی آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 361,
+    "name": "دیس کوچک آملون",
+    "slug": "%d8%af%db%8c%d8%b3-%da%a9%d9%88%da%86%da%a9-%d8%a2%d9%85%d9%84%d9%88%d9%86-2",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%af%db%8c%d8%b3-%da%a9%d9%88%da%86%da%a9-%d8%a2%d9%85%d9%84%d9%88%d9%86-2/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 2554,
+      "plainTextChars": 1317,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "دیس کوچک آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 362,
+    "name": "دیس متوسط آملون",
+    "slug": "%d8%af%db%8c%d8%b3-%d9%85%d8%aa%d9%88%d8%b3%d8%b7-%d8%a2%d9%85%d9%84%d9%88%d9%86-2",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%af%db%8c%d8%b3-%d9%85%d8%aa%d9%88%d8%b3%d8%b7-%d8%a2%d9%85%d9%84%d9%88%d9%86-2/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3730,
+      "plainTextChars": 2073,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "دیس متوسط آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 363,
+    "name": "دیس بزرگ آملون",
+    "slug": "%d8%af%db%8c%d8%b3-%d8%a8%d8%b2%d8%b1%da%af-%d8%a2%d9%85%d9%84%d9%88%d9%86-2",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%af%db%8c%d8%b3-%d8%a8%d8%b2%d8%b1%da%af-%d8%a2%d9%85%d9%84%d9%88%d9%86-2/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3379,
+      "plainTextChars": 2387,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "دیس بزرگ آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 367,
+    "name": "بشقاب آملون",
+    "slug": "%d8%a8%d8%b4%d9%82%d8%a7%d8%a8-%d8%a2%d9%85%d9%84%d9%88%d9%86-2",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%a8%d8%b4%d9%82%d8%a7%d8%a8-%d8%a2%d9%85%d9%84%d9%88%d9%86-2/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3093,
+      "plainTextChars": 1623,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "بشقاب آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 368,
+    "name": "بشقاب ساده آملون",
+    "slug": "%d8%a8%d8%b4%d9%82%d8%a7%d8%a8-%d8%b3%d8%a7%d8%af%d9%87-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%a8%d8%b4%d9%82%d8%a7%d8%a8-%d8%b3%d8%a7%d8%af%d9%87-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3197,
+      "plainTextChars": 1431,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "بشقاب ساده آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 369,
+    "name": "پیش دستی آملون",
+    "slug": "%d9%be%db%8c%d8%b4-%d8%af%d8%b3%d8%aa%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86-2",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d9%be%db%8c%d8%b4-%d8%af%d8%b3%d8%aa%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86-2/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3490,
+      "plainTextChars": 1965,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "پیش دستی آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 370,
+    "name": "بشقاب بزرگ آملون",
+    "slug": "%d8%a8%d8%b4%d9%82%d8%a7%d8%a8-%d8%a8%d8%b2%d8%b1%da%af-%d8%a2%d9%85%d9%84%d9%88%d9%86-2",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%a8%d8%b4%d9%82%d8%a7%d8%a8-%d8%a8%d8%b2%d8%b1%da%af-%d8%a2%d9%85%d9%84%d9%88%d9%86-2/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3912,
+      "plainTextChars": 1976,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "بشقاب بزرگ آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 375,
+    "name": "ظرف غذا تک خانه آملون",
+    "slug": "%d8%b8%d8%b1%d9%81-%d8%ba%d8%b0%d8%a7%db%8c-%d8%aa%da%a9-%d8%ae%d8%a7%d9%86%d9%87-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%b8%d8%b1%d9%81-%d8%ba%d8%b0%d8%a7%db%8c-%d8%aa%da%a9-%d8%ae%d8%a7%d9%86%d9%87-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3178,
+      "plainTextChars": 1747,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "ظرف غذا تک خانه آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 376,
+    "name": "ظرف سه خانه کبابی آملون",
+    "slug": "%d8%b8%d8%b1%d9%81-%d8%b3%d9%87-%d8%ae%d8%a7%d9%86%d9%87-%da%a9%d8%a8%d8%a7%d8%a8%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%b8%d8%b1%d9%81-%d8%b3%d9%87-%d8%ae%d8%a7%d9%86%d9%87-%da%a9%d8%a8%d8%a7%d8%a8%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 1903,
+      "plainTextChars": 1217,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "ظرف سه خانه کبابی آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 377,
+    "name": "ظرف چهارخونه فانتزی آملون",
+    "slug": "%d8%b8%d8%b1%d9%81-%da%86%d9%87%d8%a7%d8%b1%d8%ae%d9%88%d9%86%d9%87-%d9%81%d8%a7%d9%86%d8%aa%d8%b2%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%b8%d8%b1%d9%81-%da%86%d9%87%d8%a7%d8%b1%d8%ae%d9%88%d9%86%d9%87-%d9%81%d8%a7%d9%86%d8%aa%d8%b2%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 1946,
+      "plainTextChars": 1832,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "ظرف چهارخونه فانتزی آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 378,
+    "name": "ظرف غذا شش خانه فانتزی آملون",
+    "slug": "%d8%b8%d8%b1%d9%81-%d8%ba%d8%b0%d8%a7-%d8%b4%d8%b4-%d8%ae%d8%a7%d9%86%d9%87-%d9%81%d8%a7%d9%86%d8%aa%d8%b2%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%b8%d8%b1%d9%81-%d8%ba%d8%b0%d8%a7-%d8%b4%d8%b4-%d8%ae%d8%a7%d9%86%d9%87-%d9%81%d8%a7%d9%86%d8%aa%d8%b2%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 1643,
+      "plainTextChars": 1528,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "ظرف غذا شش خانه فانتزی آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 379,
+    "name": "دوخانه کبابی آملون",
+    "slug": "%d8%af%d9%88%d8%ae%d8%a7%d9%86%d9%87-%da%a9%d8%a8%d8%a7%d8%a8%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%af%d9%88%d8%ae%d8%a7%d9%86%d9%87-%da%a9%d8%a8%d8%a7%d8%a8%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 2098,
+      "plainTextChars": 1408,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "دوخانه کبابی آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 380,
+    "name": "دو خانه مرغی آملون",
+    "slug": "%d8%af%d9%88-%d8%ae%d8%a7%d9%86%d9%87-%d9%85%d8%b1%d8%ba%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%af%d9%88-%d8%ae%d8%a7%d9%86%d9%87-%d9%85%d8%b1%d8%ba%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3023,
+      "plainTextChars": 1788,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "دوخانه مرغی آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 382,
+    "name": "چهارخانه کبابی آملون",
+    "slug": "%da%86%d9%87%d8%a7%d8%b1%d8%ae%d8%a7%d9%86%d9%87-%da%a9%d8%a8%d8%a7%d8%a8%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%da%86%d9%87%d8%a7%d8%b1%d8%ae%d8%a7%d9%86%d9%87-%da%a9%d8%a8%d8%a7%d8%a8%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 2101,
+      "plainTextChars": 1394,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "چهارخانه کبابی آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 383,
+    "name": "ظرف غذا دوخانه آملون",
+    "slug": "%d8%b8%d8%b1%d9%81-%d8%ba%d8%b0%d8%a7%db%8c-%d8%af%d9%88%d8%ae%d8%a7%d9%86%d9%87-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%b8%d8%b1%d9%81-%d8%ba%d8%b0%d8%a7%db%8c-%d8%af%d9%88%d8%ae%d8%a7%d9%86%d9%87-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 2366,
+      "plainTextChars": 1360,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "ظرف غذا دوخانه آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 386,
+    "name": "چهارخانه مرغی آملون",
+    "slug": "%da%86%d9%87%d8%a7%d8%b1%d8%ae%d8%a7%d9%86%d9%87-%d9%85%d8%b1%d8%ba%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%da%86%d9%87%d8%a7%d8%b1%d8%ae%d8%a7%d9%86%d9%87-%d9%85%d8%b1%d8%ba%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3281,
+      "plainTextChars": 1989,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "چهارخانه مرغی آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 399,
+    "name": "درب 195 آملون",
+    "slug": "%d8%af%d8%b1%d8%a8-195-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%af%d8%b1%d8%a8-195-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3379,
+      "plainTextChars": 1653,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "درب 195 آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 400,
+    "name": "درب 175 آملون",
+    "slug": "%d8%af%d8%b1%d8%a8-175-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%af%d8%b1%d8%a8-175-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 2671,
+      "plainTextChars": 1632,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "درب 175 آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 401,
+    "name": "درب 150 آملون",
+    "slug": "%d8%af%d8%b1%d8%a8-150-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%af%d8%b1%d8%a8-150-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3037,
+      "plainTextChars": 1704,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "درب 150 آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 402,
+    "name": "درب 125 آملون",
+    "slug": "%d8%af%d8%b1%d8%a8-125-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%af%d8%b1%d8%a8-125-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 5025,
+      "plainTextChars": 2821,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "درب 125 آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 403,
+    "name": "درب 105 آملون",
+    "slug": "%d8%af%d8%b1%d8%a8-105-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%af%d8%b1%d8%a8-105-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3013,
+      "plainTextChars": 1709,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "درب 105 آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 409,
+    "name": "قاشق آملون",
+    "slug": "%d9%82%d8%a7%d8%b4%d9%82-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d9%82%d8%a7%d8%b4%d9%82-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 2698,
+      "plainTextChars": 1633,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "قاشق آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 410,
+    "name": "کارد آملون",
+    "slug": "%da%a9%d8%a7%d8%b1%d8%af-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%da%a9%d8%a7%d8%b1%d8%af-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 2771,
+      "plainTextChars": 1507,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "کارد آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 411,
+    "name": "قاشق چای خوری آملون",
+    "slug": "%d9%82%d8%a7%d8%b4%d9%82-%da%86%d8%a7%db%8c-%d8%ae%d9%88%d8%b1%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d9%82%d8%a7%d8%b4%d9%82-%da%86%d8%a7%db%8c-%d8%ae%d9%88%d8%b1%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3728,
+      "plainTextChars": 1836,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "قاشق چای خوری آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 412,
+    "name": "نی آملون",
+    "slug": "%d9%86%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d9%86%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3401,
+      "plainTextChars": 1836,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "نی آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 413,
+    "name": "چنگال آملون",
+    "slug": "%da%86%d9%86%da%af%d8%a7%d9%84-%d8%a2%d9%85%d9%84%d9%88%d9%86-2",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%da%86%d9%86%da%af%d8%a7%d9%84-%d8%a2%d9%85%d9%84%d9%88%d9%86-2/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 4614,
+      "plainTextChars": 2640,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "چنگال آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 419,
+    "name": "ظرف همبرگر خوری آملون",
+    "slug": "%d8%b8%d8%b1%d9%81-%d9%87%d9%85%d8%a8%d8%b1%da%af%d8%b1-%d8%ae%d9%88%d8%b1%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%b8%d8%b1%d9%81-%d9%87%d9%85%d8%a8%d8%b1%da%af%d8%b1-%d8%ae%d9%88%d8%b1%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 2156,
+      "plainTextChars": 1437,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "ظرف همبرگر خوری آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 420,
+    "name": "ظرف سه خانه درب دار آملون",
+    "slug": "%d8%b8%d8%b1%d9%81-%d8%b3%d9%87-%d8%ae%d8%a7%d9%86%d9%87-%d8%af%d8%b1%d8%a8-%d8%af%d8%a7%d8%b1-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%b8%d8%b1%d9%81-%d8%b3%d9%87-%d8%ae%d8%a7%d9%86%d9%87-%d8%af%d8%b1%d8%a8-%d8%af%d8%a7%d8%b1-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3574,
+      "plainTextChars": 1608,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "ظرف سه خانه درب دار آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 421,
+    "name": "ظرف تک پرسی 1000 آملون",
+    "slug": "%d8%b8%d8%b1%d9%81-%d8%aa%da%a9-%d9%be%d8%b1%d8%b3%db%8c-1000-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%b8%d8%b1%d9%81-%d8%aa%da%a9-%d9%be%d8%b1%d8%b3%db%8c-1000-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 4746,
+      "plainTextChars": 2082,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "ظرف تک پرسی 1000 آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 423,
+    "name": "ظرف غذا دوپرسی آملون",
+    "slug": "%d8%b8%d8%b1%d9%81-%d8%ba%d8%b0%d8%a7-%d8%af%d9%88%d9%be%d8%b1%d8%b3%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%b8%d8%b1%d9%81-%d8%ba%d8%b0%d8%a7-%d8%af%d9%88%d9%be%d8%b1%d8%b3%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3992,
+      "plainTextChars": 1832,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "ظرف غذا دوپرسی آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 425,
+    "name": "دوخانه درب دار آملون",
+    "slug": "%d8%af%d9%88%d8%ae%d8%a7%d9%86%d9%87-%d8%af%d8%b1%d8%a8-%d8%af%d8%a7%d8%b1-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%af%d9%88%d8%ae%d8%a7%d9%86%d9%87-%d8%af%d8%b1%d8%a8-%d8%af%d8%a7%d8%b1-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 4434,
+      "plainTextChars": 2057,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "ظرف دوخانه درب دار آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 432,
+    "name": "ظرف کبابی طرح آلومینیوم آملون",
+    "slug": "%d8%b8%d8%b1%d9%81-%da%a9%d8%a8%d8%a7%d8%a8%db%8c-%d8%b7%d8%b1%d8%ad-%d8%a2%d9%84%d9%88%d9%85%db%8c%d9%86%db%8c%d9%88%d9%85-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%b8%d8%b1%d9%81-%da%a9%d8%a8%d8%a7%d8%a8%db%8c-%d8%b7%d8%b1%d8%ad-%d8%a2%d9%84%d9%88%d9%85%db%8c%d9%86%db%8c%d9%88%d9%85-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 4146,
+      "plainTextChars": 1895,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "ظرف کبابی طرح آلومینیوم آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 433,
+    "name": "ظرف غذا طرح آلومینیوم 800 آملون",
+    "slug": "%d8%b8%d8%b1%d9%81-%d8%ba%d8%b0%d8%a7-%d8%b7%d8%b1%d8%ad-%d8%a2%d9%84%d9%88%d9%85%db%8c%d9%86%db%8c%d9%88%d9%85-800-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%b8%d8%b1%d9%81-%d8%ba%d8%b0%d8%a7-%d8%b7%d8%b1%d8%ad-%d8%a2%d9%84%d9%88%d9%85%db%8c%d9%86%db%8c%d9%88%d9%85-800-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3588,
+      "plainTextChars": 1908,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "ظرف غذا طرح آلومینیوم 800 آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 434,
+    "name": "ظرف غذا طرح آلومینیوم 1200 آملون",
+    "slug": "%d8%b8%d8%b1%d9%81-%d8%ba%d8%b0%d8%a7-%d8%b7%d8%b1%d8%ad-%d8%a2%d9%84%d9%88%d9%85%db%8c%d9%86%db%8c%d9%88%d9%85-1200-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%b8%d8%b1%d9%81-%d8%ba%d8%b0%d8%a7-%d8%b7%d8%b1%d8%ad-%d8%a2%d9%84%d9%88%d9%85%db%8c%d9%86%db%8c%d9%88%d9%85-1200-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3501,
+      "plainTextChars": 1931,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "ظرف غذا طرح آلومینیوم 1200 آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 435,
+    "name": "ظرف بسته بندی کم عمق آملون",
+    "slug": "%d8%b8%d8%b1%d9%81-%d8%a8%d8%b3%d8%aa%d9%87-%d8%a8%d9%86%d8%af%db%8c-%da%a9%d9%85-%d8%b9%d9%85%d9%82-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%b8%d8%b1%d9%81-%d8%a8%d8%b3%d8%aa%d9%87-%d8%a8%d9%86%d8%af%db%8c-%da%a9%d9%85-%d8%b9%d9%85%d9%82-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3181,
+      "plainTextChars": 1823,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "ظرف بسته بندی کم عمق آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 437,
+    "name": "ظرف بسته بندی عمیق آملون",
+    "slug": "%d8%b8%d8%b1%d9%81-%d8%a8%d8%b3%d8%aa%d9%87-%d8%a8%d9%86%d8%af%db%8c-%d8%b9%d9%85%db%8c%d9%82-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%b8%d8%b1%d9%81-%d8%a8%d8%b3%d8%aa%d9%87-%d8%a8%d9%86%d8%af%db%8c-%d8%b9%d9%85%db%8c%d9%82-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 6959,
+      "plainTextChars": 3477,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "ظرف بسته بندی عمیق آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 438,
+    "name": "ظرف بسته بندی سه خانه آملون",
+    "slug": "%d8%b8%d8%b1%d9%81-%d8%a8%d8%b3%d8%aa%d9%87-%d8%a8%d9%86%d8%af%db%8c-%d8%b3%d9%87-%d8%ae%d8%a7%d9%86%d9%87-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%b8%d8%b1%d9%81-%d8%a8%d8%b3%d8%aa%d9%87-%d8%a8%d9%86%d8%af%db%8c-%d8%b3%d9%87-%d8%ae%d8%a7%d9%86%d9%87-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3736,
+      "plainTextChars": 2084,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "ظرف بسته بندی سه خانه آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 439,
+    "name": "ظرف بسته بندی دوخانه آملون",
+    "slug": "%d8%b8%d8%b1%d9%81-%d8%a8%d8%b3%d8%aa%d9%87-%d8%a8%d9%86%d8%af%db%8c-%d8%af%d9%88%d8%ae%d8%a7%d9%86%d9%87-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%b8%d8%b1%d9%81-%d8%a8%d8%b3%d8%aa%d9%87-%d8%a8%d9%86%d8%af%db%8c-%d8%af%d9%88%d8%ae%d8%a7%d9%86%d9%87-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3949,
+      "plainTextChars": 2136,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "ظرف بسته بندی دوخانه آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 447,
+    "name": "لیوان 200 شیرینگ 24 تایی آملون",
+    "slug": "%d9%84%db%8c%d9%88%d8%a7%d9%86-200-%d8%b4%db%8c%d8%b1%db%8c%d9%86%da%af-24-%d8%aa%d8%a7%db%8c%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d9%84%db%8c%d9%88%d8%a7%d9%86-200-%d8%b4%db%8c%d8%b1%db%8c%d9%86%da%af-24-%d8%aa%d8%a7%db%8c%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 4647,
+      "plainTextChars": 2414,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "لیوان 200 شیرینگ 24 تایی آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 448,
+    "name": "فنجان با نگهدارنده آملون",
+    "slug": "%d9%81%d9%86%d8%ac%d8%a7%d9%86-%d8%a8%d8%a7-%d9%86%da%af%d9%87%d8%af%d8%a7%d8%b1%d9%86%d8%af%d9%87-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d9%81%d9%86%d8%ac%d8%a7%d9%86-%d8%a8%d8%a7-%d9%86%da%af%d9%87%d8%af%d8%a7%d8%b1%d9%86%d8%af%d9%87-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3514,
+      "plainTextChars": 2064,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "فنجان با نگهدارنده آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 449,
+    "name": "فنجان 24 تایی آملون",
+    "slug": "%d9%81%d9%86%d8%ac%d8%a7%d9%86-24-%d8%aa%d8%a7%db%8c%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d9%81%d9%86%d8%ac%d8%a7%d9%86-24-%d8%aa%d8%a7%db%8c%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3869,
+      "plainTextChars": 2541,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "فنجان 24 تایی آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 450,
+    "name": "لیوان 200 (12 تایی) آملون",
+    "slug": "%d9%84%db%8c%d9%88%d8%a7%d9%86-200-12-%d8%aa%d8%a7%db%8c%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d9%84%db%8c%d9%88%d8%a7%d9%86-200-12-%d8%aa%d8%a7%db%8c%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 4585,
+      "plainTextChars": 3034,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "لیوان 200 آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 451,
+    "name": "لیوان 250 (12 تایی) آملون",
+    "slug": "%d9%84%db%8c%d9%88%d8%a7%d9%86-250-12-%d8%aa%d8%a7%db%8c%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d9%84%db%8c%d9%88%d8%a7%d9%86-250-12-%d8%aa%d8%a7%db%8c%db%8c-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 4309,
+      "plainTextChars": 2947,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "لیوان 250 آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 458,
+    "name": "کاسه چهارگوش آملون",
+    "slug": "%da%a9%d8%a7%d8%b3%d9%87-%da%86%d9%87%d8%a7%d8%b1%da%af%d9%88%d8%b4-%d8%a2%d9%85%d9%84%d9%88%d9%86-2",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%da%a9%d8%a7%d8%b3%d9%87-%da%86%d9%87%d8%a7%d8%b1%da%af%d9%88%d8%b4-%d8%a2%d9%85%d9%84%d9%88%d9%86-2/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3769,
+      "plainTextChars": 2660,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "کاسه چهارگوش آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 459,
+    "name": "سطل 1000 بلند آملون",
+    "slug": "%d8%b3%d8%b7%d9%84-1000-%d8%a8%d9%84%d9%86%d8%af-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%b3%d8%b7%d9%84-1000-%d8%a8%d9%84%d9%86%d8%af-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 4283,
+      "plainTextChars": 3247,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "سطل 1000 بلند آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 460,
+    "name": "کاسه 300 آملون",
+    "slug": "%da%a9%d8%a7%d8%b3%d9%87-300-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%da%a9%d8%a7%d8%b3%d9%87-300-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3310,
+      "plainTextChars": 2513,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "کاسه 300 آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 461,
+    "name": "کاسه 550 آملون",
+    "slug": "%da%a9%d8%a7%d8%b3%d9%87-550-%d8%a2%d9%85%d9%84%d9%88%d9%86",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%da%a9%d8%a7%d8%b3%d9%87-550-%d8%a2%d9%85%d9%84%d9%88%d9%86/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 2277,
+      "plainTextChars": 1687,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "کاسه 550 آملون"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 743,
+    "name": "ظرف خورشتی پ پ الیکاس",
+    "slug": "%d8%b8%d8%b1%d9%81-%d8%ae%d9%88%d8%b1%d8%b4%d8%aa%db%8c-%d9%be-%d9%be-%d8%a7%d9%84%db%8c%da%a9%d8%a7%d8%b3",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%b8%d8%b1%d9%81-%d8%ae%d9%88%d8%b1%d8%b4%d8%aa%db%8c-%d9%be-%d9%be-%d8%a7%d9%84%db%8c%da%a9%d8%a7%d8%b3/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 4091,
+      "plainTextChars": 2262,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "ظرف خورشتی پ پ الیکاس"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 787,
+    "name": "سطل 1200 شفاف پ پ",
+    "slug": "%d8%b3%d8%b7%d9%84-1200-%d8%b4%d9%81%d8%a7%d9%81-%d9%be-%d9%be",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%b3%d8%b7%d9%84-1200-%d8%b4%d9%81%d8%a7%d9%81-%d9%be-%d9%be/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3971,
+      "plainTextChars": 2561,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "سطل-1200-شفاف-پ-پ"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 789,
+    "name": "درب سطل1000 و 1200",
+    "slug": "%d8%af%d8%b1%d8%a8-%d8%b3%d8%b7%d9%841000-%d9%88-1200",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%af%d8%b1%d8%a8-%d8%b3%d8%b7%d9%841000-%d9%88-1200/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 2514,
+      "plainTextChars": 2504,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "درب سطل1000 و 1200"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 790,
+    "name": "سطل1300 شفاف پ پ",
+    "slug": "%d8%b3%d8%b7%d9%841300-%d8%b4%d9%81%d8%a7%d9%81-%d9%be-%d9%be",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%b3%d8%b7%d9%841300-%d8%b4%d9%81%d8%a7%d9%81-%d9%be-%d9%be/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 5021,
+      "plainTextChars": 4898,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "سطل1300 شفاف پ پ"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 791,
+    "name": "سطل 1500 شفاف پ پ",
+    "slug": "%d8%b3%d8%b7%d9%84-1500-%d8%b4%d9%81%d8%a7%d9%81-%d9%be-%d9%be",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%b3%d8%b7%d9%84-1500-%d8%b4%d9%81%d8%a7%d9%81-%d9%be-%d9%be/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 2679,
+      "plainTextChars": 2617,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "سطل 1500 شفاف پ پ"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 792,
+    "name": "سطل 1700 شفاف پ پ الیکاس",
+    "slug": "%d8%b3%d8%b7%d9%84-1700-%d8%b4%d9%81%d8%a7%d9%81-%d9%be-%d9%be-%d8%a7%d9%84%db%8c%da%a9%d8%a7%d8%b3",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%b3%d8%b7%d9%84-1700-%d8%b4%d9%81%d8%a7%d9%81-%d9%be-%d9%be-%d8%a7%d9%84%db%8c%da%a9%d8%a7%d8%b3/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 4062,
+      "plainTextChars": 2519,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "سطل 1700 شفاف پ پ الیکاس"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 794,
+    "name": "درب سطل 1300/1500/1700 پ پ",
+    "slug": "%d8%af%d8%b1%d8%a8-%d8%b3%d8%b7%d9%84-1300-1500-1700-%d9%be-%d9%be",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%af%d8%b1%d8%a8-%d8%b3%d8%b7%d9%84-1300-1500-1700-%d9%be-%d9%be/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 4000,
+      "plainTextChars": 2323,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "درب سطل 1300/1500/1700 پ پ"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 795,
+    "name": "سطل 1800 شفاف پ پ الیکاس",
+    "slug": "%d8%b3%d8%b7%d9%84-1800-%d8%b4%d9%81%d8%a7%d9%81-%d9%be-%d9%be-%d8%a7%d9%84%db%8c%da%a9%d8%a7%d8%b3",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%b3%d8%b7%d9%84-1800-%d8%b4%d9%81%d8%a7%d9%81-%d9%be-%d9%be-%d8%a7%d9%84%db%8c%da%a9%d8%a7%d8%b3/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 5372,
+      "plainTextChars": 3260,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "سطل 1800 شفاف پ پ الیکاس"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 796,
+    "name": "سطل 2000 شفاف پ پ",
+    "slug": "%d8%b3%d8%b7%d9%84-2000-%d8%b4%d9%81%d8%a7%d9%81-%d9%be-%d9%be",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%b3%d8%b7%d9%84-2000-%d8%b4%d9%81%d8%a7%d9%81-%d9%be-%d9%be/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 4058,
+      "plainTextChars": 2398,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "سطل 2000 شفاف پ پ"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 797,
+    "name": "سطل 2500 پ پ",
+    "slug": "%d8%b3%d8%b7%d9%84-2500-%d9%be-%d9%be",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%b3%d8%b7%d9%84-2500-%d9%be-%d9%be/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 4129,
+      "plainTextChars": 2407,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "سطل 2500 پ پ"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  },
+  {
+    "legacyProductId": 798,
+    "name": "سطل 3000 پ پ",
+    "slug": "%d8%b3%d8%b7%d9%84-3000-%d9%be-%d9%be",
+    "sku": "",
+    "legacyUrl": "https://www.ayrik-cornstarch.com/product/%d8%b3%d8%b7%d9%84-3000-%d9%be-%d9%be/",
+    "content": {
+      "longDescriptionHtml": true,
+      "longDescriptionChars": 3024,
+      "plainTextChars": 1659,
+      "shortDescription": true,
+      "seoTitle": false,
+      "seoDescription": true,
+      "focusKeyword": "سطل 3000 پ پ"
+    },
+    "migrationStatus": "READY",
+    "newPlatformField": "products.legacyDescriptionHtml"
+  }
+]

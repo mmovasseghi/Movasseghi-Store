@@ -95,6 +95,14 @@ export const Products: CollectionConfig = {
       label: 'توضیحات کامل',
     },
     {
+      name: 'legacyDescriptionHtml',
+      type: 'textarea',
+      label: 'توضیحات Legacy (HTML)',
+      admin: {
+        description: 'محتوای HTML اصلی WordPress — حفظ SEO و متن تجاری',
+      },
+    },
+    {
       name: 'featuredImage',
       type: 'upload',
       relationTo: 'media',

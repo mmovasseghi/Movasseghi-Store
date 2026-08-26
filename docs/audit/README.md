@@ -1,7 +1,7 @@
 # Legacy Audit — Movasseghi Store
 
 **Phase:** 1 — Legacy Forensics  
-**Status:** COMPLETE — awaiting **Gate 1** approval  
+**Status:** COMPLETE — Legacy DNA documented; implementation in progress  
 **Audit date:** 2026-08-26  
 **Legacy source:** `Old Verison WebSite/backup` (JetBackup, read-only)  
 **Extracted analysis workspace:** `.legacy-extract/` (gitignored, derived data)
@@ -151,7 +151,44 @@ See [20-unknowns.md](./20-unknowns.md).
 
 ---
 
-## Audit document index
+## Legacy DNA document index (§48 spec)
+
+| Doc | Topic | Status |
+|---|---|---|
+| [PROJECT-OVERVIEW.md](./PROJECT-OVERVIEW.md) | Identity, backup, rebrand | ✅ |
+| [VISUAL-DESIGN-AUDIT.md](./VISUAL-DESIGN-AUDIT.md) | Colors, typography, layout DNA | ✅ |
+| [COMPONENT-INVENTORY.md](./COMPONENT-INVENTORY.md) | UI components legacy → new | ✅ |
+| [PAGE-DNA.md](./PAGE-DNA.md) | Page-by-page reverse engineering | ✅ |
+| [UX-AUDIT.md](./UX-AUDIT.md) | User flows, catalog UX | ✅ |
+| [RESPONSIVE-AUDIT.md](./RESPONSIVE-AUDIT.md) | Breakpoints, mobile-first gaps | ✅ |
+| [CONTENT-INVENTORY.md](./CONTENT-INVENTORY.md) | All legacy text assets | ✅ |
+| [PRODUCT-CONTENT-MAP.md](./PRODUCT-CONTENT-MAP.md) | Product content parity | ✅ |
+| [PRODUCT-MEDIA-MAP.md](./PRODUCT-MEDIA-MAP.md) | Product ↔ image mapping | ✅ |
+| [MEDIA-INVENTORY.md](./MEDIA-INVENTORY.md) | Full media forensic report | ✅ |
+| [SEO-AUDIT.md](./SEO-AUDIT.md) | SEO forensics | ✅ |
+| [URL-INVENTORY.md](./URL-INVENTORY.md) | URL catalog | ✅ |
+| [BUSINESS-RULES.md](./BUSINESS-RULES.md) | Commerce rules | ✅ |
+| [COMMERCE-AUDIT.md](./COMMERCE-AUDIT.md) | WooCommerce behavior | ✅ |
+| [DATABASE-AUDIT.md](./DATABASE-AUDIT.md) | Schema | ✅ |
+| [PLUGIN-AUDIT.md](./PLUGIN-AUDIT.md) | Plugins | ✅ |
+| [CUSTOM-CODE-AUDIT.md](./CUSTOM-CODE-AUDIT.md) | Custom code | ✅ |
+| [FEATURE-INVENTORY.md](./FEATURE-INVENTORY.md) | Feature map | ✅ |
+| [RISK-REGISTER.md](./RISK-REGISTER.md) | Risks | ✅ |
+| [UNKNOWN.md](./UNKNOWN.md) | Gaps | ✅ |
+
+## First-phase completion test (§49)
+
+| Question | Answer |
+|---|---|
+| Can you explain how the old site looks? | ✅ VISUAL-DESIGN-AUDIT.md |
+| Can you reproduce its visual language? | ✅ DESIGN-SYSTEM.md + visual audit |
+| Full product descriptions recoverable? | ✅ 95/95 HTML in migration bundle |
+| Real image per product? | ✅ 83/95 featured; 12 had no legacy primary |
+| UX / purchase flows documented? | ✅ UX-AUDIT, COMMERCE-AUDIT |
+| SEO migration path clear? | ✅ docs/seo/* |
+| Business model documented? | ✅ BUSINESS-RULES + knowledge/ |
+
+## Detailed audit index (numbered)
 
 | Doc | Topic |
 |---|---|
@@ -185,6 +222,8 @@ See [20-unknowns.md](./20-unknowns.md).
 |---|---|
 | `scripts/legacy/extract-audit-v2.py` | SQL → JSON audit summary |
 | `scripts/legacy/generate-inventories.py` | JSON → markdown tables |
-| `scripts/legacy/extract-payments.py` | Payment option key scan |
+| `scripts/legacy/extract-media-inventory.py` | Media forensic inventory |
+| `scripts/legacy/extract-content-inventory.py` | Content + product content map |
+| `scripts/legacy/sync-media-masters.py` | Copy masters to media-master/ |
 
 Raw extracted JSON: `.legacy-extract/audit-data-v2.json`, `.legacy-extract/url-inventory.json`

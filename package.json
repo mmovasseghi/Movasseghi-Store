@@ -20,8 +20,10 @@
     "seed:legacy": "cross-env NODE_OPTIONS=--no-deprecation tsx scripts/import/seed-from-legacy.ts",
     "export:legacy": "python scripts/legacy/export-migration-bundle.py",
     "inventory:media": "python scripts/legacy/extract-media-inventory.py",
+    "inventory:content": "python scripts/legacy/extract-content-inventory.py",
     "sync:media": "python scripts/legacy/sync-media-masters.py",
-    "import:media": "cross-env NODE_OPTIONS=--no-deprecation tsx scripts/import/import-media.ts"
+    "import:media": "cross-env NODE_OPTIONS=--no-deprecation tsx scripts/import/import-media.ts",
+    "sync:content": "cross-env NODE_OPTIONS=--no-deprecation tsx scripts/import/sync-product-content.ts"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "3.88.0",

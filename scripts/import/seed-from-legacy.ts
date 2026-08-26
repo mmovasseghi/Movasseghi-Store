@@ -26,6 +26,7 @@ type MigrationProduct = {
   name: string
   slug: string
   shortDescription?: string
+  descriptionHtml?: string
   regularPrice: number
   salePrice?: number
   sku?: string
@@ -120,6 +121,7 @@ async function main() {
         stockQuantity: p.stockQuantity ?? 0,
         manageStock: p.manageStock ?? true,
         shortDescription: p.shortDescription,
+        legacyDescriptionHtml: p.descriptionHtml,
         categories: categoryIds,
         legacyId: p.legacyId,
         attributes: { material: 'آملون' },

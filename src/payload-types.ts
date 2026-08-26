@@ -223,6 +223,10 @@ export interface Product {
     };
     [k: string]: unknown;
   } | null;
+  /**
+   * محتوای HTML اصلی WordPress — حفظ SEO و متن تجاری
+   */
+  legacyDescriptionHtml?: string | null;
   featuredImage?: (number | null) | Media;
   gallery?:
     | {
@@ -447,6 +451,7 @@ export interface ProductsSelect<T extends boolean = true> {
   manageStock?: T;
   shortDescription?: T;
   description?: T;
+  legacyDescriptionHtml?: T;
   featuredImage?: T;
   gallery?:
     | T

@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
 import { ProductGallery } from '@/components/shop/ProductGallery'
+import { LegacyProductContent } from '@/components/shop/LegacyProductContent'
 import { formatIrt } from '@/commerce/cart'
 import { getPayloadClient } from '@/lib/payload'
 import { productDisplayPrice, productGalleryImages } from '@/lib/products'
@@ -104,6 +105,12 @@ export default async function ProductPage({ params }: Props) {
             )}
           </div>
         </div>
+        {product.legacyDescriptionHtml && (
+          <section className="mt-12 border-t border-border pt-10">
+            <h2 className="mb-6 text-xl font-semibold text-brand-ink">توضیحات محصول</h2>
+            <LegacyProductContent html={product.legacyDescriptionHtml} />
+          </section>
+        )}
       </main>
     )
   } catch {
