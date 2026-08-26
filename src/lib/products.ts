@@ -7,10 +7,17 @@ export type ProductRecord = {
   status?: string
   sku?: string | null
   shortDescription?: string | null
+  stockQuantity?: number | null
   seo?: { title?: string | null; description?: string | null } | null
   attributes?: {
     material?: string | null
     capacityMl?: number | null
+    packSize?: string | null
+  } | null
+  b2b?: {
+    wholesalePrice?: number | null
+    moq?: number | null
+    b2bOnly?: boolean | null
   } | null
 }
 
@@ -70,5 +77,12 @@ export function productCardProps(product: ProductRecord) {
     price: product.regularPrice,
     salePrice: product.salePrice,
     imageUrl: image,
+    packSize: product.attributes?.packSize ?? null,
+    wholesalePrice: product.b2b?.wholesalePrice ?? null,
+    inStock: (product.stockQuantity ?? 0) > 0,
+    hasDiscount:
+      !!product.salePrice &&
+      product.salePrice > 0 &&
+      product.salePrice < product.regularPrice,
   }
 }

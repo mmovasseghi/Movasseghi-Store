@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { CategoryCard } from '@/components/shop/CategoryCard'
 import { ProductCard } from '@/components/shop/ProductCard'
 import { getPayloadClient } from '@/lib/payload'
 import { productCardProps } from '@/lib/products'
@@ -97,21 +98,12 @@ export default async function HomePage() {
 
       {/* Categories */}
       {categories.length > 0 && (
-        <section className="border-b border-border bg-white px-4 py-8">
+        <section className="border-b border-border bg-white px-4 py-8 motion-reveal">
           <div className="mx-auto max-w-6xl">
             <h2 className="text-lg font-bold text-brand-ink">دسته‌بندی محصولات</h2>
-            <div className="mt-4 flex flex-wrap gap-2">
+            <div className="mt-4 flex gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {categories.map((cat) => (
-                <Link
-                  key={cat.slug}
-                  href={`/shop/${cat.slug}`}
-                  className="rounded-full border border-border bg-brand-off-white px-4 py-2 text-sm font-medium text-brand-ink transition hover:border-brand-green hover:text-brand-green"
-                >
-                  {cat.name}
-                  {cat.productCount != null && cat.productCount > 0 && (
-                    <span className="ms-1.5 text-brand-muted">({cat.productCount})</span>
-                  )}
-                </Link>
+                <CategoryCard key={cat.slug} {...cat} />
               ))}
             </div>
           </div>

@@ -27,3 +27,7 @@ jobs:
           DATABASE_URL: postgresql://movasseghi:movasseghi@localhost:5432/movasseghi
           PAYLOAD_SECRET: ci-build-secret-min-32-chars-long
           NEXT_PUBLIC_SITE_URL: http://91.107.181.79
+      - run: npx playwright install chromium
+      - run: npm run test:e2e
+        env:
+          PLAYWRIGHT_BASE_URL: http://91.107.181.79
