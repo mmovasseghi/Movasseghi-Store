@@ -33,6 +33,7 @@ export async function generateMetadata({ params }: Props) {
 export default async function CategoryPage({ params }: Props) {
   const { category: slug } = await params
   let categoryName = slug
+  let categoryDescription: string | null | undefined
   let products: ReturnType<typeof productCardProps>[] = []
 
   try {
@@ -45,6 +46,7 @@ export default async function CategoryPage({ params }: Props) {
     const category = cats[0]
     if (!category) notFound()
     categoryName = category.name
+    const categoryDescription = category.description
 
     const { docs } = await payload.find({
       collection: 'products',
@@ -68,8 +70,13 @@ export default async function CategoryPage({ params }: Props) {
         <span className="mx-2">/</span>
         <span>{categoryName}</span>
       </nav>
-      <h1 className="text-2xl font-bold text-brand-ink">{categoryName}</h1>
-      <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+      <h1 className="text-2xl font-bold text-brand-ink md:text-3xl">{categoryName}</h1>
+      {categoryDescription && (
+        <p className="mt-4 max-w-3xl leading-relaxed text-brand-muted whitespace-pre-line">
+          {categoryDescription.replace(/rn/g, '\n')}
+        </p>
+      )}
+      <div className="mt-8 grid grid-cols-2 divide-x divide-y divide-border overflow-hidden rounded-xl border border-border md:grid-cols-3 lg:grid-cols-4">
         {products.map((p) => (
           <ProductCard key={p.slug} {...p} />
         ))}

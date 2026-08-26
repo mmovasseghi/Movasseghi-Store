@@ -62,7 +62,7 @@ export default async function ShopPage() {
         </div>
       )}
 
-      <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+      <div className="mt-8 grid grid-cols-2 divide-x divide-y divide-border overflow-hidden rounded-xl border border-border md:grid-cols-3 lg:grid-cols-4">
         {products.length > 0 ? (
           products.map((p) => <ProductCard key={p.slug} {...p} />)
         ) : (

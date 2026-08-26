@@ -8,8 +8,8 @@ import 'dotenv/config'
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { getPayload } from 'payload'
 import config from '@payload-config'
+import { getPayload } from 'payload'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const MAP_PATH = path.resolve(__dirname, '../../docs/audit/generated/product-media-map.json')
@@ -158,7 +158,9 @@ async function main() {
     }
   }
 
-  console.log(`Media import: ${linked} products linked, ${uploaded} files uploaded, ${missing} missing masters`)
+  console.log(
+    `Media import: ${linked} products linked, ${uploaded} files uploaded, ${missing} missing masters`,
+  )
   process.exit(0)
 }
 

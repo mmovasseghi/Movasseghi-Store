@@ -6,8 +6,8 @@ import 'dotenv/config'
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { getPayload } from 'payload'
 import config from '@payload-config'
+import { getPayload } from 'payload'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const DATA_PATH = path.resolve(__dirname, 'migration-data.json')

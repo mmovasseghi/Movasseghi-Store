@@ -8,10 +8,10 @@
   "files": {
     "includes": [
       "**/*.{ts,tsx,js,json,mjs}",
-      "!!**/node_modules/**",
-      "!!**/.next/**",
+      "!!**/node_modules",
+      "!!**/.next",
       "!!**/src/payload-types.ts",
-      "!!**/src/app/(payload)/**"
+      "!!**/src/app/(payload)"
     ]
   },
   "formatter": {

@@ -1,13 +1,11 @@
+'use client'
+
 import Link from 'next/link'
-import { type Cart, cartItemCount } from '@/commerce/cart'
+import { useCart } from '@/components/shop/CartProvider'
 import { cn } from '@/lib/utils'
 
-type HeaderProps = {
-  cart?: Cart
-}
-
-export function Header({ cart }: HeaderProps) {
-  const count = cart ? cartItemCount(cart) : 0
+export function Header() {
+  const { count } = useCart()
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-white/95 backdrop-blur">

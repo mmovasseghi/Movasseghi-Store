@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 import { Vazirmatn } from 'next/font/google'
-import { emptyCart } from '@/commerce/cart'
 import { Footer } from '@/components/layout/Footer'
 import { Header } from '@/components/layout/Header'
+import { CartProvider } from '@/components/shop/CartProvider'
 import './globals.css'
 
 const vazirmatn = Vazirmatn({
@@ -22,14 +22,14 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const cart = emptyCart()
-
   return (
     <html lang="fa" dir="rtl" className={vazirmatn.variable}>
       <body className="flex min-h-screen flex-col">
-        <Header cart={cart} />
-        <div className="flex-1">{children}</div>
-        <Footer />
+        <CartProvider>
+          <Header />
+          <div className="flex-1">{children}</div>
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   )
