@@ -13,6 +13,12 @@ const nextConfig: NextConfig = {
       {
         pathname: '/api/media/file/**',
       },
+      {
+        pathname: '/brand/**',
+      },
+      {
+        pathname: '/trust/**',
+      },
     ],
   },
   async redirects() {
