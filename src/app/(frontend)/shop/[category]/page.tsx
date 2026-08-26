@@ -4,6 +4,7 @@ import { ProductCard } from '@/components/shop/ProductCard'
 import { getPayloadClient } from '@/lib/payload'
 import { categoryJsonLd } from '@/lib/jsonld'
 import { productCardProps } from '@/lib/products'
+import { canonicalUrl } from '@/lib/site-url'
 import type { Category } from '@/payload-types'
 
 export const dynamic = 'force-dynamic'
@@ -26,6 +27,7 @@ export async function generateMetadata({ params }: Props) {
     return {
       title: cat.seo?.title ?? `${cat.name} | فروشگاه موثقی`,
       description: cat.seo?.description ?? cat.description?.replace(/rn/g, ' ').slice(0, 160),
+      alternates: { canonical: canonicalUrl(`/shop/${cat.slug}`) },
     }
   } catch {
     return { title: 'دسته‌بندی' }

@@ -1,4 +1,5 @@
 import type { CartItem } from '@/commerce/cart'
+import { validateCartAgainstProducts, validatedToCartItems } from '@/commerce/cart-validation'
 import { getPayloadClient } from '@/lib/payload'
 import { NextResponse } from 'next/server'
 
@@ -53,6 +54,29 @@ export async function POST(request: Request) {
 
   try {
     const payload = await getPayloadClient()
+
+    const ids = body.items.map((i) => Number(i.productId)).filter((n) => !Number.isNaN(n))
+    const { docs: products } = await payload.find({
+      collection: 'products',
+      where: { id: { in: ids } },
+      limit: ids.length,
+      depth: 1,
+    })
+
+    const validated = validateCartAgainstProducts(body.items, products)
+    if (!validated.ok) {
+      return NextResponse.json({ error: validated.error }, { status: 400 })
+    }
+
+    if (Math.abs(validated.subtotal - body.subtotal) > 1) {
+      return NextResponse.json(
+        { error: 'Price mismatch — refresh cart', serverSubtotal: validated.subtotal },
+        { status: 409 },
+      )
+    }
+
+    const serverItems = validatedToCartItems(validated.items)
+
     const existing = await payload.find({
       collection: 'orders',
       where: { orderNumber: { equals: body.orderId } },
@@ -71,8 +95,8 @@ export async function POST(request: Request) {
         note: body.note?.trim() || undefined,
         paymentMethod: body.payment,
         shippingMethod: body.shipping,
-        items: body.items,
-        subtotal: body.subtotal,
+        items: serverItems,
+        subtotal: validated.subtotal,
         status: 'pending',
       },
     })

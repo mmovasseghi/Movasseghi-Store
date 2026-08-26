@@ -74,6 +74,7 @@ export function productCardProps(product: ProductRecord) {
   return {
     slug: product.slug,
     name: product.name,
+    shortDescription: product.shortDescription ?? null,
     price: product.regularPrice,
     salePrice: product.salePrice,
     imageUrl: image,

@@ -2,6 +2,7 @@ import { CheckoutSuccess } from '@/components/shop/CheckoutSuccess'
 
 export const metadata = {
   title: 'سفارش ثبت شد',
+  robots: { index: false, follow: false },
 }
 
 export default function CheckoutSuccessPage() {

@@ -1,16 +1,18 @@
 import Link from 'next/link'
 import { Suspense } from 'react'
-import type { Where } from 'payload'
 import { ProductCard } from '@/components/shop/ProductCard'
 import { ShopSearch } from '@/components/shop/ShopSearch'
 import { getPayloadClient } from '@/lib/payload'
+import { persianSearchMatch } from '@/lib/persian-search'
 import { productCardProps } from '@/lib/products'
+import { canonicalUrl } from '@/lib/site-url'
 
 export const dynamic = 'force-dynamic'
 
 export const metadata = {
   title: 'فروشگاه',
   description: 'خرید ظروف یکبار مصرف گیاهی آملون — فروشگاه موثقی',
+  alternates: { canonical: canonicalUrl('/shop') },
 }
 
 type Props = {
@@ -26,20 +28,12 @@ export default async function ShopPage({ searchParams }: Props) {
 
   try {
     const payload = await getPayloadClient()
-    const productWhere = (query
-      ? {
-          and: [
-            { status: { equals: 'published' as const } },
-            { name: { contains: query } },
-          ],
-        }
-      : { status: { equals: 'published' as const } }) as Where
 
     const [productResult, categoryResult] = await Promise.all([
       payload.find({
         collection: 'products',
-        where: productWhere,
-        limit: 48,
+        where: { status: { equals: 'published' } },
+        limit: query ? 200 : 48,
         sort: 'name',
         depth: 1,
       }),
@@ -49,7 +43,14 @@ export default async function ShopPage({ searchParams }: Props) {
         sort: 'sortOrder',
       }),
     ])
-    products = productResult.docs.map(productCardProps)
+    const filtered = query
+      ? productResult.docs.filter(
+          (p) =>
+            persianSearchMatch(p.name, query) ||
+            (p.sku ? persianSearchMatch(p.sku, query) : false),
+        )
+      : productResult.docs
+    products = filtered.slice(0, 48).map(productCardProps)
     categories = categoryResult.docs.map((c) => ({
       slug: c.slug,
       name: c.name,

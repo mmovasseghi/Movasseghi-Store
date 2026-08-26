@@ -2,6 +2,7 @@ import { CartView } from '@/components/shop/CartView'
 
 export const metadata = {
   title: 'سبد خرید',
+  robots: { index: false, follow: false },
 }
 
 export default function CartPage() {

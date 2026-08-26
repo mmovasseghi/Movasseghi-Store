@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { formatIrt } from '@/commerce/cart'
 import { useCart } from '@/components/shop/CartProvider'
+import { trackAddToCart, trackPhoneClick } from '@/lib/analytics'
 import { cn, formatPrice } from '@/lib/utils'
 
 type ProductActionsProps = {
@@ -37,6 +38,7 @@ export function ProductActions({
   const handleAdd = () => {
     if (price <= 0) return
     addItem({ productId, slug, name, unitPrice: price, imageUrl: imageUrl ?? undefined }, qty)
+    trackAddToCart({ productId, name, price, quantity: qty })
     setAdded(true)
     setTimeout(() => setAdded(false), 2000)
   }
@@ -115,6 +117,7 @@ export function ProductActions({
         </button>
         <a
           href="tel:09125199105"
+          onClick={() => trackPhoneClick('product')}
           className="flex min-h-11 flex-1 items-center justify-center rounded-xl border-2 border-brand-green px-6 py-3 text-base font-semibold text-brand-green hover:bg-brand-aqua-pale"
         >
           تماس سریع

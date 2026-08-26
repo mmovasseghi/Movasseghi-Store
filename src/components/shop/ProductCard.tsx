@@ -6,6 +6,7 @@ import { cn, formatPrice } from '@/lib/utils'
 type ProductCardProps = {
   slug: string
   name: string
+  shortDescription?: string | null
   price: number
   salePrice?: number | null
   imageUrl?: string | null
@@ -19,6 +20,7 @@ type ProductCardProps = {
 export function ProductCard({
   slug,
   name,
+  shortDescription,
   price,
   salePrice,
   imageUrl,
@@ -62,6 +64,13 @@ export function ProductCard({
         <h3 className="line-clamp-2 text-sm font-medium leading-snug text-brand-ink group-hover:text-brand-green md:text-base">
           {name}
         </h3>
+        {shortDescription && (
+          <p className="hidden text-xs leading-relaxed text-brand-muted md:line-clamp-2 md:group-hover:line-clamp-3 lg:block">
+            <span className="lg:opacity-70 lg:transition-opacity lg:group-hover:opacity-100">
+              {shortDescription}
+            </span>
+          </p>
+        )}
         {(packSize || wholesalePrice) && (
           <div className="flex flex-wrap gap-1">
             {packSize && <Badge variant="default">{packSize}</Badge>}

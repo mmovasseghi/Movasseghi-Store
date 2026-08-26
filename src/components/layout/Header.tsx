@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 import { CartSheet } from '@/components/shop/CartSheet'
+import { HeaderSearch } from '@/components/layout/HeaderSearch'
 import { MobileNav } from '@/components/layout/MobileNav'
 import { useCart } from '@/components/shop/CartProvider'
 import { cn } from '@/lib/utils'
@@ -38,7 +39,9 @@ export function Header() {
             </Link>
           </div>
 
-          <nav className="hidden items-center gap-6 text-sm font-medium text-brand-muted md:flex">
+          <HeaderSearch />
+
+          <nav className="hidden items-center gap-5 text-sm font-medium text-brand-muted xl:flex">
             <Link href="/shop" className="hover:text-brand-green">
               فروشگاه
             </Link>
@@ -56,10 +59,10 @@ export function Header() {
           <div className="flex items-center gap-2">
             <Link
               href="/shop"
-              className="hidden h-11 items-center rounded-xl border border-border px-3 text-sm text-brand-muted hover:border-brand-green sm:flex"
+              className="flex h-11 min-w-11 items-center justify-center rounded-xl border border-border px-3 text-sm text-brand-muted hover:border-brand-green lg:hidden"
               aria-label="جستجو"
             >
-              جستجو…
+              🔍
             </Link>
             <button
               type="button"

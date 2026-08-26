@@ -2,9 +2,10 @@
 
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { cartSubtotal, formatIrt } from '@/commerce/cart'
 import { useCart } from '@/components/shop/CartProvider'
+import { trackBeginCheckout, trackPhoneClick } from '@/lib/analytics'
 import { cn } from '@/lib/utils'
 
 type PaymentMethod = 'online' | 'card_to_card' | 'phone'
@@ -21,6 +22,13 @@ export function CheckoutForm() {
   const [payment, setPayment] = useState<PaymentMethod>('phone')
   const [shipping, setShipping] = useState<ShippingMethod>('seller')
   const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (cart.items.length > 0) {
+      trackBeginCheckout(subtotal, cart.items.length)
+    }
+  }, [cart.items.length, subtotal])
 
   if (cart.items.length === 0) {
     return (
@@ -37,8 +45,29 @@ export function CheckoutForm() {
     e.preventDefault()
     if (!name.trim() || !phone.trim()) return
     setSubmitting(true)
+    setError(null)
+
+    const validationRes = await fetch('/api/cart/validate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ items: cart.items }),
+    })
+    const validation = (await validationRes.json()) as {
+      ok?: boolean
+      error?: string
+      items?: typeof cart.items
+      subtotal?: number
+      warnings?: string[]
+    }
+
+    if (!validationRes.ok || !validation.ok || !validation.items) {
+      setError(validation.error ?? 'سبد خرید نامعتبر است — لطفاً صفحه را رفرش کنید')
+      setSubmitting(false)
+      return
+    }
 
     const orderId = `ORD-${Date.now()}`
+    const serverSubtotal = validation.subtotal ?? subtotal
     const payload = {
       orderId,
       name,
@@ -46,23 +75,30 @@ export function CheckoutForm() {
       note,
       payment,
       shipping,
-      items: cart.items,
-      subtotal,
+      items: validation.items,
+      subtotal: serverSubtotal,
       createdAt: new Date().toISOString(),
     }
     localStorage.setItem(`movasseghi-order-${orderId}`, JSON.stringify(payload))
 
     try {
-      await fetch('/api/orders', {
+      const res = await fetch('/api/orders', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       })
+      if (!res.ok) {
+        const data = (await res.json()) as { error?: string }
+        setError(data.error ?? 'ثبت سفارش ناموفق — دوباره تلاش کنید')
+        setSubmitting(false)
+        return
+      }
     } catch {
       // local backup already saved
     }
 
     if (payment === 'phone') {
+      trackPhoneClick('checkout')
       window.location.href = `tel:09125199105`
     }
 
@@ -72,6 +108,12 @@ export function CheckoutForm() {
   return (
     <form onSubmit={handleSubmit} className="mt-8 grid gap-8 lg:grid-cols-5">
       <div className="space-y-6 lg:col-span-3">
+        {error && (
+          <div className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-800" role="alert">
+            {error}
+          </div>
+        )}
+
         <section className="rounded-xl border border-border bg-white p-5">
           <h2 className="font-semibold text-brand-ink">اطلاعات تماس</h2>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">

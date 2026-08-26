@@ -2,10 +2,12 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import { useEffect, useRef } from 'react'
 import { cartSubtotal, formatIrt } from '@/commerce/cart'
 import { Button } from '@/components/ui/Button'
 import { Sheet } from '@/components/ui/Sheet'
 import { useCart } from '@/components/shop/CartProvider'
+import { trackViewCart } from '@/lib/analytics'
 
 type Props = {
   open: boolean
@@ -15,6 +17,17 @@ type Props = {
 export function CartSheet({ open, onClose }: Props) {
   const { cart, removeItem, setQuantity } = useCart()
   const subtotal = cartSubtotal(cart)
+  const trackedOpen = useRef(false)
+
+  useEffect(() => {
+    if (open && cart.items.length > 0 && !trackedOpen.current) {
+      trackedOpen.current = true
+      trackViewCart(subtotal, cart.items.length)
+    }
+    if (!open) {
+      trackedOpen.current = false
+    }
+  }, [open, cart.items.length, subtotal])
 
   return (
     <Sheet open={open} onClose={onClose} title="سبد خرید">

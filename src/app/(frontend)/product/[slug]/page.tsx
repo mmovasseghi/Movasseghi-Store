@@ -5,9 +5,11 @@ import { ProductCard } from '@/components/shop/ProductCard'
 import { ProductGallery } from '@/components/shop/ProductGallery'
 import { ProductSpecs } from '@/components/shop/ProductSpecs'
 import { ProductStickyBar } from '@/components/shop/ProductStickyBar'
+import { ProductViewTracker } from '@/components/shop/ProductViewTracker'
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs'
 import { productJsonLd } from '@/lib/jsonld'
 import { getPayloadClient } from '@/lib/payload'
+import { canonicalUrl } from '@/lib/site-url'
 import {
   mediaUrl,
   productCardProps,
@@ -63,6 +65,7 @@ export async function generateMetadata({ params }: Props) {
     return {
       title: product.seo?.title ?? product.name,
       description: product.seo?.description ?? product.shortDescription,
+      alternates: { canonical: canonicalUrl(`/product/${product.slug}`) },
     }
   } catch {
     return { title: 'محصول' }
@@ -106,6 +109,7 @@ export default async function ProductPage({ params }: Props) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <ProductViewTracker productId={String(product.id)} name={product.name} price={price} />
         <main className="mx-auto max-w-6xl px-4 pb-28 pt-6 md:pb-12 md:pt-8">
           <Breadcrumbs items={breadcrumbItems} className="mb-6" />
 

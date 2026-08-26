@@ -7,6 +7,10 @@ import { productCardProps } from '@/lib/products'
 
 export const dynamic = 'force-dynamic'
 
+const SEO_HUBS = [
+  { label: 'قیمت محصولات آملون', href: '/pricing' },
+] as const
+
 const TRUST = [
   { title: '۱۰۰٪ گیاهی', desc: 'ظروف آملون بر پایه نشاسته ذرت — دوستدار محیط زیست' },
   { title: 'عمده و خرده', desc: 'فروش B2B برای رستوران، کترینگ و سازمان‌ها' },
@@ -48,6 +52,13 @@ export default async function HomePage() {
   }
 
   const mainCategory = categories.find((c) => c.slug.includes('آملون')) ?? categories[0]
+  const categoryHref = mainCategory ? `/shop/${mainCategory.slug}` : '/shop'
+  const seoChips = [
+    { label: 'ظروف یکبار مصرف گیاهی', href: categoryHref },
+    { label: 'ظروف یکبار مصرف', href: '/shop' },
+    { label: 'ظرف یکبار مصرف گیاهی', href: categoryHref },
+    ...SEO_HUBS,
+  ]
 
   return (
     <main>
@@ -93,6 +104,21 @@ export default async function HomePage() {
               ۰۹۱۲۵۱۹۹۱۰۵
             </a>
           </div>
+        </div>
+      </section>
+
+      {/* Commercial SEO hubs */}
+      <section className="border-b border-border bg-brand-aqua-pale/30 px-4 py-6">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-2">
+          {seoChips.map((hub) => (
+            <Link
+              key={hub.label}
+              href={hub.href}
+              className="rounded-full border border-brand-green/20 bg-white px-4 py-2 text-xs font-medium text-brand-ink transition hover:border-brand-green hover:bg-brand-aqua-pale md:text-sm"
+            >
+              {hub.label}
+            </Link>
+          ))}
         </div>
       </section>
 

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { Suspense, useEffect, useRef } from 'react'
 import { useCart } from '@/components/shop/CartProvider'
+import { trackPhoneClick, trackPurchase } from '@/lib/analytics'
 
 function SuccessContent() {
   const params = useSearchParams()
@@ -15,6 +16,18 @@ function SuccessContent() {
     if (!orderId || cleared.current) return
     cleared.current = true
     clearCart()
+
+    try {
+      const raw = localStorage.getItem(`movasseghi-order-${orderId}`)
+      if (raw) {
+        const order = JSON.parse(raw) as { subtotal?: number }
+        if (typeof order.subtotal === 'number') {
+          trackPurchase(orderId, order.subtotal)
+        }
+      }
+    } catch {
+      // ignore
+    }
   }, [orderId, clearCart])
 
   return (
@@ -28,6 +41,7 @@ function SuccessContent() {
       <div className="mt-6 flex flex-wrap justify-center gap-3">
         <a
           href="tel:09125199105"
+          onClick={() => trackPhoneClick('checkout_success')}
           className="rounded-xl bg-brand-green px-6 py-3 font-semibold text-white hover:bg-brand-green-light"
         >
           تماس ۰۹۱۲۵۱۹۹۱۰۵

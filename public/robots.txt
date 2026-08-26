@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: http://91.107.181.79/sitemap.xml

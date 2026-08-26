@@ -3,6 +3,7 @@ import { CheckoutForm } from '@/components/shop/CheckoutForm'
 export const metadata = {
   title: 'تسویه حساب',
   description: 'ثبت سفارش ظروف یکبار مصرف گیاهی — فروشگاه موثقی',
+  robots: { index: false, follow: false },
 }
 
 export default function CheckoutPage() {
