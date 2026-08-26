@@ -69,6 +69,11 @@ export function Footer() {
               </Link>
             </li>
             <li>
+              <Link href="/account" className="hover:text-brand-green">
+                حساب کاربری
+              </Link>
+            </li>
+            <li>
               <Link href="/shipping" className="hover:text-brand-green">
                 روش ارسال
               </Link>

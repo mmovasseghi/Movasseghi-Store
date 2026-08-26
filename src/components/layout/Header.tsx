@@ -58,6 +58,13 @@ export function Header() {
 
           <div className="flex items-center gap-2">
             <Link
+              href="/account"
+              className="hidden h-11 min-w-11 items-center justify-center rounded-xl border border-border px-3 text-sm text-brand-muted hover:border-brand-green sm:flex"
+              aria-label="حساب کاربری"
+            >
+              👤
+            </Link>
+            <Link
               href="/shop"
               className="flex h-11 min-w-11 items-center justify-center rounded-xl border border-border px-3 text-sm text-brand-muted hover:border-brand-green lg:hidden"
               aria-label="جستجو"

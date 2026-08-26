@@ -11,6 +11,11 @@ import {
   sortProductCards,
   type ProductCardData,
 } from '@/lib/products'
+import {
+  extractFilterOptions,
+  hasActiveShopFilters,
+  matchesShopFilters,
+} from '@/lib/shop-filters'
 import { canonicalUrl } from '@/lib/site-url'
 
 export const dynamic = 'force-dynamic'
@@ -22,27 +27,31 @@ export const metadata = {
 }
 
 type Props = {
-  searchParams: Promise<{ q?: string; sort?: string; sale?: string }>
+  searchParams: Promise<{ q?: string; sort?: string; sale?: string; material?: string; pack?: string }>
 }
 
 export default async function ShopPage({ searchParams }: Props) {
-  const { q, sort = 'name', sale } = await searchParams
+  const { q, sort = 'name', sale, material, pack } = await searchParams
   const query = q?.trim() ?? ''
   const saleOnly = sale === '1'
+  const materialFilter = material?.trim() ?? ''
+  const packFilter = pack?.trim() ?? ''
   const sortKey = sort === 'price-asc' || sort === 'price-desc' ? sort : 'name'
+  const filtersActive = hasActiveShopFilters({ q: query, sale, material: materialFilter, pack: packFilter })
 
   let products: ProductCardData[] = []
   let categories: { slug: string; name: string; productCount?: number | null }[] = []
+  let filterOptions = { materials: [] as string[], packSizes: [] as string[] }
 
   try {
     const payload = await getPayloadClient()
-    const needsWideFetch = Boolean(query || saleOnly)
+    const needsWideFetch = Boolean(query || saleOnly || materialFilter || packFilter)
 
     const [productResult, categoryResult] = await Promise.all([
       payload.find({
         collection: 'products',
         where: { status: { equals: 'published' } },
-        limit: needsWideFetch ? 200 : 48,
+        limit: needsWideFetch ? 200 : 200,
         sort: 'name',
         depth: 1,
       }),
@@ -52,6 +61,8 @@ export default async function ShopPage({ searchParams }: Props) {
         sort: 'sortOrder',
       }),
     ])
+
+    filterOptions = extractFilterOptions(productResult.docs)
 
     let filtered = productResult.docs
     if (query) {
@@ -63,6 +74,11 @@ export default async function ShopPage({ searchParams }: Props) {
     }
     if (saleOnly) {
       filtered = filtered.filter((p) => isOnSale(p))
+    }
+    if (materialFilter || packFilter) {
+      filtered = filtered.filter((p) =>
+        matchesShopFilters(p, materialFilter || undefined, packFilter || undefined),
+      )
     }
 
     products = sortProductCards(filtered.map(productCardProps), sortKey).slice(0, 48)
@@ -88,27 +104,24 @@ export default async function ShopPage({ searchParams }: Props) {
       </div>
 
       <Suspense fallback={null}>
-        <ShopToolbar />
+        <ShopToolbar filterOptions={filterOptions} />
       </Suspense>
 
-      {(query || saleOnly) && (
+      {filtersActive && (
         <p className="mt-4 text-sm text-brand-muted">
           {query && <>نتایج «{query}» — </>}
           {saleOnly && <>فقط تخفیف‌دار — </>}
+          {materialFilter && <>جنس: {materialFilter} — </>}
+          {packFilter && <>بسته: {packFilter} — </>}
           {products.length} محصول
-          {(query || saleOnly) && (
-            <>
-              {' '}
-              ·{' '}
-              <Link href="/shop" className="text-brand-green hover:underline">
-                پاک کردن فیلتر
-              </Link>
-            </>
-          )}
+          {' · '}
+          <Link href="/shop" className="text-brand-green hover:underline">
+            پاک کردن فیلتر
+          </Link>
         </p>
       )}
 
-      {categories.length > 0 && !query && !saleOnly && (
+      {categories.length > 0 && !filtersActive && (
         <div className="mt-6 flex flex-wrap gap-2">
           {categories.map((cat) => (
             <Link
@@ -130,7 +143,7 @@ export default async function ShopPage({ searchParams }: Props) {
           products.map((p) => <ProductCard key={p.slug} {...p} />)
         ) : (
           <p className="col-span-full rounded-lg border border-dashed border-border bg-white p-8 text-center text-brand-muted">
-            {query || saleOnly ? 'محصولی یافت نشد.' : 'محصولی یافت نشد.'}
+            {query || saleOnly || materialFilter || packFilter ? 'محصولی یافت نشد.' : 'محصولی یافت نشد.'}
           </p>
         )}
       </div>

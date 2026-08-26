@@ -26,6 +26,9 @@ export default buildConfig({
     meta: {
       titleSuffix: '— موثقی',
     },
+    components: {
+      beforeDashboard: ['@/components/admin/OpsDashboard#OpsDashboard'],
+    },
   },
   collections: [Users, Media, Categories, Products, Pages, Orders, Quotes, Posts],
   editor: lexicalEditor(),

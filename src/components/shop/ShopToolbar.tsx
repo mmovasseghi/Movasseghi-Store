@@ -1,5 +1,6 @@
 'use client'
 
+import type { ShopFilterOptions } from '@/lib/shop-filters'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useCallback } from 'react'
 
@@ -9,22 +10,32 @@ const SORT_OPTIONS = [
   { value: 'price-desc', label: 'قیمت: زیاد به کم' },
 ] as const
 
-export function ShopToolbar() {
+type Props = {
+  filterOptions?: ShopFilterOptions
+}
+
+export function ShopToolbar({ filterOptions }: Props) {
   const router = useRouter()
   const params = useSearchParams()
   const sort = params.get('sort') ?? 'name'
   const saleOnly = params.get('sale') === '1'
   const q = params.get('q') ?? ''
+  const material = params.get('material') ?? ''
+  const pack = params.get('pack') ?? ''
 
   const update = useCallback(
-    (next: { sort?: string; sale?: boolean }) => {
+    (next: { sort?: string; sale?: boolean; material?: string; pack?: string }) => {
       const sp = new URLSearchParams()
       if (q) sp.set('q', q)
       sp.set('sort', next.sort ?? sort)
       if (next.sale ?? saleOnly) sp.set('sale', '1')
+      const mat = next.material !== undefined ? next.material : material
+      const pk = next.pack !== undefined ? next.pack : pack
+      if (mat) sp.set('material', mat)
+      if (pk) sp.set('pack', pk)
       router.push(`/shop?${sp.toString()}`)
     },
-    [q, router, saleOnly, sort],
+    [q, router, saleOnly, sort, material, pack],
   )
 
   return (
@@ -44,6 +55,45 @@ export function ShopToolbar() {
           ))}
         </select>
       </label>
+
+      {filterOptions && filterOptions.materials.length > 0 && (
+        <label className="flex items-center gap-2 text-sm text-brand-muted">
+          <span>جنس</span>
+          <select
+            value={material}
+            onChange={(e) => update({ material: e.target.value })}
+            className="h-10 max-w-[10rem] rounded-lg border border-border bg-white px-2 text-sm text-brand-ink outline-none focus:ring-2 focus:ring-brand-green/30"
+            aria-label="فیلتر جنس"
+          >
+            <option value="">همه</option>
+            {filterOptions.materials.map((m) => (
+              <option key={m} value={m}>
+                {m}
+              </option>
+            ))}
+          </select>
+        </label>
+      )}
+
+      {filterOptions && filterOptions.packSizes.length > 0 && (
+        <label className="flex items-center gap-2 text-sm text-brand-muted">
+          <span>بسته</span>
+          <select
+            value={pack}
+            onChange={(e) => update({ pack: e.target.value })}
+            className="h-10 max-w-[10rem] rounded-lg border border-border bg-white px-2 text-sm text-brand-ink outline-none focus:ring-2 focus:ring-brand-green/30"
+            aria-label="فیلتر بسته‌بندی"
+          >
+            <option value="">همه</option>
+            {filterOptions.packSizes.map((p) => (
+              <option key={p} value={p}>
+                {p}
+              </option>
+            ))}
+          </select>
+        </label>
+      )}
+
       <label className="flex min-h-10 cursor-pointer items-center gap-2 rounded-lg border border-border bg-white px-3 text-sm">
         <input
           type="checkbox"

@@ -11,7 +11,8 @@ const NAV = [
   { href: '/pricing', label: 'لیست قیمت' },
   { href: '/b2b', label: 'عمده‌فروشی' },
   { href: '/about', label: 'درباره ما' },
-  { href: '/contact', label: 'تماس' },
+  { href: '/track-order', label: 'پیگیری سفارش' },
+  { href: '/account', label: 'حساب کاربری' },
 ]
 
 export function MobileNav() {

@@ -12,6 +12,18 @@ test.describe('storefront smoke', () => {
     await expect(page.getByRole('heading', { name: 'فروشگاه' })).toBeVisible()
   })
 
+  test('shop filters toolbar', async ({ page }) => {
+    await page.goto('/shop')
+    await expect(page.getByLabel('مرتب‌سازی محصولات')).toBeVisible()
+    await expect(page.getByLabel('فقط تخفیف‌دار')).toBeVisible()
+  })
+
+  test('account login page', async ({ page }) => {
+    await page.goto('/account/login')
+    await expect(page.getByRole('heading', { name: 'حساب کاربری' })).toBeVisible()
+    await expect(page.getByRole('button', { name: 'ورود به حساب' })).toBeVisible()
+  })
+
   test('product page from shop', async ({ page }) => {
     await page.goto('/shop')
     const productLink = page.locator('a[href^="/product/"]').first()
