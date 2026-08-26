@@ -23,7 +23,12 @@
     "inventory:content": "python scripts/legacy/extract-content-inventory.py",
     "sync:media": "python scripts/legacy/sync-media-masters.py",
     "import:media": "cross-env NODE_OPTIONS=--no-deprecation tsx scripts/import/import-media.ts",
-    "sync:content": "cross-env NODE_OPTIONS=--no-deprecation tsx scripts/import/sync-product-content.ts"
+    "sync:content": "cross-env NODE_OPTIONS=--no-deprecation tsx scripts/import/sync-product-content.ts",
+    "sync:pages": "cross-env NODE_OPTIONS=--no-deprecation tsx scripts/import/sync-pages.ts",
+    "export:blog": "python scripts/legacy/export-blog-posts.py",
+    "sync:blog": "cross-env NODE_OPTIONS=--no-deprecation tsx scripts/import/sync-blog.ts",
+    "sync:media-alt": "cross-env NODE_OPTIONS=--no-deprecation tsx scripts/import/sync-media-alt.ts",
+    "deploy:pack": "tar -cf release.tar --exclude=node_modules --exclude=.next --exclude=release.tar --exclude=media-master --exclude=.git --exclude=.env --exclude=\"Old Verison WebSite\" --exclude=legacy-export --exclude=.legacy-extract ."
   },
   "dependencies": {
     "@payloadcms/db-postgres": "3.88.0",

@@ -25,8 +25,11 @@ EOF
 fi
 
 npm ci
+npx payload migrate
+npm run sync:pages || true
+npm run sync:blog || true
+npm run sync:media-alt || true
 npm run build
-npm run seed:legacy || true
 
 pm2 delete movasseghi 2>/dev/null || true
 pm2 start npm --name movasseghi -- start

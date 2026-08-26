@@ -3,6 +3,7 @@ import { Vazirmatn } from 'next/font/google'
 import { Footer } from '@/components/layout/Footer'
 import { Header } from '@/components/layout/Header'
 import { CartProvider } from '@/components/shop/CartProvider'
+import { organizationJsonLd } from '@/lib/jsonld'
 import './globals.css'
 
 const vazirmatn = Vazirmatn({
@@ -22,8 +23,15 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const orgLd = organizationJsonLd()
   return (
     <html lang="fa" dir="rtl" className={vazirmatn.variable}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgLd) }}
+        />
+      </head>
       <body className="flex min-h-screen flex-col">
         <CartProvider>
           <Header />

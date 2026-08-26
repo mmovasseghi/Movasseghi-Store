@@ -72,6 +72,8 @@ export interface Config {
     categories: Category;
     products: Product;
     pages: Page;
+    orders: Order;
+    posts: Post;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -84,6 +86,8 @@ export interface Config {
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
+    orders: OrdersSelect<false> | OrdersSelect<true>;
+    posts: PostsSelect<false> | PostsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -263,6 +267,11 @@ export interface Page {
   id: number;
   title: string;
   slug: string;
+  legacyId?: number | null;
+  /**
+   * محتوای منتقل‌شده از وردپرس — قبل از ویرایش دستی
+   */
+  legacyContentHtml?: string | null;
   status?: ('draft' | 'published') | null;
   content?: {
     root: {
@@ -279,6 +288,52 @@ export interface Page {
     };
     [k: string]: unknown;
   } | null;
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "orders".
+ */
+export interface Order {
+  id: number;
+  orderNumber: string;
+  customerName: string;
+  customerPhone: string;
+  note?: string | null;
+  paymentMethod: 'phone' | 'card_to_card' | 'online';
+  shippingMethod: 'seller' | 'customer';
+  items:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  subtotal: number;
+  status?: ('pending' | 'confirmed' | 'cancelled') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts".
+ */
+export interface Post {
+  id: number;
+  title: string;
+  slug: string;
+  legacyId?: number | null;
+  excerpt?: string | null;
+  legacyContentHtml?: string | null;
+  publishedAt?: string | null;
+  status?: ('draft' | 'published') | null;
   seo?: {
     title?: string | null;
     description?: string | null;
@@ -329,6 +384,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'pages';
         value: number | Page;
+      } | null)
+    | ({
+        relationTo: 'orders';
+        value: number | Order;
+      } | null)
+    | ({
+        relationTo: 'posts';
+        value: number | Post;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -493,8 +556,48 @@ export interface ProductsSelect<T extends boolean = true> {
 export interface PagesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
+  legacyId?: T;
+  legacyContentHtml?: T;
   status?: T;
   content?: T;
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "orders_select".
+ */
+export interface OrdersSelect<T extends boolean = true> {
+  orderNumber?: T;
+  customerName?: T;
+  customerPhone?: T;
+  note?: T;
+  paymentMethod?: T;
+  shippingMethod?: T;
+  items?: T;
+  subtotal?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts_select".
+ */
+export interface PostsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  legacyId?: T;
+  excerpt?: T;
+  legacyContentHtml?: T;
+  publishedAt?: T;
+  status?: T;
   seo?:
     | T
     | {

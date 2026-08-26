@@ -1,7 +1,40 @@
 import { productDisplayPrice, productGalleryImages } from '@/lib/products'
-import type { Product } from '@/payload-types'
+import type { Category, Product } from '@/payload-types'
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
+
+export function organizationJsonLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'فروشگاه موثقی',
+    url: SITE,
+    telephone: '+989125199105',
+    sameAs: ['https://instagram.com/movasseghiStore'],
+  }
+}
+
+export function categoryJsonLd(
+  category: Category,
+  products: { slug: string; name: string }[],
+) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: category.name,
+    description: category.seo?.description ?? category.description,
+    url: `${SITE}/shop/${category.slug}`,
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: products.slice(0, 20).map((p, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        url: `${SITE}/product/${p.slug}`,
+        name: p.name,
+      })),
+    },
+  }
+}
 
 export function productJsonLd(product: Product) {
   const price = productDisplayPrice(product)

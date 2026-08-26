@@ -1,14 +1,14 @@
 import type { CollectionConfig } from 'payload'
 
-export const Pages: CollectionConfig = {
-  slug: 'pages',
+export const Posts: CollectionConfig = {
+  slug: 'posts',
   labels: {
-    singular: 'صفحه',
-    plural: 'صفحات',
+    singular: 'مقاله',
+    plural: 'مقالات',
   },
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'slug', 'status', 'updatedAt'],
+    defaultColumns: ['title', 'slug', 'status', 'publishedAt', 'updatedAt'],
   },
   access: {
     read: ({ req }) => {
@@ -39,13 +39,21 @@ export const Pages: CollectionConfig = {
       admin: { readOnly: true },
     },
     {
+      name: 'excerpt',
+      type: 'textarea',
+      label: 'خلاصه',
+    },
+    {
       name: 'legacyContentHtml',
       type: 'code',
-      label: 'محتوای HTML قدیمی',
-      admin: {
-        language: 'html',
-        description: 'محتوای منتقل‌شده از وردپرس — قبل از ویرایش دستی',
-      },
+      label: 'محتوای HTML',
+      admin: { language: 'html' },
+    },
+    {
+      name: 'publishedAt',
+      type: 'date',
+      label: 'تاریخ انتشار',
+      admin: { date: { pickerAppearance: 'dayAndTime' } },
     },
     {
       name: 'status',
@@ -56,11 +64,6 @@ export const Pages: CollectionConfig = {
         { label: 'پیش‌نویس', value: 'draft' },
         { label: 'منتشر شده', value: 'published' },
       ],
-    },
-    {
-      name: 'content',
-      type: 'richText',
-      label: 'محتوا',
     },
     {
       type: 'group',

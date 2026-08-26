@@ -44,9 +44,9 @@ export function Header() {
           <Link href="/about" className="hover:text-brand-green">
             درباره ما
           </Link>
-          <a href="tel:09125199105" className="hover:text-brand-green">
-            ۰۹۱۲۵۱۹۹۱۰۵
-          </a>
+          <Link href="/contact" className="hover:text-brand-green">
+            تماس
+          </Link>
         </nav>
 
         <Link

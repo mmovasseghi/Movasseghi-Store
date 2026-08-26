@@ -7,7 +7,9 @@ import { fileURLToPath } from 'url'
 
 import { Categories } from './collections/Categories'
 import { Media } from './collections/Media'
+import { Orders } from './collections/Orders'
 import { Pages } from './collections/Pages'
+import { Posts } from './collections/Posts'
 import { Products } from './collections/Products'
 import { Users } from './collections/Users'
 
@@ -24,7 +26,7 @@ export default buildConfig({
       titleSuffix: '— موثقی',
     },
   },
-  collections: [Users, Media, Categories, Products, Pages],
+  collections: [Users, Media, Categories, Products, Pages, Orders, Posts],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

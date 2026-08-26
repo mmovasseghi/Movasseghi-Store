@@ -1,0 +1,49 @@
+name: Deploy Production
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run build
+        env:
+          DATABASE_URL: postgresql://movasseghi:movasseghi@localhost:5432/movasseghi
+          PAYLOAD_SECRET: ci-build-secret-min-32-chars-long
+          NEXT_PUBLIC_SITE_URL: http://91.107.181.79
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          script: |
+            set -euo pipefail
+            APP_DIR=/var/www/movasseghi/app
+            cd "$APP_DIR"
+            git fetch origin main
+            git reset --hard origin/main
+            npm ci
+            npx payload migrate
+            npm run sync:pages || true
+            npm run sync:blog || true
+            npm run sync:media-alt || true
+            rm -rf .next
+            npm run build
+            pm2 restart movasseghi || pm2 start npm --name movasseghi -- start
+            pm2 save

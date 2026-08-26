@@ -52,6 +52,16 @@ export function CheckoutForm() {
     }
     localStorage.setItem(`movasseghi-order-${orderId}`, JSON.stringify(payload))
 
+    try {
+      await fetch('/api/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+    } catch {
+      // local backup already saved
+    }
+
     if (payment === 'phone') {
       window.location.href = `tel:09125199105`
     }

@@ -8,9 +8,10 @@ import { cn } from '@/lib/utils'
 
 const NAV = [
   { href: '/shop', label: 'فروشگاه' },
+  { href: '/pricing', label: 'لیست قیمت' },
   { href: '/b2b', label: 'عمده‌فروشی' },
   { href: '/about', label: 'درباره ما' },
-  { href: 'tel:09125199105', label: 'تماس', external: true },
+  { href: '/contact', label: 'تماس' },
 ]
 
 export function MobileNav() {
@@ -60,27 +61,16 @@ export function MobileNav() {
               </button>
             </div>
             <nav className="flex flex-1 flex-col gap-1 p-4">
-              {NAV.map((item) =>
-                item.external ? (
-                  <a
-                    key={item.href}
-                    href={item.href}
-                    className="rounded-lg px-4 py-3 text-base font-medium text-brand-ink hover:bg-brand-aqua-pale"
-                    onClick={() => setOpen(false)}
-                  >
-                    {item.label}
-                  </a>
-                ) : (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="rounded-lg px-4 py-3 text-base font-medium text-brand-ink hover:bg-brand-aqua-pale"
-                    onClick={() => setOpen(false)}
-                  >
-                    {item.label}
-                  </Link>
-                ),
-              )}
+              {NAV.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="rounded-lg px-4 py-3 text-base font-medium text-brand-ink hover:bg-brand-aqua-pale"
+                  onClick={() => setOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              ))}
             </nav>
             <div className="border-t border-border p-4">
               <Link

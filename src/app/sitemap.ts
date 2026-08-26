@@ -3,7 +3,7 @@ import { getPayloadClient } from '@/lib/payload'
 export default async function sitemap() {
   const base = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
 
-  const staticRoutes = ['', '/shop', '/b2b', '/about', '/cart'].map((path) => ({
+  const staticRoutes = ['', '/shop', '/b2b', '/about', '/contact', '/pricing', '/cart'].map((path) => ({
     url: `${base}${path}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
@@ -21,6 +21,11 @@ export default async function sitemap() {
       collection: 'categories',
       limit: 50,
     })
+    const { docs: blogPosts } = await payload.find({
+      collection: 'posts',
+      where: { status: { equals: 'published' } },
+      limit: 100,
+    })
 
     return [
       ...staticRoutes,
@@ -35,6 +40,13 @@ export default async function sitemap() {
         lastModified: new Date(),
         changeFrequency: 'weekly' as const,
         priority: 0.9,
+      })),
+      { url: `${base}/mag`, lastModified: new Date(), changeFrequency: 'weekly' as const, priority: 0.6 },
+      ...blogPosts.map((p) => ({
+        url: `${base}/mag/${p.slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly' as const,
+        priority: 0.5,
       })),
     ]
   } catch {
