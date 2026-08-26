@@ -11,6 +11,7 @@ import { Orders } from './collections/Orders'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
 import { Products } from './collections/Products'
+import { Quotes } from './collections/Quotes'
 import { Users } from './collections/Users'
 
 const filename = fileURLToPath(import.meta.url)
@@ -26,7 +27,7 @@ export default buildConfig({
       titleSuffix: '— موثقی',
     },
   },
-  collections: [Users, Media, Categories, Products, Pages, Orders, Posts],
+  collections: [Users, Media, Categories, Products, Pages, Orders, Quotes, Posts],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

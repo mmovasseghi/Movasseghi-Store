@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { CategoryCard } from '@/components/shop/CategoryCard'
 import { ProductCard } from '@/components/shop/ProductCard'
 import { getPayloadClient } from '@/lib/payload'
-import { productCardProps } from '@/lib/products'
+import { productCardProps, isOnSale } from '@/lib/products'
 
 export const dynamic = 'force-dynamic'
 
@@ -20,6 +20,7 @@ const TRUST = [
 
 export default async function HomePage() {
   let featured: ReturnType<typeof productCardProps>[] = []
+  let onSale: ReturnType<typeof productCardProps>[] = []
   let categories: { slug: string; name: string; productCount?: number | null }[] = []
 
   try {
@@ -28,7 +29,7 @@ export default async function HomePage() {
       payload.find({
         collection: 'products',
         where: { status: { equals: 'published' } },
-        limit: 8,
+        limit: 100,
         sort: '-updatedAt',
         depth: 1,
       }),
@@ -39,7 +40,9 @@ export default async function HomePage() {
         depth: 0,
       }),
     ])
-    featured = productResult.docs.map(productCardProps)
+    const allCards = productResult.docs.map(productCardProps)
+    featured = allCards.slice(0, 8)
+    onSale = productResult.docs.filter(isOnSale).map(productCardProps).slice(0, 8)
     categories = categoryResult.docs
       .filter((c) => !c.parent)
       .map((c) => ({
@@ -159,6 +162,28 @@ export default async function HomePage() {
           </p>
         )}
       </section>
+
+      {/* Special offers — legacy special-offer plugin equivalent */}
+      {onSale.length > 0 && (
+        <section className="border-t border-border bg-brand-aqua-pale/20 px-4 py-12">
+          <div className="mx-auto max-w-6xl">
+            <div className="mb-6 flex items-end justify-between gap-4">
+              <div>
+                <h2 className="text-xl font-bold text-brand-ink md:text-2xl">پیشنهاد ویژه</h2>
+                <p className="mt-1 text-sm text-brand-muted">محصولات با قیمت ویژه</p>
+              </div>
+              <Link href="/shop?sale=1" className="shrink-0 text-sm font-medium text-brand-green hover:underline">
+                همه تخفیف‌ها ←
+              </Link>
+            </div>
+            <div className="grid grid-cols-2 divide-x divide-y divide-border overflow-hidden rounded-xl border border-border md:grid-cols-4">
+              {onSale.map((p) => (
+                <ProductCard key={p.slug} {...p} variant="grid" />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Trust */}
       <section className="border-t border-border bg-white px-4 py-12">

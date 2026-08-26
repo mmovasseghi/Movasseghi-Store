@@ -5,6 +5,7 @@ import * as migration_20260826_160000_orders_pages from './20260826_160000_order
 import * as migration_20260826_160100_pages_html_text from './20260826_160100_pages_html_text'
 import * as migration_20260826_160200_orders_rels from './20260826_160200_orders_rels'
 import * as migration_20260826_170000_blog_posts from './20260826_170000_blog_posts'
+import * as migration_20260826_180000_quotes from './20260826_180000_quotes'
 
 export const migrations = [
   {
@@ -41,5 +42,10 @@ export const migrations = [
     up: migration_20260826_170000_blog_posts.up,
     down: migration_20260826_170000_blog_posts.down,
     name: '20260826_170000_blog_posts',
+  },
+  {
+    up: migration_20260826_180000_quotes.up,
+    down: migration_20260826_180000_quotes.down,
+    name: '20260826_180000_quotes',
   },
 ]

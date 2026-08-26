@@ -2,9 +2,15 @@ import Link from 'next/link'
 import { Suspense } from 'react'
 import { ProductCard } from '@/components/shop/ProductCard'
 import { ShopSearch } from '@/components/shop/ShopSearch'
+import { ShopToolbar } from '@/components/shop/ShopToolbar'
 import { getPayloadClient } from '@/lib/payload'
 import { persianSearchMatch } from '@/lib/persian-search'
-import { productCardProps } from '@/lib/products'
+import {
+  isOnSale,
+  productCardProps,
+  sortProductCards,
+  type ProductCardData,
+} from '@/lib/products'
 import { canonicalUrl } from '@/lib/site-url'
 
 export const dynamic = 'force-dynamic'
@@ -16,24 +22,27 @@ export const metadata = {
 }
 
 type Props = {
-  searchParams: Promise<{ q?: string }>
+  searchParams: Promise<{ q?: string; sort?: string; sale?: string }>
 }
 
 export default async function ShopPage({ searchParams }: Props) {
-  const { q } = await searchParams
+  const { q, sort = 'name', sale } = await searchParams
   const query = q?.trim() ?? ''
+  const saleOnly = sale === '1'
+  const sortKey = sort === 'price-asc' || sort === 'price-desc' ? sort : 'name'
 
-  let products: ReturnType<typeof productCardProps>[] = []
+  let products: ProductCardData[] = []
   let categories: { slug: string; name: string; productCount?: number | null }[] = []
 
   try {
     const payload = await getPayloadClient()
+    const needsWideFetch = Boolean(query || saleOnly)
 
     const [productResult, categoryResult] = await Promise.all([
       payload.find({
         collection: 'products',
         where: { status: { equals: 'published' } },
-        limit: query ? 200 : 48,
+        limit: needsWideFetch ? 200 : 48,
         sort: 'name',
         depth: 1,
       }),
@@ -43,14 +52,20 @@ export default async function ShopPage({ searchParams }: Props) {
         sort: 'sortOrder',
       }),
     ])
-    const filtered = query
-      ? productResult.docs.filter(
-          (p) =>
-            persianSearchMatch(p.name, query) ||
-            (p.sku ? persianSearchMatch(p.sku, query) : false),
-        )
-      : productResult.docs
-    products = filtered.slice(0, 48).map(productCardProps)
+
+    let filtered = productResult.docs
+    if (query) {
+      filtered = filtered.filter(
+        (p) =>
+          persianSearchMatch(p.name, query) ||
+          (p.sku ? persianSearchMatch(p.sku, query) : false),
+      )
+    }
+    if (saleOnly) {
+      filtered = filtered.filter((p) => isOnSale(p))
+    }
+
+    products = sortProductCards(filtered.map(productCardProps), sortKey).slice(0, 48)
     categories = categoryResult.docs.map((c) => ({
       slug: c.slug,
       name: c.name,
@@ -72,22 +87,28 @@ export default async function ShopPage({ searchParams }: Props) {
         </Suspense>
       </div>
 
-      {query && (
+      <Suspense fallback={null}>
+        <ShopToolbar />
+      </Suspense>
+
+      {(query || saleOnly) && (
         <p className="mt-4 text-sm text-brand-muted">
-          نتایج جستجو برای «{query}» — {products.length} محصول
-          {products.length > 0 && (
+          {query && <>نتایج «{query}» — </>}
+          {saleOnly && <>فقط تخفیف‌دار — </>}
+          {products.length} محصول
+          {(query || saleOnly) && (
             <>
               {' '}
               ·{' '}
               <Link href="/shop" className="text-brand-green hover:underline">
-                پاک کردن
+                پاک کردن فیلتر
               </Link>
             </>
           )}
         </p>
       )}
 
-      {categories.length > 0 && !query && (
+      {categories.length > 0 && !query && !saleOnly && (
         <div className="mt-6 flex flex-wrap gap-2">
           {categories.map((cat) => (
             <Link
@@ -109,7 +130,7 @@ export default async function ShopPage({ searchParams }: Props) {
           products.map((p) => <ProductCard key={p.slug} {...p} />)
         ) : (
           <p className="col-span-full rounded-lg border border-dashed border-border bg-white p-8 text-center text-brand-muted">
-            {query ? 'محصولی با این نام یافت نشد.' : 'محصولی یافت نشد.'}
+            {query || saleOnly ? 'محصولی یافت نشد.' : 'محصولی یافت نشد.'}
           </p>
         )}
       </div>

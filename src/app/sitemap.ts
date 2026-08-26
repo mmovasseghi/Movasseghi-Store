@@ -3,7 +3,22 @@ import { getPayloadClient } from '@/lib/payload'
 export default async function sitemap() {
   const base = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
 
-  const staticRoutes = ['', '/shop', '/b2b', '/about', '/contact', '/pricing', '/cart'].map((path) => ({
+  const staticRoutes = [
+    '',
+    '/shop',
+    '/b2b',
+    '/b2b/quote',
+    '/about',
+    '/contact',
+    '/pricing',
+    '/shipping',
+    '/payment-methods',
+    '/returns',
+    '/terms',
+    '/privacy',
+    '/track-order',
+    '/cart',
+  ].map((path) => ({
     url: `${base}${path}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,

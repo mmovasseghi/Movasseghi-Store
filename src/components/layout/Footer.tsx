@@ -4,7 +4,7 @@ import Link from 'next/link'
 export function Footer() {
   return (
     <footer className="mt-auto border-t border-border bg-brand-off-white">
-      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 md:grid-cols-4">
+      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:grid-cols-2 lg:grid-cols-5">
         <div>
           <p className="font-bold text-brand-ink">فروشگاه موثقی</p>
           <p className="mt-2 text-sm text-brand-muted">
@@ -61,8 +61,43 @@ export function Footer() {
           </ul>
         </div>
         <div>
-          <p className="font-semibold text-brand-ink">درباره</p>
+          <p className="font-semibold text-brand-ink">خدمات</p>
           <ul className="mt-2 space-y-1 text-sm text-brand-muted">
+            <li>
+              <Link href="/track-order" className="hover:text-brand-green">
+                پیگیری سفارش
+              </Link>
+            </li>
+            <li>
+              <Link href="/shipping" className="hover:text-brand-green">
+                روش ارسال
+              </Link>
+            </li>
+            <li>
+              <Link href="/payment-methods" className="hover:text-brand-green">
+                روش پرداخت
+              </Link>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <p className="font-semibold text-brand-ink">قوانین</p>
+          <ul className="mt-2 space-y-1 text-sm text-brand-muted">
+            <li>
+              <Link href="/terms" className="hover:text-brand-green">
+                قوانین
+              </Link>
+            </li>
+            <li>
+              <Link href="/privacy" className="hover:text-brand-green">
+                حریم خصوصی
+              </Link>
+            </li>
+            <li>
+              <Link href="/returns" className="hover:text-brand-green">
+                مرجوعی
+              </Link>
+            </li>
             <li>
               <Link href="/about" className="hover:text-brand-green">
                 درباره ما

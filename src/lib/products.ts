@@ -87,3 +87,29 @@ export function productCardProps(product: ProductRecord) {
       product.salePrice < product.regularPrice,
   }
 }
+
+export type ProductCardData = ReturnType<typeof productCardProps>
+
+export function cardDisplayPrice(card: ProductCardData): number {
+  if (card.salePrice && card.salePrice > 0 && card.salePrice < card.price) return card.salePrice
+  return card.price
+}
+
+export function sortProductCards(cards: ProductCardData[], sort: string): ProductCardData[] {
+  const list = [...cards]
+  if (sort === 'price-asc') {
+    return list.sort((a, b) => cardDisplayPrice(a) - cardDisplayPrice(b))
+  }
+  if (sort === 'price-desc') {
+    return list.sort((a, b) => cardDisplayPrice(b) - cardDisplayPrice(a))
+  }
+  return list.sort((a, b) => a.name.localeCompare(b.name, 'fa'))
+}
+
+export function isOnSale(product: Pick<ProductRecord, 'regularPrice' | 'salePrice'>): boolean {
+  return (
+    !!product.salePrice &&
+    product.salePrice > 0 &&
+    product.salePrice < product.regularPrice
+  )
+}

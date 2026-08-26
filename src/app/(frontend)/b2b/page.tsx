@@ -61,9 +61,15 @@ export default function B2BPage() {
       </div>
 
       <div className="mt-8 flex flex-wrap gap-3">
+        <Link
+          href="/b2b/quote"
+          className="rounded-xl bg-brand-green px-6 py-3 font-semibold text-white hover:bg-brand-green-light"
+        >
+          فرم درخواست عمده
+        </Link>
         <a
           href="tel:09125199105"
-          className="rounded-xl bg-brand-green px-6 py-3 font-semibold text-white hover:bg-brand-green-light"
+          className="rounded-xl border-2 border-brand-green px-6 py-3 font-semibold text-brand-green hover:bg-brand-aqua-pale"
         >
           تماس فوری
         </a>

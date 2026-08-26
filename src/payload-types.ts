@@ -73,6 +73,7 @@ export interface Config {
     products: Product;
     pages: Page;
     orders: Order;
+    quotes: Quote;
     posts: Post;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
@@ -87,6 +88,7 @@ export interface Config {
     products: ProductsSelect<false> | ProductsSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     orders: OrdersSelect<false> | OrdersSelect<true>;
+    quotes: QuotesSelect<false> | QuotesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -323,6 +325,24 @@ export interface Order {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "quotes".
+ */
+export interface Quote {
+  id: number;
+  quoteNumber: string;
+  companyName: string;
+  contactName: string;
+  contactPhone: string;
+  city?: string | null;
+  productsNote: string;
+  shippingPreference?: ('seller' | 'customer' | 'unknown') | null;
+  note?: string | null;
+  status?: ('new' | 'in_progress' | 'answered' | 'closed') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "posts".
  */
 export interface Post {
@@ -388,6 +408,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'orders';
         value: number | Order;
+      } | null)
+    | ({
+        relationTo: 'quotes';
+        value: number | Quote;
       } | null)
     | ({
         relationTo: 'posts';
@@ -582,6 +606,23 @@ export interface OrdersSelect<T extends boolean = true> {
   shippingMethod?: T;
   items?: T;
   subtotal?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "quotes_select".
+ */
+export interface QuotesSelect<T extends boolean = true> {
+  quoteNumber?: T;
+  companyName?: T;
+  contactName?: T;
+  contactPhone?: T;
+  city?: T;
+  productsNote?: T;
+  shippingPreference?: T;
+  note?: T;
   status?: T;
   updatedAt?: T;
   createdAt?: T;
