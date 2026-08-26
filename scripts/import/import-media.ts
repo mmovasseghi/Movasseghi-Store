@@ -140,6 +140,11 @@ async function main() {
       } else missing++
     }
 
+    // When primary PNG master is missing locally, use first real gallery image as featured
+    if (!featuredId && galleryItems.length > 0) {
+      featuredId = galleryItems[0]!.image
+    }
+
     if (featuredId || galleryItems.length) {
       await payload.update({
         collection: 'products',

@@ -43,7 +43,17 @@ wp-content/uploads/YYYY/MM/filename.ext
 | **MASTER** | Server object storage `/var/www/movasseghi/media-master/` (not in Git) | Original legacy files preserved read-only |
 | **PRODUCTION** | Payload `media` collection + `/media` or S3 | Optimized WebP/AVIF derivatives |
 
-## Policy (HARD REQUIREMENT)
+## Production import status (2026-08-26)
+
+| Metric | Value |
+|---|---:|
+| Media records in Payload (server) | 4 unique files |
+| Products with featured image (server) | 16 (gallery fallback) |
+| Products awaiting primary PNG masters | 66+ |
+| Missing masters blocked on full backup extract | 97 |
+
+**Deployed:** `npm run import:media` on Hetzner — authentic legacy JPGs linked; Persian-named primary PNGs pending full `wp-content/uploads/` extract from JetBackup tarball.
+
 
 1. **PRESERVE → MAP → REUSE → OPTIMIZE** — never delete/replace/invent
 2. No stock photos, no AI-generated product visuals when legacy exists
