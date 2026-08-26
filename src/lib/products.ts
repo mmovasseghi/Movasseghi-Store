@@ -3,7 +3,7 @@ export type ProductRecord = {
   name: string
   regularPrice: number
   salePrice?: number | null
-  featuredImage?: { url?: string | null } | number | null
+  featuredImage?: { url?: string | null; alt?: string | null } | number | null
   status?: string
   sku?: string | null
   shortDescription?: string | null
@@ -16,11 +16,37 @@ export type ProductRecord = {
 
 export type MediaRecord = {
   url?: string | null
+  alt?: string | null
 }
 
 export function mediaUrl(media: number | MediaRecord | null | undefined): string | null {
   if (!media || typeof media === 'number') return null
   return media.url ?? null
+}
+
+export function productGalleryImages(
+  product: ProductRecord & {
+    gallery?: Array<{ image?: number | MediaRecord | null } | null> | null
+  },
+): { url: string; alt: string }[] {
+  const images: { url: string; alt: string }[] = []
+  const featured = mediaUrl(product.featuredImage)
+  if (featured) {
+    const alt =
+      typeof product.featuredImage === 'object' && product.featuredImage?.alt
+        ? String(product.featuredImage.alt)
+        : product.name
+    images.push({ url: featured, alt })
+  }
+  for (const item of product.gallery ?? []) {
+    if (!item?.image) continue
+    const url = mediaUrl(item.image)
+    if (!url) continue
+    const alt =
+      typeof item.image === 'object' && item.image.alt ? String(item.image.alt) : product.name
+    if (!images.some((i) => i.url === url)) images.push({ url, alt })
+  }
+  return images
 }
 
 export function productDisplayPrice(

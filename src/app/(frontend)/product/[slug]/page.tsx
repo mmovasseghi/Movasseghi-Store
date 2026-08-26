@@ -1,8 +1,8 @@
-import Image from 'next/image'
 import { notFound } from 'next/navigation'
+import { ProductGallery } from '@/components/shop/ProductGallery'
 import { formatIrt } from '@/commerce/cart'
 import { getPayloadClient } from '@/lib/payload'
-import { mediaUrl, productDisplayPrice } from '@/lib/products'
+import { productDisplayPrice, productGalleryImages } from '@/lib/products'
 import { formatPrice } from '@/lib/utils'
 
 export const dynamic = 'force-dynamic'
@@ -46,20 +46,18 @@ export default async function ProductPage({ params }: Props) {
     if (!product || product.status !== 'published') notFound()
 
     const price = productDisplayPrice(product)
-    const imageUrl = mediaUrl(product.featuredImage)
+    const galleryImages = productGalleryImages(product)
 
     return (
       <main className="mx-auto max-w-6xl px-4 py-8">
         <div className="grid gap-8 md:grid-cols-2">
-          <div className="relative aspect-square overflow-hidden rounded-lg border border-border bg-brand-aqua-pale">
-            {imageUrl ? (
-              <Image src={imageUrl} alt={product.name} fill className="object-cover" priority />
-            ) : (
-              <div className="flex h-full items-center justify-center text-brand-muted">
-                بدون تصویر
-              </div>
-            )}
-          </div>
+          {galleryImages.length > 0 ? (
+            <ProductGallery name={product.name} images={galleryImages} />
+          ) : (
+            <div className="relative flex aspect-square items-center justify-center rounded-lg border border-dashed border-border bg-brand-aqua-pale text-brand-muted">
+              تصویر محصول — در حال انتقال از آرشیو legacy
+            </div>
+          )}
           <div>
             <h1 className="text-2xl font-bold text-brand-ink">{product.name}</h1>
             {product.sku && <p className="mt-1 text-sm text-brand-muted">کد: {product.sku}</p>}

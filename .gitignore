@@ -56,5 +56,6 @@ scripts/legacy/_debug_prices.py
 *.tsbuildinfo
 next-env.d.ts
 
-release.tar
+# Legacy media masters (not in Git — copy from backup)
+media-master/
 
