@@ -12,9 +12,10 @@ const SORT_OPTIONS = [
 
 type Props = {
   filterOptions?: ShopFilterOptions
+  basePath?: string
 }
 
-export function ShopToolbar({ filterOptions }: Props) {
+export function ShopToolbar({ filterOptions, basePath = '/shop' }: Props) {
   const router = useRouter()
   const params = useSearchParams()
   const sort = params.get('sort') ?? 'name'
@@ -33,9 +34,9 @@ export function ShopToolbar({ filterOptions }: Props) {
       const pk = next.pack !== undefined ? next.pack : pack
       if (mat) sp.set('material', mat)
       if (pk) sp.set('pack', pk)
-      router.push(`/shop?${sp.toString()}`)
+      router.push(`${basePath}?${sp.toString()}`)
     },
-    [q, router, saleOnly, sort, material, pack],
+    [q, router, saleOnly, sort, material, pack, basePath],
   )
 
   return (

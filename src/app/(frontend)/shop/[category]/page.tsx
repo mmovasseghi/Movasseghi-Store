@@ -1,9 +1,16 @@
 import Link from 'next/link'
+import { Suspense } from 'react'
 import { notFound } from 'next/navigation'
 import { ProductCard } from '@/components/shop/ProductCard'
+import { ShopToolbar } from '@/components/shop/ShopToolbar'
 import { getPayloadClient } from '@/lib/payload'
 import { categoryJsonLd } from '@/lib/jsonld'
-import { productCardProps } from '@/lib/products'
+import { productCardProps, sortProductCards } from '@/lib/products'
+import {
+  extractFilterOptions,
+  filterPublishedProducts,
+  hasActiveShopFilters,
+} from '@/lib/shop-filters'
 import { canonicalUrl } from '@/lib/site-url'
 import type { Category } from '@/payload-types'
 
@@ -11,6 +18,7 @@ export const dynamic = 'force-dynamic'
 
 type Props = {
   params: Promise<{ category: string }>
+  searchParams: Promise<{ sort?: string; sale?: string; material?: string; pack?: string }>
 }
 
 export async function generateMetadata({ params }: Props) {
@@ -34,11 +42,19 @@ export async function generateMetadata({ params }: Props) {
   }
 }
 
-export default async function CategoryPage({ params }: Props) {
+export default async function CategoryPage({ params, searchParams }: Props) {
   const { category: slug } = await params
+  const { sort = 'name', sale, material, pack } = await searchParams
+  const sortKey = sort === 'price-asc' || sort === 'price-desc' ? sort : 'name'
+  const materialFilter = material?.trim() ?? ''
+  const packFilter = pack?.trim() ?? ''
+  const filtersActive = hasActiveShopFilters({ sale, material: materialFilter, pack: packFilter })
+  const categoryPath = `/shop/${slug}`
+
   let category: Category | null = null
   let childCategories: { slug: string; name: string }[] = []
   let products: ReturnType<typeof productCardProps>[] = []
+  let filterOptions = { materials: [] as string[], packSizes: [] as string[] }
 
   try {
     const payload = await getPayloadClient()
@@ -64,10 +80,12 @@ export default async function CategoryPage({ params }: Props) {
       where: {
         and: [{ status: { equals: 'published' } }, { categories: { contains: category.id } }],
       },
-      limit: 48,
+      limit: 200,
       depth: 1,
     })
-    products = docs.map(productCardProps)
+    filterOptions = extractFilterOptions(docs)
+    const filtered = filterPublishedProducts(docs, { sale, material: materialFilter, pack: packFilter })
+    products = sortProductCards(filtered.map(productCardProps), sortKey)
   } catch {
     notFound()
   }
@@ -108,6 +126,22 @@ export default async function CategoryPage({ params }: Props) {
               </Link>
             ))}
           </div>
+        )}
+
+        <Suspense fallback={null}>
+          <ShopToolbar filterOptions={filterOptions} basePath={categoryPath} />
+        </Suspense>
+
+        {filtersActive && (
+          <p className="mt-4 text-sm text-brand-muted">
+            {sale === '1' && <>فقط تخفیف‌دار — </>}
+            {materialFilter && <>جنس: {materialFilter} — </>}
+            {packFilter && <>بسته: {packFilter} — </>}
+            {products.length} محصول ·{' '}
+            <Link href={categoryPath} className="text-brand-green hover:underline">
+              پاک کردن فیلتر
+            </Link>
+          </p>
         )}
 
         <div className="mt-8 grid grid-cols-2 divide-x divide-y divide-border overflow-hidden rounded-xl border border-border md:grid-cols-3 lg:grid-cols-4">

@@ -4,17 +4,15 @@ import { ProductCard } from '@/components/shop/ProductCard'
 import { ShopSearch } from '@/components/shop/ShopSearch'
 import { ShopToolbar } from '@/components/shop/ShopToolbar'
 import { getPayloadClient } from '@/lib/payload'
-import { persianSearchMatch } from '@/lib/persian-search'
 import {
-  isOnSale,
   productCardProps,
   sortProductCards,
   type ProductCardData,
 } from '@/lib/products'
 import {
   extractFilterOptions,
+  filterPublishedProducts,
   hasActiveShopFilters,
-  matchesShopFilters,
 } from '@/lib/shop-filters'
 import { canonicalUrl } from '@/lib/site-url'
 
@@ -63,23 +61,12 @@ export default async function ShopPage({ searchParams }: Props) {
     ])
 
     filterOptions = extractFilterOptions(productResult.docs)
-
-    let filtered = productResult.docs
-    if (query) {
-      filtered = filtered.filter(
-        (p) =>
-          persianSearchMatch(p.name, query) ||
-          (p.sku ? persianSearchMatch(p.sku, query) : false),
-      )
-    }
-    if (saleOnly) {
-      filtered = filtered.filter((p) => isOnSale(p))
-    }
-    if (materialFilter || packFilter) {
-      filtered = filtered.filter((p) =>
-        matchesShopFilters(p, materialFilter || undefined, packFilter || undefined),
-      )
-    }
+    const filtered = filterPublishedProducts(productResult.docs, {
+      q: query,
+      sale,
+      material: materialFilter,
+      pack: packFilter,
+    })
 
     products = sortProductCards(filtered.map(productCardProps), sortKey).slice(0, 48)
     categories = categoryResult.docs.map((c) => ({

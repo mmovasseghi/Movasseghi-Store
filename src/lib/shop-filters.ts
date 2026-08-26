@@ -1,8 +1,17 @@
 import type { ProductRecord } from '@/lib/products'
+import { isOnSale } from '@/lib/products'
+import { persianSearchMatch } from '@/lib/persian-search'
 
 export type ShopFilterOptions = {
   materials: string[]
   packSizes: string[]
+}
+
+export type ShopFilterParams = {
+  q?: string
+  sale?: string
+  material?: string
+  pack?: string
 }
 
 export function extractFilterOptions(products: ProductRecord[]): ShopFilterOptions {
@@ -36,11 +45,30 @@ export function matchesShopFilters(
   return true
 }
 
-export function hasActiveShopFilters(params: {
-  q?: string
-  sale?: string
-  material?: string
-  pack?: string
-}): boolean {
+export function hasActiveShopFilters(params: ShopFilterParams): boolean {
   return Boolean(params.q || params.sale === '1' || params.material || params.pack)
+}
+
+export function filterPublishedProducts(
+  products: ProductRecord[],
+  params: ShopFilterParams,
+): ProductRecord[] {
+  const query = params.q?.trim() ?? ''
+  let filtered = products
+  if (query) {
+    filtered = filtered.filter(
+      (p) =>
+        persianSearchMatch(p.name, query) ||
+        (p.sku ? persianSearchMatch(p.sku, query) : false),
+    )
+  }
+  if (params.sale === '1') {
+    filtered = filtered.filter((p) => isOnSale(p))
+  }
+  const material = params.material?.trim()
+  const pack = params.pack?.trim()
+  if (material || pack) {
+    filtered = filtered.filter((p) => matchesShopFilters(p, material || undefined, pack || undefined))
+  }
+  return filtered
 }

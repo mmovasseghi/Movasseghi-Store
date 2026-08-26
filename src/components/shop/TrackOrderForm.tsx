@@ -1,6 +1,7 @@
 'use client'
 
 import { formatIrt } from '@/commerce/cart'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 type OrderResult = {
@@ -20,9 +21,13 @@ const STATUS_LABEL: Record<string, string> = {
 }
 
 export function TrackOrderForm() {
+  const router = useRouter()
   const [loading, setLoading] = useState(false)
+  const [sessionLoading, setSessionLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [order, setOrder] = useState<OrderResult | null>(null)
+  const [verifiedPhone, setVerifiedPhone] = useState('')
+  const [verifiedOrderNumber, setVerifiedOrderNumber] = useState('')
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -30,14 +35,13 @@ export function TrackOrderForm() {
     setError(null)
     setOrder(null)
     const fd = new FormData(e.currentTarget)
+    const phone = String(fd.get('phone') ?? '')
+    const orderNumber = String(fd.get('orderNumber') ?? '')
     try {
       const res = await fetch('/api/orders/track', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          orderNumber: fd.get('orderNumber'),
-          phone: fd.get('phone'),
-        }),
+        body: JSON.stringify({ orderNumber, phone }),
       })
       const data = (await res.json()) as OrderResult & { error?: string }
       if (!res.ok) {
@@ -46,10 +50,34 @@ export function TrackOrderForm() {
         return
       }
       setOrder(data)
+      setVerifiedPhone(phone)
+      setVerifiedOrderNumber(orderNumber)
     } catch {
       setError('خطای شبکه')
     }
     setLoading(false)
+  }
+
+  const openAccount = async () => {
+    if (!verifiedPhone || !verifiedOrderNumber) return
+    setSessionLoading(true)
+    try {
+      const res = await fetch('/api/account/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone: verifiedPhone, orderNumber: verifiedOrderNumber }),
+      })
+      if (!res.ok) {
+        setError('ورود به حساب ناموفق بود')
+        setSessionLoading(false)
+        return
+      }
+      router.push('/account')
+      router.refresh()
+    } catch {
+      setError('خطای شبکه')
+      setSessionLoading(false)
+    }
   }
 
   return (
@@ -100,6 +128,14 @@ export function TrackOrderForm() {
               </li>
             ))}
           </ul>
+          <button
+            type="button"
+            onClick={openAccount}
+            disabled={sessionLoading}
+            className="mt-4 w-full rounded-xl border border-brand-green py-2.5 text-sm font-semibold text-brand-green hover:bg-brand-aqua-pale disabled:opacity-60"
+          >
+            {sessionLoading ? 'در حال ورود…' : 'مشاهده همه سفارش‌های من'}
+          </button>
         </div>
       )}
     </div>
