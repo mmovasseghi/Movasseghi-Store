@@ -1,0 +1,18 @@
+{
+  "name": "Movasseghi Store",
+  "user": "ubuntu",
+  "install": "bash .cursor/scripts/install.sh",
+  "start": "bash .cursor/scripts/start.sh",
+  "terminals": [
+    {
+      "name": "next-dev",
+      "command": "npm run dev"
+    }
+  ],
+  "ports": [
+    {
+      "name": "Next.js dev server",
+      "port": 3000
+    }
+  ]
+}
