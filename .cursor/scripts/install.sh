@@ -56,10 +56,25 @@ echo "==> Generating Payload import map and types"
 npm run generate:importmap
 npm run generate:types
 
-echo "==> Applying database migrations"
-npm run payload -- migrate
+# Payload's `migrate` prompts interactively once the schema has been dev-pushed
+# ("data loss will occur, proceed?"). Only run it against a truly fresh database
+# (no `products` table) so re-runs never hang or risk data loss. `</dev/null`
+# guards against any unexpected prompt turning into a hang.
+PSQL="psql postgresql://movasseghi:movasseghi@localhost:5432/movasseghi -tAc"
+SCHEMA_READY="$($PSQL "SELECT to_regclass('public.products') IS NOT NULL;" 2>/dev/null || echo f)"
+if [ "$SCHEMA_READY" != "t" ]; then
+  echo "==> Applying database migrations"
+  npm run payload -- migrate < /dev/null
+else
+  echo "==> Schema already present — skipping migrations"
+fi
 
-echo "==> Seeding catalog from legacy bundle (idempotent)"
-npm run seed:legacy || echo "seed skipped/partial (data may already exist)"
+PRODUCT_COUNT="$($PSQL "SELECT count(*) FROM products;" 2>/dev/null || echo 0)"
+if [ "${PRODUCT_COUNT:-0}" = "0" ]; then
+  echo "==> Seeding catalog from legacy bundle"
+  npm run seed:legacy || echo "seed skipped/partial"
+else
+  echo "==> Catalog already seeded (${PRODUCT_COUNT} products) — skipping seed"
+fi
 
 echo "==> Install complete"
