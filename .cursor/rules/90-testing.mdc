@@ -1,0 +1,11 @@
+---
+description: Testing requirements
+globs: **/*.test.*,**/e2e/**
+alwaysApply: false
+---
+
+# Testing
+
+- Playwright for homepage, catalog, cart, checkout, mobile layouts
+- Payment test matrix before production
+- SEO regression checklist before release

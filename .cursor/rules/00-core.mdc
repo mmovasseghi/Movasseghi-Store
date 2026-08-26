@@ -1,0 +1,13 @@
+---
+description: Core agent operating principles for Movasseghi Store
+alwaysApply: true
+---
+
+# Core
+
+- Legacy backup is read-only; never modify `Old Verison WebSite/backup`
+- Prefer `docs/audit/` and `docs/knowledge/` over rescanning legacy
+- Classify facts: CONFIRMED / INFERRED / UNKNOWN / NOT FOUND
+- No fabricated product, pricing, or marketing claims
+- Minimize scope and dependencies
+- Stop at approval gates defined in AGENTS.md

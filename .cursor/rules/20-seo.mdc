@@ -1,0 +1,13 @@
+---
+description: SEO protection and migration rules
+globs: docs/seo/**,**/seo/**
+alwaysApply: false
+---
+
+# SEO
+
+- Preserve product/category slugs unless explicitly approved
+- Primary keywords map to commercial pages, not thin articles
+- Block release if important URLs disappear or schema breaks
+- Exclude spam URLs from sitemap and redirects (410)
+- Connect GSC before production indexing

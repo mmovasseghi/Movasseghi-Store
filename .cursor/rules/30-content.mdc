@@ -1,0 +1,12 @@
+---
+description: Content migration governance
+globs: docs/knowledge/**,docs/audit/**
+alwaysApply: false
+---
+
+# Content
+
+- Sequence: migrate → parity → SEO validation → release → improve
+- Mark unverified claims SOURCE_REQUIRED
+- Do not invent specs, certifications, reviews, or statistics
+- Migrate Ayrik copy verbatim before editorial rebrand pass

@@ -1,0 +1,11 @@
+---
+description: Security requirements
+alwaysApply: true
+---
+
+# Security
+
+- Secrets in environment only
+- No public user registration unless explicitly approved
+- Input validation, RBAC, secure headers
+- Legacy malware must never enter new codebase

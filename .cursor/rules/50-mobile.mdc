@@ -1,0 +1,10 @@
+---
+description: Mobile-first requirement
+alwaysApply: true
+---
+
+# Mobile-first
+
+- Design and implement mobile → tablet → desktop
+- Touch-friendly targets on catalog, cart, checkout, forms
+- Test critical flows at mobile viewport in Playwright

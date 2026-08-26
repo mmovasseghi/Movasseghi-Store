@@ -1,0 +1,12 @@
+---
+description: Payment integration rules
+globs: **/payment/**
+alwaysApply: false
+---
+
+# Payment
+
+- Use PaymentService abstraction; no provider logic in UI components
+- Callback is not proof of payment — server verification required
+- Use official NextPay/ZarinPal docs only; no invented endpoints
+- Never commit payment credentials

@@ -1,0 +1,12 @@
+---
+description: Legacy source read-only rules
+globs: Old Verison WebSite/**
+alwaysApply: false
+---
+
+# Legacy
+
+- NEVER modify, delete, or "clean up" legacy files
+- NEVER commit secrets from wp-config or database dumps
+- Extract to `.legacy-extract/` for analysis only
+- Treat legacy PHP/runtime as compromised — data migration only

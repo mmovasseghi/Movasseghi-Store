@@ -1,0 +1,11 @@
+---
+description: Performance budget rules
+alwaysApply: true
+---
+
+# Performance
+
+- Respect PERFORMANCE-BUDGET.md when defined
+- Premium motion must not break LCP/INP/CLS
+- Optimize images (responsive, modern formats, lazy where safe)
+- Support prefers-reduced-motion

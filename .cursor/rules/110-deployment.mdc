@@ -1,0 +1,12 @@
+---
+description: Deployment and infrastructure rules
+globs: .github/**,scripts/deploy/**
+alwaysApply: false
+---
+
+# Deployment
+
+- GitHub → CI → staging → production; no ad-hoc prod changes
+- Staging: noindex, isolated credentials
+- Hetzner deploy via SSH keys; never passwords in repo
+- Reproducible infrastructure only

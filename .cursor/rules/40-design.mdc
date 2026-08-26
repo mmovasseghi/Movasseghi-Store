@@ -1,0 +1,11 @@
+---
+description: Design system rules (Gate 3)
+globs: docs/DESIGN-SYSTEM.md,**/components/**
+alwaysApply: false
+---
+
+# Design
+
+- Reference DESIGN-SYSTEM.md when it exists (Gate 3)
+- Premium, clean, RTL-first, nature-inspired — not cliché eco
+- Mobile-first breakpoints: mobile → tablet → desktop

@@ -1,0 +1,11 @@
+---
+description: Commerce integrity rules
+globs: **/cart/**,**/checkout/**,**/commerce/**
+alwaysApply: false
+---
+
+# Commerce
+
+- Server validates price, stock, discounts, totals — never trust browser
+- Support B2B paths when specified in BUSINESS-RULES.md
+- Single product data source for storefront, admin, schema, feeds
