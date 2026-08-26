@@ -11,29 +11,36 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  lint-build:
+    name: Lint & Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run build
+        env:
+          DATABASE_URL: postgresql://movasseghi:movasseghi@localhost:5432/movasseghi
+          PAYLOAD_SECRET: ci-build-secret-min-32-chars-long
+          NEXT_PUBLIC_SITE_URL: http://localhost:3000
+
   docs-check:
     name: Docs structure
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Verify audit docs exist
+      - name: Verify core docs
         run: |
           test -f docs/audit/README.md
           test -f docs/BUSINESS-RULES.md
           test -f AGENTS.md
+          test -f docs/decisions/ARCHITECTURE-DECISION.md
           echo "Core documentation present"
-
-  # Placeholder — enable when Next.js app exists
-  # build:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - uses: actions/setup-node@v4
-  #       with:
-  #         node-version: "22"
-  #     - run: npm ci
-  #     - run: npm run lint
-  #     - run: npm run build
 
   secret-scan:
     name: Gitleaks

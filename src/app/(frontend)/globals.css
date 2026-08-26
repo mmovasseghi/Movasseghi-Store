@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-green: #2d6a4f;
+  --color-brand-green-light: #40916c;
+  --color-brand-aqua: #95d5b2;
+  --color-brand-aqua-pale: #d8f3dc;
+  --color-brand-off-white: #f8faf9;
+  --color-brand-ink: #1b4332;
+  --color-brand-muted: #52796f;
+  --color-border: #e2e8e6;
+  --font-sans: "Vazirmatn", system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply min-h-screen bg-brand-off-white font-sans text-brand-ink antialiased;
+  }
+
+  a {
+    @apply transition-colors;
+  }
+}

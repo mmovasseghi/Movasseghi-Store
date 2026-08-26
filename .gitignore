@@ -1,4 +1,4 @@
-# Legacy forensic extraction workspace (derived from read-only backup)
+# Legacy forensic extraction workspace
 .legacy-extract/
 
 # Local raw backup — too large, contains secrets
@@ -6,6 +6,10 @@ Old Verison WebSite/
 
 # Temp / clone check
 _remote-check/
+movasseghi-tmp/
+
+# Separate Legacy repo working copy
+legacy-export/
 
 # Environment and secrets
 .env
@@ -19,15 +23,18 @@ secrets/
 # Dependencies and build
 node_modules/
 .next/
+out/
 dist/
 build/
 coverage/
 .turbo/
+/media
 
 # OS / editor
 .DS_Store
 Thumbs.db
 *.log
+.idea/
 
 # Never commit legacy credentials
 **/wp-config.php
@@ -35,5 +42,15 @@ Thumbs.db
 **/*.sql.gz
 **/*.tar.gz
 
-# Separate Legacy repo working copy (published to Movasseghi-Store-Legacy)
-legacy-export/
+# Playwright (optional)
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Vercel
+.vercel
