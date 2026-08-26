@@ -42,7 +42,9 @@ Workflow: `.github/workflows/deploy-staging.yml` (enabled after app bootstrap)
 
 ## Bootstrap checklist
 
-- [ ] Create `deploy` user
+- [ ] **Root password expired** — change via Hetzner console/VNC first
+- [ ] Run `scripts/infra/hetzner-bootstrap.sh` as root
+- [ ] Add deploy user SSH public key
 - [ ] Install Node 22, Docker (optional), Nginx, Certbot
 - [ ] Firewall: 22, 80, 443
 - [ ] `/var/www/movasseghi-staging` directory
