@@ -1,9 +1,44 @@
 # Reference Matrix — Movasseghi Store UI
 
-**Purpose:** Compare open-source references + legacy DNA; select patterns per area.  
-**Rule:** References are **not** dependencies. Legacy brand + real product data have **highest priority**.
+**Purpose:** Map every major UI area to **Legacy (primary)**, **Zhaket/RTL market**, **Open Source**, and **final implementation**.  
+**Rule:** References are **not** dependencies. Legacy Woodmart DNA + real product data have **highest priority**.
+
+**Related:** [`../competition/ZHAKET-RTL-PATTERNS.md`](../competition/ZHAKET-RTL-PATTERNS.md) · [`../audit/THEME-RECONSTRUCTION.md`](../audit/THEME-RECONSTRUCTION.md)
 
 **Legend:** ★★★ excellent fit · ★★ good · ★ partial · — weak / skip
+
+---
+
+## Architecture references (patterns only)
+
+| Repo | Role | Movasseghi use |
+|---|---|---|
+| **Legacy Woodmart** | Visual + UX DNA | **PRIMARY** |
+| Vercel Commerce | Storefront/SEO/perf architecture | Route + metadata patterns |
+| Payload 3 | CMS + admin + ecommerce template | **Stack in use** |
+| shadcn/ui | Accessible primitives | Button, Sheet, future Input |
+| PersianLabs/ui | RTL forms | Checkout fields (copy-paste) |
+| Saleor storefront | Cart/checkout/account UX | Reference only — FSL, no embed |
+| next-shadcn-dashboard | Admin ops UI | Future custom dashboard |
+
+---
+
+## Market theme references (Zhaket / RTL)
+
+| Area | Legacy | Market ref | OSS | Final |
+|---|---|---|---|---|
+| Header / mega nav | WHB ★★★ | ShopKadeh, Sabad ★★ | shadcn ★★ | Sticky Header + drawer |
+| Mobile UX | Woodmart ★★ | DigiRado, ShopKadeh ★★★ | — | MobileNav + touch 44px |
+| Product card | bordered grid ★★★ | Woostify ★★ | shadcn badges ★★ | ProductCard grid |
+| Product page | full HTML ★★★ | Molla ★★ | Vercel commerce ★ | Gallery + legacy HTML |
+| Filters | AJAX shop ★★ | ShopKadeh ★★★ | — | Category + search (filters ⏳) |
+| Cart | mini-cart ★★ | DigiRado ★★★ | shadcn Sheet ★★★ | CartSheet |
+| Checkout | phone ★ | Web Store ★★ | PersianLabs ★★ | Multi-path form |
+| Account | WC account ★★ | Woostify ★★★ | Saleor ref ★ | ⏳ Phase 3 |
+| Blog | /mag ★★ | Ecommax ★★ | — | /mag sanitized |
+| Search | header ★★ | Liora ajax ★★★ | — | persianSearch + HeaderSearch |
+| B2B | copy ★★ | Web Store ★★ | Cruip ★★ | /b2b + wholesale badges |
+| Admin | WP admin ★ | — | Payload ★★★ | Payload + future ops UI |
 
 ---
 

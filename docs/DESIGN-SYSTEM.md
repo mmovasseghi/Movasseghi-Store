@@ -1,8 +1,27 @@
 # Design System — فروشگاه موثقی
 
-**Status:** Single source of truth (SSOT) · v2.0 · 2026-08-26  
+**Status:** Single source of truth (SSOT) · v3.0 · 2026-08-26  
 **Direction:** [`design/DESIGN-DIRECTION.md`](design/DESIGN-DIRECTION.md)  
-**Reference analysis:** [`design/REFERENCE-MATRIX.md`](design/REFERENCE-MATRIX.md)
+**Reference analysis:** [`design/REFERENCE-MATRIX.md`](design/REFERENCE-MATRIX.md)  
+**Page system:** [`design/PAGE-INVENTORY.md`](design/PAGE-INVENTORY.md)  
+**Legacy tokens source:** [`audit/VISUAL-DESIGN-AUDIT.md`](audit/VISUAL-DESIGN-AUDIT.md)
+
+---
+
+## Legacy → new token mapping
+
+| Legacy (Woodmart CSS) | Legacy hex | New token | New hex | Notes |
+|---|---|---|---|---|
+| `--wd-primary-color` | `#428D42` | `brand-green` | `#2D6A4F` | Deeper premium green |
+| Elementor accent | `#459647` | `brand-green-light` | `#40916C` | Hover/active |
+| — | — | `brand-aqua` | `#95D5B2` | Badges, highlights |
+| — | — | `brand-aqua-pale` | `#D8F3DC` | Image wells |
+| `--wd-main-bgcolor` | `#FFFFFF` | page bg | white + `brand-off-white` sections |
+| `--wd-title-color` | `#242424` | `brand-ink` | `#1B4332` | Headings |
+| `--wd-text-color` | `#777777` | `brand-muted` | `#52796F` | Body secondary |
+| `--brdcolor-gray-300` | `rgba(0,0,0,0.105)` | `border` | `#E2E8E6` | Grid lines |
+| IranYekan 14px | — | Vazirmatn 16px | — | Mobile readability |
+| Container 1220px | — | `max-w-6xl` | 72rem | ~1152px content |
 
 ---
 

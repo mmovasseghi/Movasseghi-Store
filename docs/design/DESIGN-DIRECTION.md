@@ -1,104 +1,108 @@
 # Design Direction — Movasseghi Store
 
-**Status:** APPROVED for implementation (2026-08-26)  
-**SSOT for tokens/components:** [`../DESIGN-SYSTEM.md`](../DESIGN-SYSTEM.md)
+**Status:** v3.0 · 2026-08-26  
+**SSOT tokens:** [`../DESIGN-SYSTEM.md`](../DESIGN-SYSTEM.md)  
+**Pages:** [`PAGE-INVENTORY.md`](PAGE-INVENTORY.md)  
+**Legacy reconstruction:** [`../audit/THEME-RECONSTRUCTION.md`](../audit/THEME-RECONSTRUCTION.md)
+
+---
+
+## Strategy stack (user-defined)
+
+```
+LEGACY WORDPRESS (Woodmart + WC + Elementor)
+        → LEGACY DNA MODEL
+        → + Zhaket/RTL market patterns
+        → + Open Source primitives (shadcn, Payload, Vercel patterns)
+        → MOVASSEGHI DESIGN SYSTEM
+        → Storefront · Admin · Content · Commerce
+```
+
+**Never:** clone ShopKadeh, Molla, shadcn demo, or generic AI ecommerce.
+
+---
+
+## Reconstruction-first pipeline
+
+| Phase | Action | Status |
+|---|---|---|
+| **A** | Theme forensics (Woodmart settings, CSS, templates, pipeline) | ✅ `docs/audit/THEME-*` |
+| **B** | Visual baseline vs new storefront | ✅ `VISUAL-BASELINE.md` |
+| **C** | Token mapping Legacy → Design System | ✅ `DESIGN-SYSTEM.md` |
+| **D** | Modernize (mobile, premium, performance) | 🔄 Ongoing |
 
 ---
 
 ## Identity statement
 
-Movasseghi Store is **natural + premium + trustworthy + commercial + modern** — not a generic eco template, not a shadcn demo, not a Kairo clone.
+Movasseghi Store = **same brand recognition as legacy ایریک/موثقی**, implemented in modern code, then made **more beautiful, mobile-first, and performant**.
 
-Visual evolution of **ایریک/موثقی legacy** (green `#428D42` lineage → refined `#2D6A4F`), with **real product photos**, **real legacy HTML**, and **bordered catalog grid** as signature commerce pattern.
+Visual anchors:
+
+- Real legacy hero + product photos
+- Bordered catalog grid (Woodmart signature)
+- Green commercial palette (evolved from `#428D42`)
+- Full product HTML preserved
+- Phone + B2B + trust badges
 
 ---
 
 ## Composition principles
 
-1. **Legacy first** — content, images, SEO, grid DNA, category-desc-before-grid.
-2. **Reference second** — borrow primitives (shadcn), motion discipline (Velora), typography rhythm (Cruip), e-com affordances (Kairo).
-3. **One motion language** — subtle reveal, card hover, sheet slide; reduced-motion safe.
-4. **Mobile defines hierarchy** — sticky buy bar, drawer nav, cart sheet, 360px baseline.
-5. **No placeholder commerce** — zero stock photos, zero shortened product copy.
+1. **Legacy first** — reconstruct DNA before inventing layouts
+2. **Market second** — borrow proven Persian ecommerce UX (drawer cart, mobile nav)
+3. **OSS third** — shadcn/Payload for implementation quality
+4. **One motion language** — subtle, reduced-motion safe
+5. **Mobile defines hierarchy** — 360px baseline
+6. **No placeholder commerce** — real content/images only
 
 ---
 
-## Screen direction
+## Screen direction (summary)
 
-### Header
-- Sticky, white, 1px border, light backdrop blur.
-- Mobile: hamburger → drawer (existing `MobileNav`).
-- Desktop: shop · B2B · about · contact.
-- Cart: **opens Sheet** (quick) + link to full cart.
-- Search: compact on shop; header link/icon → shop search.
+| Screen | Direction |
+|---|---|
+| Header | Sticky, logo, desktop search, cart sheet trigger |
+| Home | Legacy hero + SEO chips + categories + bordered featured grid |
+| Shop | Search, category chips, bordered grid |
+| Category | H1 + legacy description + child chips + grid |
+| Product | Gallery, actions, specs, **full legacy HTML**, sticky mobile bar |
+| Cart | Sheet + full page, server validation |
+| Checkout | Phone default, card-to-card, online when credentialed |
+| B2B | Editorial + phone + quote path (expand) |
+| Admin | Payload native → custom ops UI later |
 
-### Hero (home)
-- Legacy `hero.png` background, ink gradient left-to-right (RTL).
-- H1: primary SEO keyword (ظروف یکبار مصرف گیاهی آملون).
-- CTAs: primary → main category; secondary B2B; tertiary phone.
-
-### Product grid
-- **Bordered unified grid** (legacy `products_bordered_grid`) — not isolated floating cards.
-- Hover: subtle shadow + image scale (motion-safe).
-- Show pack size badge when `attributes.packSize` set.
-- Show «عمده» hint when wholesale price exists.
-
-### Category
-- Homepage: horizontal scroll **CategoryCard** with name + count.
-- Category page: H1 + legacy description + child chips + grid.
-
-### Product page
-- Gallery (swipe, thumbs) → title/price/actions → specs accordion → **full legacy HTML** → related grid.
-- Mobile sticky bar for add-to-cart (existing).
-
-### Cart
-- **Sheet** from start edge (RTL) for quick edit.
-- Full `/cart` for review; large touch steppers.
-
-### Checkout
-- Single column mobile; phone order default.
-- Future: PersianLabs mobile + city copy-paste (no npm package).
-
-### B2B
-- Cruip-style editorial blocks + MOQ/wholesale callouts on products.
-- CTA band on homepage (existing).
-
-### Admin
-- Payload admin for catalog/orders; custom ops UI deferred.
+Detail per area: [`REFERENCE-MATRIX.md`](REFERENCE-MATRIX.md)
 
 ---
 
-## Anti-patterns (explicit reject)
+## Anti-patterns
 
-- Excessive leaf/eco clip-art
-- Glassmorphism cards everywhere
-- Rounded-3xl SaaS product cards breaking grid
-- Gradient heroes without product context
-- Shortened AI product descriptions
-- Importing Velora/Kairo/EasyUI as dependencies
-- Desktop-first shrink
-
----
-
-## Implementation phases
-
-| Phase | Scope | Status |
-|---|---|---|
-| A | Design docs + tokens + UI primitives | This commit |
-| B | Cart Sheet, enhanced ProductCard, CategoryCard | This commit |
-| C | PersianLabs checkout fields | When checkout hardens |
-| D | Admin ops dashboard | Post-launch |
-| E | Image WebP derivatives | Infra |
+- Generic Tailwind/shadcn starter as visual foundation
+- Floating SaaS product cards breaking grid
+- Shortened product copy
+- Stock/AI product images
+- Elementor port to React
+- Installing reference themes as npm deps
 
 ---
 
-## Quality bar (definition of done)
+## Quality gate
 
-Design is **not** complete until:
+A page ships when:
 
-- [ ] Visually clearly above legacy Woodmart
-- [ ] Legacy grid + content preserved
-- [ ] Mobile cart/checkout polished
-- [ ] Motion coherent + reduced-motion
-- [ ] DESIGN-SYSTEM.md matches code tokens
-- [ ] No template collage appearance
+- [ ] Matches legacy DNA checklist in `VISUAL-BASELINE.md`
+- [ ] Mobile 360px intentionally designed
+- [ ] Real product content where applicable
+- [ ] Performance budget respected
+- [ ] Recognizable as **Movasseghi**, not a template
+
+---
+
+## Next implementation targets
+
+1. Custom 404 + error states
+2. Shop filters/sort (Woodmart AJAX parity)
+3. Special offers / featured strip (legacy plugin equivalent)
+4. Account + order tracking (Woostify/Web Store patterns)
+5. B2B quote form
