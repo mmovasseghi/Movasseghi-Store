@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Movasseghi Store
 
 Modern ecommerce platform for **فروشگاه موثقی** — disposable plant-based food-service products.
@@ -39,3 +40,7 @@ Previous site: **ایریک پلاستیک ایرانیان** at `ayrik-cornstar
 ---
 
 Private repository. Do not commit secrets.
+=======
+# Movasseghi-Store
+فروشگاه ظروف یکبار مصرف گیاهی آملون
+>>>>>>> origin/main
