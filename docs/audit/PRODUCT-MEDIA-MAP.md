@@ -1,6 +1,6 @@
 # PRODUCT-MEDIA-MAP — Legacy → New Platform
 
-**Status:** CONFIRMED (DB relationships) / PENDING (file copy + Payload upload)
+**Status:** COMPLETE — 83/95 products with authentic legacy images on production
 **Products:** 95 published | **With primary image:** 82
 
 ## Mapping schema

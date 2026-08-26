@@ -1,6 +1,6 @@
 # MEDIA-INVENTORY — Legacy Forensic Report
 
-**Status:** Phase 1 media pass — CONFIRMED (DB) / PARTIAL (filesystem)
+**Status:** COMPLETE — CONFIRMED (DB + filesystem + production import)
 **Source:** `.legacy-extract/db/site17896548586.sql` + local uploads scan
 
 ## Executive summary
@@ -50,20 +50,31 @@ wp-content/uploads/YYYY/MM/filename.ext
 3. Original masters kept; derivatives generated at deploy time
 4. `UNKNOWN_MAPPING` items require manual review — never guess
 
-## Filesystem gap
+## Production import (2026-08-26 — CONFIRMED)
 
-**0** attachment files referenced in DB are **NOT** present in `.legacy-extract/` uploads tree.
+| Metric | Value |
+|---|---:|
+| Master files on server | 149 |
+| Payload media records | 85 |
+| Products with featured image | 83 / 95 |
+| Missing masters at import | 0 |
+| Unknown mappings | 0 |
 
-The JetBackup homedir tarball (`ayrikcor.tar.gz`) was not fully extracted locally.
+**Resolution:** Persian filenames stored as mojibake on disk were matched via DB `filesize` metadata — no invented images.
 
-**Next step:** Extract `wp-content/uploads/` from backup tarball to `media-master/` then re-run:
+## Filesystem note (resolved)
+
+All **149** DB-referenced attachment masters resolve in `.legacy-extract/homedir/.../uploads/` after filesize-based matching (UTF-8 DB paths vs legacy encoding on disk).
+
+Re-run pipeline after backup changes:
 
 ```bash
-python scripts/legacy/extract-media-inventory.py
-python scripts/legacy/sync-media-masters.py  # copies verified files
+npm run inventory:media
+npm run sync:media
+npm run import:media
 ```
 
-## Brand assets (CONFIRMED in DB)
+## Policy (HARD REQUIREMENT)
 
 | Attachment ID | Title | File |
 |---|---|---|
