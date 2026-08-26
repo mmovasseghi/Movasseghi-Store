@@ -4,6 +4,8 @@ import { ProductCard } from '@/components/shop/ProductCard'
 import { getPayloadClient } from '@/lib/payload'
 import { productCardProps } from '@/lib/products'
 
+export const dynamic = 'force-dynamic'
+
 type Props = {
   params: Promise<{ category: string }>
 }

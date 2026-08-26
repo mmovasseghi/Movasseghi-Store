@@ -20,7 +20,7 @@
 | Env | Host | Indexable |
 |---|---|---|
 | Staging | IP or staging subdomain | **no** (robots + noindex) |
-| Production | TBD domain | yes (after gates) |
+| Production | http://91.107.181.79 (domain TBD) | yes |
 
 ## Deploy path
 
@@ -44,12 +44,11 @@ Workflow: `.github/workflows/deploy-staging.yml` (enabled after app bootstrap)
 
 - [x] Run `scripts/infra/hetzner-bootstrap.sh` as root (2026-08-26)
 - [x] Node 22 + Nginx + UFW + fail2ban installed
-- [x] Staging placeholder at `/var/www/movasseghi-staging` (noindex)
-- [ ] Add deploy user SSH public key
-- [ ] Install Node 22, Docker (optional), Nginx, Certbot
-- [ ] Firewall: 22, 80, 443
-- [ ] `/var/www/movasseghi-staging` directory
-- [ ] Nginx staging vhost with noindex header
+- [x] PostgreSQL 14 + PM2 (2026-08-26 release)
+- [x] **Release live** at http://91.107.181.79/ (Next.js + Payload)
+- [x] 95 products + 22 categories imported from legacy
+- [ ] Add deploy user SSH public key (currently root deploy)
+- [ ] TLS + domain (when purchased)
 - [ ] GitHub Actions deploy key authorized
 
 ## Staging URL (temporary)

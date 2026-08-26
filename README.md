@@ -11,9 +11,8 @@ Modern ecommerce platform for **فروشگاه موثقی** — disposable plant
 | Legacy forensics | ✅ Complete — `docs/audit/` |
 | Gate 2 Architecture | ✅ Payload + custom commerce |
 | Gate 3 Design system | ✅ `docs/DESIGN-SYSTEM.md` |
-| App scaffold | ✅ Next.js 16 + Payload 3 + PostgreSQL |
-| Staging server | ✅ Hetzner bootstrap — `91.107.181.79` |
-| Content migration | 🔄 Pending — import from Legacy repo |
+| App + Release | ✅ Live at http://91.107.181.79 |
+| Content migration | ✅ 95 products, 22 categories imported |
 
 ## Repositories
 

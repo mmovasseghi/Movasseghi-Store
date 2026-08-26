@@ -5,6 +5,8 @@ import { getPayloadClient } from '@/lib/payload'
 import { mediaUrl, productDisplayPrice } from '@/lib/products'
 import { formatPrice } from '@/lib/utils'
 
+export const dynamic = 'force-dynamic'
+
 type Props = {
   params: Promise<{ slug: string }>
 }

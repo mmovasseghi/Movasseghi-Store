@@ -3,6 +3,8 @@ import { ProductCard } from '@/components/shop/ProductCard'
 import { getPayloadClient } from '@/lib/payload'
 import { productCardProps } from '@/lib/products'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata = {
   title: 'فروشگاه',
   description: 'خرید ظروف یکبار مصرف گیاهی آملون — فروشگاه موثقی',
