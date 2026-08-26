@@ -47,28 +47,73 @@ def parse_attachment_metadata(raw: str) -> dict:
     return out
 
 
-def resolve_local_file(relative_path: str) -> Path | None:
+def resolve_local_file(
+    relative_path: str,
+    *,
+    filesize: int | None = None,
+    title: str | None = None,
+) -> Path | None:
+    """Resolve legacy upload path; handles Persian UTF-8 DB paths vs mojibake on-disk names."""
     if not relative_path:
         return None
     rel = relative_path.replace("\\", "/").lstrip("/")
-    for base in (
+    bases = (
         LEGACY_UPLOADS_BASE,
         ROOT / ".legacy-extract" / "homedir2" / "public_html" / "wp-content" / "uploads",
-    ):
+    )
+    for base in bases:
         direct = base / rel
         if direct.is_file():
             return direct
-        # WordPress may store Persian names; try basename glob
         name = Path(rel).name
         if name:
             matches = list(base.rglob(name))
             if matches:
                 return matches[0]
+
+    parent = str(Path(rel).parent)
+    suffix = Path(rel).suffix.lower()
+
+    if filesize:
+        for base in bases:
+            folder = base / parent
+            if not folder.is_dir():
+                continue
+            same_size = [
+                f
+                for f in folder.iterdir()
+                if f.is_file() and f.stat().st_size == filesize
+            ]
+            if not same_size:
+                continue
+            if len(same_size) == 1:
+                return same_size[0]
+            masters = [
+                f
+                for f in same_size
+                if not re.search(r"-\d+x\d+\.", f.name) and not f.name.endswith("-scaled" + suffix)
+            ]
+            if len(masters) == 1:
+                return masters[0]
+            return same_size[0]
+
+    # ASCII slug from title (e.g. photo_2017-07-09_14-09-50)
+    if title:
+        ascii_slug = re.sub(r"[^\w\-]+", "", title.replace(" ", "-"))
+        if ascii_slug:
+            for base in bases:
+                folder = base / parent
+                if not folder.is_dir():
+                    continue
+                for f in folder.iterdir():
+                    if f.is_file() and ascii_slug in f.name:
+                        return f
+
     return None
 
 
-def file_exists_local(relative_path: str) -> bool:
-    return resolve_local_file(relative_path) is not None
+def file_exists_local(relative_path: str, **kwargs) -> bool:
+    return resolve_local_file(relative_path, **kwargs) is not None
 
 
 def main() -> int:
@@ -128,7 +173,6 @@ def main() -> int:
             if key == "_wp_attached_file":
                 attachments[post_id]["attachedFile"] = val
                 attachments[post_id]["legacyUrl"] = LEGACY_DOMAIN + val.lstrip("/")
-                attachments[post_id]["fileOnDisk"] = file_exists_local(val)
             elif key == "_wp_attachment_image_alt":
                 attachments[post_id]["alt"] = val
             elif key == "_wp_attachment_metadata":
@@ -143,6 +187,19 @@ def main() -> int:
                 products[post_id]["galleryIds"] = [
                     int(x) for x in val.split(",") if x.strip().isdigit()
                 ]
+
+    # Resolve on-disk files (after metadata filesize is available; handles mojibake filenames)
+    for att in attachments.values():
+        if not att["attachedFile"]:
+            continue
+        resolved = resolve_local_file(
+            att["attachedFile"],
+            filesize=att.get("filesize"),
+            title=att.get("title"),
+        )
+        att["fileOnDisk"] = resolved is not None
+        if resolved:
+            att["localResolvedPath"] = str(resolved)
 
     # Category thumbnails from termmeta
     termmeta_blob = extract_insert_table(sql, "wp_termmeta")

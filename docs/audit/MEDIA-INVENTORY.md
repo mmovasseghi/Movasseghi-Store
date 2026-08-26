@@ -13,8 +13,8 @@
 | Products with gallery | 17 | CONFIRMED |
 | Product-linked attachment IDs | 85 | CONFIRMED |
 | Category thumbnail references | 21 | CONFIRMED |
-| Files found in local extract | 52 | CONFIRMED |
-| Files **missing** locally (need tar/backup) | 97 | CONFIRMED |
+| Files found in local extract | 149 | CONFIRMED |
+| Files **missing** locally (need tar/backup) | 0 | CONFIRMED |
 | Confident product↔media mappings | 99 | CONFIRMED |
 | Unknown mappings | 0 | CONFIRMED |
 | Orphaned attachments (not product-linked) | 64 | INFERRED |
@@ -43,17 +43,7 @@ wp-content/uploads/YYYY/MM/filename.ext
 | **MASTER** | Server object storage `/var/www/movasseghi/media-master/` (not in Git) | Original legacy files preserved read-only |
 | **PRODUCTION** | Payload `media` collection + `/media` or S3 | Optimized WebP/AVIF derivatives |
 
-## Production import status (2026-08-26)
-
-| Metric | Value |
-|---|---:|
-| Media records in Payload (server) | 4 unique files |
-| Products with featured image (server) | 16 (gallery fallback) |
-| Products awaiting primary PNG masters | 66+ |
-| Missing masters blocked on full backup extract | 97 |
-
-**Deployed:** `npm run import:media` on Hetzner — authentic legacy JPGs linked; Persian-named primary PNGs pending full `wp-content/uploads/` extract from JetBackup tarball.
-
+## Policy (HARD REQUIREMENT)
 
 1. **PRESERVE → MAP → REUSE → OPTIMIZE** — never delete/replace/invent
 2. No stock photos, no AI-generated product visuals when legacy exists
@@ -62,7 +52,7 @@ wp-content/uploads/YYYY/MM/filename.ext
 
 ## Filesystem gap
 
-**97** attachment files referenced in DB are **NOT** present in `.legacy-extract/` uploads tree.
+**0** attachment files referenced in DB are **NOT** present in `.legacy-extract/` uploads tree.
 
 The JetBackup homedir tarball (`ayrikcor.tar.gz`) was not fully extracted locally.
 

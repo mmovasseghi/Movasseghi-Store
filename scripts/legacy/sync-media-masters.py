@@ -38,7 +38,11 @@ def main() -> int:
         if not rel or rel in seen:
             continue
         seen.add(rel)
-        src = resolve_local_file(rel)
+        src = resolve_local_file(
+            rel,
+            filesize=att.get("filesize"),
+            title=att.get("title"),
+        )
         if not src:
             skipped += 1
             continue
