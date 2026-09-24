@@ -30,7 +30,7 @@
 </div>
 
 <div class="kit-toolbar kit-rise">
-    <form method="get" action="/Admin/NewsAdmin" class="kit-search" data-kit-nobusy>
+    <form method="get" action="@AppPath.H("/Admin/NewsAdmin", Context)" class="kit-search" data-kit-nobusy>
         <span class="kit-search-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
         </span>
@@ -38,19 +38,19 @@
     </form>
 
     <nav class="kit-segment" aria-label="فیلتر وضعیت">
-        <a href="/Admin/NewsAdmin" class="@(string.IsNullOrEmpty(status) ? "is-active" : "")">همه</a>
-        <a href="/Admin/NewsAdmin?status=published" class="@(status == "published" ? "is-active" : "")">
+        <a href="@AppPath.H("/Admin/NewsAdmin", Context)" class="@(string.IsNullOrEmpty(status) ? "is-active" : "")">همه</a>
+        <a href="@AppPath.H("/Admin/NewsAdmin?status=published", Context)" class="@(status == "published" ? "is-active" : "")">
             منتشرشده <span class="kit-segment-count">@ViewBag.PublishedCount</span>
         </a>
-        <a href="/Admin/NewsAdmin?status=draft" class="@(status == "draft" ? "is-active" : "")">
+        <a href="@AppPath.H("/Admin/NewsAdmin?status=draft", Context)" class="@(status == "draft" ? "is-active" : "")">
             پیش‌نویس <span class="kit-segment-count">@ViewBag.DraftCount</span>
         </a>
-        <a href="/Admin/NewsAdmin?status=breaking" class="@(status == "breaking" ? "is-active" : "")">
+        <a href="@AppPath.H("/Admin/NewsAdmin?status=breaking", Context)" class="@(status == "breaking" ? "is-active" : "")">
             فوری <span class="kit-segment-count">@ViewBag.BreakingCount</span>
         </a>
     </nav>
 
-    <a class="st-btn st-btn-primary" href="/Admin/NewsAdmin/Create">+ خبر جدید</a>
+    <a class="st-btn st-btn-primary" href="@AppPath.H("/Admin/NewsAdmin/Create", Context)">+ خبر جدید</a>
 </div>
 
 <section class="kit-table-card kit-rise">
@@ -63,7 +63,7 @@
                 خبرهای تازه (محصول جدید، نمایشگاه، تغییر قیمت) به گوگل نشان می‌دهد سایت زنده است
                 و باعث می‌شود دفعات خزش صفحات بیشتر شود.
             </p>
-            <a class="st-btn st-btn-primary" href="/Admin/NewsAdmin/Create">ثبت اولین خبر</a>
+            <a class="st-btn st-btn-primary" href="@AppPath.H("/Admin/NewsAdmin/Create", Context)">ثبت اولین خبر</a>
         </div>
     }
     else

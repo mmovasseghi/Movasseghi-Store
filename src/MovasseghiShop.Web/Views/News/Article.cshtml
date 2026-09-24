@@ -74,8 +74,8 @@
 
 <article class="ms-wrap ct-page ct-page--article ct-page--news" data-ct-page itemscope itemtype="https://schema.org/NewsArticle">
     <nav class="ct-breadcrumb" aria-label="مسیر صفحه">
-        <a href="/">خانه</a><span aria-hidden="true">/</span>
-        <a href="/News">اخبار</a><span aria-hidden="true">/</span>
+        <a href="@AppPath.H("/", Context)">خانه</a><span aria-hidden="true">/</span>
+        <a href="@AppPath.H("/News", Context)">اخبار</a><span aria-hidden="true">/</span>
         <span aria-current="page">@Model.Title</span>
     </nav>
 
@@ -139,8 +139,8 @@
     }
 
     <div class="ct-article-nav">
-        <a href="/News" class="btn btn-ghost">← بازگشت به اخبار</a>
-        <a href="/Catalog" class="btn btn-primary">مشاهده محصولات</a>
+        <a href="@AppPath.H("/News", Context)" class="btn btn-ghost">← بازگشت به اخبار</a>
+        <a href="@AppPath.H("/Catalog", Context)" class="btn btn-primary">مشاهده محصولات</a>
     </div>
 </article>
 

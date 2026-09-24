@@ -10,7 +10,7 @@
 
 <div class="st-edit-grid st-reveal">
 <div>
-<form method="post" action="/Admin/BlogAdmin/Save" data-kit-primary data-kit-dirty-guard>
+<form method="post" action="@AppPath.H("/Admin/BlogAdmin/Save", Context)" data-kit-primary data-kit-dirty-guard>
     @Html.AntiForgeryToken()
     <input type="hidden" name="Id" value="@Model.Id" />
 
@@ -21,7 +21,7 @@
                 برای ذخیره می‌توانید Ctrl+S بزنید.
             </span>
         </div>
-        <a class="st-btn st-btn-ghost" href="/Admin/BlogAdmin">بازگشت</a>
+        <a class="st-btn st-btn-ghost" href="@AppPath.H("/Admin/BlogAdmin", Context)">بازگشت</a>
         <button type="submit" class="st-btn st-btn-primary">@(isNew ? "ساخت مقاله" : "ذخیره تغییرات")</button>
     </div>
 
@@ -229,7 +229,7 @@
 </div>
 
 @section Scripts {
-    <script src="/js/blog-editorial-images.js" asp-append-version="true"></script>
+    <script src="~/js/blog-editorial-images.js" asp-append-version="true"></script>
     <style>
         .blog-featured-preview { max-width: 100%; max-height: 200px; border-radius: 8px; margin-top: .35rem; }
         .blog-inline-img-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: .5rem; }

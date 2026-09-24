@@ -18,7 +18,7 @@
 
 <div class="st-btn-row st-reveal" style="margin-bottom:1rem">
 
-    <form method="post" action="/Admin/StudioContent/SyncCompetitors">
+    <form method="post" action="@AppPath.H("/Admin/StudioContent/SyncCompetitors", Context)">
 
         @Html.AntiForgeryToken()
 

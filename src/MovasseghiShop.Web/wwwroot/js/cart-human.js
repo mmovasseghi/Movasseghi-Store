@@ -16,7 +16,7 @@
       '<p class="ms-human-gate__ok"><span class="ms-human-gate__ok-icon" aria-hidden="true">✓</span> تأیید شد — می‌توانید سفارش را تکمیل کنید</p>';
     if (checkout) {
       checkout.classList.remove('is-disabled');
-      checkout.setAttribute('href', '/Checkout');
+      checkout.setAttribute('href', (window.appUrl || (u => u))('/Checkout'));
       checkout.removeAttribute('tabindex');
       checkout.setAttribute('aria-disabled', 'false');
     }

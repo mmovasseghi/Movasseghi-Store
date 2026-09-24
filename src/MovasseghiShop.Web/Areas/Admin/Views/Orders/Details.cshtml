@@ -53,7 +53,7 @@
             </p>
         </div>
         <div class="kit-order-hero__actions">
-            <a class="st-btn st-btn-ghost" href="/Admin/Orders">بازگشت</a>
+            <a class="st-btn st-btn-ghost" href="@AppPath.H("/Admin/Orders", Context)">بازگشت</a>
             @if (OrderStatusLabels.NeedsOperatorFollowUp(Model))
             {
                 ViewData["FollowUpReturnUrl"] = Context.Request.Path + Context.Request.QueryString;

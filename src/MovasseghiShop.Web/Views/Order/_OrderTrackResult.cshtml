@@ -215,13 +215,13 @@
         <a class="ms-order-success__btn ms-order-success__btn--primary" href="@invoiceUrl">دانلود پیش‌فاکتور</a>
         @if (isAccount)
         {
-            <a class="ms-order-success__btn ms-order-success__btn--ghost" href="/Account">بازگشت به حساب</a>
-            <a class="ms-order-success__btn ms-order-success__btn--ghost" href="/Catalog">ادامه خرید</a>
+            <a class="ms-order-success__btn ms-order-success__btn--ghost" href="@AppPath.H("/Account", Context)">بازگشت به حساب</a>
+            <a class="ms-order-success__btn ms-order-success__btn--ghost" href="@AppPath.H("/Catalog", Context)">ادامه خرید</a>
         }
         else
         {
-            <a class="ms-order-success__btn ms-order-success__btn--ghost" href="/Order/Track">پیگیری سفارش دیگر</a>
-            <a class="ms-order-success__btn ms-order-success__btn--ghost" href="/Catalog">فروشگاه</a>
+            <a class="ms-order-success__btn ms-order-success__btn--ghost" href="@AppPath.H("/Order/Track", Context)">پیگیری سفارش دیگر</a>
+            <a class="ms-order-success__btn ms-order-success__btn--ghost" href="@AppPath.H("/Catalog", Context)">فروشگاه</a>
         }
     </div>
 </div>

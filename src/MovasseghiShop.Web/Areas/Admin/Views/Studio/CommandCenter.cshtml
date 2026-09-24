@@ -19,7 +19,7 @@
 <partial name="_AdminHero" />
 
 <p class="kit-form-hint" style="margin:-.5rem 0 1rem">
-    <a href="/Admin/Studio/EditorialHub" class="st-btn st-btn-ghost st-btn-sm">✍️ پنل موتور بلاگ خودکار (SEO/GEO/AEO)</a>
+    <a href="@AppPath.H("/Admin/Studio/EditorialHub", Context)" class="st-btn st-btn-ghost st-btn-sm">✍️ پنل موتور بلاگ خودکار (SEO/GEO/AEO)</a>
 </p>
 
 
@@ -62,7 +62,7 @@
     <div class="st-alert st-alert-warn st-reveal">
         داده واقعی SERP رقبا همگام‌سازی نشده — قدرت رقابتی فعلاً تخمینی است.
         برای تحلیل واقعی Top 10، کلید <code>SerpApi:ApiKey</code> را تنظیم و
-        <a href="/Admin/StudioContent/Competitors">همگام‌سازی رقبا</a> را اجرا کنید.
+        <a href="@AppPath.H("/Admin/StudioContent/Competitors", Context)">همگام‌سازی رقبا</a> را اجرا کنید.
     </div>
 }
 
@@ -163,7 +163,7 @@
 
                                 <a class="st-btn st-btn-ghost st-btn-sm" href="/Admin/Products/Edit/@action.EntityId">ویرایش</a>
 
-                                <form method="post" action="/Admin/Studio/AutoFixProduct" style="display:inline">
+                                <form method="post" action="@AppPath.H("/Admin/Studio/AutoFixProduct", Context)" style="display:inline">
 
                                     @Html.AntiForgeryToken()
 
@@ -180,7 +180,7 @@
                         {
                             <div class="st-action-foot">
                                 <a class="st-btn st-btn-ghost st-btn-sm" href="/Admin/BlogAdmin/Edit/@action.EntityId">ویرایش</a>
-                                <form method="post" action="/Admin/Studio/AutoFixBlog" style="display:inline">
+                                <form method="post" action="@AppPath.H("/Admin/Studio/AutoFixBlog", Context)" style="display:inline">
                                     @Html.AntiForgeryToken()
                                     <input type="hidden" name="id" value="@action.EntityId" />
                                     <button type="submit" class="st-btn st-btn-primary st-btn-sm">✨ Auto-Fix</button>
@@ -197,7 +197,7 @@
         }
         </div>
 
-        <form method="post" action="/Admin/Studio/RefreshQueue" style="margin-top:1rem">
+        <form method="post" action="@AppPath.H("/Admin/Studio/RefreshQueue", Context)" style="margin-top:1rem">
 
             @Html.AntiForgeryToken()
 
@@ -205,12 +205,12 @@
 
         </form>
 
-        <form method="post" action="/Admin/Studio/RunEditorialGrowth" style="margin-top:.5rem">
+        <form method="post" action="@AppPath.H("/Admin/Studio/RunEditorialGrowth", Context)" style="margin-top:.5rem">
             @Html.AntiForgeryToken()
             <button type="submit" class="st-btn st-btn-primary">✍️ اجرای موتور رشد بلاگ (SEO/GEO/AEO)</button>
         </form>
 
-        <form method="post" action="/Admin/Studio/RefreshEditorialQueue" style="margin-top:.5rem">
+        <form method="post" action="@AppPath.H("/Admin/Studio/RefreshEditorialQueue", Context)" style="margin-top:.5rem">
             @Html.AntiForgeryToken()
             <button type="submit" class="st-btn st-btn-ghost">📋 پر کردن صف موضوعات (GSC + رتبه)</button>
         </form>
@@ -258,9 +258,9 @@
 
     <div class="st-panel-actions">
 
-        <a class="st-btn st-btn-primary" href="/Admin/Products">مدیریت محصولات</a>
+        <a class="st-btn st-btn-primary" href="@AppPath.H("/Admin/Products", Context)">مدیریت محصولات</a>
 
-        <form method="post" action="/Admin/Studio/BulkAutoFix" onsubmit="return confirm('Auto-Fix روی همه محصولات اجرا شود؟');">
+        <form method="post" action="@AppPath.H("/Admin/Studio/BulkAutoFix", Context)" onsubmit="return confirm('Auto-Fix روی همه محصولات اجرا شود؟');">
 
             @Html.AntiForgeryToken()
 
@@ -268,7 +268,7 @@
 
         </form>
 
-        <form method="post" action="/Admin/Studio/BulkAutoFixCategories" onsubmit="return confirm('Auto-Fix روی همه دسته‌بندی‌ها اجرا شود؟ محتوای سئوی دسته‌ها ساخته و در کاتالوگ نمایش داده می‌شود.');">
+        <form method="post" action="@AppPath.H("/Admin/Studio/BulkAutoFixCategories", Context)" onsubmit="return confirm('Auto-Fix روی همه دسته‌بندی‌ها اجرا شود؟ محتوای سئوی دسته‌ها ساخته و در کاتالوگ نمایش داده می‌شود.');">
 
             @Html.AntiForgeryToken()
 
@@ -276,13 +276,13 @@
 
         </form>
 
-        <form method="post" action="/Admin/Studio/BulkAutoFixBlogs" onsubmit="return confirm('Auto-Fix روی همه مقالات منتشر‌شده اجرا شود؟');">
+        <form method="post" action="@AppPath.H("/Admin/Studio/BulkAutoFixBlogs", Context)" onsubmit="return confirm('Auto-Fix روی همه مقالات منتشر‌شده اجرا شود؟');">
             @Html.AntiForgeryToken()
             <button type="submit" class="st-btn st-btn-gold">📰 Auto-Fix مقالات منتشر‌شده</button>
         </form>
 
-        <a class="st-btn st-btn-ghost" href="/Admin/BlogAdmin">مدیریت بلاگ</a>
-        <a class="st-btn st-btn-ghost" href="/Admin/Studio/RankRadar">📡 Rank Radar</a>
+        <a class="st-btn st-btn-ghost" href="@AppPath.H("/Admin/BlogAdmin", Context)">مدیریت بلاگ</a>
+        <a class="st-btn st-btn-ghost" href="@AppPath.H("/Admin/Studio/RankRadar", Context)">📡 Rank Radar</a>
 
     </div>
 
@@ -305,24 +305,24 @@
 
     <div class="st-quick-grid">
 
-        <a class="st-quick-link" href="/Admin/StudioContent/Home">🏠 صفحه اصلی</a>
+        <a class="st-quick-link" href="@AppPath.H("/Admin/StudioContent/Home", Context)">🏠 صفحه اصلی</a>
 
-        <a class="st-quick-link" href="/Admin/StudioContent/Pages">📄 CMS</a>
+        <a class="st-quick-link" href="@AppPath.H("/Admin/StudioContent/Pages", Context)">📄 CMS</a>
 
-        <a class="st-quick-link" href="/Admin/StudioContent/Nav">🧭 منو</a>
+        <a class="st-quick-link" href="@AppPath.H("/Admin/StudioContent/Nav", Context)">🧭 منو</a>
 
-        <a class="st-quick-link" href="/Admin/StudioContent/Atoms">⚛️ Atoms</a>
+        <a class="st-quick-link" href="@AppPath.H("/Admin/StudioContent/Atoms", Context)">⚛️ Atoms</a>
 
-        <a class="st-quick-link" href="/Admin/StudioContent/Reports">📊 گزارش</a>
+        <a class="st-quick-link" href="@AppPath.H("/Admin/StudioContent/Reports", Context)">📊 گزارش</a>
 
-        <a class="st-quick-link" href="/Admin/StudioContent/Authority">🛡️ Authority</a>
+        <a class="st-quick-link" href="@AppPath.H("/Admin/StudioContent/Authority", Context)">🛡️ Authority</a>
 
-        <a class="st-quick-link" href="/Admin/StudioContent/Competitors">🔍 رقبا</a>
+        <a class="st-quick-link" href="@AppPath.H("/Admin/StudioContent/Competitors", Context)">🔍 رقبا</a>
 
     </div>
 
 </section>
 
-<script src="/js/studio-command-center.js" asp-append-version="true"></script>
+<script src="~/js/studio-command-center.js" asp-append-version="true"></script>
 
 

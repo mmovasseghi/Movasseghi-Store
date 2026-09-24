@@ -130,7 +130,7 @@
                                 <h1 class="ms-hero-title">فروشگاه <em>موثقی</em></h1>
                                 <p class="ms-hero-desc">پخش عمده <strong>ظروف یکبار مصرف گیاهی</strong> — اصل کارخانه، ارسال سراسری، مشاوره رایگان</p>
                                 <div class="ms-hero-actions">
-                                    <a href="/Catalog" class="ms-hero-cta">ورود به فروشگاه</a>
+                                    <a href="@AppPath.H("/Catalog", Context)" class="ms-hero-cta">ورود به فروشگاه</a>
                                     <a href="tel:@WholesaleRules.CoordinationPhone" class="ms-hero-cta ms-hero-cta-outline">تماس فوری</a>
                                 </div>
                             </div>
@@ -248,7 +248,7 @@
                         <p>فرصت محدود خرید عمده</p>
                     </div>
                 </div>
-                <a href="/Catalog" class="ms-offers-more">همه ←</a>
+                <a href="@AppPath.H("/Catalog", Context)" class="ms-offers-more">همه ←</a>
             </header>
             <div class="ms-countdown ms-countdown-ltr" data-countdown aria-label="زمان باقی‌مانده">
                 <span><b data-cd-d>۰۰</b><small>روز</small></span>
@@ -297,7 +297,7 @@
                     <h2>انتخاب بر اساس نوع ظرف</h2>
                     <p>@categoryTypes.Count دسته · @productCount محصول <span class="ms-cat-hint-mobile">— بکشید ←</span></p>
                 </div>
-                <a href="/Catalog" class="ms-cat-all">همه ←</a>
+                <a href="@AppPath.H("/Catalog", Context)" class="ms-cat-all">همه ←</a>
             </header>
             <div class="ms-cat-scroll-wrap">
                 <div class="ms-cat-scroll" data-cat-scroll>
@@ -329,7 +329,7 @@
                     <h2>محصولات برتر موثقی</h2>
                     <p>جدیدترین کاتالوگ آملون · @Math.Min(featured.Count, 8) محصول</p>
                 </div>
-                <a href="/Catalog" class="ms-featured-all">همه ←</a>
+                <a href="@AppPath.H("/Catalog", Context)" class="ms-featured-all">همه ←</a>
             </header>
             <div class="ms-featured-grid" data-featured-grid>
                 @foreach (var p in featured.Take(8))
@@ -443,7 +443,7 @@
                     <li><b>@WholesaleRules.FormatMinAmount().Replace(" تومان", "")</b><span>حداقل سفارش</span></li>
                 </ul>
                 <div class="ms-closing-actions">
-                    <a href="/Catalog" class="ms-closing-btn">مشاهده محصولات</a>
+                    <a href="@AppPath.H("/Catalog", Context)" class="ms-closing-btn">مشاهده محصولات</a>
                     <a href="tel:@WholesaleRules.CoordinationPhone" class="ms-closing-phone">@WholesaleRules.CoordinationPhone</a>
                 </div>
             </div>
@@ -463,7 +463,7 @@
                     <h2>آخرین اخبار و رویدادها</h2>
                     <p>اطلاعیه‌ها، ورود محصول و پیشنهادهای ویژه پخش عمده</p>
                 </div>
-                <a href="/News" class="ms-news-all">همه اخبار ←</a>
+                <a href="@AppPath.H("/News", Context)" class="ms-news-all">همه اخبار ←</a>
             </header>
             <div class="ms-news-track" data-news-track>
                 @{ var feedIdx = 0; }
@@ -515,7 +515,7 @@
                     <h2>راهنما و مطالب تخصصی</h2>
                     <p>نکات خرید عمده، انتخاب ظروف گیاهی و تجربه رستوران‌ها</p>
                 </div>
-                <a href="/Blog" class="ms-news-all">همه مطالب ←</a>
+                <a href="@AppPath.H("/Blog", Context)" class="ms-news-all">همه مطالب ←</a>
             </header>
             <div class="ms-news-track" data-news-track>
                 @{ var newsIdx = 0; }

@@ -11,7 +11,7 @@
     <div class="ms-wrap">
         <header class="ms-cart-page-head">
             <h1 class="ms-cart-page-title">سبد خرید</h1>
-            <a href="/Catalog" class="ms-cart-page-back">← بازگشت به محصولات</a>
+            <a href="@AppPath.H("/Catalog", Context)" class="ms-cart-page-back">← بازگشت به محصولات</a>
         </header>
 
         @if (Model.Items.Count == 0)

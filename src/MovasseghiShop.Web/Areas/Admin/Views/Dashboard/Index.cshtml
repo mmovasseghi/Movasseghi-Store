@@ -57,7 +57,7 @@
     <article class="kit-stat">
         <span class="kit-stat-label">@SeoPublishGateLabels.NeedsWork</span>
         <span class="kit-stat-value @(ViewBag.SeoWeak > 0 ? "kit-stat-value--gold" : "")">@ViewBag.SeoWeak.ToString("N0")</span>
-        <span class="kit-stat-foot"><a href="/Admin/Studio">Auto-Fix در مرکز SEO</a></span>
+        <span class="kit-stat-foot"><a href="@AppPath.H("/Admin/Studio", Context)">Auto-Fix در مرکز SEO</a></span>
     </article>
     <article class="kit-stat">
         <span class="kit-stat-label">⚡ پاسخ سرور</span>
@@ -71,10 +71,10 @@
         <strong style="font-size:.88rem">اقدام‌های روزانه</strong>
         <span class="kit-form-hint" style="margin-top:.15rem">اول سرنخ‌ها، بعد سفارش‌ها، بعد سئوی ناقص.</span>
     </div>
-    <a class="st-btn st-btn-primary" href="/Admin/Inquiries?status=open">استعلام‌های باز</a>
-    <a class="st-btn st-btn-ghost" href="/Admin/Orders">سفارش‌ها</a>
-    <a class="st-btn st-btn-ghost" href="/Admin/Reports">گزارش تحلیلی</a>
-    <a class="st-btn st-btn-gold" href="/Admin/Studio">مرکز SEO</a>
+    <a class="st-btn st-btn-primary" href="@AppPath.H("/Admin/Inquiries?status=open", Context)">استعلام‌های باز</a>
+    <a class="st-btn st-btn-ghost" href="@AppPath.H("/Admin/Orders", Context)">سفارش‌ها</a>
+    <a class="st-btn st-btn-ghost" href="@AppPath.H("/Admin/Reports", Context)">گزارش تحلیلی</a>
+    <a class="st-btn st-btn-gold" href="@AppPath.H("/Admin/Studio", Context)">مرکز SEO</a>
 </div>
 
 @if (insights.Count > 0)
@@ -91,7 +91,7 @@ else if (!t.HasData && !s.HasData)
                 بازدید، منبع ورود، قیف فروش و سرعت صفحات از همین لحظه ثبت می‌شوند.
                 بعد از چند روز استفاده، همین‌جا هشدار و پیشنهاد فروش می‌بینید.
             </p>
-            <a class="st-btn st-btn-primary" href="/" target="_blank" rel="noopener">باز کردن فروشگاه</a>
+            <a class="st-btn st-btn-primary" href="@AppPath.H("/", Context)" target="_blank" rel="noopener">باز کردن فروشگاه</a>
         </div>
     </section>
 }
@@ -104,7 +104,7 @@ else if (!t.HasData && !s.HasData)
                     <h2>📥 استعلام‌های پیگیری‌نشده</h2>
                     <p>اگر بیش از ۲۴ ساعت بماند، احتمال تبدیل به سفارش افت می‌کند.</p>
                 </div>
-                <a class="st-btn st-btn-ghost st-btn-sm" href="/Admin/Inquiries?status=open">همه</a>
+                <a class="st-btn st-btn-ghost st-btn-sm" href="@AppPath.H("/Admin/Inquiries?status=open", Context)">همه</a>
             </div>
             @if (!openInquiries.Any())
             {
@@ -152,7 +152,7 @@ else if (!t.HasData && !s.HasData)
         <section class="kit-section kit-rise">
             <div class="kit-section-head">
                 <div><h2>🛒 آخرین سفارش‌ها</h2></div>
-                <a class="st-btn st-btn-ghost st-btn-sm" href="/Admin/Orders">همه</a>
+                <a class="st-btn st-btn-ghost st-btn-sm" href="@AppPath.H("/Admin/Orders", Context)">همه</a>
             </div>
             @if (!recentOrders.Any())
             {
@@ -194,7 +194,7 @@ else if (!t.HasData && !s.HasData)
                     <h2>📡 رتبه کلمات</h2>
                     <p>این عدد قول رتبه ۱ نیست؛ وضعیت فعلی رصد است.</p>
                 </div>
-                <a class="st-btn st-btn-ghost st-btn-sm" href="/Admin/Studio/RankRadar">رصد رتبه</a>
+                <a class="st-btn st-btn-ghost st-btn-sm" href="@AppPath.H("/Admin/Studio/RankRadar", Context)">رصد رتبه</a>
             </div>
             @if (!topKw.Any())
             {
@@ -217,12 +217,12 @@ else if (!t.HasData && !s.HasData)
         <section class="kit-section kit-rise">
             <div class="kit-section-head"><div><h2>دسترسی سریع</h2></div></div>
             <div class="kit-form-grid kit-quick-links">
-                <a class="st-btn st-btn-ghost" href="/Admin/Products">محصولات</a>
-                <a class="st-btn st-btn-ghost" href="/Admin/BlogAdmin">مقالات بلاگ</a>
-                <a class="st-btn st-btn-ghost" href="/Admin/FaqAdmin">سوالات متداول</a>
-                <a class="st-btn st-btn-ghost" href="/Admin/StudioContent/Home">صفحه اصلی</a>
-                <a class="st-btn st-btn-ghost" href="/" target="_blank" rel="noopener">فروشگاه ↗</a>
-                <form method="post" action="/Admin/Dashboard/ImportAmelon" class="kit-quick-links__form"
+                <a class="st-btn st-btn-ghost" href="@AppPath.H("/Admin/Products", Context)">محصولات</a>
+                <a class="st-btn st-btn-ghost" href="@AppPath.H("/Admin/BlogAdmin", Context)">مقالات بلاگ</a>
+                <a class="st-btn st-btn-ghost" href="@AppPath.H("/Admin/FaqAdmin", Context)">سوالات متداول</a>
+                <a class="st-btn st-btn-ghost" href="@AppPath.H("/Admin/StudioContent/Home", Context)">صفحه اصلی</a>
+                <a class="st-btn st-btn-ghost" href="@AppPath.H("/", Context)" target="_blank" rel="noopener">فروشگاه ↗</a>
+                <form method="post" action="@AppPath.H("/Admin/Dashboard/ImportAmelon", Context)" class="kit-quick-links__form"
                       data-kit-confirm="واردسازی محصولات آملون شروع شود؟ ممکن است چند دقیقه طول بکشد."
                       data-kit-confirm-title="واردسازی آملون">
                     @Html.AntiForgeryToken()

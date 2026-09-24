@@ -8,7 +8,7 @@
     var listQ = Context.Request.Query["q"].ToString();
 }
 
-<form method="post" action="/Admin/ProductReviewsAdmin/Save" data-kit-dirty-guard>
+<form method="post" action="@AppPath.H("/Admin/ProductReviewsAdmin/Save", Context)" data-kit-dirty-guard>
     @Html.AntiForgeryToken()
     <input type="hidden" name="Id" value="@review.Id" />
     <input type="hidden" name="ProductId" value="@review.ProductId" />
@@ -129,7 +129,7 @@
                     </span>
                     <span class="kit-form-hint" dir="ltr">@reply.CreatedAt.ToLocalTime().ToString("yyyy/MM/dd HH:mm")</span>
                 </div>
-                <form method="post" action="/Admin/ProductReviewsAdmin/SaveStoreReply" class="kit-reply-form">
+                <form method="post" action="@AppPath.H("/Admin/ProductReviewsAdmin/SaveStoreReply", Context)" class="kit-reply-form">
                     @Html.AntiForgeryToken()
                     <input type="hidden" name="parentReviewId" value="@review.Id" />
                     <input type="hidden" name="replyId" value="@reply.Id" />
@@ -145,7 +145,7 @@
                         <button type="submit" class="st-btn st-btn-primary st-btn-sm">ذخیره پاسخ</button>
                     </div>
                 </form>
-                <form method="post" action="/Admin/ProductReviewsAdmin/DeleteStoreReply" style="margin-top:.5rem" onsubmit="return confirm('این پاسخ حذف شود؟');">
+                <form method="post" action="@AppPath.H("/Admin/ProductReviewsAdmin/DeleteStoreReply", Context)" style="margin-top:.5rem" onsubmit="return confirm('این پاسخ حذف شود؟');">
                     @Html.AntiForgeryToken()
                     <input type="hidden" name="replyId" value="@reply.Id" />
                     <input type="hidden" name="parentReviewId" value="@review.Id" />
@@ -157,7 +157,7 @@
         <article class="kit-reply-card kit-rise" style="padding:1rem;border:1px dashed rgba(82,183,136,.35);border-radius:12px">
             <h3 style="margin:0 0 .5rem;font-size:.9rem">@(Model.StoreReplies.Count > 0 ? "پاسخ جدید" : "ثبت پاسخ")</h3>
             <p class="kit-form-hint" style="margin-bottom:.75rem">نام نمایشی در سایت: <strong>@storeReplyLabel</strong></p>
-            <form method="post" action="/Admin/ProductReviewsAdmin/SaveStoreReply">
+            <form method="post" action="@AppPath.H("/Admin/ProductReviewsAdmin/SaveStoreReply", Context)">
                 @Html.AntiForgeryToken()
                 <input type="hidden" name="parentReviewId" value="@review.Id" />
                 <div class="st-field">

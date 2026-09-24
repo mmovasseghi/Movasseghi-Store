@@ -78,8 +78,8 @@
 
 <article class="ms-wrap ct-page ct-page--article ct-page--blog" data-ct-page itemscope itemtype="https://schema.org/BlogPosting">
     <nav class="ct-breadcrumb" aria-label="مسیر صفحه">
-        <a href="/">خانه</a><span aria-hidden="true">/</span>
-        <a href="/Blog">وبلاگ</a><span aria-hidden="true">/</span>
+        <a href="@AppPath.H("/", Context)">خانه</a><span aria-hidden="true">/</span>
+        <a href="@AppPath.H("/Blog", Context)">وبلاگ</a><span aria-hidden="true">/</span>
         <span aria-current="page">@Model.Title</span>
     </nav>
 
@@ -136,8 +136,8 @@
     }
 
     <div class="ct-article-nav">
-        <a href="/Blog" class="btn btn-ghost">← بازگشت به وبلاگ</a>
-        <a href="/Catalog" class="btn btn-primary">مشاهده محصولات</a>
+        <a href="@AppPath.H("/Blog", Context)" class="btn btn-ghost">← بازگشت به وبلاگ</a>
+        <a href="@AppPath.H("/Catalog", Context)" class="btn btn-primary">مشاهده محصولات</a>
     </div>
 </article>
 

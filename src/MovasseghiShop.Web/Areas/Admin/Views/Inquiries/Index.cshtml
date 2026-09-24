@@ -25,7 +25,7 @@
 </div>
 
 <div class="kit-toolbar kit-rise">
-    <form method="get" action="/Admin/Inquiries" class="kit-search" data-kit-nobusy>
+    <form method="get" action="@AppPath.H("/Admin/Inquiries", Context)" class="kit-search" data-kit-nobusy>
         <span class="kit-search-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
         </span>
@@ -37,11 +37,11 @@
     </form>
 
     <nav class="kit-segment" aria-label="فیلتر وضعیت">
-        <a href="/Admin/Inquiries" class="@(string.IsNullOrEmpty(status) ? "is-active" : "")">همه</a>
-        <a href="/Admin/Inquiries?status=open" class="@(status == "open" ? "is-active" : "")">
+        <a href="@AppPath.H("/Admin/Inquiries", Context)" class="@(string.IsNullOrEmpty(status) ? "is-active" : "")">همه</a>
+        <a href="@AppPath.H("/Admin/Inquiries?status=open", Context)" class="@(status == "open" ? "is-active" : "")">
             باز <span class="kit-segment-count">@ViewBag.OpenCount</span>
         </a>
-        <a href="/Admin/Inquiries?status=handled" class="@(status == "handled" ? "is-active" : "")">
+        <a href="@AppPath.H("/Admin/Inquiries?status=handled", Context)" class="@(status == "handled" ? "is-active" : "")">
             پیگیری‌شده <span class="kit-segment-count">@ViewBag.HandledCount</span>
         </a>
     </nav>
@@ -57,7 +57,7 @@
                 وقتی بازدیدکننده روی «استعلام قیمت» صفحه محصول کلیک کند، درخواستش این‌جا می‌نشیند.
                 در گزارش ترافیک می‌توانید ببینید چند نفر فرم را باز کردند ولی ثبت نکردند.
             </p>
-            <a class="st-btn st-btn-ghost" href="/Admin/Reports/Traffic">دیدن قیف تبدیل</a>
+            <a class="st-btn st-btn-ghost" href="@AppPath.H("/Admin/Reports/Traffic", Context)">دیدن قیف تبدیل</a>
         </div>
     }
     else

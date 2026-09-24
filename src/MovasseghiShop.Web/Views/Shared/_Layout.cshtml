@@ -53,6 +53,7 @@
         @if (ViewData["OgImage"] is string twImg) { <meta name="twitter:image" content="@twImg" /> }
     }
     <meta name="theme-color" content="#2f4a3e" />
+    @await Html.PartialAsync("_AppPathScript")
     @* فونت روی همین دامنه میزبانی می‌شود: قبلاً دو اتصال جداگانه به
        fonts.googleapis.com و fonts.gstatic.com لازم بود و CSS فونت هم رندر را
        بلاک می‌کرد. نسخه variable هر شش وزن را در یک فایل دارد. *@
@@ -131,7 +132,7 @@
                     <span class="ms-burger-line"></span>
                 </span>
             </button>
-            <a href="/" class="ms-logo-link">
+            <a href="@AppPath.H("/", Context)" class="ms-logo-link">
                 <img src="~/images/brand/originallogo.png" alt="فروشگاه موثقی" class="ms-logo" width="320" height="104" />
             </a>
             <nav class="ms-top-nav" aria-label="ناوبری دسکتاپ">
@@ -144,7 +145,7 @@
                 </a>
                 @if (isLoggedIn)
                 {
-                    <a href="/Account" class="ms-icon-btn" aria-label="حساب من">
+                    <a href="@AppPath.H("/Account", Context)" class="ms-icon-btn" aria-label="حساب من">
                         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                     </a>
                 }
@@ -161,7 +162,7 @@
             </div>
         </div>
         <div class="ms-search-wrap">
-            <form action="/Catalog" method="get" class="ms-search" role="search" data-search-form>
+            <form action="@AppPath.H("/Catalog", Context)" method="get" class="ms-search" role="search" data-search-form>
                 <span class="ms-search-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
                 </span>
@@ -204,7 +205,7 @@
                 </button>
                 @if (isLoggedIn)
                 {
-                    <a href="/Account" class="ms-drawer-quick-btn">
+                    <a href="@AppPath.H("/Account", Context)" class="ms-drawer-quick-btn">
                         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                         <span>حساب</span>
                     </a>
@@ -239,7 +240,7 @@
                         <span class="ms-drawer-cat-label">دیس</span>
                     </a>
                 </div>
-                <a href="/Catalog" class="ms-drawer-cat-all" data-drawer-link>
+                <a href="@AppPath.H("/Catalog", Context)" class="ms-drawer-cat-all" data-drawer-link>
                     <span>مشاهده همه دسته‌ها</span>
                     <span aria-hidden="true">›</span>
                 </a>
@@ -264,11 +265,11 @@
     <main class="ms-main" id="ms-main" tabindex="-1">@RenderBody()</main>
 
     <nav class="ms-tabbar" aria-label="ناوبری اصلی">
-        <a href="/" class="ms-tab @(isHome ? "is-active" : "")">
+        <a href="@AppPath.H("/", Context)" class="ms-tab @(isHome ? "is-active" : "")">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1z"/></svg>
             <span>خانه</span>
         </a>
-        <a href="/Catalog" class="ms-tab @(isCatalog ? "is-active" : "")">
+        <a href="@AppPath.H("/Catalog", Context)" class="ms-tab @(isCatalog ? "is-active" : "")">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/></svg>
             <span>محصولات</span>
         </a>
@@ -279,7 +280,7 @@
             </span>
             <span>سبد</span>
         </button>
-        <a href="/Order/Track" class="ms-tab">
+        <a href="@AppPath.H("/Order/Track", Context)" class="ms-tab">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h10M4 17h6"/></svg>
             <span>سفارش</span>
         </a>
@@ -321,7 +322,7 @@
         <div class="ms-wrap ms-footer-inner">
             <div class="ms-footer-top">
                 <div class="ms-footer-brand" data-footer-brand>
-                    <a href="/" class="ms-footer-logo-link"><img src="~/images/brand/blackandwhitelogo.png" alt="فروشگاه موثقی" class="ms-footer-logo" width="260" height="120" /></a>
+                    <a href="@AppPath.H("/", Context)" class="ms-footer-logo-link"><img src="~/images/brand/blackandwhitelogo.png" alt="فروشگاه موثقی" class="ms-footer-logo" width="260" height="120" /></a>
                     <p class="ms-footer-tagline">نمایندگی رسمی آملون در تهران<br/>پخش عمده ظروف یکبار مصرف گیاهی</p>
                     <a href="tel:@WholesaleRules.CoordinationPhone" class="ms-footer-phone">
                         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.89.3 1.77.57 2.61a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.84.27 1.72.45 2.61.57A2 2 0 0 1 22 16.92z"/></svg>

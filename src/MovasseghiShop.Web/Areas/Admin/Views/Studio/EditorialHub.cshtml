@@ -109,25 +109,25 @@
     </div>
 
     <div class="kit-toolbar ehub-toolbar">
-        <form method="post" action="/Admin/Studio/EditorialQualitySweep">
+        <form method="post" action="@AppPath.H("/Admin/Studio/EditorialQualitySweep", Context)">
             @Html.AntiForgeryToken()
             <button type="submit" class="st-btn st-btn-primary ehub-cta-danger">
                 🧹 حذف ضعیف + تولید @opt.TargetArticlesPerQualitySweep مقاله باکیفیت
             </button>
         </form>
-        <form method="post" action="/Admin/Studio/RunEditorialFullMaint">
+        <form method="post" action="@AppPath.H("/Admin/Studio/RunEditorialFullMaint", Context)">
             @Html.AntiForgeryToken()
             <button type="submit" class="st-btn st-btn-ghost">⚡ نگهداری کامل</button>
         </form>
-        <form method="post" action="/Admin/Studio/RunEditorialGrowthFromHub">
+        <form method="post" action="@AppPath.H("/Admin/Studio/RunEditorialGrowthFromHub", Context)">
             @Html.AntiForgeryToken()
             <button type="submit" class="st-btn st-btn-ghost">▶ یک چرخه رشد</button>
         </form>
-        <form method="post" action="/Admin/Studio/RefreshEditorialQueueFromHub">
+        <form method="post" action="@AppPath.H("/Admin/Studio/RefreshEditorialQueueFromHub", Context)">
             @Html.AntiForgeryToken()
             <button type="submit" class="st-btn st-btn-ghost">📋 پر کردن صف</button>
         </form>
-        <a class="st-btn st-btn-ghost" href="/Admin/BlogAdmin">ویرایش دستی</a>
+        <a class="st-btn st-btn-ghost" href="@AppPath.H("/Admin/BlogAdmin", Context)">ویرایش دستی</a>
     </div>
 </section>
 

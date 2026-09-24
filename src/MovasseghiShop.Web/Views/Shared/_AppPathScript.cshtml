@@ -1,0 +1,63 @@
+@{
+    var pathBase = Context.Request.PathBase.Value ?? "";
+}
+<script>
+(function () {
+  var base = '@pathBase';
+  if (!base) return;
+
+  window.__PATH_BASE = base;
+  window.appUrl = function (u) {
+    if (!u) return base + '/';
+    if (/^(https?:|tel:|mailto:|#)/i.test(u)) return u;
+    if (u.charAt(0) !== '/') u = '/' + u;
+    if (u.indexOf(base) === 0) return u;
+    return base + u;
+  };
+
+  function needsPatch(u) {
+    return u && u.charAt(0) === '/' && u.charAt(1) !== '/' && u.indexOf(base) !== 0;
+  }
+
+  function patchDom() {
+    document.querySelectorAll('a[href]').forEach(function (a) {
+      var h = a.getAttribute('href');
+      if (needsPatch(h)) a.setAttribute('href', appUrl(h));
+    });
+    document.querySelectorAll('form[action]').forEach(function (f) {
+      var a = f.getAttribute('action');
+      if (needsPatch(a)) f.setAttribute('action', appUrl(a));
+    });
+  }
+
+  var nativeFetch = window.fetch;
+  if (nativeFetch) {
+    window.fetch = function (input, init) {
+      if (typeof input === 'string' && needsPatch(input)) input = appUrl(input);
+      return nativeFetch.call(this, input, init);
+    };
+  }
+
+  var locAssign = window.location.assign.bind(window.location);
+  window.location.assign = function (u) {
+    if (typeof u === 'string' && needsPatch(u)) u = appUrl(u);
+    return locAssign(u);
+  };
+
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a');
+    if (!a) return;
+    var h = a.getAttribute('href');
+    if (!needsPatch(h)) return;
+    e.preventDefault();
+    window.location.href = appUrl(h);
+  }, true);
+
+  if (document.readyState === 'loading')
+    document.addEventListener('DOMContentLoaded', patchDom);
+  else
+    patchDom();
+
+  window.patchAppPaths = patchDom;
+})();
+</script>

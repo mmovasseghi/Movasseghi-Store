@@ -90,10 +90,10 @@
                     ?? facets.Categories.FirstOrDefault(c => c.Value == q.Category)?.Label;
             }
             <nav class="breadcrumb" aria-label="مسیر صفحه">
-                <a href="/">خانه</a><span aria-hidden="true">/</span>
+                <a href="@AppPath.H("/", Context)">خانه</a><span aria-hidden="true">/</span>
                 @if (!string.IsNullOrEmpty(crumbCategory))
                 {
-                    <a href="/Catalog">محصولات</a><span aria-hidden="true">/</span><span>@crumbCategory</span>
+                    <a href="@AppPath.H("/Catalog", Context)">محصولات</a><span aria-hidden="true">/</span><span>@crumbCategory</span>
                 }
                 else
                 {
@@ -128,7 +128,7 @@
                             <a href="@f.RemoveUrl" aria-label="حذف فیلتر @f.Label">✕</a>
                         </span>
                     }
-                    <a href="/Catalog" class="btn btn-ghost" style="font-size:.78rem;padding:.35rem .65rem;min-height:36px">پاک کردن همه</a>
+                    <a href="@AppPath.H("/Catalog", Context)" class="btn btn-ghost" style="font-size:.78rem;padding:.35rem .65rem;min-height:36px">پاک کردن همه</a>
                 </div>
             }
 
@@ -193,7 +193,7 @@
                         }
                     </div>
                     <div class="ms-search-miss-foot">
-                        <a href="/Catalog" class="btn btn-secondary">مشاهده همه محصولات</a>
+                        <a href="@AppPath.H("/Catalog", Context)" class="btn btn-secondary">مشاهده همه محصولات</a>
                     </div>
                 }
                 else

@@ -29,11 +29,11 @@
             ? "راهنمای خرید عمده، انتخاب ظروف گیاهی آملون و تجربه رستوران‌ها"
             : "اطلاعیه‌ها، ورود محصولات جدید و پیشنهادهای ویژه پخش عمده")</p>
         <nav class="ct-hero-tabs" aria-label="انتخاب بخش محتوا">
-            <a href="/Blog" class="ct-tab @(isBlog ? "is-active" : "")">
+            <a href="@AppPath.H("/Blog", Context)" class="ct-tab @(isBlog ? "is-active" : "")">
                 <span class="ct-tab-icon" aria-hidden="true">📚</span>
                 <span>وبلاگ</span>
             </a>
-            <a href="/News" class="ct-tab @(isNews ? "is-active" : "")">
+            <a href="@AppPath.H("/News", Context)" class="ct-tab @(isNews ? "is-active" : "")">
                 <span class="ct-tab-icon" aria-hidden="true">📢</span>
                 <span>اخبار</span>
             </a>

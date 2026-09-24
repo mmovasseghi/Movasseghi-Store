@@ -23,14 +23,14 @@
 {
     @foreach (var item in Model)
     {
-        <a href="@item.Url" class="@ActiveClass(item.Url)">@item.Label</a>
+        <a href="@AppPath.H(item.Url, Context)" class="@ActiveClass(item.Url)">@item.Label</a>
     }
 }
 else if (zone.StartsWith("drawer"))
 {
     @foreach (var item in Model)
     {
-        <a href="@item.Url" class="ms-drawer-link @ActiveClass(item.Url)" data-drawer-link>
+        <a href="@AppPath.H(item.Url, Context)" class="ms-drawer-link @ActiveClass(item.Url)" data-drawer-link>
             @if (!string.IsNullOrEmpty(item.Icon))
             {
                 <span class="ms-drawer-link-icon" aria-hidden="true">@item.Icon</span>
@@ -44,6 +44,6 @@ else if (zone.StartsWith("footer"))
 {
     @foreach (var item in Model)
     {
-        <li><a href="@item.Url">@item.Label</a></li>
+        <li><a href="@AppPath.H(item.Url, Context)">@item.Label</a></li>
     }
 }

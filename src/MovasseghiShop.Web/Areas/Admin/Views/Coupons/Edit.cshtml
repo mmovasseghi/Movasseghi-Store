@@ -5,7 +5,7 @@
     string DateVal(DateTime? d) => d?.ToLocalTime().ToString("yyyy-MM-dd") ?? "";
 }
 
-<form method="post" action="/Admin/Coupons/Save" data-kit-primary data-kit-dirty-guard>
+<form method="post" action="@AppPath.H("/Admin/Coupons/Save", Context)" data-kit-primary data-kit-dirty-guard>
     @Html.AntiForgeryToken()
     <input type="hidden" name="Id" value="@Model.Id" />
     <input type="hidden" name="UsedCount" value="@Model.UsedCount" />
@@ -20,7 +20,7 @@
                 </span>
             }
         </div>
-        <a class="st-btn st-btn-ghost" href="/Admin/Coupons">بازگشت</a>
+        <a class="st-btn st-btn-ghost" href="@AppPath.H("/Admin/Coupons", Context)">بازگشت</a>
         <button type="submit" class="st-btn st-btn-primary">@(isNew ? "ساخت کد" : "ذخیره تغییرات")</button>
     </div>
 

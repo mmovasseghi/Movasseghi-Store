@@ -28,7 +28,7 @@
 </div>
 
 <div class="kit-toolbar kit-rise">
-    <form method="get" action="/Admin/BlogAdmin" class="kit-search" data-kit-nobusy>
+    <form method="get" action="@AppPath.H("/Admin/BlogAdmin", Context)" class="kit-search" data-kit-nobusy>
         <span class="kit-search-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
         </span>
@@ -40,16 +40,16 @@
     </form>
 
     <nav class="kit-segment" aria-label="فیلتر وضعیت">
-        <a href="/Admin/BlogAdmin" class="@(string.IsNullOrEmpty(status) ? "is-active" : "")">همه</a>
-        <a href="/Admin/BlogAdmin?status=published" class="@(status == "published" ? "is-active" : "")">
+        <a href="@AppPath.H("/Admin/BlogAdmin", Context)" class="@(string.IsNullOrEmpty(status) ? "is-active" : "")">همه</a>
+        <a href="@AppPath.H("/Admin/BlogAdmin?status=published", Context)" class="@(status == "published" ? "is-active" : "")">
             منتشرشده <span class="kit-segment-count">@ViewBag.PublishedCount</span>
         </a>
-        <a href="/Admin/BlogAdmin?status=draft" class="@(status == "draft" ? "is-active" : "")">
+        <a href="@AppPath.H("/Admin/BlogAdmin?status=draft", Context)" class="@(status == "draft" ? "is-active" : "")">
             پیش‌نویس <span class="kit-segment-count">@ViewBag.DraftCount</span>
         </a>
     </nav>
 
-    <a class="st-btn st-btn-primary" href="/Admin/BlogAdmin/Create">+ مقاله جدید</a>
+    <a class="st-btn st-btn-primary" href="@AppPath.H("/Admin/BlogAdmin/Create", Context)">+ مقاله جدید</a>
 </div>
 
 <section class="kit-table-card kit-rise">
@@ -62,7 +62,7 @@
                 مقاله‌های آموزشی درباره ظروف گیاهی، بهترین ابزار گرفتن جایگاه اول در گوگل هستند:
                 هم سوال واقعی مشتری را پاسخ می‌دهند، هم به صفحات محصول لینک داخلی می‌رسانند.
             </p>
-            <a class="st-btn st-btn-primary" href="/Admin/BlogAdmin/Create">نوشتن اولین مقاله</a>
+            <a class="st-btn st-btn-primary" href="@AppPath.H("/Admin/BlogAdmin/Create", Context)">نوشتن اولین مقاله</a>
         </div>
     }
     else

@@ -32,8 +32,8 @@
             Auto-Fix دسته، توضیح و FAQ می‌سازد و در کاتالوگ نمایش داده می‌شود.
         </span>
     </div>
-    <a class="st-btn st-btn-gold" href="/Admin/Studio">Auto-Fix دسته‌ها</a>
-    <a class="st-btn st-btn-primary" href="/Admin/Categories/Create">+ دسته جدید</a>
+    <a class="st-btn st-btn-gold" href="@AppPath.H("/Admin/Studio", Context)">Auto-Fix دسته‌ها</a>
+    <a class="st-btn st-btn-primary" href="@AppPath.H("/Admin/Categories/Create", Context)">+ دسته جدید</a>
 </div>
 
 <section class="kit-table-card kit-rise">
@@ -42,7 +42,7 @@
         <div class="kit-empty">
             <div class="kit-empty-icon" aria-hidden="true">🗂️</div>
             <h3>هنوز دسته‌ای نیست</h3>
-            <a class="st-btn st-btn-primary" href="/Admin/Categories/Create">ساخت اولین دسته</a>
+            <a class="st-btn st-btn-primary" href="@AppPath.H("/Admin/Categories/Create", Context)">ساخت اولین دسته</a>
         </div>
     }
     else

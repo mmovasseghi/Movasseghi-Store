@@ -22,7 +22,7 @@ else if (challenge != null)
             </div>
         </div>
         <p class="ms-human-gate__prompt">@challenge.Prompt</p>
-        <form action="/Cart/HumanCheck" method="post" class="ms-human-gate__form" data-human-form novalidate>
+        <form action="@AppPath.H("/Cart/HumanCheck", Context)" method="post" class="ms-human-gate__form" data-human-form novalidate>
             <input type="hidden" name="token" value="@challenge.Token" data-human-token-input />
             <div class="ms-human-gate__options" role="group" aria-label="تأیید انسان">
                 @foreach (var opt in challenge.Options)

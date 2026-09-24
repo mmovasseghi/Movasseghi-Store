@@ -4,7 +4,7 @@
     var mobile = Model.Mobile;
     var facets = Model.Facets;
 }
-<form method="get" action="/Catalog" class="filters-form @(mobile ? "filters-mobile" : "")">
+<form method="get" action="@AppPath.H("/Catalog", Context)" class="filters-form @(mobile ? "filters-mobile" : "")">
     @if (!string.IsNullOrEmpty(q.Q))
     {
         <input type="hidden" name="q" value="@q.Q" />
@@ -83,5 +83,5 @@
         </fieldset>
     }
 
-    <a href="/Catalog" class="btn btn-secondary btn-block">پاک کردن فیلترها</a>
+    <a href="@AppPath.H("/Catalog", Context)" class="btn btn-secondary btn-block">پاک کردن فیلترها</a>
 </form>

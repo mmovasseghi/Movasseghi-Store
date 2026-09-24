@@ -4,7 +4,7 @@
     ViewData["Title"] = isNew ? "سوال جدید" : "ویرایش سوال";
 }
 
-<form method="post" action="/Admin/FaqAdmin/Save" data-kit-primary data-kit-dirty-guard>
+<form method="post" action="@AppPath.H("/Admin/FaqAdmin/Save", Context)" data-kit-primary data-kit-dirty-guard>
     @Html.AntiForgeryToken()
     <input type="hidden" name="Id" value="@Model.Id" />
 
@@ -12,7 +12,7 @@
         <div class="kit-toolbar-grow">
             <strong style="font-size:.88rem">@(isNew ? "افزودن پرسش متداول" : Model.Question)</strong>
         </div>
-        <a class="st-btn st-btn-ghost" href="/Admin/FaqAdmin">بازگشت</a>
+        <a class="st-btn st-btn-ghost" href="@AppPath.H("/Admin/FaqAdmin", Context)">بازگشت</a>
         <button type="submit" class="st-btn st-btn-primary">@(isNew ? "ثبت سوال" : "ذخیره تغییرات")</button>
     </div>
 

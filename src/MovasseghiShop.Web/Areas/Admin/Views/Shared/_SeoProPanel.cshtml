@@ -236,7 +236,7 @@
                 <strong>نظرات محصول و Schema</strong>
                 <p class="st-seo-note">نظرات پیشنهادی Auto-Fix و نظرات ارسالی از سایت تا تأیید شما در فروشگاه نمایش داده نمی‌شوند.</p>
                 <div class="st-seo-reviews__actions">
-                    <form method="post" action="/Admin/ProductReviewsAdmin/ApproveAllSuggested">
+                    <form method="post" action="@AppPath.H("/Admin/ProductReviewsAdmin/ApproveAllSuggested", Context)">
                         @Html.AntiForgeryToken()
                         <input type="hidden" name="productId" value="@entityId" />
                         <button type="submit" class="st-btn st-btn-gold st-btn-sm st-btn-block">تأیید همه پیشنهادی</button>

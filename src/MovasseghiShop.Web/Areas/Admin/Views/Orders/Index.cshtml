@@ -47,7 +47,7 @@
 </div>
 
 <div class="kit-toolbar kit-rise kit-order-index-toolbar">
-    <form method="get" action="/Admin/Orders" class="kit-search" data-kit-nobusy>
+    <form method="get" action="@AppPath.H("/Admin/Orders", Context)" class="kit-search" data-kit-nobusy>
         <span class="kit-search-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
         </span>
@@ -62,13 +62,13 @@
         }
     </form>
 
-    <a class="st-btn st-btn-ghost @(queue == "followup" ? "is-active" : "")" href="/Admin/Orders?queue=followup">
+    <a class="st-btn st-btn-ghost @(queue == "followup" ? "is-active" : "")" href="@AppPath.H("/Admin/Orders?queue=followup", Context)">
         صف پیگیری
         @if (needsFollowUp > 0) { <span class="kit-segment-count">@needsFollowUp</span> }
     </a>
 
     <nav class="kit-segment" aria-label="فیلتر وضعیت">
-        <a href="/Admin/Orders" class="@(string.IsNullOrEmpty(status) ? "is-active" : "")">همه <span class="kit-segment-count">@total</span></a>
+        <a href="@AppPath.H("/Admin/Orders", Context)" class="@(string.IsNullOrEmpty(status) ? "is-active" : "")">همه <span class="kit-segment-count">@total</span></a>
         @foreach (OrderStatus s in Enum.GetValues<OrderStatus>())
         {
             var key = s.ToString();

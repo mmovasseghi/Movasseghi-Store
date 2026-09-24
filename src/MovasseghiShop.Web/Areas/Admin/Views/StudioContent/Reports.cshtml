@@ -16,7 +16,7 @@
 
 <partial name="_AdminHero" />
 
-<form method="post" action="/Admin/StudioContent/GenerateReport" class="st-reveal" style="margin-bottom:1rem">
+<form method="post" action="@AppPath.H("/Admin/StudioContent/GenerateReport", Context)" class="st-reveal" style="margin-bottom:1rem">
 
     @Html.AntiForgeryToken()
 

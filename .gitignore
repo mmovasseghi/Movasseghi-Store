@@ -43,6 +43,9 @@ _query_products.py
 tmp-*.html
 tmp-*.json
 thumb-v2-*.png
+publish-linux/
+publish-linux-sc/
+publish-linux*.tgz
 **/appsettings.Development.json
 
 # OS

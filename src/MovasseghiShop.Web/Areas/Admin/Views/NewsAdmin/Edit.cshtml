@@ -8,7 +8,7 @@
 
 <div class="st-edit-grid st-reveal">
 <div>
-<form method="post" action="/Admin/NewsAdmin/Save" data-kit-primary data-kit-dirty-guard>
+<form method="post" action="@AppPath.H("/Admin/NewsAdmin/Save", Context)" data-kit-primary data-kit-dirty-guard>
     @Html.AntiForgeryToken()
     <input type="hidden" name="Id" value="@Model.Id" />
 
@@ -17,7 +17,7 @@
             <strong style="font-size:.88rem">@(isNew ? "ثبت خبر تازه" : Model.Title)</strong>
             <span class="kit-form-hint" style="margin-top:.15rem">برای ذخیره می‌توانید Ctrl+S بزنید.</span>
         </div>
-        <a class="st-btn st-btn-ghost" href="/Admin/NewsAdmin">بازگشت</a>
+        <a class="st-btn st-btn-ghost" href="@AppPath.H("/Admin/NewsAdmin", Context)">بازگشت</a>
         <button type="submit" class="st-btn st-btn-primary">@(isNew ? "ساخت خبر" : "ذخیره تغییرات")</button>
     </div>
 

@@ -69,8 +69,8 @@
     <nav class="pd-breadcrumb" aria-label="مسیر صفحه" data-pd-breadcrumb>
         <div class="pd-breadcrumb__shell">
             <ol class="pd-breadcrumb__track">
-                <li class="pd-breadcrumb__item"><a href="/">خانه</a></li>
-                <li class="pd-breadcrumb__item"><a href="/Catalog">محصولات</a></li>
+                <li class="pd-breadcrumb__item"><a href="@AppPath.H("/", Context)">خانه</a></li>
+                <li class="pd-breadcrumb__item"><a href="@AppPath.H("/Catalog", Context)">محصولات</a></li>
                 <li class="pd-breadcrumb__item"><a href="/Catalog?category=@Model.Category.Slug">@Model.Category.Name</a></li>
                 <li class="pd-breadcrumb__item pd-breadcrumb__item--current" aria-current="page">@Model.Name</li>
             </ol>

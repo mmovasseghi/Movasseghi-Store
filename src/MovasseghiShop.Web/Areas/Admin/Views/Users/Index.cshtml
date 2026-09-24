@@ -50,7 +50,7 @@
         <button type="submit" class="st-btn st-btn-primary">جستجو</button>
         @if (!string.IsNullOrEmpty(search))
         {
-            <a href="/Admin/Users" class="st-btn st-btn-ghost">پاک کردن</a>
+            <a href="@AppPath.H("/Admin/Users", Context)" class="st-btn st-btn-ghost">پاک کردن</a>
         }
     </form>
 
@@ -114,7 +114,7 @@
                         <div class="st-btn-row">
                             @if (!isAdmin)
                             {
-                                <form method="post" action="/Admin/Users/SetRole" style="display:inline">
+                                <form method="post" action="@AppPath.H("/Admin/Users/SetRole", Context)" style="display:inline">
                                     @Html.AntiForgeryToken()
                                     <input type="hidden" name="id" value="@u.Id" />
                                     <input type="hidden" name="role" value="Admin" />
@@ -124,7 +124,7 @@
                             }
                             else
                             {
-                                <form method="post" action="/Admin/Users/SetRole" style="display:inline">
+                                <form method="post" action="@AppPath.H("/Admin/Users/SetRole", Context)" style="display:inline">
                                     @Html.AntiForgeryToken()
                                     <input type="hidden" name="id" value="@u.Id" />
                                     <input type="hidden" name="role" value="Admin" />
@@ -132,7 +132,7 @@
                                     <button type="submit" class="st-btn st-btn-sm st-btn-ghost">− Admin</button>
                                 </form>
                             }
-                            <form method="post" action="/Admin/Users/ToggleLock" style="display:inline" onsubmit="return confirm('@(isLocked ? "فعال شود؟" : "قفل شود؟")')">
+                            <form method="post" action="@AppPath.H("/Admin/Users/ToggleLock", Context)" style="display:inline" onsubmit="return confirm('@(isLocked ? "فعال شود؟" : "قفل شود؟")')">
                                 @Html.AntiForgeryToken()
                                 <input type="hidden" name="id" value="@u.Id" />
                                 <button type="submit" class="st-btn st-btn-sm @(isLocked ? "st-btn-primary" : "st-btn-ghost")">

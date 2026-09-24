@@ -351,7 +351,7 @@
         const nameStarts = top.name && top.name.startsWith(q);
         if (slugMatch || nameStarts) {
           e.preventDefault();
-          window.location.href = '/Shop/Product/' + encodeURIComponent(top.slug);
+          window.location.href = (window.appUrl || (u => u))('/Shop/Product/' + encodeURIComponent(top.slug));
         }
       } catch { /* fall through to catalog */ }
     });
@@ -394,7 +394,7 @@
 
     suggestions.addEventListener('click', e => {
       const li = e.target.closest('[data-slug]');
-      if (li) window.location.href = '/Shop/Product/' + encodeURIComponent(li.dataset.slug);
+      if (li) window.location.href = (window.appUrl || (u => u))('/Shop/Product/' + encodeURIComponent(li.dataset.slug));
     });
 
     document.addEventListener('click', e => {

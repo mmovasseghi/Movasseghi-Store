@@ -77,11 +77,11 @@
             در ستون «تصویر حلقه» عکس دایره را آپلود کنید — همان تصویری که کاربر روی صفحه اصلی می‌بیند.
         </span>
     </div>
-    <form method="post" action="/Admin/StoriesAdmin/ImportFromProducts" style="display:inline">
+    <form method="post" action="@AppPath.H("/Admin/StoriesAdmin/ImportFromProducts", Context)" style="display:inline">
         @Html.AntiForgeryToken()
         <button type="submit" class="st-btn st-btn-ghost" title="ساخت مجدد از محصولات و دسته‌ها">↻ بازسازی از محصولات</button>
     </form>
-    <a class="st-btn st-btn-primary" href="/Admin/StoriesAdmin/Create">+ استوری جدید</a>
+    <a class="st-btn st-btn-primary" href="@AppPath.H("/Admin/StoriesAdmin/Create", Context)">+ استوری جدید</a>
 </div>
 
 <section class="kit-table-card kit-rise">
@@ -91,7 +91,7 @@
             <div class="kit-empty-icon" aria-hidden="true">📱</div>
             <h3>هنوز استوری ثبت نشده</h3>
             <p>دکمه «بازسازی از محصولات» را بزنید تا همه استوری‌های قبلی (دسته‌بندی‌ها) برگردند.</p>
-            <form method="post" action="/Admin/StoriesAdmin/ImportFromProducts" style="display:inline">
+            <form method="post" action="@AppPath.H("/Admin/StoriesAdmin/ImportFromProducts", Context)" style="display:inline">
                 @Html.AntiForgeryToken()
                 <button type="submit" class="st-btn st-btn-primary">بازسازی از محصولات</button>
             </form>
@@ -118,7 +118,7 @@
                     <tr>
                         <td>@s.SortOrder</td>
                         <td>
-                            <form method="post" action="/Admin/StoriesAdmin/UploadCover" enctype="multipart/form-data" class="kit-story-cover-form">
+                            <form method="post" action="@AppPath.H("/Admin/StoriesAdmin/UploadCover", Context)" enctype="multipart/form-data" class="kit-story-cover-form">
                                 @Html.AntiForgeryToken()
                                 <input type="hidden" name="id" value="@s.Id" />
                                 @if (!string.IsNullOrWhiteSpace(s.CoverImageUrl))

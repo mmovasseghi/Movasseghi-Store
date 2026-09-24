@@ -21,7 +21,7 @@
                 قیف فروش ثبت می‌شود. برای اینکه مقایسه با دوره قبل معنا پیدا کند دست‌کم
                 چند روز داده لازم است.
             </p>
-            <a class="st-btn st-btn-primary" href="/" target="_blank" rel="noopener">
+            <a class="st-btn st-btn-primary" href="@AppPath.H("/", Context)" target="_blank" rel="noopener">
                 باز کردن فروشگاه برای تولید داده
             </a>
         </div>
@@ -95,7 +95,7 @@ else
                 @if (s.InquiryOpen > 0)
                 {
                     <span class="kit-stat-foot__row">
-                        <a class="kit-stat-action" href="/Admin/Inquiries?status=open">
+                        <a class="kit-stat-action" href="@AppPath.H("/Admin/Inquiries?status=open", Context)">
                             <span class="kit-stat-action__ico" aria-hidden="true">←</span>
                             پیگیری کن
                         </a>

@@ -18,7 +18,7 @@
     <div class="st-btn-row" style="justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap">
         <h2 style="margin:0">Google Search Console</h2>
         <div class="st-btn-row">
-            <form method="post" action="/Admin/Studio/SyncGsc">
+            <form method="post" action="@AppPath.H("/Admin/Studio/SyncGsc", Context)">
                 @Html.AntiForgeryToken()
                 <button type="submit" class="st-btn st-btn-primary" disabled="@(gscConfigured ? null : "disabled")">🔄 Sync از GSC</button>
             </form>
@@ -79,12 +79,12 @@
 <section class="st-panel st-reveal">
     <div class="st-btn-row" style="justify-content:space-between;margin-bottom:1rem">
         <h2 style="margin:0">ثبت دستی / SerpAPI</h2>
-        <form method="post" action="/Admin/Studio/SyncRankApi">
+        <form method="post" action="@AppPath.H("/Admin/Studio/SyncRankApi", Context)">
             @Html.AntiForgeryToken()
             <button type="submit" class="st-btn st-btn-ghost">SerpAPI Sync (اختیاری)</button>
         </form>
     </div>
-    <form method="post" action="/Admin/Studio/RecordRank" class="st-btn-row" style="align-items:flex-end;margin-bottom:1.25rem">
+    <form method="post" action="@AppPath.H("/Admin/Studio/RecordRank", Context)" class="st-btn-row" style="align-items:flex-end;margin-bottom:1.25rem">
         @Html.AntiForgeryToken()
         <div class="st-field" style="flex:2;min-width:200px;margin:0">
             <label>کلمه کلیدی</label>
@@ -129,4 +129,4 @@
     </div>
 </section>
 
-<p class="st-reveal"><a href="/Admin/Studio" class="st-btn st-btn-ghost">← مرکز فرمان</a></p>
+<p class="st-reveal"><a href="@AppPath.H("/Admin/Studio", Context)" class="st-btn st-btn-ghost">← مرکز فرمان</a></p>

@@ -17,7 +17,7 @@
 
 <div class="st-edit-grid st-reveal">
     <div>
-        <form method="post" action="/Admin/StoriesAdmin/Save" enctype="multipart/form-data" class="st-card">
+        <form method="post" action="@AppPath.H("/Admin/StoriesAdmin/Save", Context)" enctype="multipart/form-data" class="st-card">
             @Html.AntiForgeryToken()
             <input type="hidden" name="Id" value="@Model.Id" />
 
@@ -68,7 +68,7 @@
             </label>
             <div class="st-btn-row st-mt">
                 <button type="submit" class="st-btn st-btn-primary">ذخیره استوری</button>
-                <a href="/Admin/StoriesAdmin" class="st-btn st-btn-ghost">← بازگشت</a>
+                <a href="@AppPath.H("/Admin/StoriesAdmin", Context)" class="st-btn st-btn-ghost">← بازگشت</a>
             </div>
         </form>
 
@@ -85,7 +85,7 @@
                 {
                     @foreach (var slide in slides)
                     {
-                        <form method="post" action="/Admin/StoriesAdmin/UpdateSlide" enctype="multipart/form-data" class="st-card" style="margin-bottom:1rem;padding:1rem;background:var(--st-surface-2)">
+                        <form method="post" action="@AppPath.H("/Admin/StoriesAdmin/UpdateSlide", Context)" enctype="multipart/form-data" class="st-card" style="margin-bottom:1rem;padding:1rem;background:var(--st-surface-2)">
                             @Html.AntiForgeryToken()
                             <input type="hidden" name="storyId" value="@Model.Id" />
                             <input type="hidden" name="slideId" value="@slide.Id" />
@@ -119,7 +119,7 @@
                                 <button type="submit" class="st-btn st-btn-primary st-btn-sm">ذخیره اسلاید</button>
                             </div>
                         </form>
-                        <form method="post" action="/Admin/StoriesAdmin/DeleteSlide" style="margin:-.5rem 0 1.25rem 0">
+                        <form method="post" action="@AppPath.H("/Admin/StoriesAdmin/DeleteSlide", Context)" style="margin:-.5rem 0 1.25rem 0">
                             @Html.AntiForgeryToken()
                             <input type="hidden" name="storyId" value="@Model.Id" />
                             <input type="hidden" name="slideId" value="@slide.Id" />
@@ -130,7 +130,7 @@
 
                 <hr style="margin:1.25rem 0;border:none;border-top:1px solid var(--st-border)" />
                 <h4 style="margin:0 0 .75rem;font-size:.88rem">+ افزودن اسلاید جدید</h4>
-                <form method="post" action="/Admin/StoriesAdmin/AddSlide" enctype="multipart/form-data">
+                <form method="post" action="@AppPath.H("/Admin/StoriesAdmin/AddSlide", Context)" enctype="multipart/form-data">
                     @Html.AntiForgeryToken()
                     <input type="hidden" name="storyId" value="@Model.Id" />
                     <input type="hidden" name="sortOrder" value="@nextSort" />
@@ -150,7 +150,7 @@
                 </form>
             </section>
 
-            <form method="post" action="/Admin/StoriesAdmin/Delete" class="st-mt" onsubmit="return confirm('کل استوری و اسلایدهایش حذف شود؟')">
+            <form method="post" action="@AppPath.H("/Admin/StoriesAdmin/Delete", Context)" class="st-mt" onsubmit="return confirm('کل استوری و اسلایدهایش حذف شود؟')">
                 @Html.AntiForgeryToken()
                 <input type="hidden" name="id" value="@Model.Id" />
                 <button type="submit" class="st-btn st-btn-ghost" style="color:var(--st-danger)">حذف کامل استوری</button>

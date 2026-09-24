@@ -44,7 +44,7 @@
 <section class="st-panel st-reveal">
     @foreach (var item in Model)
     {
-        <form method="post" action="/Admin/StudioContent/ToggleAuthority" class="st-action" style="margin-bottom:.5rem">
+        <form method="post" action="@AppPath.H("/Admin/StudioContent/ToggleAuthority", Context)" class="st-action" style="margin-bottom:.5rem">
             @Html.AntiForgeryToken()
             <input type="hidden" name="id" value="@item.Id" />
             <input type="hidden" name="isDone" value="@(!item.IsDone)" />

@@ -31,7 +31,7 @@
         </div>
         <p class="st-login-note">دسترسی محدود به پنل مدیریت</p>
         @if (TempData["Error"] != null) { <div class="st-alert st-alert-error">@TempData["Error"]</div> }
-        <form method="post" class="st-login-form" action="/Admin/Auth/Login">
+        <form method="post" class="st-login-form" action="@AppPath.H("/Admin/Auth/Login", Context)">
             @Html.AntiForgeryToken()
             @if (!string.IsNullOrEmpty(returnUrl))
             {
@@ -47,7 +47,7 @@
             </div>
             <button type="submit" class="st-btn st-btn-primary st-btn-block st-login-submit">ورود</button>
         </form>
-        <p class="st-login-foot"><a href="/">← بازگشت به فروشگاه</a></p>
+        <p class="st-login-foot"><a href="@AppPath.H("/", Context)">← بازگشت به فروشگاه</a></p>
     </section>
 </main>
 </body>

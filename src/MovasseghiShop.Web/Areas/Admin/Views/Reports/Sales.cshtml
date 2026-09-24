@@ -74,7 +74,7 @@ else
                 @if (Model.PendingCount > 0)
                 {
                     <span class="kit-stat-foot__row">
-                        <a class="kit-stat-action" href="/Admin/Orders">
+                        <a class="kit-stat-action" href="@AppPath.H("/Admin/Orders", Context)">
                             <span class="kit-stat-action__ico" aria-hidden="true">←</span>
                             بررسی سفارش‌ها
                         </a>
@@ -104,7 +104,7 @@ else
                 {
                     <span class="kit-stat-foot__row">
                         <span class="kit-delta kit-delta--down">@Model.InquiryOpen.ToString("N0") بی‌پاسخ</span>
-                        <a class="kit-stat-action" href="/Admin/Inquiries?status=open">
+                        <a class="kit-stat-action" href="@AppPath.H("/Admin/Inquiries?status=open", Context)">
                             <span class="kit-stat-action__ico" aria-hidden="true">←</span>
                             پیگیری کن
                         </a>
