@@ -475,6 +475,14 @@
   .ms-modal-sheet--add{width:min(420px,94vw)!important;border-radius:var(--r-xl)!important;max-height:88vh!important}
 }
 
+/* ── Modal loading (cart / auth) ── */
+.ms-modal-loading-body{padding:1rem 1.1rem 1.4rem;display:grid;gap:.65rem}
+.ms-skeleton-block{height:72px;border-radius:14px;background:linear-gradient(90deg,rgba(61,90,76,.08) 0%,rgba(61,90,76,.14) 45%,rgba(61,90,76,.08) 90%);background-size:200% 100%;animation:msSkeletonShimmer 1s ease-in-out infinite}
+.ms-skeleton-block--short{height:48px;width:72%}
+.ms-skeleton-block--auth{height:220px}
+@keyframes msSkeletonShimmer{0%{background-position:100% 0}100%{background-position:-100% 0}}
+.ms-modal-sheet--loading .ms-cart-drawer-close,.ms-modal-sheet--loading .ms-auth-close{pointer-events:auto}
+
 /* ── Add-to-cart confirmation popup ── */
 .ms-modal-sheet--add{
   background:linear-gradient(180deg,#fff 0%,#f4faf7 100%)!important;

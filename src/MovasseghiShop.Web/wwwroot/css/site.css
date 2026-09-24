@@ -1032,6 +1032,7 @@ body.ms-drawer-open,body.ms-modal-open,body.ms-sheet-open{overflow:hidden}
 .ms-modal{position:fixed;inset:0;z-index:600;display:grid;place-items:end center;padding:0}
 .ms-modal[hidden]{display:none}
 .ms-modal-backdrop{position:absolute;inset:0;background:rgba(10,16,14,.55);backdrop-filter:blur(6px)}
+@media(max-width:767px){.ms-modal-backdrop{backdrop-filter:none;background:rgba(10,16,14,.62)}}
 .ms-modal-sheet{position:relative;width:min(480px,100vw);max-height:92vh;overflow-y:auto;background:var(--c-white);border-radius:var(--r-xl) var(--r-xl) 0 0;box-shadow:0 -20px 60px rgba(0,0,0,.2);z-index:1}
 .ms-modal-open{overflow:hidden}
 .ms-modal-head{display:flex;justify-content:space-between;align-items:flex-start;padding:1.25rem 1.25rem .75rem;border-bottom:1px solid var(--c-border)}
