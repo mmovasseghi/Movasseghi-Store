@@ -562,6 +562,15 @@ if (args.Contains("--bulk-seo-fix", StringComparer.OrdinalIgnoreCase))
 
 await DbInitializer.InitializeAsync(app.Services);
 
+var configuredPathBase = app.Configuration["PathBase"]?.Trim();
+if (!string.IsNullOrEmpty(configuredPathBase))
+{
+    if (!configuredPathBase.StartsWith('/'))
+        configuredPathBase = "/" + configuredPathBase;
+    configuredPathBase = configuredPathBase.TrimEnd('/');
+    app.UsePathBase(configuredPathBase);
+}
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");

@@ -9,6 +9,7 @@
     }
   },
   "AllowedHosts": "movasseghi.ir;www.movasseghi.ir",
+  "PathBase": "",
   "SiteSettings": {
     "PublicBaseUrl": "https://movasseghi.ir"
   },

@@ -120,8 +120,10 @@ import json, pathlib
 p = pathlib.Path("/MOVASSEGHISTORE/publish/appsettings.Production.json")
 data = json.loads(p.read_text(encoding="utf-8"))
 data["AllowedHosts"] = "*"
+data["PathBase"] = "/MOVASSEGHISTORE"
 data.setdefault("ConnectionStrings", {})["DefaultConnection"] = "Data Source=movasseghi.db"
-data.setdefault("SiteSettings", {})["PublicBaseUrl"] = "http://85.133.244.142"
+data["SiteSettings"] = data.get("SiteSettings") or {}
+data["SiteSettings"]["PublicBaseUrl"] = "http://85.133.244.142/MOVASSEGHISTORE"
 data.setdefault("EditorialGrowth", {})["Enabled"] = False
 data.setdefault("Seo", {}).setdefault("Maintenance", {})["RunFullCatalogOnStartup"] = False
 if not data.get("Security", {}).get("CheckoutHmacSecret"):
@@ -159,13 +161,18 @@ systemctl daemon-reload
 systemctl enable "$SERVICE_NAME"
 systemctl restart "$SERVICE_NAME"
 
-# nginx: shop on /, keep existing /Airlock proxy
+# nginx: shop under /MOVASSEGHISTORE only; root empty; keep /Airlock
 cat > /etc/nginx/sites-available/movasseghi-shop <<'NGX'
 server {
     listen 80 default_server;
     listen [::]:80 default_server;
     server_name _;
     client_max_body_size 32M;
+
+    location = / {
+        default_type text/plain;
+        return 204;
+    }
 
     location /Airlock {
         proxy_pass http://127.0.0.1:3000;
@@ -179,8 +186,12 @@ server {
         proxy_cache_bypass $http_upgrade;
     }
 
-    location / {
-        proxy_pass http://127.0.0.1:5080;
+    location = /MOVASSEGHISTORE {
+        return 301 /MOVASSEGHISTORE/;
+    }
+
+    location /MOVASSEGHISTORE/ {
+        proxy_pass http://127.0.0.1:5080/MOVASSEGHISTORE/;
         proxy_http_version 1.1;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
@@ -198,7 +209,7 @@ systemctl reload nginx
 echo "==> Waiting for Kestrel (up to 3 min on warm DB)..."
 ready=0
 for _ in $(seq 1 36); do
-  code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 5 http://127.0.0.1:5080/ 2>/dev/null || echo "000")
+  code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 5 http://127.0.0.1:5080/MOVASSEGHISTORE/ 2>/dev/null || echo "000")
   if [[ "$code" == "200" ]]; then ready=1; break; fi
   sleep 5
 done
@@ -207,8 +218,10 @@ if [[ "$ready" -ne 1 ]]; then
   journalctl -u "$SERVICE_NAME" -n 25 --no-pager || true
 fi
 
-bash "$INSTALL_DIR/src/deploy/linux/smoke-test.sh" "http://127.0.0.1:5080" || true
-bash "$INSTALL_DIR/src/deploy/linux/smoke-test.sh" "http://127.0.0.1" || true
+bash "$INSTALL_DIR/src/deploy/linux/smoke-test.sh" "http://127.0.0.1:5080" "/MOVASSEGHISTORE" || true
+bash "$INSTALL_DIR/src/deploy/linux/smoke-test.sh" "http://127.0.0.1" "/MOVASSEGHISTORE" || true
+root_code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 5 http://127.0.0.1/ 2>/dev/null || echo "000")
+echo "Root / HTTP $root_code (expect 204)"
 systemctl is-active "$SERVICE_NAME"
 
-echo "==> Install complete: http://85.133.244.142"
+echo "==> Install complete: http://85.133.244.142/MOVASSEGHISTORE/"
