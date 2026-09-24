@@ -7,7 +7,7 @@
     var priceFrom = sellable.Count > 0 && ProductStorefrontResolver.UseFromPricePrefix(sellable);
 }
 <article class="ms-product">
-    <a href="/Shop/Product/@Model.Slug" class="ms-product-link">
+    <a href="@AppPath.H($"/Shop/Product/{Model.Slug}", Context)" class="ms-product-link">
         <partial name="_ProductImageStageFromProduct" model="Model" />
         <div class="ms-product-body">
             @if (!string.IsNullOrEmpty(Model.ProductCode)) { <span class="ms-product-code">کد @Model.ProductCode</span> }

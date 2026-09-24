@@ -102,10 +102,10 @@
                                     }
                                     <p class="ms-hero-desc">@Html.Raw(slide.Desc)</p>
                                     <div class="ms-hero-actions">
-                                        <a href="@slide.Cta1Url" class="ms-hero-cta">@slide.Cta1Text</a>
+                                        <a href="@AppPath.H(slide.Cta1Url, Context)" class="ms-hero-cta">@slide.Cta1Text</a>
                                         @if (!string.IsNullOrEmpty(slide.Cta2Text) && !string.IsNullOrEmpty(slide.Cta2Url))
                                         {
-                                            <a href="@slide.Cta2Url" class="ms-hero-cta ms-hero-cta-outline">@slide.Cta2Text</a>
+                                            <a href="@AppPath.H(slide.Cta2Url, Context)" class="ms-hero-cta ms-hero-cta-outline">@slide.Cta2Text</a>
                                         }
                                     </div>
                                 </div>
@@ -265,7 +265,7 @@
                     var offerSellable = ProductStorefrontResolver.GetSellableVariants(p.Variants);
                     var price = ProductStorefrontResolver.GetMinPrice(p.Variants);
                     var offerFrom = offerSellable.Count > 0 && ProductStorefrontResolver.UseFromPricePrefix(offerSellable);
-                    <a href="/Shop/Product/@p.Slug" class="ms-offer-card">
+                    <a href="@AppPath.H($"/Shop/Product/{p.Slug}", Context)" class="ms-offer-card">
                         @{ ViewData["StageVariant"] = "offer"; ViewData["StageWidth"] = 140; ViewData["StageHeight"] = 140; }
                         <partial name="_ProductImageStageFromProduct" model="p" />
                         <div class="ms-offer-body">
@@ -400,7 +400,7 @@
             <div class="ms-segments-grid" data-segments-grid>
                 @foreach (var seg in wholesaleSegments)
                 {
-                    <a href="@seg.Url" class="ms-seg-tile">
+                    <a href="@AppPath.H(seg.Url, Context)" class="ms-seg-tile">
                         <span class="ms-seg-tile-ring">
                             <partial name="_SegmentIcon" model="seg.Icon" />
                         </span>
