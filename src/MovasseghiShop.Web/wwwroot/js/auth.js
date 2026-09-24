@@ -223,13 +223,15 @@
       }
     }
 
+    function dismissKeyboard() {
+      const active = document.activeElement;
+      if (active && panel.contains(active) && typeof active.blur === 'function') active.blur();
+    }
+
     function moveGlider(container, glider, activeBtn) {
       if (!container || !glider || !activeBtn) return;
-      const cRect = container.getBoundingClientRect();
-      const bRect = activeBtn.getBoundingClientRect();
-      const left = bRect.left - cRect.left;
-      glider.style.width = bRect.width + 'px';
-      glider.style.transform = `translateX(${left}px)`;
+      glider.style.width = activeBtn.offsetWidth + 'px';
+      glider.style.transform = `translate3d(${activeBtn.offsetLeft}px, 0, 0)`;
       pulseGlider(glider);
     }
 
@@ -272,43 +274,28 @@
       showError('');
       if (devEl) { devEl.hidden = true; devEl.textContent = ''; }
       clearInterval(resendInterval);
-      if (mainTab === 'login' && loginMode === 'password') {
-        goStep('password-login', -1);
-        panel.querySelector('#authLoginPhone')?.focus();
-      } else {
-        goStep('phone', -1);
-        panel.querySelector('#authPhone')?.focus();
-      }
+      dismissKeyboard();
+      if (mainTab === 'login' && loginMode === 'password') goStep('password-login', -1);
+      else goStep('phone', -1);
     }
 
     function setMainTab(tab) {
       const changed = mainTab !== tab;
       mainTab = tab;
+      dismissKeyboard();
       syncTabsUI();
       if (changed) resetToEntry();
-      else panel.querySelector('#authPhone')?.focus({ preventScroll: true });
+      requestAnimationFrame(() => syncTabsUI());
     }
 
     function setLoginMode(mode) {
-      const changed = loginMode !== mode;
       loginMode = mode;
+      dismissKeyboard();
       syncLoginModeUI();
       showError('');
-      if (!changed && mode === 'sms') {
-        panel.querySelector('#authPhone')?.focus({ preventScroll: true });
-        return;
-      }
-      if (!changed && mode === 'password') {
-        panel.querySelector('#authLoginPhone')?.focus({ preventScroll: true });
-        return;
-      }
-      if (mode === 'password') {
-        goStep('password-login', 1);
-        panel.querySelector('#authLoginPhone')?.focus({ preventScroll: true });
-      } else {
-        goStep('phone', -1);
-        panel.querySelector('#authPhone')?.focus({ preventScroll: true });
-      }
+      if (mode === 'password') goStep('password-login', 1);
+      else goStep('phone', -1);
+      requestAnimationFrame(() => syncLoginModeUI());
     }
 
     function startResendCooldown(sec = 60) {
@@ -352,6 +339,10 @@
     bindPhoneInput(panel.querySelector('#authPhone'));
     bindPhoneInput(panel.querySelector('#authLoginPhone'));
     bindPasswordToggle(panel);
+
+    panel.addEventListener('mousedown', e => {
+      if (e.target.closest('[data-auth-tab], [data-auth-login-mode]')) e.preventDefault();
+    });
 
     panel.addEventListener('click', e => {
       const tabBtn = e.target.closest('[data-auth-tab]');

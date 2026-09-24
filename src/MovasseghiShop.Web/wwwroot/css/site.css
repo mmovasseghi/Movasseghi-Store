@@ -128,7 +128,8 @@ a{color:inherit;text-decoration:none}
 .ms-drawer[hidden]{display:block!important;visibility:hidden;pointer-events:none}
 .ms-drawer-bg{position:absolute;inset:0;background:rgba(10,18,14,.55);backdrop-filter:blur(0);opacity:0;transition:opacity .4s var(--ease),backdrop-filter .4s}
 .ms-drawer.is-open .ms-drawer-bg{opacity:1;backdrop-filter:blur(10px)}
-.ms-drawer-panel{position:absolute;top:0;right:0;bottom:0;width:min(340px,92vw);background:linear-gradient(180deg,#fff 0%,#f8faf9 100%);display:flex;flex-direction:column;box-shadow:-24px 0 60px rgba(0,0,0,.18);transform:translateX(105%);overflow:hidden;z-index:1;max-height:100dvh}
+.ms-drawer-panel{position:absolute;top:0;right:0;bottom:0;width:min(340px,92vw);background:linear-gradient(180deg,#fff 0%,#f8faf9 100%);display:flex;flex-direction:column;box-shadow:-24px 0 60px rgba(0,0,0,.18);transform:translate3d(105%,0,0);overflow:hidden;z-index:1;max-height:100dvh;transition:transform .42s cubic-bezier(.32,.72,0,1);will-change:transform}
+.ms-drawer.is-open .ms-drawer-panel{transform:translate3d(0,0,0)}
 .ms-drawer-head,.ms-drawer-quick{flex-shrink:0}
 .ms-drawer-nav{flex:1;min-height:0;padding:.65rem 1rem .75rem;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
 .ms-drawer-foot{flex-shrink:0;padding:.75rem 1rem calc(.85rem + var(--safe-b));border-top:1px solid rgba(61,90,76,.08);background:#fff;box-shadow:0 -8px 24px rgba(0,0,0,.06)}
@@ -1063,7 +1064,7 @@ body.ms-drawer-open,body.ms-modal-open,body.ms-sheet-open{overflow:hidden}
 .ms-auth-switcher__kicker{margin:0 0 .4rem;font-size:.62rem;font-weight:900;letter-spacing:.06em;color:var(--c-text-2);text-transform:uppercase}
 .ms-auth-switcher__primary{padding:.65rem .7rem .55rem;border-radius:16px;background:#fff;border:1px solid rgba(61,90,76,.14);box-shadow:0 8px 22px rgba(36,56,48,.06)}
 .ms-auth-tabs{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:.35rem;padding:0;z-index:1}
-.ms-auth-tab{padding:.62rem .5rem;border:0;background:transparent;font:inherit;font-weight:900;font-size:.86rem;color:var(--c-text-2);cursor:pointer;border-radius:12px;position:relative;z-index:1;transition:color .25s}
+.ms-auth-tab{padding:.62rem .5rem;border:0;background:transparent;font:inherit;font-weight:900;font-size:.86rem;color:var(--c-text-2);cursor:pointer;border-radius:12px;position:relative;z-index:2;transition:color .22s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;user-select:none}
 .ms-auth-tab.is-active{color:var(--c-primary-dark)}
 .ms-auth-tabs-glider{position:absolute;top:0;bottom:0;left:0;border-radius:12px;background:linear-gradient(180deg,#f0faf4,#fff);border:1px solid rgba(61,90,76,.16);box-shadow:0 4px 14px rgba(61,90,76,.1);transition:transform .38s cubic-bezier(.22,1,.36,1),width .38s cubic-bezier(.22,1,.36,1);pointer-events:none;z-index:0}
 .ms-auth-switcher__secondary{margin:.55rem .35rem 0;padding:.55rem .65rem .6rem;border-radius:14px;background:rgba(61,90,76,.06);border:1px solid rgba(61,90,76,.12);border-inline-start:3px solid var(--c-primary)}
@@ -1073,7 +1074,7 @@ body.ms-drawer-open,body.ms-modal-open,body.ms-sheet-open{overflow:hidden}
 .ms-auth-switcher__parent{margin:0;font-size:.62rem;font-weight:800;color:var(--c-text-2);opacity:.9}
 .ms-auth-switcher__method-label{margin:.1rem 0 0;font-size:.74rem;font-weight:900;color:var(--c-primary-dark)}
 .ms-auth-mode{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:.35rem;padding:0;z-index:1}
-.ms-auth-mode-btn{padding:.5rem .35rem;border:0;background:transparent;font:inherit;font-weight:800;font-size:.7rem;line-height:1.35;color:var(--c-text-2);cursor:pointer;border-radius:10px;position:relative;z-index:1;transition:color .25s}
+.ms-auth-mode-btn{padding:.5rem .35rem;border:0;background:transparent;font:inherit;font-weight:800;font-size:.7rem;line-height:1.35;color:var(--c-text-2);cursor:pointer;border-radius:10px;position:relative;z-index:2;transition:color .22s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;user-select:none}
 .ms-auth-mode-btn.is-active{color:var(--c-primary-dark)}
 .ms-auth-mode-glider{position:absolute;top:0;bottom:0;left:0;border-radius:10px;background:#fff;border:1px solid rgba(61,90,76,.14);box-shadow:0 3px 10px rgba(61,90,76,.08);transition:transform .35s cubic-bezier(.22,1,.36,1),width .35s cubic-bezier(.22,1,.36,1);pointer-events:none;z-index:0}
 .ms-auth-switcher__register-note{margin:.55rem .2rem 0;padding:.55rem .65rem;border-radius:12px;font-size:.72rem;line-height:1.65;font-weight:700;color:var(--c-text-2);background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.28)}

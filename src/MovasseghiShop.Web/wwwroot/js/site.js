@@ -71,41 +71,47 @@
     drawer.setAttribute('aria-hidden', 'false');
     document.body.classList.add('ms-drawer-open');
     menuBtns.forEach(b => { b.classList.add('is-open'); b.setAttribute('aria-expanded', 'true'); });
+    if (drawerPanel) drawerPanel.style.transform = '';
+    drawer.classList.remove('is-open');
+    void drawer.offsetWidth;
     drawer.classList.add('is-open');
 
-    if (hasGsap && !snappyUi()) {
-      gsap.set(drawerPanel, { x: '100%' });
-      gsap.fromTo(drawerBg, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: 'power2.out' });
-      gsap.to(drawerPanel, { x: 0, opacity: 1, duration: 0.55, ease: 'power3.out' });
+    if (hasGsap && !reduced && isDesktop()) {
       gsap.from(drawer.querySelectorAll('.ms-drawer-link, .ms-drawer-cat, .ms-drawer-cat-all, .ms-drawer-quick-btn'), {
-        opacity: 0, x: 28, stagger: 0.045, duration: 0.42, ease: 'power3.out', delay: 0.12
+        opacity: 0, x: 20, stagger: 0.04, duration: 0.38, ease: 'power3.out', delay: 0.08, clearProps: 'opacity,transform'
       });
-      gsap.from(drawer.querySelector('.ms-drawer-cta'), { opacity: 0, y: 16, duration: 0.45, ease: 'back.out(1.6)', delay: 0.35 });
-    } else if (drawerPanel) {
-      drawerPanel.style.transform = 'translateX(0)';
+      gsap.from(drawer.querySelector('.ms-drawer-cta'), { opacity: 0, y: 12, duration: 0.4, ease: 'back.out(1.5)', delay: 0.2, clearProps: 'opacity,transform' });
     }
-
-    drawerPanel?.querySelector('[data-menu-close]')?.focus();
   }
 
   function closeDrawer() {
     if (!drawer || !drawerOpen) return;
+    drawerOpen = false;
+    drawer.classList.remove('is-open');
+    menuBtns.forEach(b => { b.classList.remove('is-open'); b.setAttribute('aria-expanded', 'false'); });
+
     const done = () => {
       drawer.setAttribute('hidden', '');
       drawer.setAttribute('aria-hidden', 'true');
-      drawer.classList.remove('is-open');
       document.body.classList.remove('ms-drawer-open');
-      menuBtns.forEach(b => { b.classList.remove('is-open'); b.setAttribute('aria-expanded', 'false'); });
-      drawerOpen = false;
     };
 
-    if (hasGsap && !snappyUi()) {
-      gsap.to(drawerPanel, { x: '100%', opacity: 0.5, duration: 0.38, ease: 'power2.in' });
-      gsap.to(drawerBg, { opacity: 0, duration: 0.32, onComplete: done });
-    } else {
-      if (drawerPanel) drawerPanel.style.transform = 'translateX(105%)';
+    if (!drawerPanel || reduced) {
       done();
+      return;
     }
+    let finished = false;
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      drawerPanel.removeEventListener('transitionend', onEnd);
+      done();
+    };
+    const onEnd = e => {
+      if (e.target === drawerPanel) finish();
+    };
+    drawerPanel.addEventListener('transitionend', onEnd);
+    setTimeout(finish, 480);
   }
 
   menuBtns.forEach(b => b.addEventListener('click', () => drawerOpen ? closeDrawer() : openDrawer()));
@@ -125,12 +131,20 @@
     modalSheet.classList.toggle('ms-modal-sheet--auth', !!opts.auth);
     modalSheet.classList.toggle('ms-modal-sheet--cart', !!opts.cart);
     modalSheet.classList.toggle('ms-modal-sheet--add', !!opts.add);
-    modal.classList.toggle('ms-modal--snappy', snappyUi());
+    const mobileSheet = touchUi() && (opts.auth || opts.cart || opts.add);
+    modal.classList.toggle('ms-modal--snappy', snappyUi() && !mobileSheet);
+    modal.classList.toggle('ms-modal--sheet-in', mobileSheet);
     modal.removeAttribute('hidden');
     document.body.classList.add('ms-modal-open');
     modalOpen = true;
     bindModalClose();
     const backdrop = modal.querySelector('.ms-modal-backdrop');
+    if (mobileSheet) {
+      modalSheet.style.transform = '';
+      modalSheet.style.opacity = '';
+      if (opts.cart) animateCartDrawer(true);
+      return;
+    }
     if (snappyUi()) {
       if (backdrop) backdrop.style.opacity = '1';
       modalSheet.style.transform = 'none';
@@ -257,8 +271,19 @@
       document.body.classList.remove('ms-modal-open');
       modalOpen = false;
     };
-    if (snappyUi()) {
-      modal.classList.remove('ms-modal--snappy');
+    const wasMobileSheet = modal.classList.contains('ms-modal--sheet-in');
+    modal.classList.remove('ms-modal--snappy', 'ms-modal--sheet-in');
+    if ((snappyUi() || touchUi()) && wasMobileSheet && modalSheet && !reduced) {
+      modalSheet.classList.add('ms-modal-sheet--closing');
+      const finish = () => {
+        modalSheet.classList.remove('ms-modal-sheet--closing');
+        done();
+      };
+      modalSheet.addEventListener('animationend', finish, { once: true });
+      setTimeout(finish, 320);
+      return;
+    }
+    if (snappyUi() || touchUi()) {
       done();
       return;
     }
