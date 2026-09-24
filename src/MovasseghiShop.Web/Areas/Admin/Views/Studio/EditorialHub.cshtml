@@ -93,7 +93,7 @@
                                     <td data-label="مقاله">
                                         @if (slot.BlogPostId.HasValue)
                                         {
-                                            <a href="/Admin/BlogAdmin/Edit/@slot.BlogPostId">#@slot.BlogPostId</a>
+                                            <a href="@AppPath.H($"/Admin/BlogAdmin/Edit/{slot.BlogPostId}", Context)">#@slot.BlogPostId</a>
                                         }
                                     </td>
                                 </tr>
@@ -164,7 +164,7 @@
                             : b.DisplayScore >= 74 ? "ehub-score--warn" : "ehub-score--bad";
                         var when = b.IsPublished ? b.PublishedTehran : b.ScheduledTehran;
                         <tr>
-                            <td data-label="#"><a href="/Admin/BlogAdmin/Edit/@b.Id">@b.Id</a></td>
+                            <td data-label="#"><a href="@AppPath.H($"/Admin/BlogAdmin/Edit/{b.Id}", Context)">@b.Id</a></td>
                             <td data-label="عنوان">@b.Title</td>
                             <td data-label="امتیاز"><span class="ehub-score @scoreClass">@b.DisplayScore</span></td>
                             <td data-label="SEO">@(b.IsPublishReady ? "✓" : "✗")</td>
@@ -213,7 +213,7 @@
                             <td data-label="مقاله">
                                 @if (t.BlogPostId.HasValue)
                                 {
-                                    <a href="/Admin/BlogAdmin/Edit/@t.BlogPostId">#@t.BlogPostId</a>
+                                    <a href="@AppPath.H($"/Admin/BlogAdmin/Edit/{t.BlogPostId}", Context)">#@t.BlogPostId</a>
                                 }
                                 else { <span>—</span> }
                             </td>

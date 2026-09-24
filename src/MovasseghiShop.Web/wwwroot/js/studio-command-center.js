@@ -1,4 +1,6 @@
 (function () {
+  const url = (path) => (typeof window.appUrl === 'function' ? window.appUrl(path) : path);
+
   const banner = document.getElementById('studio-maintenance-banner');
   if (!banner) return;
 
@@ -93,17 +95,26 @@
     }
     host.innerHTML = actions
       .map((action) => {
-        const foot =
-          action.entityType === 'product' && action.entityId
-            ? `<div class="st-action-foot">
-                <a class="st-btn st-btn-ghost st-btn-sm" href="/Admin/Products/Edit/${action.entityId}">ویرایش</a>
-                <form method="post" action="/Admin/Studio/AutoFixProduct" style="display:inline">
+        let foot = '';
+        if (action.entityType === 'product' && action.entityId) {
+          foot = `<div class="st-action-foot">
+                <a class="st-btn st-btn-ghost st-btn-sm" href="${url('/Admin/Products/Edit/' + action.entityId)}">ویرایش</a>
+                <form method="post" action="${url('/Admin/Studio/AutoFixProduct')}" style="display:inline">
                   <input type="hidden" name="__RequestVerificationToken" value="${token}" />
                   <input type="hidden" name="id" value="${action.entityId}" />
                   <button type="submit" class="st-btn st-btn-primary st-btn-sm">✨ Auto-Fix</button>
                 </form>
-              </div>`
-            : '';
+              </div>`;
+        } else if (action.entityType === 'blog' && action.entityId) {
+          foot = `<div class="st-action-foot">
+                <a class="st-btn st-btn-ghost st-btn-sm" href="${url('/Admin/BlogAdmin/Edit/' + action.entityId)}">ویرایش</a>
+                <form method="post" action="${url('/Admin/Studio/AutoFixBlog')}" style="display:inline">
+                  <input type="hidden" name="__RequestVerificationToken" value="${token}" />
+                  <input type="hidden" name="id" value="${action.entityId}" />
+                  <button type="submit" class="st-btn st-btn-primary st-btn-sm">✨ Auto-Fix</button>
+                </form>
+              </div>`;
+        }
         const desc = action.description
           ? `<small class="st-action-desc">${escapeHtml(action.description)}</small>`
           : '';
@@ -129,7 +140,7 @@
 
   async function poll() {
     try {
-      const res = await fetch('/Admin/Studio/DashboardLive', { credentials: 'same-origin' });
+      const res = await fetch(url('/Admin/Studio/DashboardLive'), { credentials: 'same-origin' });
       if (!res.ok) return;
       const data = await res.json();
       const snap = data.maintenance;
@@ -139,7 +150,7 @@
         updateStats(data.stats);
       } else {
         if (wasRunning) {
-          await fetch('/Admin/Studio/DashboardLive?refreshQueue=true', { credentials: 'same-origin' })
+          await fetch(url('/Admin/Studio/DashboardLive?refreshQueue=true'), { credentials: 'same-origin' })
             .then((r) => (r.ok ? r.json() : data))
             .then((fresh) => {
               updateStats(fresh.stats);

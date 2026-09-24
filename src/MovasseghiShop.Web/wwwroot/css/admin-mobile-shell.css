@@ -120,12 +120,52 @@
     margin-bottom: 0.85rem;
   }
 
-  /* انیمیشن ورود روی موبایل باعث «ناپدید» می‌شود */
+  /* انیمیشن ورود — با animation:none باید opacity را صریحاً ۱ کنیم (fill-mode: both) */
   .st-reveal,
   .kit-rise,
   .kit-stagger > *,
   .kit-table tbody tr {
     animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+  }
+
+  .st-panel-actions,
+  .st-quick-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+
+  .st-panel-actions form,
+  .st-panel-actions > a,
+  .st-panel-actions > form {
+    width: 100%;
+    margin: 0;
+  }
+
+  .st-panel-actions .st-btn {
+    width: 100%;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .st-action-foot {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+  }
+
+  .st-action-foot form {
+    width: 100%;
+  }
+
+  .st-action-foot .st-btn {
+    width: 100%;
   }
 
   /* جدول‌ها: همیشه کارت (حتی قبل از JS) */

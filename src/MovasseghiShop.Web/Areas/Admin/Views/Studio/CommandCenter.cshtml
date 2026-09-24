@@ -161,7 +161,7 @@
 
                             <div class="st-action-foot">
 
-                                <a class="st-btn st-btn-ghost st-btn-sm" href="/Admin/Products/Edit/@action.EntityId">ویرایش</a>
+                                <a class="st-btn st-btn-ghost st-btn-sm" href="@AppPath.H($"/Admin/Products/Edit/{action.EntityId}", Context)">ویرایش</a>
 
                                 <form method="post" action="@AppPath.H("/Admin/Studio/AutoFixProduct", Context)" style="display:inline">
 
@@ -179,7 +179,7 @@
                         @if (action.EntityType == "blog" && action.EntityId.HasValue)
                         {
                             <div class="st-action-foot">
-                                <a class="st-btn st-btn-ghost st-btn-sm" href="/Admin/BlogAdmin/Edit/@action.EntityId">ویرایش</a>
+                                <a class="st-btn st-btn-ghost st-btn-sm" href="@AppPath.H($"/Admin/BlogAdmin/Edit/{action.EntityId}", Context)">ویرایش</a>
                                 <form method="post" action="@AppPath.H("/Admin/Studio/AutoFixBlog", Context)" style="display:inline">
                                     @Html.AntiForgeryToken()
                                     <input type="hidden" name="id" value="@action.EntityId" />

@@ -1434,5 +1434,9 @@ a.st-btn-primary:hover {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .st-reveal, .nx-orb, .st-status-dot { animation: none !important; }
+  .st-reveal, .nx-orb, .st-status-dot {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }

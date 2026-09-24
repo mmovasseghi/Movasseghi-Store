@@ -1458,6 +1458,8 @@
   .kit-empty,
   .kit-bulkbar {
     animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
   .kit-skeleton { animation: none; }
   .kit-stat:hover { transform: none; }

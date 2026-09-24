@@ -47,6 +47,10 @@
     if (e.key === 'Escape' && sidebar?.classList.contains('is-open')) closeSidebar();
   });
 
+  window.addEventListener('pageshow', () => {
+    closeSidebar();
+  });
+
   document.querySelectorAll('[data-count]').forEach((el) => {
     const target = parseInt(el.getAttribute('data-count') || '0', 10);
     if (isNaN(target)) return;
