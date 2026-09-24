@@ -3,7 +3,12 @@
 set -euo pipefail
 
 INSTALL_DIR="/MOVASSEGHISTORE"
-REPO_URL="https://github.com/mmovasseghi/Movasseghi-Store.git"
+REPO_SLUG="mmovasseghi/Movasseghi-Store.git"
+if [[ -n "${GITHUB_TOKEN:-}" ]]; then
+  REPO_URL="https://x-access-token:${GITHUB_TOKEN}@${REPO_SLUG}"
+else
+  REPO_URL="https://${REPO_SLUG}"
+fi
 SERVICE_NAME="movasseghi-shop"
 DOTNET_ROOT="/usr/share/dotnet"
 
@@ -37,6 +42,7 @@ mkdir -p "$INSTALL_DIR"
 if [[ ! -d "$INSTALL_DIR/src/.git" ]]; then
   git clone "$REPO_URL" "$INSTALL_DIR/src"
 else
+  git -C "$INSTALL_DIR/src" remote set-url origin "$REPO_URL"
   git -C "$INSTALL_DIR/src" pull --ff-only
 fi
 
