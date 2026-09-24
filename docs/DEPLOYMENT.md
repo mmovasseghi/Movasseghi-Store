@@ -73,13 +73,19 @@ sudo systemctl restart movasseghi-shop
 
 ## به‌روزرسانی
 
+یک دستور (پیشنهادی — از GitHub، با بکاپ DB و smoke test):
+
 ```bash
-cd /opt/MOVASSEGHISTORE/src
-git pull
-npm ci && npm run build:rte
-dotnet publish src/MovasseghiShop.Web/MovasseghiShop.Web.csproj -c Release -o /opt/MOVASSEGHISTORE/publish
-sudo systemctl restart movasseghi-shop
+sudo bash /MOVASSEGHISTORE/src/deploy/linux/remote-install.sh
 ```
+
+یا بعد از `git pull` در همان پوشهٔ `src`:
+
+```bash
+cd /MOVASSEGHISTORE/src && git pull --ff-only && sudo bash deploy/linux/remote-install.sh
+```
+
+اسکریپت: `git pull` → `npm ci` → `build:rte` → `dotnet publish` (پوشهٔ staging) → swap → `systemctl restart` → `smoke-test.sh`.
 
 ## عیب‌یابی
 
