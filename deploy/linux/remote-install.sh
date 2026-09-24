@@ -65,6 +65,10 @@ if [[ -d "$INSTALL_DIR/publish/App_Data" ]]; then
   cp -a "$INSTALL_DIR/publish/App_Data" "$BACKUP_DIR/" 2>/dev/null || true
 fi
 
+echo "==> Stopping $SERVICE_NAME before publish..."
+systemctl stop "$SERVICE_NAME" 2>/dev/null || true
+sleep 2
+
 dotnet publish src/MovasseghiShop.Web/MovasseghiShop.Web.csproj \
   -c Release \
   -r linux-x64 \
