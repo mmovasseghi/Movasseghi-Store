@@ -3,11 +3,11 @@
 set -euo pipefail
 
 INSTALL_DIR="/MOVASSEGHISTORE"
-REPO_SLUG="mmovasseghi/Movasseghi-Store.git"
+REPO_PATH="mmovasseghi/Movasseghi-Store.git"
 if [[ -n "${GITHUB_TOKEN:-}" ]]; then
-  REPO_URL="https://x-access-token:${GITHUB_TOKEN}@${REPO_SLUG}"
+  REPO_URL="https://x-access-token:${GITHUB_TOKEN}@github.com/${REPO_PATH}"
 else
-  REPO_URL="https://${REPO_SLUG}"
+  REPO_URL="https://github.com/${REPO_PATH}"
 fi
 SERVICE_NAME="movasseghi-shop"
 DOTNET_ROOT="/usr/share/dotnet"
