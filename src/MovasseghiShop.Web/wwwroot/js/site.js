@@ -126,7 +126,7 @@
       if (e.target === drawerPanel) finish();
     };
     drawerPanel.addEventListener('transitionend', onEnd);
-    setTimeout(finish, 480);
+    setTimeout(finish, 360);
   }
 
   menuBtns.forEach(b => {
