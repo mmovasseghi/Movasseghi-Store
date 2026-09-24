@@ -917,6 +917,9 @@ body.ms-drawer-open,body.ms-modal-open,body.ms-sheet-open{overflow:hidden}
   .ms-hero-product img{max-height:240px;max-width:min(100%,320px)}
 }
 @media(max-width:767px){
+  html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+  .ms-app,.ms-main{min-width:0;max-width:100%}
+  .ms-modal-sheet,.ms-sheet-panel{width:100%;max-width:100%}
   .ms-wrap{width:100%;max-width:100%;padding-inline:12px;box-sizing:border-box}
   .ms-top-nav,.ms-top-phone{display:none!important}
   .ms-menu-btn{display:grid!important}
@@ -926,24 +929,23 @@ body.ms-drawer-open,body.ms-modal-open,body.ms-sheet-open{overflow:hidden}
   .ms-logo-link{min-height:56px}
   .ms-top-card{grid-template-columns:44px minmax(0,1fr) 80px;padding:.45rem .55rem;width:100%}
   .ms-menu-btn{width:44px;height:44px;border-radius:12px}
-  /* Hero — موبایل: یک ستون تمام‌عرض (نه نسخهٔ مینی دسکتاپ) */
+  /* Hero — full width + 40/60 two-column (image left, text right) */
   .ms-hero{padding:.35rem 0 .85rem;overflow:hidden;width:100%;max-width:100%;margin-inline:0}
-  .ms-hero .ms-hero-wrap{width:100%!important;margin:0!important;padding-inline:10px!important;max-width:100%!important}
-  .ms-hero-stage{border-radius:18px;width:100%}
-  .ms-hero-viewport{padding:1.35rem 1.1rem 1.15rem}
-  .ms-hero-slide{padding:0;align-items:stretch}
-  .ms-hero-grid{grid-template-columns:1fr;gap:.85rem;align-items:center;justify-items:center;text-align:center}
-  .ms-hero-product{grid-column:1;grid-row:1;width:100%;max-width:min(100%,280px);justify-self:center;margin-top:0}
-  .ms-hero-copy{grid-column:1;grid-row:2;width:100%;min-width:0;padding-inline:0;max-width:36rem}
-  .ms-hero-product img{max-height:min(42vw,196px);max-width:min(92%,240px);margin-inline:auto}
-  .ms-hero-ring{width:100%;height:100%;max-width:220px;max-height:220px;margin-inline:auto}
-  .ms-hero-title{font-size:clamp(1.32rem,6.2vw,1.72rem);line-height:1.18;letter-spacing:-.02em;margin-bottom:.4rem}
+  .ms-hero .ms-hero-wrap{width:100%!important;margin:0!important;padding-inline:8px!important;max-width:100%!important}
+  .ms-hero-stage{border-radius:16px;width:100%;max-width:100%}
+  .ms-hero-beams{display:none}
+  .ms-hero-viewport{padding:1.65rem 1rem 1.25rem}
+  .ms-hero-slide{padding:0}
+  .ms-hero-grid{grid-template-columns:minmax(0,2fr) minmax(0,3fr);gap:.65rem;align-items:center}
+  .ms-hero-copy{grid-column:2;grid-row:1;width:auto;min-width:0;padding-inline:0}
+  .ms-hero-product{grid-column:1;grid-row:1;width:100%;justify-self:center;margin-top:0;min-width:0}
+  .ms-hero-product img{max-height:clamp(88px,22vw,118px);max-width:100%}
+  .ms-hero-title{font-size:clamp(.95rem,4.6vw,1.28rem);line-height:1.2;letter-spacing:-.015em;margin-bottom:.35rem}
   .ms-hero-title em{display:inline}
-  .ms-hero-kicker{font-size:clamp(.76rem,3.2vw,.86rem);padding:.34rem .72rem;margin-bottom:.4rem;max-width:100%;white-space:normal;line-height:1.35}
-  .ms-hero-desc{font-size:clamp(.88rem,3.6vw,.98rem);line-height:1.65;margin-bottom:.85rem;max-width:34ch;margin-inline:auto;min-height:0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-  .ms-hero-cta{padding:.62rem 1.1rem;font-size:clamp(.82rem,3.4vw,.9rem)}
-  .ms-hero-actions{gap:.5rem;flex-wrap:wrap;justify-content:center}
-  .ms-hero-stat{display:none}
+  .ms-hero-kicker{font-size:clamp(.7rem,2.6vw,.8rem);padding:.32rem .65rem;margin-bottom:.36rem;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .ms-hero-desc{font-size:clamp(.8rem,2.8vw,.9rem);line-height:1.62;margin-bottom:.8rem;max-width:none;min-height:calc(2 * 1.62em);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .ms-hero-cta{padding:.52rem .75rem;font-size:clamp(.68rem,2.2vw,.74rem)}
+  .ms-hero-actions{gap:.4rem;flex-wrap:nowrap}
   .ms-promo-bar{padding:.46rem .5rem;gap:.35rem}
   .ms-promo-line{font-size:clamp(.56rem,2.5vw,.64rem);gap:.28rem .32rem;justify-content:flex-start}
   .ms-promo-badge{display:grid;width:1.45rem;height:1.45rem;font-size:.85rem;flex-shrink:0}
@@ -977,10 +979,9 @@ body.ms-drawer-open,body.ms-modal-open,body.ms-sheet-open{overflow:hidden}
   .ms-cat-chip-name{font-size:.68rem;max-width:78px;line-height:1.35}
   .ms-cat-chip-count{font-size:.6rem;padding:.12rem .45rem}
   /* Stories — mobile scroll */
-  .ms-stories{padding:.65rem 0 .35rem}
-  .ms-stories-track{display:flex;flex-wrap:nowrap;gap:.75rem;overflow-x:auto;padding:0 .25rem;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
-  .ms-story{flex:0 0 72px;width:72px;scroll-snap-align:start}
-  .ms-story-ring{width:64px;height:64px}
+  .ms-stories-track{display:flex;flex-wrap:nowrap;gap:.85rem;overflow-x:auto;padding:0 .25rem;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+  .ms-story{flex:0 0 80px;width:80px;scroll-snap-align:start}
+  .ms-story-ring{width:72px;height:72px}
   .ms-story-label{font-size:.7rem}
   .ms-closing-card{grid-template-columns:1fr;text-align:center}
   .ms-closing-visual{justify-content:center}
