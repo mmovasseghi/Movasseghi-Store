@@ -62,7 +62,7 @@
      یا با تأخیر اجرا شود، لحظه ثبت LCP را همان‌قدر عقب می‌اندازد. برای همین
      تصویر و ظرفش فقط با transform جان می‌گیرند — بدون fade و بدون delay. */
   const heroStage = document.querySelector('.ms-hero-stage');
-  if (heroStage) {
+  if (heroStage && !isMobile()) {
     gsap.from('.ms-hero-stat', { opacity: 0, scale: 0.6, stagger: 0.15, duration: 0.7, ease: 'back.out(2.5)', delay: 0.45, clearProps: 'opacity,transform' });
     gsap.from('.ms-hero-slide.is-active .ms-hero-copy > *', {
       opacity: 0, y: 18, stagger: 0.08, duration: 0.55, ease: 'power3.out', delay: 0.35,
@@ -167,12 +167,14 @@
     }
   }
 
+  if (!isMobile()) {
   /* Stories — flat fade-in only (no rotation/skew) */
   gsap.from('.ms-story', {
     opacity: 0, y: 10,
     stagger: 0.05, duration: 0.45, ease: 'power2.out', delay: 0.05,
     clearProps: 'opacity,transform'
   });
+  }
 
   /* Closing counter only — NOT hero */
   document.querySelectorAll('[data-count]').forEach(el => {
@@ -186,6 +188,11 @@
       }
     });
   });
+
+  if (isMobile()) {
+    window.addEventListener('load', () => { if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh(); });
+    return;
+  }
 
   reveal('.ms-features-band', { opacity: 0, y: 24, duration: 0.6, ease: 'power3.out' }, '.ms-features', 'top 92%');
   reveal('.ms-feature-card:not(.ms-feature-card--dup)', {

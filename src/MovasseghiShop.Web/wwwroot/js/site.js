@@ -3,8 +3,51 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const hasGsap = typeof gsap !== 'undefined';
   const isDesktop = () => matchMedia('(min-width: 768px)').matches;
-  const isTouchUi = () => !isDesktop();
-  const apiUrl = (path) => (window.appUrl || (u => u))(path);
+  const touchUi = () => matchMedia('(max-width: 767px)').matches;
+  const snappyUi = () => reduced || touchUi();
+
+  let cartPanelHtml = null;
+  let authModalHtml = null;
+  let cartPanelInflight = null;
+  let authModalInflight = null;
+
+  function prefetchCartPanel() {
+    if (cartPanelHtml || cartPanelInflight) return cartPanelInflight;
+    cartPanelInflight = fetch('/Cart/Panel')
+      .then(r => (r.ok ? r.text() : null))
+      .then(html => { if (html) cartPanelHtml = html; })
+      .catch(() => {})
+      .finally(() => { cartPanelInflight = null; });
+    return cartPanelInflight;
+  }
+
+  function prefetchAuthModal() {
+    if (authModalHtml || authModalInflight) return authModalInflight;
+    authModalInflight = fetch('/Account/Modal')
+      .then(r => (r.ok ? r.text() : null))
+      .then(html => { if (html) authModalHtml = html; })
+      .catch(() => {})
+      .finally(() => { authModalInflight = null; });
+    return authModalInflight;
+  }
+
+  function wirePanelPrefetch() {
+    const warm = () => {
+      prefetchCartPanel();
+      prefetchAuthModal();
+    };
+    document.querySelectorAll('[data-open-cart]').forEach(el => {
+      el.addEventListener('touchstart', warm, { passive: true });
+      el.addEventListener('mouseenter', warm, { passive: true });
+    });
+    document.querySelectorAll('[data-open-auth]').forEach(el => {
+      el.addEventListener('touchstart', warm, { passive: true });
+      el.addEventListener('mouseenter', warm, { passive: true });
+    });
+    if ('requestIdleCallback' in window) requestIdleCallback(warm, { timeout: 2500 });
+    else setTimeout(warm, 1800);
+  }
+  wirePanelPrefetch();
   if (hasGsap) gsap.registerPlugin(ScrollTrigger);
 
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
@@ -30,7 +73,7 @@
     menuBtns.forEach(b => { b.classList.add('is-open'); b.setAttribute('aria-expanded', 'true'); });
     drawer.classList.add('is-open');
 
-    if (hasGsap && !reduced) {
+    if (hasGsap && !snappyUi()) {
       gsap.set(drawerPanel, { x: '100%' });
       gsap.fromTo(drawerBg, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: 'power2.out' });
       gsap.to(drawerPanel, { x: 0, opacity: 1, duration: 0.55, ease: 'power3.out' });
@@ -45,7 +88,7 @@
     drawerPanel?.querySelector('[data-menu-close]')?.focus();
   }
 
-  function closeDrawer(instant = false) {
+  function closeDrawer() {
     if (!drawer || !drawerOpen) return;
     const done = () => {
       drawer.setAttribute('hidden', '');
@@ -56,15 +99,13 @@
       drawerOpen = false;
     };
 
-    if (instant || reduced || !hasGsap) {
+    if (hasGsap && !snappyUi()) {
+      gsap.to(drawerPanel, { x: '100%', opacity: 0.5, duration: 0.38, ease: 'power2.in' });
+      gsap.to(drawerBg, { opacity: 0, duration: 0.32, onComplete: done });
+    } else {
       if (drawerPanel) drawerPanel.style.transform = 'translateX(105%)';
-      if (drawerBg) drawerBg.style.opacity = '0';
       done();
-      return;
     }
-
-    gsap.to(drawerPanel, { x: '100%', opacity: 0.5, duration: 0.22, ease: 'power2.in' });
-    gsap.to(drawerBg, { opacity: 0, duration: 0.18, onComplete: done });
   }
 
   menuBtns.forEach(b => b.addEventListener('click', () => drawerOpen ? closeDrawer() : openDrawer()));
@@ -76,78 +117,7 @@
   /* ── Modal system ── */
   const modal = document.getElementById('appModal');
   const modalSheet = modal?.querySelector('[data-modal-sheet]');
-  const modalBackdrop = modal?.querySelector('.ms-modal-backdrop');
   let modalOpen = false;
-
-  const PANEL_CACHE_MS = 20000;
-  const panelCache = {
-    cart: { html: null, ts: 0, inflight: null },
-    auth: { html: null, ts: 0, inflight: null }
-  };
-
-  const CART_LOADING_HTML = `<div class="ms-cart-drawer ms-modal-loading" data-cart-panel aria-busy="true">
-    <header class="ms-cart-drawer-head">
-      <div class="ms-cart-drawer-head-text"><span class="ms-cart-drawer-kicker">🛒 سبد خرید</span><h2>لحظه‌ای…</h2></div>
-      <button type="button" class="ms-cart-drawer-close" data-modal-close aria-label="بستن"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
-    </header>
-    <div class="ms-modal-loading-body"><div class="ms-skeleton-block"></div><div class="ms-skeleton-block ms-skeleton-block--short"></div></div>
-  </div>`;
-
-  const AUTH_LOADING_HTML = `<div class="ms-auth-panel ms-modal-loading" data-auth-panel aria-busy="true">
-    <header class="ms-auth-head"><div class="ms-auth-brand"><span class="ms-auth-logo" aria-hidden="true">م</span><div class="ms-auth-head-copy"><span class="ms-auth-badge">فروشگاه موثقی</span><h2>ورود</h2></div></div>
-    <button type="button" class="ms-auth-close" data-modal-close aria-label="بستن">✕</button></header>
-    <div class="ms-modal-loading-body"><div class="ms-skeleton-block ms-skeleton-block--auth"></div></div>
-  </div>`;
-
-  function invalidatePanelCache(kind) {
-    if (!panelCache[kind]) return;
-    panelCache[kind].html = null;
-    panelCache[kind].ts = 0;
-  }
-
-  function prefetchPanel(kind, url) {
-    const bucket = panelCache[kind];
-    if (bucket.inflight) return bucket.inflight;
-    bucket.inflight = fetch(apiUrl(url), { credentials: 'same-origin' })
-      .then(res => (res.ok ? res.text() : null))
-      .then(html => {
-        if (html) {
-          bucket.html = html;
-          bucket.ts = Date.now();
-        }
-        bucket.inflight = null;
-        return html;
-      })
-      .catch(() => {
-        bucket.inflight = null;
-        return null;
-      });
-    return bucket.inflight;
-  }
-
-  function panelCacheFresh(kind) {
-    const b = panelCache[kind];
-    return b.html && (Date.now() - b.ts < PANEL_CACHE_MS);
-  }
-
-  function animateModalEnter(opts = {}) {
-    if (!hasGsap || reduced || !modal || !modalSheet) return;
-    const fast = isTouchUi() || opts.loading;
-    const backdrop = modalBackdrop;
-    if (fast) {
-      if (backdrop) gsap.fromTo(backdrop, { opacity: 0 }, { opacity: 1, duration: 0.16, ease: 'power1.out' });
-      gsap.fromTo(modalSheet, { y: '102%', opacity: 0.98 }, { y: 0, opacity: 1, duration: 0.22, ease: 'power2.out' });
-      return;
-    }
-    if (backdrop) {
-      gsap.fromTo(backdrop, { opacity: 0 }, { opacity: 1, duration: 0.28, ease: 'power2.out' });
-    }
-    if (isDesktop() || opts.auth || opts.add) {
-      gsap.fromTo(modalSheet, { scale: 0.94, opacity: 0, y: 12 }, { scale: 1, opacity: 1, y: 0, duration: opts.auth ? 0.38 : 0.32, ease: 'power2.out' });
-    } else {
-      gsap.fromTo(modalSheet, { y: '108%', opacity: 0 }, { y: 0, opacity: 1, duration: 0.28, ease: 'power2.out' });
-    }
-  }
 
   function openModal(html, opts = {}) {
     if (!modal || !modalSheet) return;
@@ -155,29 +125,28 @@
     modalSheet.classList.toggle('ms-modal-sheet--auth', !!opts.auth);
     modalSheet.classList.toggle('ms-modal-sheet--cart', !!opts.cart);
     modalSheet.classList.toggle('ms-modal-sheet--add', !!opts.add);
-    modalSheet.classList.toggle('ms-modal-sheet--loading', !!opts.loading);
+    modal.classList.toggle('ms-modal--snappy', snappyUi());
     modal.removeAttribute('hidden');
     document.body.classList.add('ms-modal-open');
     modalOpen = true;
     bindModalClose();
-    animateModalEnter(opts);
-    if (opts.cart && !opts.loading && !isTouchUi()) animateCartDrawer(false);
-    if (opts.add && !isTouchUi()) animateAddConfirm();
-  }
-
-  function setModalContent(html, opts = {}) {
-    if (!modalSheet) return;
-    modalSheet.classList.remove('ms-modal-sheet--loading');
-    modalSheet.innerHTML = html;
-    bindModalClose();
-    if (opts.cart) {
-      bindCartActions();
-      if (!isTouchUi()) animateCartDrawer(false);
+    const backdrop = modal.querySelector('.ms-modal-backdrop');
+    if (snappyUi()) {
+      if (backdrop) backdrop.style.opacity = '1';
+      modalSheet.style.transform = 'none';
+      modalSheet.style.opacity = '1';
+      if (opts.cart) animateCartDrawer(true);
+      return;
     }
-    if (opts.auth) {
-      const panel = modalSheet.querySelector('[data-auth-panel]');
-      if (panel) delete panel.dataset.authReady;
-      if (window.MsAuth?.init) window.MsAuth.init(panel);
+    if (hasGsap && !reduced) {
+      gsap.fromTo(backdrop, { opacity: 0, backdropFilter: 'blur(0px)' }, { opacity: 1, backdropFilter: 'blur(12px)', duration: 0.45 });
+      if (isDesktop() || opts.auth || opts.add) {
+        gsap.fromTo(modalSheet, { scale: 0.88, opacity: 0, y: 20 }, { scale: 1, opacity: 1, y: 0, duration: opts.auth ? 0.65 : 0.5, ease: 'back.out(1.35)' });
+      } else {
+        gsap.fromTo(modalSheet, { y: '110%', opacity: 0, scale: 0.94 }, { y: 0, opacity: 1, scale: 1, duration: opts.auth ? 0.72 : 0.55, ease: opts.auth ? 'back.out(1.35)' : 'power3.out' });
+      }
+      if (opts.cart) animateCartDrawer(false);
+      if (opts.add) animateAddConfirm();
     }
   }
 
@@ -195,7 +164,7 @@
 
   function animateCartDrawer(lightRefresh = false) {
     const drawer = modalSheet?.querySelector('.ms-cart-drawer');
-    if (!drawer || !hasGsap || reduced || isTouchUi()) return;
+    if (!drawer || !hasGsap || snappyUi()) return;
 
     gsap.killTweensOf(drawer.querySelectorAll('[data-cart-item], .ms-cart-drawer-item-chips .cart-chip, .ms-cart-drawer-action-rail, .ms-cart-drawer-foot, .ms-cart-drawer-total-row, .ms-cart-drawer-checkout, [data-cart-tier-nudge], [data-cart-premium]'));
 
@@ -288,15 +257,18 @@
       document.body.classList.remove('ms-modal-open');
       modalOpen = false;
     };
+    if (snappyUi()) {
+      modal.classList.remove('ms-modal--snappy');
+      done();
+      return;
+    }
     if (hasGsap && !reduced) {
-      const fast = isTouchUi();
-      const dur = fast ? 0.18 : 0.26;
-      if (!fast && (isDesktop() || modalSheet.classList.contains('ms-modal-sheet--auth') || modalSheet.classList.contains('ms-modal-sheet--add'))) {
-        gsap.to(modalSheet, { scale: 0.96, opacity: 0, duration: dur, ease: 'power2.in', onComplete: done });
+      if (isDesktop() || modalSheet.classList.contains('ms-modal-sheet--auth') || modalSheet.classList.contains('ms-modal-sheet--add')) {
+        gsap.to(modalSheet, { scale: 0.92, opacity: 0, duration: 0.3, ease: 'power2.in', onComplete: done });
       } else {
-        gsap.to(modalSheet, { y: '100%', opacity: 0, duration: dur, ease: 'power2.in', onComplete: done });
+        gsap.to(modalSheet, { y: '100%', opacity: 0, duration: 0.35, ease: 'power2.in', onComplete: done });
       }
-      if (modalBackdrop) gsap.to(modalBackdrop, { opacity: 0, duration: dur });
+      gsap.to(modal.querySelector('.ms-modal-backdrop'), { opacity: 0, duration: 0.3 });
     } else done();
   }
 
@@ -313,33 +285,23 @@
 
   /* ── Auth modal ── */
   async function openAuthModal() {
-    closeDrawer(true);
-    if (panelCacheFresh('auth')) {
-      openModal(panelCache.auth.html, { auth: true });
-      const panel = modalSheet?.querySelector('[data-auth-panel]');
-      if (panel) delete panel.dataset.authReady;
-      if (window.MsAuth?.init) window.MsAuth.init(panel);
-      prefetchPanel('auth', '/Account/Modal');
-      return;
-    }
-    openModal(AUTH_LOADING_HTML, { auth: true, loading: true });
-    const html = await (panelCache.auth.inflight || prefetchPanel('auth', '/Account/Modal'));
+    closeDrawer();
+    let html = authModalHtml;
     if (!html) {
-      closeModal();
-      return;
+      await (authModalInflight || prefetchAuthModal());
+      html = authModalHtml;
     }
-    setModalContent(html, { auth: true });
+    if (!html) {
+      const res = await fetch('/Account/Modal');
+      if (!res.ok) return;
+      html = await res.text();
+      authModalHtml = html;
+    }
+    openModal(html, { auth: true });
+    const panel = modalSheet?.querySelector('[data-auth-panel]');
+    if (panel) delete panel.dataset.authReady;
+    if (window.MsAuth?.init) window.MsAuth.init(panel);
   }
-
-  function wirePanelPrefetch(selector, kind, url) {
-    document.querySelectorAll(selector).forEach(el => {
-      el.addEventListener('pointerdown', () => prefetchPanel(kind, url), { passive: true });
-      el.addEventListener('touchstart', () => prefetchPanel(kind, url), { passive: true });
-    });
-  }
-
-  wirePanelPrefetch('[data-open-auth]', 'auth', '/Account/Modal');
-  wirePanelPrefetch('[data-open-cart]', 'cart', '/Cart/Panel');
 
   document.querySelectorAll('[data-open-auth]').forEach(el =>
     el.addEventListener('click', e => { e.preventDefault(); openAuthModal(); }));
@@ -373,21 +335,20 @@
   }
 
   async function openCartModal() {
-    closeDrawer(true);
-    if (panelCacheFresh('cart')) {
-      openModal(panelCache.cart.html, { cart: true });
-      bindCartActions();
-      refreshCartBadge();
-      prefetchPanel('cart', '/Cart/Panel');
-      return;
-    }
-    openModal(CART_LOADING_HTML, { cart: true, loading: true });
-    const html = await (panelCache.cart.inflight || prefetchPanel('cart', '/Cart/Panel'));
+    closeDrawer();
+    let html = cartPanelHtml;
     if (!html) {
-      closeModal();
-      return;
+      await (cartPanelInflight || prefetchCartPanel());
+      html = cartPanelHtml;
     }
-    setModalContent(html, { cart: true });
+    if (!html) {
+      const res = await fetch('/Cart/Panel');
+      if (!res.ok) return;
+      html = await res.text();
+      cartPanelHtml = html;
+    }
+    openModal(html, { cart: true });
+    bindCartActions();
     refreshCartBadge();
   }
 
@@ -423,13 +384,13 @@
     if (token) fd.append('__RequestVerificationToken', token);
     const res = await fetch(url, { method: 'POST', body: fd });
     if (res.ok) {
-      invalidatePanelCache('cart');
-      modalSheet.innerHTML = await res.text();
+      const next = await res.text();
+      modalSheet.innerHTML = next;
+      cartPanelHtml = next;
       bindModalClose();
       bindCartActions();
       refreshCartBadge();
       animateCartDrawer(true);
-      prefetchPanel('cart', '/Cart/Panel');
     }
   }
 
@@ -438,8 +399,7 @@
     refreshBadge: refreshCartBadge,
     openDrawer: openCartModal,
     showAddConfirm(html) {
-      invalidatePanelCache('cart');
-      closeDrawer(true);
+      closeDrawer();
       openModal(html, { add: true });
       bindModalClose();
       const count = modalSheet?.querySelector('[data-cart-add-confirm]')?.dataset.cartCount;
@@ -449,11 +409,6 @@
 
   document.querySelectorAll('[data-open-cart]').forEach(el =>
     el.addEventListener('click', e => { e.preventDefault(); openCartModal(); }));
-
-  refreshCartBadge().then(() => {
-    const hasItems = document.querySelector('[data-cart-badge].is-visible');
-    if (hasItems) prefetchPanel('cart', '/Cart/Panel');
-  });
 
   /* ── Search autocomplete ── */
   const searchInput = document.getElementById('globalSearch');
@@ -599,7 +554,7 @@
   }
 
   /* ── Global reveal (skip sections animated in home.js) ── */
-  if (hasGsap && !reduced) {
+  if (hasGsap && !reduced && !touchUi()) {
     gsap.utils.toArray('.ms-reveal:not(.ms-hero):not(.ms-stories):not(.ms-features):not(.ms-offers):not(.ms-cat-section):not(.ms-featured-section):not(.ms-segments):not(.ms-closing):not(.ms-news)').forEach(el => {
       gsap.from(el, {
         scrollTrigger: { trigger: el, start: 'top 92%', once: true },

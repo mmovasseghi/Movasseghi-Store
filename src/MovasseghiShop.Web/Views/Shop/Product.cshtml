@@ -198,6 +198,10 @@
             }
 
             <div class="pd-variants" id="pd-variants">
+                <header class="pd-variants-intro">
+                    <h2 class="pd-variants-title">قیمت و افزودن به سبد</h2>
+                    <p class="pd-variants-lead">نوع بسته را انتخاب کنید — <strong>فله</strong> (عمده کارخانه) یا <strong>شیرینگ</strong> — تعداد را بزنید و روی «افزودن» همان ردیف بزنید.</p>
+                </header>
                 @if (bulkVariants.Count > 0)
                 {
                     <div class="pd-pack-group">
@@ -227,11 +231,7 @@
             </div>
 
             <div class="pd-cta-row">
-                @if (hasCartVariants)
-                {
-                    <a href="#pd-variants" class="btn btn-secondary">انتخاب بسته‌بندی</a>
-                }
-                else
+                @if (!hasCartVariants)
                 {
                     <a href="#pd-inquiry" class="btn btn-secondary">استعلام قیمت</a>
                 }
@@ -424,7 +424,7 @@
         </div>
         @if (hasCartVariants)
         {
-            <a href="#pd-variants" class="btn btn-primary">افزودن به سبد</a>
+            <a href="#pd-variants" class="btn btn-primary">انتخاب نوع و افزودن</a>
         }
         else
         {
