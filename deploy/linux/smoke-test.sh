@@ -24,6 +24,8 @@ check "${PREFIX}/Blog" "200"
 check "${PREFIX}/Admin/Auth/Login" "200"
 check "${PREFIX}/css/site.css" "200"
 check "${PREFIX}/js/site.js" "200"
+check "${PREFIX}/images/products/0071/01.webp" "200"
+check "/images/products/0071/01.webp" "200"
 
 if [[ "$fail" -ne 0 ]]; then
   exit 1
