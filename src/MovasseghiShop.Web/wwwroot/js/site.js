@@ -48,6 +48,22 @@
     else setTimeout(warm, 1800);
   }
   wirePanelPrefetch();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => { prefetchCartPanel(); prefetchAuthModal(); });
+  } else {
+    prefetchCartPanel();
+    prefetchAuthModal();
+  }
+
+  function readAuthTemplateHtml() {
+    const tpl = document.getElementById('msAuthModalTpl');
+    if (!tpl) return null;
+    const el = tpl.content?.querySelector?.('[data-auth-panel]');
+    return el ? el.outerHTML : tpl.innerHTML;
+  }
+
+  const MODAL_BUSY_CART = '<div class="ms-modal-busy" aria-busy="true"><span class="ms-modal-busy__spin" aria-hidden="true"></span><span>در حال بارگذاری سبد…</span></div>';
+  const MODAL_BUSY_AUTH = '<div class="ms-modal-busy" aria-busy="true"><span class="ms-modal-busy__spin" aria-hidden="true"></span><span>ورود / ثبت‌نام</span></div>';
   if (hasGsap) gsap.registerPlugin(ScrollTrigger);
 
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
@@ -73,8 +89,7 @@
     menuBtns.forEach(b => { b.classList.add('is-open'); b.setAttribute('aria-expanded', 'true'); });
     if (drawerPanel) drawerPanel.style.transform = '';
     drawer.classList.remove('is-open');
-    void drawer.offsetWidth;
-    drawer.classList.add('is-open');
+    requestAnimationFrame(() => drawer.classList.add('is-open'));
 
     if (hasGsap && !reduced && isDesktop()) {
       gsap.from(drawer.querySelectorAll('.ms-drawer-link, .ms-drawer-cat, .ms-drawer-cat-all, .ms-drawer-quick-btn'), {
@@ -114,7 +129,13 @@
     setTimeout(finish, 480);
   }
 
-  menuBtns.forEach(b => b.addEventListener('click', () => drawerOpen ? closeDrawer() : openDrawer()));
+  menuBtns.forEach(b => {
+    b.addEventListener('click', e => {
+      e.preventDefault();
+      if (drawerOpen) closeDrawer();
+      else openDrawer();
+    });
+  });
   drawer?.querySelectorAll('[data-menu-close]').forEach(el => el.addEventListener('click', closeDrawer));
   drawer?.querySelectorAll('[data-drawer-link]').forEach(el => el.addEventListener('click', () => closeDrawer()));
 
@@ -309,27 +330,39 @@
   });
 
   /* ── Auth modal ── */
+  function bootAuthPanel() {
+    const panel = modalSheet?.querySelector('[data-auth-panel]');
+    if (!panel) return;
+    panel.dataset.authReady = '';
+    if (window.MsAuth?.init) window.MsAuth.init(panel);
+  }
+
   async function openAuthModal() {
     closeDrawer();
-    let html = authModalHtml;
-    if (!html) {
+    let html = authModalHtml || readAuthTemplateHtml();
+    if (html) authModalHtml = html;
+    if (html) {
+      openModal(html, { auth: true });
+      requestAnimationFrame(() => bootAuthPanel());
+      return;
+    }
+    openModal(MODAL_BUSY_AUTH, { auth: true });
+    try {
       await (authModalInflight || prefetchAuthModal());
-      html = authModalHtml;
-    }
-    if (!html) {
-      const res = await fetch('/Account/Modal');
-      if (!res.ok) return;
-      html = await res.text();
+      html = authModalHtml || readAuthTemplateHtml();
+      if (!html) {
+        const res = await fetch('/Account/Modal');
+        if (!res.ok) throw new Error('auth modal');
+        html = await res.text();
+      }
       authModalHtml = html;
+      modalSheet.innerHTML = html;
+      bindModalClose();
+      bootAuthPanel();
+    } catch {
+      modalSheet.innerHTML = '<div class="ms-modal-busy"><p>خطا در بارگذاری. دوباره تلاش کنید.</p><button type="button" class="btn btn-primary" data-modal-close>بستن</button></div>';
+      bindModalClose();
     }
-    openModal(html, { auth: true });
-    const bootAuth = () => {
-      const panel = modalSheet?.querySelector('[data-auth-panel]');
-      if (!panel) return;
-      panel.dataset.authReady = '';
-      if (window.MsAuth?.init) window.MsAuth.init(panel);
-    };
-    requestAnimationFrame(() => requestAnimationFrame(bootAuth));
   }
 
   document.querySelectorAll('[data-open-auth]').forEach(el =>
@@ -365,20 +398,30 @@
 
   async function openCartModal() {
     closeDrawer();
-    let html = cartPanelHtml;
-    if (!html) {
+    if (cartPanelHtml) {
+      openModal(cartPanelHtml, { cart: true });
+      bindCartActions();
+      refreshCartBadge();
+      return;
+    }
+    openModal(MODAL_BUSY_CART, { cart: true });
+    try {
       await (cartPanelInflight || prefetchCartPanel());
-      html = cartPanelHtml;
+      let html = cartPanelHtml;
+      if (!html) {
+        const res = await fetch('/Cart/Panel');
+        if (!res.ok) throw new Error('cart panel');
+        html = await res.text();
+        cartPanelHtml = html;
+      }
+      modalSheet.innerHTML = html;
+      bindModalClose();
+      bindCartActions();
+      refreshCartBadge();
+    } catch {
+      modalSheet.innerHTML = '<div class="ms-modal-busy"><p>سبد در دسترس نیست.</p><button type="button" class="btn btn-primary" data-modal-close>بستن</button></div>';
+      bindModalClose();
     }
-    if (!html) {
-      const res = await fetch('/Cart/Panel');
-      if (!res.ok) return;
-      html = await res.text();
-      cartPanelHtml = html;
-    }
-    openModal(html, { cart: true });
-    bindCartActions();
-    refreshCartBadge();
   }
 
   function bindCartActions() {

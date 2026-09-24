@@ -128,7 +128,7 @@
     let currentPhone = '';
     let stepDir = 1;
     let mainTab = 'login';
-    let loginMode = 'sms';
+    let loginMode = 'password';
 
     function showError(msg) {
       if (!errEl) return;
@@ -231,8 +231,14 @@
     function moveGlider(container, glider, activeBtn) {
       if (!container || !glider || !activeBtn) return;
       glider.style.width = activeBtn.offsetWidth + 'px';
-      glider.style.transform = `translate3d(${activeBtn.offsetLeft}px, 0, 0)`;
+      glider.style.left = activeBtn.offsetLeft + 'px';
+      glider.style.transform = 'none';
       pulseGlider(glider);
+    }
+
+    function layoutGliders() {
+      syncTabsUI();
+      syncLoginModeUI();
     }
 
     function syncTabsUI() {
@@ -502,11 +508,15 @@
       });
     });
 
+    updateChrome(mainTab === 'login' && loginMode === 'password' ? 'password-login' : 'phone', 0);
     requestAnimationFrame(() => {
-      syncTabsUI();
-      syncLoginModeUI();
-      updateChrome('phone', 0);
+      layoutGliders();
+      requestAnimationFrame(layoutGliders);
     });
+    if (typeof ResizeObserver !== 'undefined') {
+      const ro = new ResizeObserver(() => layoutGliders());
+      ro.observe(panel);
+    }
 
     if (hasGsap && !liteMotion()) {
       gsap.to(panel.querySelector('.ms-auth-bg-ring'), { rotation: 360, duration: 40, repeat: -1, ease: 'none' });

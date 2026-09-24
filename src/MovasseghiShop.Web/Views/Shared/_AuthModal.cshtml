@@ -37,8 +37,8 @@
                 </div>
             </div>
             <div class="ms-auth-mode" data-auth-login-modes>
-                <button type="button" class="ms-auth-mode-btn is-active" data-auth-login-mode="sms" aria-pressed="true">ورود با پیامک</button>
-                <button type="button" class="ms-auth-mode-btn" data-auth-login-mode="password" aria-pressed="false">ورود با رمز عبور</button>
+                <button type="button" class="ms-auth-mode-btn" data-auth-login-mode="sms" aria-pressed="false">ورود با پیامک</button>
+                <button type="button" class="ms-auth-mode-btn is-active" data-auth-login-mode="password" aria-pressed="true">ورود با رمز عبور</button>
                 <span class="ms-auth-mode-glider" data-auth-mode-glider aria-hidden="true"></span>
             </div>
         </div>
@@ -60,7 +60,7 @@
     </div>
 
     <div class="ms-auth-stage" data-auth-stage>
-        <section class="ms-auth-step is-active" data-auth-step="phone">
+        <section class="ms-auth-step" data-auth-step="phone" hidden>
             <form data-auth-phone-form class="ms-auth-form">
                 @Html.AntiForgeryToken()
                 <p class="ms-auth-lead" data-auth-phone-lead>شماره موبایل خود را وارد کنید تا کد تأیید ارسال شود.</p>
@@ -72,7 +72,7 @@
             </form>
         </section>
 
-        <section class="ms-auth-step" data-auth-step="password-login" hidden>
+        <section class="ms-auth-step is-active" data-auth-step="password-login">
             <form data-auth-password-form class="ms-auth-form">
                 @Html.AntiForgeryToken()
                 <p class="ms-auth-lead">شماره موبایل و رمز عبور حساب خود را وارد کنید.</p>

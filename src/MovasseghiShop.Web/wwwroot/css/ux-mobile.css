@@ -364,7 +364,7 @@
   }
 
   .ms-modal.ms-modal--sheet-in .ms-modal-sheet {
-    animation: msModalSheetIn 0.38s cubic-bezier(0.32, 0.72, 0, 1) both;
+    animation: msModalSheetIn 0.26s cubic-bezier(0.32, 0.72, 0, 1) both;
     will-change: transform, opacity;
   }
 
