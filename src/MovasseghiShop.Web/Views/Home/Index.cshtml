@@ -38,7 +38,7 @@
                     <span class="ms-story-icon-wrap">
                         @if (!string.IsNullOrWhiteSpace(story.CoverImageUrl))
                         {
-                            <img src="@story.CoverImageUrl" alt="" class="ms-story-cover" width="76" height="76" loading="lazy" decoding="async" />
+                            <img src="@AppPath.H(story.CoverImageUrl, Context)" alt="" class="ms-story-cover" width="76" height="76" loading="lazy" decoding="async" />
                         }
                         else
                         {
@@ -114,7 +114,7 @@
                                     var img = ProductImageHelper.GetDisplayUrl(ProductImageHelper.GetPrimary(hp.Images), Env);
                                     <div class="ms-hero-product">
                                         <span class="ms-hero-ring" aria-hidden="true"></span>
-                                        <img src="@img" alt="@hp.Name" width="240" height="240" @(si == 0 ? "fetchpriority=\"high\"" : "loading=\"lazy\"") />
+                                        <img src="@AppPath.H(img, Context)" alt="@hp.Name" width="240" height="240" @(si == 0 ? "fetchpriority=\"high\"" : "loading=\"lazy\"") />
                                     </div>
                                 }
                             </div>
@@ -139,7 +139,7 @@
                                 var img1 = ProductImageHelper.GetDisplayUrl(ProductImageHelper.GetPrimary(hp1.Images), Env);
                                 <div class="ms-hero-product">
                                     <span class="ms-hero-ring" aria-hidden="true"></span>
-                                    <img src="@img1" alt="@hp1.Name" width="240" height="240" fetchpriority="high" />
+                                    <img src="@AppPath.H(img1, Context)" alt="@hp1.Name" width="240" height="240" fetchpriority="high" />
                                 </div>
                             }
                         </div>
@@ -476,7 +476,7 @@
                         <span class="ms-news-card-visual" aria-hidden="true">
                             @if (!string.IsNullOrEmpty(item.FeaturedImageUrl))
                             {
-                                <img src="@item.FeaturedImageUrl" alt="" loading="lazy" width="320" height="180" />
+                                <img src="@AppPath.H(item.FeaturedImageUrl, Context)" alt="" loading="lazy" width="320" height="180" />
                             }
                             else
                             {
@@ -528,7 +528,7 @@
                         <span class="ms-news-card-visual" aria-hidden="true">
                             @if (!string.IsNullOrEmpty(post.FeaturedImageUrl))
                             {
-                                <img src="@post.FeaturedImageUrl" alt="" loading="lazy" width="320" height="180" />
+                                <img src="@AppPath.H(post.FeaturedImageUrl, Context)" alt="" loading="lazy" width="320" height="180" />
                             }
                             else
                             {

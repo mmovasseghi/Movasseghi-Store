@@ -44,7 +44,7 @@
                 @if (!string.IsNullOrEmpty(categoryLanding.ImageUrl))
                 {
                     <div class="catalog-hero-cover">
-                        <img src="@categoryLanding.ImageUrl" alt="@categoryLanding.Name" width="120" height="120" loading="eager" />
+                        <img src="@AppPath.H(categoryLanding.ImageUrl, Context)" alt="@categoryLanding.Name" width="120" height="120" loading="eager" />
                     </div>
                 }
                 <div class="catalog-hero-text">

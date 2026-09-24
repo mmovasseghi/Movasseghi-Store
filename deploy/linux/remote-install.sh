@@ -193,6 +193,18 @@ server {
         return 301 /MOVASSEGHISTORE/;
     }
 
+    # Absolute /images and /fonts from old HTML/CSS still hit the shop static files
+    location /images/ {
+        proxy_pass http://127.0.0.1:5080/MOVASSEGHISTORE/images/;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+    }
+    location /fonts/ {
+        proxy_pass http://127.0.0.1:5080/MOVASSEGHISTORE/fonts/;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+    }
+
     location /MOVASSEGHISTORE/ {
         proxy_pass http://127.0.0.1:5080/MOVASSEGHISTORE/;
         proxy_http_version 1.1;

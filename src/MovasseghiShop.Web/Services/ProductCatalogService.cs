@@ -19,7 +19,11 @@ public interface IProductCatalogService
     Task<string?> TryResolveDirectProductSlugAsync(string? term, CancellationToken ct = default);
 }
 
-public class ProductCatalogService(ApplicationDbContext db, IWebHostEnvironment env, IMemoryCache cache) : IProductCatalogService
+public class ProductCatalogService(
+    ApplicationDbContext db,
+    IWebHostEnvironment env,
+    IMemoryCache cache,
+    IHttpContextAccessor httpContextAccessor) : IProductCatalogService
 {
     private const int PageSize = 24;
     const string TypesCacheKey = "catalog:product-types";
@@ -175,6 +179,9 @@ public class ProductCatalogService(ApplicationDbContext db, IWebHostEnvironment 
     SearchSuggestionDto ToSuggestionDto(Product p)
     {
         var img = ProductImageHelper.GetDisplayUrl(ProductImageHelper.GetPrimary(p.Images), env);
+        var ctx = httpContextAccessor.HttpContext;
+        if (ctx != null && !string.IsNullOrEmpty(img))
+            img = AppPath.H(img, ctx);
         return new SearchSuggestionDto(p.Name, p.Slug, img, p.ProductCode);
     }
 

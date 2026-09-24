@@ -1,15 +1,18 @@
 @model ProductImageStageModel
+@{
+    string U(string? url) => string.IsNullOrEmpty(url) ? "" : AppPath.H(url, Context);
+}
 <div class="ms-product-dual__aurora" aria-hidden="true"></div>
 <div class="ms-product-dual__slides">
     <div class="ms-product-dual__slide ms-product-dual__slide--studio" data-ms-dual-slide="studio">
         <div class="ms-product-shot">
             <div class="ms-product-stage">
-                <img class="ms-product-img-el" src="@Model.ImageUrl" alt="@Model.Alt" width="@Model.Width" height="@Model.Height" loading="@Model.Loading" @(Model.FetchPriority ? "fetchpriority=\"high\"" : null) />
+                <img class="ms-product-img-el" src="@U(Model.ImageUrl)" alt="@Model.Alt" width="@Model.Width" height="@Model.Height" loading="@Model.Loading" @(Model.FetchPriority ? "fetchpriority=\"high\"" : null) />
             </div>
         </div>
     </div>
     <div class="ms-product-dual__slide ms-product-dual__slide--scene" data-ms-dual-slide="scene">
-        <img class="ms-product-img-el ms-product-img-el--scene ms-product-dual__scene-img" src="@Model.AlternateImageUrl" alt="@Model.AlternateAlt" width="@Model.Width" height="@Model.Height" loading="lazy" />
+        <img class="ms-product-img-el ms-product-img-el--scene ms-product-dual__scene-img" src="@U(Model.AlternateImageUrl)" alt="@Model.AlternateAlt" width="@Model.Width" height="@Model.Height" loading="lazy" />
     </div>
 </div>
 <div class="ms-product-dual__chrome" aria-hidden="true">

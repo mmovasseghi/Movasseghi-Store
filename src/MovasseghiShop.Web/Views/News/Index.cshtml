@@ -15,7 +15,7 @@
     ViewData["OgDescription"] = ViewData["MetaDescription"];
     ViewData["OgType"] = "website";
     ViewData["OgUrl"] = pageUrl;
-    ViewData["OgImage"] = $"{Context.Request.Scheme}://{Context.Request.Host}/images/brand/originallogo.png";
+    ViewData["OgImage"] = AppPath.Absolute("/images/brand/originallogo.png", Context);
 }
 @section Head {
     <link rel="stylesheet" href="~/css/ux-content.css" asp-append-version="true" />
@@ -90,7 +90,7 @@
                         <div class="ct-card-visual @(item.FeaturedImageUrl?.Contains("/products/") == true ? "ct-card-visual--photo" : "ms-img-stage")">
                             @if (!string.IsNullOrEmpty(item.FeaturedImageUrl))
                             {
-                                <img src="@item.FeaturedImageUrl" alt="@item.Title" width="320" height="180" loading="lazy" />
+                                <img src="@AppPath.H(item.FeaturedImageUrl, Context)" alt="@item.Title" width="320" height="180" loading="lazy" />
                             }
                         </div>
                         <div class="ct-card-body">

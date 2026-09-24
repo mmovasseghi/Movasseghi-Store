@@ -9,7 +9,7 @@
   window.__PATH_BASE = base;
   window.appUrl = function (u) {
     if (!u) return base + '/';
-    if (/^(https?:|tel:|mailto:|#)/i.test(u)) return u;
+    if (/^(https?:|tel:|mailto:|#|data:)/i.test(u)) return u;
     if (u.charAt(0) !== '/') u = '/' + u;
     if (u.indexOf(base) === 0) return u;
     return base + u;
@@ -17,6 +17,18 @@
 
   function needsPatch(u) {
     return u && u.charAt(0) === '/' && u.charAt(1) !== '/' && u.indexOf(base) !== 0;
+  }
+
+  function patchSrcset(val) {
+    if (!val || val.indexOf('/') === -1) return val;
+    return val.split(',').map(function (part) {
+      part = part.trim();
+      var i = part.lastIndexOf(' ');
+      var url = i === -1 ? part : part.slice(0, i).trim();
+      var desc = i === -1 ? '' : part.slice(i);
+      if (needsPatch(url)) url = appUrl(url);
+      return url + desc;
+    }).join(', ');
   }
 
   function patchDom() {
@@ -27,6 +39,19 @@
     document.querySelectorAll('form[action]').forEach(function (f) {
       var a = f.getAttribute('action');
       if (needsPatch(a)) f.setAttribute('action', appUrl(a));
+    });
+    document.querySelectorAll('img[src], source[src], video[poster], link[href][rel="preload"][as="image"]').forEach(function (el) {
+      var attr = el.hasAttribute('src') ? 'src' : (el.hasAttribute('poster') ? 'poster' : 'href');
+      var v = el.getAttribute(attr);
+      if (needsPatch(v)) el.setAttribute(attr, appUrl(v));
+    });
+    document.querySelectorAll('img[srcset], source[srcset]').forEach(function (el) {
+      var s = el.getAttribute('srcset');
+      if (s && s.indexOf('/') !== -1) el.setAttribute('srcset', patchSrcset(s));
+    });
+    document.querySelectorAll('[data-src]').forEach(function (el) {
+      var v = el.getAttribute('data-src');
+      if (needsPatch(v)) el.setAttribute('data-src', appUrl(v));
     });
   }
 

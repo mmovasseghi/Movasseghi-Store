@@ -15,7 +15,7 @@
     ViewData["OgDescription"] = ViewData["MetaDescription"];
     ViewData["OgType"] = "website";
     ViewData["OgUrl"] = pageUrl;
-    ViewData["OgImage"] = $"{Context.Request.Scheme}://{Context.Request.Host}/images/brand/originallogo.png";
+    ViewData["OgImage"] = AppPath.Absolute("/images/brand/originallogo.png", Context);
 
     var items = Model.Select(p => new Dictionary<string, object?>
     {
@@ -82,7 +82,7 @@
             <div class="ct-featured-visual @(featured.FeaturedImageUrl?.Contains("/products/") == true ? "ct-card-visual--photo" : "ms-img-stage")">
                 @if (!string.IsNullOrEmpty(featured.FeaturedImageUrl))
                 {
-                    <img src="@featured.FeaturedImageUrl" alt="@featured.Title" width="640" height="360" loading="eager" />
+                    <img src="@AppPath.H(featured.FeaturedImageUrl, Context)" alt="@featured.Title" width="640" height="360" loading="eager" />
                 }
             </div>
             <div class="ct-featured-body">
@@ -106,7 +106,7 @@
                         <div class="ct-card-visual @(post.FeaturedImageUrl?.Contains("/products/") == true ? "ct-card-visual--photo" : "ms-img-stage")">
                             @if (!string.IsNullOrEmpty(post.FeaturedImageUrl))
                             {
-                                <img src="@post.FeaturedImageUrl" alt="@post.Title" width="320" height="180" loading="lazy" />
+                                <img src="@AppPath.H(post.FeaturedImageUrl, Context)" alt="@post.Title" width="320" height="180" loading="lazy" />
                             }
                         </div>
                         <div class="ct-card-body">

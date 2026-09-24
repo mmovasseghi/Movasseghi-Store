@@ -116,7 +116,7 @@ public class CatalogController(
         ViewData["OgUrl"] = canonical;
         if (!string.IsNullOrWhiteSpace(category.ImageUrl))
             ViewData["OgImage"] = category.ImageUrl!.StartsWith("/")
-                ? $"{Request.Scheme}://{Request.Host}{category.ImageUrl}"
+                ? AppPath.Absolute(category.ImageUrl, HttpContext)
                 : category.ImageUrl;
 
         static string? Pick(params string?[] candidates) =>

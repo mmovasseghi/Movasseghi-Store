@@ -13,8 +13,8 @@
     var gallerySlides = ProductImageHelper.BuildGallery(Model.Images, Env);
     var gallery = gallerySlides.Select(s => s.Url).ToList();
     var mainImg = ProductImageHelper.GetDisplayUrl(ProductImageHelper.GetPrimary(Model.Images), Env);
-    var pageUrl = $"{Context.Request.Scheme}://{Context.Request.Host}/Shop/Product/{Model.Slug}";
-    var absImg = mainImg != null && mainImg.StartsWith("/") ? $"{Context.Request.Scheme}://{Context.Request.Host}{mainImg}" : mainImg;
+    var pageUrl = AppPath.Absolute($"/Shop/Product/{Model.Slug}", Context)!;
+    var absImg = AppPath.Absolute(mainImg, Context);
 
     ViewData["CanonicalUrl"] = pageUrl;
     ViewData["OgTitle"] = ViewData["Title"];
@@ -89,13 +89,13 @@
                             <figure class="pd-gallery-slide @(slide.IsScene ? "pd-gallery-slide--scene" : "pd-gallery-slide--product") @(i == 0 ? "is-active" : "")" data-pd-slide data-index="@i">
                                 @if (slide.IsScene)
                                 {
-                                    <img class="pd-main-img pd-main-img--scene" src="@slide.Url" alt="@slide.Alt" width="480" height="480" @(i == 0 ? "fetchpriority=\"high\" itemprop=\"image\"" : "loading=\"lazy\"") />
+                                    <img class="pd-main-img pd-main-img--scene" src="@AppPath.H(slide.Url, Context)" alt="@slide.Alt" width="480" height="480" @(i == 0 ? "fetchpriority=\"high\" itemprop=\"image\"" : "loading=\"lazy\"") />
                                 }
                                 else
                                 {
                                     <div class="ms-product-shot pd-product-shot">
                                         <div class="ms-product-stage pd-product-stage">
-                                            <img class="pd-main-img ms-product-img-el" src="@slide.Url" alt="@slide.Alt" width="480" height="480" loading="lazy" />
+                                            <img class="pd-main-img ms-product-img-el" src="@AppPath.H(slide.Url, Context)" alt="@slide.Alt" width="480" height="480" loading="lazy" />
                                         </div>
                                     </div>
                                 }
@@ -125,7 +125,7 @@
                                         data-pd-thumb data-pd-index="@i"
                                         aria-label="نمایش تصویر @(i + 1)" aria-selected="@(i == 0 ? "true" : "false")">
                                     <span class="pd-thumb__frame">
-                                        <img src="@slide.Url" alt="@slide.Alt" width="72" height="72" loading="lazy" />
+                                        <img src="@AppPath.H(slide.Url, Context)" alt="@slide.Alt" width="72" height="72" loading="lazy" />
                                     </span>
                                 </button>
                             }
@@ -289,7 +289,7 @@
                     </summary>
                     <div class="pd-article-fold__body">
                         <div class="pd-article-fold__prose-wrap">
-                            <div class="pd-prose">@Html.Raw(Model.Description)</div>
+                            <div class="pd-prose">@Html.Raw(AppPath.RewriteHtmlRootUrls(Model.Description, Context))</div>
                         </div>
                     </div>
                 </details>

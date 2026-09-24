@@ -370,7 +370,7 @@
 
         const renderItem = (item, i, isSimilar) => {
           const img = item.imageUrl
-            ? `<div class="ms-product-shot"><div class="ms-product-stage"><img class="ms-product-img-el" src="${item.imageUrl}" alt="" width="44" height="44" loading="lazy"/></div></div>`
+            ? `<div class="ms-product-shot"><div class="ms-product-stage"><img class="ms-product-img-el" src="${(window.appUrl || (u => u))(item.imageUrl)}" alt="" width="44" height="44" loading="lazy"/></div></div>`
             : '<div class="ms-product-empty" aria-hidden="true"></div>';
           return `
           <li role="option" data-slug="${item.slug}" data-index="${i}"${isSimilar ? ' class="is-similar"' : ''}>

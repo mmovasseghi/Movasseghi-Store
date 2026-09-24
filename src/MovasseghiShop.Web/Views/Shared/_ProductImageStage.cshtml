@@ -1,5 +1,6 @@
 @model ProductImageStageModel
 @{
+    string U(string? url) => string.IsNullOrEmpty(url) ? "" : AppPath.H(url, Context);
     var shell = Model.Variant switch
     {
         "offer" => "ms-offer-img",
@@ -35,7 +36,7 @@ else if (Model.Variant == "featured")
         {
             <div class="ms-product-shot">
                 <div class="ms-product-stage">
-                    <img class="ms-product-img-el" src="@Model.ImageUrl" alt="@Model.Alt" width="@Model.Width" height="@Model.Height" loading="@Model.Loading" />
+                    <img class="ms-product-img-el" src="@U(Model.ImageUrl)" alt="@Model.Alt" width="@Model.Width" height="@Model.Height" loading="@Model.Loading" />
                 </div>
             </div>
         }
@@ -55,13 +56,13 @@ else
             {
                 <div class="ms-product-shot">
                     <div class="ms-product-stage">
-                        <img class="ms-product-img-el" src="@Model.ImageUrl" alt="@Model.Alt" width="@Model.Width" height="@Model.Height" loading="@Model.Loading" @(Model.FetchPriority ? "fetchpriority=\"high\"" : null) />
+                        <img class="ms-product-img-el" src="@U(Model.ImageUrl)" alt="@Model.Alt" width="@Model.Width" height="@Model.Height" loading="@Model.Loading" @(Model.FetchPriority ? "fetchpriority=\"high\"" : null) />
                     </div>
                 </div>
             }
             else
             {
-                <img class="ms-product-img-el ms-product-img-el--scene" src="@Model.ImageUrl" alt="@Model.Alt" width="@Model.Width" height="@Model.Height" loading="@Model.Loading" @(Model.FetchPriority ? "fetchpriority=\"high\"" : null) />
+                <img class="ms-product-img-el ms-product-img-el--scene" src="@U(Model.ImageUrl)" alt="@Model.Alt" width="@Model.Width" height="@Model.Height" loading="@Model.Loading" @(Model.FetchPriority ? "fetchpriority=\"high\"" : null) />
             }
         }
         else

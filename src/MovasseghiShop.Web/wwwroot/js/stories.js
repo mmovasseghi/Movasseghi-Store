@@ -103,7 +103,8 @@
 
     const slide = story.slides[slideIdx];
     if (slide && slidesEl) {
-      slidesEl.innerHTML = `<div class="ms-story-slide"><img src="${escapeAttr(slide.image)}" alt="${escapeAttr(slide.title)}" /></div>`;
+      const imgSrc = (window.appUrl || (u => u))(slide.image);
+      slidesEl.innerHTML = `<div class="ms-story-slide"><img src="${escapeAttr(imgSrc)}" alt="${escapeAttr(slide.title)}" /></div>`;
     }
     if (ctaEl && slide) {
       ctaEl.href = slide.link || '#';

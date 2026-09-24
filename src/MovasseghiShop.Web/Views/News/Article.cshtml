@@ -4,9 +4,7 @@
     var related = ((IEnumerable<NewsItem>)ViewBag.Related ?? Enumerable.Empty<NewsItem>()).ToList();
     var pubDate = Model.PublishedAt ?? Model.CreatedAt;
     var pageUrl = $"{Context.Request.Scheme}://{Context.Request.Host}/News/Article/{Model.Slug}";
-    var absImg = !string.IsNullOrEmpty(Model.FeaturedImageUrl) && Model.FeaturedImageUrl.StartsWith("/")
-        ? $"{Context.Request.Scheme}://{Context.Request.Host}{Model.FeaturedImageUrl}"
-        : Model.FeaturedImageUrl;
+    var absImg = AppPath.Absolute(Model.FeaturedImageUrl, Context);
 
     ViewData["Title"] = Model.MetaTitle ?? $"{Model.Title} | اخبار موثقی";
     ViewData["MetaDescription"] = Model.MetaDescription ?? Model.Excerpt ?? Model.Title;
@@ -102,12 +100,12 @@
     @if (!string.IsNullOrEmpty(Model.FeaturedImageUrl))
     {
         <div class="ct-article-cover @(Model.FeaturedImageUrl?.Contains("/products/") == true ? "ct-card-visual--photo" : "ms-img-stage")">
-            <img src="@Model.FeaturedImageUrl" alt="@Model.Title" width="960" height="480" fetchpriority="high" itemprop="image" />
+            <img src="@AppPath.H(Model.FeaturedImageUrl, Context)" alt="@Model.Title" width="960" height="480" fetchpriority="high" itemprop="image" />
         </div>
     }
 
     <div class="ct-article-body ct-prose" itemprop="articleBody">
-        @Html.Raw(Model.Content)
+        @Html.Raw(AppPath.RewriteHtmlRootUrls(Model.Content, Context))
     </div>
 
     <section class="ct-faq" aria-labelledby="ct-faq-title">

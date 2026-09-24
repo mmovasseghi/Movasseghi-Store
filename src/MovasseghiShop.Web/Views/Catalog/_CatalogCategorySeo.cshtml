@@ -26,7 +26,7 @@
 
                     @if (Model.HasProse)
                     {
-                        <div class="ms-prose pd-prose catalog-seo-body">@Html.Raw(Model.DescriptionHtml)</div>
+                        <div class="ms-prose pd-prose catalog-seo-body">@Html.Raw(AppPath.RewriteHtmlRootUrls(Model.DescriptionHtml, Context))</div>
                     }
 
                     @if (Model.HasFaqs)
