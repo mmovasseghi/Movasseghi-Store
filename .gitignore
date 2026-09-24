@@ -12,10 +12,11 @@ appsettings.*.local.json
 .env
 .env.*
 
-# SQLite (copy separately for production — see docs/DEPLOYMENT.md)
+# SQLite (raw files stay local — catalog snapshot is data/movasseghi.db.gz)
 *.db
 *.db-shm
 *.db-wal
+!data/movasseghi.db.gz
 
 # Node (bundle is committed; install deps on build)
 node_modules/

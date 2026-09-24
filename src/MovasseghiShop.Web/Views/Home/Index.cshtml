@@ -337,7 +337,7 @@
                     var featSellable = ProductStorefrontResolver.GetSellableVariants(p.Variants);
                     var fPrice = ProductStorefrontResolver.GetMinPrice(p.Variants);
                     var featFrom = featSellable.Count > 0 && ProductStorefrontResolver.UseFromPricePrefix(featSellable);
-                    <a href="/Shop/Product/@p.Slug" class="ms-feat-card">
+                    <a href="@AppPath.H($"/Shop/Product/{p.Slug}", Context)" class="ms-feat-card">
                         @{ ViewData["StageVariant"] = "featured"; ViewData["StageWidth"] = 180; ViewData["StageHeight"] = 180; }
                         <partial name="_ProductImageStageFromProduct" model="p" />
                         <span class="ms-feat-card-body">
@@ -471,7 +471,7 @@
                 {
                     feedIdx++;
                     var pubDate = item.PublishedAt ?? item.CreatedAt;
-                    <a href="/News/Article/@item.Slug" class="ms-news-card" style="--news-i:@feedIdx">
+                    <a href="@AppPath.H($"/News/Article/{item.Slug}", Context)" class="ms-news-card" style="--news-i:@feedIdx">
                         <span class="ms-news-card-shimmer" aria-hidden="true"></span>
                         <span class="ms-news-card-visual" aria-hidden="true">
                             @if (!string.IsNullOrEmpty(item.FeaturedImageUrl))
@@ -523,7 +523,7 @@
                 {
                     newsIdx++;
                     var pubDate = post.PublishedAt ?? post.CreatedAt;
-                    <a href="/Blog/Post/@post.Slug" class="ms-news-card" style="--news-i:@newsIdx">
+                    <a href="@AppPath.H($"/Blog/Post/{post.Slug}", Context)" class="ms-news-card" style="--news-i:@newsIdx">
                         <span class="ms-news-card-shimmer" aria-hidden="true"></span>
                         <span class="ms-news-card-visual" aria-hidden="true">
                             @if (!string.IsNullOrEmpty(post.FeaturedImageUrl))

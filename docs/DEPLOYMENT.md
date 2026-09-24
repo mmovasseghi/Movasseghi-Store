@@ -52,17 +52,32 @@ sudo apt install certbot python3-certbot-nginx
 sudo certbot --nginx -d movasseghi.ir -d www.movasseghi.ir
 ```
 
-## انتقال دیتابیس از لوکال
+## دیتابیس و گیت‌هاب
 
-فایل `movasseghi.db` در `.gitignore` است (عمداً).
+| چه چیزی | در گیت؟ |
+|---------|---------|
+| کد، تصاویر `wwwroot/images` | بله |
+| `movasseghi.db` خام | خیر (حجم + حساسیت) |
+| `data/movasseghi.db.gz` | بله — کاتالوگ + پرچم‌های صفحهٔ اصلی (`IsHomeFeatured`, `IsHomeSpecialOffer`) |
+
+نصب تازه با `deploy/linux/remote-install.sh`: اگر روی سرور قبلاً `publish/movasseghi.db` نباشد، از `data/movasseghi.db.gz` پر می‌شود. هر deploy بعدی **دیتابیس موجود را نگه می‌دارد** (بکاپ در `backups/`).
+
+اگر روی سرور دیتابیس ناقص است (مثلاً محصولات صفحهٔ اصلی خالی، `featured=0` در `scripts/db-stats.py`):
 
 ```bash
-scp ./src/MovasseghiShop.Web/movasseghi.db user@SERVER:/opt/MOVASSEGHISTORE/publish/
-sudo chown www-data:www-data /opt/MOVASSEGHISTORE/publish/movasseghi.db
-sudo systemctl restart movasseghi-shop
+# از ویندوز
+pscp ./src/MovasseghiShop.Web/movasseghi.db root@SERVER:/MOVASSEGHISTORE/publish/
+ssh root@SERVER 'chown www-data:www-data /MOVASSEGHISTORE/publish/movasseghi.db && systemctl restart movasseghi-shop'
 ```
 
-در `appsettings.Production.json` مسیر `Data Source` را با محل واقعی فایل یکی کنید.
+به‌روزرسانی snapshot در گیت (بعد از تغییر کاتالوگ در لوکال):
+
+```bash
+python -c "import gzip,shutil; f=open('src/MovasseghiShop.Web/movasseghi.db','rb'); g=gzip.open('data/movasseghi.db.gz','wb'); g.writelines(f); g.close(); f.close()"
+git add data/movasseghi.db.gz
+```
+
+در `appsettings.Production.json` معمولاً `Data Source=movasseghi.db` در همان پوشهٔ publish است.
 
 ## پس از بالا آمدن
 

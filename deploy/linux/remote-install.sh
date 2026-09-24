@@ -92,6 +92,9 @@ if [[ -f "$BACKUP_DIR/movasseghi.db" ]]; then
 elif [[ -f "$INSTALL_DIR/publish-old/movasseghi.db" ]]; then
   cp -a "$INSTALL_DIR/publish-old/movasseghi.db" "$INSTALL_DIR/publish/"
   echo "==> Restored movasseghi.db after publish"
+elif [[ -f "$INSTALL_DIR/src/data/movasseghi.db.gz" ]]; then
+  echo "==> Seeding movasseghi.db from data/movasseghi.db.gz (first deploy)"
+  gunzip -c "$INSTALL_DIR/src/data/movasseghi.db.gz" > "$INSTALL_DIR/publish/movasseghi.db"
 fi
 if [[ -f "$BACKUP_DIR/appsettings.Production.json" ]]; then
   cp -a "$BACKUP_DIR/appsettings.Production.json" "$INSTALL_DIR/publish/"
