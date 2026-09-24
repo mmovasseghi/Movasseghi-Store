@@ -52,18 +52,46 @@ cd "$INSTALL_DIR/src"
 npm ci
 npm run build:rte
 
+BACKUP_DIR="$INSTALL_DIR/backups/$(date +%Y%m%d-%H%M%S)"
+mkdir -p "$BACKUP_DIR"
+if [[ -f "$INSTALL_DIR/publish/movasseghi.db" ]]; then
+  cp -a "$INSTALL_DIR/publish/movasseghi.db" "$BACKUP_DIR/"
+  echo "==> Backed up movasseghi.db to $BACKUP_DIR"
+fi
+if [[ -f "$INSTALL_DIR/publish/appsettings.Production.json" ]]; then
+  cp -a "$INSTALL_DIR/publish/appsettings.Production.json" "$BACKUP_DIR/"
+fi
+if [[ -d "$INSTALL_DIR/publish/App_Data" ]]; then
+  cp -a "$INSTALL_DIR/publish/App_Data" "$BACKUP_DIR/" 2>/dev/null || true
+fi
+
 dotnet publish src/MovasseghiShop.Web/MovasseghiShop.Web.csproj \
   -c Release \
   -r linux-x64 \
   --self-contained true \
   -o "$INSTALL_DIR/publish"
 
+if [[ -f "$BACKUP_DIR/movasseghi.db" ]]; then
+  cp -a "$BACKUP_DIR/movasseghi.db" "$INSTALL_DIR/publish/"
+  echo "==> Restored movasseghi.db after publish"
+fi
+if [[ -f "$BACKUP_DIR/appsettings.Production.json" ]]; then
+  cp -a "$BACKUP_DIR/appsettings.Production.json" "$INSTALL_DIR/publish/"
+else
+  cp src/MovasseghiShop.Web/appsettings.Production.json.example \
+    "$INSTALL_DIR/publish/appsettings.Production.json"
+fi
+if [[ -d "$BACKUP_DIR/App_Data" ]]; then
+  mkdir -p "$INSTALL_DIR/publish/App_Data"
+  cp -a "$BACKUP_DIR/App_Data/." "$INSTALL_DIR/publish/App_Data/" 2>/dev/null || true
+fi
+
 if [[ ! -f "$INSTALL_DIR/publish/appsettings.Production.json" ]]; then
   cp src/MovasseghiShop.Web/appsettings.Production.json.example \
     "$INSTALL_DIR/publish/appsettings.Production.json"
 fi
 
-# IP deploy until domain is pointed
+# First-time defaults only (preserve restored Production config)
 python3 - <<'PY'
 import json, pathlib
 p = pathlib.Path("/MOVASSEGHISTORE/publish/appsettings.Production.json")
@@ -144,9 +172,20 @@ ln -sf /etc/nginx/sites-available/movasseghi-shop /etc/nginx/sites-enabled/movas
 nginx -t
 systemctl reload nginx
 
-sleep 3
-curl -sI -o /dev/null -w "HTTP %{http_code}\n" http://127.0.0.1:5080/ || true
-curl -sI -o /dev/null -w "HTTP %{http_code}\n" http://127.0.0.1/ || true
+echo "==> Waiting for Kestrel (up to 3 min on warm DB)..."
+ready=0
+for _ in $(seq 1 36); do
+  code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 5 http://127.0.0.1:5080/ 2>/dev/null || echo "000")
+  if [[ "$code" == "200" ]]; then ready=1; break; fi
+  sleep 5
+done
+if [[ "$ready" -ne 1 ]]; then
+  echo "WARN: app not returning 200 yet; check journalctl -u $SERVICE_NAME"
+  journalctl -u "$SERVICE_NAME" -n 25 --no-pager || true
+fi
+
+bash "$INSTALL_DIR/src/deploy/linux/smoke-test.sh" "http://127.0.0.1:5080" || true
+bash "$INSTALL_DIR/src/deploy/linux/smoke-test.sh" "http://127.0.0.1" || true
 systemctl is-active "$SERVICE_NAME"
 
 echo "==> Install complete: http://85.133.244.142"
