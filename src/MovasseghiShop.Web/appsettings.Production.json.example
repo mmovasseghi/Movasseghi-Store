@@ -1,6 +1,6 @@
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Data Source=/var/lib/movasseghi/movasseghi.db"
+    "DefaultConnection": "Data Source=movasseghi.db"
   },
   "Logging": {
     "LogLevel": {

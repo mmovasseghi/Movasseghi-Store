@@ -42,7 +42,9 @@ mkdir -p "$INSTALL_DIR"
 if [[ ! -d "$INSTALL_DIR/src/.git" ]]; then
   git clone "$REPO_URL" "$INSTALL_DIR/src"
 else
-  git -C "$INSTALL_DIR/src" remote set-url origin "$REPO_URL"
+  if [[ -n "${GITHUB_TOKEN:-}" ]]; then
+    git -C "$INSTALL_DIR/src" remote set-url origin "$REPO_URL"
+  fi
   git -C "$INSTALL_DIR/src" pull --ff-only
 fi
 
@@ -67,6 +69,7 @@ import json, pathlib
 p = pathlib.Path("/MOVASSEGHISTORE/publish/appsettings.Production.json")
 data = json.loads(p.read_text(encoding="utf-8"))
 data["AllowedHosts"] = "*"
+data.setdefault("ConnectionStrings", {})["DefaultConnection"] = "Data Source=movasseghi.db"
 data.setdefault("SiteSettings", {})["PublicBaseUrl"] = "http://85.133.244.142"
 data.setdefault("EditorialGrowth", {})["Enabled"] = False
 data.setdefault("Seo", {}).setdefault("Maintenance", {})["RunFullCatalogOnStartup"] = False
