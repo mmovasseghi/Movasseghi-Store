@@ -1,0 +1,155 @@
+@model List<MovasseghiShop.Web.Models.Entities.ProductReview>
+
+@using MovasseghiShop.Web.Models.Enums
+
+@{
+
+    ViewData["Title"] = "نظرات محصولات";
+
+    var pending = ViewBag.PendingCount as int? ?? 0;
+
+    var productId = ViewBag.ProductId as int?;
+
+    var status = ViewBag.Status as string;
+
+    var search = ViewBag.Search as string;
+
+    var approved = Model.Count(r => r.Status == ProductReviewStatus.Approved);
+
+    string FilterHref(string? st, bool includeProduct = true)
+    {
+        var parts = new List<string>();
+        if (includeProduct && productId is > 0) parts.Add($"productId={productId}");
+        if (!string.IsNullOrEmpty(st)) parts.Add($"status={Uri.EscapeDataString(st)}");
+        if (!string.IsNullOrWhiteSpace(search)) parts.Add($"q={Uri.EscapeDataString(search.Trim())}");
+        return parts.Count == 0 ? "/Admin/ProductReviewsAdmin" : "/Admin/ProductReviewsAdmin?" + string.Join("&", parts);
+    }
+
+}
+
+
+
+<div class="kit-stats kit-stagger" id="reviewsStats">
+
+    <article class="kit-stat">
+
+        <span class="kit-stat-label">💬 در این فهرست</span>
+
+        <span class="kit-stat-value" data-stat="count">@Model.Count.ToString("N0")</span>
+
+    </article>
+
+    <article class="kit-stat">
+
+        <span class="kit-stat-label">⏳ در انتظار تأیید</span>
+
+        <span class="kit-stat-value @(pending > 0 ? "kit-stat-value--gold" : "kit-stat-value--ok")">@pending.ToString("N0")</span>
+
+        <span class="kit-stat-foot">تا تأیید شما در سایت محصول نمایش داده نمی‌شود</span>
+
+    </article>
+
+    <article class="kit-stat">
+
+        <span class="kit-stat-label">✅ تأیید‌شده</span>
+
+        <span class="kit-stat-value kit-stat-value--ok" data-stat="approved">@approved.ToString("N0")</span>
+
+    </article>
+
+</div>
+
+
+
+<div class="kit-toolbar kit-toolbar--products kit-rise" id="reviewsToolbar" data-list-url="/Admin/ProductReviewsAdmin/ListPartial">
+
+    <div class="kit-toolbar-filters">
+
+        <div class="kit-search">
+
+            <span class="kit-search-icon" aria-hidden="true">
+
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+
+            </span>
+
+            <input type="search"
+                   id="reviewsSearch"
+                   name="q"
+                   value="@search"
+
+                   class="st-input"
+
+                   placeholder="محصول، نویسنده یا متن نظر…"
+
+                   aria-label="جستجوی نظرات"
+
+                   autocomplete="off"
+
+                   spellcheck="false" />
+
+        </div>
+
+        <div class="kit-filter-group">
+
+            <a class="st-btn st-btn-ghost @(string.IsNullOrEmpty(status) ? "is-active" : "")" href="@FilterHref(null)">همه</a>
+
+            <a class="st-btn st-btn-ghost @(status == "pending" ? "is-active" : "")" href="@FilterHref("pending")">در انتظار</a>
+
+            <a class="st-btn st-btn-ghost @(status == "approved" ? "is-active" : "")" href="@FilterHref("approved")">تأیید‌شده</a>
+
+            <a class="st-btn st-btn-ghost @(status == "rejected" ? "is-active" : "")" href="@FilterHref("rejected")">رد‌شده</a>
+
+        </div>
+
+    </div>
+
+    @if (productId is > 0)
+
+    {
+
+        <div class="kit-toolbar-actions">
+
+            <span class="kit-form-hint">فیلتر محصول #@productId</span>
+
+            <a class="st-btn st-btn-ghost st-btn-sm" href="@FilterHref(status, includeProduct: false)">حذف فیلتر محصول</a>
+
+        </div>
+
+    }
+
+</div>
+
+
+
+@if (TempData["Success"] != null)
+
+{
+
+    <div class="kit-insight kit-insight--ok kit-rise">
+
+        <span class="kit-insight-icon" aria-hidden="true">✓</span>
+
+        <div class="kit-insight-body"><strong>@TempData["Success"]</strong></div>
+
+    </div>
+
+}
+
+
+
+<section class="kit-table-card kit-rise" id="reviewsTableCard">
+
+    <div id="reviewsTableContent" aria-live="polite" aria-busy="false">
+
+        <partial name="_ProductReviewsList" model="Model" />
+
+    </div>
+
+</section>
+
+
+
+<script src="~/js/admin-product-reviews.js" asp-append-version="true" defer></script>
+
+

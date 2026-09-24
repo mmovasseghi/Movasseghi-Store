@@ -1,0 +1,127 @@
+/* ── Order success ── */
+.ms-order-success{padding:1.75rem 0 3rem}
+.ms-order-success__hero{
+  text-align:center;padding:1.75rem 1.25rem 1.5rem;margin-bottom:1.25rem;
+  border-radius:24px;background:linear-gradient(165deg,#f0f7f3 0%,#fff 45%,#faf6eb 100%);
+  border:1px solid rgba(45,106,79,.15);box-shadow:0 12px 40px rgba(36,56,48,.08);
+}
+.ms-order-success__icon{
+  width:4rem;height:4rem;margin:0 auto .85rem;border-radius:50%;
+  background:linear-gradient(145deg,#2d6a4f,#40916c);color:#fff;font-size:1.75rem;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 10px 28px rgba(45,106,79,.35);
+}
+.ms-order-success__title{margin:0 0 .4rem;font-size:clamp(1.25rem,3vw,1.55rem);font-weight:900;color:var(--c-primary-dark)}
+.ms-order-success__lead{margin:0 auto;max-width:32rem;font-size:.88rem;line-height:1.7;color:var(--c-text-2);font-weight:600}
+.ms-order-success__grid{display:grid;gap:.75rem;margin-bottom:1.25rem}
+@media(min-width:720px){.ms-order-success__grid{grid-template-columns:repeat(3,1fr)}}
+.ms-order-success__card{
+  padding:1rem 1.05rem;border-radius:16px;background:#fff;border:1px solid var(--c-border);
+  box-shadow:0 6px 20px rgba(30,50,41,.05);
+}
+.ms-order-success__card-kicker{font-size:.68rem;font-weight:800;color:var(--c-text-2);margin-bottom:.25rem}
+.ms-order-success__card-val{font-size:1rem;font-weight:900;color:var(--c-primary-dark);word-break:break-word}
+.ms-order-success__card-val--amount{font-size:1.05rem;color:#1b4332}
+.ms-order-success__notice{
+  padding:.85rem 1rem;border-radius:14px;margin-bottom:1.25rem;
+  background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.28);
+  font-size:.78rem;line-height:1.65;color:#5c4a1f;font-weight:600;
+}
+.ms-order-success__actions{display:flex;flex-wrap:wrap;gap:.65rem;justify-content:center}
+.ms-order-success__btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.4rem;
+  padding:.72rem 1.25rem;border-radius:999px;font:inherit;font-weight:900;font-size:.88rem;
+  text-decoration:none;cursor:pointer;border:none;transition:transform .15s,box-shadow .15s;
+}
+.ms-order-success__btn--primary{
+  background:linear-gradient(145deg,#1b4332,#2d6a4f);color:#fff!important;
+  box-shadow:0 8px 24px rgba(27,67,50,.28);
+}
+.ms-order-success__btn--primary:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(27,67,50,.32)}
+.ms-order-success__btn--ghost{
+  background:#fff;color:var(--c-primary-dark)!important;border:1.5px solid rgba(61,90,76,.2);
+}
+.ms-order-success__steps{
+  margin-top:1.5rem;padding:1rem;border-radius:16px;background:#fff;border:1px solid var(--c-border);
+}
+.ms-order-success__steps h2{margin:0 0 .65rem;font-size:.9rem;font-weight:900;color:var(--c-primary-dark)}
+.ms-order-success__steps ol{margin:0;padding:0 1.25rem 0 0;font-size:.8rem;line-height:1.7;color:var(--c-text-2);font-weight:600}
+
+/* ── Proforma invoice ── */
+.proforma-page{min-height:100vh;background:linear-gradient(180deg,#e8efe9 0%,#f4f6f4 40%,#eef2ef 100%);padding:1.25rem 1rem 2.5rem}
+.proforma-toolbar{
+  max-width:880px;margin:0 auto 1rem;display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;justify-content:space-between;
+}
+.proforma-toolbar__title{font-weight:900;font-size:.9rem;color:var(--c-primary-dark)}
+.proforma-toolbar__actions{display:flex;flex-wrap:wrap;gap:.45rem}
+.proforma-btn{
+  display:inline-flex;align-items:center;gap:.35rem;padding:.5rem .9rem;border-radius:10px;
+  font:inherit;font-weight:800;font-size:.78rem;cursor:pointer;border:1px solid rgba(61,90,76,.2);
+  background:#fff;color:var(--c-primary-dark);text-decoration:none;
+}
+.proforma-btn--primary{background:var(--c-primary-dark);color:#fff;border-color:transparent}
+.proforma-sheet{
+  position:relative;max-width:880px;margin:0 auto;padding:1.75rem 1.65rem 1.5rem;
+  background:#fff;border-radius:4px;box-shadow:0 20px 60px rgba(30,50,41,.12),0 0 0 1px rgba(61,90,76,.08);
+  overflow:hidden;
+}
+.proforma-sheet__watermark{
+  position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0;
+}
+.proforma-sheet__watermark span{
+  position:absolute;top:42%;left:50%;transform:translate(-50%,-50%) rotate(-22deg);
+  font-size:clamp(3rem,14vw,5.5rem);font-weight:900;color:rgba(45,106,79,.06);white-space:nowrap;
+  letter-spacing:.08em;
+}
+.proforma-sheet__inner{position:relative;z-index:1}
+.proforma-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;margin-bottom:1.25rem;padding-bottom:1rem;border-bottom:2px solid rgba(45,106,79,.15)}
+.proforma-brand strong{display:block;font-size:1.05rem;font-weight:900;color:#1b4332}
+.proforma-brand span{font-size:.72rem;color:var(--c-text-2);font-weight:700}
+.proforma-meta{text-align:left}
+.proforma-meta dt{font-size:.65rem;font-weight:800;color:var(--c-text-2);margin-bottom:.15rem}
+.proforma-meta dd{margin:0 0 .45rem;font-size:.82rem;font-weight:900;color:var(--c-primary-dark)}
+.proforma-badge-row{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem}
+.proforma-badge{
+  font-size:.68rem;font-weight:900;padding:.28rem .6rem;border-radius:6px;
+  background:rgba(192,57,43,.1);color:#922b21;border:1px solid rgba(192,57,43,.25);
+}
+.proforma-badge--gold{background:rgba(201,168,76,.15);color:#7a6228;border-color:rgba(201,168,76,.35)}
+.proforma-parties{display:grid;gap:.75rem;margin-bottom:1.1rem}
+@media(min-width:640px){.proforma-parties{grid-template-columns:1fr 1fr}}
+.proforma-party{padding:.75rem .85rem;border-radius:10px;background:#f8fbf9;border:1px solid rgba(61,90,76,.1)}
+.proforma-party h3{margin:0 0 .4rem;font-size:.72rem;font-weight:900;color:var(--c-text-2)}
+.proforma-party p{margin:0;font-size:.8rem;line-height:1.6;font-weight:700;color:var(--c-primary-dark)}
+.proforma-table{width:100%;border-collapse:collapse;margin-bottom:1rem;font-size:.78rem}
+.proforma-table th{
+  text-align:right;padding:.55rem .5rem;background:linear-gradient(180deg,#2d6a4f,#1b4332);color:#fff;
+  font-weight:800;font-size:.72rem;
+}
+.proforma-table th:first-child{border-radius:8px 0 0 0}
+.proforma-table th:last-child{border-radius:0 8px 0 0}
+.proforma-table td{padding:.5rem .45rem;border-bottom:1px solid rgba(61,90,76,.1);vertical-align:top}
+.proforma-table tbody tr:nth-child(even){background:rgba(240,246,242,.5)}
+.proforma-table .num{text-align:left;direction:ltr;font-variant-numeric:tabular-nums;font-weight:800}
+.proforma-totals{margin-left:auto;max-width:320px}
+.proforma-totals dl{display:grid;grid-template-columns:1fr auto;gap:.35rem .75rem;font-size:.8rem;margin:0}
+.proforma-totals dt{color:var(--c-text-2);font-weight:700}
+.proforma-totals dd{margin:0;font-weight:900;color:var(--c-primary-dark);text-align:left;direction:ltr}
+.proforma-totals .grand{font-size:.95rem;color:#1b4332;padding-top:.35rem;border-top:2px solid rgba(45,106,79,.2)}
+.proforma-legal{
+  margin-top:1.15rem;padding:1rem 1.05rem;border-radius:12px;
+  background:linear-gradient(135deg,rgba(192,57,43,.06),rgba(201,168,76,.08));
+  border:1px solid rgba(192,57,43,.18);
+}
+.proforma-legal h3{margin:0 0 .5rem;font-size:.82rem;font-weight:900;color:#922b21}
+.proforma-legal ul{margin:0;padding:0 1.1rem 0 0;font-size:.74rem;line-height:1.75;color:#4a3f35;font-weight:600}
+.proforma-legal li{margin-bottom:.35rem}
+.proforma-foot{
+  margin-top:1rem;padding-top:.75rem;border-top:1px dashed rgba(61,90,76,.2);
+  font-size:.7rem;line-height:1.6;color:var(--c-text-2);font-weight:600;text-align:center;
+}
+
+@media print{
+  .no-print{display:none!important}
+  .proforma-page{background:#fff;padding:0}
+  .proforma-sheet{box-shadow:none;border-radius:0;max-width:100%;padding:1rem}
+  body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}

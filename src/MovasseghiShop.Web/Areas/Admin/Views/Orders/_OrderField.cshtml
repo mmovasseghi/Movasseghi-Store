@@ -1,0 +1,19 @@
+@{
+    var label = ViewData["Label"] as string ?? "";
+    var text = ViewData["Value"] as string;
+    var href = ViewData["Href"] as string;
+    var ltr = ViewData["Ltr"] as bool? ?? false;
+    var wide = ViewData["Wide"] as bool? ?? false;
+    var display = string.IsNullOrWhiteSpace(text) ? "—" : text;
+}
+<div class="kit-order-field @(wide ? "kit-order-field--wide" : "")">
+    <span class="kit-order-field__label">@label</span>
+    @if (!string.IsNullOrEmpty(href))
+    {
+        <a class="kit-order-field__value kit-order-link" href="@href" dir="@(ltr ? "ltr" : null)">@display</a>
+    }
+    else
+    {
+        <span class="kit-order-field__value" dir="@(ltr ? "ltr" : null)">@display</span>
+    }
+</div>

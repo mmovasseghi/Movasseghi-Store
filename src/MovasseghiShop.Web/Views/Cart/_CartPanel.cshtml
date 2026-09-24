@@ -1,0 +1,112 @@
+@model CartSummary
+@{
+    var payable = Model.TotalAfterVolumeDiscount - (ViewBag.CouponDiscount as decimal? ?? 0m);
+}
+<div class="ms-cart-drawer" data-cart-panel>
+    <div class="ms-cart-drawer-aurora" aria-hidden="true">
+        <span class="ms-cart-drawer-orb ms-cart-drawer-orb--1"></span>
+        <span class="ms-cart-drawer-orb ms-cart-drawer-orb--2"></span>
+    </div>
+    <header class="ms-cart-drawer-head">
+        <div class="ms-cart-drawer-head-text">
+            <span class="ms-cart-drawer-kicker">🛒 سبد خرید</span>
+            <h2>@Model.Items.Count قلم · @CartAnalyticsHelper.FormatCount(Model.Analytics.TotalPieces) عدد</h2>
+        </div>
+        <button type="button" class="ms-cart-drawer-close" data-modal-close aria-label="بستن">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+    </header>
+
+    @if (Model.Items.Count == 0)
+    {
+        var empty = ViewBag.CartEmpty as MovasseghiShop.Web.Models.Entities.ContentAtom;
+        <div class="ms-cart-drawer-empty">
+            <div class="ms-cart-drawer-empty-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="52" height="52" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg>
+            </div>
+            <p>@(empty?.Body ?? "سبد خرید خالی است")</p>
+            <a href="@(empty?.CtaUrl ?? "/Catalog")" class="ms-cart-drawer-empty-btn" data-modal-close>@(empty?.CtaText ?? "مشاهده محصولات")</a>
+        </div>
+    }
+    else
+    {
+        <div class="ms-cart-drawer-body">
+            <div class="ms-cart-drawer-items">
+                @foreach (var item in Model.Items)
+                {
+                    var s = item.Stats;
+                    <article class="ms-cart-drawer-item" data-variant-id="@item.VariantId" data-cart-item>
+                        <div class="ms-cart-drawer-item-top">
+                            <div class="ms-cart-drawer-item-info">
+                                <strong class="ms-cart-drawer-item-name">@item.ProductName</strong>
+                                <span class="ms-cart-drawer-item-meta">@item.VariantLabel · @SlugHelper.FormatToman(item.UnitPrice) / @item.UnitName</span>
+                            </div>
+                        </div>
+                        <div class="cart-item-chips ms-cart-drawer-item-chips">
+                            @if (s.NylonCount > 0) { <span class="cart-chip cart-chip--nylon">@CartAnalyticsHelper.FormatCount(s.NylonCount) نایلون</span> }
+                            @if (s.CartonCount > 0) { <span class="cart-chip cart-chip--carton">@CartAnalyticsHelper.FormatCount(s.CartonCount) کارتن</span> }
+                            @if (s.PackCount > 0) { <span class="cart-chip cart-chip--pack">@CartAnalyticsHelper.FormatCount(s.PackCount) بسته</span> }
+                            <span class="cart-chip cart-chip--pieces">@CartAnalyticsHelper.FormatCount(s.PieceCount) قلم</span>
+                        </div>
+                        <div class="ms-cart-drawer-item-foot">
+                            <div class="ms-cart-drawer-action-rail" aria-label="کنترل تعداد و قیمت">
+                                <div class="ms-cart-drawer-price-block">
+                                    <span class="ms-cart-drawer-item-total" data-cart-line-total>@SlugHelper.FormatToman(item.LineTotal)</span>
+                                    <span class="ms-cart-drawer-item-total-unit">تومان</span>
+                                </div>
+                                <div class="ms-cart-drawer-stepper" aria-label="تعداد @item.UnitName">
+                                    <button type="button" class="ms-cart-drawer-stepper-btn ms-cart-drawer-stepper-btn--minus" data-cart-qty="-1" aria-label="کم کردن">
+                                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14"/></svg>
+                                    </button>
+                                    <div class="ms-cart-drawer-stepper-core">
+                                        <span class="ms-cart-drawer-stepper-val" data-cart-qty-val>@item.CartonQuantity</span>
+                                        <span class="ms-cart-drawer-stepper-unit">@item.UnitName</span>
+                                    </div>
+                                    <button type="button" class="ms-cart-drawer-stepper-btn ms-cart-drawer-stepper-btn--plus" data-cart-qty="1" aria-label="زیاد کردن">
+                                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                                    </button>
+                                </div>
+                                <button type="button" class="ms-cart-drawer-remove" data-cart-remove aria-label="حذف از سبد">
+                                    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                }
+            </div>
+
+            @{ ViewBag.CompactDiscount = true; }
+            <partial name="_CartDiscountProgress" model="Model" />
+        </div>
+
+        <footer class="ms-cart-drawer-foot">
+            <div class="ms-cart-drawer-totals">
+                <div class="ms-cart-drawer-total-row"><span>جمع اقلام</span><strong>@SlugHelper.FormatToman(Model.SubTotal) تومان</strong></div>
+                @if (Model.VolumeDiscountAmount > 0)
+                {
+                    <div class="ms-cart-drawer-total-row ms-cart-drawer-total-row--save">
+                        <span>تخفیف @(Model.VolumeDiscountPercent)٪</span>
+                        <strong>−@SlugHelper.FormatToman(Model.VolumeDiscountAmount) تومان</strong>
+                    </div>
+                }
+                @if (Model.MeetsMinimum)
+                {
+                    <div class="ms-cart-drawer-total-row ms-cart-drawer-total-row--pay">
+                        <span>قابل پرداخت</span>
+                        <strong>@SlugHelper.FormatToman(payable) تومان</strong>
+                    </div>
+                }
+            </div>
+            <div class="ms-cart-drawer-actions">
+                <a href="/Cart" class="ms-cart-drawer-link" data-modal-close>گزارش کامل</a>
+                @if (Model.MeetsMinimum)
+                {
+                    <a href="/Checkout" class="ms-cart-drawer-checkout" data-modal-close>
+                        <span>ادامه ثبت سفارش</span>
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                    </a>
+                }
+            </div>
+        </footer>
+    }
+</div>

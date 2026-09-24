@@ -1,0 +1,58 @@
+@model ProformaInvoiceViewModel
+@{
+    Layout = null;
+    var order = Model.Order;
+    var title = $"پیش‌فاکتور {order.OrderNumber}";
+}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>@title</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/ux-order.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/ux-order-proforma.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/ux-cart.css" asp-append-version="true" />
+</head>
+<body class="proforma-page">
+    <div class="proforma-toolbar no-print">
+        <span class="proforma-toolbar__title">@title</span>
+        <div class="proforma-toolbar__actions">
+            <button type="button" class="proforma-btn" id="proformaPrint">چاپ</button>
+            <button type="button" class="proforma-btn proforma-btn--primary" id="proformaDownload">دانلود HTML</button>
+            <a class="proforma-btn" href="/Order/Success?number=@Uri.EscapeDataString(order.OrderNumber)">بازگشت به خلاصه سفارش</a>
+        </div>
+    </div>
+
+    <partial name="_ProformaBody" model="Model" />
+
+    <script>
+      (function () {
+        const orderNo = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(order.OrderNumber));
+        const docEl = document.getElementById('proforma-doc');
+        document.getElementById('proformaPrint')?.addEventListener('click', () => window.print());
+        document.getElementById('proformaDownload')?.addEventListener('click', async () => {
+          if (!docEl) return;
+          let css = '';
+          try {
+            const links = document.querySelectorAll('link[rel="stylesheet"]');
+            for (const link of links) {
+              const href = link.getAttribute('href');
+              if (!href || (!href.includes('ux-order') && !href.includes('ux-cart') && !href.includes('site.css'))) continue;
+              css += await fetch(href).then(r => r.text());
+            }
+          } catch { /* ignore */ }
+          const html = `<!DOCTYPE html><html lang="fa" dir="rtl"><head><meta charset="utf-8"/><title>پیش‌فاکتور ${orderNo}</title><style>${css}</style></head><body class="proforma-page">${docEl.outerHTML}</body></html>`;
+          const blob = new Blob(['\ufeff', html], { type: 'text/html;charset=utf-8' });
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(blob);
+          a.download = `پیش-فاکتور-${orderNo}.html`;
+          a.click();
+          URL.revokeObjectURL(a.href);
+        });
+      })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+@model MovasseghiShop.Web.Models.Entities.ContentAtom
+@using System.Text.Json
+@using MovasseghiShop.Web.Models
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = Model.Key;
+    ViewData["HeroTitle"] = $"⚛️ {Model.Key}";
+    ViewData["HeroSubtitle"] = Model.Title;
+    ViewData["HeroBadge"] = "ATOM";
+
+    var isPromo = Model.Key == "promo-bar";
+    PromoBarConfig? promo = null;
+    if (isPromo)
+        promo = HomeSectionConfigParser.ParsePromoBar(Model.Body);
+    promo ??= new PromoBarConfig("", SiteKeywordStrategy.Secondary, []);
+    var chips = promo.Chips.Length > 0 ? promo.Chips : ["🌿 ۱۰۰٪ گیاهی", "💰 تخفیف پلکانی", "🛡️ ضمانت اصالت", "🚚 ارسال سراسری"];
+}
+
+<partial name="_AdminHero" />
+
+<form method="post" class="st-panel st-reveal">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <input type="hidden" name="Key" value="@Model.Key" />
+
+    <div class="st-field"><label>عنوان (فقط برای پنل)</label><input name="Title" value="@Model.Title" class="st-input" /></div>
+
+    @if (isPromo)
+    {
+        <div class="st-alert st-alert-success" style="margin-bottom:1rem">
+            <strong>راهنما:</strong> این بخش نوار تبلیغاتی بالای سایت است. متن‌ها را ساده بنویسید — نیازی به JSON نیست.
+        </div>
+        <div class="st-field">
+            <label>متن کامل نوار (با امکان HTML ساده مثل &lt;strong&gt;)</label>
+            <textarea name="PromoSloganFull" rows="2" class="st-input" placeholder="با موثقی ظروف یکبار مصرف گیاهی…">@promo.SloganFull</textarea>
+        </div>
+        <div class="st-field">
+            <label>متن کوتاه (موبایل)</label>
+            <input name="PromoSloganShort" value="@promo.SloganShort" class="st-input" maxlength="80" />
+        </div>
+        <div class="st-field">
+            <label>برچسب‌ها (هر خط یک برچسب — مثلاً 🌿 ۱۰۰٪ گیاهی)</label>
+            <textarea name="PromoChips" rows="4" class="st-input">@string.Join(Environment.NewLine, chips)</textarea>
+        </div>
+        <input type="hidden" name="Body" value="" />
+    }
+    else
+    {
+        <div class="st-field">
+            <label>متن نمایشی</label>
+            <textarea name="Body" rows="6" class="st-input" placeholder="متن ساده که کاربر می‌بیند">@Model.Body</textarea>
+            <small class="st-field-hint">برای پیام‌های ساده مثل «سبد خالی» فقط متن بنویسید.</small>
+        </div>
+    }
+
+    <div class="st-field"><label>متن دکمه (اختیاری)</label><input name="CtaText" value="@Model.CtaText" class="st-input" placeholder="مثلاً مشاهده محصولات" /></div>
+    <div class="st-field"><label>لینک دکمه (اختیاری)</label><input name="CtaUrl" value="@Model.CtaUrl" class="st-input" dir="ltr" placeholder="/Catalog" /></div>
+    <label class="st-checkbox"><input type="checkbox" name="IsActive" value="true" @(Model.IsActive ? "checked" : "") /> فعال</label>
+
+    <div class="st-btn-row" style="margin-top:1rem">
+        <button type="submit" class="st-btn st-btn-primary">💾 ذخیره</button>
+        <a href="/Admin/StudioContent/Atoms" class="st-btn st-btn-ghost">← بازگشت</a>
+    </div>
+</form>

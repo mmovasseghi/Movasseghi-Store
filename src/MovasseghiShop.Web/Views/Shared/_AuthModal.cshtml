@@ -1,0 +1,167 @@
+<div class="ms-auth-panel" data-auth-panel>
+    <div class="ms-auth-bg" aria-hidden="true">
+        <span class="ms-auth-bg-glow"></span>
+        <span class="ms-auth-bg-ring"></span>
+        <span class="ms-auth-bg-spark ms-auth-bg-spark--1"></span>
+        <span class="ms-auth-bg-spark ms-auth-bg-spark--2"></span>
+    </div>
+
+    <header class="ms-auth-head">
+        <div class="ms-auth-brand">
+            <span class="ms-auth-logo" aria-hidden="true">م</span>
+            <div class="ms-auth-head-copy">
+                <span class="ms-auth-badge">فروشگاه موثقی</span>
+                <h2 data-auth-title>ورود</h2>
+                <p class="ms-auth-sub" data-auth-sub>با شماره موبایل وارد شوید</p>
+            </div>
+        </div>
+        <button type="button" class="ms-auth-close" data-modal-close aria-label="بستن">✕</button>
+    </header>
+
+    <div class="ms-auth-switcher" data-auth-switcher>
+        <div class="ms-auth-switcher__primary">
+            <p class="ms-auth-switcher__kicker" id="auth-main-choice-label">نوع حساب</p>
+            <div class="ms-auth-tabs" role="tablist" aria-labelledby="auth-main-choice-label" data-auth-tabs>
+                <button type="button" class="ms-auth-tab is-active" role="tab" id="auth-tab-login" aria-selected="true" aria-controls="auth-login-options" data-auth-tab="login">ورود</button>
+                <button type="button" class="ms-auth-tab" role="tab" id="auth-tab-register" aria-selected="false" data-auth-tab="register">ثبت‌نام</button>
+                <span class="ms-auth-tabs-glider" data-auth-tabs-glider aria-hidden="true"></span>
+            </div>
+        </div>
+
+        <div class="ms-auth-switcher__secondary" id="auth-login-options" data-auth-login-options role="group" aria-labelledby="auth-login-method-label">
+            <div class="ms-auth-switcher__secondary-head">
+                <span class="ms-auth-switcher__branch" aria-hidden="true"></span>
+                <div>
+                    <p class="ms-auth-switcher__parent">فقط برای «ورود» به حساب</p>
+                    <p class="ms-auth-switcher__method-label" id="auth-login-method-label">روش ورود</p>
+                </div>
+            </div>
+            <div class="ms-auth-mode" data-auth-login-modes>
+                <button type="button" class="ms-auth-mode-btn is-active" data-auth-login-mode="sms" aria-pressed="true">ورود با پیامک</button>
+                <button type="button" class="ms-auth-mode-btn" data-auth-login-mode="password" aria-pressed="false">ورود با رمز عبور</button>
+                <span class="ms-auth-mode-glider" data-auth-mode-glider aria-hidden="true"></span>
+            </div>
+        </div>
+
+        <p class="ms-auth-switcher__register-note" data-auth-register-note hidden>
+            ثبت‌نام فقط با <strong>تأیید پیامک</strong> انجام می‌شود؛ پس از کد، فرم اطلاعات باز می‌شود.
+        </p>
+    </div>
+
+    <div class="ms-auth-stepbar" data-auth-stepbar aria-hidden="true">
+        <div class="ms-auth-stepbar-track">
+            <span class="ms-auth-stepbar-fill" data-auth-bar style="width:33%"></span>
+        </div>
+        <div class="ms-auth-stepbar-labels">
+            <span class="is-active is-current" data-auth-pill="0">موبایل</span>
+            <span data-auth-pill="1">کد</span>
+            <span data-auth-pill="2">پروفایل</span>
+        </div>
+    </div>
+
+    <div class="ms-auth-stage" data-auth-stage>
+        <section class="ms-auth-step is-active" data-auth-step="phone">
+            <form data-auth-phone-form class="ms-auth-form">
+                @Html.AntiForgeryToken()
+                <p class="ms-auth-lead" data-auth-phone-lead>شماره موبایل خود را وارد کنید تا کد تأیید ارسال شود.</p>
+                <div class="ms-field ms-field--auth">
+                    <input type="tel" name="phone" class="ms-field-input" id="authPhone" placeholder=" " inputmode="numeric" autocomplete="tel" required dir="ltr" />
+                    <label class="ms-field-label" for="authPhone">شماره تماس</label>
+                </div>
+                <button type="submit" class="ms-auth-btn ms-ripple" data-auth-submit><span data-auth-phone-btn>دریافت کد تأیید</span></button>
+            </form>
+        </section>
+
+        <section class="ms-auth-step" data-auth-step="password-login" hidden>
+            <form data-auth-password-form class="ms-auth-form">
+                @Html.AntiForgeryToken()
+                <p class="ms-auth-lead">شماره موبایل و رمز عبور حساب خود را وارد کنید.</p>
+                <div class="ms-field ms-field--auth">
+                    <input type="tel" name="phone" class="ms-field-input" id="authLoginPhone" placeholder=" " inputmode="numeric" autocomplete="tel" required dir="ltr" />
+                    <label class="ms-field-label" for="authLoginPhone">شماره تماس</label>
+                </div>
+                <div class="ms-field ms-field--auth ms-field--password">
+                    <input type="password" name="password" class="ms-field-input" id="authLoginPassword" placeholder=" " autocomplete="current-password" required />
+                    <label class="ms-field-label" for="authLoginPassword">رمز عبور</label>
+                    <button type="button" class="ms-field-eye" data-toggle-password="authLoginPassword" aria-label="نمایش رمز">👁</button>
+                </div>
+                <button type="submit" class="ms-auth-btn ms-ripple" data-auth-submit><span>ورود به حساب</span></button>
+                <button type="button" class="ms-auth-link ms-auth-link--center" data-auth-switch-sms>ورود با پیامک</button>
+            </form>
+        </section>
+
+        <section class="ms-auth-step" data-auth-step="otp" hidden>
+            <form data-auth-otp-form class="ms-auth-form">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="phone" data-auth-phone-hidden />
+                <p class="ms-auth-lead">کد ۶ رقمی ارسال‌شده به <strong data-auth-phone-display></strong></p>
+                <div class="ms-otp" data-otp-inputs role="group" aria-label="کد تأیید">
+                    <input type="text" class="ms-otp-box" inputmode="numeric" maxlength="1" autocomplete="one-time-code" aria-label="رقم ۱" />
+                    <input type="text" class="ms-otp-box" inputmode="numeric" maxlength="1" aria-label="رقم ۲" />
+                    <input type="text" class="ms-otp-box" inputmode="numeric" maxlength="1" aria-label="رقم ۳" />
+                    <input type="text" class="ms-otp-box" inputmode="numeric" maxlength="1" aria-label="رقم ۴" />
+                    <input type="text" class="ms-otp-box" inputmode="numeric" maxlength="1" aria-label="رقم ۵" />
+                    <input type="text" class="ms-otp-box" inputmode="numeric" maxlength="1" aria-label="رقم ۶" />
+                </div>
+                <input type="hidden" name="code" data-otp-value />
+                <button type="submit" class="ms-auth-btn ms-ripple" data-auth-submit><span>تأیید و ادامه</span></button>
+                <div class="ms-auth-actions">
+                    <button type="button" class="ms-auth-link" data-auth-back>تغییر شماره</button>
+                    <button type="button" class="ms-auth-link" data-auth-resend disabled>ارسال مجدد (<span data-auth-resend-timer>60</span>)</button>
+                </div>
+            </form>
+            <p class="ms-auth-dev" data-auth-dev hidden></p>
+        </section>
+
+        <section class="ms-auth-step" data-auth-step="register" hidden>
+            <form data-auth-register-form class="ms-auth-form">
+                @Html.AntiForgeryToken()
+                <p class="ms-auth-lead">برای فعال‌سازی حساب عمده‌فروشی، اطلاعات زیر را تکمیل کنید.</p>
+                <div class="ms-field ms-field--auth ms-field--readonly">
+                    <input type="tel" class="ms-field-input" id="authPhoneReadonly" placeholder=" " readonly dir="ltr" data-auth-phone-readonly />
+                    <label class="ms-field-label" for="authPhoneReadonly">شماره تماس</label>
+                </div>
+                <div class="ms-auth-grid">
+                    <div class="ms-field ms-field--auth">
+                        <input type="text" name="firstName" class="ms-field-input" id="authFirstName" placeholder=" " autocomplete="given-name" required />
+                        <label class="ms-field-label" for="authFirstName">نام <span class="ms-req">*</span></label>
+                    </div>
+                    <div class="ms-field ms-field--auth">
+                        <input type="text" name="lastName" class="ms-field-input" id="authLastName" placeholder=" " autocomplete="family-name" required />
+                        <label class="ms-field-label" for="authLastName">نام خانوادگی <span class="ms-req">*</span></label>
+                    </div>
+                </div>
+                <div class="ms-field ms-field--auth">
+                    <input type="email" name="email" class="ms-field-input" id="authEmail" placeholder=" " autocomplete="email" dir="ltr" />
+                    <label class="ms-field-label" for="authEmail">ایمیل (اختیاری)</label>
+                </div>
+                <div class="ms-field ms-field--auth">
+                    <input type="text" name="businessName" class="ms-field-input" id="authBusiness" placeholder=" " autocomplete="organization" />
+                    <label class="ms-field-label" for="authBusiness">نام مجموعه (اختیاری)</label>
+                </div>
+                <div class="ms-field ms-field--auth ms-field--password">
+                    <input type="password" name="password" class="ms-field-input" id="authPassword" placeholder=" " autocomplete="new-password" required minlength="8" />
+                    <label class="ms-field-label" for="authPassword">رمز عبور <span class="ms-req">*</span></label>
+                    <button type="button" class="ms-field-eye" data-toggle-password="authPassword" aria-label="نمایش رمز">👁</button>
+                </div>
+                <div class="ms-field ms-field--auth ms-field--password">
+                    <input type="password" name="confirmPassword" class="ms-field-input" id="authConfirmPassword" placeholder=" " autocomplete="new-password" required minlength="8" />
+                    <label class="ms-field-label" for="authConfirmPassword">تکرار رمز عبور <span class="ms-req">*</span></label>
+                    <button type="button" class="ms-field-eye" data-toggle-password="authConfirmPassword" aria-label="نمایش رمز">👁</button>
+                </div>
+                <p class="ms-auth-hint">رمز عبور حداقل ۸ کاراکتر و شامل یک عدد باشد.</p>
+                <button type="submit" class="ms-auth-btn ms-ripple" data-auth-submit><span>ثبت‌نام و ورود به پنل</span></button>
+            </form>
+        </section>
+
+        <section class="ms-auth-step" data-auth-step="success" hidden>
+            <div class="ms-auth-success">
+                <span class="ms-auth-success-icon">✓</span>
+                <h3>خوش آمدید!</h3>
+                <p>در حال انتقال به پنل کاربری...</p>
+            </div>
+        </section>
+    </div>
+
+    <p class="ms-auth-error" data-auth-error hidden role="alert"></p>
+</div>

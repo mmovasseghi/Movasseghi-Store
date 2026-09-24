@@ -1,0 +1,398 @@
+@model TrafficReport
+@{
+    ViewData["Title"] = "ترافیک و صفحات";
+
+    string DeltaClass(double d) => d > 0.5 ? "kit-delta--up" : d < -0.5 ? "kit-delta--down" : "kit-delta--flat";
+    string DeltaText(double d) => d == 0 ? "بدون تغییر" : $"{(d > 0 ? "▲" : "▼")} {Math.Abs(d):0.#}٪";
+
+    string FaDevice(string d) => d switch
+    {
+        "mobile" => "📱 موبایل",
+        "tablet" => "💻 تبلت",
+        "desktop" => "🖥️ دسکتاپ",
+        "bot" => "🤖 ربات",
+        _ => d
+    };
+}
+
+<partial name="_ReportRange" />
+
+@if (!Model.HasData)
+{
+    <section class="kit-table-card kit-rise">
+        <div class="kit-empty">
+            <div class="kit-empty-icon" aria-hidden="true">📡</div>
+            <h3>هنوز بازدیدی ثبت نشده</h3>
+            <p>ردیابی فعال است. به‌محض بازدید اولین کاربر، این صفحه پر می‌شود.</p>
+        </div>
+    </section>
+}
+else
+{
+    <div class="kit-stats kit-stagger">
+        <article class="kit-stat">
+            <span class="kit-stat-label">بازدیدکننده یکتا</span>
+            <span class="kit-stat-value">@Model.Visitors.ToString("N0")</span>
+            <span class="kit-stat-foot">
+                @Model.NewVisitors.ToString("N0") جدید ·
+                @(Model.ReturningShare.ToString("0.#"))٪ بازگشتی
+            </span>
+        </article>
+        <article class="kit-stat">
+            <span class="kit-stat-label">نشست</span>
+            <span class="kit-stat-value">@Model.Sessions.ToString("N0")</span>
+            <span class="kit-stat-foot">
+                <span class="kit-delta @DeltaClass(Model.SessionDelta)">@DeltaText(Model.SessionDelta)</span>
+            </span>
+        </article>
+        <article class="kit-stat">
+            <span class="kit-stat-label">نرخ پرش</span>
+            <span class="kit-stat-value @(Model.BounceRate >= 65 ? "kit-stat-value--bad" : Model.BounceRate <= 40 ? "kit-stat-value--ok" : "")">@(Model.BounceRate.ToString("0.#"))٪</span>
+            <span class="kit-stat-foot">@Model.SinglePageSessions.ToString("N0") نشست تک‌صفحه‌ای</span>
+        </article>
+        <article class="kit-stat">
+            <span class="kit-stat-label">صفحه در هر نشست</span>
+            <span class="kit-stat-value">@Model.PagesPerSession.ToString("0.##")</span>
+            <span class="kit-stat-foot">عدد بالاتر یعنی لینک داخلی بهتر کار می‌کند</span>
+        </article>
+        <article class="kit-stat">
+            <span class="kit-stat-label">ساعت اوج</span>
+            <span class="kit-stat-value">@Model.PeakHour</span>
+            <span class="kit-stat-foot">بهترین زمان تماس فروش و انتشار محتوا</span>
+        </article>
+        <article class="kit-stat">
+            <span class="kit-stat-label">خزش ربات</span>
+            <span class="kit-stat-value @(Model.BotViews > 0 ? "kit-stat-value--ok" : "kit-stat-value--bad")">@Model.BotViews.ToString("N0")</span>
+            <span class="kit-stat-foot">پیش‌شرط ایندکس شدن در گوگل و پاسخ‌های AI</span>
+        </article>
+    </div>
+
+    @* ═══ روند ═══ *@
+    <section class="kit-section kit-rise">
+        <div class="kit-section-head">
+            <div>
+                <h2>📈 بازدید و نشست روزانه</h2>
+                <p>ستون روشن: بازدید صفحه · موس را روی هر ستون ببرید برای عدد دقیق.</p>
+            </div>
+        </div>
+        @{
+            var maxViews = Model.Daily.Count > 0 ? Math.Max(1, Model.Daily.Max(d => d.Views)) : 1;
+        }
+        <div class="kit-chart" role="img" aria-label="نمودار بازدید روزانه">
+            @foreach (var (p, i) in Model.Daily.Select((p, i) => (p, i)))
+            {
+                <div class="kit-chart-bar"
+                     style="height:@(Math.Max(2, p.Views * 100 / maxViews))%;animation-delay:@((i * 10))ms"
+                     data-label="@p.Label — @p.Views.ToString("N0") بازدید · @p.Sessions.ToString("N0") نشست"></div>
+            }
+        </div>
+        <div class="kit-chart-axis">
+            <span>@(Model.Daily.FirstOrDefault()?.Label ?? "")</span>
+            <span>بیشینه @maxViews.ToString("N0")</span>
+            <span>@(Model.Daily.LastOrDefault()?.Label ?? "")</span>
+        </div>
+    </section>
+
+    @* ═══ ساعت‌های شبانه‌روز ═══ *@
+    <section class="kit-section kit-rise">
+        <div class="kit-section-head">
+            <div>
+                <h2>🕐 ترافیک در ساعت‌های شبانه‌روز</h2>
+                <p>به وقت تهران. برای زمان‌بندی تماس، انتشار محتوا و کمپین.</p>
+            </div>
+        </div>
+        @{
+            var maxHour = Math.Max(1, Model.Hourly.Max(h => h.Count));
+            var peakIdx = Model.Hourly.IndexOf(Model.Hourly.OrderByDescending(h => h.Count).First());
+        }
+        <div class="kit-chart" style="height:96px" role="img" aria-label="نمودار ترافیک ساعتی">
+            @foreach (var (h, i) in Model.Hourly.Select((h, i) => (h, i)))
+            {
+                <div class="kit-chart-bar @(i == peakIdx ? "kit-chart-bar--gold" : "")"
+                     style="height:@(Math.Max(2, h.Count * 100 / maxHour))%;animation-delay:@((i * 12))ms"
+                     data-label="ساعت @h.Label — @h.Count.ToString("N0") بازدید"></div>
+            }
+        </div>
+        <div class="kit-chart-axis">
+            <span>۰۰</span><span>۰۶</span><span>۱۲</span><span>۱۸</span><span>۲۳</span>
+        </div>
+    </section>
+
+    <div class="kit-grid-2">
+        @* ═══ کانال ═══ *@
+        <section class="kit-section kit-rise">
+            <div class="kit-section-head">
+                <div>
+                    <h2>🚪 کانال ورود</h2>
+                    <p>سهم جستجوی گوگل، شاخص اصلی موفقیت سئو است.</p>
+                </div>
+            </div>
+            @{
+                var maxCh = Math.Max(1, Model.Channels.Max(c => c.Sessions));
+            }
+            @foreach (var ch in Model.Channels)
+            {
+                <div class="kit-hbar-row">
+                    <div class="kit-hbar-label">
+                        <span>
+                            @ch.Icon @ch.Fa
+                            @if (Model.Sessions > 0)
+                            {
+                                <span style="color:var(--st-muted)">(@((ch.Sessions * 100 / Math.Max(1, Model.Sessions)))٪)</span>
+                            }
+                        </span>
+                        <div class="kit-hbar-track">
+                            <div class="kit-hbar-fill" style="width:@(ch.Sessions * 100 / maxCh)%"></div>
+                        </div>
+                    </div>
+                    <div class="kit-hbar-value">
+                        @ch.Sessions.ToString("N0")
+                        <span class="kit-delta @DeltaClass(ch.Delta)" style="display:block;font-size:.68rem">@DeltaText(ch.Delta)</span>
+                    </div>
+                </div>
+            }
+        </section>
+
+        @* ═══ دستگاه ═══ *@
+        <section class="kit-section kit-rise">
+            <div class="kit-section-head">
+                <div>
+                    <h2>📱 دستگاه بازدیدکننده</h2>
+                    <p>گوگل رتبه را بر اساس نسخه موبایل تعیین می‌کند (Mobile-First Indexing).</p>
+                </div>
+            </div>
+            @{
+                var maxDev = Math.Max(1, Model.Devices.Max(d => d.Count));
+            }
+            @foreach (var dev in Model.Devices)
+            {
+                <div class="kit-hbar-row">
+                    <div class="kit-hbar-label">
+                        <span>
+                            @FaDevice(dev.Label)
+                            <span style="color:var(--st-muted)">(@((dev.Count * 100 / Math.Max(1, Model.Sessions)))٪)</span>
+                        </span>
+                        <div class="kit-hbar-track">
+                            <div class="kit-hbar-fill" style="width:@(dev.Count * 100 / maxDev)%"></div>
+                        </div>
+                    </div>
+                    <div class="kit-hbar-value">@dev.Count.ToString("N0")</div>
+                </div>
+            }
+
+            @if (Model.TopReferrers.Count > 0)
+            {
+                <h3 style="margin:1.2rem 0 .5rem;font-size:.85rem">سایت‌هایی که به شما لینک داده‌اند</h3>
+                @foreach (var r in Model.TopReferrers.Take(8))
+                {
+                    <div class="kit-hbar-row">
+                        <div class="kit-hbar-label"><span dir="ltr">@r.Label</span></div>
+                        <div class="kit-hbar-value">@r.Count.ToString("N0")</div>
+                    </div>
+                }
+            }
+        </section>
+    </div>
+
+    @* ═══ همه صفحات ═══ *@
+    <section class="kit-section kit-rise">
+        <div class="kit-section-head">
+            <div>
+                <h2>📄 صفحات پربازدید</h2>
+                <p>روی هر سرستون کلیک کنید تا مرتب شود.</p>
+            </div>
+            <a class="st-btn st-btn-ghost st-btn-sm" href="/Admin/Reports/ExportPages?days=@ViewBag.Days">دریافت CSV</a>
+        </div>
+
+        <div class="kit-table-scroll">
+            <table class="kit-table">
+                <thead>
+                    <tr>
+                        <th data-sort>صفحه</th>
+                        <th data-sort>نوع</th>
+                        <th data-sort>بازدید</th>
+                        <th data-sort>نشست</th>
+                        <th data-sort>پاسخ سرور</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var p in Model.TopPages)
+                    {
+                        <tr>
+                            <td>
+                                <span class="kit-cell-main">@(p.Title ?? p.Path)</span>
+                                <span class="kit-cell-sub" dir="ltr">@p.Path</span>
+                            </td>
+                            <td><span class="kit-tag kit-tag--muted">@p.FaPageType</span></td>
+                            <td class="kit-cell-num" data-sort-value="@p.Views">@p.Views.ToString("N0")</td>
+                            <td class="kit-cell-num" data-sort-value="@p.Sessions">@p.Sessions.ToString("N0")</td>
+                            <td class="kit-cell-num" data-sort-value="@p.AvgServerMs">
+                                <span class="@(p.AvgServerMs > 600 ? "kit-delta--down" : p.AvgServerMs <= 200 ? "kit-delta--up" : "")">
+                                    @p.AvgServerMs.ToString("N0") ms
+                                </span>
+                            </td>
+                            <td class="kit-cell-actions">
+                                <a class="st-btn st-btn-ghost st-btn-sm" href="@p.Path" target="_blank" rel="noopener">بازکردن</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <div class="kit-grid-2">
+        @* ═══ صفحات ورود و خروج ═══ *@
+        <section class="kit-section kit-rise">
+            <div class="kit-section-head">
+                <div>
+                    <h2>🚩 صفحات ورود</h2>
+                    <p>
+                        اولین صفحه‌ای که کاربر دید. نرخ خروج بالا یعنی صفحه انتظار
+                        بازدیدکننده را برآورده نکرده.
+                    </p>
+                </div>
+            </div>
+            <div class="kit-table-scroll">
+                <table class="kit-table">
+                    <thead>
+                        <tr><th data-sort>مسیر</th><th data-sort>ورود</th><th data-sort>نرخ خروج</th></tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var p in Model.TopLandingPages)
+                        {
+                            <tr>
+                                <td><span dir="ltr" style="font-size:.76rem">@p.Path</span></td>
+                                <td class="kit-cell-num" data-sort-value="@p.Views">@p.Views.ToString("N0")</td>
+                                <td class="kit-cell-num" data-sort-value="@p.ExitRate">
+                                    <span class="kit-tag @(p.ExitRate >= 70 ? "kit-tag--bad" : p.ExitRate >= 45 ? "kit-tag--gold" : "kit-tag--ok")">
+                                        @(p.ExitRate.ToString("0.#"))٪
+                                    </span>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        @* ═══ کندترین صفحات ═══ *@
+        <section class="kit-section kit-rise">
+            <div class="kit-section-head">
+                <div>
+                    <h2>🐌 کندترین صفحات</h2>
+                    <p>
+                        زمان پاسخ سرور مستقیماً LCP را بالا می‌برد و LCP یکی از سه شاخص
+                        رتبه‌بندی گوگل است.
+                    </p>
+                </div>
+            </div>
+            @if (Model.SlowestPages.Count == 0)
+            {
+                <p class="kit-form-hint">هیچ صفحه‌ای با بازدید کافی برای سنجش نبود.</p>
+            }
+            else
+            {
+                <div class="kit-table-scroll">
+                    <table class="kit-table">
+                        <thead>
+                            <tr><th data-sort>مسیر</th><th data-sort>میانگین</th><th data-sort>بدترین</th><th data-sort>بازدید</th></tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var p in Model.SlowestPages)
+                            {
+                                <tr class="@(p.AvgServerMs > 900 ? "" : "is-dim")">
+                                    <td><span dir="ltr" style="font-size:.76rem">@p.Path</span></td>
+                                    <td class="kit-cell-num" data-sort-value="@p.AvgServerMs">
+                                        <span class="kit-tag @(p.AvgServerMs > 600 ? "kit-tag--bad" : p.AvgServerMs <= 200 ? "kit-tag--ok" : "kit-tag--gold")">
+                                            @p.AvgServerMs.ToString("N0") ms
+                                        </span>
+                                    </td>
+                                    <td class="kit-cell-num" data-sort-value="@p.MaxServerMs">@p.MaxServerMs.ToString("N0") ms</td>
+                                    <td class="kit-cell-num" data-sort-value="@p.Views">@p.Views.ToString("N0")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </section>
+    </div>
+
+    <div class="kit-grid-2">
+        @* ═══ خزش ربات ═══ *@
+        <section class="kit-section kit-rise">
+            <div class="kit-section-head">
+                <div>
+                    <h2>🤖 ربات‌ها چه صفحاتی را می‌خوانند</h2>
+                    <p>
+                        شامل ربات گوگل و ربات‌های هوش مصنوعی (GPTBot، ClaudeBot، PerplexityBot).
+                        صفحه‌ای که خزیده نشود، در نتایج و پاسخ‌های AI ظاهر نمی‌شود.
+                    </p>
+                </div>
+            </div>
+            @if (Model.BotHits.Count == 0)
+            {
+                <p class="kit-form-hint">
+                    هیچ خزشی ثبت نشده. robots.txt و ثبت سایت در Search Console را بررسی کنید.
+                </p>
+            }
+            else
+            {
+                var maxBot = Math.Max(1, Model.BotHits.Max(b => b.Count));
+                foreach (var b in Model.BotHits)
+                {
+                    <div class="kit-hbar-row">
+                        <div class="kit-hbar-label">
+                            <span dir="ltr">@b.Label</span>
+                            <div class="kit-hbar-track">
+                                <div class="kit-hbar-fill" style="width:@(b.Count * 100 / maxBot)%"></div>
+                            </div>
+                        </div>
+                        <div class="kit-hbar-value">@b.Count.ToString("N0")</div>
+                    </div>
+                }
+            }
+        </section>
+
+        @* ═══ ۴۰۴ ═══ *@
+        <section class="kit-section kit-rise">
+            <div class="kit-section-head">
+                <div>
+                    <h2>🚫 صفحات پیدا نشده (۴۰۴)</h2>
+                    <p>لینک شکسته هم کاربر را فراری می‌دهد هم اعتبار سئو را هدر می‌کند.</p>
+                </div>
+            </div>
+            @if (Model.NotFoundPages.Count == 0)
+            {
+                <div class="kit-insight kit-insight--win">
+                    <span class="kit-insight-icon" aria-hidden="true">✅</span>
+                    <div class="kit-insight-body">
+                        <strong>هیچ خطای ۴۰۴ ثبت نشده</strong>
+                        همه لینک‌های سایت سالم‌اند.
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="kit-table-scroll">
+                    <table class="kit-table">
+                        <thead><tr><th data-sort>مسیر</th><th data-sort>تعداد</th></tr></thead>
+                        <tbody>
+                            @foreach (var n in Model.NotFoundPages)
+                            {
+                                <tr>
+                                    <td><span dir="ltr" style="font-size:.76rem">@n.Label</span></td>
+                                    <td class="kit-cell-num" data-sort-value="@n.Count">
+                                        <span class="kit-tag kit-tag--bad">@n.Count.ToString("N0")</span>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </section>
+    </div>
+}

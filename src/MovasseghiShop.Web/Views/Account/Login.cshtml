@@ -1,0 +1,12 @@
+@{ ViewData["Title"] = "ورود"; }
+<div class="section"><div class="container">
+    <div class="form-card">
+        <h1>ورود / ثبت‌نام</h1>
+        <form asp-action="SendLoginOtp" method="post">
+            @Html.AntiForgeryToken()
+            <div class="form-group"><label>شماره موبایل</label><input class="form-control" name="phone" required /></div>
+            <button class="btn btn-primary" type="submit">دریافت کد OTP</button>
+        </form>
+        <hr />
+    </div>
+</div></div>

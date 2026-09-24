@@ -1,0 +1,180 @@
+@model HomeStory
+@using MovasseghiShop.Web.Areas.Admin.Controllers
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = Model.Id == 0 ? "استوری جدید" : "ویرایش استوری";
+    ViewData["HeroTitle"] = Model.Id == 0 ? "استوری جدید" : Model.Label;
+    ViewData["HeroSubtitle"] = Model.Id == 0 ? "ابتدا اطلاعات استوری را ذخیره کنید، سپس اسلاید اضافه کنید" : $"شناسه: {Model.StoryKey}";
+    ViewData["HeroBadge"] = "Story Editor";
+    var slides = Model.Slides.OrderBy(s => s.SortOrder).ToList();
+    var nextSort = slides.Count == 0 ? 0 : slides.Max(s => s.SortOrder) + 1;
+}
+
+<partial name="_AdminHero" />
+
+@if (TempData["Success"] != null) { <div class="st-alert st-alert-success st-reveal">@TempData["Success"]</div> }
+@if (TempData["Error"] != null) { <div class="st-alert st-alert-error st-reveal">@TempData["Error"]</div> }
+
+<div class="st-edit-grid st-reveal">
+    <div>
+        <form method="post" action="/Admin/StoriesAdmin/Save" enctype="multipart/form-data" class="st-card">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="Id" value="@Model.Id" />
+
+            <div class="st-field">
+                <label>عنوان استوری (روی حلقه)</label>
+                <input name="Label" value="@Model.Label" required class="st-input" placeholder="مثلاً پخش عمده" />
+            </div>
+            <div class="st-field">
+                <label>شناسه یکتا (انگلیسی/بدون فاصله)</label>
+                <input name="StoryKey" value="@Model.StoryKey" class="st-input" dir="ltr" placeholder="wholesale" />
+                <small class="st-field-hint">در کد HTML به‌صورت data-story-id استفاده می‌شود. خالی بماند خودکار ساخته می‌شود.</small>
+            </div>
+            <div class="st-field">
+                <label>آیکون پیش‌فرض (وقتی کاور ندارید)</label>
+                <select name="IconKey" class="st-input">
+                    @foreach (var opt in StoriesAdminController.IconOptions)
+                    {
+                        if (Model.IconKey == opt.Key)
+                        {
+                            <option value="@opt.Key" selected="selected">@opt.Label</option>
+                        }
+                        else
+                        {
+                            <option value="@opt.Key">@opt.Label</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="st-field">
+                <label>تصویر دایره استوری (روی صفحه اصلی — ۵۱۲×۵۱۲)</label>
+                @if (!string.IsNullOrWhiteSpace(Model.CoverImageUrl))
+                {
+                    <img src="@Model.CoverImageUrl" alt="کاور" class="kit-story-cover-thumb" style="width:88px;height:88px;margin-bottom:.5rem" />
+                }
+                else
+                {
+                    <p class="st-field-hint" style="margin:0 0 .5rem">فعلاً آیکون پیش‌فرض نشان داده می‌شود — عکس خودتان را اینجا آپلود کنید.</p>
+                }
+                <input type="file" name="coverImage" accept="image/jpeg,image/png,image/webp" class="st-input" />
+                <small class="st-field-hint">این تصویر همان حلقه دایره‌ای است که کاربر روی صفحه اول می‌بیند. مربع ۱:۱ — سوژه وسط باشد.</small>
+            </div>
+            <div class="st-field">
+                <label>ترتیب نمایش</label>
+                <input name="SortOrder" type="number" value="@Model.SortOrder" class="st-input" style="max-width:120px" />
+            </div>
+            <label class="st-checkbox">
+                <input type="checkbox" name="IsActive" value="true" @(Model.IsActive ? "checked" : "") /> فعال در صفحه اصلی
+            </label>
+            <div class="st-btn-row st-mt">
+                <button type="submit" class="st-btn st-btn-primary">ذخیره استوری</button>
+                <a href="/Admin/StoriesAdmin" class="st-btn st-btn-ghost">← بازگشت</a>
+            </div>
+        </form>
+
+        @if (Model.Id > 0)
+        {
+            <section class="st-card st-mt">
+                <h3 style="margin:0 0 1rem;font-size:.95rem">اسلایدها (@slides.Count)</h3>
+
+                @if (slides.Count == 0)
+                {
+                    <p class="st-field-hint">هنوز اسلایدی ندارید. حداقل یک اسلاید با تصویر ۱۰۸۰×۱۹۲۰ اضافه کنید.</p>
+                }
+                else
+                {
+                    @foreach (var slide in slides)
+                    {
+                        <form method="post" action="/Admin/StoriesAdmin/UpdateSlide" enctype="multipart/form-data" class="st-card" style="margin-bottom:1rem;padding:1rem;background:var(--st-surface-2)">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="storyId" value="@Model.Id" />
+                            <input type="hidden" name="slideId" value="@slide.Id" />
+                            <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:flex-start">
+                                <div style="flex:0 0 72px">
+                                    <img src="@slide.ImageUrl" alt="" style="width:72px;height:128px;object-fit:cover;border-radius:8px;background:#0a100e;border:1px solid #dce8e0" />
+                                </div>
+                                <div style="flex:1;min-width:200px">
+                                    <div class="st-field">
+                                        <label>عنوان اسلاید (دکمه CTA)</label>
+                                        <input name="title" value="@slide.Title" required class="st-input" />
+                                    </div>
+                                    <div class="st-field">
+                                        <label>لینک دکمه</label>
+                                        <input name="linkUrl" value="@slide.LinkUrl" class="st-input" dir="ltr" placeholder="/Catalog" />
+                                    </div>
+                                    <div class="st-field">
+                                        <label>ترتیب</label>
+                                        <input name="sortOrder" type="number" value="@slide.SortOrder" class="st-input" style="max-width:100px" />
+                                    </div>
+                                    <label class="st-checkbox">
+                                        <input type="checkbox" name="isActive" value="true" @(slide.IsActive ? "checked" : "") /> فعال
+                                    </label>
+                                    <div class="st-field" style="margin-top:.5rem">
+                                        <label>تعویض تصویر (۹:۱۶ — ۱۰۸۰×۱۹۲۰)</label>
+                                        <input type="file" name="slideImage" accept="image/jpeg,image/png,image/webp" class="st-input" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="st-btn-row" style="margin-top:.75rem">
+                                <button type="submit" class="st-btn st-btn-primary st-btn-sm">ذخیره اسلاید</button>
+                            </div>
+                        </form>
+                        <form method="post" action="/Admin/StoriesAdmin/DeleteSlide" style="margin:-.5rem 0 1.25rem 0">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="storyId" value="@Model.Id" />
+                            <input type="hidden" name="slideId" value="@slide.Id" />
+                            <button type="submit" class="st-btn st-btn-ghost st-btn-sm" style="color:var(--st-danger)" onclick="return confirm('این اسلاید حذف شود؟')">حذف اسلاید</button>
+                        </form>
+                    }
+                }
+
+                <hr style="margin:1.25rem 0;border:none;border-top:1px solid var(--st-border)" />
+                <h4 style="margin:0 0 .75rem;font-size:.88rem">+ افزودن اسلاید جدید</h4>
+                <form method="post" action="/Admin/StoriesAdmin/AddSlide" enctype="multipart/form-data">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="storyId" value="@Model.Id" />
+                    <input type="hidden" name="sortOrder" value="@nextSort" />
+                    <div class="st-field">
+                        <label>عنوان</label>
+                        <input name="title" required class="st-input" placeholder="مثلاً تخفیف ویژه عمده" />
+                    </div>
+                    <div class="st-field">
+                        <label>لینک</label>
+                        <input name="linkUrl" value="/Catalog" class="st-input" dir="ltr" />
+                    </div>
+                    <div class="st-field">
+                        <label>تصویر اسلاید (۱۰۸۰ × ۱۹۲۰ پیکسل)</label>
+                        <input type="file" name="slideImage" accept="image/jpeg,image/png,image/webp" class="st-input" required />
+                    </div>
+                    <button type="submit" class="st-btn st-btn-primary">افزودن اسلاید</button>
+                </form>
+            </section>
+
+            <form method="post" action="/Admin/StoriesAdmin/Delete" class="st-mt" onsubmit="return confirm('کل استوری و اسلایدهایش حذف شود؟')">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="id" value="@Model.Id" />
+                <button type="submit" class="st-btn st-btn-ghost" style="color:var(--st-danger)">حذف کامل استوری</button>
+            </form>
+        }
+    </div>
+
+    <aside>
+        <div class="st-card">
+            <h3 style="margin:0 0 .75rem;font-size:.92rem">📐 راهنمای سریع سایز</h3>
+            <dl style="margin:0;font-size:.82rem;line-height:1.65">
+                <dt style="font-weight:800;margin-top:.5rem">کاور حلقه</dt>
+                <dd style="margin:.2rem 0 0;color:var(--st-muted)">۵۱۲×۵۱۲ (۱:۱) — JPG/WebP</dd>
+                <dt style="font-weight:800;margin-top:.75rem">اسلاید تمام‌صفحه</dt>
+                <dd style="margin:.2rem 0 0;color:var(--st-muted)">۱۰۸۰×۱۹۲۰ (۹:۱۶) — مثل استوری موبایل</dd>
+                <dt style="font-weight:800;margin-top:.75rem">نکته طراحی</dt>
+                <dd style="margin:.2rem 0 0;color:var(--st-muted)">متن و لوگو را در ۸۰٪ وسط تصویر بگذارید؛ پایین صفحه دکمه طلایی CTA می‌آید.</dd>
+            </dl>
+        </div>
+        <div class="st-card st-mt">
+            <h3 style="margin:0 0 .5rem;font-size:.92rem">پیش‌نمایش viewer</h3>
+            <p style="margin:0;font-size:.8rem;color:var(--st-muted);line-height:1.6">
+                viewer استوری در سایت نسبت ۹:۱۶ دارد (حداکثر عرض ~۴۲۰px). تصاویر عمودی موبایلی بهترین نتیجه را می‌دهند.
+            </p>
+        </div>
+    </aside>
+</div>

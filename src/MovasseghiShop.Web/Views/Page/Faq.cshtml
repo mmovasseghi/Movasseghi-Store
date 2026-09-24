@@ -1,0 +1,9 @@
+@model IEnumerable<FaqItem>
+@{ ViewData["Title"] = "سوالات متداول"; }
+<div class="section"><div class="container">
+    <h1>سوالات متداول</h1>
+    @foreach (var f in Model)
+    {
+        <details class="form-card" style="margin-bottom:.75rem"><summary><strong>@f.Question</strong></summary><p>@f.Answer</p></details>
+    }
+</div></div>

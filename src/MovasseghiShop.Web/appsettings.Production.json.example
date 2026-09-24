@@ -1,0 +1,27 @@
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Data Source=/var/lib/movasseghi/movasseghi.db"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "movasseghi.ir;www.movasseghi.ir",
+  "SiteSettings": {
+    "PublicBaseUrl": "https://movasseghi.ir"
+  },
+  "GoogleSearchConsole": {
+    "PropertyUrl": "https://movasseghi.ir/",
+    "ServiceAccountKeyPath": "App_Data/gsc-service-account.json",
+    "SiteVerificationMeta": ""
+  },
+  "SerpApi": {
+    "ApiKey": "",
+    "AutoSync": false
+  },
+  "Security": {
+    "CheckoutHmacSecret": "CHANGE_ME_LONG_RANDOM_STRING"
+  }
+}

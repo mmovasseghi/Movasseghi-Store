@@ -1,0 +1,167 @@
+@model CartSummary
+@{
+    var a = Model.Analytics;
+    var compact = ViewBag.CompactAnalytics as bool? ?? false;
+    var analyticsKicker = ViewBag.AnalyticsKicker as string ?? "📊 گزارش هوشمند سبد";
+    var analyticsTitle = ViewBag.AnalyticsTitle as string ?? "خلاصه بسته‌بندی و تعداد";
+    var lineCount = Model.Items.Count;
+    var manyLines = lineCount > 18;
+    var barLimit = ViewBag.AnalyticsBarLimit as int? ?? 12;
+    var detailLimit = ViewBag.AnalyticsDetailLimit as int? ?? 15;
+    var hideItemDetails = ViewBag.HideAnalyticsItemDetails as bool? ?? false;
+    var barItems = a.ItemDetails.OrderByDescending(x => x.Stats.PieceCount).Take(barLimit).ToList();
+    var detailItems = manyLines ? a.ItemDetails.Take(detailLimit).ToList() : a.ItemDetails;
+    var donut = CartAnalyticsHelper.DonutGradient(a.PackagingMix);
+    var maxPieces = barItems.Count > 0 ? barItems.Max(x => x.Stats.PieceCount) : 1;
+}
+<section class="cart-analytics @(compact ? "cart-analytics--compact" : "") @(manyLines ? "cart-analytics--many" : "")" aria-label="گزارش آماری سبد خرید" data-cart-line-count="@lineCount">
+    <header class="cart-analytics-head">
+        <span class="cart-analytics-kicker">@analyticsKicker</span>
+        @if (!compact)
+        {
+            <h2 class="cart-analytics-title">@analyticsTitle</h2>
+        }
+    </header>
+
+    <p class="cart-analytics-insight">@a.SmartSummaryLine</p>
+
+    <div class="cart-analytics-kpis">
+        <div class="cart-kpi">
+            <span class="cart-kpi-icon" aria-hidden="true">🔢</span>
+            <strong>@CartAnalyticsHelper.FormatCount(a.TotalPieces)</strong>
+            <span>قلم (عدد)</span>
+        </div>
+        @if (a.TotalNylons > 0)
+        {
+            <div class="cart-kpi cart-kpi--nylon">
+                <span class="cart-kpi-icon" aria-hidden="true">📦</span>
+                <strong>@CartAnalyticsHelper.FormatCount(a.TotalNylons)</strong>
+                <span>نایلون</span>
+            </div>
+        }
+        @if (a.TotalCartons > 0)
+        {
+            <div class="cart-kpi cart-kpi--carton">
+                <span class="cart-kpi-icon" aria-hidden="true">🧱</span>
+                <strong>@CartAnalyticsHelper.FormatCount(a.TotalCartons)</strong>
+                <span>کارتن</span>
+            </div>
+        }
+        @if (a.TotalPacks > 0)
+        {
+            <div class="cart-kpi cart-kpi--pack">
+                <span class="cart-kpi-icon" aria-hidden="true">🎁</span>
+                <strong>@CartAnalyticsHelper.FormatCount(a.TotalPacks)</strong>
+                <span>بسته شیرینگ</span>
+            </div>
+        }
+    </div>
+
+    @if (!compact && a.SpecRows.Count > 0)
+    {
+        <div class="cart-spec-table">
+            <h3 class="cart-spec-table-title">ظرفیت بسته‌بندی (مرجع)</h3>
+            <dl class="cart-spec-dl">
+                @foreach (var row in a.SpecRows)
+                {
+                    <div class="cart-spec-row">
+                        <dt>@row.Label</dt>
+                        <dd>@row.Value</dd>
+                    </div>
+                }
+            </dl>
+        </div>
+    }
+
+    @if (!compact && a.PackagingMix.Count > 0)
+    {
+        <div class="cart-analytics-charts">
+            <div class="cart-chart-donut-wrap">
+                <div class="cart-chart-donut" style="background:@donut" role="img" aria-label="نمودار ترکیب بسته‌بندی">
+                    <div class="cart-chart-donut-hole">
+                        <strong>@CartAnalyticsHelper.FormatCount(a.TotalPieces)</strong>
+                        <span>قلم</span>
+                    </div>
+                </div>
+                <ul class="cart-chart-legend">
+                    @{ var ci = 0; var legendColors = new[] { "#3d5a4c", "#c9a84c", "#6b9080" }; }
+                    @foreach (var slice in a.PackagingMix)
+                    {
+                        <li style="--lc:@legendColors[ci % legendColors.Length]"><span class="cart-legend-dot"></span>@slice.Icon @slice.Label · <strong>@CartAnalyticsHelper.FormatCount(slice.Count)</strong></li>
+                        ci++;
+                    }
+                </ul>
+            </div>
+
+            <div class="cart-chart-bars">
+                <h3 class="cart-chart-bars-title">سهم هر محصول (بر اساس تعداد قلم)@(manyLines && a.ItemDetails.Count > barLimit ? $" · {barLimit} پرفروش‌ترین" : "")</h3>
+                @foreach (var (item, stats) in barItems)
+                {
+                    var pct = maxPieces > 0 ? (int)Math.Round(stats.PieceCount * 100m / maxPieces) : 0;
+                    <div class="cart-bar-row">
+                        <div class="cart-bar-label">
+                            <span class="cart-bar-name">@item.ProductName</span>
+                            <span class="cart-bar-val">@CartAnalyticsHelper.FormatCount(stats.PieceCount) عدد</span>
+                        </div>
+                        <div class="cart-bar-track" aria-hidden="true">
+                            <div class="cart-bar-fill" style="--w:@pct%"></div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+
+    @if (!hideItemDetails)
+    {
+        <div class="cart-analytics-details">
+            <h3 class="cart-analytics-details-title">جزئیات هر قلم@(manyLines && a.ItemDetails.Count > detailLimit ? $" · {detailLimit} از {a.ItemDetails.Count}" : "")</h3>
+            @if (manyLines && a.ItemDetails.Count > detailLimit)
+            {
+                <p class="cart-analytics-details-note">برای سرعت بارگذاری، جزئیات آماری فقط برای @detailLimit قلم اول نمایش داده می‌شود؛ جمع کل در بالا معتبر است.</p>
+            }
+            @foreach (var (item, stats) in detailItems)
+            {
+                <article class="cart-detail-card">
+                    <div class="cart-detail-head">
+                        <strong>@item.ProductName</strong>
+                        <span class="cart-detail-price">@SlugHelper.FormatToman(item.LineTotal) تومان</span>
+                    </div>
+                    <p class="cart-detail-unit">@item.VariantLabel · @CartAnalyticsHelper.FormatCount(item.CartonQuantity) @item.UnitName × @SlugHelper.FormatToman(item.UnitPrice)</p>
+                    <p class="cart-detail-formula">@stats.SummaryLine</p>
+                    <p class="cart-detail-result">@stats.DetailLine</p>
+                    @{
+                        var itemSpecs = CartAnalyticsHelper.GetItemSpecRows(item, stats);
+                    }
+                    @if (itemSpecs.Count > 0)
+                    {
+                        <dl class="cart-item-spec">
+                            @foreach (var spec in itemSpecs)
+                            {
+                                <div class="cart-item-spec-row">
+                                    <dt>@spec.Label</dt>
+                                    <dd>@spec.Value</dd>
+                                </div>
+                            }
+                        </dl>
+                    }
+                    <div class="cart-detail-chips">
+                        @if (stats.NylonCount > 0)
+                        {
+                            <span class="cart-chip cart-chip--nylon">@CartAnalyticsHelper.FormatCount(stats.NylonCount) نایلون</span>
+                        }
+                        @if (stats.CartonCount > 0)
+                        {
+                            <span class="cart-chip cart-chip--carton">@CartAnalyticsHelper.FormatCount(stats.CartonCount) کارتن</span>
+                        }
+                        @if (stats.PackCount > 0)
+                        {
+                            <span class="cart-chip cart-chip--pack">@CartAnalyticsHelper.FormatCount(stats.PackCount) بسته</span>
+                        }
+                        <span class="cart-chip cart-chip--pieces">@CartAnalyticsHelper.FormatCount(stats.PieceCount) قلم</span>
+                    </div>
+                </article>
+            }
+        </div>
+    }
+</section>

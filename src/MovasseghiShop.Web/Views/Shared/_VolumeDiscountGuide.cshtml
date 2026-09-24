@@ -1,0 +1,43 @@
+<section class="vd-guide ms-reveal" aria-labelledby="vd-guide-title">
+    <div class="vd-guide-head">
+        <span class="vd-guide-kicker">💰 تخفیف پلکانی</span>
+        <h2 id="vd-guide-title">چطور تخفیف بگیرید؟</h2>
+        <p>هرچه جمع فاکتور بیشتر شود، درصد تخفیف روی <strong>کل سفارش</strong> بالاتر می‌رود.</p>
+    </div>
+
+    <ol class="vd-guide-steps">
+        <li class="vd-guide-step vd-guide-step--base">
+            <span class="vd-guide-num">۱</span>
+            <div class="vd-guide-body">
+                <strong>اول: حداقل سفارش</strong>
+                <p>جمع سبد باید حداقل <em>@WholesaleRules.FormatMinAmount() تومان</em> باشد. کمتر از این مبلغ، امکان ثبت سفارش نیست.</p>
+            </div>
+        </li>
+        @for (var i = 0; i < WholesaleRules.VolumeTiers.Length; i++)
+        {
+            var tier = WholesaleRules.VolumeTiers[i];
+            <li class="vd-guide-step">
+                <span class="vd-guide-num">@(i + 2)</span>
+                <div class="vd-guide-body">
+                    <strong>از @tier.LabelFa تومان به بالا</strong>
+                    <p>@tier.DiscountPercent درصد از کل مبلغ فاکتور به‌صورت خودکار کم می‌شود.</p>
+                </div>
+                <span class="vd-guide-badge">@tier.DiscountPercent%</span>
+            </li>
+        }
+        <li class="vd-guide-step vd-guide-step--premium">
+            <span class="vd-guide-num">★</span>
+            <div class="vd-guide-body">
+                <strong>سطح ویژه</strong>
+                <p>سفارش بالای @WholesaleRules.FormatPremiumAmount() تومان یا @WholesaleRules.PremiumCartons کارتن — تخفیف بیش از ۱۲ درصد و ارسال رایگان تهران (با هماهنگی تلفنی).</p>
+                <p><a href="tel:@WholesaleRules.CoordinationPhone">@WholesaleRules.CoordinationPhone</a></p>
+            </div>
+            <span class="vd-guide-badge vd-guide-badge--gold">+۱۲%</span>
+        </li>
+    </ol>
+
+    <div class="vd-guide-example" aria-label="مثال محاسبه">
+        <h3>مثال</h3>
+        <p>اگر جمع فاکتور <strong>۵۰ میلیون تومان</strong> باشد → <strong>۷ درصد</strong> تخفیف یعنی <strong>۳٬۵۰۰٬۰۰۰ تومان</strong> · پرداخت نهایی: <strong>۴۶٬۵۰۰٬۰۰۰ تومان</strong></p>
+    </div>
+</section>

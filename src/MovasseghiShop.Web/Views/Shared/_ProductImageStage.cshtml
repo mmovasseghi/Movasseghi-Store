@@ -1,0 +1,72 @@
+@model ProductImageStageModel
+@{
+    var shell = Model.Variant switch
+    {
+        "offer" => "ms-offer-img",
+        "featured" => "ms-feat-card-img",
+        "search" => "ms-suggest-img",
+        _ => "ms-product-img"
+    };
+    var shellClass = string.IsNullOrWhiteSpace(Model.ExtraClass) ? shell : $"{shell} {Model.ExtraClass}";
+    var dual = Model.DualCycle && !string.IsNullOrEmpty(Model.ImageUrl) && !string.IsNullOrEmpty(Model.AlternateImageUrl);
+    var outerTag = Model.Variant == "featured" ? "span" : "div";
+}
+
+@if (dual)
+{
+    @if (outerTag == "span")
+    {
+        <span class="@shellClass ms-product-media--dual" data-ms-product-dual data-ms-dual-phase="studio">
+            @await Html.PartialAsync("_ProductImageDualInner", Model)
+            <span class="ms-feat-card-shine" aria-hidden="true"></span>
+        </span>
+    }
+    else
+    {
+        <div class="@shellClass ms-product-media--dual" data-ms-product-dual data-ms-dual-phase="studio">
+            @await Html.PartialAsync("_ProductImageDualInner", Model)
+        </div>
+    }
+}
+else if (Model.Variant == "featured")
+{
+    <span class="@shellClass">
+        @if (!string.IsNullOrEmpty(Model.ImageUrl))
+        {
+            <div class="ms-product-shot">
+                <div class="ms-product-stage">
+                    <img class="ms-product-img-el" src="@Model.ImageUrl" alt="@Model.Alt" width="@Model.Width" height="@Model.Height" loading="@Model.Loading" />
+                </div>
+            </div>
+        }
+        else
+        {
+            <span class="ms-feat-card-empty" aria-hidden="true"></span>
+        }
+        <span class="ms-feat-card-shine" aria-hidden="true"></span>
+    </span>
+}
+else
+{
+    <div class="@shellClass">
+        @if (!string.IsNullOrEmpty(Model.ImageUrl))
+        {
+            if (Model.Framed)
+            {
+                <div class="ms-product-shot">
+                    <div class="ms-product-stage">
+                        <img class="ms-product-img-el" src="@Model.ImageUrl" alt="@Model.Alt" width="@Model.Width" height="@Model.Height" loading="@Model.Loading" @(Model.FetchPriority ? "fetchpriority=\"high\"" : null) />
+                    </div>
+                </div>
+            }
+            else
+            {
+                <img class="ms-product-img-el ms-product-img-el--scene" src="@Model.ImageUrl" alt="@Model.Alt" width="@Model.Width" height="@Model.Height" loading="@Model.Loading" @(Model.FetchPriority ? "fetchpriority=\"high\"" : null) />
+            }
+        }
+        else
+        {
+            <div class="ms-product-empty" aria-hidden="true"></div>
+        }
+    </div>
+}

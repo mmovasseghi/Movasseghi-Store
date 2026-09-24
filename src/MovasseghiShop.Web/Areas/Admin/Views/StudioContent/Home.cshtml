@@ -1,0 +1,55 @@
+@model List<MovasseghiShop.Web.Models.Entities.HomeSection>
+
+@{
+
+    Layout = "_AdminLayout";
+
+    ViewData["Title"] = "صفحه اصلی";
+
+    ViewData["HeroTitle"] = "🏠 بخش‌های صفحه اصلی";
+
+    ViewData["HeroSubtitle"] = "Hero، Trust، Features — JSON config و HTML";
+
+    ViewData["HeroBadge"] = "CMS";
+
+}
+
+<partial name="_AdminHero" />
+
+@if (TempData["Success"] != null) { <div class="st-alert st-alert-success st-reveal">@TempData["Success"]</div> }
+
+<section class="st-panel st-reveal">
+
+    <div class="st-table-wrap">
+
+        <table class="st-table">
+
+            <thead><tr><th>بخش</th><th>وضعیت</th><th></th></tr></thead>
+
+            <tbody>
+
+            @foreach (var s in Model)
+
+            {
+
+                <tr>
+
+                    <td><strong>@s.Key</strong> — @s.Title</td>
+
+                    <td><span class="st-badge @(s.IsActive ? "st-badge-ok" : "st-badge-muted")">@(s.IsActive ? "فعال" : "غیرفعال")</span></td>
+
+                    <td><a class="st-btn st-btn-ghost st-btn-sm" href="/Admin/StudioContent/EditHome/@s.Id">ویرایش</a></td>
+
+                </tr>
+
+            }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+

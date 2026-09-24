@@ -1,0 +1,157 @@
+@model ProformaInvoiceViewModel
+@using MovasseghiShop.Web.Models.Enums
+@{
+    var order = Model.Order;
+    var orderAnalytics = Model.Analytics;
+    var payFa = order.PaymentMethod switch
+    {
+        PaymentMethod.CashOnPickup => "نقدی هنگام بارگیری",
+        PaymentMethod.Online => "پرداخت آنلاین",
+        _ => "—"
+    };
+    var delFa = order.DeliveryMethod switch
+    {
+        DeliveryMethod.FreeKhavar => "ارسال رایگان داخل تهران (خاور)",
+        DeliveryMethod.CustomerVehicle => "بارگیری با وسیله مشتری از انبار",
+        _ => "—"
+    };
+    var createdLocal = order.CreatedAt.ToLocalTime();
+}
+<article class="proforma-sheet" id="proforma-doc">
+    <div class="proforma-sheet__frame" aria-hidden="true"></div>
+    <div class="proforma-sheet__ribbon">پیش‌فاکتور رسمی فروشگاه</div>
+    <div class="proforma-sheet__watermark" aria-hidden="true"><span>MOVASSAGHI</span></div>
+    <div class="proforma-sheet__inner">
+        <header class="proforma-head">
+            <div class="proforma-brand">
+                <div class="proforma-brand__mark" aria-hidden="true">م</div>
+                <div>
+                    <strong>@WholesaleRules.StoreNameFa</strong>
+                    <span>عمده ظروف گیاهی آملون · تهران</span>
+                    <span class="proforma-brand__tag">نمایندگی رسمی · خرید عمده</span>
+                </div>
+            </div>
+            <div class="proforma-head__side">
+                <div class="proforma-stamp" aria-hidden="true">
+                    <span>پیش‌فاکتور</span>
+                    <small>غیر مالیاتی</small>
+                </div>
+                <dl class="proforma-meta">
+                    <dt>شماره سند</dt>
+                    <dd dir="ltr">@order.OrderNumber</dd>
+                    <dt>تاریخ صدور</dt>
+                    <dd dir="ltr">@createdLocal.ToString("yyyy/MM/dd — HH:mm")</dd>
+                </dl>
+            </div>
+        </header>
+
+        <div class="proforma-badge-row">
+            <span class="proforma-badge">فاقد اعتبار مالیاتی و رسمی</span>
+            <span class="proforma-badge proforma-badge--gold">فاکتور رسمی هنگام بارگیری</span>
+            <span class="proforma-badge proforma-badge--muted">اعتبار تا تأیید فروش و موجودی</span>
+        </div>
+
+        <div class="proforma-parties">
+            <div class="proforma-party proforma-party--buyer">
+                <h3>مشخصات خریدار</h3>
+                <p class="proforma-party__name">@order.CustomerName</p>
+                <p class="proforma-party__line">موبایل: <span dir="ltr">@order.Phone</span></p>
+                @if (order.WantsOfficialInvoice && !string.IsNullOrWhiteSpace(order.CompanyName))
+                {
+                    <p class="proforma-party__line proforma-party__line--sub">حقوقی: @order.CompanyName</p>
+                }
+            </div>
+            <div class="proforma-party proforma-party--terms">
+                <h3>شرایط تحویل و پرداخت</h3>
+                <ul class="proforma-party__list">
+                    <li><span>روش پرداخت</span><strong>@payFa</strong></li>
+                    <li><span>روش تحویل</span><strong>@delFa</strong></li>
+                    <li><span>آماده‌سازی</span><strong>۲ تا ۷ روز کاری</strong></li>
+                </ul>
+            </div>
+        </div>
+
+        @if (orderAnalytics is not null && orderAnalytics.Items.Count > 0)
+        {
+            <div class="proforma-analytics-wrap">
+                @{
+                    ViewBag.AnalyticsKicker = "📊 گزارش هوشمند پیش‌فاکتور";
+                    ViewBag.AnalyticsTitle = "تحلیل بسته‌بندی و تعداد اقلام";
+                    ViewBag.AnalyticsBarLimit = 20;
+                    ViewBag.AnalyticsDetailLimit = 80;
+                    ViewBag.HideAnalyticsItemDetails = true;
+                }
+                <partial name="_CartAnalyticsReport" model="orderAnalytics" />
+            </div>
+        }
+
+        <div class="proforma-table-wrap">
+            <table class="proforma-table">
+                <thead>
+                    <tr>
+                        <th class="col-idx">#</th>
+                        <th>شرح کالا / تنوع</th>
+                        <th class="col-num">کارتن</th>
+                        <th class="col-num">فی (تومان)</th>
+                        <th class="col-num">جمع (تومان)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ var row = 0; }
+                    @foreach (var i in order.Items)
+                    {
+                        row++;
+                        <tr>
+                            <td class="col-idx">@row</td>
+                            <td>
+                                <span class="proforma-item-name">@i.ProductName</span>
+                                <span class="proforma-item-var">@i.VariantLabel</span>
+                            </td>
+                            <td class="col-num">@i.CartonQuantity.ToString("N0")</td>
+                            <td class="col-num">@SlugHelper.FormatToman(i.UnitPrice)</td>
+                            <td class="col-num proforma-line-total">@SlugHelper.FormatToman(i.LineTotal)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="proforma-summary">
+            <div class="proforma-summary__note">
+                <strong>توجه:</strong>
+                مبلغ زیر بر اساس قیمت روز ثبت سفارش است. در صورت تغییر نرخ کارخانه، پیش‌فاکتور از اعتبار ساقط می‌شود.
+            </div>
+            <div class="proforma-totals">
+                <dl>
+                    <dt>جمع اقلام</dt>
+                    <dd>@SlugHelper.FormatToman(order.SubTotal)</dd>
+                    @if (order.DiscountAmount > 0)
+                    {
+                        <dt>تخفیف @if (!string.IsNullOrEmpty(order.CouponCode)) { <span>(@order.CouponCode)</span> }</dt>
+                        <dd class="proforma-totals__discount">− @SlugHelper.FormatToman(order.DiscountAmount)</dd>
+                    }
+                    <dt class="grand">مبلغ پیش‌فاکتور</dt>
+                    <dd class="grand">@SlugHelper.FormatToman(order.TotalAmount) <small>تومان</small></dd>
+                </dl>
+            </div>
+        </div>
+
+        <aside class="proforma-legal">
+            <h3>تذکرات</h3>
+            <ul class="proforma-legal__cols">
+                <li>این سند <strong>پیش‌فاکتور غیرمالیاتی</strong> است؛ فاکتور رسمی هنگام <strong>بارگیری</strong> صادر می‌شود.</li>
+                <li>با <strong>افزایش قیمت کارخانه</strong>، پیش‌فاکتور از اعتبار ساقط و مبلغ نهایی پس از تأیید فروش اعلام می‌شود.</li>
+                <li>ثبت سفارش قطعی‌کننده موجودی نیست؛ زمان بارگیری پس از تماس هماهنگ می‌شود.</li>
+            </ul>
+        </aside>
+
+        @if (!string.IsNullOrWhiteSpace(order.Notes))
+        {
+            <p class="proforma-customer-note"><strong>یادداشت:</strong> @order.Notes</p>
+        }
+    </div>
+    <footer class="proforma-sheet__bar">
+        <span class="proforma-sheet__bar-phone" dir="ltr">@WholesaleRules.CoordinationPhone</span>
+        <span class="proforma-sheet__bar-brand">@WholesaleRules.StoreNameFa · نمایندگی رسمی آملون</span>
+    </footer>
+</article>

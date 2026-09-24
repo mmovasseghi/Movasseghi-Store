@@ -1,0 +1,163 @@
+@model List<HomeStory>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "استوری‌های صفحه اصلی";
+    ViewData["HeroTitle"] = "استوری‌های صفحه اصلی";
+    ViewData["HeroSubtitle"] = "حلقه‌های استوری بالای صفحه اول — تصویر دایره و اسلایدهای تمام‌صفحه";
+    ViewData["HeroBadge"] = "Home Stories";
+    var activeCount = Model.Count(s => s.IsActive);
+    var slideCount = Model.Sum(s => s.Slides.Count(sl => sl.IsActive));
+    var onlyDefaults = Model.Count == 3 && Model.All(s => s.StoryKey is "all" or "wholesale" or "official");
+}
+
+<partial name="_AdminHero" />
+
+@if (TempData["Success"] != null) { <div class="st-alert st-alert-success st-reveal">@TempData["Success"]</div> }
+@if (TempData["Error"] != null) { <div class="st-alert st-alert-error st-reveal">@TempData["Error"]</div> }
+
+@if (onlyDefaults)
+{
+    <div class="st-alert st-alert-warn st-reveal">
+        فقط ۳ استوری پایه نمایش داده می‌شود. برای برگرداندن استوری‌های دسته‌بندی محصولات (لیوان، کاسه و …)
+        دکمه <strong>«بازسازی از محصولات»</strong> را بزنید — یا سرور را یک‌بار ری‌استارت کنید تا خودکار پر شود.
+    </div>
+}
+
+<div class="kit-stats kit-stagger">
+    <article class="kit-stat">
+        <span class="kit-stat-label">📱 کل استوری‌ها</span>
+        <span class="kit-stat-value">@Model.Count.ToString("N0")</span>
+    </article>
+    <article class="kit-stat">
+        <span class="kit-stat-label">✅ فعال</span>
+        <span class="kit-stat-value kit-stat-value--ok">@activeCount.ToString("N0")</span>
+    </article>
+    <article class="kit-stat">
+        <span class="kit-stat-label">🖼️ اسلاید فعال</span>
+        <span class="kit-stat-value">@slideCount.ToString("N0")</span>
+    </article>
+</div>
+
+<section class="kit-section kit-rise">
+    <div class="kit-section-head">
+        <div>
+            <h2>📐 راهنمای سایز تصاویر</h2>
+            <p>برای نمایش بی‌نقص روی صفحه اصلی — قبل از آپلود بخوانید</p>
+        </div>
+    </div>
+    <div class="kit-grid-2">
+        <div>
+            <strong class="kit-form-hint" style="display:block;margin-bottom:.35rem;color:var(--st-text)">تصویر دایره حلقه (همان چیزی که روی صفحه دیده می‌شود)</strong>
+            <ul class="kit-form-hint" style="margin:0;padding-right:1.1rem;line-height:1.75">
+                <li><strong style="color:var(--st-text-2)">پیشنهادی:</strong> ۵۱۲ × ۵۱۲ پیکسل (مربع ۱:۱)</li>
+                <li>حداقل ۴۰۰ × ۴۰۰ — روی صفحه ~۷۶px دایره نشان داده می‌شود</li>
+                <li>فرمت JPG، PNG یا WebP — حداکثر ~۵۰۰ کیلوبایت</li>
+                <li>سوژه وسط تصویر باشد (لبه‌ها در دایره بریده می‌شود)</li>
+            </ul>
+        </div>
+        <div>
+            <strong class="kit-form-hint" style="display:block;margin-bottom:.35rem;color:var(--st-text)">تصویر اسلاید (تمام‌صفحه استوری)</strong>
+            <ul class="kit-form-hint" style="margin:0;padding-right:1.1rem;line-height:1.75">
+                <li><strong style="color:var(--st-text-2)">پیشنهادی:</strong> ۱۰۸۰ × ۱۹۲۰ پیکسل (نسبت ۹:۱۶)</li>
+                <li>مثل استوری اینستاگرام — viewer سایت هم ۹:۱۶ است</li>
+                <li>متن مهم را وسط و بالا نگه دارید (پایین دکمه CTA قرار می‌گیرد)</li>
+                <li>فرمت JPG یا WebP — حداکثر ~۸۰۰ کیلوبایت</li>
+            </ul>
+        </div>
+    </div>
+    <p class="kit-form-hint" style="margin:.85rem 0 0">
+        اگر نسبت ۹:۱۶ نباشد، سایت با <code>object-fit: contain</code> نمایش می‌دهد و ممکن است نوار مشکی بالا/پایین ببینید.
+    </p>
+</section>
+
+<div class="kit-toolbar kit-rise">
+    <div class="kit-toolbar-grow">
+        <strong style="font-size:.88rem">لیست استوری‌ها</strong>
+        <span class="kit-form-hint" style="margin-top:.15rem">
+            در ستون «تصویر حلقه» عکس دایره را آپلود کنید — همان تصویری که کاربر روی صفحه اصلی می‌بیند.
+        </span>
+    </div>
+    <form method="post" action="/Admin/StoriesAdmin/ImportFromProducts" style="display:inline">
+        @Html.AntiForgeryToken()
+        <button type="submit" class="st-btn st-btn-ghost" title="ساخت مجدد از محصولات و دسته‌ها">↻ بازسازی از محصولات</button>
+    </form>
+    <a class="st-btn st-btn-primary" href="/Admin/StoriesAdmin/Create">+ استوری جدید</a>
+</div>
+
+<section class="kit-table-card kit-rise">
+    @if (Model.Count == 0)
+    {
+        <div class="kit-empty">
+            <div class="kit-empty-icon" aria-hidden="true">📱</div>
+            <h3>هنوز استوری ثبت نشده</h3>
+            <p>دکمه «بازسازی از محصولات» را بزنید تا همه استوری‌های قبلی (دسته‌بندی‌ها) برگردند.</p>
+            <form method="post" action="/Admin/StoriesAdmin/ImportFromProducts" style="display:inline">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="st-btn st-btn-primary">بازسازی از محصولات</button>
+            </form>
+        </div>
+    }
+    else
+    {
+        <div class="kit-table-scroll">
+            <table class="kit-table">
+                <thead>
+                    <tr>
+                        <th>ترتیب</th>
+                        <th>تصویر حلقه</th>
+                        <th>عنوان</th>
+                        <th>شناسه</th>
+                        <th>اسلاید</th>
+                        <th>وضعیت</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var s in Model)
+                {
+                    <tr>
+                        <td>@s.SortOrder</td>
+                        <td>
+                            <form method="post" action="/Admin/StoriesAdmin/UploadCover" enctype="multipart/form-data" class="kit-story-cover-form">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@s.Id" />
+                                @if (!string.IsNullOrWhiteSpace(s.CoverImageUrl))
+                                {
+                                    <img src="@s.CoverImageUrl" alt="" class="kit-story-cover-thumb" />
+                                }
+                                else
+                                {
+                                    <span class="kit-pill">آیکون پیش‌فرض</span>
+                                }
+                                <label class="kit-story-cover-upload">
+                                    <span class="st-btn st-btn-ghost st-btn-sm">📷 آپلود تصویر</span>
+                                    <input type="file" name="coverImage" accept="image/jpeg,image/png,image/webp" onchange="this.form.submit()" />
+                                </label>
+                            </form>
+                        </td>
+                        <td><strong>@s.Label</strong></td>
+                        <td dir="ltr" style="font-size:.78rem">@s.StoryKey</td>
+                        <td>@s.Slides.Count(sl => sl.IsActive) / @s.Slides.Count</td>
+                        <td>
+                            @if (s.IsActive)
+                            { <span class="kit-pill kit-pill--ok">فعال</span> }
+                            else
+                            { <span class="kit-pill kit-pill--muted">غیرفعال</span> }
+                        </td>
+                        <td>
+                            <a href="/Admin/StoriesAdmin/Edit/@s.Id" class="st-btn st-btn-ghost st-btn-sm">ویرایش</a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
+</section>
+
+<style>
+.kit-story-cover-form { display:flex; flex-direction:column; align-items:flex-start; gap:.35rem; min-width:110px }
+.kit-story-cover-thumb { width:52px; height:52px; border-radius:50%; object-fit:cover; border:2px solid var(--st-gold) }
+.kit-story-cover-upload input[type=file] { position:absolute; width:1px; height:1px; opacity:0; overflow:hidden }
+.kit-story-cover-upload { cursor:pointer }
+</style>

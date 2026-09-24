@@ -1,0 +1,132 @@
+@model MovasseghiShop.Web.Services.RankRadarModel
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Rank Radar";
+    ViewData["HeroTitle"] = "📡 Rank Radar + Google Search Console";
+    ViewData["HeroSubtitle"] = "رتبه واقعی از GSC (رایگان) · ثبت دستی · SerpAPI اختیاری";
+    ViewData["HeroBadge"] = "GROWTH ENGINE";
+    var gsc = ViewBag.Gsc as MovasseghiShop.Web.Services.GscSyncResult;
+    var gscConfigured = ViewBag.GscConfigured as bool? ?? false;
+    var gscProperty = ViewBag.GscProperty as string;
+}
+<partial name="_AdminHero" />
+
+@if (TempData["Success"] != null) { <div class="st-alert st-alert-success st-reveal">@TempData["Success"]</div> }
+@if (TempData["Error"] != null) { <div class="st-alert st-alert-error st-reveal">@TempData["Error"]</div> }
+
+<section class="st-panel st-reveal">
+    <div class="st-btn-row" style="justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap">
+        <h2 style="margin:0">Google Search Console</h2>
+        <div class="st-btn-row">
+            <form method="post" action="/Admin/Studio/SyncGsc">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="st-btn st-btn-primary" disabled="@(gscConfigured ? null : "disabled")">🔄 Sync از GSC</button>
+            </form>
+            <a href="https://search.google.com/search-console" target="_blank" rel="noopener" class="st-btn st-btn-ghost">باز کردن GSC ↗</a>
+        </div>
+    </div>
+
+    @if (!gscConfigured)
+    {
+        <div class="st-alert st-alert-error">
+            <strong>راه‌اندازی GSC (رایگان):</strong>
+            <ol style="margin:.5rem 0 0;padding-right:1.2rem;font-size:.85rem">
+                <li>در <a href="https://search.google.com/search-console" target="_blank">Search Console</a> سایت را اضافه کنید.</li>
+                <li>در Google Cloud، Search Console API را فعال کنید و Service Account بسازید.</li>
+                <li>فایل JSON را در <code>App_Data/gsc-service-account.json</code> قرار دهید.</li>
+                <li>ایمیل Service Account را در GSC → Users → Owner اضافه کنید.</li>
+                <li>در <code>appsettings.json</code> مقدار <code>GoogleSearchConsole:PropertyUrl</code> را بگذارید (مثال: <code>https://yourdomain.com/</code>).</li>
+                <li>برای تأیید مالکیت HTML، <code>SiteVerificationMeta</code> را از GSC کپی کنید.</li>
+            </ol>
+        </div>
+    }
+    else
+    {
+        <p class="st-panel-desc">Property: <code dir="ltr">@gscProperty</code> · @(gsc?.Message ?? "")</p>
+    }
+
+    @if (gsc?.TopQueries?.Count > 0)
+    {
+        <div class="st-table-wrap" style="margin-top:1rem">
+            <table class="st-table">
+                <thead>
+                    <tr><th>Query (GSC)</th><th>کلیک</th><th>Impression</th><th>CTR</th><th>میانگین رتبه</th></tr>
+                </thead>
+                <tbody>
+                    @foreach (var q in gsc.TopQueries.Take(25))
+                    {
+                        <tr>
+                            <td>@q.Query</td>
+                            <td>@q.Clicks.ToString("0")</td>
+                            <td>@q.Impressions.ToString("0")</td>
+                            <td>@(q.Ctr * 100).ToString("0.0")%</td>
+                            <td><span class="st-badge @(q.Position <= 10 ? "st-badge-ok" : "st-badge-muted")">@q.Position.ToString("0.0")</span></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</section>
+
+<div class="st-grid st-reveal">
+    <div class="st-stat"><div class="st-stat-label">کلمه ردیابی‌شده</div><div class="st-stat-value">@Model.Rows.Count</div></div>
+    <div class="st-stat"><div class="st-stat-label">ثبت‌شده</div><div class="st-stat-value">@Model.TrackedCount</div></div>
+    <div class="st-stat"><div class="st-stat-label">تاپ ۳</div><div class="st-stat-value is-success">@Model.Top3Count</div></div>
+    <div class="st-stat"><div class="st-stat-label">تاپ ۱۰</div><div class="st-stat-value is-gold">@Model.Top10Count</div></div>
+</div>
+
+<section class="st-panel st-reveal">
+    <div class="st-btn-row" style="justify-content:space-between;margin-bottom:1rem">
+        <h2 style="margin:0">ثبت دستی / SerpAPI</h2>
+        <form method="post" action="/Admin/Studio/SyncRankApi">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="st-btn st-btn-ghost">SerpAPI Sync (اختیاری)</button>
+        </form>
+    </div>
+    <form method="post" action="/Admin/Studio/RecordRank" class="st-btn-row" style="align-items:flex-end;margin-bottom:1.25rem">
+        @Html.AntiForgeryToken()
+        <div class="st-field" style="flex:2;min-width:200px;margin:0">
+            <label>کلمه کلیدی</label>
+            <input type="text" name="keyword" required class="st-input" placeholder="پخش عمده ظروف یکبار مصرف" />
+        </div>
+        <div class="st-field" style="flex:0 0 100px;margin:0">
+            <label>رتبه</label>
+            <input type="number" name="position" min="0" max="100" value="0" class="st-input" />
+        </div>
+        <div class="st-field" style="flex:0 0 120px;margin:0">
+            <label>نوع</label>
+            <select name="keywordType" class="st-input">
+                <option value="pillar">pillar</option>
+                <option value="product">product</option>
+                <option value="gsc">gsc</option>
+            </select>
+        </div>
+        <button type="submit" class="st-btn st-btn-gold">ثبت</button>
+    </form>
+    <div class="st-table-wrap">
+        <table class="st-table">
+            <thead><tr><th>کلمه</th><th>نوع</th><th>رتبه</th><th>آخرین بررسی</th><th>اقدام</th></tr></thead>
+            <tbody>
+                @foreach (var row in Model.Rows)
+                {
+                    <tr>
+                        <td>@row.Keyword</td>
+                        <td><span class="st-badge st-badge-muted">@row.KeywordType</span></td>
+                        <td>
+                            @if (row.LastPosition is >= 1 and <= 100)
+                            {
+                                <span class="st-badge @(row.LastPosition <= 3 ? "st-badge-ok" : row.LastPosition <= 10 ? "st-badge-warn" : "st-badge-muted")">@row.LastPosition</span>
+                            }
+                            else { <span class="st-badge st-badge-muted">—</span> }
+                        </td>
+                        <td style="color:var(--st-muted);font-size:.8rem">@(row.LastChecked?.ToLocalTime().ToString("yyyy/MM/dd HH:mm") ?? "—")</td>
+                        <td><a href="@row.GoogleSearchUrl" target="_blank" rel="noopener" class="st-btn st-btn-ghost st-btn-sm">گوگل</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<p class="st-reveal"><a href="/Admin/Studio" class="st-btn st-btn-ghost">← مرکز فرمان</a></p>

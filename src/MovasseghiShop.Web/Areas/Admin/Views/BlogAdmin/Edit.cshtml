@@ -1,0 +1,243 @@
+@model BlogPost
+@using MovasseghiShop.Web.Models
+@using MovasseghiShop.Web.Services.Editorial
+@{
+    var isNew = Model.Id == 0;
+    var score = (SeoScoreResult?)ViewBag.SeoScore;
+    var inlineImages = ViewBag.InlineImages as IReadOnlyList<EditorialInlineImage> ?? Array.Empty<EditorialInlineImage>();
+    ViewData["Title"] = isNew ? "مقاله جدید" : "ویرایش مقاله";
+}
+
+<div class="st-edit-grid st-reveal">
+<div>
+<form method="post" action="/Admin/BlogAdmin/Save" data-kit-primary data-kit-dirty-guard>
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="Id" value="@Model.Id" />
+
+    <div class="kit-toolbar kit-rise">
+        <div class="kit-toolbar-grow">
+            <strong style="font-size:.88rem">@(isNew ? "نوشتن مقاله تازه" : Model.Title)</strong>
+            <span class="kit-form-hint" style="margin-top:.15rem">
+                برای ذخیره می‌توانید Ctrl+S بزنید.
+            </span>
+        </div>
+        <a class="st-btn st-btn-ghost" href="/Admin/BlogAdmin">بازگشت</a>
+        <button type="submit" class="st-btn st-btn-primary">@(isNew ? "ساخت مقاله" : "ذخیره تغییرات")</button>
+    </div>
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="kit-insight kit-insight--risk kit-rise">
+            <span class="kit-insight-icon" aria-hidden="true">⚠️</span>
+            <div class="kit-insight-body">
+                <strong>فرم ذخیره نشد</strong>
+                @foreach (var err in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <div>· @err.ErrorMessage</div>
+                }
+                <em>مقادیری که وارد کرده بودید حفظ شده — فقط موارد بالا را اصلاح کنید.</em>
+            </div>
+        </div>
+    }
+
+    <div class="kit-grid-2 kit-grid-2--wide">
+        <div>
+            <section class="kit-section kit-rise">
+                <div class="kit-section-head">
+                    <div><h2>متن مقاله</h2></div>
+                </div>
+
+                <div class="kit-form-grid">
+                    <div class="st-field kit-form-full">
+                        <label for="Title">عنوان مقاله <span style="color:#fca5a5">*</span></label>
+                        <input id="Title" name="Title" value="@Model.Title" class="st-input @(ViewData.ModelState["Title"]?.Errors.Count > 0 ? "kit-input-invalid" : "")" required />
+                        <span class="kit-form-hint">
+                            عنوان باید شامل عبارتی باشد که مشتری واقعاً در گوگل جستجو می‌کند.
+                        </span>
+                    </div>
+
+                    <div class="st-field kit-form-full">
+                        <label for="Slug">نامک (آدرس صفحه)</label>
+                        <input id="Slug" name="Slug" value="@Model.Slug" class="st-input" dir="ltr" placeholder="خالی بگذارید تا از عنوان ساخته شود" />
+                        <span class="kit-form-hint">
+                            @if (!isNew)
+                            {
+                                <text>
+                                    تغییر نامک، آدرس فعلی را می‌شکند. اگر صفحه در گوگل ایندکس شده،
+                                    فقط در صورت لزوم تغییر دهید.
+                                </text>
+                            }
+                            else
+                            {
+                                <text>حروف لاتین یا فارسی، با خط تیره بین کلمات.</text>
+                            }
+                        </span>
+                    </div>
+
+                    <div class="st-field kit-form-full">
+                        <label for="Excerpt">
+                            چکیده
+                            <span class="kit-counter" id="cnt-excerpt"></span>
+                        </label>
+                        <textarea id="Excerpt" name="Excerpt" rows="2" class="st-input"
+                                  data-kit-counter="#cnt-excerpt" data-kit-min="80" data-kit-max="200">@Model.Excerpt</textarea>
+                        <span class="kit-form-hint">
+                            در فهرست بلاگ و کارت اشتراک‌گذاری نمایش داده می‌شود.
+                        </span>
+                    </div>
+
+                    <div class="st-field kit-form-full">
+                        <label>متن کامل <span style="color:#fca5a5">*</span></label>
+                        @{
+                            ViewData["EditorContent"] = Model.Content;
+                            ViewData["FieldName"] = "Content";
+                            ViewData["EditorMinHeight"] = 420;
+                            ViewData["EditorPreview"] = true;
+                        }
+                        <partial name="_RichTextEditor" model="@("blog-content")" />
+                        <span class="kit-form-hint">
+                            برای گرفتن Featured Snippet: هر سرتیتر H2 یک سوال واقعی باشد و
+                            بلافاصله زیرش پاسخ کوتاه و مستقیم بیاید. به صفحات محصول لینک داخلی بدهید.
+                        </span>
+                    </div>
+
+                    <div class="st-field kit-form-full">
+                        <label for="FeaturedImageUrl">تصویر شاخص (نمایه)</label>
+                        <div class="kit-toolbar" style="gap:.5rem;margin-bottom:.35rem">
+                            <input id="FeaturedImageUrl" name="FeaturedImageUrl" value="@Model.FeaturedImageUrl" class="st-input" dir="ltr" placeholder="/uploads/..." style="flex:1" />
+                            <button type="button" class="st-btn st-btn-ghost st-btn-sm" data-pick-featured-image>🖼 از کاتالوگ</button>
+                        </div>
+                        <img id="featured-image-preview" src="@Model.FeaturedImageUrl" alt="" class="blog-featured-preview" @(string.IsNullOrWhiteSpace(Model.FeaturedImageUrl) ? "hidden" : "") loading="lazy" />
+                    </div>
+
+                    @if (!isNew && inlineImages.Count > 0)
+                    {
+                        <div class="st-field kit-form-full">
+                            <label>تصاویر داخل متن</label>
+                            <ul class="blog-inline-img-list">
+                                @foreach (var img in inlineImages)
+                                {
+                                    <li>
+                                        <img src="@img.Url" alt="@img.Alt" loading="lazy" width="72" height="54" />
+                                        <span class="blog-inline-img-url" dir="ltr">@img.Url</span>
+                                        <button type="button" class="st-btn st-btn-ghost st-btn-sm" data-pick-inline-image data-image-url="@img.Url">تعویض</button>
+                                    </li>
+                                }
+                            </ul>
+                            <span class="kit-form-hint">بعد از تعویض، «ذخیره تغییرات» را بزنید.</span>
+                        </div>
+                    }
+                </div>
+            </section>
+        </div>
+
+        <div>
+            <section class="kit-section kit-rise">
+                <div class="kit-section-head">
+                    <div>
+                        <h2>انتشار</h2>
+                    </div>
+                </div>
+
+                <label class="kit-switch" style="margin-bottom:1rem">
+                    <input type="checkbox" name="IsPublished" value="true" @(Model.IsPublished ? "checked" : "") />
+                    <span class="kit-switch-label">منتشر شود</span>
+                    <span class="kit-switch-track" aria-hidden="true"></span>
+                </label>
+                <input type="hidden" name="IsPublished" value="false" />
+
+                <p class="kit-form-hint">
+                    مقاله منتشرنشده در Sitemap نمی‌آید و گوگل آن را نمی‌بیند.
+                </p>
+
+                @if (!isNew && Model.PublishedAt.HasValue)
+                {
+                    <p class="kit-form-hint">
+                        اولین انتشار: @Model.PublishedAt.Value.ToLocalTime().ToString("yyyy/MM/dd HH:mm")
+                        <br />آخرین ویرایش: @Model.UpdatedAt.ToLocalTime().ToString("yyyy/MM/dd HH:mm")
+                    </p>
+                }
+            </section>
+
+            <section class="kit-section kit-rise">
+                <div class="kit-section-head">
+                    <div>
+                        <h2>سئو صفحه</h2>
+                        <p>عنوان و توضیحی که در نتایج گوگل دیده می‌شود.</p>
+                    </div>
+                </div>
+
+                <div class="st-field">
+                    <label for="MetaTitle">
+                        عنوان Meta
+                        <span class="kit-counter" id="cnt-mt"></span>
+                    </label>
+                    <input id="MetaTitle" name="MetaTitle" value="@Model.MetaTitle" class="st-input"
+                           data-kit-counter="#cnt-mt" data-kit-min="30" data-kit-max="60" />
+                    <span class="kit-form-hint">۳۰ تا ۶۰ کاراکتر — بلندتر در گوگل بریده می‌شود.</span>
+                </div>
+
+                <div class="st-field">
+                    <label for="MetaDescription">
+                        توضیح Meta
+                        <span class="kit-counter" id="cnt-md"></span>
+                    </label>
+                    <textarea id="MetaDescription" name="MetaDescription" rows="3" class="st-input"
+                              data-kit-counter="#cnt-md" data-kit-min="120" data-kit-max="160">@Model.MetaDescription</textarea>
+                    <span class="kit-form-hint">۱۲۰ تا ۱۶۰ کاراکتر — این متن نرخ کلیک را تعیین می‌کند.</span>
+                </div>
+
+                <div class="st-field">
+                    <label for="MetaKeywords">کلیدواژه‌ها (متا)</label>
+                    <input id="MetaKeywords" name="MetaKeywords" value="@Model.MetaKeywords" class="st-input" placeholder="خودکار از pillar + Focus پر می‌شود" />
+                </div>
+
+                @if (!isNew)
+                {
+                    <div class="st-field">
+                        <label>Focus / Secondary (پروفایل SEO)</label>
+                        <p class="kit-form-hint" dir="auto">
+                            <strong>@(ViewBag.FocusKeyword ?? "—")</strong>
+                            <br />@(ViewBag.SecondaryKeyword ?? "—")
+                        </p>
+                    </div>
+                }
+            </section>
+        </div>
+    </div>
+</form>
+
+@if (!isNew)
+{
+    <form method="post" action="/Admin/BlogAdmin/AutoFillSeo/@Model.Id" class="kit-rise" style="margin-top:.75rem">
+        @Html.AntiForgeryToken()
+        <button type="submit" class="st-btn st-btn-primary st-btn-sm">✨ پر کردن کلیدواژه + Auto-Fix SEO/GEO/AEO</button>
+    </form>
+}
+</div>
+
+@if (!isNew)
+{
+    <aside>
+        @{
+            ViewData["SeoEntityId"] = Model.Id;
+            ViewData["SeoEntityType"] = "blog";
+        }
+        <partial name="_SeoProPanel" model="@score" />
+    </aside>
+}
+</div>
+
+@section Scripts {
+    <script src="/js/blog-editorial-images.js" asp-append-version="true"></script>
+    <style>
+        .blog-featured-preview { max-width: 100%; max-height: 200px; border-radius: 8px; margin-top: .35rem; }
+        .blog-inline-img-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: .5rem; }
+        .blog-inline-img-list li { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
+        .blog-inline-img-url { font-size: .75rem; opacity: .85; max-width: 220px; overflow: hidden; text-overflow: ellipsis; }
+        .blog-img-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: .5rem; max-height: 320px; overflow: auto; margin: .75rem 0; }
+        .blog-img-tile { border: 1px solid rgba(255,255,255,.12); border-radius: 8px; padding: .25rem; background: rgba(0,0,0,.2); cursor: pointer; text-align: center; }
+        .blog-img-tile img { width: 100%; height: 72px; object-fit: cover; border-radius: 4px; }
+        .blog-img-tile span { font-size: .65rem; display: block; margin-top: .2rem; }
+    </style>
+}

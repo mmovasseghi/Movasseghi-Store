@@ -1,0 +1,117 @@
+@model CartSummary
+@{
+    var couponDiscount = ViewBag.CouponDiscount as decimal? ?? 0m;
+    var payable = Model.TotalAfterVolumeDiscount - couponDiscount;
+    var payableHero = ViewBag.CartPayableHero as bool? ?? false;
+    var a = Model.Analytics;
+}
+
+@if (payableHero && Model.MeetsMinimum)
+{
+    <section class="cart-invoice" data-cart-invoice aria-label="خلاصه فاکتور">
+        <header class="cart-invoice__head">
+            <span class="cart-invoice__head-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg>
+            </span>
+            <h3 class="cart-invoice__title">خلاصه فاکتور</h3>
+        </header>
+
+        <div class="cart-invoice__body">
+            <div class="cart-invoice__row" data-invoice-row>
+                <span class="cart-invoice__label">جمع اقلام</span>
+                <strong class="cart-invoice__val">@SlugHelper.FormatToman(Model.SubTotal) <small>تومان</small></strong>
+            </div>
+            <div class="cart-invoice__stats" data-invoice-row>
+                <div class="cart-invoice__stat">
+                    <span class="cart-invoice__stat-label">قلم (عدد)</span>
+                    <strong class="cart-invoice__stat-val">@CartAnalyticsHelper.FormatCount(a.TotalPieces)</strong>
+                </div>
+                <div class="cart-invoice__stat">
+                    <span class="cart-invoice__stat-label">نایلون</span>
+                    <strong class="cart-invoice__stat-val">@CartAnalyticsHelper.FormatCount(a.TotalNylons)</strong>
+                </div>
+                <div class="cart-invoice__stat">
+                    <span class="cart-invoice__stat-label">کارتن</span>
+                    <strong class="cart-invoice__stat-val">@CartAnalyticsHelper.FormatCount(a.TotalCartons)</strong>
+                </div>
+                <div class="cart-invoice__stat">
+                    <span class="cart-invoice__stat-label">بسته شیرینگ</span>
+                    <strong class="cart-invoice__stat-val">@CartAnalyticsHelper.FormatCount(a.TotalPacks)</strong>
+                </div>
+            </div>
+            @if (Model.VolumeDiscountAmount > 0)
+            {
+                <div class="cart-invoice__row cart-invoice__row--discount" data-invoice-row data-cart-discount
+                     data-discount-value="@Model.VolumeDiscountAmount.ToString(System.Globalization.CultureInfo.InvariantCulture)">
+                    <span class="cart-invoice__label">
+                        <span class="cart-invoice__discount-icon" aria-hidden="true">↓</span>
+                        تخفیف @(Model.VolumeDiscountPercent)٪
+                    </span>
+                    <strong class="cart-invoice__val cart-invoice__val--save">
+                        <span class="cart-invoice__save-num" dir="ltr">
+                            <span class="cart-invoice__save-sign" aria-hidden="true">−</span><span data-cart-discount-amount>@SlugHelper.FormatToman(Model.VolumeDiscountAmount)</span>
+                        </span>
+                        <small>تومان</small>
+                    </strong>
+                </div>
+            }
+            @if (couponDiscount > 0)
+            {
+                <div class="cart-invoice__row cart-invoice__row--discount" data-invoice-row data-cart-discount
+                     data-discount-value="@couponDiscount.ToString(System.Globalization.CultureInfo.InvariantCulture)">
+                    <span class="cart-invoice__label">
+                        <span class="cart-invoice__discount-icon" aria-hidden="true">↓</span>
+                        کد تخفیف
+                    </span>
+                    <strong class="cart-invoice__val cart-invoice__val--save">
+                        <span class="cart-invoice__save-num" dir="ltr">
+                            <span class="cart-invoice__save-sign" aria-hidden="true">−</span><span data-cart-discount-amount>@SlugHelper.FormatToman(couponDiscount)</span>
+                        </span>
+                        <small>تومان</small>
+                    </strong>
+                </div>
+            }
+        </div>
+
+        <footer class="cart-invoice__foot">
+            <div class="cart-invoice__payable" data-cart-payable
+                 data-payable-value="@payable.ToString(System.Globalization.CultureInfo.InvariantCulture)">
+                <span class="cart-invoice__payable-kicker">مبلغ نهایی</span>
+                <div class="cart-invoice__payable-main">
+                    <span class="cart-invoice__payable-label">قابل پرداخت</span>
+                    <div class="cart-invoice__payable-amount">
+                        <span data-cart-payable-amount>@SlugHelper.FormatToman(payable)</span>
+                        <small>تومان</small>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </section>
+}
+else
+{
+    <div class="ms-cart-summary">
+        <div><span>جمع اقلام</span><strong>@SlugHelper.FormatToman(Model.SubTotal) تومان</strong></div>
+        @if (Model.TotalCartons > 0)
+        {
+            <div><span>تعداد کارتن</span><strong>@Model.TotalCartons</strong></div>
+        }
+        @if (Model.VolumeDiscountAmount > 0)
+        {
+            <div class="ms-cart-discount"><span>تخفیف پلکانی (@Model.VolumeDiscountPercent درصد)</span><strong>−@SlugHelper.FormatToman(Model.VolumeDiscountAmount) تومان</strong></div>
+        }
+        @if (couponDiscount > 0)
+        {
+            <div class="ms-cart-discount"><span>تخفیف کد</span><strong>−@SlugHelper.FormatToman(couponDiscount) تومان</strong></div>
+        }
+        @if (Model.MeetsMinimum)
+        {
+            <div class="ms-cart-payable"><span>مبلغ قابل پرداخت</span><strong>@SlugHelper.FormatToman(payable) تومان</strong></div>
+        }
+    </div>
+}
+
+@if (!Model.MeetsMinimum)
+{
+    <p class="ms-cart-warn">برای ثبت سفارش، جمع سبد باید حداقل <strong>@WholesaleRules.FormatMinAmount() تومان</strong> باشد. سوالی دارید؟ <a href="tel:@WholesaleRules.CoordinationPhone">تماس با فروش</a></p>
+}

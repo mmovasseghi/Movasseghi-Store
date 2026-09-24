@@ -1,0 +1,62 @@
+@model string
+@{
+    var fieldName = ViewData["FieldName"] as string ?? "Content";
+    var label = ViewData["EditorLabel"] as string;
+    var minHeight = ViewData["EditorMinHeight"] as int? ?? 320;
+    var showPreview = ViewData["EditorPreview"] as bool? ?? true;
+    var hint = ViewData["EditorHint"] as string;
+}
+<div class="st-rte" data-st-rte="@Model" data-st-rte-field="@fieldName">
+    @if (!string.IsNullOrEmpty(label))
+    {
+        <div class="st-rte-head">
+            <span class="st-rte-label">@label</span>
+            @if (!string.IsNullOrEmpty(hint))
+            {
+                <span class="st-rte-hint">@hint</span>
+            }
+        </div>
+    }
+    else if (!string.IsNullOrEmpty(hint))
+    {
+        <div class="st-rte-head st-rte-head--hint-only">
+            <span class="st-rte-hint">@hint</span>
+        </div>
+    }
+    <textarea id="@Model" name="@fieldName" class="st-rte-source" aria-hidden="true">@ViewData["EditorContent"]</textarea>
+    <div class="st-rte-shell">
+        <div class="st-rte-toolbar" role="toolbar" aria-label="ابزار ویرایش">
+            <button type="button" class="st-rte-btn" data-cmd="bold" title="درشت"><strong>B</strong></button>
+            <button type="button" class="st-rte-btn" data-cmd="italic" title="کج"><em>I</em></button>
+            <button type="button" class="st-rte-btn" data-cmd="underline" title="زیرخط"><u>U</u></button>
+            <span class="st-rte-sep"></span>
+            <button type="button" class="st-rte-btn" data-cmd="h2" title="عنوان H2">H2</button>
+            <button type="button" class="st-rte-btn" data-cmd="h3" title="عنوان H3">H3</button>
+            <span class="st-rte-sep"></span>
+            <button type="button" class="st-rte-btn" data-cmd="bulletList" title="لیست">•</button>
+            <button type="button" class="st-rte-btn" data-cmd="orderedList" title="لیست شماره‌دار">1.</button>
+            <button type="button" class="st-rte-btn" data-cmd="blockquote" title="نقل‌قول">❝</button>
+            <button type="button" class="st-rte-btn" data-cmd="hr" title="خط جداکننده">—</button>
+            <span class="st-rte-sep"></span>
+            <button type="button" class="st-rte-btn" data-cmd="link" title="افزودن لینک">🔗</button>
+            <button type="button" class="st-rte-btn" data-cmd="unlink" title="حذف لینک">⛓‍💥</button>
+            <span class="st-rte-sep"></span>
+            <button type="button" class="st-rte-btn" data-cmd="undo" title="برگشت">↩</button>
+            <button type="button" class="st-rte-btn" data-cmd="redo" title="جلو">↪</button>
+            <button type="button" class="st-rte-btn" data-cmd="clear" title="پاک‌سازی قالب">⌫</button>
+            @if (showPreview)
+            {
+                <span class="st-rte-sep"></span>
+                <button type="button" class="st-rte-btn st-rte-mode is-active" data-rte-mode="edit">ویرایش</button>
+                <button type="button" class="st-rte-btn st-rte-mode" data-rte-mode="preview">پیش‌نمایش</button>
+            }
+        </div>
+        <div class="st-rte-body" style="--rte-min: @(minHeight)px">
+            <div id="@(Model)-mount" class="st-rte-edit"></div>
+            @if (showPreview)
+            {
+                <div id="@(Model)-preview" class="st-rte-preview pd-prose st-pe-prose" hidden></div>
+            }
+        </div>
+    </div>
+</div>

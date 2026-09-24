@@ -1,0 +1,239 @@
+@using MovasseghiShop.Web.Models.Entities
+@using MovasseghiShop.Web.Services
+@using MovasseghiShop.Web.Services.Editorial
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "موتور رشد خودکار بلاگ";
+    var status = (EditorialGrowthStatus)ViewBag.Status;
+    var queue = (List<EditorialTopicQueue>)ViewBag.Queue;
+    var pillars = (IReadOnlyList<PillarKeywordDef>)ViewBag.Pillars;
+    var opt = (EditorialGrowthOptions)ViewBag.Options;
+    dynamic blogStats = ViewBag.BlogStats;
+    var inventory = (IReadOnlyList<EditorialBlogInventoryRow>)ViewBag.Inventory;
+    var timeline = (IReadOnlyList<EditorialTimelineStep>)ViewBag.Timeline;
+    var publishedToday = (int)ViewBag.PublishedToday;
+    var weakCount = inventory.Count(b => !b.IsPublishReady || b.DisplayScore < opt.MinPublishDisplayScore);
+    var readyCount = inventory.Count(b => b.IsPublishReady && b.DisplayScore >= opt.MinPublishDisplayScore);
+}
+
+@section Head {
+    <link rel="stylesheet" href="~/css/editorial-hub.css" asp-append-version="true" />
+}
+
+<partial name="_AdminHero" />
+
+@if (TempData["Success"] != null) { <div class="st-alert st-alert-success st-reveal">@TempData["Success"]</div> }
+@if (TempData["Error"] != null) { <div class="st-alert st-alert-error st-reveal">@TempData["Error"]</div> }
+
+<section class="st-panel st-reveal ehub-panel">
+    <div class="ehub-panel-head">
+        <h2>چه زمانی چه چیزی منتشر می‌شود؟</h2>
+        <p class="ehub-lead">
+            همهٔ زمان‌ها <strong>به وقت تهران</strong>. مقالهٔ زیر @opt.MinPublishDisplayScore یا بدون دروازه انتشار نگه داشته نمی‌شود — حذف و تولید مجدد.
+        </p>
+    </div>
+
+    <div class="ehub-stats">
+        <div class="ehub-stat"><strong>@publishedToday</strong><span>انتشار امروز / @opt.MaxPostsPerDay</span></div>
+        <div class="ehub-stat"><strong>@(status.NextScheduledTehran ?? "—")</strong><span>نزدیک‌ترین انتشار</span></div>
+        <div class="ehub-stat"><strong>@readyCount</strong><span>باکیفیت (≥ @opt.MinPublishDisplayScore)</span></div>
+        <div class="ehub-stat ehub-stat--warn"><strong>@weakCount</strong><span>ضعیف / نامناسب</span></div>
+        <div class="ehub-stat"><strong>@status.QueuedPlanned</strong><span>صف planned</span></div>
+        <div class="ehub-stat"><strong>@status.QueuedDrafting</strong><span>پیش‌نویس آماده</span></div>
+    </div>
+
+    <div class="ehub-layout">
+        <div>
+            <h3 class="ehub-block-title">مسیر کار موتور</h3>
+            <ol class="ehub-timeline">
+                @foreach (var step in timeline)
+                {
+                    <li data-step="@step.Step">
+                        <h4>@step.Title</h4>
+                        <p>@step.Detail</p>
+                        @if (!string.IsNullOrWhiteSpace(step.Badge))
+                        {
+                            <span class="ehub-badge">@step.Badge</span>
+                        }
+                    </li>
+                }
+            </ol>
+        </div>
+        <div>
+            <h3 class="ehub-block-title">تقویم انتشار</h3>
+            @if (status.Upcoming.Count == 0)
+            {
+                <p class="kit-form-hint">صف خالی — «پر کردن صف pillar» را بزنید.</p>
+            }
+            else
+            {
+                <div class="st-table-wrap st-table-wrap--stack">
+                    <table class="st-table st-table--stack">
+                        <thead>
+                            <tr>
+                                <th>زمان (تهران)</th>
+                                <th>وضعیت</th>
+                                <th>SEO</th>
+                                <th>عنوان</th>
+                                <th>مقاله</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var slot in status.Upcoming.OrderBy(s => s.ScheduledPublishUtc ?? DateTime.MaxValue))
+                            {
+                                <tr>
+                                    <td data-label="زمان" dir="ltr"><strong>@slot.ScheduledTehran</strong></td>
+                                    <td data-label="وضعیت">@slot.Status</td>
+                                    <td data-label="SEO">
+                                        @if (slot.IsPublishReady == true) { <span class="ehub-score ehub-score--ok">آماده</span> }
+                                        else if (slot.IsPublishReady == false) { <span class="ehub-score ehub-score--warn">ناقص</span> }
+                                        else { <span>—</span> }
+                                    </td>
+                                    <td data-label="عنوان">@slot.Title</td>
+                                    <td data-label="مقاله">
+                                        @if (slot.BlogPostId.HasValue)
+                                        {
+                                            <a href="/Admin/BlogAdmin/Edit/@slot.BlogPostId">#@slot.BlogPostId</a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            <p class="kit-form-hint ehub-hint">
+                @(opt.AutoPublishWhenReady ? "در زمان برنامه، اگر SEO آماده باشد انتشار خودکار است." : "انتشار خودکار خاموش — زمان فقط برای برنامه‌ریزی است.")
+            </p>
+        </div>
+    </div>
+
+    <div class="kit-toolbar ehub-toolbar">
+        <form method="post" action="/Admin/Studio/EditorialQualitySweep">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="st-btn st-btn-primary ehub-cta-danger">
+                🧹 حذف ضعیف + تولید @opt.TargetArticlesPerQualitySweep مقاله باکیفیت
+            </button>
+        </form>
+        <form method="post" action="/Admin/Studio/RunEditorialFullMaint">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="st-btn st-btn-ghost">⚡ نگهداری کامل</button>
+        </form>
+        <form method="post" action="/Admin/Studio/RunEditorialGrowthFromHub">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="st-btn st-btn-ghost">▶ یک چرخه رشد</button>
+        </form>
+        <form method="post" action="/Admin/Studio/RefreshEditorialQueueFromHub">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="st-btn st-btn-ghost">📋 پر کردن صف</button>
+        </form>
+        <a class="st-btn st-btn-ghost" href="/Admin/BlogAdmin">ویرایش دستی</a>
+    </div>
+</section>
+
+<section class="st-panel st-reveal ehub-subpanel">
+    <h2>موجودی مقالات</h2>
+    <p class="ehub-lead">
+        نمایه 🌅 Scene · حداقل ۳ عکس در متن (Scene + 📦 Studio). هدف: ≥ @opt.MinPublishDisplayScore و دروازه باز.
+    </p>
+    @if (inventory.Count == 0)
+    {
+        <p class="kit-form-hint">مقاله‌ای نیست — دکمه پاکسازی را بزنید.</p>
+    }
+    else
+    {
+        <div class="st-table-wrap st-table-wrap--stack">
+            <table class="st-table st-table--stack">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>عنوان</th>
+                        <th>امتیاز</th>
+                        <th>SEO</th>
+                        <th>منتشر</th>
+                        <th>زمان</th>
+                        <th>نمایه</th>
+                        <th>عکس</th>
+                        <th>Focus</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var b in inventory)
+                    {
+                        var scoreClass = b.DisplayScore >= opt.MinPublishDisplayScore ? "ehub-score--ok"
+                            : b.DisplayScore >= 74 ? "ehub-score--warn" : "ehub-score--bad";
+                        var when = b.IsPublished ? b.PublishedTehran : b.ScheduledTehran;
+                        <tr>
+                            <td data-label="#"><a href="/Admin/BlogAdmin/Edit/@b.Id">@b.Id</a></td>
+                            <td data-label="عنوان">@b.Title</td>
+                            <td data-label="امتیاز"><span class="ehub-score @scoreClass">@b.DisplayScore</span></td>
+                            <td data-label="SEO">@(b.IsPublishReady ? "✓" : "✗")</td>
+                            <td data-label="منتشر">@(b.IsPublished ? "بله" : "پیش‌نویس")</td>
+                            <td data-label="زمان" dir="ltr">@(when ?? "—")</td>
+                            <td data-label="نمایه">@b.FeaturedHint</td>
+                            <td data-label="عکس">@b.InlineImageCount</td>
+                            <td data-label="Focus" dir="auto">@(b.FocusKeyword ?? "—")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</section>
+
+<section class="st-panel st-reveal ehub-subpanel">
+    <h2>صف موضوعات</h2>
+    @if (queue.Count == 0)
+    {
+        <p class="kit-form-hint">صف خالی است.</p>
+    }
+    else
+    {
+        <div class="st-table-wrap st-table-wrap--stack">
+            <table class="st-table st-table--stack">
+                <thead>
+                    <tr>
+                        <th>امتیاز</th>
+                        <th>وضعیت</th>
+                        <th>انتشار</th>
+                        <th>Focus</th>
+                        <th>عنوان</th>
+                        <th>مقاله</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var t in queue)
+                    {
+                        <tr>
+                            <td data-label="امتیاز">@t.OpportunityScore.ToString("0")</td>
+                            <td data-label="وضعیت">@t.Status</td>
+                            <td data-label="انتشار" dir="ltr">@(t.ScheduledPublishUtc.HasValue ? EditorialHumanSchedule.FormatTehran(t.ScheduledPublishUtc.Value) : "—")</td>
+                            <td data-label="Focus" dir="auto">@t.FocusKeyword</td>
+                            <td data-label="عنوان">@t.ProposedTitle</td>
+                            <td data-label="مقاله">
+                                @if (t.BlogPostId.HasValue)
+                                {
+                                    <a href="/Admin/BlogAdmin/Edit/@t.BlogPostId">#@t.BlogPostId</a>
+                                }
+                                else { <span>—</span> }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</section>
+
+<section class="st-panel st-reveal ehub-subpanel">
+    <h2>ستون‌های کلیدی</h2>
+    <ul class="st-pillar-list">
+        @foreach (var p in pillars)
+        {
+            <li><strong>@p.Priority</strong> — @p.Phrase</li>
+        }
+    </ul>
+    <p class="kit-form-hint ehub-hint">
+        سرویس: @(opt.Enabled ? $"فعال · هر {opt.CheckIntervalMinutes} دقیقه" : "غیرفعال") · انتشار ۷ روز: @status.PublishedLast7Days
+    </p>
+</section>

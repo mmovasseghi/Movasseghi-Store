@@ -1,0 +1,101 @@
+@model IEnumerable<Category>
+@using MovasseghiShop.Web.Services
+@{
+    ViewData["Title"] = "دسته‌بندی‌ها";
+    var seoScores = (Dictionary<int, int>)ViewBag.SeoScores;
+    var seoAudited = (Dictionary<int, bool>)ViewBag.SeoAudited;
+    var list = Model.ToList();
+    var active = list.Count(c => c.IsActive);
+    var weak = list.Count(c => seoAudited.GetValueOrDefault(c.Id, false) && seoScores.GetValueOrDefault(c.Id, 0) < 70);
+}
+
+<div class="kit-stats kit-stagger">
+    <article class="kit-stat">
+        <span class="kit-stat-label">🗂️ دسته</span>
+        <span class="kit-stat-value">@list.Count.ToString("N0")</span>
+    </article>
+    <article class="kit-stat">
+        <span class="kit-stat-label">✅ فعال</span>
+        <span class="kit-stat-value kit-stat-value--ok">@active.ToString("N0")</span>
+    </article>
+    <article class="kit-stat">
+        <span class="kit-stat-label">SEO ضعیف</span>
+        <span class="kit-stat-value @(weak > 0 ? "kit-stat-value--gold" : "kit-stat-value--ok")">@weak.ToString("N0")</span>
+        <span class="kit-stat-foot">محتوای دسته روی صفحه کاتالوگ دیده می‌شود</span>
+    </article>
+</div>
+
+<div class="kit-toolbar kit-rise">
+    <div class="kit-toolbar-grow">
+        <strong style="font-size:.88rem">دسته‌بندی محصولات</strong>
+        <span class="kit-form-hint" style="margin-top:.15rem">
+            Auto-Fix دسته، توضیح و FAQ می‌سازد و در کاتالوگ نمایش داده می‌شود.
+        </span>
+    </div>
+    <a class="st-btn st-btn-gold" href="/Admin/Studio">Auto-Fix دسته‌ها</a>
+    <a class="st-btn st-btn-primary" href="/Admin/Categories/Create">+ دسته جدید</a>
+</div>
+
+<section class="kit-table-card kit-rise">
+    @if (list.Count == 0)
+    {
+        <div class="kit-empty">
+            <div class="kit-empty-icon" aria-hidden="true">🗂️</div>
+            <h3>هنوز دسته‌ای نیست</h3>
+            <a class="st-btn st-btn-primary" href="/Admin/Categories/Create">ساخت اولین دسته</a>
+        </div>
+    }
+    else
+    {
+        <div class="kit-table-scroll">
+            <table class="kit-table">
+                <thead>
+                    <tr>
+                        <th data-sort>نام</th>
+                        <th data-sort>نامک</th>
+                        <th data-sort>محصولات</th>
+                        <th data-sort>SEO</th>
+                        <th data-sort>وضعیت</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var c in list)
+                    {
+                        var audited = seoAudited.GetValueOrDefault(c.Id, false);
+                        var seo = seoScores.GetValueOrDefault(c.Id, 0);
+                        <tr class="@(c.IsActive ? "" : "is-dim")">
+                            <td><span class="kit-cell-main">@c.Name</span></td>
+                            <td dir="ltr"><span class="kit-cell-sub">@c.Slug</span></td>
+                            <td class="kit-cell-num" data-sort-value="@c.Products.Count">@c.Products.Count.ToString("N0")</td>
+                            <td data-sort-value="@(audited ? seo : -1)" title="@(audited ? null : "هنوز بررسی نشده — ویرایش یا Auto-Fix")">
+                                @if (!audited)
+                                {
+                                    <span class="kit-tag kit-tag--muted">—</span>
+                                }
+                                else
+                                {
+                                    <span class="kit-tag @(seo >= SeoContentRules.PublishThreshold ? "kit-tag--ok" : seo >= 70 ? "kit-tag--warn" : "kit-tag--bad")">@seo</span>
+                                }
+                            </td>
+                            <td data-sort-value="@(c.IsActive ? 1 : 0)">
+                                <span class="kit-tag @(c.IsActive ? "kit-tag--ok" : "kit-tag--muted")">@(c.IsActive ? "فعال" : "غیرفعال")</span>
+                            </td>
+                            <td class="kit-cell-actions">
+                                <a class="st-btn st-btn-ghost st-btn-sm" href="/Admin/Categories/Edit/@c.Id">ویرایش</a>
+                                <a class="st-btn st-btn-ghost st-btn-sm" href="/Catalog/Category/@Uri.EscapeDataString(c.Slug)" target="_blank" rel="noopener">مشاهده</a>
+                                <form method="post" action="/Admin/Categories/Delete/@c.Id" style="display:inline"
+                                      data-kit-confirm="دسته «<strong>@c.Name</strong>» حذف می‌شود."
+                                      data-kit-confirm-title="حذف دسته"
+                                      data-kit-confirm-ok="حذف کن">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="st-btn st-btn-ghost st-btn-sm">حذف</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</section>

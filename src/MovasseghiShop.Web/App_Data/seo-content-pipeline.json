@@ -1,0 +1,9 @@
+{
+  "pillarKeywordsSource": "SiteKeywordStrategy.Pillars (20 کلمه با اولویت 1–20 در کد)",
+  "serpApiKey": "appsettings → SerpApi:ApiKey",
+  "prompts": {
+    "userSpecification": "Services/ContentPipeline/SeoContentPipelinePrompts.UserSpecificationPrompt",
+    "engineered": "Services/ContentPipeline/SeoContentPipelinePrompts.EngineeredExecutionPrompt"
+  },
+  "notes": "بدون SerpApi، تحقیق از snippet همان نتایج انجام می‌شود؛ برای راستی‌سنجی کامل HTML رقبا FetchCompetitorHtml=true بماند."
+}

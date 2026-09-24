@@ -1,0 +1,328 @@
+@model MovasseghiShop.Web.Services.GrowthDashboardModel
+
+@{
+
+    Layout = "_AdminLayout";
+
+    ViewData["Title"] = "موثقی Studio";
+
+    ViewData["HeroTitle"] = "مرکز فرمان Studio";
+
+    ViewData["HeroSubtitle"] = "SEO + Growth Engine — هدف: صفحه اول گوگل و AI";
+
+    ViewData["HeroBadge"] = "✦ LIVE COMMAND";
+
+}
+
+
+
+<partial name="_AdminHero" />
+
+<p class="kit-form-hint" style="margin:-.5rem 0 1rem">
+    <a href="/Admin/Studio/EditorialHub" class="st-btn st-btn-ghost st-btn-sm">✍️ پنل موتور بلاگ خودکار (SEO/GEO/AEO)</a>
+</p>
+
+
+
+@if (TempData["Success"] != null)
+
+{
+
+    <div class="st-alert st-alert-success st-reveal">@TempData["Success"]</div>
+
+}
+
+@{
+    var seoJob = ViewBag.SeoMaintenance as MovasseghiShop.Web.Services.SeoMaintenanceSnapshot;
+}
+<div id="studio-maintenance-banner" class="st-alert st-alert-warn st-reveal" data-running="@(seoJob is { IsRunning: true } ? "true" : "false")" @(seoJob is { IsRunning: true } ? null : "hidden")>
+    <strong>نگهداری SEO در حال اجرا</strong> — <span data-studio-task>@(seoJob?.CurrentTask ?? "…")</span><span data-studio-count>@(seoJob is { Total: > 0 } j ? $" ({j.Done}/{j.Total})" : "")</span>
+    @if (seoJob is { Total: > 0 } job)
+    {
+        <div class="studio-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="@(job.Total > 0 ? (int)Math.Round(job.Done * 100.0 / job.Total) : 0)" style="margin-top:.5rem;height:6px;background:rgba(255,255,255,.12);border-radius:3px;overflow:hidden">
+            <div data-studio-progress style="height:100%;width:@(job.Total > 0 ? Math.Round(job.Done * 100.0 / job.Total) : 0)%;background:linear-gradient(90deg,#34f5a7,#d4af37);transition:width .35s ease"></div>
+        </div>
+    }
+    <span class="kit-form-hint" style="display:block;margin-top:.35rem">پیشرفت و آمار پایین صفحه هر چند ثانیه خودکار به‌روز می‌شود — نیازی به رفرش دستی نیست.</span>
+</div>
+<div id="studio-maintenance-done" class="st-alert st-reveal" style="border-color:rgba(52,245,167,.35)" @(seoJob is { IsRunning: false } && seoJob?.LastSummary is { Length: > 0 } ? null : "hidden")>
+    <strong>آخرین نگهداری SEO</strong> — <span data-studio-summary>@(seoJob?.LastSummary)</span>
+    @if (seoJob?.LastCompletedAt is { } tDone)
+    {
+        <span class="kit-form-hint" style="display:block;margin-top:.25rem" dir="ltr" data-studio-time>@tDone.ToLocalTime().ToString("yyyy/MM/dd HH:mm")</span>
+    }
+    else
+    {
+        <span class="kit-form-hint" style="display:block;margin-top:.25rem" dir="ltr" data-studio-time hidden></span>
+    }
+</div>
+
+@if (!Model.HasSerpData)
+{
+    <div class="st-alert st-alert-warn st-reveal">
+        داده واقعی SERP رقبا همگام‌سازی نشده — قدرت رقابتی فعلاً تخمینی است.
+        برای تحلیل واقعی Top 10، کلید <code>SerpApi:ApiKey</code> را تنظیم و
+        <a href="/Admin/StudioContent/Competitors">همگام‌سازی رقبا</a> را اجرا کنید.
+    </div>
+}
+
+<div class="st-grid st-reveal">
+
+    <div class="st-stat">
+
+        <div class="st-stat-label">@SeoPublishGateLabels.ReadinessLabel</div>
+
+        <div class="st-stat-value" data-stat-readiness>@Model.AverageReadiness.ToString("0")<small>/100</small></div>
+
+        <div class="st-stat-foot">@SeoPublishGateLabels.ReadinessVerdict((int)Model.AverageReadiness)</div>
+
+    </div>
+
+    <div class="st-stat">
+
+        <div class="st-stat-label">میانگین امتیاز SEO</div>
+
+        <div class="st-stat-value" data-stat-score>@Model.AverageScore.ToString("0")<small>/100</small></div>
+
+        <div class="st-stat-foot" data-stat-audited-foot>قدرت رقابتی <span data-stat-competitive>@Model.AverageCompetitive.ToString("0")</span> · @Model.AuditedCount محصول تحلیل‌شده</div>
+
+    </div>
+
+    <div class="st-stat">
+
+        <div class="st-stat-label">@SeoPublishGateLabels.StatLabel</div>
+
+        <div class="st-stat-value is-success" data-stat-ready>@Model.PublishReadyCount</div>
+
+    </div>
+
+    <div class="st-stat">
+
+        <div class="st-stat-label">@SeoPublishGateLabels.NeedsWork</div>
+
+        <div class="st-stat-value is-gold" data-stat-blocked>@Model.BlockedCount</div>
+
+    </div>
+
+    <div class="st-stat">
+
+        <div class="st-stat-label">کارهای امروز</div>
+
+        <div class="st-stat-value" data-stat-actions>@Model.OpenActions</div>
+
+    </div>
+
+</div>
+
+
+
+<div class="st-split st-reveal">
+
+    <section class="st-panel">
+
+        <h2>🎯 کارهای اولویت‌دار</h2>
+
+        <div id="studio-priority-actions">
+        @if (Model.TopActions.Count == 0)
+
+        {
+
+            <p class="st-ok">همه چیز مرتب است — عالی!</p>
+
+        }
+
+        else
+
+        {
+
+            foreach (var action in Model.TopActions)
+
+            {
+
+                <div class="st-action">
+
+                    <span class="st-action-priority @action.Priority"></span>
+
+                    <div class="st-action-body">
+
+                        <strong class="st-action-title">@action.Title</strong>
+
+                        @if (!string.IsNullOrEmpty(action.Description))
+
+                        {
+
+                            <small class="st-action-desc">@action.Description</small>
+
+                        }
+
+                        @if (action.EntityType == "product" && action.EntityId.HasValue)
+
+                        {
+
+                            <div class="st-action-foot">
+
+                                <a class="st-btn st-btn-ghost st-btn-sm" href="/Admin/Products/Edit/@action.EntityId">ویرایش</a>
+
+                                <form method="post" action="/Admin/Studio/AutoFixProduct" style="display:inline">
+
+                                    @Html.AntiForgeryToken()
+
+                                    <input type="hidden" name="id" value="@action.EntityId" />
+
+                                    <button type="submit" class="st-btn st-btn-primary st-btn-sm">✨ Auto-Fix</button>
+
+                                </form>
+
+                            </div>
+
+                        }
+                        @if (action.EntityType == "blog" && action.EntityId.HasValue)
+                        {
+                            <div class="st-action-foot">
+                                <a class="st-btn st-btn-ghost st-btn-sm" href="/Admin/BlogAdmin/Edit/@action.EntityId">ویرایش</a>
+                                <form method="post" action="/Admin/Studio/AutoFixBlog" style="display:inline">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="id" value="@action.EntityId" />
+                                    <button type="submit" class="st-btn st-btn-primary st-btn-sm">✨ Auto-Fix</button>
+                                </form>
+                            </div>
+                        }
+
+                    </div>
+
+                </div>
+
+            }
+
+        }
+        </div>
+
+        <form method="post" action="/Admin/Studio/RefreshQueue" style="margin-top:1rem">
+
+            @Html.AntiForgeryToken()
+
+            <button type="submit" class="st-btn st-btn-ghost">🔄 به‌روزرسانی صف کار</button>
+
+        </form>
+
+        <form method="post" action="/Admin/Studio/RunEditorialGrowth" style="margin-top:.5rem">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="st-btn st-btn-primary">✍️ اجرای موتور رشد بلاگ (SEO/GEO/AEO)</button>
+        </form>
+
+        <form method="post" action="/Admin/Studio/RefreshEditorialQueue" style="margin-top:.5rem">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="st-btn st-btn-ghost">📋 پر کردن صف موضوعات (GSC + رتبه)</button>
+        </form>
+
+        <p class="st-panel-desc st-panel-desc--tight" style="margin-top:.75rem">
+            مقالات: <strong>@Model.BlogPublishReadyCount</strong> آماده انتشار از <strong>@Model.TotalBlogPosts</strong>
+            · <span class="is-gold">@Model.BlogBlockedCount</span> نیاز به بهبود
+        </p>
+
+    </section>
+
+
+
+    <section class="st-panel">
+
+        <h2>🔑 ۲۰ کلمه کلیدی اصلی</h2>
+
+        <p class="st-panel-desc st-panel-desc--tight">اولویت ۱–۳: گیاهی · یکبار مصرف · آملون</p>
+
+        @foreach (var p in Model.Pillars)
+
+        {
+
+            <div class="st-pillar">
+
+                <span class="st-pillar-rank">#@p.Priority</span>
+
+                @p.Phrase
+
+                <span class="st-pillar-meta">→ @p.OwnerPageKey</span>
+
+            </div>
+
+        }
+
+    </section>
+
+</div>
+
+
+
+<section class="st-panel st-reveal">
+
+    <h2>📦 محصولات</h2>
+
+    <div class="st-panel-actions">
+
+        <a class="st-btn st-btn-primary" href="/Admin/Products">مدیریت محصولات</a>
+
+        <form method="post" action="/Admin/Studio/BulkAutoFix" onsubmit="return confirm('Auto-Fix روی همه محصولات اجرا شود؟');">
+
+            @Html.AntiForgeryToken()
+
+            <button type="submit" class="st-btn st-btn-gold">✨ Auto-Fix همه محصولات</button>
+
+        </form>
+
+        <form method="post" action="/Admin/Studio/BulkAutoFixCategories" onsubmit="return confirm('Auto-Fix روی همه دسته‌بندی‌ها اجرا شود؟ محتوای سئوی دسته‌ها ساخته و در کاتالوگ نمایش داده می‌شود.');">
+
+            @Html.AntiForgeryToken()
+
+            <button type="submit" class="st-btn st-btn-gold">🗂️ Auto-Fix همه دسته‌ها</button>
+
+        </form>
+
+        <form method="post" action="/Admin/Studio/BulkAutoFixBlogs" onsubmit="return confirm('Auto-Fix روی همه مقالات منتشر‌شده اجرا شود؟');">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="st-btn st-btn-gold">📰 Auto-Fix مقالات منتشر‌شده</button>
+        </form>
+
+        <a class="st-btn st-btn-ghost" href="/Admin/BlogAdmin">مدیریت بلاگ</a>
+        <a class="st-btn st-btn-ghost" href="/Admin/Studio/RankRadar">📡 Rank Radar</a>
+
+    </div>
+
+    <p class="st-panel-desc">
+        Auto-Fix Ultimate (همان موتور ویرایش محصول) — Content Pipeline · SERP · Ranking Readiness ·
+        قدرت رقابتی · Scene/Studio · AEO · GEO · Schema · لینک‌سازی داخلی
+    </p>
+    <p class="st-panel-desc st-panel-desc--tight">
+        حلقه بهینه‌سازی تا ۵ تکرار روی ضعیف‌ترین بُعد اجرا می‌شود و با رسیدن به بازده نزولی متوقف می‌شود.
+        @SeoPublishGateLabels.GateHint
+    </p>
+
+</section>
+
+
+
+<section class="st-panel st-reveal">
+
+    <h2>📝 CMS + Growth</h2>
+
+    <div class="st-quick-grid">
+
+        <a class="st-quick-link" href="/Admin/StudioContent/Home">🏠 صفحه اصلی</a>
+
+        <a class="st-quick-link" href="/Admin/StudioContent/Pages">📄 CMS</a>
+
+        <a class="st-quick-link" href="/Admin/StudioContent/Nav">🧭 منو</a>
+
+        <a class="st-quick-link" href="/Admin/StudioContent/Atoms">⚛️ Atoms</a>
+
+        <a class="st-quick-link" href="/Admin/StudioContent/Reports">📊 گزارش</a>
+
+        <a class="st-quick-link" href="/Admin/StudioContent/Authority">🛡️ Authority</a>
+
+        <a class="st-quick-link" href="/Admin/StudioContent/Competitors">🔍 رقبا</a>
+
+    </div>
+
+</section>
+
+<script src="/js/studio-command-center.js" asp-append-version="true"></script>
+
+

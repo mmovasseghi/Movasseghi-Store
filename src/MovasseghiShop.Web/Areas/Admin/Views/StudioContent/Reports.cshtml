@@ -1,0 +1,53 @@
+@model List<MovasseghiShop.Web.Models.Entities.GrowthReport>
+
+@{
+
+    Layout = "_AdminLayout";
+
+    ViewData["Title"] = "گزارش‌های Growth";
+
+    ViewData["HeroTitle"] = "📊 گزارش هفتگی";
+
+    ViewData["HeroSubtitle"] = "خلاصه SEO، رتبه و اقدامات پیشنهادی";
+
+    ViewData["HeroBadge"] = "GROWTH";
+
+}
+
+<partial name="_AdminHero" />
+
+<form method="post" action="/Admin/StudioContent/GenerateReport" class="st-reveal" style="margin-bottom:1rem">
+
+    @Html.AntiForgeryToken()
+
+    <button class="st-btn st-btn-gold">+ ساخت گزارش الان</button>
+
+</form>
+
+<section class="st-panel st-reveal">
+
+    @if (Model.Count == 0)
+
+    {
+
+        <p class="st-panel-desc">هنوز گزارشی ساخته نشده — دکمه بالا را بزنید.</p>
+
+    }
+
+    @foreach (var r in Model)
+
+    {
+
+        <div class="st-card-row">
+
+            <a href="/Admin/StudioContent/ReportDetail/@r.Id">@r.Title</a>
+
+            <span class="st-badge st-badge-muted">@r.CreatedAt.ToLocalTime().ToString("yyyy/MM/dd")</span>
+
+        </div>
+
+    }
+
+</section>
+
+

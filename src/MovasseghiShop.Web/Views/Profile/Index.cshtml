@@ -1,0 +1,17 @@
+@model IEnumerable<Order>
+@{ ViewData["Title"] = "پنل کاربری"; }
+<div class="section"><div class="container">
+    <h1>پنل کاربری</h1>
+    <form asp-controller="Account" asp-action="Logout" method="post" style="margin-bottom:1rem">
+        @Html.AntiForgeryToken()
+        <button class="btn btn-ghost" type="submit">خروج</button>
+    </form>
+    @if (!Model.Any()) { <div class="form-card">هنوز سفارشی ندارید.</div> }
+    @foreach (var o in Model)
+    {
+        <div class="form-card" style="margin-bottom:1rem">
+            <strong>@o.OrderNumber</strong> — @o.Status — @SlugHelper.FormatToman(o.TotalAmount) تومان
+            <div><a href="/Order/Details/@o.OrderNumber">جزئیات</a></div>
+        </div>
+    }
+</div></div>

@@ -1,0 +1,74 @@
+@model List<MovasseghiShop.Web.Models.Entities.NavItem>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "منوی سایت";
+    ViewData["HeroTitle"] = "منوی سایت";
+    ViewData["HeroSubtitle"] = "هدر، منوی موبایل و سه ستون فوتر — از تب‌ها جابه‌جا شوید";
+    ViewData["HeroBadge"] = "NAVIGATION";
+    var zones = new[] {
+        ("header", "هدر دسکتاپ"),
+        ("drawer-main", "منوی موبایل — اصلی"),
+        ("drawer-more", "منوی موبایل — بیشتر"),
+        ("footer-shop", "فوتر — فروشگاه"),
+        ("footer-support", "فوتر — پشتیبانی"),
+        ("footer-wholesale", "فوتر — خرید عمده")
+    };
+    var activeZone = ViewContext.HttpContext.Request.Query["zone"].FirstOrDefault() ?? "header";
+    var items = Model.Where(n => n.Zone == activeZone).OrderBy(n => n.SortOrder).ToList();
+}
+
+<partial name="_AdminHero" />
+
+@if (TempData["Success"] != null) { <div class="st-alert st-alert-success">@TempData["Success"]</div> }
+
+<div class="st-zone-tabs" role="tablist" aria-label="بخش‌های منو">
+    @foreach (var (z, label) in zones)
+    {
+        <a href="?zone=@z" class="st-zone-tab @(activeZone == z ? "is-active" : "")" role="tab" aria-selected="@(activeZone == z ? "true" : "false")">@label</a>
+    }
+</div>
+
+<div class="st-panel-actions">
+    <a class="st-btn st-btn-primary" href="/Admin/StudioContent/CreateNav?zone=@activeZone">+ افزودن لینک</a>
+</div>
+
+<section class="st-panel">
+    @if (items.Count == 0)
+    {
+        <p class="st-panel-desc">هنوز آیتمی در این بخش نیست.</p>
+    }
+    @foreach (var n in items)
+    {
+        <div class="hb-nav-row">
+            <div class="hb-nav-info">
+                @if (!string.IsNullOrEmpty(n.Icon)) { <span class="hb-nav-icon">@n.Icon</span> }
+                <div>
+                    <strong>@n.Label</strong>
+                    <small dir="ltr">@n.Url</small>
+                </div>
+            </div>
+            <div class="st-btn-row">
+                <span class="st-badge @(n.IsActive ? "st-badge-ok" : "st-badge-muted")">@(n.IsActive ? "فعال" : "غیرفعال")</span>
+                <a class="st-btn st-btn-ghost st-btn-sm" href="/Admin/StudioContent/EditNav/@n.Id">ویرایش</a>
+                <form method="post" action="/Admin/StudioContent/DeleteNav" onsubmit="return confirm('حذف شود؟')">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" value="@n.Id" />
+                    <button type="submit" class="st-btn st-btn-ghost st-btn-sm">حذف</button>
+                </form>
+            </div>
+        </div>
+    }
+</section>
+
+<p class="st-panel-desc">ستون «سبد خرید» در فوتر فروشگاه ثابت است و جدا از منو نمایش داده می‌شود.</p>
+
+<style>
+.hb-nav-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: 0.85rem 0; border-bottom: 1px solid var(--st-border);
+}
+.hb-nav-row:last-child { border-bottom: none; }
+.hb-nav-info { display: flex; align-items: center; gap: 0.65rem; }
+.hb-nav-info small { display: block; color: var(--st-muted); font-size: 0.75rem; margin-top: 0.15rem; }
+.hb-nav-icon { font-size: 1.25rem; }
+</style>

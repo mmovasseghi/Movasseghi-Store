@@ -1,0 +1,443 @@
+@inject MovasseghiShop.Web.Services.ICartService CartService
+@inject IConfiguration Config
+@using MovasseghiShop.Web.Services
+@{
+    var title = ViewData["Title"]?.ToString() ?? SiteKeywordStrategy.SiteTitle;
+    var metaDescription = ViewData["MetaDescription"]?.ToString() ?? SiteKeywordStrategy.SiteDescription;
+    var metaKeywords = ViewData["MetaKeywords"] as string ?? SiteKeywordStrategy.MetaKeywords;
+    var isHome = ViewContext.RouteData.Values["controller"]?.ToString() == "Home";
+    var ctrl = ViewContext.RouteData.Values["controller"]?.ToString() ?? "";
+    var isCatalog = ctrl == "Catalog";
+    var isBlog = ctrl == "Blog";
+    var isNews = ctrl == "News";
+    var isAccount = ctrl == "Account";
+    var isOrder = ctrl == "Order";
+    var isLocalTunnel = Context.Request.Host.Host.EndsWith(".loca.lt", StringComparison.OrdinalIgnoreCase);
+    var isLoggedIn = User.Identity?.IsAuthenticated == true;
+    var cartItemCount = CartService.GetItemCount(Context);
+    var cartAriaLabel = cartItemCount > 0 ? $"سبد خرید ({cartItemCount} قلم)" : "سبد خرید";
+}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>@title</title>
+    <meta name="description" content="@metaDescription" />
+    <meta name="keywords" content="@metaKeywords" />
+    @{
+        var gscVerify = Config["GoogleSearchConsole:SiteVerificationMeta"]?.Trim();
+        if (!string.IsNullOrWhiteSpace(gscVerify))
+        {
+            <meta name="google-site-verification" content="@gscVerify" />
+        }
+    }
+    @if (ViewData["CanonicalUrl"] is string canonical && !string.IsNullOrWhiteSpace(canonical))
+    {
+        <link rel="canonical" href="@canonical" />
+    }
+    @if (ViewData["OgTitle"] is string ogTitle)
+    {
+        <meta property="og:title" content="@ogTitle" />
+        <meta property="og:description" content="@(ViewData["OgDescription"] ?? metaDescription)" />
+        <meta property="og:type" content="@(ViewData["OgType"] ?? "website")" />
+        <meta property="og:locale" content="fa_IR" />
+        @if (ViewData["OgUrl"] is string ogUrl) { <meta property="og:url" content="@ogUrl" /> }
+        @if (ViewData["OgImage"] is string ogImg) { <meta property="og:image" content="@ogImg" /> }
+    }
+    <meta name="twitter:card" content="summary_large_image" />
+    @if (ViewData["OgTitle"] is string twTitle)
+    {
+        <meta name="twitter:title" content="@twTitle" />
+        <meta name="twitter:description" content="@(ViewData["OgDescription"] ?? metaDescription)" />
+        @if (ViewData["OgImage"] is string twImg) { <meta name="twitter:image" content="@twImg" /> }
+    }
+    <meta name="theme-color" content="#2f4a3e" />
+    @* فونت روی همین دامنه میزبانی می‌شود: قبلاً دو اتصال جداگانه به
+       fonts.googleapis.com و fonts.gstatic.com لازم بود و CSS فونت هم رندر را
+       بلاک می‌کرد. نسخه variable هر شش وزن را در یک فایل دارد. *@
+    <link rel="preload" href="~/fonts/Vazirmatn-var.woff2" as="font" type="font/woff2" crossorigin asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" media="@(isLocalTunnel ? "not all" : null)" />
+    <link rel="stylesheet" href="~/css/prose.css" asp-append-version="true" media="@(isLocalTunnel ? "not all" : null)" />
+    <link rel="stylesheet" href="~/css/ux-cart.css" asp-append-version="true" media="@(isLocalTunnel ? "not all" : null)" />
+    <link rel="stylesheet" href="~/css/ux-mobile.css" asp-append-version="true" media="@(isLocalTunnel ? "not all" : null)" />
+    <link rel="stylesheet" href="~/css/ux-desktop.css" asp-append-version="true" media="@(isLocalTunnel ? "not all" : "(min-width: 768px)")" />
+    <link rel="stylesheet" href="~/css/ux-product-dual.css" asp-append-version="true" media="@(isLocalTunnel ? "not all" : null)" />
+    @await RenderSectionAsync("Head", required: false)
+    @if (isLocalTunnel)
+    {
+        <script>
+        (function () {
+          if (!/\.loca\.lt$/i.test(location.hostname)) return;
+          var bypass = { 'Bypass-Tunnel-Reminder': 'true' };
+          document.querySelectorAll('link[rel="stylesheet"][href]').forEach(function (link) {
+            fetch(link.href, { headers: bypass })
+              .then(function (r) { return r.text(); })
+              .then(function (css) {
+                var style = document.createElement('style');
+                style.textContent = css;
+                var media = link.getAttribute('media');
+                if (media && media !== 'not all') style.media = media;
+                document.head.appendChild(style);
+              })
+              .catch(function () {});
+          });
+          function loadTunnelScripts() {
+            function loadScript(src) {
+              return fetch(src, { headers: bypass })
+                .then(function (r) { return r.text(); })
+                .then(function (code) {
+                  var script = document.createElement('script');
+                  script.textContent = code;
+                  document.body.appendChild(script);
+                });
+            }
+            var queue = Array.prototype.slice.call(
+              document.querySelectorAll('script[type="text/tunnel"][data-src]')
+            );
+            queue.reduce(function (chain, node) {
+              return chain.then(function () { return loadScript(node.getAttribute('data-src')); });
+            }, Promise.resolve());
+          }
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadTunnelScripts);
+          } else {
+            loadTunnelScripts();
+          }
+        })();
+        </script>
+    }
+</head>
+<body class="ms-body">
+<a href="#ms-main" class="ms-skip-link">پرش به محتوای اصلی</a>
+<div class="ms-app">
+    <div class="ms-promo-bar" data-promo-bar>
+        <div class="ms-promo-shimmer" aria-hidden="true"></div>
+        <div class="ms-promo-content">
+            @await Component.InvokeAsync("ContentAtom", new { key = "promo-bar" })
+        </div>
+        <a href="tel:@WholesaleRules.CoordinationPhone" class="ms-promo-cta">
+            <span class="ms-promo-cta-label ms-promo-cta-label--full">مشاوره رایگان</span>
+            <span class="ms-promo-cta-label ms-promo-cta-label--short">تماس</span>
+        </a>
+    </div>
+
+    <header class="ms-top ms-wrap @(isHome ? "ms-top-float" : "")">
+        <div class="ms-top-card">
+            <button type="button" class="ms-icon-btn ms-menu-btn" data-menu-toggle aria-label="منو" aria-expanded="false" aria-controls="mobileNav">
+                <span class="ms-burger" aria-hidden="true">
+                    <span class="ms-burger-line"></span>
+                    <span class="ms-burger-line"></span>
+                    <span class="ms-burger-line"></span>
+                </span>
+            </button>
+            <a href="/" class="ms-logo-link">
+                <img src="~/images/brand/originallogo.png" alt="فروشگاه موثقی" class="ms-logo" width="320" height="104" />
+            </a>
+            <nav class="ms-top-nav" aria-label="ناوبری دسکتاپ">
+                @await Component.InvokeAsync("NavZone", new { zone = "header" })
+            </nav>
+            <div class="ms-top-actions">
+                <a href="tel:@WholesaleRules.CoordinationPhone" class="ms-top-phone" aria-label="تماس">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.89.3 1.77.57 2.61a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.84.27 1.72.45 2.61.57A2 2 0 0 1 22 16.92z"/></svg>
+                    <span>@WholesaleRules.CoordinationPhone</span>
+                </a>
+                @if (isLoggedIn)
+                {
+                    <a href="/Account" class="ms-icon-btn" aria-label="حساب من">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </a>
+                }
+                else
+                {
+                    <button type="button" class="ms-icon-btn" data-open-auth aria-label="ورود">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </button>
+                }
+                <button type="button" class="ms-icon-btn ms-cart-btn" data-open-cart aria-label="@cartAriaLabel">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg>
+                    <partial name="_CartBadge" model="cartItemCount" />
+                </button>
+            </div>
+        </div>
+        <div class="ms-search-wrap">
+            <form action="/Catalog" method="get" class="ms-search" role="search" data-search-form>
+                <span class="ms-search-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+                </span>
+                <input type="search" id="globalSearch" name="q" placeholder="جستجو در محصولات..." aria-label="جستجو" autocomplete="off" />
+                <span class="ms-search-glow" aria-hidden="true"></span>
+                <ul id="searchSuggestions" class="ms-search-suggestions" hidden role="listbox"></ul>
+            </form>
+        </div>
+    </header>
+
+    <div class="ms-drawer" id="mobileNav" hidden aria-hidden="true">
+        <div class="ms-drawer-bg" data-menu-close tabindex="-1"></div>
+        <aside class="ms-drawer-panel" role="dialog" aria-modal="true" aria-label="منوی موبایل">
+            <div class="ms-drawer-aurora" aria-hidden="true">
+                <span class="ms-drawer-orb ms-drawer-orb--1"></span>
+                <span class="ms-drawer-orb ms-drawer-orb--2"></span>
+                <span class="ms-drawer-shimmer"></span>
+            </div>
+            <header class="ms-drawer-head">
+                <div class="ms-drawer-brand">
+                    <span class="ms-drawer-logo" aria-hidden="true">م</span>
+                    <div>
+                        <strong>فروشگاه موثقی</strong>
+                        <small>پخش عمده · گیاهی</small>
+                    </div>
+                </div>
+                <button type="button" class="ms-drawer-close" data-menu-close aria-label="بستن منو">
+                    <span class="ms-drawer-close-icon" aria-hidden="true"></span>
+                </button>
+            </header>
+            <div class="ms-drawer-quick">
+                <a href="tel:@WholesaleRules.CoordinationPhone" class="ms-drawer-quick-btn ms-drawer-quick-btn--call">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.89.3 1.77.57 2.61a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.84.27 1.72.45 2.61.57A2 2 0 0 1 22 16.92z"/></svg>
+                    <span>تماس</span>
+                </a>
+                <button type="button" class="ms-drawer-quick-btn ms-cart-btn" data-open-cart aria-label="@cartAriaLabel">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg>
+                    <partial name="_CartBadge" model="cartItemCount" />
+                    <span>سبد</span>
+                </button>
+                @if (isLoggedIn)
+                {
+                    <a href="/Account" class="ms-drawer-quick-btn">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        <span>حساب</span>
+                    </a>
+                }
+                else
+                {
+                    <button type="button" class="ms-drawer-quick-btn" data-open-auth>
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/></svg>
+                        <span>ورود</span>
+                    </button>
+                }
+            </div>
+            <nav class="ms-drawer-nav" aria-label="منوی موبایل">
+                <p class="ms-drawer-section">منوی اصلی</p>
+                @await Component.InvokeAsync("NavZone", new { zone = "drawer-main" })
+                <p class="ms-drawer-section">دسته‌بندی محصولات</p>
+                <div class="ms-drawer-cat-grid">
+                    <a href="/Catalog/ByType?type=@Uri.EscapeDataString("کاسه")" class="ms-drawer-cat" data-drawer-link>
+                        <span class="ms-drawer-cat-icon" aria-hidden="true">🥣</span>
+                        <span class="ms-drawer-cat-label">کاسه</span>
+                    </a>
+                    <a href="/Catalog/ByType?type=@Uri.EscapeDataString("ظرف غذا")" class="ms-drawer-cat" data-drawer-link>
+                        <span class="ms-drawer-cat-icon" aria-hidden="true">🍱</span>
+                        <span class="ms-drawer-cat-label">ظرف غذا</span>
+                    </a>
+                    <a href="/Catalog/ByType?type=@Uri.EscapeDataString("لیوان")" class="ms-drawer-cat" data-drawer-link>
+                        <span class="ms-drawer-cat-icon" aria-hidden="true">🥤</span>
+                        <span class="ms-drawer-cat-label">لیوان</span>
+                    </a>
+                    <a href="/Catalog/ByType?type=@Uri.EscapeDataString("دیس")" class="ms-drawer-cat" data-drawer-link>
+                        <span class="ms-drawer-cat-icon" aria-hidden="true">🍽️</span>
+                        <span class="ms-drawer-cat-label">دیس</span>
+                    </a>
+                </div>
+                <a href="/Catalog" class="ms-drawer-cat-all" data-drawer-link>
+                    <span>مشاهده همه دسته‌ها</span>
+                    <span aria-hidden="true">›</span>
+                </a>
+                <p class="ms-drawer-section">اطلاعات</p>
+                @await Component.InvokeAsync("NavZone", new { zone = "drawer-more" })
+            </nav>
+            <footer class="ms-drawer-foot">
+                <div class="ms-drawer-trust-row" aria-hidden="true">
+                    <span>✓ نمایندگی رسمی</span>
+                    <span>✓ اصل کارخانه</span>
+                    <span>✓ مشاوره رایگان</span>
+                </div>
+                <a href="tel:@WholesaleRules.CoordinationPhone" class="ms-drawer-cta">
+                    <span class="ms-drawer-cta-shine" aria-hidden="true"></span>
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.89.3 1.77.57 2.61a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.84.27 1.72.45 2.61.57A2 2 0 0 1 22 16.92z"/></svg>
+                    <span>@WholesaleRules.CoordinationPhone</span>
+                </a>
+            </footer>
+        </aside>
+    </div>
+
+    <main class="ms-main" id="ms-main" tabindex="-1">@RenderBody()</main>
+
+    <nav class="ms-tabbar" aria-label="ناوبری اصلی">
+        <a href="/" class="ms-tab @(isHome ? "is-active" : "")">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1z"/></svg>
+            <span>خانه</span>
+        </a>
+        <a href="/Catalog" class="ms-tab @(isCatalog ? "is-active" : "")">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/></svg>
+            <span>محصولات</span>
+        </a>
+        <button type="button" class="ms-tab ms-tab-center ms-cart-btn" data-open-cart aria-label="@cartAriaLabel">
+            <span class="ms-tab-fab">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg>
+                <partial name="_CartBadge" model="cartItemCount" />
+            </span>
+            <span>سبد</span>
+        </button>
+        <a href="/Order/Track" class="ms-tab">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h10M4 17h6"/></svg>
+            <span>سفارش</span>
+        </a>
+        <a href="tel:@WholesaleRules.CoordinationPhone" class="ms-tab">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.89.3 1.77.57 2.61a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.84.27 1.72.45 2.61.57A2 2 0 0 1 22 16.92z"/></svg>
+            <span>تماس</span>
+        </a>
+    </nav>
+
+    <footer class="ms-footer" data-footer>
+        <div class="ms-footer-wave" aria-hidden="true"></div>
+        <div class="ms-footer-aurora" aria-hidden="true">
+            <span class="ms-footer-orb ms-footer-orb-a"></span>
+            <span class="ms-footer-orb ms-footer-orb-b"></span>
+        </div>
+        <div class="ms-footer-gradient-band" data-footer-band aria-hidden="true">
+            <svg viewBox="0 0 400 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="ftGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#3d5a4c"/>
+                        <stop offset="40%" stop-color="#5f8a72"/>
+                        <stop offset="70%" stop-color="#c9a84c"/>
+                        <stop offset="100%" stop-color="#d4b85a"/>
+                    </linearGradient>
+                    <filter id="ftBlur"><feGaussianBlur stdDeviation="8"/></filter>
+                </defs>
+                <g filter="url(#ftBlur)" opacity=".85">
+                    <rect x="0" y="40" width="44" height="80" fill="url(#ftGrad)" rx="4"/>
+                    <rect x="50" y="20" width="44" height="100" fill="url(#ftGrad)" rx="4"/>
+                    <rect x="100" y="50" width="44" height="70" fill="url(#ftGrad)" rx="4"/>
+                    <rect x="150" y="10" width="44" height="110" fill="url(#ftGrad)" rx="4"/>
+                    <rect x="200" y="35" width="44" height="85" fill="url(#ftGrad)" rx="4"/>
+                    <rect x="250" y="15" width="44" height="105" fill="url(#ftGrad)" rx="4"/>
+                    <rect x="300" y="45" width="44" height="75" fill="url(#ftGrad)" rx="4"/>
+                    <rect x="350" y="25" width="44" height="95" fill="url(#ftGrad)" rx="4"/>
+                </g>
+            </svg>
+        </div>
+        <div class="ms-wrap ms-footer-inner">
+            <div class="ms-footer-top">
+                <div class="ms-footer-brand" data-footer-brand>
+                    <a href="/" class="ms-footer-logo-link"><img src="~/images/brand/blackandwhitelogo.png" alt="فروشگاه موثقی" class="ms-footer-logo" width="260" height="120" /></a>
+                    <p class="ms-footer-tagline">نمایندگی رسمی آملون در تهران<br/>پخش عمده ظروف یکبار مصرف گیاهی</p>
+                    <a href="tel:@WholesaleRules.CoordinationPhone" class="ms-footer-phone">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.89.3 1.77.57 2.61a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.84.27 1.72.45 2.61.57A2 2 0 0 1 22 16.92z"/></svg>
+                        @WholesaleRules.CoordinationPhone
+                    </a>
+                </div>
+                <nav class="ms-footer-nav" aria-label="لینک‌های فوتر">
+                    <div class="ms-footer-col" data-footer-col>
+                        <h4>فروشگاه</h4>
+                        <ul>
+                            @await Component.InvokeAsync("NavZone", new { zone = "footer-shop" })
+                            <li><a href="#" data-open-cart>سبد خرید</a></li>
+                        </ul>
+                    </div>
+                    <div class="ms-footer-col" data-footer-col>
+                        <h4>پشتیبانی</h4>
+                        <ul>
+                            @await Component.InvokeAsync("NavZone", new { zone = "footer-support" })
+                        </ul>
+                    </div>
+                    <div class="ms-footer-col ms-footer-col--wide" data-footer-col>
+                        <h4>خرید عمده</h4>
+                        <ul class="ms-footer-links-split">
+                            @await Component.InvokeAsync("NavZone", new { zone = "footer-wholesale" })
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="ms-footer-trust-viewport">
+                <div class="ms-footer-trust-marquee" data-footer-trust>
+                    <div class="ms-footer-trust-row">
+                        @for (var rep = 0; rep < 3; rep++)
+                        {
+                            <span>✓ نمایندگی رسمی</span>
+                            <span>✓ اصل کارخانه</span>
+                            <span>✓ ۱۰۰٪ گیاهی</span>
+                            <span>✓ ارسال سراسری</span>
+                            <span>✓ مشاوره رایگان</span>
+                        }
+                    </div>
+                    <div class="ms-footer-trust-row" aria-hidden="true">
+                        @for (var rep = 0; rep < 3; rep++)
+                        {
+                            <span>✓ نمایندگی رسمی</span>
+                            <span>✓ اصل کارخانه</span>
+                            <span>✓ ۱۰۰٪ گیاهی</span>
+                            <span>✓ ارسال سراسری</span>
+                            <span>✓ مشاوره رایگان</span>
+                        }
+                    </div>
+                </div>
+            </div>
+            <p class="ms-footer-copy" data-footer-copy>© @DateTime.Now.Year فروشگاه موثقی — تمامی حقوق محفوظ است</p>
+        </div>
+    </footer>
+</div>
+
+<a href="tel:@WholesaleRules.CoordinationPhone" class="ms-fab-call" data-fab-call aria-label="تماس سریع">
+    <span class="ms-fab-call-glow" aria-hidden="true"></span>
+    <span class="ms-fab-call-rings" aria-hidden="true">
+        <span class="ms-fab-call-ring"></span>
+        <span class="ms-fab-call-ring"></span>
+        <span class="ms-fab-call-ring"></span>
+    </span>
+    <span class="ms-fab-call-core">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.89.3 1.77.57 2.61a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.84.27 1.72.45 2.61.57A2 2 0 0 1 22 16.92z"/></svg>
+    </span>
+</a>
+
+<!-- Modal overlay -->
+<div class="ms-modal" id="appModal" hidden>
+    <div class="ms-modal-backdrop" data-modal-close></div>
+    <div class="ms-modal-sheet" data-modal-sheet></div>
+</div>
+
+<!-- Story viewer -->
+<div class="ms-story-modal" id="msStoryModal" hidden>
+    <div class="ms-story-modal-backdrop" data-story-close tabindex="-1"></div>
+    <div class="ms-story-viewer" role="dialog" aria-modal="true" aria-label="استوری">
+        <button type="button" class="ms-story-modal-close" data-story-close aria-label="بستن">✕</button>
+        <div class="ms-story-progress" data-story-progress aria-hidden="true"></div>
+        <header class="ms-story-header">
+            <span class="ms-story-viewer-ring" data-story-viewer-icon aria-hidden="true"></span>
+            <span class="ms-story-viewer-label" data-story-viewer-label></span>
+        </header>
+        <div class="ms-story-slides" data-story-slides></div>
+        <div class="ms-story-tap ms-story-tap-prev" data-story-prev aria-hidden="true"></div>
+        <div class="ms-story-tap ms-story-tap-next" data-story-next aria-hidden="true"></div>
+        <div class="ms-story-foot">
+            <a class="ms-story-cta" data-story-cta href="#" hidden>
+                <span class="ms-story-cta-shine" aria-hidden="true"></span>
+                <span class="ms-story-cta-text">مشاهده</span>
+            </a>
+        </div>
+    </div>
+</div>
+<form id="msAntiForgery" class="ms-sr-only" aria-hidden="true">@Html.AntiForgeryToken()</form>
+
+@* GSAP از jsDelivr می‌آمد: یک اتصال شخص‌ثالث اضافه، بدون کش طولانی‌مدت خودمان
+   و بدون defer (پارسر را متوقف می‌کرد). حالا محلی و deferred است؛ ترتیب اجرای
+   اسکریپت‌ها با defer دقیقاً همان ترتیب سند می‌ماند. *@
+<script defer src="~/js/vendor/gsap.min.js" asp-append-version="true"></script>
+<script defer src="~/js/vendor/ScrollTrigger.min.js" asp-append-version="true"></script>
+@if (isLocalTunnel)
+{
+    <script type="text/tunnel" data-src="@Url.Content("~/js/auth.js")"></script>
+    <script type="text/tunnel" data-src="@Url.Content("~/js/site.js")"></script>
+    <script type="text/tunnel" data-src="@Url.Content("~/js/desktop.js")"></script>
+}
+else
+{
+    <script defer src="~/js/auth.js" asp-append-version="true"></script>
+    <script defer src="~/js/site.js" asp-append-version="true"></script>
+    <script defer src="~/js/product-card-dual.js" asp-append-version="true"></script>
+    <script defer src="~/js/desktop.js" asp-append-version="true"></script>
+}
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

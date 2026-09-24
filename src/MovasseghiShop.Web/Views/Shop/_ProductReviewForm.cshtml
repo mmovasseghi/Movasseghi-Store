@@ -1,0 +1,44 @@
+@model MovasseghiShop.Web.Models.ProductReviewsSectionModel
+<section class="pd-voices-compose" id="pd-review-form" aria-labelledby="pd-review-form-title">
+    <header class="pd-voices-compose__head">
+        <span class="pd-voices-compose__icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/>
+            </svg>
+        </span>
+        <div>
+            <h2 id="pd-review-form-title">ثبت نظر یا پرسش</h2>
+            <p>پس از تأیید تیم فروش، نظر شما در بخش «نظرات خریداران» همین صفحه نمایش داده می‌شود.</p>
+        </div>
+    </header>
+
+    @if (TempData["ReviewSubmitted"] != null)
+    {
+        <div class="pd-reviews-toast" role="status">نظر شما ثبت شد و پس از بررسی پشتیبانی در این بخش نمایش داده می‌شود.</div>
+    }
+
+    <form asp-controller="Shop" asp-action="SubmitReview" method="post" class="pd-reviews-form pd-voices-compose__form">
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="productId" value="@Model.ProductId" />
+        <input type="hidden" name="slug" value="@Context.Request.RouteValues["slug"]" />
+        <div class="pd-reviews-form-row">
+            <label class="pd-reviews-label" for="review-author">نام / نام مجموعه</label>
+            <input class="pd-reviews-input" id="review-author" name="authorName" required maxlength="80" autocomplete="name" />
+        </div>
+        <div class="pd-reviews-form-row">
+            <label class="pd-reviews-label" for="review-rating">امتیاز</label>
+            <select class="pd-reviews-input" id="review-rating" name="rating" required>
+                <option value="5">۵ — عالی</option>
+                <option value="4">۴ — خوب</option>
+                <option value="3">۳ — متوسط</option>
+                <option value="2">۲ — ضعیف</option>
+                <option value="1">۱ — نامناسب</option>
+            </select>
+        </div>
+        <div class="pd-reviews-form-row">
+            <label class="pd-reviews-label" for="review-body">متن نظر یا سوال</label>
+            <textarea class="pd-reviews-input" id="review-body" name="body" rows="4" required maxlength="2000" placeholder="کیفیت بسته‌بندی، زمان بارگیری، مقایسه با سفارش قبلی..."></textarea>
+        </div>
+        <button type="submit" class="pd-reviews-submit">ارسال برای بررسی</button>
+    </form>
+</section>

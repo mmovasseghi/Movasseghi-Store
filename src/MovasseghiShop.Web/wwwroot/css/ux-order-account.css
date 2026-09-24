@@ -1,0 +1,631 @@
+/* ── جزئیات سفارش از حساب کاربری (پریمیوم) ── */
+
+.ms-order-account-page {
+
+  position: relative;
+
+  padding-top: 0.25rem;
+
+  padding-bottom: 3.5rem;
+
+}
+
+
+
+.ms-order-account-ambient {
+
+  position: absolute;
+
+  inset: -2rem 0 auto;
+
+  height: 420px;
+
+  pointer-events: none;
+
+  overflow: hidden;
+
+  z-index: 0;
+
+}
+
+
+
+.ms-order-account-ambient__orb {
+
+  position: absolute;
+
+  border-radius: 50%;
+
+  filter: blur(48px);
+
+  opacity: 0.55;
+
+}
+
+
+
+.ms-order-account-ambient__orb--1 {
+
+  width: 280px;
+
+  height: 280px;
+
+  top: -40px;
+
+  inset-inline-end: -60px;
+
+  background: rgba(45, 106, 79, 0.35);
+
+}
+
+
+
+.ms-order-account-ambient__orb--2 {
+
+  width: 220px;
+
+  height: 220px;
+
+  top: 80px;
+
+  inset-inline-start: -50px;
+
+  background: rgba(201, 168, 76, 0.28);
+
+}
+
+
+
+.ms-order-account-page > *:not(.ms-order-account-ambient) {
+
+  position: relative;
+
+  z-index: 1;
+
+}
+
+
+
+.ms-order-account-nav {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  align-items: center;
+
+  gap: 0.4rem;
+
+  margin-bottom: 1.1rem;
+
+  padding: 0.45rem 0.65rem;
+
+  border-radius: 12px;
+
+  font-size: 0.76rem;
+
+  font-weight: 700;
+
+  color: var(--c-text-2);
+
+  background: rgba(255, 255, 255, 0.72);
+
+  border: 1px solid rgba(45, 106, 79, 0.1);
+
+  backdrop-filter: blur(6px);
+
+}
+
+
+
+.ms-order-account-nav a {
+
+  color: var(--c-primary);
+
+  text-decoration: none;
+
+}
+
+
+
+.ms-order-account-nav a:hover {
+
+  text-decoration: underline;
+
+}
+
+
+
+.ms-track-result--account {
+
+  max-width: 880px;
+
+}
+
+
+
+.ms-track-result__hero--account {
+
+  padding: 2rem 1.35rem 1.65rem;
+
+  background: linear-gradient(155deg, #0f241c 0%, #1b4332 42%, #2d6a4f 100%);
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  box-shadow: 0 28px 64px rgba(15, 36, 28, 0.35);
+
+  color: #fff;
+
+}
+
+
+
+.ms-track-result__hero--account .ms-track-result__kicker,
+
+.ms-track-result__hero--account .ms-track-result__hint {
+
+  color: rgba(255, 255, 255, 0.78);
+
+}
+
+
+
+.ms-track-result__hero--account .ms-track-result__number {
+
+  color: #fff;
+
+  font-size: clamp(1.1rem, 3.2vw, 1.45rem);
+
+}
+
+
+
+.ms-track-result__account-kicker {
+
+  margin: 0 0 0.35rem;
+
+  font-size: 0.68rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.1em;
+
+  color: rgba(244, 213, 141, 0.95);
+
+}
+
+
+
+.ms-track-result__hero--account .ms-track-result__hero-icon {
+
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.08));
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+
+}
+
+
+
+.ms-track-result__hero--account .ms-track-pill--ok {
+
+  color: #d8f3dc;
+
+  background: rgba(255, 255, 255, 0.14);
+
+  border-color: rgba(255, 255, 255, 0.22);
+
+}
+
+
+
+.ms-order-account-hero-total {
+
+  margin-top: 1.15rem;
+
+  padding: 0.75rem 1rem;
+
+  border-radius: 16px;
+
+  background: rgba(0, 0, 0, 0.22);
+
+  border: 1px solid rgba(255, 255, 255, 0.14);
+
+  backdrop-filter: blur(8px);
+
+}
+
+
+
+.ms-order-account-hero-total span {
+
+  display: block;
+
+  font-size: 0.68rem;
+
+  font-weight: 800;
+
+  color: rgba(255, 255, 255, 0.7);
+
+  margin-bottom: 0.2rem;
+
+}
+
+
+
+.ms-order-account-hero-total strong {
+
+  font-size: clamp(1.15rem, 4vw, 1.55rem);
+
+  font-weight: 900;
+
+  color: #f4d58d;
+
+  letter-spacing: 0.02em;
+
+}
+
+
+
+.ms-order-account-hero-total strong small {
+
+  font-size: 0.55em;
+
+  font-weight: 800;
+
+  color: rgba(255, 255, 255, 0.85);
+
+}
+
+
+
+.ms-order-account-quick {
+
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 0.55rem;
+
+  margin: -0.35rem 0 1.25rem;
+
+  padding: 0.15rem 0;
+
+}
+
+
+
+@media (min-width: 640px) {
+
+  .ms-order-account-quick {
+
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  }
+
+}
+
+
+
+.ms-order-account-quick__item {
+
+  padding: 0.7rem 0.75rem;
+
+  border-radius: 14px;
+
+  background: #fff;
+
+  border: 1px solid rgba(45, 106, 79, 0.12);
+
+  box-shadow: 0 10px 28px rgba(27, 67, 50, 0.08);
+
+}
+
+
+
+.ms-order-account-quick__item span {
+
+  display: block;
+
+  font-size: 0.65rem;
+
+  font-weight: 800;
+
+  color: var(--c-text-2);
+
+  margin-bottom: 0.2rem;
+
+}
+
+
+
+.ms-order-account-quick__item strong {
+
+  display: block;
+
+  font-size: 0.82rem;
+
+  font-weight: 900;
+
+  color: var(--c-primary-dark);
+
+  line-height: 1.35;
+
+}
+
+
+
+.ms-order-account-discount {
+
+  margin: 0 0 1rem;
+
+  padding: 0.55rem 0.85rem;
+
+  border-radius: 12px;
+
+  font-size: 0.78rem;
+
+  font-weight: 700;
+
+  color: #7a6228;
+
+  background: rgba(201, 168, 76, 0.14);
+
+  border: 1px solid rgba(201, 168, 76, 0.28);
+
+}
+
+
+
+.ms-track-items--account {
+
+  padding: 1.2rem 1.15rem 1.25rem;
+
+  border-radius: 20px;
+
+  background: #fff;
+
+  border: 1px solid rgba(45, 106, 79, 0.12);
+
+  box-shadow: 0 18px 48px rgba(27, 67, 50, 0.1);
+
+}
+
+
+
+.ms-track-items--account .ms-track-items__title {
+
+  font-size: 0.95rem;
+
+  color: var(--c-primary-dark);
+
+}
+
+
+
+.ms-order-lines-table-wrap {
+
+  overflow-x: auto;
+
+  margin-top: 0.55rem;
+
+  border-radius: 14px;
+
+  border: 1px solid rgba(45, 106, 79, 0.1);
+
+}
+
+
+
+.ms-order-lines-table {
+
+  width: 100%;
+
+  border-collapse: collapse;
+
+  font-size: 0.8rem;
+
+}
+
+
+
+.ms-order-lines-table th {
+
+  text-align: right;
+
+  padding: 0.6rem 0.7rem;
+
+  background: linear-gradient(180deg, #1b4332, #163d2f);
+
+  color: #fff;
+
+  font-weight: 800;
+
+  font-size: 0.71rem;
+
+}
+
+
+
+.ms-order-lines-table td {
+
+  padding: 0.58rem 0.7rem;
+
+  border-bottom: 1px solid rgba(45, 106, 79, 0.08);
+
+  vertical-align: top;
+
+}
+
+
+
+.ms-order-lines-table tbody tr:nth-child(even) {
+
+  background: rgba(240, 247, 243, 0.7);
+
+}
+
+
+
+.ms-order-lines-table .num {
+
+  text-align: left;
+
+  direction: ltr;
+
+  font-variant-numeric: tabular-nums;
+
+  font-weight: 800;
+
+  white-space: nowrap;
+
+}
+
+
+
+.ms-order-lines-table tfoot td {
+
+  background: linear-gradient(180deg, rgba(45, 106, 79, 0.12), rgba(45, 106, 79, 0.06));
+
+  font-weight: 900;
+
+  color: var(--c-primary-dark);
+
+}
+
+
+
+.ms-order-lines-table tfoot .grand {
+
+  color: #1b4332;
+
+  font-size: 0.95rem;
+
+}
+
+
+
+.ms-order-account-extra {
+
+  display: grid;
+
+  gap: 0.75rem;
+
+  margin: 1.15rem 0 1.35rem;
+
+}
+
+
+
+@media (min-width: 640px) {
+
+  .ms-order-account-extra {
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  }
+
+  .ms-order-extra-card--note {
+
+    grid-column: 1 / -1;
+
+  }
+
+}
+
+
+
+.ms-order-extra-card {
+
+  padding: 1rem 1.05rem;
+
+  border-radius: 18px;
+
+  background: linear-gradient(145deg, #fff, #f6fbf8);
+
+  border: 1px solid rgba(45, 106, 79, 0.12);
+
+  box-shadow: 0 12px 32px rgba(27, 67, 50, 0.07);
+
+}
+
+
+
+.ms-order-extra-card h3 {
+
+  margin: 0 0 0.5rem;
+
+  font-size: 0.82rem;
+
+  font-weight: 900;
+
+  color: var(--c-primary-dark);
+
+}
+
+
+
+.ms-order-extra-card p {
+
+  margin: 0;
+
+  font-size: 0.8rem;
+
+  line-height: 1.75;
+
+  font-weight: 600;
+
+  color: var(--c-text-2);
+
+}
+
+
+
+.ms-order-extra-card p.sub {
+
+  margin-top: 0.35rem;
+
+  font-size: 0.74rem;
+
+}
+
+
+
+.ms-track-result__actions--account {
+
+  justify-content: flex-start;
+
+  gap: 0.55rem;
+
+  padding: 0.25rem 0;
+
+}
+
+
+
+.ms-track-result__actions--account .ms-order-success__btn--primary {
+
+  box-shadow: 0 12px 32px rgba(27, 67, 50, 0.28);
+
+}
+
+
+
+.ms-order-account-page .ms-track-timeline {
+
+  margin-bottom: 1.5rem;
+
+  padding: 0.65rem 0.75rem 0.25rem;
+
+  border-radius: 18px;
+
+  background: rgba(255, 255, 255, 0.85);
+
+  border: 1px solid rgba(45, 106, 79, 0.1);
+
+  box-shadow: 0 12px 36px rgba(27, 67, 50, 0.06);
+
+}
+
+

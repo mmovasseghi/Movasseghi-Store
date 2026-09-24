@@ -1,0 +1,15 @@
+@{ ViewData["Title"] = "تأیید OTP"; }
+<div class="section"><div class="container">
+    <div class="form-card">
+        <h1>تأیید کد</h1>
+        @if (TempData["Error"] != null) { <div class="alert alert-error">@TempData["Error"]</div> }
+        @if (ViewBag.DevOtp != null) { <div class="alert alert-info">کد تست: @ViewBag.DevOtp</div> }
+        <form asp-action="VerifyOtp" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="phone" value="@ViewBag.Phone" />
+            <div class="form-group"><label>کد OTP</label><input class="form-control" name="code" required /></div>
+            <div class="form-group"><label>نام (اولین ورود)</label><input class="form-control" name="fullName" /></div>
+            <button class="btn btn-primary" type="submit">ورود</button>
+        </form>
+    </div>
+</div></div>

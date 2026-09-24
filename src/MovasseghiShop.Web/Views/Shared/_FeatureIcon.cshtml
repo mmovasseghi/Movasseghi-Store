@@ -1,0 +1,48 @@
+@model string
+@{
+    var id = $"ft{Guid.NewGuid():N}"[..8];
+}
+<svg class="ms-feature-icon-svg" viewBox="0 0 48 48" width="44" height="44" fill="none" aria-hidden="true">
+    <defs>
+        <linearGradient id="fg1@(id)" x1="4" y1="4" x2="44" y2="44">
+            <stop offset="0%" stop-color="#5f8a72"/>
+            <stop offset="100%" stop-color="#3d5a4c"/>
+        </linearGradient>
+        <linearGradient id="fg2@(id)" x1="0" y1="0" x2="48" y2="48">
+            <stop offset="0%" stop-color="#d4b85a"/>
+            <stop offset="100%" stop-color="#c9a84c"/>
+        </linearGradient>
+        <filter id="fsh@(id)" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="2" stdDeviation="1.5" flood-color="#3d5a4c" flood-opacity=".2"/>
+        </filter>
+    </defs>
+    <circle cx="24" cy="24" r="20" fill="url(#fg1@(id))" opacity=".1"/>
+    <g filter="url(#fsh@(id))">
+    @switch (Model)
+    {
+        case "official":
+            <path d="M24 10l3.5 7 7.8 1.1-5.6 5.5 1.5 9L24 29l-8 4 1.5-9L11 17.5 20 16z" fill="url(#fg2@(id))"/>
+            <circle cx="24" cy="24" r="18" stroke="url(#fg1@(id))" stroke-width="1.5" opacity=".3" fill="none"/>
+            break;
+        case "shield":
+            <path d="M24 7L11 13v10c0 8 6.5 14 13 17 6.5-3 13-9 13-17V13L24 7z" fill="url(#fg1@(id))"/>
+            <path d="M18 24l4 4 8-8" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+            break;
+        case "box":
+            <path d="M9 17l15-7 15 7v19H9V17z" fill="url(#fg1@(id))"/>
+            <path d="M9 17l15 7 15-7M24 24v12" stroke="url(#fg2@(id))" stroke-width="2" opacity=".8"/>
+            <rect x="20" y="26" width="8" height="6" rx="1" fill="url(#fg2@(id))"/>
+            break;
+        case "truck":
+            <rect x="7" y="18" width="22" height="14" rx="2" fill="url(#fg1@(id))"/>
+            <path d="M29 21h7l4 6v5H29V21z" fill="url(#fg1@(id))"/>
+            <circle cx="14" cy="34" r="3.5" fill="url(#fg2@(id))"/>
+            <circle cx="34" cy="34" r="3.5" fill="url(#fg2@(id))"/>
+            <path d="M12 22h8" stroke="#fff" stroke-width="1.2" opacity=".4" stroke-linecap="round"/>
+            break;
+        default:
+            <circle cx="24" cy="24" r="12" fill="url(#fg1@(id))"/>
+            break;
+    }
+    </g>
+</svg>

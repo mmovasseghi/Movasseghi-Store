@@ -1,0 +1,510 @@
+@model Product
+
+@using MovasseghiShop.Web.Models
+
+@using MovasseghiShop.Web.Models.Entities
+
+@using MovasseghiShop.Web.Models.Enums
+
+@using MovasseghiShop.Web.Services
+
+@{
+
+    Layout = "_AdminLayout";
+
+    ViewData["Title"] = "ویرایش محصول";
+
+    var score = (SeoScoreResult?)ViewBag.SeoScore;
+
+    var suggestedPrimary = (string?)ViewBag.SuggestedPrimary ?? "";
+
+    var suggestedSecondary = (string?)ViewBag.SuggestedSecondary ?? "";
+
+    var proseContent = (string?)ViewBag.ProseContent ?? "";
+
+    var scene = Model.Images.FirstOrDefault(i => i.Role == ProductImageRole.Scene)
+
+        ?? Model.Images.OrderBy(i => i.SortOrder).FirstOrDefault(i => i.Url.Contains("hero", StringComparison.OrdinalIgnoreCase));
+
+    var studio = Model.Images.FirstOrDefault(i => i.Role == ProductImageRole.Studio)
+
+        ?? Model.Images.FirstOrDefault(i => i.IsPrimary && i != scene)
+
+        ?? Model.Images.Where(i => i != scene).OrderByDescending(i => i.SortOrder).FirstOrDefault();
+
+    string Preview(string? url) => string.IsNullOrEmpty(url) ? "" : (url.StartsWith("/") ? url : "/" + url);
+
+    var total = score?.DisplayTotal ?? 0;
+
+    var ready = score?.IsPublishReady == true;
+
+    ViewData["HeroTitle"] = System.Net.WebUtility.HtmlDecode(Model.Name);
+
+    ViewData["HeroSubtitle"] = $"کد {Model.ProductCode} · ویرایش محتوا، مشخصات و SEO";
+
+    ViewData["HeroBadge"] = ready ? SeoPublishGateLabels.VerifiedBadge : SeoPublishGateLabels.NotVerified;
+
+}
+
+
+
+@section Head {
+
+    <link rel="stylesheet" href="~/css/product-editor.css" asp-append-version="true" />
+
+}
+
+
+
+<partial name="_AdminHero" />
+
+<p class="st-panel-desc st-reveal" style="margin:-0.75rem 0 1rem">
+
+    <a href="/Shop/Product/@Model.Slug" target="_blank" rel="noopener" style="color:var(--st-green-light);font-weight:700">مشاهده در فروشگاه ↗</a>
+
+</p>
+
+
+
+@if (TempData["Success"] != null) { <div class="st-alert st-alert-success st-reveal">@TempData["Success"]</div> }
+
+@if (TempData["Error"] != null) { <div class="st-alert st-alert-error st-reveal">@TempData["Error"]</div> }
+@if (TempData["Warn"] != null) { <div class="st-alert st-alert-warn st-reveal">@TempData["Warn"]</div> }
+
+
+
+<div class="st-edit-grid st-reveal">
+
+    <div>
+
+        <form method="post" enctype="multipart/form-data" id="product-edit-form" novalidate asp-action="Edit" asp-route-id="@Model.Id">
+
+            @Html.AntiForgeryToken()
+
+            <input type="hidden" name="Id" value="@Model.Id" />
+
+            <nav class="st-pe-tabs" aria-label="بخش‌های ویرایش">
+
+                <button type="button" class="st-pe-tab is-active" data-pe-tab="content">📝 محتوا</button>
+
+                <button type="button" class="st-pe-tab" data-pe-tab="specs">📋 مشخصات فنی</button>
+
+                <button type="button" class="st-pe-tab" data-pe-tab="seo">🔍 SEO</button>
+
+                <button type="button" class="st-pe-tab" data-pe-tab="gallery">🖼️ گالری</button>
+
+                <button type="button" class="st-pe-tab" data-pe-tab="pricing">📦 بسته‌بندی</button>
+
+                <button type="button" class="st-pe-tab" data-pe-tab="publish">🚀 انتشار</button>
+
+            </nav>
+
+
+
+            <!-- محتوا -->
+
+            <section class="st-panel st-pe-panel" data-pe-panel="content">
+
+                <h2>محتوای محصول</h2>
+
+                <p class="st-pe-intro">توضیحات را با ویرایشگر بصری بنویسید. بخش «مشخصات فنی» پایین صفحه به‌صورت خودکار از تب مشخصات ساخته می‌شود.</p>
+
+
+
+                <div class="st-field">
+
+                    <label>نام محصول</label>
+
+                    <input name="Name" value="@Model.Name" required class="st-input" />
+
+                </div>
+
+                <div class="st-field">
+                    <label>دسته‌بندی</label>
+                    <select name="CategoryId" class="st-input" required>
+                        @foreach (var c in (IEnumerable<Category>)ViewBag.Categories)
+                        {
+                            <option value="@c.Id" selected="@(Model.CategoryId == c.Id)">@c.Name</option>
+                        }
+                    </select>
+                    <small class="st-field-hint">محصول در کاتالوگ و Breadcrumb همین دسته نمایش داده می‌شود.</small>
+                </div>
+
+
+
+                <div class="st-field">
+
+                    <label>توضیح کوتاه (زیر عنوان در فروشگاه — همان خط «lead» در صفحه محصول، نه بلوک توضیحات پایین)</label>
+
+                    <textarea name="ShortDescription" rows="2" class="st-input" data-pe-count data-pe-count-max="200">@Model.ShortDescription</textarea>
+
+                    <span class="st-pe-counter" data-pe-counter></span>
+
+                </div>
+
+
+
+                <div class="st-field st-field-rte">
+                    <label for="product-desc-mount">توضیحات کامل</label>
+                    <p class="st-field-hint">متن اصلی صفحه محصول در فروشگاه — بخش «مشخصات فنی» از تب مشخصات جداگانه ساخته می‌شود.</p>
+                    @{
+                        ViewData["FieldName"] = "Description";
+                        ViewData["EditorContent"] = proseContent;
+                        ViewData["EditorLabel"] = null;
+                        ViewData["EditorHint"] = "پیش‌نمایش = همان چیزی که مشتری می‌بیند";
+                        ViewData["EditorMinHeight"] = 320;
+                        ViewData["EditorPreview"] = true;
+                    }
+                    <partial name="_RichTextEditor" model="@("product-desc")" />
+                </div>
+
+            </section>
+
+
+
+            <!-- مشخصات فنی -->
+
+            <section class="st-panel st-pe-panel" data-pe-panel="specs" hidden>
+
+                <h2>مشخصات فنی</h2>
+
+                <p class="st-pe-intro">فیلدهای ساختاریافته — در انتهای توضیحات به‌صورت جدول «مشخصات فنی» نمایش داده می‌شوند.</p>
+
+
+
+                <div class="st-pe-specs-grid">
+
+                    <div class="st-field">
+
+                        <label>کد محصول آملون</label>
+
+                        <input name="ProductCode" value="@Model.ProductCode" class="st-input" data-spec-field />
+
+                    </div>
+
+                    <div class="st-field">
+
+                        <label>GTIN / بارکد جهانی (اختیاری)</label>
+
+                        <input name="Gtin" value="@Model.Gtin" class="st-input" dir="ltr" inputmode="numeric" placeholder="فقط اگر روی جعبه دارید" />
+
+                        @{
+                            var gtinError = MovasseghiShop.Web.Services.SeoProductIdentity.Validate(Model.Gtin);
+                        }
+                        @if (gtinError is not null)
+                        {
+                            <small class="st-field-error">@gtinError</small>
+                        }
+                        else if (!string.IsNullOrWhiteSpace(Model.Gtin))
+                        {
+                            <small class="st-field-ok">✓ بارکد معتبر</small>
+                        }
+                        else
+                        {
+                            <small class="st-field-hint">محصولات آملون معمولاً GTIN ندارند — خالی بماند. کد محصول بالا به‌عنوان MPN استفاده می‌شود.</small>
+                        }
+
+                    </div>
+
+                    <div class="st-field">
+
+                        <label>MPN / کد سازنده</label>
+
+                        <input name="Mpn" value="@(Model.Mpn ?? Model.ProductCode)" class="st-input" dir="ltr" placeholder="معمولاً همان کد محصول آملون" />
+
+                        <small class="st-field-hint">Auto-Fix اگر خالی باشد، خودکار از «کد محصول آملون» پر می‌کند.</small>
+
+                    </div>
+
+                    <div class="st-field">
+
+                        <label>ابعاد</label>
+
+                        <input name="Dimensions" value="@Model.Dimensions" class="st-input" placeholder="قطر 107 × ارتفاع 47 میلی‌متر" data-spec-field />
+
+                    </div>
+
+                    <div class="st-field">
+
+                        <label>جنس</label>
+
+                        <input name="Material" value="@Model.Material" class="st-input" placeholder="نشاسته گیاهی" data-spec-field />
+
+                    </div>
+
+                    <div class="st-field">
+
+                        <label>ظرفیت (سی‌سی)</label>
+
+                        <input name="CapacityCc" type="number" value="@Model.CapacityCc" class="st-input" data-spec-field />
+
+                    </div>
+
+                    <div class="st-field">
+
+                        <label>تعداد خانه</label>
+
+                        <input name="CompartmentCount" type="number" value="@Model.CompartmentCount" class="st-input" data-spec-field />
+
+                    </div>
+
+                    <div class="st-field" style="display:flex;align-items:flex-end">
+
+                        <label class="st-checkbox">
+
+                            <input type="hidden" name="MicrowaveSafe" value="false" />
+
+                            <input type="checkbox" name="MicrowaveSafe" value="true" @(Model.MicrowaveSafe ? "checked" : "") data-spec-field />
+
+                            قابل استفاده در مایکروویو
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="st-field" style="margin-top:0.85rem">
+
+                    <label>کاربرد</label>
+
+                    <textarea name="Applications" rows="2" class="st-input" placeholder="ترشی، ماست، خورشت، کترینگ…" data-spec-field>@Model.Applications</textarea>
+
+                </div>
+
+
+
+                <div class="st-pe-specs-preview">
+
+                    <h3>پیش‌نمایش بلوک مشخصات (خودکار)</h3>
+
+                    <div class="st-pe-prose" data-pe-specs-preview></div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- SEO -->
+
+            <section class="st-panel st-pe-panel" data-pe-panel="seo" hidden>
+
+                <h2>کلمات کلیدی و SEO</h2>
+
+                <p class="st-pe-intro">اولویت سایت: ۱) @SiteKeywordStrategy.Primary · ۲) @SiteKeywordStrategy.Secondary · ۳) @SiteKeywordStrategy.Tertiary</p>
+                <p class="st-pe-intro" style="margin-top:.5rem">Auto-Fix: SEO + Media (Scene/Studio/Alt) + محتوای @SeoContentRules.MinWordCount+ کلمه + AEO (FAQ) + GEO (خلاصه AI).</p>
+
+
+
+                <div class="st-panel st-keywords" style="margin-bottom:1rem;padding:1rem">
+
+                    <div class="st-field">
+
+                        <label>کلمه ۱ (اصلی)</label>
+
+                        <input name="KeywordPrimary" value="@Model.KeywordPrimary" placeholder="@(string.IsNullOrEmpty(suggestedPrimary) ? SiteKeywordStrategy.Tertiary : suggestedPrimary)" list="kw1-suggest" class="st-input" />
+
+                        <datalist id="kw1-suggest">
+                            @foreach (var kw in SiteKeywordStrategy.Pillars.Take(10)) { <option value="@kw.Phrase" /> }
+                        </datalist>
+
+                    </div>
+
+                    <div class="st-field">
+
+                        <label>کلمه ۲ (فرعی)</label>
+
+                        <input name="KeywordSecondary" value="@Model.KeywordSecondary" placeholder="@(string.IsNullOrEmpty(suggestedSecondary) ? SiteKeywordStrategy.Primary : suggestedSecondary)" list="kw2-suggest" class="st-input" />
+
+                        <datalist id="kw2-suggest">
+                            @foreach (var kw in SiteKeywordStrategy.Pillars.Take(10)) { <option value="@kw.Phrase" /> }
+                        </datalist>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="st-field">
+
+                    <label>Meta Title</label>
+
+                    <input name="MetaTitle" value="@Model.MetaTitle" class="st-input" data-pe-count data-pe-count-max="60" />
+
+                    <span class="st-pe-counter" data-pe-counter></span>
+
+                    <div class="st-pe-seo-meter"><span style="width:@(Math.Min(100, (Model.MetaTitle?.Length ?? 0) * 100 / 60))%"></span></div>
+
+                </div>
+
+                <div class="st-field">
+
+                    <label>Meta Description</label>
+
+                    <textarea name="MetaDescription" rows="3" class="st-input" data-pe-count data-pe-count-max="160">@Model.MetaDescription</textarea>
+
+                    <span class="st-pe-counter" data-pe-counter></span>
+
+                    <div class="st-pe-seo-meter"><span style="width:@(Math.Min(100, (Model.MetaDescription?.Length ?? 0) * 100 / 160))%"></span></div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- گالری -->
+
+            <section class="st-panel st-pe-panel" data-pe-panel="gallery" hidden>
+
+                <h2>گالری Scene + Studio</h2>
+
+                <p class="st-pe-intro">Scene = محیط / Hero · Studio = تصویر محصول روی پس‌زمینه سفید — بعد از انتخاب فایل، آپلود خودکار انجام می‌شود. متن Alt برای SEO و دسترس‌پذیری است؛ Auto-Fix هم آن را پر می‌کند.</p>
+
+                <div class="st-btn-row" style="margin-bottom:.75rem">
+                    <button type="button" class="st-btn st-btn-ghost st-btn-sm" data-generate-alts data-product-id="@Model.Id">✨ تولید خودکار Alt همه تصاویر</button>
+                </div>
+
+                <div class="st-pe-gallery">
+
+                    <div class="st-pe-gallery-slot @(scene != null ? "has-image" : "")" data-gallery-slot="scene">
+                        <strong>🌅 Scene — تصویر محیط</strong>
+                        <div class="st-pe-gallery-thumb">
+                            <img alt="Scene"
+                                 data-gallery-slot-preview="scene"
+                                 src="@(scene != null ? $"{Preview(scene.Url)}?v={Model.UpdatedAt.Ticks}" : "")"
+                                 @(scene == null ? "hidden" : "") />
+                        </div>
+                        <p class="st-panel-desc" data-gallery-empty="scene" @(scene != null ? "hidden" : "")>تصویری ثبت نشده</p>
+                        <label class="st-gallery-pick">
+                            <span data-gallery-pick-label="scene">@(scene != null ? "تعویض تصویر Scene" : "انتخاب تصویر Scene")</span>
+                            <input type="file" accept="image/jpeg,image/png,image/webp,image/jpg" data-gallery-file data-gallery-role="Scene" data-product-id="@Model.Id" />
+                        </label>
+                        <p class="st-gallery-status" data-gallery-status="scene" hidden></p>
+                    </div>
+
+                    <div class="st-pe-gallery-slot @(studio != null ? "has-image" : "")" data-gallery-slot="studio">
+                        <strong>📦 Studio — محصول روی سفید</strong>
+                        <div class="st-pe-gallery-thumb">
+                            <img alt="Studio"
+                                 data-gallery-slot-preview="studio"
+                                 src="@(studio != null ? $"{Preview(studio.Url)}?v={Model.UpdatedAt.Ticks}" : "")"
+                                 @(studio == null ? "hidden" : "") />
+                        </div>
+                        <p class="st-panel-desc" data-gallery-empty="studio" @(studio != null ? "hidden" : "")>تصویری ثبت نشده</p>
+                        <label class="st-gallery-pick">
+                            <span data-gallery-pick-label="studio">@(studio != null ? "تعویض تصویر Studio" : "انتخاب تصویر Studio")</span>
+                            <input type="file" accept="image/jpeg,image/png,image/webp,image/jpg" data-gallery-file data-gallery-role="Studio" data-product-id="@Model.Id" />
+                        </label>
+                        <p class="st-gallery-status" data-gallery-status="studio" hidden></p>
+                    </div>
+
+                </div>
+
+                <div class="pe-alt-stack" data-pe-alt-stack @(scene == null && studio == null ? "hidden" : "")>
+                    <h3 class="pe-alt-stack__title">متن Alt تصاویر — ببینید و ویرایش کنید</h3>
+                    @if (scene != null)
+                    {
+                        <partial name="_ProductImageAltEditor" model="@(scene, "scene", "🌅 Scene", Model.Id, $"{Preview(scene.Url)}?v={Model.UpdatedAt.Ticks}")" />
+                    }
+                    @if (studio != null)
+                    {
+                        <partial name="_ProductImageAltEditor" model="@(studio, "studio", "📦 Studio", Model.Id, $"{Preview(studio.Url)}?v={Model.UpdatedAt.Ticks}")" />
+                    }
+                </div>
+
+            </section>
+
+
+
+            <!-- قیمت -->
+
+            <section class="st-panel st-pe-panel" data-pe-panel="pricing" hidden>
+
+                <h2>بسته‌بندی و قیمت</h2>
+
+                <partial name="_ProductPackagingEditor" model="(MovasseghiShop.Web.Models.Admin.ProductPackagingViewModel)ViewBag.Packaging" />
+
+            </section>
+
+
+
+            <!-- انتشار -->
+
+            <section class="st-panel st-pe-panel" data-pe-panel="publish" hidden>
+
+                <h2>وضعیت انتشار</h2>
+
+                <input type="hidden" name="IsActive" value="false" />
+
+                <label class="st-checkbox">
+
+                    <input type="checkbox" name="IsActive" value="true" @(Model.IsActive ? "checked" : "") />
+
+                    فعال در فروشگاه @(ready ? "" : $"— برای فعال‌سازی اولیه: {SeoPublishGateLabels.GateHint}")
+
+                </label>
+
+                @if (Model.IsActive && !ready)
+
+                {
+
+                    <p class="st-pe-intro" style="color:var(--st-ok)">✓ محصول الان در فروشگاه فعال است — ذخیره تصویر/قیمت آن را حذف نمی‌کند.</p>
+
+                }
+
+                @if (!ready)
+
+                {
+
+                    <label class="st-checkbox">
+
+                        <input type="checkbox" name="forcePublish" value="true" />
+
+                        انتشار اجباری (فقط ادمین)
+
+                    </label>
+
+                    <p class="st-pe-intro">امتیاز فعلی: <strong>@total/100</strong> — از «درست کن خودکار» در ستون کناری استفاده کنید.</p>
+
+                }
+
+            </section>
+
+
+
+            <div class="st-pe-save-bar">
+
+                <button type="submit" class="st-btn st-btn-primary">💾 ذخیره تغییرات</button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+
+    <aside>
+        @{
+            ViewData["SeoEntityId"] = Model.Id;
+            ViewData["SeoEntityType"] = "product";
+            ViewData["SceneAlt"] = scene?.AltText;
+            ViewData["StudioAlt"] = studio?.AltText;
+        }
+        <partial name="_SeoProPanel" model="@score" />
+    </aside>
+</div>
+
+
+
+@section Scripts {
+    <script src="~/js/admin-price-inputs.js" asp-append-version="true"></script>
+    <script src="~/js/product-editor.js" asp-append-version="true"></script>
+}
+
+

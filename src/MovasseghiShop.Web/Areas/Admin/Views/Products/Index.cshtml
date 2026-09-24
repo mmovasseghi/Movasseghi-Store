@@ -1,0 +1,128 @@
+@model IEnumerable<Product>
+@using MovasseghiShop.Web.Models.Enums
+@{
+    ViewData["Title"] = "محصولات";
+    var categories = (IEnumerable<Category>)ViewBag.Categories;
+    var seoScores = (Dictionary<int, int>)ViewBag.SeoScores;
+    var seoAudited = (Dictionary<int, bool>?)ViewBag.SeoAudited ?? new();
+    var list = Model.ToList();
+    var active = list.Count(p => p.IsActive);
+    var weakSeo = list.Count(p => seoAudited.GetValueOrDefault(p.Id, false) && seoScores.GetValueOrDefault(p.Id, 0) < 70);
+    var specialCount = (int)(ViewBag.HomeSpecialTotal ?? list.Count(p => p.IsHomeSpecialOffer));
+    var featuredCount = (int)(ViewBag.HomeFeaturedTotal ?? list.Count(p => p.IsHomeFeatured));
+    var search = (string?)ViewBag.Search;
+    var catId = (int?)ViewBag.CategoryId;
+    var status = (string?)ViewBag.Status;
+}
+
+<div class="kit-stats kit-stagger" id="productsStats">
+    <article class="kit-stat">
+        <span class="kit-stat-label">📦 در این فهرست</span>
+        <span class="kit-stat-value" data-stat="count">@list.Count.ToString("N0")</span>
+    </article>
+    <article class="kit-stat">
+        <span class="kit-stat-label">✅ فعال</span>
+        <span class="kit-stat-value kit-stat-value--ok" data-stat="active">@active.ToString("N0")</span>
+    </article>
+    <article class="kit-stat">
+        <span class="kit-stat-label">SEO ضعیف</span>
+        <span class="kit-stat-value @(weakSeo > 0 ? "kit-stat-value--gold" : "kit-stat-value--ok")" data-stat="weak">@weakSeo.ToString("N0")</span>
+        <span class="kit-stat-foot">امتیاز زیر ۷۰ — از مرکز SEO یا ویرایش محصول Auto-Fix کنید</span>
+    </article>
+    <article class="kit-stat">
+        <span class="kit-stat-label">پیشنهاد ویژه</span>
+        <span class="kit-stat-value kit-stat-value--gold" data-stat="special">@specialCount.ToString("N0")</span>
+        <span class="kit-stat-foot">حداکثر ۸ محصول فعال در صفحه اصلی</span>
+    </article>
+    <article class="kit-stat">
+        <span class="kit-stat-label">محصولات برتر</span>
+        <span class="kit-stat-value kit-stat-value--ice" data-stat="featured">@featuredCount.ToString("N0")</span>
+        <span class="kit-stat-foot">حداکثر ۸ محصول فعال در صفحه اصلی</span>
+    </article>
+</div>
+
+<div class="kit-toolbar kit-toolbar--products kit-rise" id="productsToolbar" data-list-url="/Admin/Products/ListPartial" data-highlight-url="/Admin/Products/SetHomeHighlight">
+    @Html.AntiForgeryToken()
+    <div class="kit-toolbar-filters">
+        <div class="kit-search">
+            <span class="kit-search-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            </span>
+            <input type="search"
+                   id="productsSearch"
+                   value="@search"
+                   class="st-input"
+                   placeholder="نام، کد یا نامک… (کلید /)"
+                   aria-label="جستجوی محصول"
+                   autocomplete="off"
+                   spellcheck="false" />
+        </div>
+        <div class="kit-filter-group">
+            <label class="kit-filter-label" for="productsCategory">دسته</label>
+            <select id="productsCategory" class="st-input kit-filter-select" aria-label="فیلتر دسته">
+                <option value="">همه دسته‌ها</option>
+                @foreach (var c in categories)
+                {
+                    if (catId == c.Id)
+                    {
+                        <option value="@c.Id" selected="selected">@c.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@c.Id">@c.Name</option>
+                    }
+                }
+            </select>
+            <label class="kit-filter-label" for="productsStatus">وضعیت</label>
+            <select id="productsStatus" class="st-input kit-filter-select" aria-label="فیلتر وضعیت">
+                <option value="">همه وضعیت‌ها</option>
+                @if (status == "active")
+                {
+                    <option value="active" selected="selected">فعال</option>
+                }
+                else
+                {
+                    <option value="active">فعال</option>
+                }
+                @if (status == "inactive")
+                {
+                    <option value="inactive" selected="selected">غیرفعال</option>
+                }
+                else
+                {
+                    <option value="inactive">غیرفعال</option>
+                }
+                @if (status == "special")
+                {
+                    <option value="special" selected="selected">پیشنهاد ویژه</option>
+                }
+                else
+                {
+                    <option value="special">پیشنهاد ویژه</option>
+                }
+                @if (status == "featured")
+                {
+                    <option value="featured" selected="selected">محصولات برتر</option>
+                }
+                else
+                {
+                    <option value="featured">محصولات برتر</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="kit-toolbar-actions">
+        <a class="st-btn st-btn-gold" href="/Admin/Studio">مرکز SEO</a>
+        <a class="st-btn st-btn-primary" href="/Admin/Products/Create">+ محصول جدید</a>
+    </div>
+</div>
+
+<section class="kit-table-card kit-rise" id="productsTableCard">
+    <div id="productsTableContent" aria-live="polite" aria-busy="false">
+        <partial name="_ProductsList" model="Model" />
+    </div>
+</section>
+
+<partial name="_HomeHighlightModal" />
+
+<script src="~/js/admin-products.js" asp-append-version="true" defer></script>

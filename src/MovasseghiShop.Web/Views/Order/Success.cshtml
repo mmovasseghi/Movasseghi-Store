@@ -1,0 +1,58 @@
+@model Order
+@using MovasseghiShop.Web.Models.Enums
+@{
+    ViewData["Title"] = "سفارش ثبت شد";
+    var payFa = Model.PaymentMethod == PaymentMethod.CashOnPickup ? "نقدی هنگام بارگیری" : "پرداخت آنلاین";
+    var invoiceUrl = User.Identity?.IsAuthenticated == true
+        ? $"/Order/MyInvoice?number={Uri.EscapeDataString(Model.OrderNumber)}"
+        : $"/Order/Invoice?number={Uri.EscapeDataString(Model.OrderNumber)}&phone={Uri.EscapeDataString(Model.Phone)}";
+}
+@section Head {
+    <link rel="stylesheet" href="~/css/ux-order.css" asp-append-version="true" />
+}
+
+<section class="ms-order-success ms-wrap">
+    <div class="ms-order-success__hero">
+        <div class="ms-order-success__icon" aria-hidden="true">✓</div>
+        <h1 class="ms-order-success__title">سفارش شما با موفقیت ثبت شد</h1>
+        <p class="ms-order-success__lead">
+            پیش‌فاکتور آماده است. واحد فروش برای تأیید موجودی و هماهنگی زمان بارگیری با شما تماس می‌گیرد.
+            مبلغ نهایی طبق روش <strong>@payFa</strong> در محل تحویل تسویه می‌شود.
+        </p>
+    </div>
+
+    <div class="ms-order-success__grid">
+        <div class="ms-order-success__card">
+            <div class="ms-order-success__card-kicker">کد پیگیری</div>
+            <div class="ms-order-success__card-val" dir="ltr">@Model.OrderNumber</div>
+        </div>
+        <div class="ms-order-success__card">
+            <div class="ms-order-success__card-kicker">مبلغ پیش‌فاکتور</div>
+            <div class="ms-order-success__card-val ms-order-success__card-val--amount">@SlugHelper.FormatToman(Model.TotalAmount) <small style="font-size:.72rem">تومان</small></div>
+        </div>
+        <div class="ms-order-success__card">
+            <div class="ms-order-success__card-kicker">زمان تحویل تقریبی</div>
+            <div class="ms-order-success__card-val">۲ تا ۷ روز کاری</div>
+        </div>
+    </div>
+
+    <div class="ms-order-success__notice">
+        این مبلغ بر اساس <strong>پیش‌فاکتور</strong> است. در صورت افزایش قیمت از کارخانه، پیش‌فاکتور از اعتبار ساقط می‌شود.
+        <strong>فاکتور رسمی</strong> را هنگام بارگیری تحویل می‌گیرید.
+    </div>
+
+    <div class="ms-order-success__actions">
+        <a class="ms-order-success__btn ms-order-success__btn--primary" href="@invoiceUrl">مشاهده و دانلود پیش‌فاکتور</a>
+        <a class="ms-order-success__btn ms-order-success__btn--ghost" href="/Order/Track?orderNumber=@Uri.EscapeDataString(Model.OrderNumber)&phone=@Uri.EscapeDataString(Model.Phone)">پیگیری سفارش</a>
+        <a class="ms-order-success__btn ms-order-success__btn--ghost" href="/Catalog">ادامه خرید</a>
+    </div>
+
+    <div class="ms-order-success__steps">
+        <h2>مراحل بعدی</h2>
+        <ol>
+            <li>پیش‌فاکتور را ذخیره یا چاپ کنید (دکمه دانلود در صفحه پیش‌فاکتور).</li>
+            <li>منتظر تماس واحد فروش موثقی برای تأیید موجودی و زمان بارگیری باشید.</li>
+            <li>در زمان بارگیری، مبلغ نهایی را نقداً تسویه و فاکتور رسمی را دریافت کنید.</li>
+        </ol>
+    </div>
+</section>

@@ -1,0 +1,23 @@
+[Unit]
+Description=Movasseghi Shop (ASP.NET Core)
+After=network.target
+
+[Service]
+Type=notify
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/MOVASSEGHISTORE/publish
+ExecStart=/usr/bin/dotnet /opt/MOVASSEGHISTORE/publish/MovasseghiShop.Web.dll
+Environment=ASPNETCORE_ENVIRONMENT=Production
+Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=false
+Environment=ASPNETCORE_URLS=http://127.0.0.1:5080
+Restart=always
+RestartSec=5
+KillSignal=SIGINT
+SyslogIdentifier=movasseghi-shop
+
+# Writable data outside publish folder
+ReadWritePaths=/var/lib/movasseghi
+
+[Install]
+WantedBy=multi-user.target

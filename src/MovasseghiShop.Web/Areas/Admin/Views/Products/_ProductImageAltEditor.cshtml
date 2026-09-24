@@ -1,0 +1,53 @@
+@model (ProductImage Image, string SlotKey, string SlotLabel, int ProductId, string PreviewUrl)
+@using MovasseghiShop.Web.Services
+@{
+    var img = Model.Image;
+    var alt = img.AltText?.Trim() ?? "";
+    var len = alt.Length;
+    var status = len == 0 ? "empty" : len < SeoContentRules.MinAltChars ? "short" : len > SeoContentRules.MaxAltChars ? "long" : "ok";
+    var statusLabel = status switch
+    {
+        "empty" => "خالی — باید پر شود",
+        "short" => "کوتاه — حداقل ۲۵ کاراکتر",
+        "long" => "بلند — حداکثر ۱۲۵",
+        _ => "مناسب SEO"
+    };
+}
+
+<article class="pe-alt-card" data-alt-block data-alt-slot="@Model.SlotKey">
+    <div class="pe-alt-card__media">
+        <img src="@Model.PreviewUrl" alt="@(string.IsNullOrEmpty(alt) ? Model.SlotLabel : alt)"
+             data-gallery-preview="@Model.SlotKey" width="160" height="160" />
+        <span class="pe-alt-badge pe-alt-badge--@status" data-alt-status data-alt-status-value="@status">@statusLabel</span>
+    </div>
+
+    <div class="pe-alt-card__body">
+        <header class="pe-alt-card__head">
+            <strong>@Model.SlotLabel</strong>
+            <span class="pe-alt-card__hint">متن جایگزین تصویر — در سایت و گوگل نمایش داده می‌شود</span>
+        </header>
+
+        <div class="pe-alt-preview" aria-live="polite">
+            <span class="pe-alt-preview__label">پیش‌نمایش — همین متن در سایت و نتایج گوگل دیده می‌شود</span>
+            <p class="pe-alt-preview__text" data-alt-preview-text>
+                @(string.IsNullOrEmpty(alt) ? "— هنوز Alt تنظیم نشده —" : alt)
+            </p>
+        </div>
+
+        <label class="pe-alt-label" for="alt-@Model.SlotKey-@img.Id">ویرایش Alt</label>
+        <textarea id="alt-@Model.SlotKey-@img.Id"
+                  class="st-input pe-alt-input"
+                  rows="3"
+                  maxlength="125"
+                  data-alt-input
+                  data-image-id="@img.Id"
+                  data-product-id="@Model.ProductId"
+                  placeholder="مثلاً: ظرف گیاهی آملون ۵۰۰ سی‌سی روی پس‌زمینه سفید">@alt</textarea>
+
+        <div class="pe-alt-toolbar">
+            <span class="pe-alt-counter" data-alt-counter>@(len) / @SeoContentRules.MaxAltChars (حداقل @SeoContentRules.MinAltChars)</span>
+            <button type="button" class="st-btn st-btn-ghost st-btn-sm" data-alt-save>ذخیره Alt</button>
+        </div>
+        <p class="pe-alt-save-hint" data-alt-save-hint hidden></p>
+    </div>
+</article>

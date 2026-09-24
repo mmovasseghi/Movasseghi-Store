@@ -1,0 +1,154 @@
+﻿@model IEnumerable<BlogPost>
+@using System.Text.Json
+@{
+    var featured = ViewBag.Featured as BlogPost;
+    var page = (int)ViewBag.Page;
+    var totalPages = (int)ViewBag.TotalPages;
+    var total = (int)ViewBag.Total;
+    var pageUrl = $"{Context.Request.Scheme}://{Context.Request.Host}/Blog{(page > 1 ? $"?page={page}" : "")}";
+
+    ViewData["Title"] = page > 1 ? $"وبلاگ — صفحه {page} | فروشگاه موثقی" : "وبلاگ | راهنما و مطالب تخصصی — فروشگاه موثقی";
+    ViewData["MetaDescription"] = "وبلاگ فروشگاه موثقی — راهنمای خرید عمده ظروف گیاهی آملون، نکات رستوران و فست‌فود، مقایسه محصولات و اخبار تخصصی پخش عمده در تهران.";
+    ViewData["MetaKeywords"] = "وبلاگ موثقی, ظروف گیاهی, خرید عمده, آملون, راهنمای رستوران";
+    ViewData["CanonicalUrl"] = pageUrl;
+    ViewData["OgTitle"] = ViewData["Title"];
+    ViewData["OgDescription"] = ViewData["MetaDescription"];
+    ViewData["OgType"] = "website";
+    ViewData["OgUrl"] = pageUrl;
+    ViewData["OgImage"] = $"{Context.Request.Scheme}://{Context.Request.Host}/images/brand/originallogo.png";
+
+    var items = Model.Select(p => new Dictionary<string, object?>
+    {
+        ["@type"] = "BlogPosting",
+        ["headline"] = p.Title,
+        ["url"] = $"{Context.Request.Scheme}://{Context.Request.Host}/Blog/Post/{p.Slug}",
+        ["datePublished"] = (p.PublishedAt ?? p.CreatedAt).ToString("o")
+    }).ToList();
+    if (featured != null)
+    {
+        items.Insert(0, new Dictionary<string, object?>
+        {
+            ["@type"] = "BlogPosting",
+            ["headline"] = featured.Title,
+            ["url"] = $"{Context.Request.Scheme}://{Context.Request.Host}/Blog/Post/{featured.Slug}",
+            ["datePublished"] = (featured.PublishedAt ?? featured.CreatedAt).ToString("o")
+        });
+    }
+}
+@section Head {
+    <link rel="stylesheet" href="~/css/ux-content.css" asp-append-version="true" />
+    <script type="application/ld+json">@Html.Raw(JsonSerializer.Serialize(new Dictionary<string, object?>
+    {
+        ["@context"] = "https://schema.org",
+        ["@type"] = "CollectionPage",
+        ["name"] = "وبلاگ فروشگاه موثقی",
+        ["description"] = ViewData["MetaDescription"],
+        ["url"] = pageUrl,
+        ["mainEntity"] = new Dictionary<string, object?>
+        {
+            ["@type"] = "ItemList",
+            ["itemListElement"] = items.Select((item, i) => new Dictionary<string, object?>
+            {
+                ["@type"] = "ListItem",
+                ["position"] = i + 1,
+                ["item"] = item
+            }).ToList()
+        }
+    }))</script>
+    <script type="application/ld+json">@Html.Raw(JsonSerializer.Serialize(new Dictionary<string, object?>
+    {
+        ["@context"] = "https://schema.org",
+        ["@type"] = "BreadcrumbList",
+        ["itemListElement"] = new object[]
+        {
+            new Dictionary<string, object?> { ["@type"] = "ListItem", ["position"] = 1, ["name"] = "خانه", ["item"] = $"{Context.Request.Scheme}://{Context.Request.Host}/" },
+            new Dictionary<string, object?> { ["@type"] = "ListItem", ["position"] = 2, ["name"] = "وبلاگ", ["item"] = pageUrl }
+        }
+    }))</script>
+}
+
+<div class="ms-wrap ct-page ct-page--blog" data-ct-page>
+    @{ ViewBag.ContentHeroMode = "blog"; ViewBag.ContentTotal = total; }
+    <partial name="_ContentPageHero" />
+
+    <nav class="ct-breadcrumb" aria-label="مسیر صفحه">
+        <a href="/">خانه</a><span aria-hidden="true">/</span><span aria-current="page">وبلاگ</span>
+    </nav>
+
+    @if (featured != null)
+    {
+        var fDate = featured.PublishedAt ?? featured.CreatedAt;
+        <a href="/Blog/Post/@featured.Slug" class="ct-featured ms-reveal">
+            <div class="ct-featured-visual @(featured.FeaturedImageUrl?.Contains("/products/") == true ? "ct-card-visual--photo" : "ms-img-stage")">
+                @if (!string.IsNullOrEmpty(featured.FeaturedImageUrl))
+                {
+                    <img src="@featured.FeaturedImageUrl" alt="@featured.Title" width="640" height="360" loading="eager" />
+                }
+            </div>
+            <div class="ct-featured-body">
+                <span class="ct-badge">⭐ مطلب ویژه</span>
+                <h2>@featured.Title</h2>
+                <p>@featured.Excerpt</p>
+                <time datetime="@fDate.ToString("yyyy-MM-dd")">@fDate.ToLocalTime().ToString("yyyy/MM/dd")</time>
+                <span class="ct-read-more">ادامه مطلب ←</span>
+            </div>
+        </a>
+    }
+
+    @if (Model.Any())
+    {
+        <div class="ct-grid ms-reveal">
+            @foreach (var post in Model)
+            {
+                var pubDate = post.PublishedAt ?? post.CreatedAt;
+                <article class="ct-card">
+                    <a href="/Blog/Post/@post.Slug" class="ct-card-link">
+                        <div class="ct-card-visual @(post.FeaturedImageUrl?.Contains("/products/") == true ? "ct-card-visual--photo" : "ms-img-stage")">
+                            @if (!string.IsNullOrEmpty(post.FeaturedImageUrl))
+                            {
+                                <img src="@post.FeaturedImageUrl" alt="@post.Title" width="320" height="180" loading="lazy" />
+                            }
+                        </div>
+                        <div class="ct-card-body">
+                            <time class="ct-date" datetime="@pubDate.ToString("yyyy-MM-dd")">@pubDate.ToLocalTime().ToString("yyyy/MM/dd")</time>
+                            <h2 class="ct-card-title">@post.Title</h2>
+                            @if (!string.IsNullOrWhiteSpace(post.Excerpt))
+                            {
+                                <p class="ct-card-excerpt">@post.Excerpt</p>
+                            }
+                            <span class="ct-read-more">ادامه مطلب ←</span>
+                        </div>
+                    </a>
+                </article>
+            }
+        </div>
+    }
+    else if (featured == null)
+    {
+        <div class="ct-empty">هنوز مطلبی منتشر نشده است.</div>
+    }
+
+    @if (totalPages > 1)
+    {
+        <nav class="ct-pagination" aria-label="صفحه‌بندی وبلاگ">
+            @if (page > 1)
+            {
+                <a href="/Blog?page=@(page - 1)" class="ct-page-btn">→ قبلی</a>
+            }
+            @for (var i = 1; i <= totalPages; i++)
+            {
+                <a href="/Blog?page=@i" class="ct-page-num @(i == page ? "is-active" : "")" @(i == page ? "aria-current=page" : "")>@i</a>
+            }
+            @if (page < totalPages)
+            {
+                <a href="/Blog?page=@(page + 1)" class="ct-page-btn">بعدی ←</a>
+            }
+        </nav>
+    }
+
+    <partial name="_ContentPageCta" />
+</div>
+
+@section Scripts {
+    <script defer src="~/js/content.js" asp-append-version="true"></script>
+}

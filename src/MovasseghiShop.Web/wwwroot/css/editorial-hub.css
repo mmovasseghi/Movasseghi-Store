@@ -1,0 +1,237 @@
+/* موتور بلاگ خودکار — UI دسکتاپ + موبایل */
+
+.ehub-panel {
+  position: relative;
+  overflow: hidden;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.ehub-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: linear-gradient(90deg, #34f5a7, #d4af37, #34f5a7);
+  opacity: 0.85;
+}
+
+.ehub-panel-head {
+  margin-bottom: 0.25rem;
+}
+
+.ehub-panel-head h2 {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+}
+
+.ehub-lead {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--st-text-2, rgba(255, 255, 255, 0.78));
+  max-width: 62ch;
+}
+
+.ehub-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.65rem;
+  margin: 1.1rem 0 1.35rem;
+}
+
+@media (max-width: 900px) {
+  .ehub-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 420px) {
+  .ehub-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ehub-stat {
+  background: linear-gradient(145deg, rgba(52, 245, 167, 0.07), rgba(0, 0, 0, 0.35));
+  border: 1px solid rgba(52, 245, 167, 0.18);
+  border-radius: 14px;
+  padding: 0.75rem 0.85rem;
+  min-width: 0;
+}
+
+.ehub-stat strong {
+  display: block;
+  font-size: clamp(1rem, 4vw, 1.28rem);
+  color: var(--st-green-light, #34f5a7);
+  line-height: 1.25;
+  word-break: break-word;
+}
+
+.ehub-stat--warn strong {
+  color: #e8c547;
+}
+
+.ehub-stat span {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.74rem;
+  opacity: 0.8;
+  line-height: 1.35;
+}
+
+.ehub-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: 1.35rem;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 960px) {
+  .ehub-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ehub-block-title {
+  margin: 0 0 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--st-text-1, #fff);
+}
+
+.ehub-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0 1.1rem 0 0;
+  border-right: 2px solid rgba(52, 245, 167, 0.35);
+}
+
+.ehub-timeline li {
+  position: relative;
+  padding: 0.55rem 0.85rem 0.55rem 0;
+  margin-bottom: 0.4rem;
+}
+
+.ehub-timeline li::before {
+  content: attr(data-step);
+  position: absolute;
+  right: -0.72rem;
+  top: 0.65rem;
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #34f5a7, #d4af37);
+  color: #0a0f0d;
+  font-size: 0.62rem;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 3px rgba(10, 15, 13, 0.9);
+}
+
+.ehub-timeline h4 {
+  margin: 0 0 0.2rem;
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+
+.ehub-timeline p {
+  margin: 0;
+  font-size: 0.8rem;
+  opacity: 0.88;
+  line-height: 1.5;
+}
+
+.ehub-badge {
+  display: inline-block;
+  font-size: 0.68rem;
+  padding: 0.12rem 0.45rem;
+  border-radius: 999px;
+  background: rgba(212, 175, 55, 0.22);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  margin-top: 0.35rem;
+}
+
+.ehub-score {
+  font-weight: 800;
+  padding: 0.12rem 0.45rem;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+
+.ehub-score--ok {
+  background: rgba(52, 245, 167, 0.15);
+  color: #34f5a7;
+}
+
+.ehub-score--warn {
+  background: rgba(212, 175, 55, 0.2);
+  color: #e8c547;
+}
+
+.ehub-score--bad {
+  background: rgba(255, 90, 90, 0.15);
+  color: #ff9a9a;
+}
+
+.ehub-toolbar {
+  margin-top: 1.25rem;
+  border: 1px dashed rgba(52, 245, 167, 0.25);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.ehub-toolbar .st-btn-primary {
+  background: linear-gradient(135deg, rgba(52, 245, 167, 0.25), rgba(212, 175, 55, 0.2));
+}
+
+.ehub-cta-danger {
+  border-color: rgba(255, 140, 100, 0.5) !important;
+}
+
+.ehub-hint {
+  margin-top: 0.75rem;
+  font-size: 0.8rem;
+}
+
+.ehub-subpanel {
+  margin-top: 0;
+}
+
+.st-pillar-list {
+  display: grid;
+  gap: 0.35rem;
+  padding-right: 1rem;
+}
+
+@media (max-width: 768px) {
+  .st-pillar-list {
+    padding-right: 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .ehub-timeline {
+    padding-inline-end: 1.35rem;
+    padding-inline-start: 0.15rem;
+    margin-inline-end: 0.5rem;
+    overflow: hidden;
+  }
+
+  .ehub-timeline li::before {
+    right: -0.55rem;
+    inset-inline-end: -0.55rem;
+  }
+
+  .ehub-layout > div {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .ehub-toolbar .st-btn {
+    white-space: normal;
+    text-align: center;
+    line-height: 1.4;
+  }
+}

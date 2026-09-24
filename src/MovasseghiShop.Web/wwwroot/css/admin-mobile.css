@@ -1,0 +1,445 @@
+/* پنل ادمین — موبایل‌اول و جلوگیری از overflow */
+
+html,
+.st-body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+@supports (padding: max(0px)) {
+  .st-topbar {
+    padding-inline: max(0.85rem, env(safe-area-inset-inline-end, 0px))
+      max(0.85rem, env(safe-area-inset-inline-start, 0px));
+  }
+
+  .st-main {
+    padding-inline: max(0.85rem, env(safe-area-inset-inline-end, 0px))
+      max(0.85rem, env(safe-area-inset-inline-start, 0px));
+  }
+}
+
+.st-body,
+.st-app,
+.st-main-wrap {
+  overflow-x: clip;
+  max-width: 100%;
+  width: 100%;
+}
+
+
+.st-main {
+  max-width: 100%;
+  min-width: 0;
+}
+
+.st-panel {
+  min-width: 0;
+}
+
+.kit-table-card,
+.kit-table-scroll {
+  max-width: 100%;
+  min-width: 0;
+}
+
+.kit-table-scroll {
+  overscroll-behavior-x: contain;
+}
+
+.st-panel h2,
+.st-panel h3 {
+  word-break: break-word;
+}
+
+@media (max-width: 960px) {
+  .st-page-header,
+  .st-hero,
+  .st-page-hero {
+    margin-bottom: 1.25rem;
+    padding-bottom: 1rem;
+  }
+
+  .st-page-title {
+    font-size: clamp(1.05rem, 4.5vw, 1.35rem);
+    line-height: 1.4;
+  }
+
+  .kit-modal {
+    padding: 0.65rem;
+    align-items: flex-end;
+  }
+
+  .kit-modal-card {
+    max-height: min(92dvh, 640px);
+    width: 100%;
+  }
+}
+
+/* ── موبایل / تبلت عمودی (همان breakpoint منوی کناری) ── */
+@media (max-width: 960px) {
+  .st-stats-grid,
+  .st-stats-grid--3,
+  .st-bento {
+    grid-template-columns: 1fr !important;
+  }
+
+  .st-stat-card--featured,
+  .st-metric--hero {
+    grid-column: span 1 !important;
+  }
+
+  .st-seo-headline,
+  .st-seo-headline--3 {
+    grid-template-columns: 1fr !important;
+  }
+
+  .st-seo-coverage {
+    grid-template-columns: 1fr;
+  }
+
+  .st-seo-head {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .st-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .st-toolbar .st-input,
+  .st-toolbar .st-btn,
+  .st-toolbar form {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .st-toolbar .st-btn {
+    justify-content: center;
+    min-height: 44px;
+  }
+
+  .st-btn-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .st-btn-row .st-btn,
+  .st-btn-row form {
+    width: 100%;
+  }
+
+  .st-btn-row .st-btn {
+    justify-content: center;
+    min-height: 44px;
+  }
+
+  .kit-bulkbar {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.65rem 0.75rem;
+  }
+
+  .kit-bulkbar .st-btn {
+    flex: 1 1 100%;
+    justify-content: center;
+    min-height: 44px;
+  }
+
+  .kit-bulkbar-spacer {
+    display: none;
+  }
+
+  .kit-pagination {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.35rem;
+  }
+
+  .kit-chart-scroll {
+    overflow-x: auto;
+    max-width: 100%;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .st-rte-toolbar {
+    flex-wrap: wrap;
+    max-width: 100%;
+  }
+
+  .st-rte-toolbar button {
+    min-width: 2.25rem;
+    min-height: 2.25rem;
+  }
+
+  .st-edit-sticky-actions {
+    position: sticky;
+    bottom: 0;
+    z-index: 40;
+    padding: 0.65rem 0;
+    margin: 0 -0.15rem;
+    background: linear-gradient(180deg, transparent, rgba(8, 11, 10, 0.92) 28%);
+  }
+
+  .st-edit-sticky-actions .st-btn {
+    min-height: 44px;
+  }
+
+  .cms-live-preview {
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .cms-live-preview iframe {
+    max-width: 100%;
+  }
+}
+
+/* نوار ابزار: فرم‌ها با display:contents روی موبایل درست چیده شوند */
+@media (max-width: 960px) {
+  .kit-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    padding: 0.85rem;
+  }
+
+  .kit-toolbar form {
+    display: flex !important;
+    flex: 1 1 100%;
+    width: 100%;
+    margin: 0;
+  }
+
+  .kit-toolbar .st-btn,
+  .kit-toolbar form .st-btn,
+  .kit-toolbar > a.st-btn {
+    width: 100%;
+    justify-content: center;
+    min-height: 44px;
+    text-align: center;
+    white-space: normal;
+    line-height: 1.35;
+    padding: 0.65rem 0.85rem;
+  }
+
+  .kit-grid-2,
+  .kit-grid-2--wide {
+    grid-template-columns: 1fr !important;
+  }
+
+  .st-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .st-stat-value {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+  }
+
+  .st-hero {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .st-hero-badge {
+    align-self: flex-start;
+  }
+}
+
+/* جدول → کارت روی موبایل (کلاس‌ها با AdminKit روی ≤۹۶۰px فعال می‌شوند) */
+@media (max-width: 960px) {
+  .st-table-wrap--stack {
+    overflow: visible;
+    border: none;
+    background: transparent;
+    padding: 0;
+  }
+
+  .st-table--stack {
+    min-width: 0 !important;
+  }
+
+  .st-table--stack thead {
+    display: none;
+  }
+
+  .st-table--stack tbody tr {
+    display: block;
+    margin-bottom: 0.75rem;
+    border: 1px solid var(--nx-border);
+    border-radius: var(--st-radius);
+    background: rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+  }
+
+  .st-table--stack tbody tr:hover {
+    background: rgba(0, 0, 0, 0.32);
+  }
+
+  .st-table--stack tbody td {
+    display: grid;
+    grid-template-columns: minmax(5.25rem, 36%) 1fr;
+    gap: 0.45rem 0.65rem;
+    align-items: start;
+    padding: 0.55rem 0.85rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    font-size: 0.82rem;
+    word-break: break-word;
+  }
+
+  .st-table--stack tbody td:last-child {
+    border-bottom: none;
+  }
+
+  .st-table--stack tbody td::before {
+    content: attr(data-label);
+    font-weight: 800;
+    font-size: 0.68rem;
+    color: var(--st-muted);
+    letter-spacing: 0.02em;
+  }
+
+  .st-table--stack tbody td[data-label=""]::before {
+    display: none;
+  }
+}
+
+/* دسکتاپ: اسکرول امن برای جدول‌های عریض */
+@media (min-width: 769px) {
+  .st-table-wrap {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@media (max-width: 960px) {
+  .st-table-wrap:not(.st-table-wrap--stack) {
+    margin-inline: -0.15rem;
+    border-radius: var(--st-radius-sm);
+  }
+
+  .kit-stats {
+    grid-template-columns: 1fr !important;
+  }
+
+  .kit-segment {
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  .kit-segment a,
+  .kit-segment button {
+    flex: 1 1 auto;
+    min-width: 0;
+    text-align: center;
+    font-size: 0.78rem;
+    padding: 0.5rem 0.4rem;
+  }
+
+  .kit-toolbar .kit-search {
+    flex: 1 1 100%;
+    width: 100%;
+  }
+
+  .kit-toolbar > .st-btn,
+  .kit-toolbar > a.st-btn {
+    width: 100%;
+    justify-content: center;
+    min-height: 44px;
+  }
+
+  .kit-table-scroll--stack {
+    overflow: visible;
+  }
+
+  .kit-table--stack thead {
+    display: none;
+  }
+
+  .kit-table--stack tbody tr {
+    display: block;
+    margin-bottom: 0.85rem;
+    border: 1px solid var(--nx-border);
+    border-radius: var(--st-radius);
+    background: var(--nx-bg-2);
+    padding: 0.15rem 0;
+  }
+
+  .kit-table--stack tbody td {
+    display: grid;
+    grid-template-columns: minmax(5rem, 34%) 1fr;
+    gap: 0.4rem 0.6rem;
+    padding: 0.55rem 0.85rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    white-space: normal !important;
+  }
+
+  .kit-table--stack tbody td:last-child {
+    border-bottom: none;
+  }
+
+  .kit-table--stack tbody td::before {
+    content: attr(data-label);
+    font-weight: 800;
+    font-size: 0.68rem;
+    color: var(--st-muted);
+  }
+
+  .kit-table--stack tbody td.kit-cell-actions::before {
+    content: "عملیات";
+  }
+
+  .kit-table--stack .kit-cell-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    align-items: stretch;
+  }
+
+  .kit-table--stack .kit-cell-actions .st-btn,
+  .kit-table--stack .kit-cell-actions form {
+    display: block !important;
+    width: 100%;
+  }
+
+  .kit-table--stack .kit-cell-actions .st-btn {
+    justify-content: center;
+    min-height: 42px;
+  }
+
+  .kit-table--stack .kit-cell-sub {
+    display: block !important;
+    margin-top: 0.2rem;
+    font-size: 0.72rem;
+    opacity: 0.75;
+    word-break: break-all;
+  }
+
+  .kit-table--stack .kit-col-star {
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    text-align: start;
+  }
+
+  .kit-table--stack .kit-hi-slot {
+    margin-inline-start: 0;
+  }
+
+  .kit-table--stack tbody td.kit-cell-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .kit-table--stack .kit-order-link {
+    word-break: break-all;
+  }
+
+  .kit-table-scroll:not(.kit-table-scroll--stack):not(.kit-table-scroll--wide) {
+    border-radius: var(--st-radius-sm);
+    max-width: 100%;
+  }
+
+}

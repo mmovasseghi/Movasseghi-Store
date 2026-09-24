@@ -1,0 +1,38 @@
+@model ContentPageHeader
+@{
+    var isBlog = Model.Page == "blog";
+    var isNews = Model.Page == "news";
+}
+<header class="ct-hero @(isNews ? "ct-hero--news" : "ct-hero--blog") ms-reveal">
+    <div class="ct-hero-deco" aria-hidden="true">
+        <span class="ct-hero-orb ct-hero-orb--1"></span>
+        <span class="ct-hero-orb ct-hero-orb--2"></span>
+        <span class="ct-hero-orb ct-hero-orb--3"></span>
+        <span class="ct-hero-grid"></span>
+    </div>
+    <div class="ct-hero-inner">
+        <div class="ct-hero-top">
+            <span class="ct-hero-kicker">
+                <span class="ct-hero-kicker-dot @(isNews ? "is-live" : "")" aria-hidden="true"></span>
+                @(isNews ? "اخبار و رویدادهای موثقی" : "وبلاگ تخصصی موثقی")
+            </span>
+            <nav class="ct-hero-switch" aria-label="نوع محتوا">
+                <a href="/Blog" class="ct-hero-switch-item @(isBlog ? "is-active" : "")">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14"/></svg>
+                    <span>وبلاگ</span>
+                </a>
+                <a href="/News" class="ct-hero-switch-item @(isNews ? "is-active" : "")">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                    <span>اخبار</span>
+                </a>
+            </nav>
+        </div>
+        <h1>@Model.Title</h1>
+        <p>@Model.Subtitle</p>
+        <div class="ct-hero-chips">
+            <span class="ct-hero-chip">@(isNews ? "📢" : "📚") @Model.ItemCount @Model.CountLabel</span>
+            <span class="ct-hero-chip">🌿 ظروف گیاهی آملون</span>
+            <span class="ct-hero-chip">✅ نمایندگی رسمی</span>
+        </div>
+    </div>
+</header>

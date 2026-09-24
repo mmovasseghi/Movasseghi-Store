@@ -1,0 +1,598 @@
+@model Product
+@inject IWebHostEnvironment Env
+@using System.Text.Json
+@using System.Text.RegularExpressions
+@using MovasseghiShop.Web.Services
+@{
+    ViewData["Title"] = Model.MetaTitle ?? $"{Model.Name} | خرید عمده — فروشگاه موثقی";
+    ViewData["MetaDescription"] = Model.MetaDescription ?? Model.ShortDescription ?? $"{Model.Name} — پخش عمده ظروف گیاهی آملون | نمایندگی رسمی موثقی در تهران | حداقل {WholesaleRules.FormatMinAmount()} تومان";
+    ViewData["MetaKeywords"] = Model.MetaKeywords ?? $"{Model.Name}, ظروف گیاهی, آملون, خرید عمده, {Model.ProductType}";
+
+    var seoProfile = ViewBag.SeoProfile as SeoProfile;
+    var related = (IEnumerable<Product>)ViewBag.Related ?? Enumerable.Empty<Product>();
+    var gallerySlides = ProductImageHelper.BuildGallery(Model.Images, Env);
+    var gallery = gallerySlides.Select(s => s.Url).ToList();
+    var mainImg = ProductImageHelper.GetDisplayUrl(ProductImageHelper.GetPrimary(Model.Images), Env);
+    var pageUrl = $"{Context.Request.Scheme}://{Context.Request.Host}/Shop/Product/{Model.Slug}";
+    var absImg = mainImg != null && mainImg.StartsWith("/") ? $"{Context.Request.Scheme}://{Context.Request.Host}{mainImg}" : mainImg;
+
+    ViewData["CanonicalUrl"] = pageUrl;
+    ViewData["OgTitle"] = ViewData["Title"];
+    ViewData["OgDescription"] = ViewData["MetaDescription"];
+    ViewData["OgType"] = "product";
+    ViewData["OgUrl"] = pageUrl;
+    if (absImg != null) ViewData["OgImage"] = absImg;
+
+    var cleanApp = CleanApplication(Model.Applications);
+    var sellableVariants = ProductStorefrontResolver.GetSellableVariants(Model.Variants);
+    var displayVariants = ProductStorefrontResolver.GetDisplayVariants(Model.Variants);
+    var (bulkVariants, shrinkVariants) = ProductStorefrontResolver.SplitByPackaging(displayVariants);
+    var minPrice = sellableVariants.Count > 0 ? sellableVariants.Min(v => v.Price) : 0m;
+    var hasPrice = minPrice > 0;
+    var priceFromPrefix = ProductStorefrontResolver.UseFromPricePrefix(sellableVariants);
+    var hasCartVariants = sellableVariants.Count > 0;
+    var hasCustomShort = SeoStorefrontDisplay.HasSubstantialPlainText(Model.ShortDescription);
+    var manualShortDesc = hasCustomShort ? Model.ShortDescription!.Trim() : null;
+    var buyboxSummary = ViewBag.BuyboxSummary as string;
+    if (string.IsNullOrWhiteSpace(buyboxSummary))
+    {
+        if (seoProfile != null && SeoStorefrontDisplay.HasSubstantialPlainText(seoProfile.AiSummary))
+            buyboxSummary = seoProfile.AiSummary!.Trim();
+        else
+            buyboxSummary = $"{Model.Name} — ظرف گیاهی اصل آملون؛ خرید عمده از موثقی با ضمانت اصالت.";
+    }
+
+    var faqs = ProductSeoHelper.GetFaqs(Model, seoProfile, cleanApp);
+    var specs = BuildSpecs(Model, cleanApp);
+    var reviewsSection = ViewBag.ReviewsSection as ProductReviewsSectionModel
+        ?? new ProductReviewsSectionModel { ProductId = Model.Id };
+}
+@section Head {
+    <link rel="stylesheet" href="~/css/ux-product.css" asp-append-version="true" />
+    <script type="application/ld+json">@Html.Raw(JsonSerializer.Serialize(BuildProductSchema(Model, pageUrl, absImg, minPrice, hasPrice, reviewsSection.Average, reviewsSection.Count)))</script>
+    <script type="application/ld+json">@Html.Raw(JsonSerializer.Serialize(BuildBreadcrumbSchema(pageUrl, Model)))</script>
+    @if (faqs.Count > 0)
+    {
+        <script type="application/ld+json">@Html.Raw(JsonSerializer.Serialize(BuildFaqSchema(faqs)))</script>
+    }
+    @if (reviewsSection.Items.Count > 0)
+    {
+        <script type="application/ld+json">@Html.Raw(JsonSerializer.Serialize(BuildReviewListSchema(reviewsSection, pageUrl)))</script>
+    }
+}
+
+<article class="ms-wrap pd-page" data-pd-page itemscope itemtype="https://schema.org/Product">
+    <meta itemprop="name" content="@Model.Name" />
+    @if (absImg != null) { <meta itemprop="image" content="@absImg" /> }
+    @if (!string.IsNullOrEmpty(Model.ProductCode)) { <meta itemprop="sku" content="@Model.ProductCode" /> }
+
+    <nav class="pd-breadcrumb" aria-label="مسیر صفحه" data-pd-breadcrumb>
+        <div class="pd-breadcrumb__shell">
+            <ol class="pd-breadcrumb__track">
+                <li class="pd-breadcrumb__item"><a href="/">خانه</a></li>
+                <li class="pd-breadcrumb__item"><a href="/Catalog">محصولات</a></li>
+                <li class="pd-breadcrumb__item"><a href="/Catalog?category=@Model.Category.Slug">@Model.Category.Name</a></li>
+                <li class="pd-breadcrumb__item pd-breadcrumb__item--current" aria-current="page">@Model.Name</li>
+            </ol>
+        </div>
+    </nav>
+
+    <div class="pd-hero">
+        <div class="pd-gallery" data-pd-gallery @(gallerySlides.Count >= 2 ? "data-pd-gallery-multi" : "") aria-label="گالری تصاویر محصول" tabindex="0">
+            @if (gallerySlides.Count > 0)
+            {
+                <div class="pd-gallery-stage pd-gallery-main pd-gallery-main--scene">
+                    <div class="pd-gallery-track" data-pd-gallery-track>
+                        @for (var i = 0; i < gallerySlides.Count; i++)
+                        {
+                            var slide = gallerySlides[i];
+                            <figure class="pd-gallery-slide @(slide.IsScene ? "pd-gallery-slide--scene" : "pd-gallery-slide--product") @(i == 0 ? "is-active" : "")" data-pd-slide data-index="@i">
+                                @if (slide.IsScene)
+                                {
+                                    <img class="pd-main-img pd-main-img--scene" src="@slide.Url" alt="@slide.Alt" width="480" height="480" @(i == 0 ? "fetchpriority=\"high\" itemprop=\"image\"" : "loading=\"lazy\"") />
+                                }
+                                else
+                                {
+                                    <div class="ms-product-shot pd-product-shot">
+                                        <div class="ms-product-stage pd-product-stage">
+                                            <img class="pd-main-img ms-product-img-el" src="@slide.Url" alt="@slide.Alt" width="480" height="480" loading="lazy" />
+                                        </div>
+                                    </div>
+                                }
+                            </figure>
+                        }
+                    </div>
+                    @if (gallerySlides.Count >= 2)
+                    {
+                        <div class="pd-gallery-progress" aria-hidden="true"><span class="pd-gallery-progress-bar" data-pd-gallery-progress></span></div>
+                        <button type="button" class="pd-gallery-nav pd-gallery-nav--prev" data-pd-gallery-prev aria-label="تصویر قبلی">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg>
+                        </button>
+                        <button type="button" class="pd-gallery-nav pd-gallery-nav--next" data-pd-gallery-next aria-label="تصویر بعدی">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 6l6 6-6 6"/></svg>
+                        </button>
+                        <span class="pd-gallery-counter" data-pd-gallery-counter aria-live="polite">۱ / @gallerySlides.Count</span>
+                    }
+                </div>
+                @if (gallerySlides.Count >= 2)
+                {
+                    <div class="pd-gallery-rail" data-pd-gallery-rail>
+                        <div class="pd-gallery-thumbs" role="tablist" aria-label="انتخاب تصویر">
+                            @for (var i = 0; i < gallerySlides.Count; i++)
+                            {
+                                var slide = gallerySlides[i];
+                                <button type="button" class="pd-thumb @(slide.IsScene ? "pd-thumb--scene" : "pd-thumb--product") @(i == 0 ? "is-active" : "")" role="tab"
+                                        data-pd-thumb data-pd-index="@i"
+                                        aria-label="نمایش تصویر @(i + 1)" aria-selected="@(i == 0 ? "true" : "false")">
+                                    <span class="pd-thumb__frame">
+                                        <img src="@slide.Url" alt="@slide.Alt" width="72" height="72" loading="lazy" />
+                                    </span>
+                                </button>
+                            }
+                        </div>
+                        <span class="pd-gallery-rail__indicator" data-pd-gallery-indicator aria-hidden="true"></span>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="pd-gallery-stage ms-img-stage">
+                    <div class="ms-product-empty" aria-hidden="true"></div>
+                </div>
+            }
+        </div>
+
+        <div class="pd-buybox">
+            @if (!string.IsNullOrEmpty(Model.ProductType))
+            {
+                <span class="pd-kicker">🌿 @Model.ProductType — گیاهی ۱۰۰٪</span>
+            }
+            <h1 class="pd-title" itemprop="name">@Model.Name</h1>
+            <aside class="pd-geo-summary pd-geo-summary--buybox" aria-label="خلاصه محصول">
+                <div class="pd-geo-summary__head">
+                    <span class="pd-geo-summary__label">✨ خلاصه</span>
+                    <span class="pd-geo-summary__hint">خلاصهٔ هوشمند از مشخصات و مقاله محصول</span>
+                </div>
+                <p class="pd-geo-summary__text" itemprop="description">@buyboxSummary</p>
+            </aside>
+
+            <div class="pd-badges">
+                @if (!string.IsNullOrEmpty(Model.ProductCode))
+                {
+                    <span class="pd-badge">🏷️ کد @Model.ProductCode</span>
+                }
+                @if (Model.MicrowaveSafe)
+                {
+                    <span class="pd-badge">♨️ مایکروویو</span>
+                }
+                <span class="pd-badge">📦 حداقل @WholesaleRules.FormatMinAmount() تومان</span>
+                @if (WholesaleRules.MaxAutoDiscountPercent > 0)
+                {
+                    <span class="pd-badge">💰 تا @WholesaleRules.MaxAutoDiscountPercent% تخفیف</span>
+                }
+                <span class="pd-badge">✅ اصل آملون</span>
+            </div>
+
+            @if (specs.Count > 0)
+            {
+                <dl class="pd-specs">
+                    @foreach (var s in specs)
+                    {
+                        <div class="pd-spec">
+                            <dt>@s.Label</dt>
+                            <dd>@s.Value</dd>
+                        </div>
+                    }
+                </dl>
+            }
+
+            @if (hasPrice)
+            {
+                <div class="pd-price-lead" itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
+                    <meta itemprop="priceCurrency" content="IRR" />
+                    @if (priceFromPrefix) { <span>از </span> }
+                    <span itemprop="lowPrice" content="@((int)(minPrice * 10))">@SlugHelper.FormatToman(minPrice)</span>
+                    <span> تومان</span>
+                    <link itemprop="availability" href="https://schema.org/InStock" />
+                </div>
+            }
+
+            <div class="pd-variants" id="pd-variants">
+                @if (bulkVariants.Count > 0)
+                {
+                    <div class="pd-pack-group">
+                        <div class="pd-pack-head pd-pack-head--bulk">
+                            <span class="pd-pack-badge">فله</span>
+                            <span class="pd-pack-desc">عمده — نایلون و کارتن (کارخانه)</span>
+                        </div>
+                        @foreach (var v in bulkVariants)
+                        {
+                            @await Html.PartialAsync("_ProductVariantRow", v)
+                        }
+                    </div>
+                }
+                @if (shrinkVariants.Count > 0)
+                {
+                    <div class="pd-pack-group">
+                        <div class="pd-pack-head pd-pack-head--shrink">
+                            <span class="pd-pack-badge">شیرینگ</span>
+                            <span class="pd-pack-desc">بسته‌بندی shrink — بسته و کارتن</span>
+                        </div>
+                        @foreach (var v in shrinkVariants)
+                        {
+                            @await Html.PartialAsync("_ProductVariantRow", v)
+                        }
+                    </div>
+                }
+            </div>
+
+            <div class="pd-cta-row">
+                @if (hasCartVariants)
+                {
+                    <a href="#pd-variants" class="btn btn-secondary">انتخاب بسته‌بندی</a>
+                }
+                else
+                {
+                    <a href="#pd-inquiry" class="btn btn-secondary">استعلام قیمت</a>
+                }
+                <a href="tel:@WholesaleRules.CoordinationPhone" class="btn btn-ghost">تماس فوری</a>
+            </div>
+
+            <div class="pd-delivery">
+                ⏱️ زمان آماده‌سازی: <strong>۲ تا ۷ روز کاری</strong> — ارسال سراسری ایران
+            </div>
+        </div>
+    </div>
+
+    <div class="pd-trust" aria-label="مزایای خرید از موثقی">
+        <div class="pd-trust-item"><span class="pd-trust-icon" aria-hidden="true">🛡️</span> ضمانت اصالت آملون</div>
+        <div class="pd-trust-item"><span class="pd-trust-icon" aria-hidden="true">🚚</span> ارسال به سراسر کشور</div>
+        <div class="pd-trust-item"><span class="pd-trust-icon" aria-hidden="true">💰</span> تخفیف پلکانی تا @(WholesaleRules.MaxAutoDiscountPercent)٪</div>
+        <div class="pd-trust-item"><span class="pd-trust-icon" aria-hidden="true">🌿</span> ۱۰۰٪ گیاهی و زیست‌تخریب‌پذیر</div>
+    </div>
+
+    @if (!string.IsNullOrEmpty(manualShortDesc) || !string.IsNullOrEmpty(Model.Description))
+    {
+        <div class="pd-desc-stack">
+            @if (!string.IsNullOrEmpty(manualShortDesc))
+            {
+                <details class="pd-short-fold pd-short-fold--open" data-pd-short-fold open>
+                    <summary class="pd-short-fold__summary">
+                        <span class="pd-short-fold__icon" aria-hidden="true">📄</span>
+                        <span class="pd-short-fold__head-text">
+                            <span class="pd-short-fold__kicker">معرفی کوتاه</span>
+                            <span class="pd-short-fold__title">توضیح کوتاه محصول</span>
+                        </span>
+                        <span class="pd-short-fold__badge" data-fold-state="open">باز</span>
+                        <span class="pd-short-fold__toggle" aria-hidden="true">
+                            <span class="pd-short-fold__chev"></span>
+                        </span>
+                    </summary>
+                    <div class="pd-short-fold__body">
+                        <p class="pd-short-fold__text">@manualShortDesc</p>
+                    </div>
+                </details>
+            }
+            @if (!string.IsNullOrEmpty(Model.Description))
+            {
+                <details class="pd-article-fold pd-article-fold--open" data-pd-article-fold open>
+                    <summary class="pd-article-fold__summary">
+                        <span class="pd-article-fold__icon" aria-hidden="true">📖</span>
+                        <span class="pd-article-fold__head-text">
+                            <span class="pd-article-fold__kicker">راهنمای کامل · مشخصات و نکات کاربرد</span>
+                            <h2 id="pd-desc-title" class="pd-article-fold__title">توضیحات تکمیلی @Model.Name</h2>
+                        </span>
+                        <span class="pd-article-fold__badge" data-fold-state="open">باز</span>
+                        <span class="pd-article-fold__toggle" aria-hidden="true">
+                            <span class="pd-article-fold__chev"></span>
+                        </span>
+                    </summary>
+                    <div class="pd-article-fold__body">
+                        <div class="pd-article-fold__prose-wrap">
+                            <div class="pd-prose">@Html.Raw(Model.Description)</div>
+                        </div>
+                    </div>
+                </details>
+            }
+        </div>
+        <div class="pd-desc-inquiry-gap" role="separator" aria-hidden="true">
+            <span class="pd-desc-inquiry-gap__line"></span>
+            <span class="pd-desc-inquiry-gap__label">استعلام قیمت و هماهنگی خرید عمده</span>
+            <span class="pd-desc-inquiry-gap__line"></span>
+        </div>
+    }
+
+    <section class="pd-stack-pre" aria-label="استعلام، پرسش و نظرات">
+        <aside class="pd-inquiry" id="pd-inquiry" data-pd-inquiry aria-labelledby="pd-inquiry-title">
+            <div class="pd-inquiry__mesh" aria-hidden="true"></div>
+            <header class="pd-inquiry__hero">
+                <div class="pd-inquiry__pills">
+                    <span class="pd-inquiry__pill">⚡ پاسخ سریع کارشناس</span>
+                    <span class="pd-inquiry__pill pd-inquiry__pill--gold">حداقل @WholesaleRules.FormatMinAmount() تومان</span>
+                </div>
+                <div class="pd-inquiry__hero-row">
+                    <span class="pd-inquiry__icon" aria-hidden="true">💼</span>
+                    <div class="pd-inquiry__hero-text">
+                        <h2 id="pd-inquiry-title" class="pd-inquiry__title">استعلام قیمت عمده</h2>
+                        <p class="pd-inquiry__lead">قیمت روز، تخفیف پلکانی و هماهنگی بسته‌بندی — مخصوص رستوران، کافه و کیترینگ</p>
+                    </div>
+                </div>
+                <ul class="pd-inquiry__perks" aria-label="مزایا">
+                    <li><span aria-hidden="true">🛡️</span> ضمانت اصالت آملون</li>
+                    <li><span aria-hidden="true">📦</span> مشاوره فله و شیرینگ</li>
+                    <li><span aria-hidden="true">🚚</span> ارسال سراسری</li>
+                </ul>
+            </header>
+            @if (TempData["InquirySuccess"] != null)
+            {
+                <div class="pd-inquiry__success alert alert-success" role="status">
+                    <span class="pd-inquiry__success-icon" aria-hidden="true">✓</span>
+                    درخواست شما ثبت شد. به زودی با شما تماس می‌گیریم.
+                </div>
+            }
+            <div class="pd-inquiry__layout">
+                <div class="pd-inquiry__contact">
+                    <p class="pd-inquiry__contact-kicker">تماس مستقیم فروش عمده</p>
+                    <a class="pd-inquiry__phone" href="tel:@WholesaleRules.CoordinationPhone">
+                        <span class="pd-inquiry__phone-icon" aria-hidden="true">📞</span>
+                        <span class="pd-inquiry__phone-num" dir="ltr">@WholesaleRules.CoordinationPhone</span>
+                    </a>
+                    <p class="pd-inquiry__contact-note">شنبه تا پنج‌شنبه · ۹ تا ۱۸</p>
+                    <div class="pd-inquiry__product-chip">
+                        <span class="pd-inquiry__product-chip-label">محصول انتخاب‌شده</span>
+                        <strong>@Model.Name</strong>
+                        @if (Model.ProductCode != null)
+                        {
+                            <span class="pd-inquiry__product-code" dir="ltr">کد @Model.ProductCode</span>
+                        }
+                    </div>
+                </div>
+                <form asp-controller="Inquiry" asp-action="Submit" method="post" class="pd-inquiry__form inquiry-form pd-inquiry-form">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="productId" value="@Model.Id" />
+                    <p class="pd-inquiry__form-title">فرم استعلام آنلاین</p>
+                    <div class="pd-inquiry__fields">
+                        <div class="pd-inquiry__field">
+                            <label for="pd-name">نام و نام خانوادگی</label>
+                            <input class="pd-inquiry__input form-control" id="pd-name" name="customerName" required autocomplete="name" placeholder="مثلاً علی رضایی" />
+                        </div>
+                        <div class="pd-inquiry__field">
+                            <label for="pd-phone">شماره موبایل</label>
+                            <input class="pd-inquiry__input form-control" id="pd-phone" name="phone" required inputmode="tel" autocomplete="tel" placeholder="09xxxxxxxxx" dir="ltr" />
+                        </div>
+                        <div class="pd-inquiry__field">
+                            <label for="pd-qty">تعداد کارتن (تقریبی)</label>
+                            <input class="pd-inquiry__input form-control" id="pd-qty" type="number" name="quantityCartons" min="1" inputmode="numeric" placeholder="۱۰" />
+                        </div>
+                        <div class="pd-inquiry__field pd-inquiry__field--full">
+                            <label for="pd-notes">توضیحات سفارش</label>
+                            <textarea class="pd-inquiry__input pd-inquiry__textarea form-control" id="pd-notes" name="notes" rows="3" placeholder="نوع بسته‌بندی، شهر مقصد، زمان نیاز...">@($"محصول: {Model.Name}{(Model.ProductCode != null ? $" — کد {Model.ProductCode}" : "")}")</textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="pd-inquiry__submit btn btn-primary">
+                        <span>ارسال درخواست استعلام</span>
+                        <span class="pd-inquiry__submit-arrow" aria-hidden="true">←</span>
+                    </button>
+                    <p class="pd-inquiry__privacy">اطلاعات شما فقط برای هماهنگی این سفارش استفاده می‌شود.</p>
+                </form>
+            </div>
+        </aside>
+
+        @if (faqs.Count > 0)
+        {
+            <div class="pd-stack-pre__block" aria-labelledby="pd-faq-title">
+                <h2 id="pd-faq-title" class="pd-stack-pre__title">سوالات متداول درباره @Model.Name</h2>
+                <div class="pd-faq-list">
+                    @foreach (var faq in faqs)
+                    {
+                        <div class="pd-faq-item">
+                            <button type="button" class="pd-faq-q" data-pd-faq aria-expanded="false">
+                                <span>@faq.Question</span>
+                                <span aria-hidden="true">+</span>
+                            </button>
+                            <div class="pd-faq-a">@faq.Answer</div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+
+        <partial name="_ProductReviewForm" model="reviewsSection" />
+        <partial name="_ProductReviewCarousel" model="reviewsSection" />
+    </section>
+
+    @if (related.Any())
+    {
+        <section class="pd-section pd-related" aria-labelledby="pd-related-title">
+            <div class="pd-related-head">
+                <h2 id="pd-related-title">محصولات مرتبط</h2>
+                <a href="/Catalog?productType=@Uri.EscapeDataString(Model.ProductType ?? "")">مشاهده همه</a>
+            </div>
+            <div class="ms-product-grid">
+                @foreach (var p in related)
+                {
+                    <partial name="_ProductCard" model="p" />
+                }
+            </div>
+        </section>
+    }
+
+    <div class="pd-sticky pd-sticky--hidden" data-pd-sticky aria-label="اقدام سریع">
+        <div class="pd-sticky-info">
+            <strong>@Model.Name</strong>
+            <small>@(hasPrice ? (priceFromPrefix ? $"از {SlugHelper.FormatToman(minPrice)} تومان" : $"{SlugHelper.FormatToman(minPrice)} تومان") : "استعلام قیمت")</small>
+        </div>
+        @if (hasCartVariants)
+        {
+            <a href="#pd-variants" class="btn btn-primary">افزودن به سبد</a>
+        }
+        else
+        {
+            <a href="#pd-inquiry" class="btn btn-primary">استعلام قیمت</a>
+        }
+        <a href="tel:@WholesaleRules.CoordinationPhone" class="btn btn-secondary" aria-label="تماس">📞</a>
+    </div>
+</article>
+
+@section Scripts {
+    <script defer src="~/js/product.js" asp-append-version="true"></script>
+}
+
+@functions {
+    record SpecItem(string Label, string Value);
+
+    static string? CleanApplication(string? text)
+    {
+        if (string.IsNullOrWhiteSpace(text)) return null;
+        if (text.Contains("کد محصول") || text.StartsWith("ویژگی", StringComparison.OrdinalIgnoreCase))
+        {
+            var m = Regex.Match(text, @"کاربرد\s*[:：]\s*([^ساخته]+)", RegexOptions.IgnoreCase);
+            return m.Success ? m.Groups[1].Value.Trim().Trim('،', ',', '.', ' ') : null;
+        }
+        return text.Length > 100 ? text[..100] + "…" : text;
+    }
+
+    static bool IsMeaningfulDimension(string? dimensions)
+    {
+        if (string.IsNullOrWhiteSpace(dimensions)) return false;
+        var t = dimensions.Trim();
+        if (t.Length < 3) return false;
+        if (!t.Any(char.IsDigit) && t is "قطر" or "ارتفاع" or "طول" or "عرض")
+            return false;
+        return true;
+    }
+
+    static List<SpecItem> BuildSpecs(Product p, string? cleanApp)
+    {
+        var list = new List<SpecItem>();
+        if (IsMeaningfulDimension(p.Dimensions)) list.Add(new("ابعاد", p.Dimensions!));
+        if (p.CapacityCc.HasValue) list.Add(new("ظرفیت", $"{p.CapacityCc} سی‌سی"));
+        if (p.CompartmentCount.HasValue) list.Add(new("تعداد خانه", p.CompartmentCount.ToString()!));
+        if (!string.IsNullOrEmpty(p.Material)) list.Add(new("جنس", p.Material));
+        else list.Add(new("جنس", "نشاسته گیاهی (زیست‌تخریب‌پذیر)"));
+        if (p.MicrowaveSafe) list.Add(new("مایکروویو", "قابل استفاده"));
+        if (!string.IsNullOrEmpty(cleanApp)) list.Add(new("کاربرد", cleanApp));
+        if (!string.IsNullOrEmpty(p.ProductType)) list.Add(new("نوع", p.ProductType));
+        return list;
+    }
+
+    static Dictionary<string, object?> BuildProductSchema(Product p, string url, string? image, decimal minPrice, bool hasPrice, double reviewAvg, int reviewCount)
+    {
+        var offer = hasPrice
+            ? new Dictionary<string, object?>
+            {
+                ["@type"] = "Offer",
+                ["priceCurrency"] = "IRR",
+                ["price"] = (int)(minPrice * 10),
+                ["availability"] = "https://schema.org/InStock",
+                ["url"] = url,
+                ["seller"] = new Dictionary<string, object?> { ["@type"] = "Organization", ["name"] = WholesaleRules.StoreNameFa }
+            }
+            : new Dictionary<string, object?>
+            {
+                ["@type"] = "Offer",
+                ["availability"] = "https://schema.org/PreOrder",
+                ["url"] = url,
+                ["priceCurrency"] = "IRR",
+                ["description"] = "استعلام قیمت — تماس با فروشگاه"
+            };
+
+        var schema = new Dictionary<string, object?>
+        {
+            ["@context"] = "https://schema.org",
+            ["@type"] = "Product",
+            ["name"] = p.Name,
+            ["description"] = p.MetaDescription ?? p.ShortDescription ?? p.Name,
+            ["sku"] = p.ProductCode,
+            ["image"] = image,
+            ["url"] = url,
+            ["brand"] = new Dictionary<string, object?> { ["@type"] = "Brand", ["name"] = "آملون" },
+            ["category"] = p.ProductType ?? p.Category.Name,
+            ["material"] = p.Material ?? "نشاسته گیاهی",
+            ["offers"] = offer
+        };
+
+        // GTIN نامعتبر در Merchant Center خطا می‌سازد — فقط بارکد معتبر منتشر می‌شود.
+        var gtinKey = SeoProductIdentity.SchemaKey(p.Gtin);
+        if (gtinKey is not null && SeoProductIdentity.IsValidGtin(p.Gtin))
+            schema[gtinKey] = SeoProductIdentity.Digits(p.Gtin);
+
+        var mpn = SeoProductIdentity.ResolveMpn(p);
+        if (!string.IsNullOrWhiteSpace(mpn))
+            schema["mpn"] = mpn;
+
+        if (reviewCount > 0 && reviewAvg > 0)
+        {
+            schema["aggregateRating"] = new Dictionary<string, object?>
+            {
+                ["@type"] = "AggregateRating",
+                ["ratingValue"] = reviewAvg,
+                ["reviewCount"] = reviewCount,
+                ["bestRating"] = 5,
+                ["worstRating"] = 1
+            };
+        }
+
+        return schema;
+    }
+
+    static Dictionary<string, object?> BuildBreadcrumbSchema(string productUrl, Product p)
+    {
+        var baseUrl = productUrl.Contains("/Shop/Product")
+            ? productUrl[..productUrl.IndexOf("/Shop/Product", StringComparison.Ordinal)]
+            : productUrl;
+        return new Dictionary<string, object?>
+        {
+            ["@context"] = "https://schema.org",
+            ["@type"] = "BreadcrumbList",
+            ["itemListElement"] = new object[]
+            {
+                new Dictionary<string, object?> { ["@type"] = "ListItem", ["position"] = 1, ["name"] = "خانه", ["item"] = baseUrl + "/" },
+                new Dictionary<string, object?> { ["@type"] = "ListItem", ["position"] = 2, ["name"] = "محصولات", ["item"] = baseUrl + "/Catalog" },
+                new Dictionary<string, object?> { ["@type"] = "ListItem", ["position"] = 3, ["name"] = p.Category.Name, ["item"] = $"{baseUrl}/Catalog?category={p.Category.Slug}" },
+                new Dictionary<string, object?> { ["@type"] = "ListItem", ["position"] = 4, ["name"] = p.Name, ["item"] = productUrl }
+            }
+        };
+    }
+
+    static Dictionary<string, object?> BuildFaqSchema(List<ProductSeoHelper.ProductFaq> faqs)
+    {
+        return new Dictionary<string, object?>
+        {
+            ["@context"] = "https://schema.org",
+            ["@type"] = "FAQPage",
+            ["mainEntity"] = faqs.Select(f => new Dictionary<string, object?>
+            {
+                ["@type"] = "Question",
+                ["name"] = f.Question,
+                ["acceptedAnswer"] = new Dictionary<string, object?> { ["@type"] = "Answer", ["text"] = f.Answer }
+            }).ToArray()
+        };
+    }
+
+    static Dictionary<string, object?> BuildReviewListSchema(ProductReviewsSectionModel section, string productUrl)
+    {
+        return new Dictionary<string, object?>
+        {
+            ["@context"] = "https://schema.org",
+            ["@type"] = "ItemList",
+            ["name"] = "نظرات مشتریان",
+            ["itemListElement"] = section.Items.Select((r, i) => new Dictionary<string, object?>
+            {
+                ["@type"] = "ListItem",
+                ["position"] = i + 1,
+                ["item"] = new Dictionary<string, object?>
+                {
+                    ["@type"] = "Review",
+                    ["author"] = new Dictionary<string, object?> { ["@type"] = "Person", ["name"] = r.AuthorDisplayName },
+                    ["datePublished"] = r.CreatedAt.ToString("yyyy-MM-dd"),
+                    ["reviewBody"] = r.Body,
+                    ["reviewRating"] = r.Rating > 0
+                        ? new Dictionary<string, object?> { ["@type"] = "Rating", ["ratingValue"] = r.Rating, ["bestRating"] = 5, ["worstRating"] = 1 }
+                        : null,
+                    ["itemReviewed"] = new Dictionary<string, object?> { ["@type"] = "Product", ["url"] = productUrl }
+                }
+            }).ToArray()
+        };
+    }
+}

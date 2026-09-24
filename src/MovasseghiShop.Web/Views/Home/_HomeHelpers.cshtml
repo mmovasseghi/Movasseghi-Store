@@ -1,0 +1,27 @@
+@functions {
+    static string CategoryEmoji(string type) => type switch
+    {
+        var t when t.Contains("کاسه") => "🥣",
+        var t when t.Contains("ظرف") => "🍱",
+        var t when t.Contains("لیوان") => "🥤",
+        var t when t.Contains("قاشق") || t.Contains("چنگال") => "🥄",
+        var t when t.Contains("نی") => "🥤",
+        var t when t.Contains("سطل") => "🗑",
+        var t when t.Contains("سایر") => "📦",
+        _ => "🌿"
+    };
+
+    static string TrendEmoji(string tag) => tag switch
+    {
+        var t when t.Contains("رستور") => "🍽",
+        var t when t.Contains("فست") => "🍔",
+        var t when t.Contains("کافه") => "☕",
+        var t when t.Contains("مهم") || t.Contains("مجلس") => "🎉",
+        var t when t.Contains("پیک") => "🛵",
+        var t when t.Contains("آب") => "💧",
+        var t when t.Contains("غذا") => "🍲",
+        var t when t.Contains("دسر") => "🍰",
+        var t when t.Contains("شیرین") => "🧁",
+        _ => "✨"
+    };
+}

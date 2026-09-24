@@ -1,0 +1,29 @@
+@model Product
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "محصول جدید";
+    var categories = (IEnumerable<Category>)ViewBag.Categories;
+}
+<partial name="_AdminHero" />
+
+<section class="st-panel st-reveal" style="max-width:520px">
+    <h2>ایجاد محصول</h2>
+    <form method="post">
+        @Html.AntiForgeryToken()
+        <div class="st-field">
+            <label>نام محصول</label>
+            <input name="name" required class="st-input" placeholder="مثلاً کاسه یکبار مصرف گیاهی ۵۵۰ سی‌سی" />
+        </div>
+        <div class="st-field">
+            <label>دسته‌بندی</label>
+            <select name="categoryId" class="st-input">
+                @foreach (var c in categories)
+                {
+                    <option value="@c.Id">@c.Name</option>
+                }
+            </select>
+        </div>
+        <button type="submit" class="st-btn st-btn-primary">ایجاد + Auto-Fix SEO</button>
+        <a href="/Admin/Products" class="st-btn st-btn-ghost">انصراف</a>
+    </form>
+</section>

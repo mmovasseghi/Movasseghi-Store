@@ -1,0 +1,37 @@
+@model List<MovasseghiShop.Web.Models.Entities.ContentAtom>
+
+@{
+
+    Layout = "_AdminLayout";
+
+    ViewData["Title"] = "Content Atoms";
+
+    ViewData["HeroTitle"] = "⚛️ Content Atoms";
+
+    ViewData["HeroSubtitle"] = "Empty states، promo bar، micro-copy — JSON یا متن";
+
+    ViewData["HeroBadge"] = "ATOMS";
+
+}
+
+<partial name="_AdminHero" />
+
+<section class="st-panel st-reveal">
+
+    @foreach (var a in Model)
+
+    {
+
+        <div class="st-card-row">
+
+            <span><strong>@a.Key</strong> — @a.Title</span>
+
+            <a class="st-btn st-btn-ghost st-btn-sm" href="/Admin/StudioContent/EditAtom/@a.Id">ویرایش</a>
+
+        </div>
+
+    }
+
+</section>
+
+

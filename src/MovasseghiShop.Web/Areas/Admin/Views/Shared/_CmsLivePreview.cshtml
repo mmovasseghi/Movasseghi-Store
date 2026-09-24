@@ -1,0 +1,48 @@
+@model string
+@{
+    var previewUrl = Model ?? "/";
+    var title = ViewData["PreviewTitle"] as string ?? "پیش‌نمایش زنده";
+    var hint = ViewData["PreviewHint"] as string ?? "بعد از ذخیره، «بروزرسانی» را بزنید یا صفحه را دوباره بارگذاری کنید.";
+    var hostLabel = previewUrl.TrimStart('/').Split('?')[0].Split('#')[0];
+    if (string.IsNullOrEmpty(hostLabel)) hostLabel = "صفحه اصلی";
+}
+<aside class="st-cms-preview-panel" id="cms-live-preview" data-cms-preview-panel>
+    <section class="st-panel st-cms-preview-card">
+        <div class="st-cms-preview-head">
+            <div>
+                <h2>👁️ @title</h2>
+                <p class="st-panel-desc">@hint</p>
+            </div>
+            <span class="st-cms-preview-mode">Desktop · 1280px</span>
+        </div>
+
+        <div class="st-cms-preview-frame" data-cms-preview>
+            <div class="st-cms-preview-chrome">
+                <span class="st-cms-preview-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="st-cms-preview-url" dir="ltr">@hostLabel</span>
+                <button type="button" class="st-cms-preview-refresh" data-preview-refresh title="بروزرسانی پیش‌نمایش">↻</button>
+            </div>
+            <div class="st-cms-preview-scaler" data-preview-scaler>
+                <iframe src="@previewUrl"
+                        title="@title"
+                        data-preview-iframe
+                        loading="lazy"
+                        width="1280"
+                        height="2400"></iframe>
+            </div>
+            <button type="button" class="st-cms-fab st-cms-fab--menu" data-fab-iframe-top title="بالای سایت — منو">
+                <span aria-hidden="true">↑</span>
+                <span class="st-cms-fab-label">منو</span>
+            </button>
+        </div>
+
+        <div class="st-btn-row st-cms-preview-actions">
+            <a href="@previewUrl" target="_blank" rel="noopener" class="st-btn st-btn-ghost">باز کردن در تب جدید ↗</a>
+        </div>
+    </section>
+</aside>
+
+<button type="button" class="st-cms-fab st-cms-fab--goto-preview" data-fab-to-preview hidden title="پیش‌نمایش">
+    <span aria-hidden="true">👁️</span>
+    <span class="st-cms-fab-label">پیش‌نمایش</span>
+</button>

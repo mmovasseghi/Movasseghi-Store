@@ -1,0 +1,21 @@
+@model MovasseghiShop.Web.Models.Entities.ContentAtom?
+@using System.Text.Json
+@{
+    if (Model == null) return;
+}
+@if (Model.Key == "promo-bar" && !string.IsNullOrWhiteSpace(Model.Body))
+{
+    var promo = JsonSerializer.Deserialize<MovasseghiShop.Web.Models.PromoBarConfig>(Model.Body, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+    if (promo != null)
+    {
+        <p class="ms-promo-line">
+            <span class="ms-promo-badge" aria-hidden="true">💚</span>
+            <span class="ms-promo-slogan ms-promo-slogan--full">@Html.Raw(promo.SloganFull)</span>
+            <span class="ms-promo-slogan ms-promo-slogan--short">@Html.Raw(promo.SloganShort)</span>
+            @foreach (var chip in promo.Chips ?? [])
+            {
+                <span class="ms-promo-chip ms-promo-chip--hide-mobile">@chip</span>
+            }
+        </p>
+    }
+}

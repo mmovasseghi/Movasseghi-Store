@@ -1,0 +1,21 @@
+@model Product
+@inject IWebHostEnvironment Env
+@{
+    var variant = ViewData["StageVariant"] as string ?? "card";
+    var width = ViewData["StageWidth"] as int? ?? 220;
+    var height = ViewData["StageHeight"] as int? ?? 220;
+    var fetchPriority = ViewData["StageFetchPriority"] as bool? ?? false;
+    var dualSlides = ProductImageHelper.ResolveDualCardSlides(Model.Images, Env, Model.Name);
+}
+@await Html.PartialAsync("_ProductImageStage", new ProductImageStageModel
+{
+    ImageUrl = dualSlides.StudioUrl,
+    Alt = dualSlides.StudioAlt,
+    AlternateImageUrl = dualSlides.SceneUrl,
+    AlternateAlt = dualSlides.SceneAlt,
+    DualCycle = dualSlides.CanCycle,
+    Variant = variant,
+    Width = width,
+    Height = height,
+    FetchPriority = fetchPriority
+})

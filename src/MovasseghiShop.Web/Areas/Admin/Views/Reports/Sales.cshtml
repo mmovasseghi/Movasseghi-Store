@@ -1,0 +1,251 @@
+@model SalesReport
+@using MovasseghiShop.Web.Models.Enums
+@{
+    ViewData["Title"] = "فروش و درآمد";
+
+    string DeltaClass(double d) => d > 0.5 ? "kit-delta--up" : d < -0.5 ? "kit-delta--down" : "kit-delta--flat";
+    string DeltaText(double d) => d == 0 ? "بدون تغییر" : $"{(d > 0 ? "▲" : "▼")} {Math.Abs(d):0.#}٪";
+
+    string FaStatus(OrderStatus s) => s switch
+    {
+        OrderStatus.PendingPayment => "در انتظار پرداخت",
+        OrderStatus.PaymentReceived => "پرداخت شده",
+        OrderStatus.Confirmed => "تأیید شده",
+        OrderStatus.PreparingForPickup => "در حال آماده‌سازی",
+        OrderStatus.ReadyForPickup => "آماده تحویل",
+        OrderStatus.OutForDelivery => "در مسیر ارسال",
+        OrderStatus.Delivered => "تحویل شده",
+        OrderStatus.Completed => "تکمیل شده",
+        OrderStatus.Cancelled => "لغو شده",
+        _ => s.ToString()
+    };
+
+    string StatusTag(OrderStatus s) => s switch
+    {
+        OrderStatus.Cancelled => "kit-tag--bad",
+        OrderStatus.Completed or OrderStatus.Delivered => "kit-tag--ok",
+        OrderStatus.PendingPayment => "kit-tag--gold",
+        _ => "kit-tag--muted"
+    };
+}
+
+<partial name="_ReportRange" />
+
+@if (!Model.HasData)
+{
+    <section class="kit-table-card kit-rise">
+        <div class="kit-empty">
+            <div class="kit-empty-icon" aria-hidden="true">🛒</div>
+            <h3>در این بازه سفارش یا استعلامی ثبت نشده</h3>
+            <p>بازه بزرگ‌تری انتخاب کنید یا گزارش ترافیک را ببینید تا بفهمید چرا بازدید به سفارش تبدیل نمی‌شود.</p>
+            <a class="st-btn st-btn-primary" href="/Admin/Reports/Traffic?days=@ViewBag.Days">بررسی ترافیک</a>
+        </div>
+    </section>
+}
+else
+{
+    <div class="kit-stats kit-stagger">
+        <article class="kit-stat">
+            <span class="kit-stat-label">💰 درآمد</span>
+            <span class="kit-stat-value kit-stat-value--gold">@Model.Revenue.ToString("N0")</span>
+            <span class="kit-stat-foot">
+                تومان · <span class="kit-delta @DeltaClass(Model.RevenueDelta)">@DeltaText(Model.RevenueDelta)</span>
+                <br />سفارش لغوشده حساب نشده
+            </span>
+        </article>
+        <article class="kit-stat">
+            <span class="kit-stat-label">🛒 سفارش</span>
+            <span class="kit-stat-value">@Model.OrderCount.ToString("N0")</span>
+            <span class="kit-stat-foot">
+                <span class="kit-delta @DeltaClass(Model.OrderDelta)">@DeltaText(Model.OrderDelta)</span>
+            </span>
+        </article>
+        <article class="kit-stat">
+            <span class="kit-stat-label">📊 میانگین ارزش سفارش</span>
+            <span class="kit-stat-value">@Model.AvgOrderValue.ToString("N0")</span>
+            <span class="kit-stat-foot">
+                تومان · <span class="kit-delta @DeltaClass(Model.AovDelta)">@DeltaText(Model.AovDelta)</span>
+            </span>
+        </article>
+        <article class="kit-stat">
+            <span class="kit-stat-label">⏳ در انتظار اقدام</span>
+            <span class="kit-stat-value @(Model.PendingCount > 0 ? "kit-stat-value--gold" : "kit-stat-value--ok")">@Model.PendingCount.ToString("N0")</span>
+            <span class="kit-stat-foot">
+                @if (Model.PendingCount > 0)
+                {
+                    <span class="kit-stat-foot__row">
+                        <a class="kit-stat-action" href="/Admin/Orders">
+                            <span class="kit-stat-action__ico" aria-hidden="true">←</span>
+                            بررسی سفارش‌ها
+                        </a>
+                    </span>
+                }
+                else
+                {
+                    <text>همه سفارش‌ها پردازش شده</text>
+                }
+            </span>
+        </article>
+        <article class="kit-stat">
+            <span class="kit-stat-label">❌ لغو شده</span>
+            <span class="kit-stat-value @(Model.CancelledCount > 0 ? "kit-stat-value--bad" : "")">@Model.CancelledCount.ToString("N0")</span>
+            <span class="kit-stat-foot">
+                @if (Model.OrderCount > 0)
+                {
+                    <text>@((Model.CancelledCount * 100.0 / Model.OrderCount).ToString("0.#"))٪ از کل سفارش‌ها</text>
+                }
+            </span>
+        </article>
+        <article class="kit-stat">
+            <span class="kit-stat-label">📨 استعلام قیمت</span>
+            <span class="kit-stat-value">@Model.InquiryTotal.ToString("N0")</span>
+            <span class="kit-stat-foot">
+                @if (Model.InquiryOpen > 0)
+                {
+                    <span class="kit-stat-foot__row">
+                        <span class="kit-delta kit-delta--down">@Model.InquiryOpen.ToString("N0") بی‌پاسخ</span>
+                        <a class="kit-stat-action" href="/Admin/Inquiries?status=open">
+                            <span class="kit-stat-action__ico" aria-hidden="true">←</span>
+                            پیگیری کن
+                        </a>
+                    </span>
+                }
+                else
+                {
+                    <text>همه پیگیری شده</text>
+                }
+            </span>
+        </article>
+    </div>
+
+    @* ═══ روند درآمد ═══ *@
+    <section class="kit-section kit-rise">
+        <div class="kit-section-head">
+            <div>
+                <h2>📈 درآمد روزانه</h2>
+                <p>موس را روی هر ستون ببرید تا مبلغ و تعداد سفارش آن روز را ببینید.</p>
+            </div>
+        </div>
+        @{
+            var maxRev = Model.Daily.Count > 0 && Model.Daily.Any(d => d.Revenue > 0)
+                ? Model.Daily.Max(d => d.Revenue)
+                : 1m;
+        }
+        <div class="kit-chart" role="img" aria-label="نمودار درآمد روزانه">
+            @foreach (var (p, i) in Model.Daily.Select((p, i) => (p, i)))
+            {
+                var h = maxRev > 0 ? (int)Math.Max(2, p.Revenue * 100 / maxRev) : 2;
+                <div class="kit-chart-bar kit-chart-bar--gold"
+                     style="height:@(h)%;animation-delay:@((i * 12))ms"
+                     data-label="@p.Label — @p.Revenue.ToString("N0") تومان · @p.Orders.ToString("N0") سفارش"></div>
+            }
+        </div>
+        <div class="kit-chart-axis">
+            <span>@(Model.Daily.FirstOrDefault()?.Label ?? "")</span>
+            <span>بیشینه @maxRev.ToString("N0") تومان</span>
+            <span>@(Model.Daily.LastOrDefault()?.Label ?? "")</span>
+        </div>
+    </section>
+
+    <div class="kit-grid-2--wide kit-grid-2">
+        @* ═══ پرفروش‌ترین محصولات ═══ *@
+        <section class="kit-section kit-rise">
+            <div class="kit-section-head">
+                <div>
+                    <h2>🏆 پرفروش‌ترین محصولات</h2>
+                    <p>بر اساس درآمد. روی سرستون کلیک کنید تا مرتب شود.</p>
+                </div>
+            </div>
+            @if (Model.TopProducts.Count == 0)
+            {
+                <p class="kit-form-hint">در این بازه فروشی ثبت نشده.</p>
+            }
+            else
+            {
+                <div class="kit-table-scroll">
+                    <table class="kit-table">
+                        <thead>
+                            <tr>
+                                <th data-sort>محصول</th>
+                                <th data-sort>کارتن</th>
+                                <th data-sort>سفارش</th>
+                                <th data-sort>درآمد</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var p in Model.TopProducts)
+                            {
+                                <tr>
+                                    <td><span class="kit-cell-main">@p.Name</span></td>
+                                    <td class="kit-cell-num" data-sort-value="@p.Quantity">@p.Quantity.ToString("N0")</td>
+                                    <td class="kit-cell-num" data-sort-value="@p.OrderCount">@p.OrderCount.ToString("N0")</td>
+                                    <td class="kit-cell-num" data-sort-value="@p.Revenue">@p.Revenue.ToString("N0")</td>
+                                    <td class="kit-cell-actions">
+                                        @if (p.ProductId > 0)
+                                        {
+                                            <a class="st-btn st-btn-ghost st-btn-sm" href="/Admin/Products/Edit/@p.ProductId">ویرایش</a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </section>
+
+        @* ═══ وضعیت سفارش‌ها ═══ *@
+        <section class="kit-section kit-rise">
+            <div class="kit-section-head">
+                <div>
+                    <h2>📋 وضعیت سفارش‌ها</h2>
+                    <p>سفارش‌های گیرکرده در یک وضعیت را پیدا کنید.</p>
+                </div>
+            </div>
+            @{
+                var maxStatus = Model.ByStatus.Count > 0 ? Math.Max(1, Model.ByStatus.Max(x => x.Count)) : 1;
+            }
+            @foreach (var row in Model.ByStatus.OrderByDescending(x => x.Count))
+            {
+                <div class="kit-hbar-row">
+                    <div class="kit-hbar-label">
+                        <span>
+                            <span class="kit-tag @StatusTag(row.Status)">@FaStatus(row.Status)</span>
+                        </span>
+                        <div class="kit-hbar-track">
+                            <div class="kit-hbar-fill" style="width:@(row.Count * 100 / maxStatus)%"></div>
+                        </div>
+                    </div>
+                    <div class="kit-hbar-value">
+                        @row.Count.ToString("N0")
+                        <span style="display:block;font-size:.68rem;color:var(--st-muted)">@row.Amount.ToString("N0") ت</span>
+                    </div>
+                </div>
+            }
+
+            @if (Model.TopInquiredProducts.Count > 0)
+            {
+                <h3 style="margin:1.3rem 0 .5rem;font-size:.85rem">
+                    پراستعلام‌ترین محصولات
+                </h3>
+                <p class="kit-form-hint" style="margin-bottom:.6rem">
+                    تقاضای عمده روی این محصول‌ها بیشتر است — موجودی و قیمتشان را در اولویت بگذارید.
+                </p>
+                var maxInq = Math.Max(1, Model.TopInquiredProducts.Max(x => x.Count));
+                foreach (var p in Model.TopInquiredProducts)
+                {
+                    <div class="kit-hbar-row">
+                        <div class="kit-hbar-label">
+                            <span>@p.Label</span>
+                            <div class="kit-hbar-track">
+                                <div class="kit-hbar-fill" style="width:@(p.Count * 100 / maxInq)%"></div>
+                            </div>
+                        </div>
+                        <div class="kit-hbar-value">@p.Count.ToString("N0")</div>
+                    </div>
+                }
+            }
+        </section>
+    </div>
+}

@@ -1,0 +1,41 @@
+@{
+    var humanOk = ViewBag.HumanVerified as bool? ?? false;
+    var challenge = ViewBag.HumanChallenge as MovasseghiShop.Web.Services.HumanChallengeDto;
+}
+@if (humanOk)
+{
+    <div class="ms-human-gate is-verified" id="humanGate" data-human-verified="1">
+        <p class="ms-human-gate__ok">
+            <span class="ms-human-gate__ok-icon" aria-hidden="true">✓</span>
+            تأیید شد — می‌توانید سفارش را تکمیل کنید
+        </p>
+    </div>
+}
+else if (challenge != null)
+{
+    <div class="ms-human-gate" id="humanGate" data-human-verified="0">
+        <div class="ms-human-gate__head">
+            <span class="ms-human-gate__badge" aria-hidden="true">🛡️</span>
+            <div>
+                <p class="ms-human-gate__title">قبل از ثبت سفارش</p>
+                <p class="ms-human-gate__subtitle">فقط یک کلیک — بین دو گزینه، محصول فروشگاه را انتخاب کنید</p>
+            </div>
+        </div>
+        <p class="ms-human-gate__prompt">@challenge.Prompt</p>
+        <form action="/Cart/HumanCheck" method="post" class="ms-human-gate__form" data-human-form novalidate>
+            <input type="hidden" name="token" value="@challenge.Token" data-human-token-input />
+            <div class="ms-human-gate__options" role="group" aria-label="تأیید انسان">
+                @foreach (var opt in challenge.Options)
+                {
+                    <button type="submit" name="optionId" value="@opt.Id" class="ms-human-opt" data-human-option="@opt.Id">
+                        <span class="ms-human-opt__emoji" aria-hidden="true">@opt.Emoji</span>
+                        <span class="ms-human-opt__label">@opt.Label</span>
+                        <span class="ms-human-opt__chev" aria-hidden="true">‹</span>
+                    </button>
+                }
+            </div>
+        </form>
+        <p class="ms-human-gate__hint" data-human-msg hidden></p>
+        <button type="button" class="ms-human-gate__refresh" data-human-refresh>سؤال دیگر</button>
+    </div>
+}

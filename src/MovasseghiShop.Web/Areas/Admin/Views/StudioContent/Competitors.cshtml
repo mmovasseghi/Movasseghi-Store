@@ -1,0 +1,87 @@
+@model List<MovasseghiShop.Web.Models.Entities.CompetitorSnapshot>
+
+@{
+
+    Layout = "_AdminLayout";
+
+    ViewData["Title"] = "Competitor Watch";
+
+    ViewData["HeroTitle"] = "🔍 Competitor Watch";
+
+    ViewData["HeroSubtitle"] = "SERP top results برای کلمات pillar — SerpAPI";
+
+    ViewData["HeroBadge"] = "INTEL";
+
+}
+
+<partial name="_AdminHero" />
+
+<div class="st-btn-row st-reveal" style="margin-bottom:1rem">
+
+    <form method="post" action="/Admin/StudioContent/SyncCompetitors">
+
+        @Html.AntiForgeryToken()
+
+        <button class="st-btn st-btn-primary">همگام‌سازی SerpAPI</button>
+
+    </form>
+
+    <form method="get" class="st-btn-row">
+
+        <input name="keyword" value="@ViewBag.Keyword" class="st-input" placeholder="کلمه pillar" />
+
+        <button class="st-btn st-btn-ghost">نمایش</button>
+
+    </form>
+
+</div>
+
+@if (Model.Count > 0)
+
+{
+
+    <section class="st-panel st-reveal">
+
+        <div class="st-table-wrap">
+
+            <table class="st-table">
+
+                <thead><tr><th>#</th><th>دامنه</th><th>عنوان</th></tr></thead>
+
+                <tbody>
+
+                @foreach (var c in Model)
+
+                {
+
+                    <tr>
+
+                        <td><span class="st-badge st-badge-warn">@c.RankPosition</span></td>
+
+                        <td>@c.Domain</td>
+
+                        <td><a href="@c.Url" target="_blank" rel="noopener">@c.Title</a></td>
+
+                    </tr>
+
+                }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+}
+
+else
+
+{
+
+    <section class="st-panel st-reveal"><p class="st-panel-desc">کلمه pillar را وارد کنید یا SerpAPI را sync کنید.</p></section>
+
+}
+
+

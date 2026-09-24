@@ -1,0 +1,163 @@
+@model NewsItem
+@using MovasseghiShop.Web.Models
+@{
+    var isNew = Model.Id == 0;
+    var score = (SeoScoreResult?)ViewBag.SeoScore;
+    ViewData["Title"] = isNew ? "خبر جدید" : "ویرایش خبر";
+}
+
+<div class="st-edit-grid st-reveal">
+<div>
+<form method="post" action="/Admin/NewsAdmin/Save" data-kit-primary data-kit-dirty-guard>
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="Id" value="@Model.Id" />
+
+    <div class="kit-toolbar kit-rise">
+        <div class="kit-toolbar-grow">
+            <strong style="font-size:.88rem">@(isNew ? "ثبت خبر تازه" : Model.Title)</strong>
+            <span class="kit-form-hint" style="margin-top:.15rem">برای ذخیره می‌توانید Ctrl+S بزنید.</span>
+        </div>
+        <a class="st-btn st-btn-ghost" href="/Admin/NewsAdmin">بازگشت</a>
+        <button type="submit" class="st-btn st-btn-primary">@(isNew ? "ساخت خبر" : "ذخیره تغییرات")</button>
+    </div>
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="kit-insight kit-insight--risk kit-rise">
+            <span class="kit-insight-icon" aria-hidden="true">⚠️</span>
+            <div class="kit-insight-body">
+                <strong>فرم ذخیره نشد</strong>
+                @foreach (var err in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <div>· @err.ErrorMessage</div>
+                }
+                <em>مقادیری که وارد کرده بودید حفظ شده — فقط موارد بالا را اصلاح کنید.</em>
+            </div>
+        </div>
+    }
+
+    <div class="kit-grid-2 kit-grid-2--wide">
+        <div>
+            <section class="kit-section kit-rise">
+                <div class="kit-section-head"><div><h2>متن خبر</h2></div></div>
+
+                <div class="kit-form-grid">
+                    <div class="st-field kit-form-full">
+                        <label for="Title">عنوان خبر <span style="color:#fca5a5">*</span></label>
+                        <input id="Title" name="Title" value="@Model.Title" class="st-input @(ViewData.ModelState["Title"]?.Errors.Count > 0 ? "kit-input-invalid" : "")" required />
+                    </div>
+
+                    <div class="st-field kit-form-full">
+                        <label for="Slug">نامک (آدرس صفحه)</label>
+                        <input id="Slug" name="Slug" value="@Model.Slug" class="st-input" dir="ltr" placeholder="خالی بگذارید تا از عنوان ساخته شود" />
+                    </div>
+
+                    <div class="st-field kit-form-full">
+                        <label for="Excerpt">
+                            چکیده
+                            <span class="kit-counter" id="cnt-excerpt"></span>
+                        </label>
+                        <textarea id="Excerpt" name="Excerpt" rows="2" class="st-input"
+                                  data-kit-counter="#cnt-excerpt" data-kit-min="80" data-kit-max="200">@Model.Excerpt</textarea>
+                    </div>
+
+                    <div class="st-field kit-form-full">
+                        <label>متن کامل <span style="color:#fca5a5">*</span></label>
+                        @{
+                            ViewData["EditorContent"] = Model.Content;
+                            ViewData["FieldName"] = "Content";
+                            ViewData["EditorMinHeight"] = 380;
+                            ViewData["EditorPreview"] = true;
+                        }
+                        <partial name="_RichTextEditor" model="@("news-content")" />
+                    </div>
+
+                    <div class="st-field kit-form-full">
+                        <label for="FeaturedImageUrl">تصویر شاخص</label>
+                        <input id="FeaturedImageUrl" name="FeaturedImageUrl" value="@Model.FeaturedImageUrl" class="st-input" dir="ltr" placeholder="/images/news/example.webp" />
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div>
+            <section class="kit-section kit-rise">
+                <div class="kit-section-head"><div><h2>انتشار</h2></div></div>
+
+                <label class="kit-switch">
+                    <input type="checkbox" name="IsPublished" value="true" @(Model.IsPublished ? "checked" : "") />
+                    <span class="kit-switch-label">منتشر شود</span>
+                    <span class="kit-switch-track" aria-hidden="true"></span>
+                </label>
+                <input type="hidden" name="IsPublished" value="false" />
+
+                <label class="kit-switch" style="margin-top:.7rem">
+                    <input type="checkbox" name="IsBreaking" value="true" @(Model.IsBreaking ? "checked" : "") />
+                    <span class="kit-switch-label">خبر فوری</span>
+                    <span class="kit-switch-track" aria-hidden="true"></span>
+                </label>
+                <input type="hidden" name="IsBreaking" value="false" />
+
+                <p class="kit-form-hint" style="margin-top:.8rem">
+                    خبر فوری در نوار بالای همه صفحات سایت دیده می‌شود. بیش از یکی دو مورد
+                    همزمان، اثرش را از بین می‌برد.
+                </p>
+
+                @if (!isNew && Model.PublishedAt.HasValue)
+                {
+                    <p class="kit-form-hint">
+                        اولین انتشار: @Model.PublishedAt.Value.ToLocalTime().ToString("yyyy/MM/dd HH:mm")
+                    </p>
+                }
+            </section>
+
+            <section class="kit-section kit-rise">
+                <div class="kit-section-head">
+                    <div>
+                        <h2>سئو صفحه</h2>
+                        <p>آنچه در نتایج گوگل دیده می‌شود.</p>
+                    </div>
+                </div>
+
+                <div class="st-field">
+                    <label for="MetaTitle">
+                        عنوان Meta
+                        <span class="kit-counter" id="cnt-mt"></span>
+                    </label>
+                    <input id="MetaTitle" name="MetaTitle" value="@Model.MetaTitle" class="st-input"
+                           data-kit-counter="#cnt-mt" data-kit-min="30" data-kit-max="60" />
+                </div>
+
+                <div class="st-field">
+                    <label for="MetaDescription">
+                        توضیح Meta
+                        <span class="kit-counter" id="cnt-md"></span>
+                    </label>
+                    <textarea id="MetaDescription" name="MetaDescription" rows="3" class="st-input"
+                              data-kit-counter="#cnt-md" data-kit-min="120" data-kit-max="160">@Model.MetaDescription</textarea>
+                </div>
+
+                <div class="st-field">
+                    <label for="MetaKeywords">کلیدواژه‌ها</label>
+                    <input id="MetaKeywords" name="MetaKeywords" value="@Model.MetaKeywords" class="st-input" placeholder="با کاما جدا کنید" />
+                </div>
+            </section>
+        </div>
+    </div>
+</form>
+</div>
+
+@if (!isNew)
+{
+    <aside>
+        @{
+            ViewData["SeoEntityId"] = Model.Id;
+            ViewData["SeoEntityType"] = "news";
+        }
+        <partial name="_SeoProPanel" model="@score" />
+    </aside>
+}
+</div>
+
+@section Scripts {
+}

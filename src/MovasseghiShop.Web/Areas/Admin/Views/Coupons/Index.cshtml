@@ -1,0 +1,155 @@
+@model List<Coupon>
+@{
+    ViewData["Title"] = "کدهای تخفیف";
+    var now = DateTime.UtcNow;
+}
+
+<div class="kit-stats kit-stagger">
+    <article class="kit-stat">
+        <span class="kit-stat-label">🎟️ کل کدها</span>
+        <span class="kit-stat-value">@Model.Count.ToString("N0")</span>
+    </article>
+    <article class="kit-stat">
+        <span class="kit-stat-label">✅ فعال</span>
+        <span class="kit-stat-value kit-stat-value--ok">@ViewBag.ActiveCount.ToString("N0")</span>
+        <span class="kit-stat-foot">قابل استفاده در تسویه‌حساب</span>
+    </article>
+    <article class="kit-stat">
+        <span class="kit-stat-label">⏳ منقضی</span>
+        <span class="kit-stat-value">@ViewBag.ExpiredCount.ToString("N0")</span>
+    </article>
+    <article class="kit-stat">
+        <span class="kit-stat-label">🛒 دفعات استفاده</span>
+        <span class="kit-stat-value">@ViewBag.TotalUses.ToString("N0")</span>
+        <span class="kit-stat-foot">مجموع سفارش‌هایی که با تخفیف بسته شده</span>
+    </article>
+</div>
+
+<div class="kit-toolbar kit-rise">
+    <div class="kit-toolbar-grow">
+        <strong style="font-size:.88rem">مدیریت کد تخفیف</strong>
+        <span class="kit-form-hint" style="margin-top:.15rem">
+            کد غیرفعال یا منقضی، هنگام تسویه رد می‌شود و پیام خطا به مشتری نشان می‌دهد.
+        </span>
+    </div>
+    <a class="st-btn st-btn-primary" href="/Admin/Coupons/Create">+ کد جدید</a>
+</div>
+
+<section class="kit-table-card kit-rise">
+    @if (Model.Count == 0)
+    {
+        <div class="kit-empty">
+            <div class="kit-empty-icon" aria-hidden="true">🎟️</div>
+            <h3>هنوز کد تخفیفی نساخته‌اید</h3>
+            <p>
+                کد تخفیف با حداقل تعداد کارتن، مؤثرترین راه بالا بردن میانگین ارزش سفارش
+                در فروش عمده است.
+            </p>
+            <a class="st-btn st-btn-primary" href="/Admin/Coupons/Create">ساخت اولین کد</a>
+        </div>
+    }
+    else
+    {
+        <div class="kit-table-scroll">
+            <table class="kit-table">
+                <thead>
+                    <tr>
+                        <th data-sort>کد</th>
+                        <th data-sort>مقدار</th>
+                        <th data-sort>شرط استفاده</th>
+                        <th data-sort>سقف / مصرف</th>
+                        <th data-sort>بازه زمانی</th>
+                        <th data-sort>وضعیت</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var c in Model)
+                    {
+                        var expired = c.ExpiresAt.HasValue && c.ExpiresAt < now;
+                        var notStarted = c.StartsAt.HasValue && c.StartsAt > now;
+                        var exhausted = c.MaxUses.HasValue && c.UsedCount >= c.MaxUses;
+                        var usable = c.IsActive && !expired && !notStarted && !exhausted;
+                        <tr class="@(usable ? "" : "is-dim")">
+                            <td>
+                                <span class="kit-cell-main" dir="ltr" style="font-family:ui-monospace,monospace">@c.Code</span>
+                            </td>
+                            <td data-sort-value="@c.Value">
+                                @if (c.Type == CouponType.Percentage)
+                                {
+                                    <span class="kit-cell-main">@(c.Value.ToString("0.#"))٪</span>
+                                }
+                                else
+                                {
+                                    <span class="kit-cell-main">@c.Value.ToString("N0") تومان</span>
+                                }
+                            </td>
+                            <td>
+                                @if (c.MinOrderAmount.HasValue)
+                                {
+                                    <div class="kit-cell-sub">حداقل @c.MinOrderAmount.Value.ToString("N0") تومان</div>
+                                }
+                                @if (c.MinCartons.HasValue)
+                                {
+                                    <div class="kit-cell-sub">حداقل @c.MinCartons.Value کارتن</div>
+                                }
+                                @if (!c.MinOrderAmount.HasValue && !c.MinCartons.HasValue)
+                                {
+                                    <span class="kit-cell-sub">بدون شرط</span>
+                                }
+                            </td>
+                            <td class="kit-cell-num" data-sort-value="@c.UsedCount">
+                                @c.UsedCount@(c.MaxUses.HasValue ? $" / {c.MaxUses}" : " / نامحدود")
+                            </td>
+                            <td data-sort-value="@(c.ExpiresAt?.Ticks ?? long.MaxValue)">
+                                <span class="kit-cell-sub">
+                                    @(c.StartsAt?.ToLocalTime().ToString("yyyy/MM/dd") ?? "بدون شروع")
+                                    –
+                                    @(c.ExpiresAt?.ToLocalTime().ToString("yyyy/MM/dd") ?? "بدون انقضا")
+                                </span>
+                            </td>
+                            <td data-sort-value="@(usable ? 2 : c.IsActive ? 1 : 0)">
+                                @if (!c.IsActive)
+                                {
+                                    <span class="kit-tag kit-tag--muted">غیرفعال</span>
+                                }
+                                else if (expired)
+                                {
+                                    <span class="kit-tag kit-tag--bad">منقضی</span>
+                                }
+                                else if (notStarted)
+                                {
+                                    <span class="kit-tag kit-tag--warn">هنوز شروع نشده</span>
+                                }
+                                else if (exhausted)
+                                {
+                                    <span class="kit-tag kit-tag--warn">سقف پر شده</span>
+                                }
+                                else
+                                {
+                                    <span class="kit-tag kit-tag--ok">فعال</span>
+                                }
+                            </td>
+                            <td class="kit-cell-actions">
+                                <a class="st-btn st-btn-ghost st-btn-sm" href="/Admin/Coupons/Edit/@c.Id">ویرایش</a>
+                                <form method="post" action="/Admin/Coupons/ToggleActive/@c.Id" style="display:inline">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="st-btn st-btn-ghost st-btn-sm">
+                                        @(c.IsActive ? "غیرفعال" : "فعال")
+                                    </button>
+                                </form>
+                                <form method="post" action="/Admin/Coupons/Delete/@c.Id" style="display:inline"
+                                      data-kit-confirm="کد «<strong>@c.Code</strong>» حذف می‌شود. اگر مشتری‌ای این کد را دارد، دیگر کار نمی‌کند."
+                                      data-kit-confirm-title="حذف کد تخفیف"
+                                      data-kit-confirm-ok="حذف کن">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="st-btn st-btn-ghost st-btn-sm">حذف</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</section>

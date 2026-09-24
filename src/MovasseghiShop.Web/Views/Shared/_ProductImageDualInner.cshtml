@@ -1,0 +1,23 @@
+@model ProductImageStageModel
+<div class="ms-product-dual__aurora" aria-hidden="true"></div>
+<div class="ms-product-dual__slides">
+    <div class="ms-product-dual__slide ms-product-dual__slide--studio" data-ms-dual-slide="studio">
+        <div class="ms-product-shot">
+            <div class="ms-product-stage">
+                <img class="ms-product-img-el" src="@Model.ImageUrl" alt="@Model.Alt" width="@Model.Width" height="@Model.Height" loading="@Model.Loading" @(Model.FetchPriority ? "fetchpriority=\"high\"" : null) />
+            </div>
+        </div>
+    </div>
+    <div class="ms-product-dual__slide ms-product-dual__slide--scene" data-ms-dual-slide="scene">
+        <img class="ms-product-img-el ms-product-img-el--scene ms-product-dual__scene-img" src="@Model.AlternateImageUrl" alt="@Model.AlternateAlt" width="@Model.Width" height="@Model.Height" loading="lazy" />
+    </div>
+</div>
+<div class="ms-product-dual__chrome" aria-hidden="true">
+    <div class="ms-product-dual__progress">
+        <span class="ms-product-dual__progress-track"></span>
+        <span class="ms-product-dual__progress-fill"></span>
+        <span class="ms-product-dual__progress-glow"></span>
+    </div>
+    <span class="ms-product-dual__pill ms-product-dual__pill--studio">📦 استودیو</span>
+    <span class="ms-product-dual__pill ms-product-dual__pill--scene">🌅 محیط</span>
+</div>

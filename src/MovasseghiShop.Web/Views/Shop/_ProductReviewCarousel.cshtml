@@ -1,0 +1,115 @@
+@model MovasseghiShop.Web.Models.ProductReviewsSectionModel
+@{
+    var starRows = Enumerable.Range(1, 5)
+        .Select(star => (Star: star, Count: Model.Items.Count(r => r.Rating == star)))
+        .OrderByDescending(x => x.Star)
+        .ToList();
+    var maxBar = starRows.Max(x => x.Count);
+    if (maxBar < 1) maxBar = 1;
+    var avgPct = Model.Count > 0 ? Math.Clamp(Model.Average / 5d * 100d, 0, 100) : 0;
+}
+<section class="pd-voices" id="pd-reviews" aria-labelledby="pd-reviews-title">
+    <div class="pd-voices__frame" aria-hidden="true"></div>
+
+    <header class="pd-voices__head">
+        <div class="pd-voices__intro">
+            <span class="pd-voices__kicker">صدای مشتریان عمده</span>
+            <h2 id="pd-reviews-title">نظرات خریداران</h2>
+            <p class="pd-voices__lead">از کیفیت ظروف، بسته‌بندی کارتنی و هماهنگی بارگیری — بدون فیلتر بازاریابی.</p>
+        </div>
+        @if (Model.Count > 0)
+        {
+            <div class="pd-voices__badge" title="میانگین امتیاز تأیید‌شده">
+                <span class="pd-voices__badge-val" dir="ltr">@Model.Average.ToString("0.0")</span>
+                <span class="pd-voices__badge-of">از ۵</span>
+            </div>
+        }
+    </header>
+
+    @if (Model.Items.Count > 0)
+    {
+        <div class="pd-voices__layout">
+            <aside class="pd-voices__summary" aria-label="خلاصه امتیازها">
+                <div class="pd-voices__ring" style="--pd-voices-pct:@avgPct.ToString("0.#", System.Globalization.CultureInfo.InvariantCulture)">
+                    <div class="pd-voices__ring-inner">
+                        <span class="pd-voices__ring-val" dir="ltr">@Model.Average.ToString("0.0")</span>
+                        <partial name="_ReviewStars" model="((int)Math.Round(Model.Average), false)" />
+                    </div>
+                </div>
+                <p class="pd-voices__summary-count"><strong>@Model.Count</strong> نظر تأیید‌شده</p>
+                <ul class="pd-voices__bars">
+                    @foreach (var row in starRows)
+                    {
+                        var w = row.Count * 100 / maxBar;
+                        <li>
+                            <span class="pd-voices__bars-label" dir="ltr">@row.Star</span>
+                            <span class="pd-voices__bars-track" aria-hidden="true">
+                                <span class="pd-voices__bars-fill" style="width:@(row.Count > 0 ? w : 0)%"></span>
+                            </span>
+                            <span class="pd-voices__bars-num">@row.Count</span>
+                        </li>
+                    }
+                </ul>
+            </aside>
+
+            <div class="pd-voices__carousel pd-reviews-carousel--premium" data-pd-reviews-carousel>
+                <div class="pd-voices__carousel-top">
+                    <button type="button" class="pd-voices__nav pd-voices__nav--prev" data-pd-reviews-prev aria-label="نظر قبلی">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+                    </button>
+                    <span class="pd-voices__counter" data-pd-reviews-counter aria-live="polite"></span>
+                    <button type="button" class="pd-voices__nav pd-voices__nav--next" data-pd-reviews-next aria-label="نظر بعدی">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+                    </button>
+                </div>
+
+                <div class="pd-reviews-carousel__stage pd-voices__stage">
+                    <div class="pd-reviews-carousel__viewport" data-pd-reviews-viewport tabindex="0">
+                        <div class="pd-reviews-carousel__track" data-pd-reviews-track>
+                            @foreach (var review in Model.Items)
+                            {
+                                var initial = string.IsNullOrWhiteSpace(review.AuthorDisplayName)
+                                    ? "م"
+                                    : review.AuthorDisplayName.Trim()[0].ToString();
+                                <article class="pd-voices-card pd-review-card--slide" data-pd-reviews-slide>
+                                    <div class="pd-voices-card__accent" aria-hidden="true"></div>
+                                    <header class="pd-voices-card__head">
+                                        <span class="pd-voices-card__avatar" aria-hidden="true">@initial</span>
+                                        <div class="pd-voices-card__who">
+                                            <strong>@review.AuthorDisplayName</strong>
+                                            <span class="pd-voices-card__verified">خریدار تأیید‌شده</span>
+                                        </div>
+                                        <time datetime="@review.CreatedAt.ToString("yyyy-MM-dd")">@review.CreatedAt.ToLocalTime().ToString("yyyy/MM/dd")</time>
+                                    </header>
+                                    <partial name="_ReviewStars" model="(review.Rating, false)" />
+                                    <blockquote class="pd-voices-card__body">@review.Body</blockquote>
+                                    @if (review.Replies?.Count > 0)
+                                    {
+                                        @foreach (var reply in review.Replies.OrderBy(r => r.CreatedAt))
+                                        {
+                                            <div class="pd-voices-card__reply @(reply.IsStoreReply ? "pd-voices-card__reply--store" : "")">
+                                                <span class="pd-voices-card__reply-label">
+                                                    @(reply.IsStoreReply ? "پشتیبانی موثقی" : reply.AuthorDisplayName)
+                                                </span>
+                                                <p>@reply.Body</p>
+                                            </div>
+                                        }
+                                    }
+                                </article>
+                            }
+                        </div>
+                    </div>
+                    <div class="pd-voices__progress" aria-hidden="true">
+                        <span class="pd-voices__progress-bar" data-pd-reviews-progress></span>
+                    </div>
+                </div>
+
+                <div class="pd-reviews-carousel__dots pd-voices__dots" data-pd-reviews-dots></div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <p class="pd-voices__empty">هنوز نظر تأیید‌شده‌ای ثبت نشده. با فرم بالا اولین تجربه خود را با دیگر خریداران عمده به اشتراک بگذارید.</p>
+    }
+</section>

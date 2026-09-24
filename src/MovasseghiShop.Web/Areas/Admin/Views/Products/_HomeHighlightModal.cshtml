@@ -1,0 +1,58 @@
+@using MovasseghiShop.Web.Services
+<div id="homeHighlightModal" class="kit-hi-modal" hidden aria-hidden="true">
+    <div class="kit-hi-modal__backdrop" data-hi-close tabindex="-1"></div>
+    <div class="kit-hi-modal__panel" role="dialog" aria-modal="true" aria-labelledby="homeHighlightModalTitle">
+        <button type="button" class="kit-hi-modal__close" data-hi-close aria-label="بستن">×</button>
+        <header class="kit-hi-modal__head">
+            <p class="kit-hi-modal__kicker">صفحه اصلی</p>
+            <h2 id="homeHighlightModalTitle" class="kit-hi-modal__title">جایگاه نمایش محصول</h2>
+            <p class="kit-hi-modal__product" data-hi-product-name></p>
+        </header>
+
+        <div class="kit-hi-modal__slots">
+            <p class="kit-hi-modal__slots-hint">حداکثر @HomeProductHighlights.MaxPerSlot محصول برای هر بلوک — فقط محصولات <strong>فعال</strong> در سایت دیده می‌شوند.</p>
+            <div class="kit-hi-slot-meter">
+                <span class="kit-hi-slot-meter__label">
+                    <span class="kit-hi-meter-icon kit-hi-meter-icon--gold" aria-hidden="true"><partial name="_HomeHighlightIconStar" /></span>
+                    پیشنهاد ویژه
+                </span>
+                <span class="kit-hi-slot-meter__bar" aria-hidden="true"><span class="kit-hi-slot-meter__fill kit-hi-slot-meter__fill--gold" data-hi-meter-special></span></span>
+                <span class="kit-hi-slot-meter__count" data-hi-count-special>۰/@HomeProductHighlights.MaxPerSlot</span>
+            </div>
+            <div class="kit-hi-slot-meter">
+                <span class="kit-hi-slot-meter__label">
+                    <span class="kit-hi-meter-icon kit-hi-meter-icon--diamond" aria-hidden="true"><partial name="_HomeHighlightIconGem" /></span>
+                    محصولات برتر
+                </span>
+                <span class="kit-hi-slot-meter__bar" aria-hidden="true"><span class="kit-hi-slot-meter__fill kit-hi-slot-meter__fill--diamond" data-hi-meter-featured></span></span>
+                <span class="kit-hi-slot-meter__count" data-hi-count-featured>۰/@HomeProductHighlights.MaxPerSlot</span>
+            </div>
+        </div>
+
+        <div class="kit-hi-cards">
+            <button type="button" class="kit-hi-card kit-hi-card--gold" data-hi-role="special">
+                <span class="kit-hi-card__icon kit-hi-card__icon--gold" aria-hidden="true"><partial name="_HomeHighlightIconStar" /></span>
+                <span class="kit-hi-card__body">
+                    <strong>پیشنهاد ویژه موثقی</strong>
+                    <span>بلوک تخفیف و فرصت خرید عمده در صفحه اصلی</span>
+                </span>
+                <span class="kit-hi-card__state is-off" data-hi-state-special>خاموش</span>
+            </button>
+            <button type="button" class="kit-hi-card kit-hi-card--diamond" data-hi-role="featured">
+                <span class="kit-hi-card__icon kit-hi-card__icon--diamond" aria-hidden="true"><partial name="_HomeHighlightIconGem" /></span>
+                <span class="kit-hi-card__body">
+                    <strong>محصولات برتر موثقی</strong>
+                    <span>منتخب کیفیت و پرفروش در صفحه اصلی</span>
+                </span>
+                <span class="kit-hi-card__state is-off" data-hi-state-featured>خاموش</span>
+            </button>
+        </div>
+
+        <p class="kit-hi-modal__error" data-hi-error hidden role="alert"></p>
+
+        <footer class="kit-hi-modal__foot">
+            <button type="button" class="st-btn st-btn-ghost" data-hi-clear>حذف از هر دو بلوک</button>
+            <button type="button" class="st-btn st-btn-primary" data-hi-close>بستن</button>
+        </footer>
+    </div>
+</div>

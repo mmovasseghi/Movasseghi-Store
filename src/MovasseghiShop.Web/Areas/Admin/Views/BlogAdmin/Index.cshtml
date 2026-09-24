@@ -1,0 +1,145 @@
+@model List<BlogPost>
+@using MovasseghiShop.Web.Services
+@{
+    ViewData["Title"] = "مقالات بلاگ";
+    var q = ViewBag.Q as string;
+    var status = ViewBag.Status as string;
+    var seoScores = (Dictionary<int, int>?)ViewBag.SeoScores ?? new();
+    var seoAudited = (Dictionary<int, bool>?)ViewBag.SeoAudited ?? new();
+    var seoReady = (Dictionary<int, bool>?)ViewBag.SeoReady ?? new();
+}
+
+<div class="kit-stats kit-stagger">
+    <article class="kit-stat">
+        <span class="kit-stat-label">📚 کل مقالات</span>
+        <span class="kit-stat-value">@((ViewBag.PublishedCount + ViewBag.DraftCount).ToString("N0"))</span>
+        <span class="kit-stat-foot">محتوای بلاگ، اقتدار موضوعی سایت را در گوگل می‌سازد</span>
+    </article>
+    <article class="kit-stat">
+        <span class="kit-stat-label">✅ منتشرشده</span>
+        <span class="kit-stat-value kit-stat-value--ok">@ViewBag.PublishedCount.ToString("N0")</span>
+        <span class="kit-stat-foot">قابل ایندکس در گوگل</span>
+    </article>
+    <article class="kit-stat">
+        <span class="kit-stat-label">📝 پیش‌نویس</span>
+        <span class="kit-stat-value @(ViewBag.DraftCount > 0 ? "kit-stat-value--gold" : "")">@ViewBag.DraftCount.ToString("N0")</span>
+        <span class="kit-stat-foot">تا منتشر نشوند، هیچ اثری روی سئو ندارند</span>
+    </article>
+</div>
+
+<div class="kit-toolbar kit-rise">
+    <form method="get" action="/Admin/BlogAdmin" class="kit-search" data-kit-nobusy>
+        <span class="kit-search-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        </span>
+        <input type="search" name="q" value="@q" class="st-input" placeholder="جستجو در عنوان یا نامک… (کلید /)" aria-label="جستجوی مقاله" />
+        @if (!string.IsNullOrEmpty(status))
+        {
+            <input type="hidden" name="status" value="@status" />
+        }
+    </form>
+
+    <nav class="kit-segment" aria-label="فیلتر وضعیت">
+        <a href="/Admin/BlogAdmin" class="@(string.IsNullOrEmpty(status) ? "is-active" : "")">همه</a>
+        <a href="/Admin/BlogAdmin?status=published" class="@(status == "published" ? "is-active" : "")">
+            منتشرشده <span class="kit-segment-count">@ViewBag.PublishedCount</span>
+        </a>
+        <a href="/Admin/BlogAdmin?status=draft" class="@(status == "draft" ? "is-active" : "")">
+            پیش‌نویس <span class="kit-segment-count">@ViewBag.DraftCount</span>
+        </a>
+    </nav>
+
+    <a class="st-btn st-btn-primary" href="/Admin/BlogAdmin/Create">+ مقاله جدید</a>
+</div>
+
+<section class="kit-table-card kit-rise">
+    @if (Model.Count == 0)
+    {
+        <div class="kit-empty">
+            <div class="kit-empty-icon" aria-hidden="true">📝</div>
+            <h3>@(string.IsNullOrEmpty(q) ? "هنوز مقاله‌ای ننوشته‌اید" : "مقاله‌ای با این جستجو پیدا نشد")</h3>
+            <p>
+                مقاله‌های آموزشی درباره ظروف گیاهی، بهترین ابزار گرفتن جایگاه اول در گوگل هستند:
+                هم سوال واقعی مشتری را پاسخ می‌دهند، هم به صفحات محصول لینک داخلی می‌رسانند.
+            </p>
+            <a class="st-btn st-btn-primary" href="/Admin/BlogAdmin/Create">نوشتن اولین مقاله</a>
+        </div>
+    }
+    else
+    {
+        <div class="kit-table-scroll kit-table-scroll--stack">
+            <table class="kit-table kit-table--stack">
+                <thead>
+                    <tr>
+                        <th data-sort>عنوان</th>
+                        <th data-sort>وضعیت</th>
+                        <th data-sort>امتیاز SEO</th>
+                        <th data-sort>تاریخ انتشار</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var post in Model)
+                    {
+                        var audited = seoAudited.GetValueOrDefault(post.Id, false);
+                        var seo = seoScores.GetValueOrDefault(post.Id, 0);
+                        var ready = seoReady.GetValueOrDefault(post.Id, false);
+                        <tr class="@(post.IsPublished ? "" : "is-dim")">
+                            <td data-label="عنوان">
+                                <span class="kit-cell-main">@post.Title</span>
+                                <span class="kit-cell-sub" dir="ltr">/Blog/Post/@post.Slug</span>
+                            </td>
+                            <td data-label="وضعیت" data-sort-value="@(post.IsPublished ? 1 : 0)">
+                                @if (post.IsPublished)
+                                {
+                                    <span class="kit-tag kit-tag--ok">منتشرشده</span>
+                                }
+                                else
+                                {
+                                    <span class="kit-tag kit-tag--muted">پیش‌نویس</span>
+                                }
+                            </td>
+                            <td data-label="امتیاز SEO" data-sort-value="@(audited ? seo : -1)" title="@(audited ? (ready ? "آماده انتشار" : "نیاز به Auto-Fix یا ویرایش") : "هنوز بررسی نشده — ویرایش یا Auto-Fix")">
+                                @if (!audited)
+                                {
+                                    <span class="kit-tag kit-tag--muted">—</span>
+                                }
+                                else
+                                {
+                                    <span class="kit-tag @(ready ? "kit-tag--ok" : seo >= 70 ? "kit-tag--warn" : "kit-tag--bad")">@seo</span>
+                                    @if (ready)
+                                    {
+                                        <span class="kit-tag kit-tag--ok" style="margin-inline-start:.25rem">✓</span>
+                                    }
+                                }
+                            </td>
+                            <td class="kit-cell-num" data-label="تاریخ" data-sort-value="@(post.PublishedAt?.Ticks ?? 0)">
+                                @(post.PublishedAt?.ToLocalTime().ToString("yyyy/MM/dd") ?? "—")
+                            </td>
+                            <td class="kit-cell-actions" data-label="">
+                                <a class="st-btn st-btn-ghost st-btn-sm" href="/Admin/BlogAdmin/Edit/@post.Id">ویرایش</a>
+                                @if (post.IsPublished)
+                                {
+                                    <a class="st-btn st-btn-ghost st-btn-sm" href="/Blog/Post/@post.Slug" target="_blank" rel="noopener">مشاهده</a>
+                                }
+                                <form method="post" action="/Admin/BlogAdmin/TogglePublish/@post.Id" style="display:inline">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="st-btn st-btn-ghost st-btn-sm">
+                                        @(post.IsPublished ? "لغو انتشار" : "انتشار")
+                                    </button>
+                                </form>
+                                <form method="post" action="/Admin/BlogAdmin/Delete/@post.Id" style="display:inline"
+                                      data-kit-confirm="مقاله «<strong>@post.Title</strong>» برای همیشه حذف می‌شود. اگر در گوگل ایندکس شده، آدرسش خطای ۴۰۴ می‌دهد."
+                                      data-kit-confirm-title="حذف مقاله"
+                                      data-kit-confirm-ok="حذف کن">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="st-btn st-btn-ghost st-btn-sm">حذف</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</section>

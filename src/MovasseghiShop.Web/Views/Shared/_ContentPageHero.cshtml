@@ -1,0 +1,42 @@
+@{
+    var mode = ViewBag.ContentHeroMode as string ?? "blog";
+    var total = (int)(ViewBag.ContentTotal ?? 0);
+    var isBlog = mode == "blog";
+    var isNews = mode == "news";
+}
+<header class="ct-hero @(isNews ? "ct-hero--news" : "ct-hero--blog") ms-reveal" aria-labelledby="ct-hero-title">
+    <div class="ct-hero-glow" aria-hidden="true"></div>
+    <div class="ct-hero-ring ct-hero-ring--1" aria-hidden="true"></div>
+    <div class="ct-hero-ring ct-hero-ring--2" aria-hidden="true"></div>
+    <img class="ct-hero-mark" src="~/images/brand/originallogo.png" alt="" width="120" height="39" aria-hidden="true" loading="lazy" />
+    <div class="ct-hero-inner">
+        <div class="ct-hero-top">
+            @if (isBlog)
+            {
+                <span class="ct-hero-kicker">📚 راهنمای تخصصی</span>
+            }
+            else
+            {
+                <span class="ct-hero-kicker ct-hero-kicker--pulse">📢 اخبار و رویدادها</span>
+            }
+            <div class="ct-hero-stats">
+                <span class="ct-hero-stat">@(isBlog ? "📄" : "📰") @(total) @(isBlog ? "مطلب" : "خبر")</span>
+                <span class="ct-hero-stat">🌿 نمایندگی رسمی</span>
+            </div>
+        </div>
+        <h1 id="ct-hero-title">@(isBlog ? "وبلاگ فروشگاه موثقی" : "اخبار فروشگاه موثقی")</h1>
+        <p>@(isBlog
+            ? "راهنمای خرید عمده، انتخاب ظروف گیاهی آملون و تجربه رستوران‌ها"
+            : "اطلاعیه‌ها، ورود محصولات جدید و پیشنهادهای ویژه پخش عمده")</p>
+        <nav class="ct-hero-tabs" aria-label="انتخاب بخش محتوا">
+            <a href="/Blog" class="ct-tab @(isBlog ? "is-active" : "")">
+                <span class="ct-tab-icon" aria-hidden="true">📚</span>
+                <span>وبلاگ</span>
+            </a>
+            <a href="/News" class="ct-tab @(isNews ? "is-active" : "")">
+                <span class="ct-tab-icon" aria-hidden="true">📢</span>
+                <span>اخبار</span>
+            </a>
+        </nav>
+    </div>
+</header>

@@ -1,0 +1,227 @@
+@model Order
+@using MovasseghiShop.Web.Models.Enums
+@{
+    var isAccount = ViewBag.IsAccountOrderView as bool? == true;
+    var step = OrderStatusLabels.CustomerTrackStepIndex(Model.Status);
+    var cancelled = Model.Status == OrderStatus.Cancelled;
+    var payFa = Model.PaymentMethod == PaymentMethod.CashOnPickup ? "نقدی هنگام بارگیری" : "پرداخت آنلاین";
+    var delFa = Model.DeliveryMethod switch
+    {
+        DeliveryMethod.FreeKhavar => "ارسال با خاور (تهران)",
+        DeliveryMethod.CustomerVehicle => "بارگیری با خودرو مشتری",
+        _ => Model.DeliveryMethod.ToString()
+    };
+    var invoiceUrl = isAccount
+        ? $"/Order/MyInvoice?number={Uri.EscapeDataString(Model.OrderNumber)}"
+        : $"/Order/Invoice?number={Uri.EscapeDataString(Model.OrderNumber)}&phone={Uri.EscapeDataString(Model.Phone)}";
+}
+
+<div class="ms-track-result @(isAccount ? "ms-track-result--account" : "")" id="ms-track-result">
+    <header class="ms-track-result__hero @(isAccount ? "ms-track-result__hero--account" : "")">
+        <div class="ms-track-result__pulse" aria-hidden="true"></div>
+        @if (isAccount)
+        {
+            <p class="ms-track-result__account-kicker">سفارش شما</p>
+        }
+        <div class="ms-track-result__hero-icon @(cancelled ? "ms-track-result__hero-icon--muted" : "")" aria-hidden="true">
+            @(cancelled ? "✕" : (isAccount ? "🧾" : "📦"))
+        </div>
+        <p class="ms-track-result__kicker">@(isAccount ? "شماره سفارش" : "کد پیگیری")</p>
+        <h1 class="ms-track-result__number" dir="ltr">@Model.OrderNumber</h1>
+        <p class="ms-track-result__status">
+            <span class="ms-track-pill @(cancelled ? "ms-track-pill--bad" : "ms-track-pill--ok")">
+                @OrderStatusLabels.Fa(Model.Status)
+            </span>
+        </p>
+        <p class="ms-track-result__hint">@OrderStatusLabels.CustomerTrackHint(Model.Status)</p>
+        @if (isAccount)
+        {
+            <div class="ms-order-account-hero-total" aria-label="مبلغ نهایی">
+                <span>مبلغ قابل پرداخت</span>
+                <strong>@SlugHelper.FormatToman(Model.TotalAmount) <small>تومان</small></strong>
+            </div>
+        }
+    </header>
+
+    @if (isAccount)
+    {
+        <div class="ms-order-account-quick" aria-label="خلاصه سفارش">
+            <div class="ms-order-account-quick__item">
+                <span>قلم</span>
+                <strong>@Model.Items.Count</strong>
+            </div>
+            <div class="ms-order-account-quick__item">
+                <span>کارتن</span>
+                <strong>@Model.TotalCartons.ToString("N0")</strong>
+            </div>
+            <div class="ms-order-account-quick__item">
+                <span>تسویه</span>
+                <strong>@payFa</strong>
+            </div>
+            <div class="ms-order-account-quick__item">
+                <span>تحویل</span>
+                <strong>@delFa</strong>
+            </div>
+        </div>
+    }
+
+    @if (!cancelled)
+    {
+        <div class="ms-track-timeline" aria-label="مراحل سفارش">
+            <div class="ms-track-timeline__rail" aria-hidden="true">
+                <span class="ms-track-timeline__fill" id="ms-track-fill"></span>
+            </div>
+            <ol class="ms-track-timeline__steps">
+                @for (var i = 0; i < OrderStatusLabels.CustomerTrackSteps.Length; i++)
+                {
+                    var label = OrderStatusLabels.CustomerTrackSteps[i];
+                    var state = i < step ? "done" : i == step ? "active" : "upcoming";
+                    <li class="ms-track-step ms-track-step--@state" data-step="@i">
+                        <span class="ms-track-step__dot" aria-hidden="true">
+                            @if (i < step) { <text>✓</text> }
+                            else { <text>@(i + 1)</text> }
+                        </span>
+                        <span class="ms-track-step__label">@label</span>
+                    </li>
+                }
+            </ol>
+        </div>
+    }
+
+    @if (!isAccount)
+    {
+        <div class="ms-track-cards">
+            <article class="ms-track-card ms-track-card--amount">
+                <span class="ms-track-card__label">مبلغ پیش‌فاکتور</span>
+                <span class="ms-track-card__value">@SlugHelper.FormatToman(Model.TotalAmount) <small>تومان</small></span>
+                @if (Model.DiscountAmount > 0)
+                {
+                    <span class="ms-track-card__sub">شامل تخفیف @SlugHelper.FormatToman(Model.DiscountAmount)</span>
+                }
+            </article>
+            <article class="ms-track-card">
+                <span class="ms-track-card__label">روش تسویه</span>
+                <span class="ms-track-card__value">@payFa</span>
+            </article>
+            <article class="ms-track-card">
+                <span class="ms-track-card__label">روش تحویل</span>
+                <span class="ms-track-card__value">@delFa</span>
+            </article>
+            <article class="ms-track-card">
+                <span class="ms-track-card__label">ثبت سفارش</span>
+                <span class="ms-track-card__value" dir="ltr">@Model.CreatedAt.ToLocalTime().ToString("yyyy/MM/dd HH:mm")</span>
+            </article>
+        </div>
+    }
+    else if (Model.DiscountAmount > 0)
+    {
+        <p class="ms-order-account-discount">تخفیف اعمال‌شده: <strong>@SlugHelper.FormatToman(Model.DiscountAmount)</strong> تومان</p>
+    }
+
+    <section class="ms-track-items @(isAccount ? "ms-track-items--account" : "")">
+        <h2 class="ms-track-items__title">
+            اقلام سفارش
+            <span>@Model.Items.Count قلم · @Model.TotalCartons.ToString("N0") کارتن</span>
+        </h2>
+        @if (isAccount)
+        {
+            <div class="ms-order-lines-table-wrap">
+                <table class="ms-order-lines-table">
+                    <thead>
+                        <tr>
+                            <th>محصول</th>
+                            <th>تنوع</th>
+                            <th>کارتن</th>
+                            <th>فی</th>
+                            <th>جمع</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var line in Model.Items)
+                        {
+                            <tr>
+                                <td><strong>@line.ProductName</strong></td>
+                                <td>@line.VariantLabel</td>
+                                <td class="num">@line.CartonQuantity.ToString("N0")</td>
+                                <td class="num">@SlugHelper.FormatToman(line.UnitPrice)</td>
+                                <td class="num">@SlugHelper.FormatToman(line.LineTotal)</td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4">جمع کل</td>
+                            <td class="num grand">@SlugHelper.FormatToman(Model.TotalAmount)</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        }
+        else
+        {
+            <ul class="ms-track-items__list">
+                @foreach (var line in Model.Items)
+                {
+                    <li class="ms-track-item">
+                        <div class="ms-track-item__main">
+                            <strong>@line.ProductName</strong>
+                            <span>@line.VariantLabel</span>
+                        </div>
+                        <div class="ms-track-item__meta" dir="ltr">
+                            @line.CartonQuantity.ToString("N0") کارتن
+                        </div>
+                    </li>
+                }
+            </ul>
+        }
+    </section>
+
+    @if (isAccount && (Model.DeliveryAddress is not null || Model.VehicleInfo is not null || !string.IsNullOrWhiteSpace(Model.Notes)))
+    {
+        <div class="ms-order-account-extra">
+            @if (Model.DeliveryAddress is not null)
+            {
+                var a = Model.DeliveryAddress;
+                <article class="ms-order-extra-card">
+                    <h3>آدرس تحویل</h3>
+                    <p><strong>@a.Province — @a.City</strong></p>
+                    <p>@a.FullAddress</p>
+                    @if (!string.IsNullOrWhiteSpace(a.PostalCode))
+                    {
+                        <p class="sub" dir="ltr">کد پستی: @a.PostalCode</p>
+                    }
+                </article>
+            }
+            @if (Model.VehicleInfo is not null)
+            {
+                var v = Model.VehicleInfo;
+                <article class="ms-order-extra-card">
+                    <h3>خودرو / راننده</h3>
+                    <p>@v.DriverName · <span dir="ltr">@v.DriverPhone</span></p>
+                    <p class="sub">پلاک <span dir="ltr">@v.PlateNumber</span> · @v.VehicleType</p>
+                </article>
+            }
+            @if (!string.IsNullOrWhiteSpace(Model.Notes))
+            {
+                <article class="ms-order-extra-card ms-order-extra-card--note">
+                    <h3>یادداشت شما</h3>
+                    <p>@Model.Notes</p>
+                </article>
+            }
+        </div>
+    }
+
+    <div class="ms-track-result__actions @(isAccount ? "ms-track-result__actions--account" : "")">
+        <a class="ms-order-success__btn ms-order-success__btn--primary" href="@invoiceUrl">دانلود پیش‌فاکتور</a>
+        @if (isAccount)
+        {
+            <a class="ms-order-success__btn ms-order-success__btn--ghost" href="/Account">بازگشت به حساب</a>
+            <a class="ms-order-success__btn ms-order-success__btn--ghost" href="/Catalog">ادامه خرید</a>
+        }
+        else
+        {
+            <a class="ms-order-success__btn ms-order-success__btn--ghost" href="/Order/Track">پیگیری سفارش دیگر</a>
+            <a class="ms-order-success__btn ms-order-success__btn--ghost" href="/Catalog">فروشگاه</a>
+        }
+    </div>
+</div>

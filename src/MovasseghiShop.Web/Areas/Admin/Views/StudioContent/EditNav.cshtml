@@ -1,0 +1,43 @@
+@model MovasseghiShop.Web.Models.Entities.NavItem
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = Model.Id == 0 ? "لینک جدید" : "ویرایش منو";
+    ViewData["HeroTitle"] = Model.Id == 0 ? "+ لینک جدید" : "ویرایش منو";
+    ViewData["HeroSubtitle"] = Model.Label ?? "Navigation item";
+    ViewData["HeroBadge"] = "NAV";
+}
+
+@section Head {
+    <link rel="stylesheet" href="~/css/cms-preview.css" asp-append-version="true" />
+}
+
+<partial name="_AdminHero" />
+
+<div class="st-edit-grid st-edit-grid--cms st-reveal">
+<div class="st-cms-form-col">
+<form method="post" class="st-panel">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <div class="st-field"><label>Zone</label><input name="Zone" value="@Model.Zone" list="zones" class="st-input" />
+        <datalist id="zones">
+            <option>header</option><option>drawer-main</option><option>drawer-more</option>
+            <option>footer-shop</option><option>footer-support</option><option>footer-wholesale</option>
+        </datalist>
+    </div>
+    <div class="st-field"><label>برچسب</label><input name="Label" value="@Model.Label" required class="st-input" /></div>
+    <div class="st-field"><label>URL</label><input name="Url" value="@Model.Url" required class="st-input" /></div>
+    <div class="st-field"><label>آیکون (drawer)</label><input name="Icon" value="@Model.Icon" class="st-input" /></div>
+    <div class="st-field"><label>ترتیب</label><input name="SortOrder" type="number" value="@Model.SortOrder" class="st-input" /></div>
+    <label class="st-checkbox"><input type="checkbox" name="IsActive" value="true" @(Model.IsActive ? "checked" : "") /> فعال</label>
+    <div class="st-btn-row" style="margin-top:1rem">
+        <button type="submit" class="st-btn st-btn-primary">💾 ذخیره</button>
+        <a href="/Admin/StudioContent/Nav" class="st-btn st-btn-ghost">← بازگشت</a>
+    </div>
+</form>
+</div>
+<partial name="_CmsLivePreview" model="@(string.IsNullOrWhiteSpace(Model.Url) || !Model.Url.StartsWith('/') ? "/" : Model.Url)" view-data="@(new ViewDataDictionary(ViewData) { ["PreviewTitle"] = "پیش‌نمایش منو", ["PreviewHint"] = "تغییرات منو روی همه صفحات دیده می‌شود — بعد از ذخیره ↻ را بزنید." })" />
+</div>
+
+@section Scripts {
+    <script src="~/js/cms-preview.js" asp-append-version="true"></script>
+}

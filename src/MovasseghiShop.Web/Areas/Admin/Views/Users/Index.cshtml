@@ -1,0 +1,158 @@
+@model IEnumerable<MovasseghiShop.Web.Data.ApplicationUser>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "مدیریت کاربران";
+    ViewData["HeroTitle"] = "مدیریت کاربران";
+    ViewData["HeroSubtitle"] = "جستجو، نقش‌ها، قفل حساب و مشاهده فعالیت";
+    ViewData["HeroBadge"] = "Users";
+    var roles = (Dictionary<string, IList<string>>)ViewBag.Roles;
+    var orderCounts = (Dictionary<string, int>)ViewBag.OrderCount;
+    var search = (string?)ViewBag.Search;
+    var totalUsers = (int)ViewBag.TotalUsers;
+    var adminCount = (int)ViewBag.AdminCount;
+}
+
+<partial name="_AdminHero" />
+
+@if (TempData["Success"] != null) { <div class="st-alert st-alert-success st-reveal">@TempData["Success"]</div> }
+@if (TempData["Error"] != null) { <div class="st-alert st-alert-error st-reveal">@TempData["Error"]</div> }
+
+<div class="st-stats-grid st-stats-grid--3 st-reveal">
+    <article class="st-stat-card">
+        <div class="st-stat-icon st-stat-icon--green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        </div>
+        <div class="st-stat-body">
+            <span class="st-stat-value st-stat-value--accent">@totalUsers</span>
+            <span class="st-stat-label">کل کاربران</span>
+        </div>
+    </article>
+    <article class="st-stat-card">
+        <div class="st-stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="st-stat-body">
+            <span class="st-stat-value">@adminCount</span>
+            <span class="st-stat-label">مدیران</span>
+        </div>
+    </article>
+    <article class="st-stat-card">
+        <div class="st-stat-body">
+            <span class="st-stat-value">@Model.Count()</span>
+            <span class="st-stat-label">نتیجه جستجو</span>
+        </div>
+    </article>
+</div>
+
+<section class="st-card st-reveal">
+    <form method="get" class="st-toolbar">
+        <input type="search" name="q" value="@search" placeholder="جستجو: نام، موبایل، ایمیل، شرکت…" class="st-input st-input--search" />
+        <button type="submit" class="st-btn st-btn-primary">جستجو</button>
+        @if (!string.IsNullOrEmpty(search))
+        {
+            <a href="/Admin/Users" class="st-btn st-btn-ghost">پاک کردن</a>
+        }
+    </form>
+
+    <div class="st-table-wrap">
+        <table class="st-table st-table--users">
+            <thead>
+                <tr>
+                    <th>کاربر</th>
+                    <th>تماس</th>
+                    <th>نقش</th>
+                    <th>سفارش</th>
+                    <th>وضعیت</th>
+                    <th>عملیات</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var u in Model)
+            {
+                var r = roles.GetValueOrDefault(u.Id, []);
+                var orders = orderCounts.GetValueOrDefault(u.Id ?? "", 0);
+                var isAdmin = r.Contains("Admin");
+                var initials = GetInitials(u.FullName ?? u.UserName ?? "?");
+                var isLocked = u.LockoutEnd.HasValue && u.LockoutEnd > DateTimeOffset.UtcNow;
+                <tr>
+                    <td>
+                        <div class="nx-user-cell">
+                            <span class="nx-avatar">@initials</span>
+                            <div>
+                                <strong>@(u.FullName ?? "—")</strong>
+                                @if (!string.IsNullOrEmpty(u.CompanyName))
+                                {
+                                    <small class="nx-user-meta">@u.CompanyName</small>
+                                }
+                                <small class="nx-user-meta">@u.UserName · @u.CreatedAt.ToLocalTime().ToString("yyyy/MM/dd")</small>
+                            </div>
+                        </div>
+                    </td>
+                    <td dir="ltr" class="nx-mono">@(u.PhoneNumber ?? u.Email ?? "—")</td>
+                    <td>
+                        @if (isAdmin)
+                        {
+                            <span class="st-badge st-badge-ok">Admin</span>
+                        }
+                        else
+                        {
+                            <span class="st-badge st-badge-muted">Customer</span>
+                        }
+                    </td>
+                    <td><span class="st-badge @(orders > 0 ? "st-badge-ok" : "st-badge-muted")">@orders</span></td>
+                    <td>
+                        @if (isLocked)
+                        {
+                            <span class="st-badge st-badge-warn">قفل</span>
+                        }
+                        else
+                        {
+                            <span class="st-badge st-badge-ok">فعال</span>
+                        }
+                    </td>
+                    <td>
+                        <div class="st-btn-row">
+                            @if (!isAdmin)
+                            {
+                                <form method="post" action="/Admin/Users/SetRole" style="display:inline">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="id" value="@u.Id" />
+                                    <input type="hidden" name="role" value="Admin" />
+                                    <input type="hidden" name="grant" value="true" />
+                                    <button type="submit" class="st-btn st-btn-sm st-btn-ghost" title="ارتقا به Admin">+ Admin</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <form method="post" action="/Admin/Users/SetRole" style="display:inline">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="id" value="@u.Id" />
+                                    <input type="hidden" name="role" value="Admin" />
+                                    <input type="hidden" name="grant" value="false" />
+                                    <button type="submit" class="st-btn st-btn-sm st-btn-ghost">− Admin</button>
+                                </form>
+                            }
+                            <form method="post" action="/Admin/Users/ToggleLock" style="display:inline" onsubmit="return confirm('@(isLocked ? "فعال شود؟" : "قفل شود؟")')">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@u.Id" />
+                                <button type="submit" class="st-btn st-btn-sm @(isLocked ? "st-btn-primary" : "st-btn-ghost")">
+                                    @(isLocked ? "فعال‌سازی" : "قفل")
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</section>
+
+@functions {
+    static string GetInitials(string name)
+    {
+        var parts = name.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        if (parts.Length >= 2) return parts[0][..1] + parts[1][..1];
+        return name.Length >= 1 ? name[..1] : "?";
+    }
+}

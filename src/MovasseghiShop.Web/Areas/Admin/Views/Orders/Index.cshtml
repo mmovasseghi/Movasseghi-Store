@@ -1,0 +1,144 @@
+@model List<Order>
+@using MovasseghiShop.Web.Models.Enums
+@section Head {
+    <link rel="stylesheet" href="~/css/admin-orders.css" asp-append-version="true" />
+}
+@{
+    ViewData["Title"] = "سفارش‌ها";
+    var q = ViewBag.Q as string;
+    var status = ViewBag.Status as string;
+    var counts = ViewBag.Counts as Dictionary<OrderStatus, int> ?? new();
+    var total = counts.Values.Sum();
+    var pending = counts.GetValueOrDefault(OrderStatus.PendingPayment);
+    var cancelled = counts.GetValueOrDefault(OrderStatus.Cancelled);
+    var needsFollowUp = (int)(ViewBag.NeedsFollowUpCount ?? 0);
+    var queue = ViewBag.Queue as string;
+    var listReturnUrl = (Context.Request.Path + Context.Request.QueryString).ToString();
+
+    string Tag(OrderStatus s) => s switch
+    {
+        OrderStatus.Cancelled => "kit-tag--bad",
+        OrderStatus.Completed or OrderStatus.Delivered => "kit-tag--ok",
+        OrderStatus.PendingPayment => "kit-tag--warn",
+        _ => "kit-tag--muted"
+    };
+}
+
+<div class="kit-order-page">
+<div class="kit-stats kit-stagger">
+    <article class="kit-stat">
+        <span class="kit-stat-label">🛒 کل سفارش‌ها</span>
+        <span class="kit-stat-value">@total.ToString("N0")</span>
+    </article>
+    <article class="kit-stat">
+        <span class="kit-stat-label">📋 در صف پیگیری اپراتور</span>
+        <span class="kit-stat-value @(needsFollowUp > 0 ? "kit-stat-value--gold" : "")">@needsFollowUp.ToString("N0")</span>
+        <span class="kit-stat-foot">تا «پیگیری شد» نزنید، در منو هم باز می‌ماند</span>
+    </article>
+    <article class="kit-stat">
+        <span class="kit-stat-label">❌ لغو شده</span>
+        <span class="kit-stat-value">@cancelled.ToString("N0")</span>
+    </article>
+    <article class="kit-stat">
+        <span class="kit-stat-label">📦 در این فهرست</span>
+        <span class="kit-stat-value">@Model.Count.ToString("N0")</span>
+        <span class="kit-stat-foot">آخرین ۴۰۰ سفارش با فیلتر فعلی</span>
+    </article>
+</div>
+
+<div class="kit-toolbar kit-rise kit-order-index-toolbar">
+    <form method="get" action="/Admin/Orders" class="kit-search" data-kit-nobusy>
+        <span class="kit-search-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        </span>
+        <input type="search" name="q" value="@q" class="st-input" placeholder="شماره سفارش، نام، تلفن یا کد تخفیف… (کلید /)" aria-label="جستجوی سفارش" />
+        @if (!string.IsNullOrEmpty(status))
+        {
+            <input type="hidden" name="status" value="@status" />
+        }
+        @if (!string.IsNullOrEmpty(queue))
+        {
+            <input type="hidden" name="queue" value="@queue" />
+        }
+    </form>
+
+    <a class="st-btn st-btn-ghost @(queue == "followup" ? "is-active" : "")" href="/Admin/Orders?queue=followup">
+        صف پیگیری
+        @if (needsFollowUp > 0) { <span class="kit-segment-count">@needsFollowUp</span> }
+    </a>
+
+    <nav class="kit-segment" aria-label="فیلتر وضعیت">
+        <a href="/Admin/Orders" class="@(string.IsNullOrEmpty(status) ? "is-active" : "")">همه <span class="kit-segment-count">@total</span></a>
+        @foreach (OrderStatus s in Enum.GetValues<OrderStatus>())
+        {
+            var key = s.ToString();
+            var n = counts.GetValueOrDefault(s);
+            <a href="/Admin/Orders?status=@key" class="@(status == key ? "is-active" : "")">
+                @OrderStatusLabels.Fa(s)
+                @if (n > 0) { <span class="kit-segment-count">@n</span> }
+            </a>
+        }
+    </nav>
+</div>
+
+<section class="kit-table-card kit-rise">
+    @if (Model.Count == 0)
+    {
+        <div class="kit-empty">
+            <div class="kit-empty-icon" aria-hidden="true">🛒</div>
+            <h3>@(string.IsNullOrEmpty(q) && string.IsNullOrEmpty(status) ? "هنوز سفارشی ثبت نشده" : "سفارشی با این فیلتر پیدا نشد")</h3>
+            <p>وقتی مشتری تسویه را کامل کند، سفارش با اقلام، آدرس و روش پرداخت این‌جا دیده می‌شود.</p>
+        </div>
+    }
+    else
+    {
+        <div class="kit-table-scroll">
+            <table class="kit-table">
+                <thead>
+                    <tr>
+                        <th data-sort>شماره</th>
+                        <th data-sort>مشتری</th>
+                        <th data-sort>وضعیت</th>
+                        <th>پیگیری اپراتور</th>
+                        <th data-sort>کارتن</th>
+                        <th data-sort>مبلغ</th>
+                        <th data-sort>تاریخ</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var o in Model)
+                    {
+                        <tr class="@(OrderStatusLabels.NeedsOperatorFollowUp(o) ? "kit-table-row--accent" : "")">
+                            <td>
+                                <span class="kit-cell-main" dir="ltr">@o.OrderNumber</span>
+                                <span class="kit-cell-sub">@o.Items.Count قلم</span>
+                            </td>
+                            <td>
+                                <span class="kit-cell-main">@o.CustomerName</span>
+                                <a class="kit-cell-sub kit-order-link" dir="ltr" href="tel:@o.Phone">@o.Phone</a>
+                            </td>
+                            <td data-sort-value="@((int)o.Status)">
+                                <span class="kit-tag @Tag(o.Status)">@OrderStatusLabels.Fa(o.Status)</span>
+                            </td>
+                            <td>
+                                @{
+                                    ViewData["FollowUpCompact"] = true;
+                                    ViewData["FollowUpReturnUrl"] = listReturnUrl;
+                                }
+                                <partial name="_OrderFollowUp" model="o" />
+                            </td>
+                            <td class="kit-cell-num" data-sort-value="@o.TotalCartons">@o.TotalCartons.ToString("N0")</td>
+                            <td class="kit-cell-num" data-sort-value="@o.TotalAmount">@SlugHelper.FormatToman(o.TotalAmount)</td>
+                            <td class="kit-cell-num" data-sort-value="@o.CreatedAt.Ticks">@o.CreatedAt.ToLocalTime().ToString("yyyy/MM/dd HH:mm")</td>
+                            <td class="kit-cell-actions">
+                                <a class="st-btn st-btn-ghost st-btn-sm" href="/Admin/Orders/Details/@o.Id">جزئیات</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</section>
+</div>

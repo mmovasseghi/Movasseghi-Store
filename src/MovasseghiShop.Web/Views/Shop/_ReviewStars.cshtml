@@ -1,0 +1,15 @@
+@model (int Rating, bool ShowScore)
+@{
+    var r = Math.Clamp(Model.Rating, 0, 5);
+    var showScore = Model.ShowScore && r > 0;
+}
+<div class="pd-review-stars" dir="ltr" role="img" aria-label="@(r > 0 ? $"{r} از ۵" : "بدون امتیاز")">
+    @for (var s = 1; s <= 5; s++)
+    {
+        <span class="pd-review-stars__item @(s <= r ? "is-on" : "")" aria-hidden="true">★</span>
+    }
+    @if (showScore)
+    {
+        <span class="pd-review-stars__score">@r.ToString("0.#")</span>
+    }
+</div>

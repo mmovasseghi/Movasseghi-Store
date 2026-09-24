@@ -1,0 +1,15 @@
+@model Order
+@{ ViewData["Title"] = "پرداخت Mock"; }
+<div class="section"><div class="container">
+    <div class="form-card">
+        <h1>درگاه پرداخت (Mock)</h1>
+        <p>شماره سفارش: <strong>@Model.OrderNumber</strong></p>
+        <p>مبلغ: <strong>@SlugHelper.FormatToman(Model.TotalAmount)</strong> تومان</p>
+        <form asp-action="Confirm" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="authority" value="@ViewBag.Authority" />
+            <input type="hidden" name="orderNumber" value="@ViewBag.OrderNumber" />
+            <button class="btn btn-primary" type="submit">پرداخت موفق (تست)</button>
+        </form>
+    </div>
+</div></div>

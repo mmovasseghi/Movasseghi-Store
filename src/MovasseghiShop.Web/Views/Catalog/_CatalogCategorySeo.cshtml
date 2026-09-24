@@ -1,0 +1,73 @@
+@model CatalogCategoryLandingViewModel?
+@if (Model != null && Model.HasAnyContent)
+{
+    <section class="catalog-seo" aria-labelledby="catalog-seo-title">
+        <details class="pd-article-fold" data-cat-guide-fold>
+            <summary class="pd-article-fold__summary">
+                <span class="pd-article-fold__icon" aria-hidden="true">📖</span>
+                <span class="pd-article-fold__head-text">
+                    <span class="pd-article-fold__kicker">راهنمای خرید عمده · @Model.Name</span>
+                    <h2 id="catalog-seo-title" class="pd-article-fold__title">توضیحات و نکات انتخاب @Model.Name</h2>
+                </span>
+                <span class="pd-article-fold__badge" data-fold-state="closed">بسته</span>
+                <span class="pd-article-fold__toggle" aria-hidden="true">
+                    <span class="pd-article-fold__chev"></span>
+                </span>
+            </summary>
+            <div class="pd-article-fold__body">
+                <div class="pd-article-fold__prose-wrap catalog-seo-fold-inner">
+                    @if (Model.HasSnippet)
+                    {
+                        <div class="catalog-seo-answer">
+                            <h3>@Model.Name چیست و چطور انتخاب کنیم؟</h3>
+                            <p>@Model.FeaturedSnippet</p>
+                        </div>
+                    }
+
+                    @if (Model.HasProse)
+                    {
+                        <div class="ms-prose pd-prose catalog-seo-body">@Html.Raw(Model.DescriptionHtml)</div>
+                    }
+
+                    @if (Model.HasFaqs)
+                    {
+                        <div class="catalog-seo-faq">
+                            <h3>سوال‌های پرتکرار درباره @Model.Name</h3>
+                            @foreach (var faq in Model.Faqs)
+                            {
+                                <details class="catalog-faq-item">
+                                    <summary>@faq.Question</summary>
+                                    <div class="ms-prose catalog-faq-answer">@Html.Raw(faq.Answer)</div>
+                                </details>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        </details>
+
+        @if (Model.HasFaqs)
+        {
+            <script type="application/ld+json">
+                @Html.Raw(System.Text.Json.JsonSerializer.Serialize(new Dictionary<string, object?>
+                {
+                    ["@context"] = "https://schema.org",
+                    ["@type"] = "FAQPage",
+                    ["mainEntity"] = Model.Faqs.Select(f => new Dictionary<string, object?>
+                    {
+                        ["@type"] = "Question",
+                        ["name"] = f.Question,
+                        ["acceptedAnswer"] = new Dictionary<string, object?>
+                        {
+                            ["@type"] = "Answer",
+                            ["text"] = f.PlainAnswer
+                        }
+                    }).ToList()
+                }, new System.Text.Json.JsonSerializerOptions
+                {
+                    Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+                }))
+            </script>
+        }
+    </section>
+}

@@ -1,0 +1,175 @@
+@model AdminProductReviewEditViewModel
+@using MovasseghiShop.Web.Models.Enums
+@{
+    var review = Model.Review;
+    var storeReplyLabel = AdminProductReviewEditViewModel.StoreReplyDisplayName;
+    ViewData["Title"] = Model.IsRootReview ? "ویرایش نظر" : "ویرایش پاسخ / نظر";
+    var listStatus = Context.Request.Query["status"].ToString();
+    var listQ = Context.Request.Query["q"].ToString();
+}
+
+<form method="post" action="/Admin/ProductReviewsAdmin/Save" data-kit-dirty-guard>
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="Id" value="@review.Id" />
+    <input type="hidden" name="ProductId" value="@review.ProductId" />
+    <input type="hidden" name="listStatus" value="@listStatus" />
+    <input type="hidden" name="listQ" value="@listQ" />
+
+    <div class="kit-toolbar kit-rise">
+        <div class="kit-toolbar-grow">
+            <strong style="font-size:.88rem">@(Model.IsRootReview ? "ویرایش نظر مشتری" : "ویرایش رکورد")</strong>
+            <span class="kit-form-hint" style="margin-top:.15rem">@(review.Product?.Name ?? "محصول")</span>
+        </div>
+        <a class="st-btn st-btn-ghost" href="/Admin/ProductReviewsAdmin?productId=@review.ProductId">بازگشت به فهرست</a>
+        <button type="submit" class="st-btn st-btn-primary">ذخیره نظر</button>
+    </div>
+
+    @if (TempData["Success"] is string okMsg)
+    {
+        <div class="kit-insight kit-insight--ok kit-rise" role="status"><span class="kit-insight-icon">✓</span><div class="kit-insight-body">@okMsg</div></div>
+    }
+    @if (TempData["Error"] is string errMsg)
+    {
+        <div class="kit-insight kit-insight--risk kit-rise" role="alert"><span class="kit-insight-icon">⚠️</span><div class="kit-insight-body">@errMsg</div></div>
+    }
+
+    @if (Model.ParentReview is not null)
+    {
+        <section class="kit-section kit-rise" style="max-width:820px">
+            <div class="kit-section-head">
+                <div>
+                    <h2>نظر اصلی مشتری</h2>
+                    <p>این رکورد پاسخ یا زیرنظر است؛ برای پاسخ فروشگاه به نظر اصلی بروید.</p>
+                </div>
+            </div>
+            <p class="kit-form-hint"><strong>@Model.ParentReview.AuthorDisplayName</strong> — @Model.ParentReview.Body</p>
+            <a class="st-btn st-btn-ghost st-btn-sm" href="/Admin/ProductReviewsAdmin/Edit/@Model.ParentReview.Id">بازگشت به نظر اصلی</a>
+        </section>
+    }
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="kit-insight kit-insight--risk kit-rise">
+            <span class="kit-insight-icon" aria-hidden="true">⚠️</span>
+            <div class="kit-insight-body">
+                <strong>ذخیره نشد</strong>
+                @foreach (var err in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <div>· @err.ErrorMessage</div>
+                }
+            </div>
+        </div>
+    }
+
+    <section class="kit-section kit-rise" style="max-width:820px">
+        <div class="kit-section-head">
+            <div>
+                <h2>متن و وضعیت انتشار</h2>
+                <p>فقط وضعیت «تأیید‌شده» در صفحه محصول و امتیاز Schema استفاده می‌شود.</p>
+            </div>
+        </div>
+
+        @if (review.IsStoreReply)
+        {
+            <p class="kit-form-hint">پاسخ فروشگاه — نام نمایشی در سایت: <strong>@storeReplyLabel</strong></p>
+            <input type="hidden" name="AuthorDisplayName" value="@review.AuthorDisplayName" />
+        }
+        else
+        {
+            <div class="st-field">
+                <label for="AuthorDisplayName">نام / نام مجموعه <span style="color:#fca5a5">*</span></label>
+                <input id="AuthorDisplayName" name="AuthorDisplayName" value="@review.AuthorDisplayName" required class="st-input" maxlength="80" />
+            </div>
+        }
+
+        <div class="kit-form-grid">
+            <div class="st-field">
+                <label for="Rating">امتیاز (۱–۵)</label>
+                <input id="Rating" name="Rating" type="number" min="0" max="5" value="@review.Rating" class="st-input" style="max-width:120px" />
+                <span class="kit-form-hint">۰ برای پاسخ فروشگاه بدون ستاره.</span>
+            </div>
+            <div class="st-field">
+                <label for="Status">وضعیت</label>
+                <select id="Status" name="Status" class="st-input">
+                    <option value="@((int)ProductReviewStatus.Pending)" selected="@(review.Status == ProductReviewStatus.Pending)">در انتظار تأیید</option>
+                    <option value="@((int)ProductReviewStatus.Approved)" selected="@(review.Status == ProductReviewStatus.Approved)">تأیید‌شده — نمایش در سایت</option>
+                    <option value="@((int)ProductReviewStatus.Rejected)" selected="@(review.Status == ProductReviewStatus.Rejected)">رد‌شده</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="st-field">
+            <label for="Body">متن @(review.IsStoreReply ? "پاسخ" : "نظر") <span style="color:#fca5a5">*</span></label>
+            <textarea id="Body" name="Body" rows="7" required class="st-input" maxlength="2000">@review.Body</textarea>
+        </div>
+
+        @if (review.IsSeoSuggested)
+        {
+            <p class="kit-form-hint">این نظر توسط Auto-Fix SEO پیشنهاد شده است.</p>
+        }
+    </section>
+</form>
+
+@if (Model.IsRootReview)
+{
+    <section class="kit-section kit-rise" id="store-reply" style="max-width:820px;margin-top:1rem">
+        <div class="kit-section-head">
+            <div>
+                <h2>پاسخ فروشگاه (@storeReplyLabel)</h2>
+                <p>اگر مشتری در نظرش سوال پرسیده، اینجا جواب دهید. پاسخ تأیید‌شده زیر همان نظر در صفحه محصول نمایش داده می‌شود.</p>
+            </div>
+        </div>
+
+        @foreach (var reply in Model.StoreReplies)
+        {
+            <article class="kit-reply-card kit-rise" style="margin-bottom:1rem;padding:1rem;border:1px solid rgba(255,255,255,.08);border-radius:12px;background:rgba(0,0,0,.15)">
+                <div class="kit-section-head" style="margin-bottom:.65rem">
+                    <span class="kit-tag @(reply.Status == ProductReviewStatus.Approved ? "kit-tag--ok" : reply.Status == ProductReviewStatus.Rejected ? "kit-tag--bad" : "kit-tag--warn")">
+                        @(reply.Status == ProductReviewStatus.Approved ? "منتشر در سایت" : reply.Status == ProductReviewStatus.Rejected ? "رد‌شده" : "در انتظار تأیید")
+                    </span>
+                    <span class="kit-form-hint" dir="ltr">@reply.CreatedAt.ToLocalTime().ToString("yyyy/MM/dd HH:mm")</span>
+                </div>
+                <form method="post" action="/Admin/ProductReviewsAdmin/SaveStoreReply" class="kit-reply-form">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="parentReviewId" value="@review.Id" />
+                    <input type="hidden" name="replyId" value="@reply.Id" />
+                    <div class="st-field">
+                        <label>متن پاسخ</label>
+                        <textarea name="body" rows="5" required class="st-input" maxlength="2000">@reply.Body</textarea>
+                    </div>
+                    <label class="kit-check" style="display:flex;align-items:center;gap:.4rem;margin:.5rem 0 .75rem;font-size:.82rem">
+                        <input type="checkbox" name="publish" value="true" @(reply.Status == ProductReviewStatus.Approved ? "checked" : "") />
+                        انتشار در سایت (تأیید‌شده)
+                    </label>
+                    <div style="display:flex;flex-wrap:wrap;gap:.5rem">
+                        <button type="submit" class="st-btn st-btn-primary st-btn-sm">ذخیره پاسخ</button>
+                    </div>
+                </form>
+                <form method="post" action="/Admin/ProductReviewsAdmin/DeleteStoreReply" style="margin-top:.5rem" onsubmit="return confirm('این پاسخ حذف شود؟');">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="replyId" value="@reply.Id" />
+                    <input type="hidden" name="parentReviewId" value="@review.Id" />
+                    <button type="submit" class="st-btn st-btn-ghost st-btn-sm" style="color:#fca5a5">حذف پاسخ</button>
+                </form>
+            </article>
+        }
+
+        <article class="kit-reply-card kit-rise" style="padding:1rem;border:1px dashed rgba(82,183,136,.35);border-radius:12px">
+            <h3 style="margin:0 0 .5rem;font-size:.9rem">@(Model.StoreReplies.Count > 0 ? "پاسخ جدید" : "ثبت پاسخ")</h3>
+            <p class="kit-form-hint" style="margin-bottom:.75rem">نام نمایشی در سایت: <strong>@storeReplyLabel</strong></p>
+            <form method="post" action="/Admin/ProductReviewsAdmin/SaveStoreReply">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="parentReviewId" value="@review.Id" />
+                <div class="st-field">
+                    <label for="newReplyBody">متن پاسخ به مشتری</label>
+                    <textarea id="newReplyBody" name="body" rows="6" required class="st-input" maxlength="2000" placeholder="مثلاً: سلام — برای سفارش عمده حداقل ۱۰٬۰۰۰٬۰۰۰ تومان است؛ هماهنگی بارگیری با شماره واحد فروش..."></textarea>
+                </div>
+                <label class="kit-check" style="display:flex;align-items:center;gap:.4rem;margin:.5rem 0 .75rem;font-size:.82rem">
+                    <input type="checkbox" name="publish" value="true" checked />
+                    بلافاصله در سایت منتشر شود (تأیید‌شده)
+                </label>
+                <button type="submit" class="st-btn st-btn-primary">ثبت پاسخ فروشگاه</button>
+            </form>
+        </article>
+    </section>
+}

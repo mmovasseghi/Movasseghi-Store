@@ -1,0 +1,6 @@
+@model int
+@{
+    var count = Model;
+    var label = count > 99 ? "99+" : count.ToString();
+}
+<span class="ms-cart-badge @(count > 0 ? "is-visible" : "")" data-cart-badge @(count <= 0 ? "hidden" : "") aria-hidden="@(count <= 0)">@label</span>

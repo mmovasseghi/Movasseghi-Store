@@ -1,0 +1,143 @@
+@model List<PurchaseInquiry>
+@{
+    ViewData["Title"] = "استعلام قیمت";
+    var q = ViewBag.Q as string;
+    var status = ViewBag.Status as string;
+    var now = DateTime.UtcNow;
+    var returnUrl = Context.Request.Path + Context.Request.QueryString;
+}
+
+<div class="kit-stats kit-stagger">
+    <article class="kit-stat">
+        <span class="kit-stat-label">📥 در انتظار پیگیری</span>
+        <span class="kit-stat-value @(ViewBag.OpenCount > 0 ? "kit-stat-value--gold" : "kit-stat-value--ok")">@ViewBag.OpenCount.ToString("N0")</span>
+        <span class="kit-stat-foot">هر مورد یک سرنخ فروش داغ است</span>
+    </article>
+    <article class="kit-stat">
+        <span class="kit-stat-label">✅ پیگیری‌شده</span>
+        <span class="kit-stat-value">@ViewBag.HandledCount.ToString("N0")</span>
+    </article>
+    <article class="kit-stat">
+        <span class="kit-stat-label">📦 کارتن درخواستی باز</span>
+        <span class="kit-stat-value">@ViewBag.TotalCartons.ToString("N0")</span>
+        <span class="kit-stat-foot">مجموع تعداد کارتن در استعلام‌های پیگیری‌نشده</span>
+    </article>
+</div>
+
+<div class="kit-toolbar kit-rise">
+    <form method="get" action="/Admin/Inquiries" class="kit-search" data-kit-nobusy>
+        <span class="kit-search-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        </span>
+        <input type="search" name="q" value="@q" class="st-input" placeholder="نام، شماره تماس یا محصول… (کلید /)" aria-label="جستجوی استعلام" />
+        @if (!string.IsNullOrEmpty(status))
+        {
+            <input type="hidden" name="status" value="@status" />
+        }
+    </form>
+
+    <nav class="kit-segment" aria-label="فیلتر وضعیت">
+        <a href="/Admin/Inquiries" class="@(string.IsNullOrEmpty(status) ? "is-active" : "")">همه</a>
+        <a href="/Admin/Inquiries?status=open" class="@(status == "open" ? "is-active" : "")">
+            باز <span class="kit-segment-count">@ViewBag.OpenCount</span>
+        </a>
+        <a href="/Admin/Inquiries?status=handled" class="@(status == "handled" ? "is-active" : "")">
+            پیگیری‌شده <span class="kit-segment-count">@ViewBag.HandledCount</span>
+        </a>
+    </nav>
+</div>
+
+<section class="kit-table-card kit-rise">
+    @if (Model.Count == 0)
+    {
+        <div class="kit-empty">
+            <div class="kit-empty-icon" aria-hidden="true">📥</div>
+            <h3>@(string.IsNullOrEmpty(q) && string.IsNullOrEmpty(status) ? "هنوز استعلامی ثبت نشده" : "موردی با این فیلتر پیدا نشد")</h3>
+            <p>
+                وقتی بازدیدکننده روی «استعلام قیمت» صفحه محصول کلیک کند، درخواستش این‌جا می‌نشیند.
+                در گزارش ترافیک می‌توانید ببینید چند نفر فرم را باز کردند ولی ثبت نکردند.
+            </p>
+            <a class="st-btn st-btn-ghost" href="/Admin/Reports/Traffic">دیدن قیف تبدیل</a>
+        </div>
+    }
+    else
+    {
+        <div class="kit-table-scroll">
+            <table class="kit-table">
+                <thead>
+                    <tr>
+                        <th data-sort>مشتری</th>
+                        <th data-sort>محصول</th>
+                        <th data-sort>تعداد کارتن</th>
+                        <th data-sort>زمان</th>
+                        <th data-sort>وضعیت</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var i in Model)
+                    {
+                        var age = now - i.CreatedAt;
+                        var stale = !i.IsHandled && age.TotalHours > 24;
+                        <tr class="@(i.IsHandled ? "is-dim" : "")">
+                            <td>
+                                <span class="kit-cell-main">@i.CustomerName</span>
+                                <a class="kit-cell-sub" dir="ltr" href="tel:@i.Phone">@i.Phone</a>
+                            </td>
+                            <td>
+                                <span class="kit-cell-main">@i.Product.Name</span>
+                                @if (!string.IsNullOrWhiteSpace(i.Notes))
+                                {
+                                    <span class="kit-cell-sub">«@i.Notes»</span>
+                                }
+                            </td>
+                            <td class="kit-cell-num" data-sort-value="@(i.QuantityCartons ?? 0)">
+                                @(i.QuantityCartons?.ToString("N0") ?? "—")
+                            </td>
+                            <td data-sort-value="@i.CreatedAt.Ticks">
+                                <span class="kit-cell-main">@i.CreatedAt.ToLocalTime().ToString("yyyy/MM/dd HH:mm")</span>
+                                @if (stale)
+                                {
+                                    <span class="kit-cell-sub" style="color:#fca5a5">
+                                        @((int)age.TotalHours) ساعت بدون پاسخ
+                                    </span>
+                                }
+                            </td>
+                            <td data-sort-value="@(i.IsHandled ? 1 : 0)">
+                                @if (i.IsHandled)
+                                {
+                                    <span class="kit-tag kit-tag--ok">پیگیری‌شده</span>
+                                }
+                                else if (stale)
+                                {
+                                    <span class="kit-tag kit-tag--bad">معطل</span>
+                                }
+                                else
+                                {
+                                    <span class="kit-tag kit-tag--warn">باز</span>
+                                }
+                            </td>
+                            <td class="kit-cell-actions">
+                                <a class="st-btn st-btn-primary st-btn-sm" href="tel:@i.Phone">تماس</a>
+                                <form method="post" action="/Admin/Inquiries/ToggleHandled/@i.Id" style="display:inline">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="returnUrl" value="@returnUrl" />
+                                    <button type="submit" class="st-btn st-btn-ghost st-btn-sm">
+                                        @(i.IsHandled ? "برگشت به باز" : "پیگیری شد")
+                                    </button>
+                                </form>
+                                <form method="post" action="/Admin/Inquiries/Delete/@i.Id" style="display:inline"
+                                      data-kit-confirm="استعلام «<strong>@i.CustomerName</strong>» حذف می‌شود."
+                                      data-kit-confirm-title="حذف استعلام"
+                                      data-kit-confirm-ok="حذف کن">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="st-btn st-btn-ghost st-btn-sm">حذف</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</section>

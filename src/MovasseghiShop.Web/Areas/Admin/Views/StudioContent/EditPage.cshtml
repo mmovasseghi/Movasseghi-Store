@@ -1,0 +1,41 @@
+@model MovasseghiShop.Web.Models.Entities.CmsPage
+@using MovasseghiShop.Web.Services
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "ویرایش " + Model.Key;
+    ViewData["HeroTitle"] = Model.Key;
+    ViewData["HeroSubtitle"] = Model.Title;
+    ViewData["HeroBadge"] = "ویرایش صفحه";
+    var previewUrl = CmsPreviewUrls.ForPageKey(Model.Key) ?? "/";
+}
+
+@section Head {
+    <link rel="stylesheet" href="~/css/cms-preview.css" asp-append-version="true" />
+}
+
+<partial name="_AdminHero" />
+
+<div class="st-edit-grid st-edit-grid--cms st-reveal">
+<div class="st-cms-form-col">
+<form method="post" class="st-panel" id="cms-page-form">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="Key" value="@Model.Key" />
+    <div class="st-field"><label>عنوان</label><input name="Title" value="@Model.Title" class="st-input" /></div>
+    <div class="st-field"><label>Meta Title</label><input name="MetaTitle" value="@Model.MetaTitle" class="st-input" /></div>
+    <div class="st-field"><label>Meta Description</label><textarea name="MetaDescription" rows="2" class="st-input">@Model.MetaDescription</textarea></div>
+    <div class="st-field"><label>محتوا</label>
+        @{ ViewData["EditorContent"] = Model.Content; ViewData["FieldName"] = "Content"; }
+        <partial name="_TipTapEditor" model="@("page-content")" />
+    </div>
+    <div class="st-btn-row" style="margin-top:1rem">
+        <button type="submit" class="st-btn st-btn-primary">ذخیره</button>
+        <a href="/Admin/StudioContent/Pages" class="st-btn st-btn-ghost">← بازگشت</a>
+    </div>
+</form>
+</div>
+<partial name="_CmsLivePreview" model="@previewUrl" view-data="@(new ViewDataDictionary(ViewData) { ["PreviewTitle"] = $"پیش‌نمایش {Model.Key}", ["PreviewHint"] = "نمای دسکتاپ — بعد از ذخیره، ↻ را بزنید." })" />
+</div>
+
+@section Scripts {
+    <script src="~/js/cms-preview.js" asp-append-version="true"></script>
+}

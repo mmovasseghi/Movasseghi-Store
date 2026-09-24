@@ -1,0 +1,112 @@
+@model MovasseghiShop.Web.Models.Entities.GrowthReport
+@using System.Text.Json
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = Model.Title;
+    ViewData["HeroTitle"] = Model.Title;
+    ViewData["HeroSubtitle"] = Model.CreatedAt.ToLocalTime().ToString("yyyy/MM/dd HH:mm");
+    ViewData["HeroBadge"] = "گزارش هفتگی";
+
+    double avgSeo = 0, authority = 0;
+    int publishReady = 0, blocked = 0, top10 = 0;
+    try
+    {
+        if (!string.IsNullOrWhiteSpace(Model.MetricsJson))
+        {
+            using var doc = JsonDocument.Parse(Model.MetricsJson);
+            var root = doc.RootElement;
+            if (root.TryGetProperty("avgSeo", out var a)) avgSeo = a.GetDouble();
+            if (root.TryGetProperty("publishReady", out var p)) publishReady = p.GetInt32();
+            if (root.TryGetProperty("blocked", out var b)) blocked = b.GetInt32();
+            if (root.TryGetProperty("top10", out var t)) top10 = t.GetInt32();
+            if (root.TryGetProperty("authorityScore", out var auth)) authority = auth.GetDouble();
+        }
+    }
+    catch { /* گزارش‌های قدیمی */ }
+}
+
+<partial name="_AdminHero" />
+
+<section class="kit-stats kit-stagger st-reveal">
+    <article class="kit-stat">
+        <span class="kit-stat-label">میانگین SEO محصولات</span>
+        <span class="kit-stat-value @(avgSeo >= 90 ? "kit-stat-value--ok" : "kit-stat-value--gold")">@avgSeo.ToString("0")</span>
+        <span class="kit-stat-foot">از ۱۰۰</span>
+    </article>
+    <article class="kit-stat">
+        <span class="kit-stat-label">آماده انتشار</span>
+        <span class="kit-stat-value kit-stat-value--ok">@publishReady</span>
+    </article>
+    <article class="kit-stat">
+        <span class="kit-stat-label">نیاز به کار</span>
+        <span class="kit-stat-value @(blocked > 0 ? "kit-stat-value--gold" : "kit-stat-value--ok")">@blocked</span>
+    </article>
+    <article class="kit-stat">
+        <span class="kit-stat-label">رتبه تاپ ۱۰</span>
+        <span class="kit-stat-value">@top10</span>
+    </article>
+    <article class="kit-stat">
+        <span class="kit-stat-label">اعتبار E-E-A-T</span>
+        <span class="kit-stat-value">@(authority.ToString("0"))٪</span>
+    </article>
+</section>
+
+@if (avgSeo > 0)
+{
+    <section class="kit-section st-reveal">
+        <h2 style="margin-top:0">نمودار خلاصه</h2>
+        <div class="kit-bar-chart">
+            <div class="kit-bar-row">
+                <span>SEO محصولات</span>
+                <div class="kit-bar-track"><div class="kit-bar-fill" style="width:@(Math.Min(100, avgSeo))%"></div></div>
+                <strong>@avgSeo.ToString("0")</strong>
+            </div>
+            <div class="kit-bar-row">
+                <span>اعتبار E-E-A-T</span>
+                <div class="kit-bar-track"><div class="kit-bar-fill kit-bar-fill--gold" style="width:@(Math.Min(100, authority))%"></div></div>
+                <strong>@(authority.ToString("0"))٪</strong>
+            </div>
+        </div>
+    </section>
+}
+
+<section class="kit-section st-reveal">
+    <h2 style="margin-top:0">جزئیات گزارش</h2>
+    <div class="kit-report-body">
+        @foreach (var line in (Model.BodyMarkdown ?? "").Split('\n'))
+        {
+            var t = line.Trim();
+            if (t.StartsWith("# "))
+            {
+                <h2>@t[2..]</h2>
+            }
+            else if (t.StartsWith("## "))
+            {
+                <h3>@t[3..]</h3>
+            }
+            else if (t.StartsWith("- "))
+            {
+                <p class="kit-report-li">@t[2..]</p>
+            }
+            else if (!string.IsNullOrWhiteSpace(t))
+            {
+                <p>@t</p>
+            }
+        }
+    </div>
+</section>
+
+<p class="st-reveal"><a href="/Admin/StudioContent/Reports" class="st-btn st-btn-ghost">← بازگشت به لیست گزارش‌ها</a></p>
+
+<style>
+.kit-bar-chart { display: grid; gap: .65rem; }
+.kit-bar-row { display: grid; grid-template-columns: 8rem 1fr 3rem; gap: .5rem; align-items: center; font-size: .84rem; }
+.kit-bar-track { height: 10px; border-radius: 999px; background: var(--nx-bg-2); overflow: hidden; }
+.kit-bar-fill { height: 100%; background: linear-gradient(90deg, var(--nx-green), #3ecf8e); border-radius: 999px; }
+.kit-bar-fill--gold { background: linear-gradient(90deg, var(--ms-gold), #e8c96a); }
+.kit-report-body { line-height: 1.85; font-size: .9rem; }
+.kit-report-body h2 { margin: 1rem 0 .5rem; font-size: 1.05rem; }
+.kit-report-body h3 { margin: .85rem 0 .35rem; font-size: .92rem; color: var(--ms-gold); }
+.kit-report-li { margin: .25rem 0; padding-inline-start: 1rem; position: relative; }
+.kit-report-li::before { content: "•"; position: absolute; inset-inline-start: 0; color: var(--nx-green); }
+</style>

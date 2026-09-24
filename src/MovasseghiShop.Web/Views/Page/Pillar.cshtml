@@ -1,0 +1,9 @@
+@model CmsPage
+@{
+    ViewData["Title"] = Model.MetaTitle ?? Model.Title;
+    ViewData["MetaDescription"] = Model.MetaDescription;
+}
+<div class="section"><div class="container">
+    <h1>@Model.Title</h1>
+    <div class="form-card">@Html.Raw(Model.Content)</div>
+</div></div>

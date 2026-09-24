@@ -1,0 +1,364 @@
+/*
+ * Movasseghi — Mobile UX & Gestalt layer
+ * Gestalt: Proximity, Similarity, Common Region, Figure-Ground, Prägnanz, Uniform Connectedness
+ * Laws of UX: Fitts, Hick, Miller/Chunking, Von Restorff, Doherty, Jakob, Serial Position, Selective Attention
+ * NOTE: Drawer/menu visual design intentionally untouched — focus-visible only for a11y.
+ */
+
+@media (max-width: 767px) {
+  :root {
+    --ux-touch: 44px;
+    --ux-touch-lg: 48px;
+    --ux-gap-section: 1.35rem;
+    --ux-gap-group: 0.75rem;
+    --ux-gap-item: 0.4rem;
+  }
+
+  /* ── Gestalt: Figure-Ground — محتوا از پس‌زمینه جدا ── */
+  .ms-product,
+  .catalog-toolbar,
+  .empty-state,
+  .ms-search-miss,
+  .ms-order-card,
+  .ms-cart-page-items,
+  .ms-cart-page-footer,
+  .product-sheet,
+  .inquiry-section,
+  .related-section,
+  .form-card {
+    background: var(--c-white);
+  }
+
+  /* ── Gestalt: Common Region — گروه‌بندی بصری ── */
+  .ms-account-tabs,
+  .ms-addr-form-col,
+  .ms-addr-map-col {
+    border: 1px solid rgba(61, 90, 76, 0.1);
+    border-radius: var(--r-lg);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.85) inset, var(--shadow);
+  }
+
+  .ms-addr-form-col,
+  .ms-addr-map-col {
+    padding: 1rem;
+    background: var(--c-white);
+  }
+
+  .ms-addr-layout {
+    gap: var(--ux-gap-group);
+  }
+
+  /* ── Gestalt: Proximity — فاصله بخش‌ها vs آیتم‌های مرتبط ── */
+  .catalog-main > * + * {
+    margin-top: var(--ux-gap-group);
+  }
+
+  .ms-product-grid {
+    gap: var(--ux-gap-group);
+  }
+
+  .ms-product-body {
+    padding: 0.7rem 0.75rem 0.8rem;
+  }
+
+  .ms-product-meta {
+    gap: var(--ux-gap-item);
+    margin-bottom: 0.4rem;
+  }
+
+  .ms-account-form-grid {
+    gap: var(--ux-gap-group);
+  }
+
+  .ms-section-head,
+  .ms-feat-head,
+  .ms-offers-head,
+  .ms-trending-head,
+  .ms-cat-head {
+    margin-bottom: var(--ux-gap-group);
+  }
+
+  /* ── Hick's Law + Miller: Chunking — نوار کاتالوگ ساده‌تر ── */
+  .catalog-toolbar {
+    flex-wrap: wrap;
+    gap: var(--ux-gap-item);
+    padding: 0.75rem 0.85rem;
+  }
+
+  .catalog-count {
+    flex: 1 1 auto;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-bottom: none;
+    font-weight: 800;
+  }
+
+  .catalog-sort {
+    display: none !important;
+  }
+
+  .catalog-toolbar {
+    justify-content: flex-start;
+  }
+
+  /* ── Fitts's Law — اهداف لمسی بزرگ‌تر ── */
+  .ms-tab {
+    min-height: var(--ux-touch);
+    padding: 0.4rem 0.15rem;
+    justify-content: center;
+  }
+
+  .ms-tab-fab {
+    width: 58px;
+    height: 58px;
+  }
+
+  .ms-search {
+    min-height: var(--ux-touch-lg);
+  }
+
+  /* Search — فقط حلقه pill بیرونی؛ بدون مستطیل border داخل input */
+  .ms-search input {
+    border: 0 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0;
+  }
+
+  .ms-search input:focus,
+  .ms-search input:focus-visible,
+  .ms-search input:active {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .ms-search input[type="search"]::-webkit-search-decoration,
+  .ms-search input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .ms-search:focus-within,
+  .ms-search.is-focused {
+    border-color: var(--c-primary);
+    box-shadow: 0 0 0 3px rgba(61, 90, 76, 0.1);
+  }
+
+  .ms-icon-btn {
+    min-width: var(--ux-touch);
+    min-height: var(--ux-touch);
+  }
+
+  .page-link {
+    min-width: var(--ux-touch);
+    min-height: var(--ux-touch);
+    display: inline-grid;
+    place-items: center;
+  }
+
+  .mf-btn {
+    min-height: var(--ux-touch-lg);
+    padding: 0.85rem 0.5rem;
+  }
+
+  .filter-check {
+    min-height: var(--ux-touch);
+    padding: 0.4rem 0;
+  }
+
+  .ms-addr-default-check {
+    min-height: var(--ux-touch);
+  }
+
+  .ms-addr-default-check input {
+    width: 20px;
+    height: 20px;
+  }
+
+  .ms-account-tab {
+    min-height: 36px;
+    padding: 0.55rem 0.95rem;
+  }
+
+  .catalog-sort select,
+  .form-control,
+  .ms-field-input {
+    min-height: var(--ux-touch-lg);
+  }
+
+  .btn,
+  .ms-auth-btn,
+  .ms-addr-map-btn {
+    min-height: var(--ux-touch);
+  }
+
+  .ms-qty-stepper button,
+  .ms-qty-btn,
+  .ms-cart-remove {
+    min-width: var(--ux-touch);
+    min-height: var(--ux-touch);
+  }
+
+  .ms-search-suggestions li {
+    min-height: 52px;
+  }
+
+  /* ── Gestalt: Similarity — المان‌های تعاملی یکدست ── */
+  .btn,
+  .page-link,
+  .mf-btn,
+  .ms-tab,
+  .ms-addr-map-btn,
+  .ms-account-tab,
+  .ms-auth-link {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .btn:active,
+  .page-link:active,
+  .mf-btn:active,
+  .ms-addr-map-btn:active,
+  .ms-account-tab:active:not(.is-active) {
+    transform: scale(0.98);
+  }
+
+  /* ── Von Restorff — CTA اصلی برجسته (بدون منو) ── */
+  .btn-primary,
+  .ms-auth-btn--solid,
+  .ms-hero-cta:not(.ms-hero-cta-outline),
+  .ms-cart-empty-btn {
+    box-shadow: 0 8px 22px rgba(36, 56, 48, 0.2);
+  }
+
+  /* ── Serial Position — اولین آیتم لیست کمی برجسته‌تر ── */
+  .ms-product-grid .ms-product:first-child {
+    border-color: rgba(61, 90, 76, 0.2);
+  }
+
+  .ms-address-card--saved:first-child {
+    border-width: 1.5px;
+    border-color: rgba(61, 90, 76, 0.15);
+  }
+
+  /* ── Goal-Gradient — پیشرفت سفارش واضح‌تر ── */
+  .ms-order-step.is-current .ms-order-step-label {
+    font-weight: 900;
+    color: var(--c-primary-dark);
+  }
+
+  .ms-order-step.is-done + .ms-order-step.is-current .ms-order-dot {
+    box-shadow: 0 0 0 4px rgba(201, 168, 76, 0.2);
+  }
+
+  /* ── Selective Attention — متن ثانویه کم‌رنگ‌تر ── */
+  .breadcrumb,
+  .ms-addr-intro,
+  .ms-addr-map-hint,
+  .page-title + .breadcrumb {
+    color: var(--c-text-2);
+    font-size: 0.76rem;
+  }
+
+  .page-title {
+    margin-bottom: 0.35rem;
+  }
+
+  /* ── Prägnanz — حالت خالی ساده و خوانا ── */
+  .empty-state {
+    padding: 1.75rem 1.15rem;
+  }
+
+  .empty-state h2 {
+    font-size: 1rem;
+    margin: 0 0 0.35rem;
+  }
+
+  .empty-state p {
+    font-size: 0.78rem;
+    color: var(--c-text-2);
+    max-width: 30ch;
+    margin: 0 auto 1rem;
+    line-height: 1.65;
+  }
+
+  /* ── Uniform Connectedness — فیلتر موبایل ── */
+  .filter-sheet-panel .filter-group--sort-mobile {
+    margin-bottom: 0.15rem;
+    padding-bottom: 0.7rem;
+    border-bottom: 1px dashed var(--c-border);
+  }
+
+  .filter-sheet-panel .filter-group--sort-mobile + .filter-group {
+    padding-top: 0;
+    border-top: none;
+  }
+
+  .filter-sheet-panel .filter-group + .filter-group {
+    padding-top: 0.65rem;
+    border-top: 1px dashed var(--c-border);
+  }
+
+  .filter-group legend {
+    color: var(--c-primary-dark);
+    margin-bottom: 0.5rem;
+  }
+
+  /* ── Jakob's Law — تب‌بار پایین آشنا ── */
+  .ms-tabbar {
+    padding-top: 0.35rem;
+  }
+
+  .ms-tab.is-active {
+    font-weight: 900;
+  }
+
+  .ms-tab.is-active svg {
+    stroke-width: 2.2;
+  }
+
+  /* ── Doherty — بازخورد سریع (<400ms feel) ── */
+  button,
+  a,
+  .ms-tab,
+  .page-link,
+  .filter-check,
+  .ms-product-link {
+    transition: transform 0.16s var(--ease), opacity 0.16s, box-shadow 0.16s, border-color 0.16s;
+  }
+
+  /* ── Focus — کیبورد/دسترسی (بدون تغییر ظاهر لمسی) ── */
+  .ms-tab:focus-visible,
+  .btn:focus-visible,
+  .page-link:focus-visible,
+  .ms-account-tab:focus-visible,
+  .ms-field-input:focus-visible,
+  .form-control:focus-visible {
+    outline: 2px solid var(--c-primary);
+    outline-offset: 2px;
+  }
+
+  /* منو: فقط focus-visible — طراحی بصری دست نخورده */
+  .ms-drawer-link:focus-visible,
+  .ms-drawer-close:focus-visible,
+  .ms-drawer-quick-btn:focus-visible,
+  .ms-drawer-cat:focus-visible,
+  .ms-drawer-cat-all:focus-visible,
+  .ms-drawer-cta:focus-visible {
+    outline: 2px solid var(--c-primary);
+    outline-offset: 2px;
+  }
+}
+
+@media (max-width: 767px) and (prefers-reduced-motion: reduce) {
+  .btn:active,
+  .page-link:active,
+  .mf-btn:active,
+  .ms-addr-map-btn:active,
+  .ms-account-tab:active {
+    transform: none;
+  }
+}

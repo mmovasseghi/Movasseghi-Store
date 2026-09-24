@@ -1,0 +1,65 @@
+@model List<MovasseghiShop.Web.Models.Entities.AuthorityCheckItem>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "اعتبار E-E-A-T";
+    var done = Model.Count(i => i.IsDone);
+    var pct = Model.Count > 0 ? done * 100 / Model.Count : 0;
+    ViewData["HeroTitle"] = "🛡️ اعتبار و اعتماد (E-E-A-T)";
+    ViewData["HeroSubtitle"] = $"پیشرفت: {done} از {Model.Count} مورد ({pct}٪)";
+    ViewData["HeroBadge"] = "E-E-A-T";
+}
+
+<partial name="_AdminHero" />
+
+<section class="st-panel st-reveal" style="margin-bottom:1rem">
+    <h2 style="margin-top:0">این بخش چیست؟</h2>
+    <p class="st-panel-desc" style="margin:0;line-height:1.8">
+        <strong>E-E-A-T</strong> مخفف Experience، Expertise، Authoritativeness و Trustworthiness است —
+        یعنی گوگل می‌خواهد ببیند فروشگاه شما <em>واقعی</em>، <em>متخصص</em> و <em>قابل اعتماد</em> است.
+        این چک‌لیست کارهایی است که <strong>شما</strong> (نه موتور Auto-Fix) باید انجام دهید:
+        پروفایل گوگل، شبکه‌های اجتماعی، ثبت در Search Console و…
+        هر مورد انجام شود، درصد اعتبار بالا می‌رود و در گزارش هفتگی Growth هم ثبت می‌شود.
+    </p>
+</section>
+
+<section class="kit-stats kit-stagger" style="margin-bottom:1rem">
+    <article class="kit-stat">
+        <span class="kit-stat-label">پیشرفت کلی</span>
+        <span class="kit-stat-value @(pct >= 80 ? "kit-stat-value--ok" : "kit-stat-value--gold")">@(pct)%</span>
+    </article>
+    <article class="kit-stat">
+        <span class="kit-stat-label">انجام‌شده</span>
+        <span class="kit-stat-value kit-stat-value--ok">@done</span>
+    </article>
+    <article class="kit-stat">
+        <span class="kit-stat-label">باقی‌مانده</span>
+        <span class="kit-stat-value">@(Model.Count - done)</span>
+    </article>
+</section>
+
+<div class="kit-progress kit-rise" style="margin-bottom:1rem;height:10px;border-radius:999px;background:var(--nx-bg-2);overflow:hidden">
+    <div style="width:@(pct)%;height:100%;background:linear-gradient(90deg,var(--nx-green),var(--ms-gold));border-radius:999px"></div>
+</div>
+
+<section class="st-panel st-reveal">
+    @foreach (var item in Model)
+    {
+        <form method="post" action="/Admin/StudioContent/ToggleAuthority" class="st-action" style="margin-bottom:.5rem">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="id" value="@item.Id" />
+            <input type="hidden" name="isDone" value="@(!item.IsDone)" />
+            <button type="submit" class="st-btn st-btn-ghost st-btn-sm" title="@(item.IsDone ? "انجام شده — کلیک برای لغو" : "انجام نشده — کلیک برای تأیید")">@(item.IsDone ? "✅" : "⬜")</button>
+            <div class="st-action-body">
+                <strong class="st-action-title">@item.Title</strong>
+                @if (!string.IsNullOrEmpty(item.Description))
+                {
+                    <small class="st-action-desc">@item.Description</small>
+                }
+                @if (!string.IsNullOrEmpty(item.HelpUrl))
+                {
+                    <div class="st-action-foot"><a href="@item.HelpUrl" target="_blank" rel="noopener" class="st-btn st-btn-ghost st-btn-sm">راهنما ↗</a></div>
+                }
+            </div>
+        </form>
+    }
+</section>

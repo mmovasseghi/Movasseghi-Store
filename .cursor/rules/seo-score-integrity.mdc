@@ -1,0 +1,12 @@
+---
+description: SEO/AEO scores must be honest — no inflated display totals
+alwaysApply: true
+---
+
+# SEO score integrity
+
+- **Never** show an overall SEO score higher than **ranking readiness** or **competitive strength** when those are shown alongside it.
+- `OverallScore` / `ResolveDisplayOverall` = `min(weighted dimension average, RankingReadiness, CompetitiveStrength)` plus caps when SERP is not live or publish gate fails — **not** `min(single dimension chip)`; dimension scores are shown separately in the grid.
+- Grades like «استثنایی» require live SERP data plus readiness and competitive thresholds — not dimension averages alone.
+- Do not manipulate scores to pass publish gates or please UI; fix the underlying content/rules instead.
+- If data is missing (SERP, GSC, CWV), say so in the verdict — do not fabricate numbers.

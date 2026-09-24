@@ -1,0 +1,54 @@
+@model string?
+@{
+    ViewData["Title"] = "ورود مدیر";
+    Layout = null;
+    var returnUrl = Model ?? Context.Request.Query["returnUrl"].FirstOrDefault();
+}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#080b0a" />
+    <title>ورود — پنل مدیریت موثقی</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/admin-studio.css" asp-append-version="true" />
+</head>
+<body class="st-login-body">
+<div class="nx-ambient" aria-hidden="true">
+    <div class="nx-orb nx-orb--1"></div>
+    <div class="nx-orb nx-orb--2"></div>
+</div>
+<main class="st-login-shell">
+    <section class="st-login-card">
+        <div class="st-login-brand">
+            <span class="st-login-mark">م</span>
+            <div>
+                <p class="st-login-kicker">پنل مدیریت · فروشگاه موثقی</p>
+                <h1>ورود مدیر</h1>
+            </div>
+        </div>
+        <p class="st-login-note">دسترسی محدود به پنل مدیریت</p>
+        @if (TempData["Error"] != null) { <div class="st-alert st-alert-error">@TempData["Error"]</div> }
+        <form method="post" class="st-login-form" action="/Admin/Auth/Login">
+            @Html.AntiForgeryToken()
+            @if (!string.IsNullOrEmpty(returnUrl))
+            {
+                <input type="hidden" name="returnUrl" value="@returnUrl" />
+            }
+            <div class="st-field">
+                <label for="username">نام کاربری</label>
+                <input id="username" name="username" required autocomplete="username" class="st-input" />
+            </div>
+            <div class="st-field">
+                <label for="password">رمز عبور</label>
+                <input id="password" name="password" type="password" required autocomplete="current-password" class="st-input" />
+            </div>
+            <button type="submit" class="st-btn st-btn-primary st-btn-block st-login-submit">ورود</button>
+        </form>
+        <p class="st-login-foot"><a href="/">← بازگشت به فروشگاه</a></p>
+    </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,121 @@
+@model CartSummary
+@{
+    var compact = ViewBag.CompactDiscount as bool? ?? false;
+}
+@if (Model.Items.Count > 0)
+{
+    <aside class="cart-status @(compact ? "cart-status--drawer" : "")" aria-label="وضعیت سفارش">
+        @if (!Model.MeetsMinimum)
+        {
+            var firstTier = WholesaleRules.VolumeTiers[0];
+            <div class="cart-status-box cart-status-box--warn">
+                <p class="cart-status-title">هنوز به حداقل سفارش عمده نرسیده‌اید</p>
+                <ul class="cart-status-facts">
+                    <li><span>جمع فاکتور شما</span><strong>@SlugHelper.FormatToman(Model.SubTotal) تومان</strong></li>
+                    <li><span>حداقل سفارش</span><strong>@WholesaleRules.FormatMinAmount() تومان</strong></li>
+                    <li><span>کمبود</span><strong class="cart-status-em">@SlugHelper.FormatToman(Model.AmountToMinimum) تومان</strong></li>
+                </ul>
+                <p class="cart-status-tip">با رسیدن به @firstTier.LabelFa تومان، @firstTier.DiscountPercent درصد تخفیف روی <strong>کل مبلغ</strong> فعال می‌شود.</p>
+            </div>
+        }
+        else if (Model.VolumeDiscountPercent > 0)
+        {
+            var activeTier = WholesaleRules.GetActiveTier(Model.SubTotal);
+            var hasNudge = Model.NextDiscountTier is { } nxtCheck && (nxtCheck.MinAmountToman - Model.SubTotal) > 0;
+            @if (!compact || hasNudge || Model.RequiresPremiumCoordination)
+            {
+            <div class="cart-status-box cart-status-box--ok">
+                @if (!compact)
+                {
+                    <p class="cart-status-title">تخفیف پلکانی فعال است</p>
+                    @if (activeTier is { } active)
+                    {
+                        <p class="cart-status-reason">چون جمع فاکتور شما از <strong>@active.LabelFa تومان</strong> بیشتر است → <strong>@(active.DiscountPercent)٪</strong> روی کل مبلغ.</p>
+                    }
+                    <ul class="cart-status-facts">
+                        <li><span>جمع فاکتور</span><strong>@SlugHelper.FormatToman(Model.SubTotal) تومان</strong></li>
+                        <li><span>درصد تخفیف</span><strong>@Model.VolumeDiscountPercent درصد</strong></li>
+                        <li><span>مبلغ تخفیف</span><strong class="cart-status-save">@SlugHelper.FormatToman(Model.VolumeDiscountAmount) تومان</strong></li>
+                    </ul>
+                }
+                else
+                {
+                    <p class="cart-status-drawer-badge">تخفیف @(Model.VolumeDiscountPercent)٪ فعال</p>
+                }
+                @if (Model.NextDiscountTier is { } nxt)
+                {
+                    var need = nxt.MinAmountToman - Model.SubTotal;
+                    if (need > 0)
+                    {
+                        var tierBase = activeTier?.MinAmountToman ?? WholesaleRules.VolumeTiers[0].MinAmountToman;
+                        var tierSpan = nxt.MinAmountToman - tierBase;
+                        var progressPct = tierSpan > 0
+                            ? Math.Clamp((double)((Model.SubTotal - tierBase) / tierSpan * 100m), 0, 100)
+                            : 0;
+                        <div class="cart-tier-nudge" data-cart-tier-nudge aria-live="polite">
+                            <div class="cart-tier-nudge__aurora" aria-hidden="true"></div>
+                            <div class="cart-tier-nudge__inner">
+                                <div class="cart-tier-nudge__head">
+                                    <span class="cart-tier-nudge__badge">
+                                        <span class="cart-tier-nudge__badge-icon" aria-hidden="true">↑</span>
+                                        پله بعدی تخفیف
+                                    </span>
+                                    <span class="cart-tier-nudge__jump">
+                                        <span class="cart-tier-nudge__from">@(Model.VolumeDiscountPercent)٪</span>
+                                        <span class="cart-tier-nudge__arrow" aria-hidden="true">→</span>
+                                        <span class="cart-tier-nudge__to">@(nxt.DiscountPercent)٪</span>
+                                    </span>
+                                </div>
+                                <div class="cart-tier-nudge__bar" role="progressbar"
+                                     aria-valuenow="@progressPct.ToString("F0", System.Globalization.CultureInfo.InvariantCulture)"
+                                     aria-valuemin="0" aria-valuemax="100"
+                                     aria-label="پیشرفت تا تخفیف @nxt.DiscountPercent درصد">
+                                    <div class="cart-tier-nudge__track">
+                                        <div class="cart-tier-nudge__fill" data-tier-fill style="width:@progressPct.ToString("F1", System.Globalization.CultureInfo.InvariantCulture)%">
+                                            <span class="cart-tier-nudge__spark" aria-hidden="true"></span>
+                                        </div>
+                                    </div>
+                                    <div class="cart-tier-nudge__labels">
+                                        <span>@SlugHelper.FormatToman(tierBase)</span>
+                                        <span>@nxt.LabelFa</span>
+                                    </div>
+                                </div>
+                                <div class="cart-tier-nudge__callout">
+                                    <span class="cart-tier-nudge__callout-icon" aria-hidden="true">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7L12 16.8 5.7 21l2.3-7-6-4.6h7.6z"/></svg>
+                                    </span>
+                                    <p class="cart-tier-nudge__callout-text">
+                                        با
+                                        <strong class="cart-tier-nudge__amount">@SlugHelper.FormatToman(need)</strong>
+                                        <span class="cart-tier-nudge__unit">تومان</span>
+                                        بیشتر در سبد، تخفیف به
+                                        <strong class="cart-tier-nudge__target">@nxt.DiscountPercent درصد</strong>
+                                        می‌رسد
+                                        <span class="cart-tier-nudge__hint">(روی کل فاکتور)</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                @if (Model.RequiresPremiumCoordination && compact)
+                {
+                    ViewBag.PremiumActive = true;
+                    <partial name="_CartPremiumCard" />
+                }
+                else if (!compact && Model.NextDiscountTier is null && Model.VolumeDiscountPercent >= WholesaleRules.MaxAutoDiscountPercent)
+                {
+                    <p class="cart-status-tip">بیشترین تخفیف خودکار (@(WholesaleRules.MaxAutoDiscountPercent)٪) فعال است. برای تخفیف ویژه سفارش‌های خیلی بزرگ تماس بگیرید.</p>
+                }
+            </div>
+            }
+        }
+        else
+        {
+            <div class="cart-status-box">
+                <p class="cart-status-title">حداقل سفارش تأمین شد</p>
+                <p class="cart-status-tip">می‌توانید ثبت سفارش را ادامه دهید.</p>
+            </div>
+        }
+    </aside>
+}

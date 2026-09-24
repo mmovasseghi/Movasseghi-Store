@@ -1,0 +1,334 @@
+﻿@model AccountDashboardViewModel
+@using MovasseghiShop.Web.Models.Enums
+@{
+    ViewData["Title"] = "حساب کاربری";
+    var accountHasPassword = ViewBag.AccountHasPassword as bool? == true;
+}
+
+<section class="ms-account ms-reveal">
+    <div class="ms-wrap ms-account-wrap">
+        <header class="ms-account-top">
+            <div>
+                <p class="ms-account-kicker">پنل مشتریان عمده</p>
+                <h1 class="ms-account-title">حساب کاربری</h1>
+            </div>
+            <button type="button" class="ms-account-logout-btn" data-logout-open>خروج</button>
+        </header>
+
+        <div class="ms-account-bento">
+            <article class="ms-account-card ms-account-hero-card" data-account-hero>
+                <div class="ms-account-avatar-ring">
+                    <span class="ms-account-avatar">@Model.Initials</span>
+                </div>
+                <div class="ms-account-hero-meta">
+                    <h2 data-account-name>@Model.DisplayName</h2>
+                    <p dir="ltr">@Model.User.PhoneNumber</p>
+                    <span class="ms-account-badge">@Model.RoleBadge</span>
+                </div>
+                <div class="ms-account-stat-chips" data-account-chips>
+                    <span class="ms-account-chip"><b>@Model.Orders.Count</b> سفارش</span>
+                    @if (!string.IsNullOrWhiteSpace(Model.User.CompanyName))
+                    {
+                        <span class="ms-account-chip" data-company-chip>@Model.User.CompanyName</span>
+                    }
+                </div>
+            </article>
+
+            <article class="ms-account-card ms-account-mini-card">
+                <span class="ms-account-mini-label">وضعیت حساب</span>
+                <strong>فعال</strong>
+                <small>عضو از @Model.User.CreatedAt.ToLocalTime().ToString("yyyy/MM/dd")</small>
+            </article>
+
+            <article class="ms-account-card ms-account-mini-card">
+                <span class="ms-account-mini-label">آخرین سفارش</span>
+                <strong>@(Model.Orders.FirstOrDefault()?.OrderNumber ?? "—")</strong>
+                <small>@(Model.Orders.FirstOrDefault() != null ? OrderStatusLabels.Fa(Model.Orders.First().Status) : "هنوز سفارشی ثبت نشده")</small>
+            </article>
+        </div>
+
+        <div class="ms-account-tabs" data-account-tabs>
+            <div class="ms-account-tablist" role="tablist">
+                <button type="button" class="ms-account-tab is-active" role="tab" aria-selected="true" data-tab="profile">پروفایل من</button>
+                <button type="button" class="ms-account-tab" role="tab" aria-selected="false" data-tab="orders">سفارش‌های من</button>
+                <button type="button" class="ms-account-tab" role="tab" aria-selected="false" data-tab="addresses">آدرس‌ها و تماس</button>
+            </div>
+            <span class="ms-account-tab-indicator" data-tab-indicator aria-hidden="true"></span>
+
+            <div class="ms-account-panels">
+                <section class="ms-account-panel is-active" data-panel="profile" role="tabpanel">
+                    <form class="ms-account-form" data-profile-form>
+                        @Html.AntiForgeryToken()
+                        <div class="ms-account-form-grid">
+                            <div class="ms-field ms-field--light">
+                                <input type="text" name="firstName" class="ms-field-input" id="profFirst" value="@Model.FirstName" placeholder=" " required />
+                                <label class="ms-field-label" for="profFirst">نام</label>
+                            </div>
+                            <div class="ms-field ms-field--light">
+                                <input type="text" name="lastName" class="ms-field-input" id="profLast" value="@Model.LastName" placeholder=" " required />
+                                <label class="ms-field-label" for="profLast">نام خانوادگی</label>
+                            </div>
+                            <div class="ms-field ms-field--light ms-field--wide ms-field--readonly">
+                                <input type="tel" class="ms-field-input" id="profPhone" value="@Model.User.PhoneNumber" placeholder=" " readonly dir="ltr" />
+                                <label class="ms-field-label" for="profPhone">شماره تماس</label>
+                            </div>
+                            <div class="ms-field ms-field--light ms-field--wide">
+                                <input type="email" name="email" class="ms-field-input" id="profEmail" value="@Model.User.Email" placeholder=" " dir="ltr" />
+                                <label class="ms-field-label" for="profEmail">ایمیل (اختیاری)</label>
+                            </div>
+                            <div class="ms-field ms-field--light ms-field--wide">
+                                <input type="text" name="businessName" class="ms-field-input" id="profBiz" value="@Model.User.CompanyName" placeholder=" " />
+                                <label class="ms-field-label" for="profBiz">نام مجموعه (اختیاری)</label>
+                            </div>
+                        </div>
+                        <button type="submit" class="ms-auth-btn ms-auth-btn--solid ms-ripple" data-profile-save>
+                            <span>ذخیره تغییرات</span>
+                        </button>
+                        <p class="ms-account-save-msg" data-profile-msg hidden></p>
+                    </form>
+
+                    <div class="ms-account-security">
+                        <header class="ms-account-security__head">
+                            <span class="ms-account-security__icon" aria-hidden="true">🔐</span>
+                            <div>
+                                <h3>رمز ورود</h3>
+                                <p>@(accountHasPassword ? "برای امنیت بیشتر، رمز قوی انتخاب کنید." : "هنوز رمز تعریف نکرده‌اید — می‌توانید برای ورود سریع‌تر تنظیم کنید.")</p>
+                            </div>
+                        </header>
+                        <form class="ms-account-form ms-account-form--password" data-password-form>
+                            @Html.AntiForgeryToken()
+                            @if (accountHasPassword)
+                            {
+                                <div class="ms-field ms-field--light ms-field--password ms-field--wide">
+                                    <input type="password" name="currentPassword" class="ms-field-input" id="pwdCurrent" placeholder=" " autocomplete="current-password" required />
+                                    <label class="ms-field-label" for="pwdCurrent">رمز عبور فعلی</label>
+                                    <button type="button" class="ms-field-eye" data-toggle-password="pwdCurrent" aria-label="نمایش رمز">👁</button>
+                                </div>
+                            }
+                            <div class="ms-account-form-grid">
+                                <div class="ms-field ms-field--light ms-field--password">
+                                    <input type="password" name="newPassword" class="ms-field-input" id="pwdNew" placeholder=" " autocomplete="new-password" required minlength="8" />
+                                    <label class="ms-field-label" for="pwdNew">رمز عبور جدید</label>
+                                    <button type="button" class="ms-field-eye" data-toggle-password="pwdNew" aria-label="نمایش رمز">👁</button>
+                                </div>
+                                <div class="ms-field ms-field--light ms-field--password">
+                                    <input type="password" name="confirmPassword" class="ms-field-input" id="pwdConfirm" placeholder=" " autocomplete="new-password" required minlength="8" />
+                                    <label class="ms-field-label" for="pwdConfirm">تکرار رمز جدید</label>
+                                    <button type="button" class="ms-field-eye" data-toggle-password="pwdConfirm" aria-label="نمایش رمز">👁</button>
+                                </div>
+                            </div>
+                            <p class="ms-account-password-hint">حداقل ۸ کاراکتر — ترجیحاً عدد و حروف ترکیبی.</p>
+                            <button type="submit" class="ms-auth-btn ms-auth-btn--solid ms-ripple" data-password-save>
+                                <span>@(accountHasPassword ? "تغییر رمز عبور" : "تنظیم رمز عبور")</span>
+                            </button>
+                            <p class="ms-account-save-msg" data-password-msg hidden></p>
+                        </form>
+                    </div>
+                </section>
+
+                <section class="ms-account-panel" data-panel="orders" role="tabpanel" hidden>
+                    @if (!Model.Orders.Any())
+                    {
+                        <div class="ms-account-empty">هنوز سفارشی ثبت نکرده‌اید. <a href="/Catalog">مشاهده فروشگاه</a></div>
+                    }
+                    @foreach (var o in Model.Orders)
+                    {
+                        var step = OrderStatusLabels.TimelineIndex(o.Status);
+                        var steps = new[] { "ثبت", "پرداخت", "تأیید", "آماده‌سازی", "ارسال", "تحویل", "تکمیل" };
+                        <article class="ms-order-card">
+                            <header class="ms-order-card-head">
+                                <div>
+                                    <strong>@o.OrderNumber</strong>
+                                    <span>@o.CreatedAt.ToLocalTime().ToString("yyyy/MM/dd HH:mm")</span>
+                                </div>
+                                <div class="ms-order-card-meta">
+                                    <span class="ms-order-status">@OrderStatusLabels.Fa(o.Status)</span>
+                                    <span>@SlugHelper.FormatToman(o.TotalAmount) تومان</span>
+                                </div>
+                            </header>
+                            @if (o.Status != OrderStatus.Cancelled)
+                            {
+                                <ol class="ms-order-timeline" data-order-timeline style="--progress:@(step < 0 ? 0 : step)">
+                                    @for (var i = 0; i < steps.Length; i++)
+                                    {
+                                        <li class="ms-order-step @(i <= step ? "is-done" : "") @(i == step ? "is-current" : "")">
+                                            <span class="ms-order-dot"></span>
+                                            <span class="ms-order-step-label">@steps[i]</span>
+                                        </li>
+                                    }
+                                </ol>
+                            }
+                            <div class="ms-order-card-actions">
+                                <a href="/Order/Details/@o.OrderNumber" class="ms-order-link">جزئیات سفارش</a>
+                                <a href="/Order/MyInvoice?number=@Uri.EscapeDataString(o.OrderNumber)" class="ms-order-link ms-order-link--proforma">پیش‌فاکتور</a>
+                            </div>
+                        </article>
+                    }
+                </section>
+
+                <section class="ms-account-panel" data-panel="addresses" role="tabpanel" hidden>
+                    <p class="ms-addr-intro">افزودن آدرس و موقعیت اختیاری است — هر زمان بعد از ثبت‌نام می‌توانید تکمیل کنید.</p>
+
+                    <div class="ms-addr-layout">
+                        <div class="ms-addr-form-col">
+                            <h3 class="ms-addr-heading">آدرس تحویل</h3>
+                            <form class="ms-account-form" data-address-form>
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="" data-addr-id />
+                                <input type="hidden" name="latitude" data-addr-lat />
+                                <input type="hidden" name="longitude" data-addr-lng />
+                                <div class="ms-account-form-grid ms-account-form-grid--single">
+                                    <div class="ms-field ms-field--light ms-field--wide">
+                                        <input type="text" name="label" class="ms-field-input" id="addrLabel" placeholder=" " data-addr-label />
+                                        <label class="ms-field-label" for="addrLabel">عنوان آدرس (اختیاری)</label>
+                                    </div>
+                                    <div class="ms-field ms-field--light">
+                                        <input type="text" name="province" class="ms-field-input" id="addrProvince" placeholder=" " data-addr-province />
+                                        <label class="ms-field-label" for="addrProvince">استان</label>
+                                    </div>
+                                    <div class="ms-field ms-field--light">
+                                        <input type="text" name="city" class="ms-field-input" id="addrCity" placeholder=" " data-addr-city />
+                                        <label class="ms-field-label" for="addrCity">شهر</label>
+                                    </div>
+                                    <div class="ms-field ms-field--light ms-field--wide">
+                                        <textarea name="fullAddress" class="ms-field-input ms-field-textarea" id="addrFull" placeholder=" " rows="3" data-addr-full></textarea>
+                                        <label class="ms-field-label" for="addrFull">آدرس کامل</label>
+                                    </div>
+                                    <div class="ms-addr-detail-row">
+                                        <div class="ms-field ms-field--light">
+                                            <input type="text" name="plaque" class="ms-field-input" id="addrPlaque" placeholder=" " data-addr-plaque />
+                                            <label class="ms-field-label" for="addrPlaque">پلاک</label>
+                                        </div>
+                                        <div class="ms-field ms-field--light">
+                                            <input type="text" name="unit" class="ms-field-input" id="addrUnit" placeholder=" " data-addr-unit />
+                                            <label class="ms-field-label" for="addrUnit">واحد</label>
+                                        </div>
+                                    </div>
+                                    <div class="ms-field ms-field--light ms-field--wide">
+                                        <input type="text" name="postalCode" class="ms-field-input" id="addrPostal" placeholder=" " dir="ltr" data-addr-postal />
+                                        <label class="ms-field-label" for="addrPostal">کد پستی (اختیاری)</label>
+                                    </div>
+                                    <label class="ms-addr-default-check">
+                                        <input type="checkbox" name="isDefault" value="true" data-addr-default />
+                                        <span>آدرس پیش‌فرض</span>
+                                    </label>
+                                </div>
+                                <div class="ms-addr-form-actions">
+                                    <button type="submit" class="ms-auth-btn ms-auth-btn--solid ms-ripple" data-addr-save><span>ذخیره آدرس</span></button>
+                                    <button type="button" class="ms-auth-link" data-addr-reset hidden>انصراف از ویرایش</button>
+                                </div>
+                                <p class="ms-account-save-msg" data-addr-msg hidden></p>
+                            </form>
+                        </div>
+
+                        <div class="ms-addr-map-col">
+                            <h3 class="ms-addr-heading">موقعیت روی نقشه <small>(اختیاری)</small></h3>
+                            <div class="ms-addr-map-wrap">
+                                <div id="accountMap" class="ms-addr-map" aria-label="نقشه موقعیت"></div>
+                                <div class="ms-addr-map-overlay" data-map-overlay hidden>
+                                    <span class="ms-addr-map-spinner" aria-hidden="true"></span>
+                                    <span data-map-overlay-text>در حال استخراج آدرس…</span>
+                                </div>
+                            </div>
+                            <div class="ms-addr-geocode-preview" data-geocode-preview hidden>
+                                <div class="ms-addr-geocode-preview-head">
+                                    <span class="ms-addr-geocode-icon" aria-hidden="true">✓</span>
+                                    <strong data-geocode-preview-title>آدرس از موقعیت</strong>
+                                    <button type="button" class="ms-addr-geocode-dismiss" data-geocode-dismiss aria-label="بستن">×</button>
+                                </div>
+                                <p data-geocode-preview-text></p>
+                            </div>
+                            <div class="ms-addr-location-status" data-location-status hidden>
+                                <span class="ms-addr-location-dot" aria-hidden="true"></span>
+                                <span data-location-status-text>موقعیت ذخیره می‌شود</span>
+                            </div>
+                            <div class="ms-addr-map-tools">
+                                <button type="button" class="ms-addr-map-btn" data-locate-me>
+                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
+                                    موقعیت من
+                                </button>
+                                <button type="button" class="ms-addr-map-btn ms-addr-map-btn--ghost" data-clear-location>پاک کردن موقعیت</button>
+                            </div>
+                            <p class="ms-addr-map-hint">روی نقشه کلیک کنید یا «موقعیت من» را بزنید — آدرس به‌صورت خودکار پر می‌شود (پلاک، واحد و کد پستی را خودتان وارد کنید).</p>
+                            <p class="ms-addr-coords" data-addr-coords-display hidden dir="ltr"></p>
+                        </div>
+                    </div>
+
+                    <div class="ms-addr-list" data-address-list>
+                        <h3 class="ms-addr-heading">آدرس‌های ذخیره‌شده</h3>
+                        @if (!Model.UserAddresses.Any())
+                        {
+                            <div class="ms-account-empty" data-addr-empty>هنوز آدرسی ثبت نکرده‌اید.</div>
+                        }
+                        @foreach (var a in Model.UserAddresses)
+                        {
+                            <article class="ms-address-card ms-address-card--saved" data-address-id="@a.Id"
+                                     data-label="@a.Label" data-province="@a.Province" data-city="@a.City"
+                                     data-full="@a.FullAddress" data-postal="@a.PostalCode"
+                                     data-plaque="@a.Plaque" data-unit="@a.Unit"
+                                     data-lat="@a.Latitude" data-lng="@a.Longitude" data-default="@a.IsDefault.ToString().ToLowerInvariant()">
+                                <div class="ms-address-card-head">
+                                    <strong>@(string.IsNullOrWhiteSpace(a.Label) ? $"{a.Province}، {a.City}" : a.Label)</strong>
+                                    @if (a.IsDefault) { <span class="ms-address-badge">پیش‌فرض</span> }
+                                </div>
+                                <p>@a.Province، @a.City — @a.FullAddress@(!string.IsNullOrWhiteSpace(a.Plaque) ? $"، پلاک {a.Plaque}" : "")@(!string.IsNullOrWhiteSpace(a.Unit) ? $"، واحد {a.Unit}" : "")</p>
+                                @if (!string.IsNullOrWhiteSpace(a.PostalCode))
+                                {
+                                    <small dir="ltr">کد پستی: @a.PostalCode</small>
+                                }
+                                @if (a.Latitude.HasValue && a.Longitude.HasValue)
+                                {
+                                    <small class="ms-address-coords" dir="ltr">📍 @a.Latitude.Value.ToString("F5"), @a.Longitude.Value.ToString("F5")</small>
+                                }
+                                <div class="ms-address-card-actions">
+                                    <button type="button" class="ms-auth-link" data-edit-address>ویرایش</button>
+                                    <button type="button" class="ms-auth-link ms-auth-link--danger" data-delete-address>حذف</button>
+                                </div>
+                            </article>
+                        }
+                    </div>
+
+                    @if (Model.SavedAddresses.Any())
+                    {
+                        <div class="ms-addr-order-history">
+                            <h3 class="ms-addr-heading">آدرس‌های سفارش‌های قبلی</h3>
+                            @foreach (var a in Model.SavedAddresses)
+                            {
+                                <article class="ms-address-card ms-address-card--readonly">
+                                    <strong>@a.Province، @a.City</strong>
+                                    <p>@a.FullAddress</p>
+                                    @if (!string.IsNullOrWhiteSpace(a.PostalCode))
+                                    {
+                                        <small>کد پستی: @a.PostalCode</small>
+                                    }
+                                </article>
+                            }
+                        </div>
+                    }
+                </section>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="ms-sheet" id="logoutSheet" hidden>
+    <div class="ms-sheet-backdrop" data-logout-close></div>
+    <div class="ms-sheet-panel" role="dialog" aria-modal="true" aria-label="تأیید خروج">
+        <div class="ms-sheet-handle" aria-hidden="true"></div>
+        <h3>خروج از حساب</h3>
+        <p>مطمئنید می‌خواهید خارج شوید؟</p>
+        <form asp-controller="Account" asp-action="Logout" method="post" class="ms-sheet-actions">
+            @Html.AntiForgeryToken()
+            <button type="button" class="ms-sheet-btn ms-sheet-btn--ghost" data-logout-close>انصراف</button>
+            <button type="submit" class="ms-sheet-btn ms-sheet-btn--danger">بله، خروج</button>
+        </form>
+    </div>
+</div>
+
+@section Head {
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+}
+@section Scripts {
+    <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script defer src="~/js/account.js" asp-append-version="true"></script>
+}

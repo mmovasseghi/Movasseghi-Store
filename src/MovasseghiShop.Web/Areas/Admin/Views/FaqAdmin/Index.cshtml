@@ -1,0 +1,110 @@
+@model List<FaqItem>
+@{
+    ViewData["Title"] = "سوالات متداول";
+    var activeCount = Model.Count(f => f.IsActive);
+    var shortAnswers = Model.Count(f => f.IsActive && (f.Answer ?? "").Length < 120);
+}
+
+<div class="kit-stats kit-stagger">
+    <article class="kit-stat">
+        <span class="kit-stat-label">❓ کل سوالات</span>
+        <span class="kit-stat-value">@Model.Count.ToString("N0")</span>
+    </article>
+    <article class="kit-stat">
+        <span class="kit-stat-label">✅ فعال روی سایت</span>
+        <span class="kit-stat-value kit-stat-value--ok">@activeCount.ToString("N0")</span>
+        <span class="kit-stat-foot">با اسکیمای FAQPage به گوگل ارسال می‌شود</span>
+    </article>
+    <article class="kit-stat">
+        <span class="kit-stat-label">✂️ پاسخ کوتاه</span>
+        <span class="kit-stat-value @(shortAnswers > 0 ? "kit-stat-value--gold" : "kit-stat-value--ok")">@shortAnswers.ToString("N0")</span>
+        <span class="kit-stat-foot">پاسخ زیر ۱۲۰ کاراکتر معمولاً برای Featured Snippet کافی نیست</span>
+    </article>
+</div>
+
+<div class="kit-toolbar kit-rise">
+    <div class="kit-toolbar-grow">
+        <strong style="font-size:.88rem">پرسش‌های متداول سایت</strong>
+        <span class="kit-form-hint" style="margin-top:.15rem">
+            این بخش مستقیم روی AEO اثر دارد: پاسخ‌های این‌جا همان چیزی است که
+            گوگل و دستیارهای هوش مصنوعی به‌عنوان جواب مستقیم نقل می‌کنند.
+        </span>
+    </div>
+    <a class="st-btn st-btn-primary" href="/Admin/FaqAdmin/Create">+ سوال جدید</a>
+</div>
+
+<section class="kit-table-card kit-rise">
+    @if (Model.Count == 0)
+    {
+        <div class="kit-empty">
+            <div class="kit-empty-icon" aria-hidden="true">❓</div>
+            <h3>هنوز سوالی ثبت نشده</h3>
+            <p>
+                سوال‌هایی را بنویسید که مشتری واقعاً می‌پرسد: «حداقل سفارش چند کارتن است؟»،
+                «ظرف گیاهی در فریزر می‌ماند؟». هر پاسخ خوب، یک شانس گرفتن جایگاه صفر گوگل است.
+            </p>
+            <a class="st-btn st-btn-primary" href="/Admin/FaqAdmin/Create">ثبت اولین سوال</a>
+        </div>
+    }
+    else
+    {
+        <div class="kit-table-scroll">
+            <table class="kit-table">
+                <thead>
+                    <tr>
+                        <th data-sort>ترتیب</th>
+                        <th data-sort>سوال</th>
+                        <th data-sort>طول پاسخ</th>
+                        <th data-sort>وضعیت</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var f in Model)
+                    {
+                        var len = (f.Answer ?? "").Length;
+                        <tr class="@(f.IsActive ? "" : "is-dim")">
+                            <td class="kit-cell-num" data-sort-value="@f.SortOrder">@f.SortOrder</td>
+                            <td>
+                                <span class="kit-cell-main">@f.Question</span>
+                                <span class="kit-cell-sub">
+                                    @(len > 130 ? (f.Answer ?? "")[..130] + "…" : f.Answer)
+                                </span>
+                            </td>
+                            <td class="kit-cell-num" data-sort-value="@len">
+                                @if (len < 120)
+                                {
+                                    <span class="kit-tag kit-tag--warn">@len کاراکتر</span>
+                                }
+                                else
+                                {
+                                    <span class="kit-tag kit-tag--ok">@len کاراکتر</span>
+                                }
+                            </td>
+                            <td data-sort-value="@(f.IsActive ? 1 : 0)">
+                                @if (f.IsActive)
+                                {
+                                    <span class="kit-tag kit-tag--ok">نمایش</span>
+                                }
+                                else
+                                {
+                                    <span class="kit-tag kit-tag--muted">مخفی</span>
+                                }
+                            </td>
+                            <td class="kit-cell-actions">
+                                <a class="st-btn st-btn-ghost st-btn-sm" href="/Admin/FaqAdmin/Edit/@f.Id">ویرایش</a>
+                                <form method="post" action="/Admin/FaqAdmin/Delete/@f.Id" style="display:inline"
+                                      data-kit-confirm="سوال «<strong>@f.Question</strong>» حذف می‌شود."
+                                      data-kit-confirm-title="حذف سوال"
+                                      data-kit-confirm-ok="حذف کن">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="st-btn st-btn-ghost st-btn-sm">حذف</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</section>

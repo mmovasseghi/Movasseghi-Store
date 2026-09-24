@@ -1,0 +1,27 @@
+@model ProductVariant
+@{
+    var unitName = VariantLabelHelper.GetSellUnitName(Model.SellUnit);
+}
+<div class="pd-variant">
+    <div class="pd-variant-info">
+        <strong>@VariantLabelHelper.GetVariantLabel(Model)</strong>
+        @if (Model.ShowPrice && Model.Price > 0)
+        {
+            <div class="pd-variant-price">@SlugHelper.FormatToman(Model.Price) @VariantLabelHelper.GetPriceSuffix(Model.SellUnit)</div>
+        }
+        else
+        {
+            <div class="pd-variant-price" style="font-size:.82rem;color:var(--c-text-2)">استعلام قیمت</div>
+        }
+    </div>
+    <form asp-controller="Cart" asp-action="Add" method="post" class="pd-variant-form" data-pd-add-form>
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="variantId" value="@Model.Id" />
+        <label class="ms-sr-only" for="qty-@Model.Id">@VariantLabelHelper.GetQuantityLabel(Model.SellUnit)</label>
+        <input type="number" id="qty-@Model.Id" name="cartons" value="1" min="1" class="pd-qty" inputmode="numeric" aria-label="@VariantLabelHelper.GetQuantityLabel(Model.SellUnit)" />
+        <button type="submit" class="btn btn-primary pd-btn-cart" data-pd-add-btn>
+            <span class="pd-btn-cart__label">افزودن @unitName</span>
+            <span class="pd-btn-cart__loading" aria-hidden="true"></span>
+        </button>
+    </form>
+</div>

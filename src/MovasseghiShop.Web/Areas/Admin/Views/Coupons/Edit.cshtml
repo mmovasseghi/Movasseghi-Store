@@ -1,0 +1,111 @@
+@model Coupon
+@{
+    var isNew = Model.Id == 0;
+    ViewData["Title"] = isNew ? "کد تخفیف جدید" : $"ویرایش کد {Model.Code}";
+    string DateVal(DateTime? d) => d?.ToLocalTime().ToString("yyyy-MM-dd") ?? "";
+}
+
+<form method="post" action="/Admin/Coupons/Save" data-kit-primary data-kit-dirty-guard>
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <input type="hidden" name="UsedCount" value="@Model.UsedCount" />
+
+    <div class="kit-toolbar kit-rise">
+        <div class="kit-toolbar-grow">
+            <strong style="font-size:.88rem">@(isNew ? "ساخت کد تخفیف" : Model.Code)</strong>
+            @if (!isNew)
+            {
+                <span class="kit-form-hint" style="margin-top:.15rem">
+                    تا الان @Model.UsedCount بار استفاده شده.
+                </span>
+            }
+        </div>
+        <a class="st-btn st-btn-ghost" href="/Admin/Coupons">بازگشت</a>
+        <button type="submit" class="st-btn st-btn-primary">@(isNew ? "ساخت کد" : "ذخیره تغییرات")</button>
+    </div>
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="kit-insight kit-insight--risk kit-rise">
+            <span class="kit-insight-icon" aria-hidden="true">⚠️</span>
+            <div class="kit-insight-body">
+                <strong>کد ذخیره نشد</strong>
+                @foreach (var err in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <div>· @err.ErrorMessage</div>
+                }
+            </div>
+        </div>
+    }
+
+    <section class="kit-section kit-rise" style="max-width:760px">
+        <div class="kit-section-head">
+            <div>
+                <h2>مشخصات کد</h2>
+                <p>کد به‌صورت خودکار به حروف بزرگ تبدیل می‌شود.</p>
+            </div>
+        </div>
+
+        <div class="kit-form-grid">
+            <div class="st-field kit-form-full">
+                <label for="Code">کد تخفیف <span style="color:#fca5a5">*</span></label>
+                <input id="Code" name="Code" value="@Model.Code" required dir="ltr"
+                       class="st-input @(ViewData.ModelState["Code"]?.Errors.Count > 0 ? "kit-input-invalid" : "")"
+                       style="font-family:ui-monospace,monospace;letter-spacing:.05em" placeholder="NOWRUZ1405" />
+                <span class="kit-form-hint">کد کوتاه و قابل تایپ باشد؛ مشتری آن را دستی وارد می‌کند.</span>
+            </div>
+
+            <div class="st-field">
+                <label for="Type">نوع تخفیف</label>
+                <select id="Type" name="Type" class="st-input">
+                    <option value="@((int)CouponType.Percentage)" selected="@(Model.Type == CouponType.Percentage)">درصدی</option>
+                    <option value="@((int)CouponType.FixedAmount)" selected="@(Model.Type == CouponType.FixedAmount)">مبلغ ثابت</option>
+                </select>
+            </div>
+
+            <div class="st-field">
+                <label for="Value">مقدار <span style="color:#fca5a5">*</span></label>
+                <input id="Value" name="Value" type="number" step="0.01" min="0" value="@(Model.Value == 0 ? "" : Model.Value.ToString("0.##"))"
+                       class="st-input @(ViewData.ModelState["Value"]?.Errors.Count > 0 ? "kit-input-invalid" : "")" required />
+                <span class="kit-form-hint">درصدی: عددی بین ۱ تا ۱۰۰ — مبلغ ثابت: به تومان.</span>
+            </div>
+
+            <div class="st-field">
+                <label for="MinOrderAmount">حداقل مبلغ سفارش</label>
+                <input id="MinOrderAmount" name="MinOrderAmount" type="number" min="0" value="@Model.MinOrderAmount" class="st-input" placeholder="بدون شرط" />
+                <span class="kit-form-hint">به تومان؛ خالی یعنی بدون حداقل.</span>
+            </div>
+
+            <div class="st-field">
+                <label for="MinCartons">حداقل تعداد کارتن</label>
+                <input id="MinCartons" name="MinCartons" type="number" min="0" value="@Model.MinCartons" class="st-input" placeholder="بدون شرط" />
+                <span class="kit-form-hint">برای تشویق به خرید عمده‌تر.</span>
+            </div>
+
+            <div class="st-field">
+                <label for="MaxUses">سقف دفعات استفاده</label>
+                <input id="MaxUses" name="MaxUses" type="number" min="0" value="@Model.MaxUses" class="st-input" placeholder="نامحدود" />
+            </div>
+
+            <div class="st-field">
+                <label for="StartsAt">تاریخ شروع</label>
+                <input id="StartsAt" name="StartsAt" type="date" value="@DateVal(Model.StartsAt)" class="st-input" dir="ltr" />
+            </div>
+
+            <div class="st-field">
+                <label for="ExpiresAt">تاریخ انقضا</label>
+                <input id="ExpiresAt" name="ExpiresAt" type="date" value="@DateVal(Model.ExpiresAt)"
+                       class="st-input @(ViewData.ModelState["ExpiresAt"]?.Errors.Count > 0 ? "kit-input-invalid" : "")" dir="ltr" />
+            </div>
+
+            <div class="kit-form-full">
+                <label class="kit-switch">
+                    <input type="checkbox" name="IsActive" value="true" @(Model.IsActive ? "checked" : "") />
+                    <span class="kit-switch-label">کد فعال باشد</span>
+                    <span class="kit-switch-track" aria-hidden="true"></span>
+                </label>
+                <input type="hidden" name="IsActive" value="false" />
+            </div>
+        </div>
+    </section>
+</form>

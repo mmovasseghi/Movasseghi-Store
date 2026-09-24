@@ -1,0 +1,10 @@
+@model CartSummary
+@{
+    var compact = ViewBag.CompactDiscount as bool? ?? false;
+    var show = !compact && Model.MeetsMinimum;
+}
+@if (show)
+{
+    ViewBag.PremiumActive = Model.RequiresPremiumCoordination;
+    <partial name="_CartPremiumCard" />
+}

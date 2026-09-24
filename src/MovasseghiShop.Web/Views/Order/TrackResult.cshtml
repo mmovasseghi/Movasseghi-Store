@@ -1,0 +1,40 @@
+@model Order
+@using MovasseghiShop.Web.Models.Enums
+@{
+    var isAccount = ViewBag.IsAccountOrderView as bool? == true;
+    ViewData["Title"] = isAccount ? $"سفارش {Model.OrderNumber}" : $"پیگیری {Model.OrderNumber}";
+    var step = OrderStatusLabels.CustomerTrackStepIndex(Model.Status);
+    var cancelled = Model.Status == OrderStatus.Cancelled;
+}
+@section Head {
+    <link rel="stylesheet" href="~/css/ux-order.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/ux-order-track.css" asp-append-version="true" />
+    @if (isAccount)
+    {
+        <link rel="stylesheet" href="~/css/ux-order-account.css" asp-append-version="true" />
+    }
+}
+
+<section class="ms-track ms-wrap @(isAccount ? "ms-order-account-page" : "")" data-track-page="result"
+         data-track-step="@step"
+         data-track-cancelled="@(cancelled ? "1" : "0")">
+    @if (isAccount)
+    {
+        <div class="ms-order-account-ambient" aria-hidden="true">
+            <span class="ms-order-account-ambient__orb ms-order-account-ambient__orb--1"></span>
+            <span class="ms-order-account-ambient__orb ms-order-account-ambient__orb--2"></span>
+        </div>
+        <nav class="ms-order-account-nav" aria-label="مسیر">
+            <a href="/Account">حساب کاربری</a>
+            <span aria-hidden="true">/</span>
+            <a href="/Account#orders">سفارش‌ها</a>
+            <span aria-hidden="true">/</span>
+            <span>جزئیات</span>
+        </nav>
+    }
+    <partial name="_OrderTrackResult" model="Model" />
+</section>
+
+@section Scripts {
+    <script src="~/js/order-track.js" asp-append-version="true" defer></script>
+}

@@ -1,0 +1,281 @@
+@model CartSummary
+@{
+    ViewData["Title"] = "ثبت سفارش";
+    var couponCode = ViewBag.CouponCode as string;
+    var couponDiscount = ViewBag.CouponDiscount as decimal? ?? 0m;
+    var premiumDelivery = Model.QualifiesForFreeTehranDelivery;
+    var premiumCartons = Model.TotalCartons;
+    var premiumAmount = Model.SubTotal;
+}
+@section Head {
+    <link rel="stylesheet" href="~/css/ux-cart.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/ux-checkout.css" asp-append-version="true" />
+}
+
+<section class="ms-checkout-page ms-wrap">
+    <header class="ms-checkout-head">
+        <a href="/Cart" class="ms-checkout-back">← بازگشت به سبد</a>
+        <h1>ثبت سفارش عمده</h1>
+        <p class="ms-checkout-sub">پس از ثبت سفارش، تیم فروش برای تأیید موجودی و زمان بارگیری با شما تماس می‌گیرد. مبلغ در محل بارگیری از انبار، نقداً تسویه می‌شود.</p>
+    </header>
+
+    @if (TempData["Error"] != null) { <div class="ms-checkout-alert ms-checkout-alert--error">@TempData["Error"]</div> }
+
+    <form asp-action="PlaceOrder" method="post" class="ms-checkout-form">
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="CouponCode" value="@couponCode" />
+
+        <div class="ms-checkout-grid">
+            <div class="ms-checkout-main">
+                <div class="ms-checkout-card">
+                    <h2>اطلاعات تماس</h2>
+                    <div class="ms-checkout-field">
+                        <label>نام و نام خانوادگی</label>
+                        <input class="ms-checkout-input" name="CustomerName" required autocomplete="name" />
+                    </div>
+                    <div class="ms-checkout-field">
+                        <label>شماره موبایل</label>
+                        <input class="ms-checkout-input" name="Phone" required dir="ltr" inputmode="tel" placeholder="0912..." autocomplete="tel" />
+                    </div>
+                </div>
+
+                <div class="ms-checkout-card ms-checkout-card--payment">
+                    <h2>روش پرداخت و تحویل</h2>
+                    <p class="ms-checkout-pay-intro">برای سفارش‌های عمده فعلاً تسویه در محل بارگیری انجام می‌شود تا هماهنگی انبار و حمل ساده‌تر باشد.</p>
+
+                    <input type="hidden" name="PaymentMethod" value="@((int)MovasseghiShop.Web.Models.Enums.PaymentMethod.CashOnPickup)" />
+
+                    <div class="ms-checkout-pay-options" role="radiogroup" aria-label="روش پرداخت">
+                        <div class="ms-pay-card ms-pay-card--active" aria-current="true">
+                            <div class="ms-pay-card__top">
+                                <span class="ms-pay-card__icon" aria-hidden="true">💵</span>
+                                <span class="ms-pay-card__badge ms-pay-card__badge--active">روش فعال</span>
+                            </div>
+                            <strong class="ms-pay-card__title">نقدی هنگام بارگیری</strong>
+                            <p class="ms-pay-card__desc">پس از آماده‌سازی سفارش، در زمان تحویل کالا در انبار (یا هنگام بارگیری) مبلغ نهایی را نقداً پرداخت می‌کنید.</p>
+                            <ul class="ms-pay-card__list">
+                                <li>بدون نیاز به درگاه بانکی یا کارت‌به‌کارت قبل از بارگیری</li>
+                                <li>مبلغ قطعی پس از تأیید موجودی و تخفیف‌های اعمال‌شده اعلام می‌شود</li>
+                                <li>هماهنگی زمان بارگیری با واحد فروش موثقی</li>
+                            </ul>
+                        </div>
+
+                        <div class="ms-pay-card ms-pay-card--disabled" aria-disabled="true">
+                            <div class="ms-pay-card__top">
+                                <span class="ms-pay-card__icon" aria-hidden="true">💳</span>
+                                <span class="ms-pay-card__badge ms-pay-card__badge--soon">به‌زودی</span>
+                            </div>
+                            <strong class="ms-pay-card__title">پرداخت آنلاین</strong>
+                            <p class="ms-pay-card__desc">درگاه پرداخت اینترنتی در حال آماده‌سازی است و به‌زودی برای سفارش‌های واجد شرایط فعال می‌شود.</p>
+                            <p class="ms-pay-card__muted">فعلاً این روش غیرفعال است — لطفاً «نقدی هنگام بارگیری» را انتخاب کنید.</p>
+                        </div>
+                    </div>
+
+                    <div class="ms-checkout-delivery" id="checkoutDelivery" data-premium-delivery="@(premiumDelivery ? "1" : "0")">
+                        <div class="ms-checkout-delivery__head">
+                            <h3 class="ms-checkout-delivery__title">روش تحویل</h3>
+                            @if (premiumDelivery)
+                            {
+                                <span class="ms-checkout-delivery__tier ms-checkout-delivery__tier--active">سطح ویژه فعال</span>
+                            }
+                            else
+                            {
+                                <span class="ms-checkout-delivery__tier">زیر سطح ویژه</span>
+                            }
+                        </div>
+
+                        @if (premiumDelivery)
+                        {
+                            <p class="ms-checkout-delivery__policy ms-checkout-delivery__policy--premium">
+                                سفارش شما به آستانه <strong>سطح ویژه</strong> رسیده است؛ می‌توانید بارگیری از انبار یا
+                                <strong>ارسال رایگان داخل تهران (خاور)</strong> را انتخاب کنید.
+                            </p>
+                        }
+                        else
+                        {
+                            <p class="ms-checkout-delivery__policy">
+                                <strong>ارسال با خاور رایگان</strong> فقط برای سطح ویژه است
+                                (<strong>@WholesaleRules.PremiumCartons کارتن</strong> یا <strong>@WholesaleRules.FormatPremiumAmount() تومان</strong>).
+                                در این سفارش فقط <strong>بارگیری با وسیله مشتری</strong> از انبار فعال است.
+                            </p>
+                            <div class="ms-checkout-delivery__meter" aria-label="پیشرفت تا سطح ویژه">
+                                <div class="ms-checkout-delivery__meter-row">
+                                    <span>کارتن سفارش</span>
+                                    <strong dir="ltr">@premiumCartons.ToString("N0") / @WholesaleRules.PremiumCartons.ToString("N0")</strong>
+                                </div>
+                                <div class="ms-checkout-delivery__meter-row">
+                                    <span>جمع فاکتور</span>
+                                    <strong dir="ltr">@SlugHelper.FormatToman(premiumAmount) / @WholesaleRules.FormatPremiumAmount()</strong>
+                                </div>
+                            </div>
+                            <input type="hidden" name="DeliveryMethod" value="@((int)DeliveryMethod.CustomerVehicle)" />
+                        }
+
+                        <div class="ms-delivery-options" role="@(premiumDelivery ? "radiogroup" : "group")" aria-label="روش تحویل">
+                            @if (premiumDelivery)
+                            {
+                                <label class="ms-del-card">
+                                    <input class="ms-del-card__input" type="radio" name="DeliveryMethod" value="@((int)DeliveryMethod.CustomerVehicle)" checked />
+                                    <div class="ms-del-card__top">
+                                        <span class="ms-del-card__icon" aria-hidden="true">🚛</span>
+                                    </div>
+                                    <strong class="ms-del-card__title">بارگیری با وسیله مشتری</strong>
+                                    <p class="ms-del-card__desc">مراجعه به انبار و بارگیری با وسیله و راننده‌ای که در فرم پایین معرفی می‌کنید.</p>
+                                </label>
+                            }
+                            else
+                            {
+                                <div class="ms-del-card ms-del-card--active" aria-current="true">
+                                    <div class="ms-del-card__top">
+                                        <span class="ms-del-card__icon" aria-hidden="true">🚛</span>
+                                        <span class="ms-del-card__badge ms-del-card__badge--only">روش فعال</span>
+                                    </div>
+                                    <strong class="ms-del-card__title">بارگیری با وسیله مشتری</strong>
+                                    <p class="ms-del-card__desc">مراجعه به انبار و بارگیری با وسیله و راننده‌ای که در فرم پایین معرفی می‌کنید.</p>
+                                    <ul class="ms-del-card__list">
+                                        <li>تسویه نقدی در محل بارگیری</li>
+                                        <li>حمل با وسیله خودتان — بدون ارسال انبار</li>
+                                    </ul>
+                                </div>
+                            }
+
+                            @if (premiumDelivery)
+                            {
+                                <label class="ms-del-card ms-del-card--premium">
+                                    <input class="ms-del-card__input" type="radio" name="DeliveryMethod" value="@((int)DeliveryMethod.FreeKhavar)" />
+                                    <div class="ms-del-card__top">
+                                        <span class="ms-del-card__icon" aria-hidden="true">📦</span>
+                                        <span class="ms-del-card__badge ms-del-card__badge--free">رایگان — تهران</span>
+                                    </div>
+                                    <strong class="ms-del-card__title">ارسال با خاور (تهران)</strong>
+                                    <p class="ms-del-card__desc">تحویل در آدرس تهران با خودروی خاور؛ هزینه حمل برای این سفارش صفر است.</p>
+                                </label>
+                            }
+                            else
+                            {
+                                <div class="ms-del-card ms-del-card--premium ms-del-card--disabled" aria-disabled="true">
+                                    <div class="ms-del-card__top">
+                                        <span class="ms-del-card__icon" aria-hidden="true">📦</span>
+                                        <span class="ms-del-card__badge ms-del-card__badge--locked">فقط سطح ویژه</span>
+                                    </div>
+                                    <strong class="ms-del-card__title">ارسال با خاور (تهران)</strong>
+                                    <p class="ms-del-card__desc">این روش برای سفارش شما غیرفعال است. با رسیدن به @WholesaleRules.PremiumCartons کارتن یا @WholesaleRules.FormatPremiumAmount() تومان، ارسال رایگان تهران باز می‌شود.</p>
+                                    <p class="ms-del-card__muted">تا آن زمان فقط بارگیری با وسیله مشتری ممکن است.</p>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="ms-checkout-timeline" aria-label="مراحل بعد از ثبت">
+                        <div class="ms-checkout-timeline__step"><span>۱</span> ثبت سفارش</div>
+                        <div class="ms-checkout-timeline__step"><span>۲</span> تماس و تأیید</div>
+                        <div class="ms-checkout-timeline__step"><span>۳</span> بارگیری و پرداخت نقدی</div>
+                    </div>
+                    <p class="ms-checkout-note">زمان آماده‌سازی معمولاً <strong>۲ تا ۷ روز کاری</strong> پس از تأیید سفارش است.</p>
+                </div>
+
+                <div class="ms-checkout-card" id="vehicleFields">
+                    <h2>وسیله نقلیه بارگیری</h2>
+                    <div class="ms-checkout-row">
+                        <div class="ms-checkout-field"><label>نام راننده</label><input class="ms-checkout-input" name="DriverName" /></div>
+                        <div class="ms-checkout-field"><label>موبایل راننده</label><input class="ms-checkout-input" name="DriverPhone" dir="ltr" /></div>
+                    </div>
+                    <div class="ms-checkout-row">
+                        <div class="ms-checkout-field"><label>پلاک</label><input class="ms-checkout-input" name="PlateNumber" /></div>
+                        <div class="ms-checkout-field"><label>نوع وسیله</label><input class="ms-checkout-input" name="VehicleType" placeholder="وانت، کامیون..." /></div>
+                    </div>
+                    <div class="ms-checkout-field"><label>توضیحات بارگیری</label><input class="ms-checkout-input" name="VehicleAdditionalInfo" /></div>
+                </div>
+
+                <div class="ms-checkout-card" id="addressFields" hidden>
+                    <h2>آدرس تحویل (تهران)</h2>
+                    <div class="ms-checkout-row">
+                        <div class="ms-checkout-field"><label>استان</label><input class="ms-checkout-input" name="Province" value="تهران" /></div>
+                        <div class="ms-checkout-field"><label>شهر</label><input class="ms-checkout-input" name="City" value="تهران" /></div>
+                    </div>
+                    <div class="ms-checkout-field"><label>آدرس کامل</label><textarea class="ms-checkout-input" name="FullAddress" rows="3"></textarea></div>
+                    <div class="ms-checkout-field"><label>کد پستی</label><input class="ms-checkout-input" name="PostalCode" dir="ltr" /></div>
+                </div>
+
+                <div class="ms-checkout-card">
+                    <label class="ms-checkout-check">
+                        <input type="checkbox" name="WantsOfficialInvoice" value="true" id="invoiceCheck" />
+                        درخواست فاکتور رسمی
+                    </label>
+                    <div id="legalFields" hidden class="ms-checkout-legal">
+                        <div class="ms-checkout-field"><label>نام شرکت</label><input class="ms-checkout-input" name="CompanyName" /></div>
+                        <div class="ms-checkout-row">
+                            <div class="ms-checkout-field"><label>شناسه ملی</label><input class="ms-checkout-input" name="NationalId" dir="ltr" /></div>
+                            <div class="ms-checkout-field"><label>کد اقتصادی</label><input class="ms-checkout-input" name="EconomicCode" dir="ltr" /></div>
+                        </div>
+                        <div class="ms-checkout-field"><label>شماره ثبت</label><input class="ms-checkout-input" name="RegistrationNumber" /></div>
+                        <div class="ms-checkout-field"><label>آدرس حقوقی</label><input class="ms-checkout-input" name="LegalAddress" /></div>
+                    </div>
+                </div>
+
+                <div class="ms-checkout-card">
+                    <div class="ms-checkout-field">
+                        <label>یادداشت سفارش</label>
+                        <textarea class="ms-checkout-input" name="Notes" rows="2" placeholder="ساعت بارگیری، تخلیه درب عقب، ..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="ms-checkout-aside">
+                <partial name="_CartDiscountProgress" model="Model" />
+                <partial name="_CartTotals" model="Model" />
+                <div class="ms-checkout-aside-pay">
+                    <span class="ms-checkout-aside-pay__icon" aria-hidden="true">✓</span>
+                    <div>
+                        <strong>پرداخت: نقدی هنگام بارگیری</strong>
+                        <p>مبلغ نهایی پس از تأیید موجودی اعلام می‌شود و در محل تحویل/بارگیری تسویه می‌گردد.</p>
+                    </div>
+                </div>
+                <p class="ms-checkout-footnote">ثبت سفارش به منزله قطعی‌کردن موجودی نیست؛ پس از تماس واحد فروش نهایی می‌شود.</p>
+                <button class="ms-cart-checkout ms-checkout-submit" type="submit">ثبت سفارش با پرداخت نقدی</button>
+            </aside>
+        </div>
+    </form>
+</section>
+
+@section Scripts {
+<script>
+(function () {
+    const vehicleEl = document.getElementById('vehicleFields');
+    const addressEl = document.getElementById('addressFields');
+    const vehicleNames = ['DriverName', 'DriverPhone', 'PlateNumber', 'VehicleType'];
+    const addressNames = ['Province', 'City', 'FullAddress'];
+
+    const premiumDelivery = document.getElementById('checkoutDelivery')?.dataset.premiumDelivery === '1';
+
+    function isKhavarSelected() {
+        if (!premiumDelivery) return false;
+        const radio = document.querySelector('input[name="DeliveryMethod"][type="radio"]:checked');
+        return radio?.value === '2';
+    }
+
+    function setRequired(names, on) {
+        names.forEach(function (name) {
+            const el = document.querySelector('[name="' + name + '"]');
+            if (el) el.required = on;
+        });
+    }
+
+    function syncDelivery() {
+        const khavar = isKhavarSelected();
+        if (vehicleEl) vehicleEl.hidden = khavar;
+        if (addressEl) addressEl.hidden = !khavar;
+        setRequired(vehicleNames, !khavar);
+        setRequired(addressNames, khavar);
+    }
+
+    document.querySelectorAll('input[name="DeliveryMethod"]').forEach(function (el) {
+        el.addEventListener('change', syncDelivery);
+    });
+    syncDelivery();
+
+    document.getElementById('invoiceCheck')?.addEventListener('change', function (e) {
+        document.getElementById('legalFields').hidden = !e.target.checked;
+    });
+})();
+</script>
+}

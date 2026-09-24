@@ -1,0 +1,14 @@
+@model CartSummary
+@{ ViewData["Title"] = "حداقل سفارش"; }
+<div class="section"><div class="container">
+    <div class="form-card">
+        <h1>حداقل سفارش رعایت نشده</h1>
+        <p>حداقل سفارش: <strong>@WholesaleRules.FormatMinAmount() تومان</strong></p>
+        <p>جمع فعلی سبد: <strong>@SlugHelper.FormatToman(Model.SubTotal) تومان</strong></p>
+        <p>با رسیدن به حداقل، تخفیف پلکانی روی کل فاکتور اعمال می‌شود (از ۳٪ تا ۱۲٪).</p>
+        <partial name="_WholesalePolicy" />
+        <p style="margin-top:1rem">برای هماهنگی سفارش‌های ویژه:</p>
+        <p style="font-size:1.5rem;font-weight:700"><a href="tel:@WholesaleRules.CoordinationPhone">@WholesaleRules.CoordinationPhone</a></p>
+        <a href="/Cart" class="btn btn-ghost">بازگشت به سبد</a>
+    </div>
+</div></div>

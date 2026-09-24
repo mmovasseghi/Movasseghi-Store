@@ -1,0 +1,45 @@
+@model List<MovasseghiShop.Web.Models.Entities.CmsPage>
+
+@{
+
+    Layout = "_AdminLayout";
+
+    ViewData["Title"] = "صفحات CMS";
+
+    ViewData["HeroTitle"] = "📄 صفحات CMS";
+
+    ViewData["HeroSubtitle"] = "About، Wholesale، Pricing و pillar pages — TipTap editor";
+
+    ViewData["HeroBadge"] = "CONTENT";
+
+}
+
+<partial name="_AdminHero" />
+
+<section class="st-panel st-reveal">
+
+    @foreach (var p in Model)
+
+    {
+
+        var viewUrl = p.Key switch { "about" => "/Page/About", "wholesale" => "/Page/Wholesale", "pricing" => "/Page/Pricing", "amelon" => "/Page/Amelon", "terms" => "/Page/Terms", "privacy" => "/Page/Privacy", _ => null };
+
+        <div class="st-card-row">
+
+            <span><strong>@p.Key</strong> — @p.Title</span>
+
+            <span class="st-btn-row">
+
+                <a class="st-btn st-btn-ghost st-btn-sm" href="/Admin/StudioContent/EditPage?key=@p.Key">ویرایش</a>
+
+                @if (viewUrl != null) { <a class="st-btn st-btn-ghost st-btn-sm" href="@viewUrl" target="_blank">مشاهده ↗</a> }
+
+            </span>
+
+        </div>
+
+    }
+
+</section>
+
+

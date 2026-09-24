@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "http": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "hotReloadEnabled": true,
+      "launchBrowser": true,
+      "applicationUrl": "http://0.0.0.0:5274",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "watch": {
+      "commandName": "Executable",
+      "executablePath": "dotnet",
+      "commandLineArgs": "watch run --project \"$(ProjectDir)$(MSBuildProjectFile)\" --urls http://0.0.0.0:5274",
+      "workingDirectory": "$(ProjectDir)",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "https": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "hotReloadEnabled": true,
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:7152;http://0.0.0.0:5274",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

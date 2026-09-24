@@ -1,0 +1,16 @@
+@{
+    var title = ViewData["HeroTitle"] as string ?? ViewData["Title"]?.ToString() ?? "";
+    var subtitle = ViewData["HeroSubtitle"] as string;
+    var badge = ViewData["HeroBadge"] as string;
+}
+<header class="st-page-header st-reveal">
+    @if (!string.IsNullOrEmpty(badge))
+    {
+        <span class="st-page-badge">@badge</span>
+    }
+    <h2 class="st-page-title">@title</h2>
+    @if (!string.IsNullOrEmpty(subtitle))
+    {
+        <p class="st-page-sub">@subtitle</p>
+    }
+</header>

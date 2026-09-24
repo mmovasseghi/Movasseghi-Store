@@ -1,0 +1,85 @@
+@model FaqItem
+@{
+    var isNew = Model.Id == 0;
+    ViewData["Title"] = isNew ? "سوال جدید" : "ویرایش سوال";
+}
+
+<form method="post" action="/Admin/FaqAdmin/Save" data-kit-primary data-kit-dirty-guard>
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="Id" value="@Model.Id" />
+
+    <div class="kit-toolbar kit-rise">
+        <div class="kit-toolbar-grow">
+            <strong style="font-size:.88rem">@(isNew ? "افزودن پرسش متداول" : Model.Question)</strong>
+        </div>
+        <a class="st-btn st-btn-ghost" href="/Admin/FaqAdmin">بازگشت</a>
+        <button type="submit" class="st-btn st-btn-primary">@(isNew ? "ثبت سوال" : "ذخیره تغییرات")</button>
+    </div>
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="kit-insight kit-insight--risk kit-rise">
+            <span class="kit-insight-icon" aria-hidden="true">⚠️</span>
+            <div class="kit-insight-body">
+                <strong>ذخیره نشد</strong>
+                @foreach (var err in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <div>· @err.ErrorMessage</div>
+                }
+            </div>
+        </div>
+    }
+
+    <section class="kit-section kit-rise" style="max-width:820px">
+        <div class="kit-section-head">
+            <div>
+                <h2>پرسش و پاسخ</h2>
+                <p>
+                    پاسخ را طوری بنویسید که جمله اولش به‌تنهایی جواب کامل باشد؛
+                    دستیارهای هوش مصنوعی معمولاً فقط همان جمله را نقل می‌کنند.
+                </p>
+            </div>
+        </div>
+
+        <div class="st-field">
+            <label for="Question">سوال <span style="color:#fca5a5">*</span></label>
+            <input id="Question" name="Question" value="@Model.Question" required
+                   class="st-input @(ViewData.ModelState["Question"]?.Errors.Count > 0 ? "kit-input-invalid" : "")"
+                   placeholder="حداقل سفارش عمده چند کارتن است؟" />
+            <span class="kit-form-hint">
+                دقیقاً با همان کلماتی بنویسید که مشتری در گوگل تایپ می‌کند و با «؟» تمام شود.
+            </span>
+        </div>
+
+        <div class="st-field">
+            <label for="Answer">
+                پاسخ <span style="color:#fca5a5">*</span>
+                <span class="kit-counter" id="cnt-answer"></span>
+            </label>
+            <textarea id="Answer" name="Answer" rows="6" required
+                      class="st-input @(ViewData.ModelState["Answer"]?.Errors.Count > 0 ? "kit-input-invalid" : "")"
+                      data-kit-counter="#cnt-answer" data-kit-min="120" data-kit-max="600">@Model.Answer</textarea>
+            <span class="kit-form-hint">
+                ۱۲۰ تا ۶۰۰ کاراکتر بهترین بازه برای Featured Snippet است: کوتاه‌تر بی‌محتوا
+                به‌نظر می‌رسد، بلندتر بریده می‌شود.
+            </span>
+        </div>
+
+        <div class="kit-form-grid">
+            <div class="st-field">
+                <label for="SortOrder">ترتیب نمایش</label>
+                <input id="SortOrder" name="SortOrder" type="number" value="@Model.SortOrder" class="st-input" style="max-width:140px" />
+                <span class="kit-form-hint">عدد کوچک‌تر بالاتر می‌آید.</span>
+            </div>
+
+            <div style="align-self:end;padding-bottom:.25rem">
+                <label class="kit-switch">
+                    <input type="checkbox" name="IsActive" value="true" @(Model.IsActive ? "checked" : "") />
+                    <span class="kit-switch-label">روی سایت نمایش داده شود</span>
+                    <span class="kit-switch-track" aria-hidden="true"></span>
+                </label>
+                <input type="hidden" name="IsActive" value="false" />
+            </div>
+        </div>
+    </section>
+</form>

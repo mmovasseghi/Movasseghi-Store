@@ -1,0 +1,282 @@
+/* ═══════════════════════════════════════════════════════════
+   Prose — تایپوگرافی محتوای متنی سایت
+   ───────────────────────────────────────────────────────────
+   موتور SEO (SeoUltimateWriter / SeoCategoryBuilder) HTML خام
+   تولید می‌کند: h2, h3, p, ul, ol, table, blockquote و لینک داخلی.
+   این فایل تضمین می‌کند هرجای سایت که آن HTML رندر شود،
+   برای بازدیدکننده واقعی خوانا و حرفه‌ای دیده شود.
+
+   کلاس‌های پوشاننده در سایت: .pd-prose (محصول) · .ct-prose (بلاگ/اخبار)
+   · .form-card (صفحات CMS) · .ms-prose (عمومی)
+   ═══════════════════════════════════════════════════════════ */
+
+.ms-prose,
+.pd-prose,
+.ct-prose,
+.form-card {
+  color: var(--c-text);
+  font-size: 0.94rem;
+  line-height: 1.95;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* ── لینک داخل متن ──
+   مشکل اصلی: reset سراسری a{color:inherit;text-decoration:none} باعث می‌شد
+   لینک از متن معمولی قابل تشخیص نباشد. این‌جا affordance واقعی می‌دهیم:
+   رنگ متمایز + زیرخط + حالت hover/focus/visited. */
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card, .breadcrumb, .pd-lead, .ct-lead) a {
+  color: var(--c-link);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, var(--c-link) 45%, transparent);
+  transition: color 0.16s var(--ease), text-decoration-color 0.16s var(--ease),
+    background-color 0.16s var(--ease);
+  border-radius: 3px;
+}
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card, .breadcrumb, .pd-lead, .ct-lead) a:hover {
+  color: var(--c-link-hover);
+  text-decoration-color: currentColor;
+  background: color-mix(in srgb, var(--c-primary-light) 70%, transparent);
+}
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card, .pd-lead, .ct-lead) a:visited {
+  color: var(--c-link-visited);
+}
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card, .breadcrumb, .pd-lead) a:focus-visible {
+  outline: 3px solid var(--c-link);
+  outline-offset: 2px;
+  background: var(--c-primary-light);
+}
+
+/* لینک خارجی — نشانه بصری که کاربر از سایت خارج می‌شود */
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card) a[target="_blank"]::after {
+  content: "↗";
+  display: inline-block;
+  margin-inline-start: 0.2em;
+  font-size: 0.78em;
+  vertical-align: super;
+  text-decoration: none;
+  opacity: 0.7;
+}
+
+/* لینک تلفن — همیشه LTR تا شماره برعکس نشود */
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card, .pd-lead) a[href^="tel:"] {
+  direction: ltr;
+  unicode-bidi: isolate;
+  white-space: nowrap;
+}
+
+/* ── سرتیترها ── */
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card) h2 {
+  margin: 2.1rem 0 0.85rem;
+  font-size: clamp(1.06rem, 3.4vw, 1.3rem);
+  font-weight: 900;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: var(--c-primary-dark);
+  padding-inline-start: 0.7rem;
+  border-inline-start: 4px solid var(--c-accent);
+  scroll-margin-top: 5rem;
+}
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card) h2:first-child {
+  margin-top: 0;
+}
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card) h3 {
+  margin: 1.5rem 0 0.6rem;
+  font-size: clamp(0.97rem, 3vw, 1.1rem);
+  font-weight: 800;
+  line-height: 1.55;
+  color: var(--c-primary);
+  scroll-margin-top: 5rem;
+}
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card) h4 {
+  margin: 1.15rem 0 0.45rem;
+  font-size: 0.93rem;
+  font-weight: 800;
+  color: var(--c-text);
+}
+
+/* ── پاراگراف و تأکید ── */
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card) p {
+  margin: 0 0 1.05rem;
+}
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card) p:last-child {
+  margin-bottom: 0;
+}
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card) strong,
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card) b {
+  font-weight: 800;
+  color: var(--c-primary-dark);
+}
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card) mark {
+  background: color-mix(in srgb, var(--c-gold) 30%, transparent);
+  color: inherit;
+  padding: 0.05em 0.25em;
+  border-radius: 4px;
+}
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card) small {
+  font-size: 0.82rem;
+  color: var(--c-text-2);
+}
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card) hr {
+  margin: 1.8rem 0;
+  border: 0;
+  border-top: 1px solid var(--c-border);
+}
+
+/* ── لیست‌ها ── */
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card) ul,
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card) ol {
+  margin: 0 0 1.15rem;
+  padding-inline-start: 1.35rem;
+}
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card) li {
+  margin-bottom: 0.5rem;
+  padding-inline-start: 0.2rem;
+}
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card) li::marker {
+  color: var(--c-accent);
+  font-weight: 800;
+}
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card) li > ul,
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card) li > ol {
+  margin-top: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+/* ── جدول مشخصات ──
+   موتور SEO جدول خام <table><thead>… می‌سازد (بدون class).
+   روی موبایل به‌صورت افقی اسکرول می‌شود تا layout نشکند. */
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card) table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 0 1.35rem;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: 0.87rem;
+  background: var(--c-white);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r);
+  box-shadow: var(--shadow);
+  -webkit-overflow-scrolling: touch;
+}
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card) thead {
+  background: var(--c-primary-light);
+}
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card) th {
+  padding: 0.72rem 0.9rem;
+  text-align: start;
+  font-weight: 800;
+  font-size: 0.84rem;
+  color: var(--c-primary-dark);
+  white-space: nowrap;
+  border-bottom: 1px solid var(--c-border);
+}
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card) td {
+  padding: 0.68rem 0.9rem;
+  border-bottom: 1px solid var(--c-border);
+  vertical-align: top;
+}
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card) tbody tr:last-child td {
+  border-bottom: 0;
+}
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card) tbody tr:nth-child(even) {
+  background: color-mix(in srgb, var(--c-bg) 55%, transparent);
+}
+/* ستون اول جدول مشخصات = نام ویژگی */
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card) tbody th:first-child,
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card) tbody td:first-child {
+  font-weight: 700;
+  color: var(--c-text-2);
+}
+
+/* ── نقل‌قول / نکته کلیدی ──
+   در محتوای AEO برای «پاسخ مستقیم» استفاده می‌شود. */
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card) blockquote {
+  margin: 0 0 1.3rem;
+  padding: 0.95rem 1.1rem;
+  background: var(--c-primary-light);
+  border-inline-start: 4px solid var(--c-accent);
+  border-radius: var(--r);
+  font-size: 0.92rem;
+  line-height: 1.85;
+  color: var(--c-primary-dark);
+}
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card) blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* ── لیست تعریف (Definition List) — سطح AEO ── */
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card) dl {
+  margin: 0 0 1.2rem;
+}
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card) dt {
+  font-weight: 800;
+  color: var(--c-primary-dark);
+  margin-top: 0.85rem;
+}
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card) dd {
+  margin: 0.25rem 0 0;
+  padding-inline-start: 0.9rem;
+  border-inline-start: 2px solid var(--c-border);
+  color: var(--c-text-2);
+}
+
+/* ── کد / اعداد فنی ── */
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card) code {
+  padding: 0.12em 0.4em;
+  background: var(--c-primary-light);
+  border-radius: 5px;
+  font-size: 0.86em;
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* ── تصویر داخل متن ── */
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card) img {
+  margin: 0.5rem 0 1.2rem;
+  border-radius: var(--r);
+  box-shadow: var(--shadow);
+}
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card) figure {
+  margin: 0 0 1.3rem;
+}
+:is(.ms-prose, .pd-prose, .ct-prose, .form-card) figcaption {
+  margin-top: 0.45rem;
+  font-size: 0.8rem;
+  color: var(--c-muted);
+  text-align: center;
+}
+
+/* ── صفحات CMS: .form-card به‌عنوان ظرف مقاله ── */
+.form-card > :first-child {
+  margin-top: 0;
+}
+
+/* ── Breadcrumb ── */
+.breadcrumb a {
+  font-weight: 700;
+}
+.breadcrumb span {
+  color: var(--c-muted);
+}
+
+@media (min-width: 768px) {
+  .ms-prose,
+  .pd-prose,
+  .ct-prose,
+  .form-card {
+    font-size: 0.97rem;
+    line-height: 2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :is(.ms-prose, .pd-prose, .ct-prose, .form-card) a {
+    transition: none;
+  }
+}

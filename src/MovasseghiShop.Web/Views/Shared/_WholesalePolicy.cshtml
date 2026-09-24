@@ -1,0 +1,23 @@
+<section class="ws-policy ms-reveal" aria-labelledby="ws-policy-title">
+    <div class="ws-policy-head">
+        <span class="ws-policy-kicker">💰 تخفیف پلکانی عمده</span>
+        <h2 id="ws-policy-title">شرایط خرید عمده موثقی</h2>
+        <p>حداقل سفارش <strong>@WholesaleRules.FormatMinAmount() تومان</strong> — تخفیف روی کل فاکتور</p>
+    </div>
+    <div class="ws-policy-grid">
+        @foreach (var tier in WholesaleRules.VolumeTiers)
+        {
+            <div class="ws-policy-tier">
+                <span class="ws-policy-tier-amt">@tier.LabelFa تومان</span>
+                <strong class="ws-policy-tier-pct">@(tier.DiscountPercent)%</strong>
+                <span class="ws-policy-tier-lbl">تخفیف کل فاکتور</span>
+            </div>
+        }
+        <div class="ws-policy-tier ws-policy-tier--premium">
+            <span class="ws-policy-tier-amt">@WholesaleRules.FormatPremiumAmount() تومان یا @WholesaleRules.PremiumCartons کارتن</span>
+            <strong class="ws-policy-tier-pct">+۱۲٪</strong>
+            <span class="ws-policy-tier-lbl">هماهنگی تلفنی · ارسال رایگان تهران</span>
+        </div>
+    </div>
+    <p class="ws-policy-note">برای سفارش‌های بزرگ (خاور پر / بالای ۷۰۰ میلیون) جهت تخفیف بیشتر و هماهنگی ارسال رایگان داخل تهران با <a href="tel:@WholesaleRules.CoordinationPhone">@WholesaleRules.CoordinationPhone</a> تماس بگیرید.</p>
+</section>

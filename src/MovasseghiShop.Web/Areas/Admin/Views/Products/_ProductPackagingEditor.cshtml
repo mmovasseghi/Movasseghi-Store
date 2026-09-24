@@ -1,0 +1,125 @@
+@model MovasseghiShop.Web.Models.Admin.ProductPackagingViewModel
+@{
+    var f = Model.Form;
+    var prefix = Model.SkuPrefix;
+}
+
+<p class="st-pe-intro">نوع بسته‌بندی را مشخص کنید — فله (نایلون/کارتن کارخانه) یا شیرینگ (بسته/کارتن retail). SKU پیشوند: <code dir="ltr">AM-@prefix-</code></p>
+
+<div class="st-pack-editor" data-pack-editor>
+    <!-- فله -->
+    <section class="st-pack-block st-pack-block--bulk" data-pack-block="bulk">
+        <label class="st-pack-toggle">
+            <input type="checkbox" name="packaging.BulkEnabled" value="true" @(f.BulkEnabled ? "checked" : "") data-pack-enable="bulk" />
+            <span class="st-pack-toggle-label">
+                <strong>📦 فله (عمده)</strong>
+                <small>نایلون کارخانه — مثل پیش‌دستی، بشقاب فله</small>
+            </span>
+        </label>
+
+        <div class="st-pack-body" data-pack-body="bulk" @(f.BulkEnabled ? null : "hidden")>
+            <div class="st-pack-row">
+                <h3>نایلون فله</h3>
+                <div class="st-pack-fields">
+                    <div class="st-field">
+                        <label>تعداد در هر نایلون</label>
+                        <input type="number" name="packaging.BulkNylonUnits" value="@f.BulkNylonUnits" min="1" class="st-input" data-bulk-nylon-units />
+                    </div>
+                    <div class="st-field">
+                        <label>قیمت هر نایلون (تومان)</label>
+                        <input type="text" name="packaging.BulkNylonPrice" value="@((int)f.BulkNylonPrice)" class="st-input" data-admin-price-input data-bulk-nylon-price />
+                    </div>
+                    <label class="st-checkbox">
+                        <input type="checkbox" name="packaging.BulkNylonShowPrice" value="true" @(f.BulkNylonShowPrice ? "checked" : "") />
+                        نمایش قیمت در فروشگاه
+                    </label>
+                </div>
+            </div>
+
+            <div class="st-pack-row st-pack-row--sub">
+                <label class="st-pack-toggle st-pack-toggle--sub">
+                    <input type="checkbox" name="packaging.BulkCartonEnabled" value="true" @(f.BulkCartonEnabled ? "checked" : "") data-pack-enable="bulk-carton" />
+                    <span>+ کارتن فله (چند نایلون)</span>
+                </label>
+                <div class="st-pack-body st-pack-body--sub" data-pack-body="bulk-carton" @(f.BulkCartonEnabled ? null : "hidden")>
+                    <div class="st-pack-fields">
+                        <div class="st-field">
+                            <label>تعداد نایلون در کارتن</label>
+                            <input type="number" name="packaging.BulkCartonNylons" value="@f.BulkCartonNylons" min="1" class="st-input" data-bulk-carton-nylons />
+                        </div>
+                        <div class="st-field">
+                            <label>کل ظرف در کارتن (عدد)</label>
+                            <input type="number" name="packaging.BulkCartonTotalUnits" value="@f.BulkCartonTotalUnits" min="1" class="st-input" data-bulk-carton-units />
+                        </div>
+                        <div class="st-field">
+                            <label>قیمت هر کارتن (تومان)</label>
+                            <input type="text" name="packaging.BulkCartonPrice" value="@((int)f.BulkCartonPrice)" class="st-input" data-admin-price-input data-bulk-carton-price />
+                        </div>
+                        <label class="st-checkbox">
+                            <input type="checkbox" name="packaging.BulkCartonShowPrice" value="true" @(f.BulkCartonShowPrice ? "checked" : "") />
+                            نمایش قیمت کارتن
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- شیرینگ -->
+    <section class="st-pack-block st-pack-block--shrink" data-pack-block="shrink">
+        <label class="st-pack-toggle">
+            <input type="checkbox" name="packaging.ShrinkEnabled" value="true" @(f.ShrinkEnabled ? "checked" : "") data-pack-enable="shrink" />
+            <span class="st-pack-toggle-label">
+                <strong>🎁 شیرینگ (Shrink)</strong>
+                <small>بسته ۱۲/۶ عددی — مثل پیش‌دستی ۱۲ عددی جداگانه</small>
+            </span>
+        </label>
+
+        <div class="st-pack-body" data-pack-body="shrink" @(f.ShrinkEnabled ? null : "hidden")>
+            <div class="st-pack-row">
+                <h3>بسته شیرینگ</h3>
+                <div class="st-pack-fields">
+                    <div class="st-field">
+                        <label>تعداد در هر بسته</label>
+                        <input type="number" name="packaging.ShrinkPackUnits" value="@f.ShrinkPackUnits" min="1" class="st-input" data-shrink-pack-units />
+                    </div>
+                    <div class="st-field">
+                        <label>قیمت هر بسته (تومان)</label>
+                        <input type="text" name="packaging.ShrinkPackPrice" value="@((int)f.ShrinkPackPrice)" class="st-input" data-admin-price-input data-shrink-pack-price />
+                    </div>
+                    <label class="st-checkbox">
+                        <input type="checkbox" name="packaging.ShrinkPackShowPrice" value="true" @(f.ShrinkPackShowPrice ? "checked" : "") />
+                        نمایش قیمت در فروشگاه
+                    </label>
+                </div>
+            </div>
+
+            <div class="st-pack-row st-pack-row--sub">
+                <label class="st-pack-toggle st-pack-toggle--sub">
+                    <input type="checkbox" name="packaging.ShrinkCartonEnabled" value="true" @(f.ShrinkCartonEnabled ? "checked" : "") data-pack-enable="shrink-carton" />
+                    <span>+ کارتن شیرینگ (چند بسته)</span>
+                </label>
+                <div class="st-pack-body st-pack-body--sub" data-pack-body="shrink-carton" @(f.ShrinkCartonEnabled ? null : "hidden")>
+                    <div class="st-pack-fields">
+                        <div class="st-field">
+                            <label>تعداد بسته در کارتن</label>
+                            <input type="number" name="packaging.ShrinkCartonPacks" value="@f.ShrinkCartonPacks" min="1" class="st-input" data-shrink-carton-packs />
+                        </div>
+                        <div class="st-field">
+                            <label>کل ظرف در کارتن (عدد)</label>
+                            <input type="number" name="packaging.ShrinkCartonTotalUnits" value="@f.ShrinkCartonTotalUnits" min="1" class="st-input" data-shrink-carton-units />
+                        </div>
+                        <div class="st-field">
+                            <label>قیمت هر کارتن (تومان)</label>
+                            <input type="text" name="packaging.ShrinkCartonPrice" value="@((int)f.ShrinkCartonPrice)" class="st-input" data-admin-price-input data-shrink-carton-price />
+                        </div>
+                        <label class="st-checkbox">
+                            <input type="checkbox" name="packaging.ShrinkCartonShowPrice" value="true" @(f.ShrinkCartonShowPrice ? "checked" : "") />
+                            نمایش قیمت کارتن
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

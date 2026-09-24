@@ -1,0 +1,14 @@
+@model Category
+@{ Layout = "_AdminLayout"; ViewData["Title"] = "دسته جدید"; }
+<section class="st-panel st-reveal" style="max-width:520px">
+    <h2>دسته جدید</h2>
+    <form method="post">
+        @Html.AntiForgeryToken()
+        <div class="st-field"><label>نام</label><input name="Name" required class="st-input" /></div>
+        <div class="st-field"><label>Slug (اختیاری)</label><input name="Slug" class="st-input" dir="ltr" /></div>
+        <div class="st-field"><label>توضیح</label><textarea name="Description" rows="3" class="st-input"></textarea></div>
+        <div class="st-field"><label>Meta Title</label><input name="MetaTitle" class="st-input" /></div>
+        <div class="st-field"><label>Meta Description</label><textarea name="MetaDescription" rows="2" class="st-input"></textarea></div>
+        <button type="submit" class="st-btn st-btn-primary">ذخیره</button>
+    </form>
+</section>

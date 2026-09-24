@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0a0e0c" />
+    <title>@ViewData["Title"] — پنل مدیریت موثقی</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/admin-studio.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/admin-kit.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/admin-mobile.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/admin-mobile-shell.css" asp-append-version="true" />
+    @await RenderSectionAsync("Head", required: false)
+</head>
+<body class="st-body">
+<div class="nx-ambient" aria-hidden="true">
+    <div class="nx-orb nx-orb--1"></div>
+    <div class="nx-orb nx-orb--2"></div>
+    <div class="nx-grid"></div>
+</div>
+<div class="st-overlay" data-st-overlay></div>
+
+<div class="st-app">
+    <aside class="st-sidebar" data-st-sidebar>
+        <div class="st-sidebar-inner">
+            <div class="st-brand-row">
+                <a href="/Admin/Dashboard" class="st-brand">
+                    <span class="st-brand-logo">
+                        <span class="st-brand-glow"></span>
+                        م
+                    </span>
+                    <span class="st-brand-text">
+                        <strong>فروشگاه موثقی</strong>
+                        <small>پنل مدیریت</small>
+                    </span>
+                </a>
+                <button type="button" class="st-nav-close" data-st-nav-close aria-label="بستن منو">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+
+            <nav class="st-nav" aria-label="منوی ادمین">
+                @{
+                    var path = Context.Request.Path.Value ?? "";
+                    string NavClass(bool active) => active ? "is-active" : "";
+                    int NavBadgeCount(object? value) => value switch
+                    {
+                        int i => i,
+                        long l => (int)l,
+                        _ => int.TryParse(value?.ToString(), out var n) ? n : 0
+                    };
+                    var openOrderCount = NavBadgeCount(ViewData["OpenOrderCount"] ?? Context.Items["OpenOrderCount"]);
+                    var openInquiryCount = NavBadgeCount(ViewData["OpenInquiryCount"] ?? Context.Items["OpenInquiryCount"]);
+                }
+                <div class="st-nav-group">
+                    <span class="st-nav-heading">فروشگاه</span>
+                    <a href="/Admin/Dashboard" class="st-nav-item @NavClass(path.Contains("/Dashboard"))">
+                        <span class="st-nav-icon-wrap"><svg class="st-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>
+                        داشبورد
+                    </a>
+                    <a href="/Admin/Products" class="st-nav-item @NavClass(path.Contains("/Products"))">
+                        <span class="st-nav-icon-wrap"><svg class="st-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></span>
+                        محصولات
+                    </a>
+                    <a href="/Admin/Categories" class="st-nav-item @NavClass(path.Contains("/Categories"))">
+                        <span class="st-nav-icon-wrap"><svg class="st-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h7"/></svg></span>
+                        دسته‌بندی
+                    </a>
+                    <a href="/Admin/Orders" class="st-nav-item @NavClass(path.Contains("/Orders"))">
+                        <span class="st-nav-icon-wrap"><svg class="st-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg></span>
+                        سفارش‌ها
+                        @if (openOrderCount > 0)
+                        {
+                            <span class="st-nav-badge" title="سفارش باز">@openOrderCount</span>
+                        }
+                    </a>
+                    <a href="/Admin/ProductReviewsAdmin" class="st-nav-item @NavClass(path.Contains("/ProductReviewsAdmin"))">
+                        <span class="st-nav-icon-wrap"><svg class="st-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+                        نظرات محصول
+                    </a>
+                    <a href="/Admin/Inquiries" class="st-nav-item @NavClass(path.Contains("/Inquiries"))">
+                        <span class="st-nav-icon-wrap"><svg class="st-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+                        استعلام قیمت
+                        @if (openInquiryCount > 0)
+                        {
+                            <span class="st-nav-badge" title="استعلام باز">@openInquiryCount</span>
+                        }
+                    </a>
+                    <a href="/Admin/Coupons" class="st-nav-item @NavClass(path.Contains("/Coupons"))">
+                        <span class="st-nav-icon-wrap"><svg class="st-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12V8H6a2 2 0 0 1 0-4h12v4"/><path d="M4 6v12a2 2 0 0 0 2 2h14v-4"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></svg></span>
+                        کد تخفیف
+                    </a>
+                </div>
+                <div class="st-nav-group">
+                    <span class="st-nav-heading">تحلیل و گزارش</span>
+                    <a href="/Admin/Reports" class="st-nav-item @NavClass(path.Contains("/Reports") && !path.Contains("StudioContent"))">
+                        <span class="st-nav-icon-wrap"><svg class="st-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg></span>
+                        گزارش‌ها
+                        <span class="st-nav-badge">جدید</span>
+                    </a>
+                    <a href="/Admin/Reports/Traffic" class="st-nav-item @NavClass(path.Contains("Reports/Traffic"))">
+                        <span class="st-nav-icon-wrap"><svg class="st-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h4l3 8 4-16 3 8h4"/></svg></span>
+                        ترافیک و صفحات
+                    </a>
+                    <a href="/Admin/Reports/Sales" class="st-nav-item @NavClass(path.Contains("Reports/Sales"))">
+                        <span class="st-nav-icon-wrap"><svg class="st-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
+                        فروش و درآمد
+                    </a>
+                </div>
+                <div class="st-nav-group">
+                    <span class="st-nav-heading">کاربران</span>
+                    <a href="/Admin/Users" class="st-nav-item @NavClass(path.Contains("/Users"))">
+                        <span class="st-nav-icon-wrap"><svg class="st-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+                        مدیریت کاربران
+                    </a>
+                </div>
+                <div class="st-nav-group">
+                    <span class="st-nav-heading">محتوا</span>
+                    <a href="/Admin/StudioContent/Home" class="st-nav-item @NavClass(path.Contains("StudioContent/Home") || path.Contains("EditHome"))">
+                        <span class="st-nav-icon-wrap"><svg class="st-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span>
+                        صفحه اصلی
+                    </a>
+                    <a href="/Admin/StoriesAdmin" class="st-nav-item @NavClass(path.Contains("/StoriesAdmin"))">
+                        <span class="st-nav-icon-wrap"><svg class="st-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
+                        استوری‌ها
+                    </a>
+                    <a href="/Admin/StudioContent/Pages" class="st-nav-item @NavClass(path.Contains("StudioContent/Pages") || path.Contains("EditPage"))">
+                        <span class="st-nav-icon-wrap"><svg class="st-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
+                        صفحات
+                    </a>
+                    <a href="/Admin/BlogAdmin" class="st-nav-item @NavClass(path.Contains("/BlogAdmin"))">
+                        <span class="st-nav-icon-wrap"><svg class="st-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
+                        مقالات بلاگ
+                    </a>
+                    <a href="/Admin/NewsAdmin" class="st-nav-item @NavClass(path.Contains("/NewsAdmin"))">
+                        <span class="st-nav-icon-wrap"><svg class="st-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-4 0v-9h4"/><path d="M18 14h-8M15 18h-5M10 6h8v4h-8z"/></svg></span>
+                        اخبار
+                    </a>
+                    <a href="/Admin/FaqAdmin" class="st-nav-item @NavClass(path.Contains("/FaqAdmin"))">
+                        <span class="st-nav-icon-wrap"><svg class="st-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+                        سوالات متداول
+                    </a>
+                    <a href="/Admin/StudioContent/Nav" class="st-nav-item @NavClass(path.Contains("StudioContent/Nav") || path.Contains("EditNav"))">
+                        <span class="st-nav-icon-wrap"><svg class="st-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></span>
+                        منوی سایت
+                    </a>
+                    <a href="/Admin/StudioContent/Atoms" class="st-nav-item @NavClass(path.Contains("Atoms") || path.Contains("EditAtom"))">
+                        <span class="st-nav-icon-wrap"><svg class="st-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2a10 10 0 0 1 0 20M12 2a10 10 0 0 0 0 20"/></svg></span>
+                        متن‌های کوتاه
+                    </a>
+                </div>
+                <div class="st-nav-group">
+                    <span class="st-nav-heading">رشد و سئو</span>
+                    <a href="/Admin/Studio" class="st-nav-item @NavClass(path.EndsWith("/Studio") || path.Contains("CommandCenter"))">
+                        <span class="st-nav-icon-wrap"><svg class="st-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>
+                        مرکز SEO
+                        <span class="st-nav-badge">Pro</span>
+                    </a>
+                    <a href="/Admin/Studio/EditorialHub" class="st-nav-item @NavClass(path.Contains("EditorialHub"))">
+                        <span class="st-nav-icon-wrap"><svg class="st-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></span>
+                        موتور بلاگ خودکار
+                    </a>
+                    <a href="/Admin/Studio/RankRadar" class="st-nav-item @NavClass(path.Contains("RankRadar"))">
+                        <span class="st-nav-icon-wrap"><svg class="st-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></span>
+                        رصد رتبه
+                    </a>
+                    <a href="/Admin/StudioContent/Competitors" class="st-nav-item @NavClass(path.Contains("Competitors"))">
+                        <span class="st-nav-icon-wrap"><svg class="st-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></span>
+                        تحلیل رقبا
+                    </a>
+                    <a href="/Admin/StudioContent/Authority" class="st-nav-item @NavClass(path.Contains("Authority"))">
+                        <span class="st-nav-icon-wrap"><svg class="st-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 5-3.8 8.5-8.5 9.7a1.5 1.5 0 0 1-1 0C6.8 20.5 3 17 3 12V5.5a1 1 0 0 1 .6-.9l8-3.4a1 1 0 0 1 .8 0l8 3.4a1 1 0 0 1 .6.9z"/></svg></span>
+                        اعتبار E-E-A-T
+                    </a>
+                    <a href="/Admin/StudioContent/Reports" class="st-nav-item @NavClass(path.Contains("StudioContent/Reports") || path.Contains("ReportDetail"))">
+                        <span class="st-nav-icon-wrap"><svg class="st-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg></span>
+                        گزارش هفتگی رشد
+                    </a>
+                </div>
+            </nav>
+
+            <div class="st-sidebar-foot">
+                <a href="/" target="_blank" class="st-foot-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    فروشگاه
+                </a>
+                <form method="post" action="/Admin/Auth/Logout">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="st-foot-btn st-foot-btn--danger">خروج</button>
+                </form>
+            </div>
+        </div>
+    </aside>
+
+    <div class="st-main-wrap">
+        <header class="st-topbar">
+            <button type="button" class="st-menu-btn" data-st-menu-toggle aria-label="منو">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </button>
+            <div class="st-topbar-title">
+                <span class="st-topbar-crumb">پنل مدیریت</span>
+                <h1>@ViewData["Title"]</h1>
+            </div>
+            <div class="st-topbar-actions">
+                <span class="st-status-pill"><span class="st-status-dot"></span> سیستم فعال</span>
+            </div>
+        </header>
+        <main class="st-main" id="st-main">@RenderBody()</main>
+    </div>
+</div>
+
+@* پیام‌های سرور به‌صورت Toast نمایش داده می‌شوند — نه بلوک ثابت بالای صفحه *@
+@if (TempData["Success"] != null)
+{
+    <div data-kit-flash="success" hidden>@TempData["Success"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div data-kit-flash="error" hidden>@TempData["Error"]</div>
+}
+@if (TempData["Warn"] != null)
+{
+    <div data-kit-flash="warn" hidden>@TempData["Warn"]</div>
+}
+
+<script src="~/js/admin-kit.js" asp-append-version="true" defer></script>
+<script src="~/js/admin-studio.js" asp-append-version="true" defer></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.AdminKit?.refreshMobileTables?.();
+  });
+</script>
+<script src="~/js/admin-content-forms.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
+<script src="~/js/rich-text-editor.bundle.js" asp-append-version="true"></script>
+<script>window.stBootRichTextEditors?.();</script>
+</body>
+</html>

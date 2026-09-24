@@ -1,0 +1,357 @@
+@model OverviewReport
+@{
+    ViewData["Title"] = "گزارش‌ها و تحلیل";
+    var t = Model.Traffic;
+    var s = Model.Sales;
+
+    string DeltaClass(double d) => d > 0.5 ? "kit-delta--up" : d < -0.5 ? "kit-delta--down" : "kit-delta--flat";
+    string DeltaText(double d) => d == 0 ? "بدون تغییر" : $"{(d > 0 ? "▲" : "▼")} {Math.Abs(d):0.#}٪";
+}
+
+<partial name="_ReportRange" />
+
+@if (!t.HasData && !s.HasData)
+{
+    <section class="kit-table-card kit-rise">
+        <div class="kit-empty">
+            <div class="kit-empty-icon" aria-hidden="true">📡</div>
+            <h3>ردیابی فعال شد — در انتظار داده</h3>
+            <p>
+                از این لحظه هر بازدید صفحه، منبع ورود، دستگاه، سرعت پاسخ سرور و هر مرحله از
+                قیف فروش ثبت می‌شود. برای اینکه مقایسه با دوره قبل معنا پیدا کند دست‌کم
+                چند روز داده لازم است.
+            </p>
+            <a class="st-btn st-btn-primary" href="/" target="_blank" rel="noopener">
+                باز کردن فروشگاه برای تولید داده
+            </a>
+        </div>
+    </section>
+}
+else
+{
+    @* ═══ شاخص‌های کلیدی ═══ *@
+    <div class="kit-stats kit-stagger">
+        <article class="kit-stat">
+            <span class="kit-stat-label">👥 بازدیدکننده یکتا</span>
+            <span class="kit-stat-value">@t.Visitors.ToString("N0")</span>
+            <span class="kit-stat-foot">
+                <span class="kit-delta @DeltaClass(t.VisitorDelta)">@DeltaText(t.VisitorDelta)</span>
+                نسبت به @Model.Days روز قبل
+            </span>
+        </article>
+
+        <article class="kit-stat">
+            <span class="kit-stat-label">🖱️ نشست</span>
+            <span class="kit-stat-value">@t.Sessions.ToString("N0")</span>
+            <span class="kit-stat-foot">
+                <span class="kit-delta @DeltaClass(t.SessionDelta)">@DeltaText(t.SessionDelta)</span>
+                · @t.PagesPerSession.ToString("0.##") صفحه در هر نشست
+            </span>
+        </article>
+
+        <article class="kit-stat">
+            <span class="kit-stat-label">📄 بازدید صفحه</span>
+            <span class="kit-stat-value">@t.PageViews.ToString("N0")</span>
+            <span class="kit-stat-foot">
+                <span class="kit-delta @DeltaClass(t.ViewDelta)">@DeltaText(t.ViewDelta)</span>
+                @if (t.BotViews > 0)
+                {
+                    <text>· @t.BotViews.ToString("N0") خزش ربات (جدا شمرده شد)</text>
+                }
+            </span>
+        </article>
+
+        <article class="kit-stat">
+            <span class="kit-stat-label">💰 درآمد</span>
+            <span class="kit-stat-value kit-stat-value--gold">@s.Revenue.ToString("N0")</span>
+            <span class="kit-stat-foot">
+                تومان ·
+                <span class="kit-delta @DeltaClass(s.RevenueDelta)">@DeltaText(s.RevenueDelta)</span>
+            </span>
+        </article>
+
+        <article class="kit-stat">
+            <span class="kit-stat-label">🛒 سفارش</span>
+            <span class="kit-stat-value">@s.OrderCount.ToString("N0")</span>
+            <span class="kit-stat-foot">
+                <span class="kit-delta @DeltaClass(s.OrderDelta)">@DeltaText(s.OrderDelta)</span>
+                · میانگین @s.AvgOrderValue.ToString("N0") تومان
+            </span>
+        </article>
+
+        <article class="kit-stat">
+            <span class="kit-stat-label">🎯 نرخ تبدیل</span>
+            <span class="kit-stat-value @(t.ConversionRate >= 1 ? "kit-stat-value--ok" : "")">@(t.ConversionRate.ToString("0.##"))٪</span>
+            <span class="kit-stat-foot">
+                نرخ سرنخ (استعلام + تماس): @(t.LeadRate.ToString("0.##"))٪
+            </span>
+        </article>
+
+        <article class="kit-stat">
+            <span class="kit-stat-label">📨 استعلام بی‌پاسخ</span>
+            <span class="kit-stat-value @(s.InquiryOpen > 0 ? "kit-stat-value--bad" : "kit-stat-value--ok")">@s.InquiryOpen.ToString("N0")</span>
+            <span class="kit-stat-foot">
+                از @s.InquiryTotal.ToString("N0") استعلام این بازه
+                @if (s.InquiryOpen > 0)
+                {
+                    <span class="kit-stat-foot__row">
+                        <a class="kit-stat-action" href="/Admin/Inquiries?status=open">
+                            <span class="kit-stat-action__ico" aria-hidden="true">←</span>
+                            پیگیری کن
+                        </a>
+                    </span>
+                }
+            </span>
+        </article>
+
+        <article class="kit-stat">
+            <span class="kit-stat-label">⚡ پاسخ سرور</span>
+            <span class="kit-stat-value @(t.AvgServerMs <= 200 ? "kit-stat-value--ok" : t.AvgServerMs > 600 ? "kit-stat-value--bad" : "")">@t.AvgServerMs.ToString("N0")</span>
+            <span class="kit-stat-foot">
+                میلی‌ثانیه — ورودی مستقیم LCP و رتبه گوگل
+            </span>
+        </article>
+    </div>
+
+    @* ═══ تحلیل هوشمند ═══ *@
+    <partial name="_ReportInsights" model="Model.Insights" />
+
+    <div class="kit-grid-2 kit-grid-2--wide">
+        @* ═══ روند بازدید ═══ *@
+        <section class="kit-section kit-rise">
+            <div class="kit-section-head">
+                <div>
+                    <h2>📈 روند بازدید روزانه</h2>
+                    <p>ستون‌ها بازدید صفحه را نشان می‌دهند. موس را روی هر ستون ببرید.</p>
+                </div>
+                <a class="st-btn st-btn-ghost st-btn-sm" href="/Admin/Reports/Traffic?days=@Model.Days">جزئیات ترافیک</a>
+            </div>
+
+            @{
+                var maxViews = t.Daily.Count > 0 ? Math.Max(1, t.Daily.Max(d => d.Views)) : 1;
+            }
+            <div class="kit-chart" role="img" aria-label="نمودار بازدید روزانه">
+                @foreach (var (point, i) in t.Daily.Select((p, i) => (p, i)))
+                {
+                    var h = Math.Max(2, point.Views * 100 / maxViews);
+                    <div class="kit-chart-bar"
+                         style="height:@(h)%;animation-delay:@((i * 12))ms"
+                         data-label="@point.Label — @point.Views.ToString("N0") بازدید · @point.Sessions.ToString("N0") نشست"></div>
+                }
+            </div>
+            <div class="kit-chart-axis">
+                <span>@(t.Daily.FirstOrDefault()?.Label ?? "")</span>
+                <span>بیشینه @maxViews.ToString("N0")</span>
+                <span>@(t.Daily.LastOrDefault()?.Label ?? "")</span>
+            </div>
+        </section>
+
+        @* ═══ کانال ورود ═══ *@
+        <section class="kit-section kit-rise">
+            <div class="kit-section-head">
+                <div>
+                    <h2>🚪 مسیر ورود بازدیدکننده</h2>
+                    <p>سهم هر کانال و تغییرش نسبت به دوره قبل.</p>
+                </div>
+            </div>
+
+            @if (t.Channels.Count == 0)
+            {
+                <p class="kit-form-hint">داده‌ای ثبت نشده.</p>
+            }
+            else
+            {
+                var maxCh = Math.Max(1, t.Channels.Max(c => c.Sessions));
+                foreach (var ch in t.Channels)
+                {
+                    <div class="kit-hbar-row">
+                        <div class="kit-hbar-label">
+                            <span>@ch.Icon @ch.Fa</span>
+                            <div class="kit-hbar-track">
+                                <div class="kit-hbar-fill" style="width:@(ch.Sessions * 100 / maxCh)%"></div>
+                            </div>
+                        </div>
+                        <div class="kit-hbar-value">
+                            @ch.Sessions.ToString("N0")
+                            <span class="kit-delta @DeltaClass(ch.Delta)" style="font-size:.68rem;display:block">@DeltaText(ch.Delta)</span>
+                        </div>
+                    </div>
+                }
+            }
+        </section>
+    </div>
+
+    <div class="kit-grid-2">
+        @* ═══ قیف فروش ═══ *@
+        <section class="kit-section kit-rise">
+            <div class="kit-section-head">
+                <div>
+                    <h2>🔻 قیف فروش</h2>
+                    <p>درصد کنار هر پله، نرخ عبور از پله قبلی است — نقطه ریزش را نشان می‌دهد.</p>
+                </div>
+            </div>
+
+            @{
+                var funnelMax = t.Funnel.Count > 0 ? Math.Max(1, t.Funnel[0].Count) : 1;
+                var worstRate = t.Funnel.Skip(1).Where(f => f.StepRate > 0).Select(f => f.StepRate).DefaultIfEmpty(0).Min();
+            }
+            @foreach (var (step, i) in t.Funnel.Select((f, i) => (f, i)))
+            {
+                var isWorst = i > 0 && step.StepRate > 0 && Math.Abs(step.StepRate - worstRate) < 0.01;
+                <div class="kit-hbar-row">
+                    <div class="kit-hbar-label">
+                        <span>
+                            @(i + 1). @step.Label
+                            @if (isWorst)
+                            {
+                                <span class="kit-tag kit-tag--bad">بیشترین ریزش</span>
+                            }
+                        </span>
+                        <div class="kit-hbar-track">
+                            <div class="kit-hbar-fill" style="width:@(step.Count * 100 / funnelMax)%"></div>
+                        </div>
+                    </div>
+                    <div class="kit-hbar-value">
+                        @step.Count.ToString("N0")
+                        @if (i > 0)
+                        {
+                            <span style="display:block;font-size:.68rem;color:var(--st-muted)">@(step.StepRate.ToString("0.#"))٪ عبور</span>
+                        }
+                    </div>
+                </div>
+            }
+
+            <p class="kit-form-hint" style="margin-top:.8rem">
+                در فروش عمده بخشی از تبدیل تلفنی است:
+                <strong>@t.InquiryCount.ToString("N0")</strong> استعلام و
+                <strong>@t.PhoneClickCount.ToString("N0")</strong> کلیک تماس در این بازه ثبت شد.
+            </p>
+        </section>
+
+        @* ═══ صفحات پربازدید ═══ *@
+        <section class="kit-section kit-rise">
+            <div class="kit-section-head">
+                <div>
+                    <h2>🏆 صفحات پربازدید</h2>
+                    <p>۱۰ صفحه اول این بازه.</p>
+                </div>
+                <a class="st-btn st-btn-ghost st-btn-sm" href="/Admin/Reports/ExportPages?days=@Model.Days">دریافت CSV</a>
+            </div>
+
+            @if (t.TopPages.Count == 0)
+            {
+                <p class="kit-form-hint">داده‌ای ثبت نشده.</p>
+            }
+            else
+            {
+                var maxPv = Math.Max(1, t.TopPages.Max(p => p.Views));
+                foreach (var row in t.TopPages.Take(10))
+                {
+                    <div class="kit-hbar-row">
+                        <div class="kit-hbar-label">
+                            <span title="@row.Path">@(row.Title ?? row.Path)</span>
+                            <div class="kit-hbar-track">
+                                <div class="kit-hbar-fill" style="width:@(row.Views * 100 / maxPv)%"></div>
+                            </div>
+                        </div>
+                        <div class="kit-hbar-value">
+                            @row.Views.ToString("N0")
+                            <span style="display:block;font-size:.68rem;color:var(--st-muted)">@row.FaPageType</span>
+                        </div>
+                    </div>
+                }
+            }
+        </section>
+    </div>
+
+    @* ═══ فرصت‌های محصول ═══ *@
+    @if (t.ProductOpportunities.Count > 0)
+    {
+        <section class="kit-section kit-rise">
+            <div class="kit-section-head">
+                <div>
+                    <h2>💡 محصول‌هایی که بازدید می‌گیرند</h2>
+                    <p>
+                        نرخ سبد پایین با بازدید بالا یعنی صفحه محصول کارش را نمی‌کند —
+                        معمولاً قیمت، تصویر یا مشخصات ناقص است.
+                    </p>
+                </div>
+            </div>
+
+            <div class="kit-table-scroll">
+                <table class="kit-table">
+                    <thead>
+                        <tr>
+                            <th data-sort>محصول</th>
+                            <th data-sort>بازدید</th>
+                            <th data-sort>افزودن به سبد</th>
+                            <th data-sort>نرخ سبد</th>
+                            <th>وضعیت</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var p in t.ProductOpportunities.Take(15))
+                        {
+                            <tr>
+                                <td><span class="kit-cell-main">@p.Name</span></td>
+                                <td class="kit-cell-num" data-sort-value="@p.Views">@p.Views.ToString("N0")</td>
+                                <td class="kit-cell-num" data-sort-value="@p.AddToCarts">@p.AddToCarts.ToString("N0")</td>
+                                <td class="kit-cell-num" data-sort-value="@p.CartRate">@(p.CartRate.ToString("0.#"))٪</td>
+                                <td>
+                                    @if (p.CartRate >= 15)
+                                    {
+                                        <span class="kit-tag kit-tag--ok">عملکرد خوب</span>
+                                    }
+                                    else if (p.CartRate >= 5)
+                                    {
+                                        <span class="kit-tag kit-tag--gold">قابل بهبود</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="kit-tag kit-tag--bad">فرصت از دست رفته</span>
+                                    }
+                                </td>
+                                <td class="kit-cell-actions">
+                                    <a class="st-btn st-btn-ghost st-btn-sm" href="/Admin/Products/Edit/@p.ProductId">اصلاح صفحه</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    }
+
+    @* ═══ جستجوی داخلی ═══ *@
+    @if (t.SearchTerms.Count > 0)
+    {
+        <section class="kit-section kit-rise">
+            <div class="kit-section-head">
+                <div>
+                    <h2>🔍 مشتری در سایت چه جستجو کرد</h2>
+                    <p>
+                        دقیق‌ترین سیگنال تقاضای واقعی. اگر عبارتی زیاد جستجو می‌شود ولی محصولش را
+                        ندارید، تقاضا از قبل موجود است — فقط باید صفحه‌اش را بسازید.
+                    </p>
+                </div>
+            </div>
+
+            @{
+                var maxSearch = Math.Max(1, t.SearchTerms.Max(x => x.Count));
+            }
+            @foreach (var term in t.SearchTerms.Take(12))
+            {
+                <div class="kit-hbar-row">
+                    <div class="kit-hbar-label">
+                        <span dir="auto">@term.Label</span>
+                        <div class="kit-hbar-track">
+                            <div class="kit-hbar-fill" style="width:@(term.Count * 100 / maxSearch)%"></div>
+                        </div>
+                    </div>
+                    <div class="kit-hbar-value">@term.Count.ToString("N0")</div>
+                </div>
+            }
+        </section>
+    }
+}

@@ -1,0 +1,61 @@
+@{
+    ViewData["Title"] = "پیگیری سفارش";
+    var orderNumber = ViewBag.TrackOrderNumber as string ?? "";
+    var phone = ViewBag.TrackPhone as string ?? "";
+    var error = ViewBag.TrackError as string;
+}
+@section Head {
+    <link rel="stylesheet" href="~/css/ux-order.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/ux-order-track.css" asp-append-version="true" />
+}
+
+<section class="ms-track ms-wrap" data-track-page="search">
+    <div class="ms-track-search" id="ms-track-search">
+        <div class="ms-track-search__glow" aria-hidden="true"></div>
+        <div class="ms-track-search__inner">
+            <div class="ms-track-search__badge">پیگیری آنلاین</div>
+            <h1 class="ms-track-search__title">وضعیت سفارش خود را ببینید</h1>
+            <p class="ms-track-search__lead">
+                شماره سفارش (مثلاً <span dir="ltr">MS2026…</span>) و همان موبایلی که هنگام ثبت وارد کرده‌اید را وارد کنید.
+            </p>
+
+            @if (!string.IsNullOrEmpty(error))
+            {
+                <div class="ms-track-alert" role="alert" id="ms-track-error">
+                    <span aria-hidden="true">!</span>
+                    @error
+                </div>
+            }
+
+            <form class="ms-track-form" asp-controller="Order" asp-action="TrackPost" method="post" novalidate>
+                @Html.AntiForgeryToken()
+                <div class="ms-track-field">
+                    <label for="track-order">شماره سفارش</label>
+                    <input id="track-order" class="ms-track-input" name="orderNumber" value="@orderNumber"
+                           required autocomplete="off" dir="ltr" placeholder="MS20260101120000123"
+                           inputmode="text" spellcheck="false" />
+                </div>
+                <div class="ms-track-field">
+                    <label for="track-phone">شماره موبایل</label>
+                    <input id="track-phone" class="ms-track-input" name="phone" value="@phone"
+                           required autocomplete="tel" dir="ltr" placeholder="09xxxxxxxxx"
+                           inputmode="tel" />
+                </div>
+                <button class="ms-track-submit" type="submit">
+                    <span class="ms-track-submit__label">مشاهده وضعیت</span>
+                    <span class="ms-track-submit__icon" aria-hidden="true">→</span>
+                </button>
+            </form>
+
+            <p class="ms-track-search__foot">
+                پیش‌فاکتور را از
+                <a href="/Catalog">صفحه موفقیت ثبت سفارش</a>
+                یا پیامک واحد فروش هم می‌توانید بردارید.
+            </p>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/order-track.js" asp-append-version="true" defer></script>
+}

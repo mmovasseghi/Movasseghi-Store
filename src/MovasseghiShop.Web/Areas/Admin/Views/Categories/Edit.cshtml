@@ -1,0 +1,86 @@
+@model Category
+@using MovasseghiShop.Web.Models
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "ویرایش دسته";
+    ViewData["HeroTitle"] = Model.Name;
+    ViewData["HeroSubtitle"] = $"Slug: {Model.Slug} · {Model.Products.Count} محصول";
+    ViewData["HeroBadge"] = "Category SEO";
+    var score = (SeoScoreResult?)ViewBag.SeoScore;
+}
+
+<partial name="_AdminHero" />
+
+@if (TempData["Success"] != null) { <div class="st-alert st-alert-success st-reveal">@TempData["Success"]</div> }
+@if (TempData["Error"] != null) { <div class="st-alert st-alert-error st-reveal">@TempData["Error"]</div> }
+
+<div class="st-edit-grid st-reveal">
+    <div>
+        <form method="post" enctype="multipart/form-data" class="st-card">
+            @Html.AntiForgeryToken()
+            <div class="st-field">
+                <label>نام دسته</label>
+                <input name="Name" value="@Model.Name" required class="st-input" />
+            </div>
+            <div class="st-field">
+                <label>Slug</label>
+                <input name="Slug" value="@Model.Slug" class="st-input" dir="ltr" />
+            </div>
+            <div class="st-field">
+                <label>تصویر شاخص دسته</label>
+                @if (!string.IsNullOrWhiteSpace(Model.ImageUrl))
+                {
+                    <img src="@Model.ImageUrl" alt="@Model.Name" style="max-width:200px;border-radius:12px;margin-bottom:.5rem;display:block" />
+                }
+                <input type="file" name="coverImage" accept="image/jpeg,image/png,image/webp" class="st-input" />
+                <small class="st-field-hint">تصویر دسته در کاتالوگ و امتیاز SEO تصویر استفاده می‌شود. فرمت JPG یا WebP.</small>
+            </div>
+            <div class="st-field">
+                <label>Focus Keyword</label>
+                <input name="focusKeyword" value="@ViewBag.FocusKeyword" class="st-input" placeholder="کلمه کلیدی اصلی دسته" />
+            </div>
+            <div class="st-field">
+                <label>Meta Title</label>
+                <input name="MetaTitle" value="@Model.MetaTitle" class="st-input" />
+            </div>
+            <div class="st-field">
+                <label>Meta Description</label>
+                <textarea name="MetaDescription" rows="2" class="st-input">@Model.MetaDescription</textarea>
+            </div>
+            <div class="st-field">
+                <label>خلاصه GEO / AI</label>
+                <textarea name="aiSummary" rows="3" class="st-input">@ViewBag.AiSummary</textarea>
+            </div>
+            <div class="st-field">
+                <label>توضیحات (محتوای SEO)</label>
+                @{ ViewData["EditorContent"] = Model.Description; ViewData["FieldName"] = "Description"; ViewData["EditorMinHeight"] = 360; ViewData["EditorPreview"] = true; }
+                <partial name="_RichTextEditor" model="@("cat-desc")" />
+            </div>
+            <div class="st-field">
+                <label>ترتیب</label>
+                <input name="SortOrder" type="number" value="@Model.SortOrder" class="st-input" style="max-width:120px" />
+            </div>
+            <label class="kit-switch">
+                <input type="checkbox" name="IsActive" value="true" @(Model.IsActive ? "checked" : "") />
+                <span class="kit-switch-label">فعال در فروشگاه</span>
+                <span class="kit-switch-track" aria-hidden="true"></span>
+            </label>
+            <input type="hidden" name="IsActive" value="false" />
+            <div class="st-btn-row st-mt">
+                <button type="submit" class="st-btn st-btn-primary">ذخیره</button>
+                <a href="/Admin/Categories" class="st-btn st-btn-ghost">← بازگشت</a>
+            </div>
+        </form>
+    </div>
+
+    <aside>
+        @{
+            ViewData["SeoEntityId"] = Model.Id;
+            ViewData["SeoEntityType"] = "category";
+        }
+        <partial name="_SeoProPanel" model="@score" />
+    </aside>
+</div>
+
+@section Scripts {
+}

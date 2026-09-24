@@ -1,0 +1,234 @@
+@using MovasseghiShop.Web.Models
+@using MovasseghiShop.Web.Models.Entities
+@using MovasseghiShop.Web.Models.Enums
+@{
+    ViewData["Title"] = "داشبورد";
+    var overview = (OverviewReport)ViewBag.Overview;
+    var t = overview.Traffic;
+    var s = overview.Sales;
+    var topKw = (IEnumerable<RankSnapshot>)ViewBag.TopKeywords;
+    var recentOrders = (IEnumerable<Order>)ViewBag.RecentOrders;
+    var openInquiries = (IEnumerable<PurchaseInquiry>)ViewBag.OpenInquiries;
+    var insights = overview.Insights.Take(5).ToList();
+
+    string DeltaClass(double d) => d > 0.5 ? "kit-delta--up" : d < -0.5 ? "kit-delta--down" : "kit-delta--flat";
+    string DeltaText(double d) => d == 0 ? "بدون تغییر" : $"{(d > 0 ? "▲" : "▼")} {Math.Abs(d):0.#}٪";
+    string Tag(OrderStatus st) => st switch
+    {
+        OrderStatus.Cancelled => "kit-tag--bad",
+        OrderStatus.Completed or OrderStatus.Delivered => "kit-tag--ok",
+        OrderStatus.PendingPayment => "kit-tag--warn",
+        _ => "kit-tag--muted"
+    };
+}
+
+<div class="kit-stats kit-stagger">
+    <article class="kit-stat">
+        <span class="kit-stat-label">👥 بازدید ۷ روز</span>
+        <span class="kit-stat-value">@t.Visitors.ToString("N0")</span>
+        <span class="kit-stat-foot">
+            <span class="kit-delta @DeltaClass(t.VisitorDelta)">@DeltaText(t.VisitorDelta)</span>
+            نسبت به ۷ روز قبل
+        </span>
+    </article>
+    <article class="kit-stat">
+        <span class="kit-stat-label">💰 درآمد ۷ روز</span>
+        <span class="kit-stat-value kit-stat-value--gold">@s.Revenue.ToString("N0")</span>
+        <span class="kit-stat-foot">
+            تومان · <span class="kit-delta @DeltaClass(s.RevenueDelta)">@DeltaText(s.RevenueDelta)</span>
+            · @s.OrderCount سفارش
+        </span>
+    </article>
+    <article class="kit-stat">
+        <span class="kit-stat-label">📥 استعلام باز</span>
+        <span class="kit-stat-value @(ViewBag.InquiriesCount > 0 ? "kit-stat-value--gold" : "kit-stat-value--ok")">@ViewBag.InquiriesCount.ToString("N0")</span>
+        <span class="kit-stat-foot">هر مورد یک سرنخ داغ است — تأخیر یعنی از دست رفتن فروش</span>
+    </article>
+    <article class="kit-stat">
+        <span class="kit-stat-label">📋 صف پیگیری سفارش</span>
+        <span class="kit-stat-value @(ViewBag.PendingOrders > 0 ? "kit-stat-value--gold" : "")">@ViewBag.PendingOrders.ToString("N0")</span>
+        <span class="kit-stat-foot">بدون «پیگیری شد» · از @ViewBag.OrdersCount.ToString("N0") سفارش کل</span>
+    </article>
+    <article class="kit-stat">
+        <span class="kit-stat-label">@SeoPublishGateLabels.StatLabel</span>
+        <span class="kit-stat-value kit-stat-value--ok">@ViewBag.SeoReady.ToString("N0")</span>
+        <span class="kit-stat-foot">از @ViewBag.ActiveProducts.ToString("N0") محصول فعال</span>
+    </article>
+    <article class="kit-stat">
+        <span class="kit-stat-label">@SeoPublishGateLabels.NeedsWork</span>
+        <span class="kit-stat-value @(ViewBag.SeoWeak > 0 ? "kit-stat-value--gold" : "")">@ViewBag.SeoWeak.ToString("N0")</span>
+        <span class="kit-stat-foot"><a href="/Admin/Studio">Auto-Fix در مرکز SEO</a></span>
+    </article>
+    <article class="kit-stat">
+        <span class="kit-stat-label">⚡ پاسخ سرور</span>
+        <span class="kit-stat-value @(t.AvgServerMs <= 200 ? "kit-stat-value--ok" : t.AvgServerMs > 600 ? "kit-stat-value--bad" : "")">@(t.HasData ? t.AvgServerMs.ToString("N0") : "—")</span>
+        <span class="kit-stat-foot">میلی‌ثانیه — روی رتبه گوگل اثر مستقیم دارد</span>
+    </article>
+</div>
+
+<div class="kit-toolbar kit-rise">
+    <div class="kit-toolbar-grow">
+        <strong style="font-size:.88rem">اقدام‌های روزانه</strong>
+        <span class="kit-form-hint" style="margin-top:.15rem">اول سرنخ‌ها، بعد سفارش‌ها، بعد سئوی ناقص.</span>
+    </div>
+    <a class="st-btn st-btn-primary" href="/Admin/Inquiries?status=open">استعلام‌های باز</a>
+    <a class="st-btn st-btn-ghost" href="/Admin/Orders">سفارش‌ها</a>
+    <a class="st-btn st-btn-ghost" href="/Admin/Reports">گزارش تحلیلی</a>
+    <a class="st-btn st-btn-gold" href="/Admin/Studio">مرکز SEO</a>
+</div>
+
+@if (insights.Count > 0)
+{
+    <partial name="_ReportInsights" model="insights" />
+}
+else if (!t.HasData && !s.HasData)
+{
+    <section class="kit-table-card kit-rise">
+        <div class="kit-empty">
+            <div class="kit-empty-icon" aria-hidden="true">📡</div>
+            <h3>ردیابی سایت فعال است</h3>
+            <p>
+                بازدید، منبع ورود، قیف فروش و سرعت صفحات از همین لحظه ثبت می‌شوند.
+                بعد از چند روز استفاده، همین‌جا هشدار و پیشنهاد فروش می‌بینید.
+            </p>
+            <a class="st-btn st-btn-primary" href="/" target="_blank" rel="noopener">باز کردن فروشگاه</a>
+        </div>
+    </section>
+}
+
+<div class="kit-grid-2 kit-grid-2--wide">
+    <div>
+        <section class="kit-section kit-rise">
+            <div class="kit-section-head">
+                <div>
+                    <h2>📥 استعلام‌های پیگیری‌نشده</h2>
+                    <p>اگر بیش از ۲۴ ساعت بماند، احتمال تبدیل به سفارش افت می‌کند.</p>
+                </div>
+                <a class="st-btn st-btn-ghost st-btn-sm" href="/Admin/Inquiries?status=open">همه</a>
+            </div>
+            @if (!openInquiries.Any())
+            {
+                <p class="kit-form-hint">استعلام بازی نیست.</p>
+            }
+            else
+            {
+                <div class="kit-table-scroll">
+                    <table class="kit-table">
+                        <thead>
+                            <tr>
+                                <th>مشتری</th>
+                                <th>محصول</th>
+                                <th>زمان</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var i in openInquiries)
+                            {
+                                <tr>
+                                    <td>
+                                        <span class="kit-cell-main">@i.CustomerName</span>
+                                        <a class="kit-cell-sub" dir="ltr" href="tel:@i.Phone">@i.Phone</a>
+                                    </td>
+                                    <td>
+                                        <span class="kit-cell-main">@i.Product.Name</span>
+                                        @if (i.QuantityCartons.HasValue)
+                                        {
+                                            <span class="kit-cell-sub">@i.QuantityCartons.Value کارتن</span>
+                                        }
+                                    </td>
+                                    <td class="kit-cell-num">@i.CreatedAt.ToLocalTime().ToString("MM/dd HH:mm")</td>
+                                    <td class="kit-cell-actions">
+                                        <a class="st-btn st-btn-primary st-btn-sm" href="tel:@i.Phone">تماس</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </section>
+
+        <section class="kit-section kit-rise">
+            <div class="kit-section-head">
+                <div><h2>🛒 آخرین سفارش‌ها</h2></div>
+                <a class="st-btn st-btn-ghost st-btn-sm" href="/Admin/Orders">همه</a>
+            </div>
+            @if (!recentOrders.Any())
+            {
+                <p class="kit-form-hint">هنوز سفارشی ثبت نشده.</p>
+            }
+            else
+            {
+                <div class="kit-table-scroll">
+                    <table class="kit-table">
+                        <thead>
+                            <tr>
+                                <th>شماره</th>
+                                <th>مشتری</th>
+                                <th>وضعیت</th>
+                                <th>مبلغ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var o in recentOrders)
+                            {
+                                <tr>
+                                    <td><a class="kit-cell-main" dir="ltr" href="/Admin/Orders/Details/@o.Id">@o.OrderNumber</a></td>
+                                    <td>@o.CustomerName</td>
+                                    <td><span class="kit-tag @Tag(o.Status)">@OrderStatusLabels.Fa(o.Status)</span></td>
+                                    <td class="kit-cell-num">@SlugHelper.FormatToman(o.TotalAmount)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </section>
+    </div>
+
+    <div>
+        <section class="kit-section kit-rise">
+            <div class="kit-section-head">
+                <div>
+                    <h2>📡 رتبه کلمات</h2>
+                    <p>این عدد قول رتبه ۱ نیست؛ وضعیت فعلی رصد است.</p>
+                </div>
+                <a class="st-btn st-btn-ghost st-btn-sm" href="/Admin/Studio/RankRadar">رصد رتبه</a>
+            </div>
+            @if (!topKw.Any())
+            {
+                <p class="kit-form-hint">هنوز رصدی ثبت نشده. از رصد رتبه همگام‌سازی کنید.</p>
+            }
+            else
+            {
+                foreach (var k in topKw)
+                {
+                    <div class="kit-hbar-row">
+                        <span class="kit-hbar-label">@k.Keyword</span>
+                        <span class="kit-tag @(k.Position is > 0 and <= 10 ? "kit-tag--ok" : k.Position is > 10 and <= 30 ? "kit-tag--warn" : "kit-tag--muted")">
+                            @(k.Position > 0 ? $"#{k.Position}" : "خارج از ۱۰۰")
+                        </span>
+                    </div>
+                }
+            }
+        </section>
+
+        <section class="kit-section kit-rise">
+            <div class="kit-section-head"><div><h2>دسترسی سریع</h2></div></div>
+            <div class="kit-form-grid kit-quick-links">
+                <a class="st-btn st-btn-ghost" href="/Admin/Products">محصولات</a>
+                <a class="st-btn st-btn-ghost" href="/Admin/BlogAdmin">مقالات بلاگ</a>
+                <a class="st-btn st-btn-ghost" href="/Admin/FaqAdmin">سوالات متداول</a>
+                <a class="st-btn st-btn-ghost" href="/Admin/StudioContent/Home">صفحه اصلی</a>
+                <a class="st-btn st-btn-ghost" href="/" target="_blank" rel="noopener">فروشگاه ↗</a>
+                <form method="post" action="/Admin/Dashboard/ImportAmelon" class="kit-quick-links__form"
+                      data-kit-confirm="واردسازی محصولات آملون شروع شود؟ ممکن است چند دقیقه طول بکشد."
+                      data-kit-confirm-title="واردسازی آملون">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="st-btn st-btn-ghost">واردسازی آملون</button>
+                </form>
+            </div>
+        </section>
+    </div>
+</div>

@@ -1,0 +1,403 @@
+@model Order
+@using MovasseghiShop.Web.Models.Enums
+@using MovasseghiShop.Web.Data
+@{
+    ViewData["Title"] = $"سفارش {Model.OrderNumber}";
+    var orderAccount = ViewBag.OrderAccount as ApplicationUser;
+    var accountOrderCount = ViewBag.OrderAccountOrderCount as int? ?? 0;
+    var accountCompletedCount = ViewBag.OrderAccountCompletedCount as int? ?? 0;
+    var accountTotalSpent = ViewBag.OrderAccountTotalSpent as decimal? ?? 0m;
+
+    string PayFa(PaymentMethod m) => m switch
+    {
+        PaymentMethod.Online => "پرداخت آنلاین",
+        PaymentMethod.CashOnPickup => "نقد هنگام تحویل",
+        _ => m.ToString()
+    };
+    string DelFa(DeliveryMethod m) => m switch
+    {
+        DeliveryMethod.CustomerVehicle => "خودرو مشتری",
+        DeliveryMethod.FreeKhavar => "ارسال با خاور رایگان",
+        _ => m.ToString()
+    };
+    string StatusTag(OrderStatus s) => s switch
+    {
+        OrderStatus.Cancelled => "kit-tag--bad",
+        OrderStatus.Completed or OrderStatus.Delivered => "kit-tag--ok",
+        OrderStatus.PendingPayment => "kit-tag--warn",
+        _ => "kit-tag--muted"
+    };
+    var initial = string.IsNullOrWhiteSpace(Model.CustomerName)
+        ? "م"
+        : Model.CustomerName.Trim()[0].ToString();
+}
+
+@section Head {
+    <link rel="stylesheet" href="~/css/admin-orders.css" asp-append-version="true" />
+}
+
+<div class="kit-order-page">
+    <header class="kit-order-hero kit-rise">
+        <div class="kit-order-hero__main">
+            <h1 class="kit-order-hero__title">
+                <span class="kit-order-hero__number" dir="ltr">@Model.OrderNumber</span>
+                <span class="kit-tag @StatusTag(Model.Status)">@OrderStatusLabels.Fa(Model.Status)</span>
+                @if (OrderStatusLabels.NeedsOperatorFollowUp(Model))
+                {
+                    <span class="kit-tag kit-tag--warn">در صف پیگیری</span>
+                }
+            </h1>
+            <p class="kit-order-hero__meta">
+                ثبت @Model.CreatedAt.ToLocalTime().ToString("yyyy/MM/dd HH:mm")
+                · آخرین تغییر @Model.UpdatedAt.ToLocalTime().ToString("yyyy/MM/dd HH:mm")
+            </p>
+        </div>
+        <div class="kit-order-hero__actions">
+            <a class="st-btn st-btn-ghost" href="/Admin/Orders">بازگشت</a>
+            @if (OrderStatusLabels.NeedsOperatorFollowUp(Model))
+            {
+                ViewData["FollowUpReturnUrl"] = Context.Request.Path + Context.Request.QueryString;
+                <partial name="_OrderFollowUp" model="Model" />
+            }
+            else if (Model.Status != OrderStatus.Cancelled && Model.OperatorFollowedUpAt is not null)
+            {
+                <span class="kit-tag kit-tag--ok">پیگیری ثبت شده</span>
+            }
+            <a class="st-btn st-btn-primary" href="tel:@Model.Phone">تماس با مشتری</a>
+        </div>
+    </header>
+
+    @if (OrderStatusLabels.NeedsOperatorFollowUp(Model))
+    {
+        <div class="kit-callout kit-callout--warn kit-rise" role="status">
+            <strong>این سفارش هنوز در صف پیگیری است.</strong>
+            پس از تماس یا بررسی، «پیگیری شد» را بزنید تا از شمارنده منو خارج شود.
+        </div>
+    }
+
+    <div class="kit-order-summary kit-stagger">
+        <article class="kit-stat">
+            <span class="kit-stat-label">مبلغ کل</span>
+            <span class="kit-stat-value kit-stat-value--gold">@SlugHelper.FormatToman(Model.TotalAmount)</span>
+            <span class="kit-stat-foot">
+                جزء @SlugHelper.FormatToman(Model.SubTotal)
+                @if (Model.DiscountAmount > 0)
+                {
+                    <text> · تخفیف @SlugHelper.FormatToman(Model.DiscountAmount)</text>
+                }
+            </span>
+        </article>
+        <article class="kit-stat">
+            <span class="kit-stat-label">پرداخت و ارسال</span>
+            <span class="kit-stat-value" style="font-size:.95rem">@PayFa(Model.PaymentMethod)</span>
+            <span class="kit-stat-foot">@DelFa(Model.DeliveryMethod)</span>
+        </article>
+        <article class="kit-stat">
+            <span class="kit-stat-label">حجم سفارش</span>
+            <span class="kit-stat-value">@Model.TotalCartons.ToString("N0") کارتن</span>
+            <span class="kit-stat-foot">@Model.Items.Count قلم</span>
+        </article>
+    </div>
+
+    <div class="kit-order-layout">
+        <div class="kit-order-stack">
+            <section class="kit-section kit-rise kit-order-card">
+                <div class="kit-order-card__head">
+                    <span class="kit-order-card__icon" aria-hidden="true">📦</span>
+                    <h2>اقلام سفارش</h2>
+                </div>
+                <div class="kit-order-card__body">
+                    @if (Model.Items.Count == 0)
+                    {
+                        <p class="kit-form-hint">این سفارش قلمی ندارد.</p>
+                    }
+                    else
+                    {
+                        <div class="kit-table-scroll">
+                            <table class="kit-table">
+                                <thead>
+                                    <tr>
+                                        <th>محصول</th>
+                                        <th>تنوع</th>
+                                        <th>کارتن</th>
+                                        <th>قیمت واحد</th>
+                                        <th>جمع</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var line in Model.Items)
+                                    {
+                                        <tr>
+                                            <td><span class="kit-cell-main">@line.ProductName</span></td>
+                                            <td><span class="kit-cell-sub">@line.VariantLabel</span></td>
+                                            <td class="kit-cell-num">@line.CartonQuantity.ToString("N0")</td>
+                                            <td class="kit-cell-num">@SlugHelper.FormatToman(line.UnitPrice)</td>
+                                            <td class="kit-cell-num">@SlugHelper.FormatToman(line.LineTotal)</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                </div>
+            </section>
+
+            <section class="kit-section kit-rise kit-order-card">
+                <div class="kit-order-card__head">
+                    <span class="kit-order-card__icon" aria-hidden="true">🔄</span>
+                    <div>
+                        <h2>تغییر وضعیت</h2>
+                    </div>
+                </div>
+                <div class="kit-order-card__body">
+                    <p class="kit-form-hint" style="margin:0 0 .75rem">مشتری در حساب کاربری همان وضعیت را می‌بیند.</p>
+                    <form method="post" asp-action="UpdateStatus" class="kit-order-status-form">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@Model.Id" />
+                        <div class="st-field">
+                            <label for="status">وضعیت جدید</label>
+                            <select id="status" name="status" class="st-input">
+                                @foreach (OrderStatus s in Enum.GetValues<OrderStatus>())
+                                {
+                                    <option value="@((int)s)" selected="@(Model.Status == s)">@OrderStatusLabels.Fa(s)</option>
+                                }
+                            </select>
+                        </div>
+                        <button type="submit" class="st-btn st-btn-primary">ذخیره وضعیت</button>
+                    </form>
+                </div>
+            </section>
+
+            @if (Model.OperatorFollowedUpAt is not null && Model.Status != OrderStatus.Cancelled)
+            {
+                <section class="kit-section kit-rise kit-order-card">
+                    <div class="kit-order-card__head">
+                        <span class="kit-order-card__icon" aria-hidden="true">✓</span>
+                        <h2>پیگیری اپراتور</h2>
+                    </div>
+                    <div class="kit-order-card__body">
+                        @{
+                            ViewData["FollowUpCompact"] = false;
+                            ViewData["FollowUpReturnUrl"] = null;
+                        }
+                        <partial name="_OrderFollowUp" model="Model" />
+                    </div>
+                </section>
+            }
+        </div>
+
+        <div class="kit-order-stack">
+            <section class="kit-section kit-rise kit-order-card kit-order-card--account">
+                <div class="kit-order-card__head">
+                    <span class="kit-order-card__icon" aria-hidden="true">🔐</span>
+                    <h2>حساب ثبت‌کننده</h2>
+                </div>
+                <div class="kit-order-card__body">
+                    @if (orderAccount is not null)
+                    {
+                        var accInitial = string.IsNullOrWhiteSpace(orderAccount.FullName)
+                            ? (string.IsNullOrWhiteSpace(orderAccount.UserName) ? "ک" : orderAccount.UserName.Trim()[0].ToString())
+                            : orderAccount.FullName.Trim()[0].ToString();
+                        var accName = orderAccount.FullName ?? orderAccount.UserName ?? "کاربر";
+                        <div class="kit-order-account">
+                            <div class="kit-order-account__profile">
+                                <span class="kit-order-account__avatar" aria-hidden="true">@accInitial</span>
+                                <div>
+                                    <div class="kit-order-account__name">@accName</div>
+                                    @if (!string.IsNullOrWhiteSpace(orderAccount.CompanyName))
+                                    {
+                                        <div class="kit-order-account__company">@orderAccount.CompanyName</div>
+                                    }
+                                    <a class="kit-order-link" dir="ltr" href="tel:@(orderAccount.PhoneNumber ?? Model.Phone)">@(orderAccount.PhoneNumber ?? Model.Phone)</a>
+                                </div>
+                            </div>
+                            <dl class="kit-order-account__stats">
+                                <div>
+                                    <dt>عضویت</dt>
+                                    <dd dir="ltr">@orderAccount.CreatedAt.ToLocalTime().ToString("yyyy/MM/dd")</dd>
+                                </div>
+                                <div>
+                                    <dt>سفارش‌ها</dt>
+                                    <dd>@accountOrderCount.ToString("N0")</dd>
+                                </div>
+                                <div>
+                                    <dt>غیر لغو</dt>
+                                    <dd>@accountCompletedCount.ToString("N0")</dd>
+                                </div>
+                                <div>
+                                    <dt>مجموع خرید</dt>
+                                    <dd>@SlugHelper.FormatToman(accountTotalSpent)</dd>
+                                </div>
+                            </dl>
+                            <a class="st-btn st-btn-ghost st-btn-sm st-btn-block" href="/Admin/Users?q=@Uri.EscapeDataString(orderAccount.PhoneNumber ?? Model.Phone)">جستجو در کاربران</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="kit-order-account kit-order-account--guest">
+                            <p class="kit-order-account__guest-title">سفارش مهمان</p>
+                            <p class="kit-form-hint" style="margin:0">بدون ورود به حساب ثبت شده — فقط اطلاعات تماس در بخش مشتری.</p>
+                        </div>
+                    }
+                </div>
+            </section>
+
+            <section class="kit-section kit-rise kit-order-card">
+                <div class="kit-order-card__head">
+                    <span class="kit-order-card__icon" aria-hidden="true">👤</span>
+                    <h2>مشتری</h2>
+                </div>
+                <div class="kit-order-card__body">
+                    <div class="kit-order-customer">
+                        <span class="kit-order-avatar" aria-hidden="true">@initial</span>
+                        <div>
+                            <div class="kit-order-customer__name">@Model.CustomerName</div>
+                            <a class="kit-order-link" dir="ltr" href="tel:@Model.Phone">@Model.Phone</a>
+                        </div>
+                    </div>
+                    @if (!string.IsNullOrWhiteSpace(Model.Notes))
+                    {
+                        <div class="kit-order-note">
+                            <strong>یادداشت مشتری</strong>
+                            @Model.Notes
+                        </div>
+                    }
+                </div>
+            </section>
+
+            <section class="kit-section kit-rise kit-order-card">
+                <div class="kit-order-card__head">
+                    <span class="kit-order-card__icon" aria-hidden="true">💳</span>
+                    <h2>پرداخت و فاکتور</h2>
+                </div>
+                <div class="kit-order-card__body">
+                    <div class="kit-order-fields">
+                        @{
+                            ViewData["Label"] = "روش پرداخت"; ViewData["Value"] = PayFa(Model.PaymentMethod); ViewData["Href"] = null; ViewData["Ltr"] = false; ViewData["Wide"] = false;
+                        }
+                        <partial name="_OrderField" />
+                        @{
+                            ViewData["Label"] = "روش ارسال"; ViewData["Value"] = DelFa(Model.DeliveryMethod);
+                        }
+                        <partial name="_OrderField" />
+                        @if (!string.IsNullOrWhiteSpace(Model.CouponCode))
+                        {
+                            ViewData["Label"] = "کد تخفیف"; ViewData["Value"] = Model.CouponCode; ViewData["Ltr"] = true;
+                            <partial name="_OrderField" />
+                        }
+                        @if (!string.IsNullOrWhiteSpace(Model.PaymentReference))
+                        {
+                            ViewData["Label"] = "پیگیری پرداخت"; ViewData["Value"] = Model.PaymentReference; ViewData["Ltr"] = true;
+                            <partial name="_OrderField" />
+                        }
+                    </div>
+                    @if (Model.WantsOfficialInvoice)
+                    {
+                        <div class="kit-order-note" style="margin-top:.85rem">
+                            <strong>فاکتور رسمی</strong>
+                            <div class="kit-order-fields kit-order-fields--single" style="margin-top:.5rem">
+                                @{
+                                    ViewData["Label"] = "شرکت"; ViewData["Value"] = Model.CompanyName; ViewData["Ltr"] = false;
+                                }
+                                <partial name="_OrderField" />
+                                @{
+                                    ViewData["Label"] = "شناسه ملی"; ViewData["Value"] = Model.NationalId; ViewData["Ltr"] = true;
+                                }
+                                <partial name="_OrderField" />
+                                @{
+                                    ViewData["Label"] = "کد اقتصادی"; ViewData["Value"] = Model.EconomicCode; ViewData["Ltr"] = true;
+                                }
+                                <partial name="_OrderField" />
+                                @{
+                                    ViewData["Label"] = "شماره ثبت"; ViewData["Value"] = Model.RegistrationNumber; ViewData["Ltr"] = true;
+                                }
+                                <partial name="_OrderField" />
+                                @{
+                                    ViewData["Label"] = "آدرس حقوقی"; ViewData["Value"] = Model.LegalAddress; ViewData["Wide"] = true;
+                                }
+                                <partial name="_OrderField" />
+                            </div>
+                        </div>
+                    }
+                </div>
+            </section>
+
+            <section class="kit-section kit-rise kit-order-card">
+                <div class="kit-order-card__head">
+                    <span class="kit-order-card__icon" aria-hidden="true">📍</span>
+                    <h2>آدرس تحویل</h2>
+                </div>
+                <div class="kit-order-card__body">
+                    @if (Model.DeliveryAddress is null)
+                    {
+                        <p class="kit-form-hint" style="margin:0">آدرسی ثبت نشده — احتمالاً تحویل حضوری.</p>
+                    }
+                    else
+                    {
+                        var a = Model.DeliveryAddress;
+                        <div class="kit-order-fields">
+                            @{
+                                ViewData["Label"] = "استان / شهر"; ViewData["Value"] = $"{a.Province} — {a.City}"; ViewData["Wide"] = true;
+                            }
+                            <partial name="_OrderField" />
+                            @{
+                                ViewData["Label"] = "آدرس"; ViewData["Value"] = a.FullAddress; ViewData["Wide"] = true;
+                            }
+                            <partial name="_OrderField" />
+                            @if (!string.IsNullOrWhiteSpace(a.PostalCode))
+                            {
+                                ViewData["Label"] = "کد پستی"; ViewData["Value"] = a.PostalCode; ViewData["Ltr"] = true; ViewData["Wide"] = false;
+                                <partial name="_OrderField" />
+                            }
+                            @if (!string.IsNullOrWhiteSpace(a.RecipientName) || !string.IsNullOrWhiteSpace(a.RecipientPhone))
+                            {
+                                ViewData["Label"] = "گیرنده"; ViewData["Value"] = $"{a.RecipientName ?? "—"} · {a.RecipientPhone ?? ""}"; ViewData["Ltr"] = false; ViewData["Wide"] = true;
+                                <partial name="_OrderField" />
+                            }
+                        </div>
+                    }
+                </div>
+            </section>
+
+            <section class="kit-section kit-rise kit-order-card">
+                <div class="kit-order-card__head">
+                    <span class="kit-order-card__icon" aria-hidden="true">🚚</span>
+                    <h2>خودرو و راننده</h2>
+                </div>
+                <div class="kit-order-card__body">
+                    @if (Model.VehicleInfo is null)
+                    {
+                        <p class="kit-form-hint" style="margin:0">اطلاعات خودرو ثبت نشده.</p>
+                    }
+                    else
+                    {
+                        var v = Model.VehicleInfo;
+                        <div class="kit-order-fields">
+                            @{
+                                ViewData["Label"] = "راننده"; ViewData["Value"] = v.DriverName; ViewData["Href"] = null; ViewData["Wide"] = false;
+                            }
+                            <partial name="_OrderField" />
+                            @{
+                                ViewData["Label"] = "تلفن راننده"; ViewData["Value"] = v.DriverPhone; ViewData["Href"] = $"tel:{v.DriverPhone}"; ViewData["Ltr"] = true;
+                            }
+                            <partial name="_OrderField" />
+                            @{
+                                ViewData["Label"] = "نوع خودرو"; ViewData["Value"] = v.VehicleType; ViewData["Href"] = null;
+                            }
+                            <partial name="_OrderField" />
+                            <div class="kit-order-field kit-order-field--wide">
+                                <span class="kit-order-field__label">پلاک</span>
+                                <span class="kit-order-plate" dir="ltr">@v.PlateNumber</span>
+                            </div>
+                            @if (!string.IsNullOrWhiteSpace(v.AdditionalInfo))
+                            {
+                                ViewData["Label"] = "توضیحات"; ViewData["Value"] = v.AdditionalInfo; ViewData["Wide"] = true;
+                                <partial name="_OrderField" />
+                            }
+                        </div>
+                    }
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

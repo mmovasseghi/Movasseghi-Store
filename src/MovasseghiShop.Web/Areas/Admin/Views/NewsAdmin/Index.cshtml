@@ -1,0 +1,154 @@
+@model List<NewsItem>
+@using MovasseghiShop.Web.Services
+@{
+    ViewData["Title"] = "اخبار";
+    var q = ViewBag.Q as string;
+    var status = ViewBag.Status as string;
+    var seoScores = (Dictionary<int, int>?)ViewBag.SeoScores ?? new();
+    var seoAudited = (Dictionary<int, bool>?)ViewBag.SeoAudited ?? new();
+    var seoReady = (Dictionary<int, bool>?)ViewBag.SeoReady ?? new();
+}
+
+<div class="kit-stats kit-stagger">
+    <article class="kit-stat">
+        <span class="kit-stat-label">📰 کل اخبار</span>
+        <span class="kit-stat-value">@((ViewBag.PublishedCount + ViewBag.DraftCount).ToString("N0"))</span>
+    </article>
+    <article class="kit-stat">
+        <span class="kit-stat-label">✅ منتشرشده</span>
+        <span class="kit-stat-value kit-stat-value--ok">@ViewBag.PublishedCount.ToString("N0")</span>
+    </article>
+    <article class="kit-stat">
+        <span class="kit-stat-label">📝 پیش‌نویس</span>
+        <span class="kit-stat-value @(ViewBag.DraftCount > 0 ? "kit-stat-value--gold" : "")">@ViewBag.DraftCount.ToString("N0")</span>
+    </article>
+    <article class="kit-stat">
+        <span class="kit-stat-label">🔴 فوری</span>
+        <span class="kit-stat-value">@ViewBag.BreakingCount.ToString("N0")</span>
+        <span class="kit-stat-foot">در نوار بالای سایت نمایش داده می‌شود</span>
+    </article>
+</div>
+
+<div class="kit-toolbar kit-rise">
+    <form method="get" action="/Admin/NewsAdmin" class="kit-search" data-kit-nobusy>
+        <span class="kit-search-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        </span>
+        <input type="search" name="q" value="@q" class="st-input" placeholder="جستجو در عنوان یا نامک… (کلید /)" aria-label="جستجوی خبر" />
+    </form>
+
+    <nav class="kit-segment" aria-label="فیلتر وضعیت">
+        <a href="/Admin/NewsAdmin" class="@(string.IsNullOrEmpty(status) ? "is-active" : "")">همه</a>
+        <a href="/Admin/NewsAdmin?status=published" class="@(status == "published" ? "is-active" : "")">
+            منتشرشده <span class="kit-segment-count">@ViewBag.PublishedCount</span>
+        </a>
+        <a href="/Admin/NewsAdmin?status=draft" class="@(status == "draft" ? "is-active" : "")">
+            پیش‌نویس <span class="kit-segment-count">@ViewBag.DraftCount</span>
+        </a>
+        <a href="/Admin/NewsAdmin?status=breaking" class="@(status == "breaking" ? "is-active" : "")">
+            فوری <span class="kit-segment-count">@ViewBag.BreakingCount</span>
+        </a>
+    </nav>
+
+    <a class="st-btn st-btn-primary" href="/Admin/NewsAdmin/Create">+ خبر جدید</a>
+</div>
+
+<section class="kit-table-card kit-rise">
+    @if (Model.Count == 0)
+    {
+        <div class="kit-empty">
+            <div class="kit-empty-icon" aria-hidden="true">📰</div>
+            <h3>@(string.IsNullOrEmpty(q) ? "هنوز خبری ثبت نشده" : "خبری با این جستجو پیدا نشد")</h3>
+            <p>
+                خبرهای تازه (محصول جدید، نمایشگاه، تغییر قیمت) به گوگل نشان می‌دهد سایت زنده است
+                و باعث می‌شود دفعات خزش صفحات بیشتر شود.
+            </p>
+            <a class="st-btn st-btn-primary" href="/Admin/NewsAdmin/Create">ثبت اولین خبر</a>
+        </div>
+    }
+    else
+    {
+        <div class="kit-table-scroll">
+            <table class="kit-table">
+                <thead>
+                    <tr>
+                        <th data-sort>عنوان</th>
+                        <th data-sort>وضعیت</th>
+                        <th data-sort>امتیاز SEO</th>
+                        <th data-sort>تاریخ انتشار</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        var audited = seoAudited.GetValueOrDefault(item.Id, false);
+                        var seo = seoScores.GetValueOrDefault(item.Id, 0);
+                        var ready = seoReady.GetValueOrDefault(item.Id, false);
+                        <tr class="@(item.IsPublished ? "" : "is-dim")">
+                            <td>
+                                <span class="kit-cell-main">
+                                    @if (item.IsBreaking)
+                                    {
+                                        <span class="kit-tag kit-tag--bad" style="margin-left:.35rem">فوری</span>
+                                    }
+                                    @item.Title
+                                </span>
+                                <span class="kit-cell-sub" dir="ltr">/News/Article/@item.Slug</span>
+                            </td>
+                            <td data-sort-value="@(item.IsPublished ? 1 : 0)">
+                                @if (item.IsPublished)
+                                {
+                                    <span class="kit-tag kit-tag--ok">منتشرشده</span>
+                                }
+                                else
+                                {
+                                    <span class="kit-tag kit-tag--muted">پیش‌نویس</span>
+                                }
+                            </td>
+                            <td data-sort-value="@(audited ? seo : -1)" title="@(audited ? (ready ? "آماده انتشار" : "نیاز به Auto-Fix یا ویرایش") : "هنوز بررسی نشده — ویرایش یا Auto-Fix")">
+                                @if (!audited)
+                                {
+                                    <span class="kit-tag kit-tag--muted">—</span>
+                                }
+                                else
+                                {
+                                    <span class="kit-tag @(ready ? "kit-tag--ok" : seo >= 70 ? "kit-tag--warn" : "kit-tag--bad")">@seo</span>
+                                    @if (ready)
+                                    {
+                                        <span class="kit-tag kit-tag--ok" style="margin-inline-start:.25rem">✓</span>
+                                    }
+                                }
+                            </td>
+                            <td class="kit-cell-num" data-sort-value="@(item.PublishedAt?.Ticks ?? 0)">
+                                @(item.PublishedAt?.ToLocalTime().ToString("yyyy/MM/dd") ?? "—")
+                            </td>
+                            <td class="kit-cell-actions">
+                                <a class="st-btn st-btn-ghost st-btn-sm" href="/Admin/NewsAdmin/Edit/@item.Id">ویرایش</a>
+                                <form method="post" action="/Admin/NewsAdmin/TogglePublish/@item.Id" style="display:inline">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="st-btn st-btn-ghost st-btn-sm">
+                                        @(item.IsPublished ? "لغو انتشار" : "انتشار")
+                                    </button>
+                                </form>
+                                <form method="post" action="/Admin/NewsAdmin/ToggleBreaking/@item.Id" style="display:inline">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="st-btn st-btn-ghost st-btn-sm">
+                                        @(item.IsBreaking ? "لغو فوری" : "فوری")
+                                    </button>
+                                </form>
+                                <form method="post" action="/Admin/NewsAdmin/Delete/@item.Id" style="display:inline"
+                                      data-kit-confirm="خبر «<strong>@item.Title</strong>» برای همیشه حذف می‌شود."
+                                      data-kit-confirm-title="حذف خبر"
+                                      data-kit-confirm-ok="حذف کن">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="st-btn st-btn-ghost st-btn-sm">حذف</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</section>

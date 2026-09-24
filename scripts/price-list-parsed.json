@@ -1,0 +1,854 @@
+{
+  "bulk": [
+    {
+      "code": "201001",
+      "name": "باقشب",
+      "price": 72600,
+      "cartons": 0,
+      "pack": 200,
+      "type": "bulk"
+    },
+    {
+      "code": "201105",
+      "name": "ی تسد شیپ",
+      "price": 72600,
+      "cartons": 0,
+      "pack": 200,
+      "type": "bulk"
+    },
+    {
+      "code": "201003",
+      "name": "گرزب باقشب",
+      "price": 138700,
+      "cartons": 0,
+      "pack": 150,
+      "type": "bulk"
+    },
+    {
+      "code": "201004",
+      "name": "201004",
+      "price": 138700,
+      "cartons": 0,
+      "pack": 100,
+      "type": "bulk"
+    },
+    {
+      "code": "201005",
+      "name": "201005",
+      "price": 144000,
+      "cartons": 0,
+      "pack": 100,
+      "type": "bulk"
+    },
+    {
+      "code": "201006",
+      "name": "راد برد سیرپ ود",
+      "price": 178400,
+      "cartons": 0,
+      "pack": 100,
+      "type": "bulk"
+    },
+    {
+      "code": "201007",
+      "name": "راد برد هناخ ود",
+      "price": 184400,
+      "cartons": 0,
+      "pack": 100,
+      "type": "bulk"
+    },
+    {
+      "code": "201009",
+      "name": "201009",
+      "price": 21600,
+      "cartons": 3000,
+      "pack": 300,
+      "type": "bulk"
+    },
+    {
+      "code": "201010",
+      "name": "201010",
+      "price": 37900,
+      "cartons": 1600,
+      "pack": 400,
+      "type": "bulk"
+    },
+    {
+      "code": "201011",
+      "name": "201011",
+      "price": 55300,
+      "cartons": 800,
+      "pack": 200,
+      "type": "bulk"
+    },
+    {
+      "code": "201012",
+      "name": "201012",
+      "price": 57800,
+      "cartons": 1200,
+      "pack": 300,
+      "type": "bulk"
+    },
+    {
+      "code": "201013",
+      "name": "201013",
+      "price": 75700,
+      "cartons": 600,
+      "pack": 100,
+      "type": "bulk"
+    },
+    {
+      "code": "201016",
+      "name": "ی غرم هناخ ود",
+      "price": 167700,
+      "cartons": 0,
+      "pack": 150,
+      "type": "bulk"
+    },
+    {
+      "code": "201017",
+      "name": "ب ابک هناخ ود ی",
+      "price": 167700,
+      "cartons": 0,
+      "pack": 150,
+      "type": "bulk"
+    },
+    {
+      "code": "201018",
+      "name": "ب ابک هناخ هس ی",
+      "price": 231200,
+      "cartons": 0,
+      "pack": 50,
+      "type": "bulk"
+    },
+    {
+      "code": "201020",
+      "name": "ب ابک هناخراهچ ی",
+      "price": 231200,
+      "cartons": 0,
+      "pack": 50,
+      "type": "bulk"
+    },
+    {
+      "code": "201019",
+      "name": "ی ی ی تناف ب ابک هناخ راهچ ی",
+      "price": 231200,
+      "cartons": 0,
+      "pack": 75,
+      "type": "bulk"
+    },
+    {
+      "code": "201021",
+      "name": "ی غرم هناخراهچ",
+      "price": 231200,
+      "cartons": 0,
+      "pack": 50,
+      "type": "bulk"
+    },
+    {
+      "code": "401141",
+      "name": "ی ی ی ی تناف غرم هناخ راهچ",
+      "price": 231200,
+      "cartons": 0,
+      "pack": 75,
+      "type": "bulk"
+    },
+    {
+      "code": "201022",
+      "name": "موینیمولآ حرط ب ابک ی",
+      "price": 192600,
+      "cartons": 0,
+      "pack": 100,
+      "type": "bulk"
+    },
+    {
+      "code": "201024",
+      "name": "هناخ کت یاذغ",
+      "price": 78000,
+      "cartons": 0,
+      "pack": 200,
+      "type": "bulk"
+    },
+    {
+      "code": "201025",
+      "name": "ه ناخود یاذغ",
+      "price": 97000,
+      "cartons": 0,
+      "pack": 150,
+      "type": "bulk"
+    },
+    {
+      "code": "201026",
+      "name": "قمع مک یدنب هتسب فرظ",
+      "price": 122300,
+      "cartons": 0,
+      "pack": 150,
+      "type": "bulk"
+    },
+    {
+      "code": "201028",
+      "name": "هناخ ود یدنب هتسب فرظ",
+      "price": 122300,
+      "cartons": 0,
+      "pack": 200,
+      "type": "bulk"
+    },
+    {
+      "code": "201029",
+      "name": "هناخ هس یدنب هتسب فرظ",
+      "price": 122300,
+      "cartons": 0,
+      "pack": 150,
+      "type": "bulk"
+    },
+    {
+      "code": "201027",
+      "name": "ق یمع یدنب هتسب فرظ",
+      "price": 140200,
+      "cartons": 0,
+      "pack": 150,
+      "type": "bulk"
+    },
+    {
+      "code": "201119",
+      "name": "201119",
+      "price": 98100,
+      "cartons": 0,
+      "pack": 100,
+      "type": "bulk"
+    },
+    {
+      "code": "401140",
+      "name": "401140",
+      "price": 108000,
+      "cartons": 100,
+      "pack": 28,
+      "type": "bulk"
+    },
+    {
+      "code": "201032",
+      "name": "201032",
+      "price": 37200,
+      "cartons": 1500,
+      "pack": 300,
+      "type": "bulk"
+    },
+    {
+      "code": "201033",
+      "name": "201033",
+      "price": 45900,
+      "cartons": 1500,
+      "pack": 300,
+      "type": "bulk"
+    },
+    {
+      "code": "201034",
+      "name": "201034",
+      "price": 48600,
+      "cartons": 1500,
+      "pack": 300,
+      "type": "bulk"
+    },
+    {
+      "code": "201035",
+      "name": "201035",
+      "price": 68100,
+      "cartons": 800,
+      "pack": 200,
+      "type": "bulk"
+    },
+    {
+      "code": "201036",
+      "name": "201036",
+      "price": 80000,
+      "cartons": 800,
+      "pack": 200,
+      "type": "bulk"
+    },
+    {
+      "code": "201108",
+      "name": "201108",
+      "price": 189000,
+      "cartons": 200,
+      "pack": 50,
+      "type": "bulk"
+    },
+    {
+      "code": "201037",
+      "name": "201037",
+      "price": 37900,
+      "cartons": 2000,
+      "pack": 500,
+      "type": "bulk"
+    },
+    {
+      "code": "201038",
+      "name": "201038",
+      "price": 64400,
+      "cartons": 750,
+      "pack": 150,
+      "type": "bulk"
+    },
+    {
+      "code": "201039",
+      "name": "201039",
+      "price": 96900,
+      "cartons": 0,
+      "pack": 150,
+      "type": "bulk"
+    },
+    {
+      "code": "201040",
+      "name": "201040",
+      "price": 88200,
+      "cartons": 800,
+      "pack": 200,
+      "type": "bulk"
+    },
+    {
+      "code": "201041",
+      "name": "201041",
+      "price": 101900,
+      "cartons": 800,
+      "pack": 200,
+      "type": "bulk"
+    },
+    {
+      "code": "201042",
+      "name": "201042",
+      "price": 115300,
+      "cartons": 400,
+      "pack": 100,
+      "type": "bulk"
+    },
+    {
+      "code": "201043",
+      "name": "201043",
+      "price": 136700,
+      "cartons": 300,
+      "pack": 100,
+      "type": "bulk"
+    },
+    {
+      "code": "201044",
+      "name": "201044",
+      "price": 150100,
+      "cartons": 300,
+      "pack": 100,
+      "type": "bulk"
+    },
+    {
+      "code": "201045",
+      "name": "201045",
+      "price": 134200,
+      "cartons": 400,
+      "pack": 100,
+      "type": "bulk"
+    },
+    {
+      "code": "201046",
+      "name": "201046",
+      "price": 157600,
+      "cartons": 300,
+      "pack": 100,
+      "type": "bulk"
+    },
+    {
+      "code": "201047",
+      "name": "201047",
+      "price": 177500,
+      "cartons": 300,
+      "pack": 100,
+      "type": "bulk"
+    },
+    {
+      "code": "201048",
+      "name": "201048",
+      "price": 177500,
+      "cartons": 300,
+      "pack": 100,
+      "type": "bulk"
+    },
+    {
+      "code": "201049",
+      "name": "201049",
+      "price": 243600,
+      "cartons": 300,
+      "pack": 100,
+      "type": "bulk"
+    },
+    {
+      "code": "201050",
+      "name": "ناجنف",
+      "price": 19900,
+      "cartons": 4200,
+      "pack": 300,
+      "type": "bulk"
+    },
+    {
+      "code": "201051",
+      "name": "201051",
+      "price": 22900,
+      "cartons": 4000,
+      "pack": 400,
+      "type": "bulk"
+    },
+    {
+      "code": "201052",
+      "name": "201052",
+      "price": 26900,
+      "cartons": 3200,
+      "pack": 320,
+      "type": "bulk"
+    },
+    {
+      "code": "201053",
+      "name": "201053",
+      "price": 30600,
+      "cartons": 3200,
+      "pack": 320,
+      "type": "bulk"
+    },
+    {
+      "code": "201055",
+      "name": "کچوک سید",
+      "price": 101900,
+      "cartons": 0,
+      "pack": 150,
+      "type": "bulk"
+    },
+    {
+      "code": "201056",
+      "name": "طسوتم سید",
+      "price": 140200,
+      "cartons": 0,
+      "pack": 100,
+      "type": "bulk"
+    },
+    {
+      "code": "201057",
+      "name": "گرزب سید",
+      "price": 160100,
+      "cartons": 0,
+      "pack": 100,
+      "type": "bulk"
+    },
+    {
+      "code": "201058",
+      "name": "یروخ کیک",
+      "price": 44700,
+      "cartons": 1400,
+      "pack": 200,
+      "type": "bulk"
+    },
+    {
+      "code": "201059",
+      "name": "ی ی روخ تیمز بیس فرظ",
+      "price": 54600,
+      "cartons": 1050,
+      "pack": 150,
+      "type": "bulk"
+    },
+    {
+      "code": "201060",
+      "name": "شوگراهچ هساک",
+      "price": 80000,
+      "cartons": 750,
+      "pack": 150,
+      "type": "bulk"
+    },
+    {
+      "code": "201121",
+      "name": "ی روخ رگتیمه فرظ",
+      "price": 243600,
+      "cartons": 100,
+      "pack": 70,
+      "type": "bulk"
+    },
+    {
+      "code": "201120",
+      "name": "ر ادبرد هناخ هس",
+      "price": 248600,
+      "cartons": 750,
+      "pack": 100,
+      "type": "bulk"
+    },
+    {
+      "code": "201061",
+      "name": "ی گنر ناجنف هیاپ",
+      "price": 232700,
+      "cartons": 560,
+      "pack": 40,
+      "type": "bulk"
+    },
+    {
+      "code": "201062",
+      "name": "هیایگ ناجنف هیاپ",
+      "price": 176400,
+      "cartons": 560,
+      "pack": 40,
+      "type": "bulk"
+    },
+    {
+      "code": "201063",
+      "name": "ز اتمم قشاق",
+      "price": 22900,
+      "cartons": 1000,
+      "pack": 200,
+      "type": "bulk"
+    },
+    {
+      "code": "201130",
+      "name": "ک یسلاک قشاق",
+      "price": 22900,
+      "cartons": 1000,
+      "pack": 200,
+      "type": "bulk"
+    },
+    {
+      "code": "401151",
+      "name": "ی ت یس ایمیک قشاق",
+      "price": 22900,
+      "cartons": 1000,
+      "pack": 200,
+      "type": "bulk"
+    },
+    {
+      "code": "201129",
+      "name": "درمز قشاق",
+      "price": 22900,
+      "cartons": 1000,
+      "pack": 200,
+      "type": "bulk"
+    },
+    {
+      "code": "201127",
+      "name": "کچ وک لاگنچ",
+      "price": 22900,
+      "cartons": 1000,
+      "pack": 300,
+      "type": "bulk"
+    },
+    {
+      "code": "201131",
+      "name": "ز اتمم لاگنچ",
+      "price": 22900,
+      "cartons": 1000,
+      "pack": 200,
+      "type": "bulk"
+    },
+    {
+      "code": "201141",
+      "name": "ک یسلاک لاگنچ",
+      "price": 22900,
+      "cartons": 1000,
+      "pack": 200,
+      "type": "bulk"
+    },
+    {
+      "code": "201125",
+      "name": "ایمیک لاگنچ",
+      "price": 22900,
+      "cartons": 1000,
+      "pack": 200,
+      "type": "bulk"
+    },
+    {
+      "code": "201065",
+      "name": "ن ولما یروخیاچ قشاق",
+      "price": 15200,
+      "cartons": 3000,
+      "pack": 500,
+      "type": "bulk"
+    },
+    {
+      "code": "201109",
+      "name": "زاتمم دراک",
+      "price": 22900,
+      "cartons": 2000,
+      "pack": 400,
+      "type": "bulk"
+    }
+  ],
+  "shrink": [
+    {
+      "code": "201088",
+      "name": "201088",
+      "price": 1226000,
+      "cartons": 24,
+      "pack": 6,
+      "type": "shrink"
+    },
+    {
+      "code": "201087",
+      "name": "201087",
+      "price": 1283000,
+      "cartons": 30,
+      "pack": 12,
+      "type": "shrink"
+    },
+    {
+      "code": "201086",
+      "name": "201086",
+      "price": 1283000,
+      "cartons": 36,
+      "pack": 12,
+      "type": "shrink"
+    },
+    {
+      "code": "201097",
+      "name": "201097",
+      "price": 1333000,
+      "cartons": 12,
+      "pack": 6,
+      "type": "shrink"
+    },
+    {
+      "code": "401188",
+      "name": "_",
+      "price": 10070000,
+      "cartons": 0,
+      "pack": 50,
+      "type": "shrink"
+    },
+    {
+      "code": "201099",
+      "name": "201099",
+      "price": 436000,
+      "cartons": 150,
+      "pack": 12,
+      "type": "shrink"
+    },
+    {
+      "code": "201089",
+      "name": "201089",
+      "price": 898000,
+      "cartons": 20,
+      "pack": 6,
+      "type": "shrink"
+    },
+    {
+      "code": "201090",
+      "name": "201090",
+      "price": 1226000,
+      "cartons": 15,
+      "pack": 6,
+      "type": "shrink"
+    },
+    {
+      "code": "201091",
+      "name": "201091",
+      "price": 1401000,
+      "cartons": 13,
+      "pack": 6,
+      "type": "shrink"
+    },
+    {
+      "code": "201094",
+      "name": "201094",
+      "price": 1073000,
+      "cartons": 24,
+      "pack": 6,
+      "type": "shrink"
+    },
+    {
+      "code": "201095",
+      "name": "201095",
+      "price": 1073000,
+      "cartons": 24,
+      "pack": 6,
+      "type": "shrink"
+    },
+    {
+      "code": "201093",
+      "name": "201093",
+      "price": 1695000,
+      "cartons": 18,
+      "pack": 12,
+      "type": "shrink"
+    },
+    {
+      "code": "201092",
+      "name": "201092",
+      "price": 1375000,
+      "cartons": 21,
+      "pack": 12,
+      "type": "shrink"
+    },
+    {
+      "code": "201076",
+      "name": "201076",
+      "price": 734500,
+      "cartons": 52,
+      "pack": 24,
+      "type": "shrink"
+    },
+    {
+      "code": "201098",
+      "name": "201098",
+      "price": 436000,
+      "cartons": 150,
+      "pack": 12,
+      "type": "shrink"
+    },
+    {
+      "code": "201102",
+      "name": "201102",
+      "price": 539000,
+      "cartons": 150,
+      "pack": 24,
+      "type": "shrink"
+    },
+    {
+      "code": "201101",
+      "name": "201101",
+      "price": 436000,
+      "cartons": 150,
+      "pack": 12,
+      "type": "shrink"
+    },
+    {
+      "code": "201137",
+      "name": "201137",
+      "price": 436000,
+      "cartons": 150,
+      "pack": 12,
+      "type": "shrink"
+    },
+    {
+      "code": "201082",
+      "name": "201082",
+      "price": 912000,
+      "cartons": 18,
+      "pack": 6,
+      "type": "shrink"
+    },
+    {
+      "code": "201080",
+      "name": "201080",
+      "price": 667000,
+      "cartons": 36,
+      "pack": 12,
+      "type": "shrink"
+    },
+    {
+      "code": "201081",
+      "name": "201081",
+      "price": 655000,
+      "cartons": 28,
+      "pack": 6,
+      "type": "shrink"
+    },
+    {
+      "code": "201100",
+      "name": "201100",
+      "price": 436000,
+      "cartons": 150,
+      "pack": 12,
+      "type": "shrink"
+    },
+    {
+      "code": "201085",
+      "name": "201085",
+      "price": 822000,
+      "cartons": 51,
+      "pack": 12,
+      "type": "shrink"
+    },
+    {
+      "code": "201072",
+      "name": "201072",
+      "price": 505000,
+      "cartons": 63,
+      "pack": 12,
+      "type": "shrink"
+    },
+    {
+      "code": "201071",
+      "name": "201071",
+      "price": 960000,
+      "cartons": 42,
+      "pack": 24,
+      "type": "shrink"
+    },
+    {
+      "code": "201073",
+      "name": "201073",
+      "price": 1910000,
+      "cartons": 50,
+      "pack": 24,
+      "type": "shrink"
+    },
+    {
+      "code": "201074",
+      "name": "201074",
+      "price": 562000,
+      "cartons": 63,
+      "pack": 12,
+      "type": "shrink"
+    },
+    {
+      "code": "201075",
+      "name": "201075",
+      "price": 1062000,
+      "cartons": 42,
+      "pack": 24,
+      "type": "shrink"
+    },
+    {
+      "code": "201096",
+      "name": "201096",
+      "price": 1226000,
+      "cartons": 24,
+      "pack": 6,
+      "type": "shrink"
+    },
+    {
+      "code": "201078",
+      "name": "201078",
+      "price": 1322000,
+      "cartons": 26,
+      "pack": 12,
+      "type": "shrink"
+    },
+    {
+      "code": "201079",
+      "name": "201079",
+      "price": 1153000,
+      "cartons": 25,
+      "pack": 6,
+      "type": "shrink"
+    },
+    {
+      "code": "201077",
+      "name": "201077",
+      "price": 1333000,
+      "cartons": 29,
+      "pack": 24,
+      "type": "shrink"
+    },
+    {
+      "code": "201084",
+      "name": "201084",
+      "price": 1203000,
+      "cartons": 6,
+      "pack": 6,
+      "type": "shrink"
+    },
+    {
+      "code": "401136",
+      "name": "401136",
+      "price": 912000,
+      "cartons": 27,
+      "pack": 6,
+      "type": "shrink"
+    },
+    {
+      "code": "401122",
+      "name": "401122",
+      "price": 2283000,
+      "cartons": 50,
+      "pack": 24,
+      "type": "shrink"
+    }
+  ]
+}

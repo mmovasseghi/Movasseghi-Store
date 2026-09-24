@@ -1,0 +1,192 @@
+/* Premium proforma — overrides ux-order.css legacy proforma block */
+.proforma-page{
+  min-height:100vh;
+  padding:1.5rem 1rem 2.75rem;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(45,106,79,.14), transparent 55%),
+    linear-gradient(180deg,#dfe9e3 0%,#f0f4f1 35%,#ebe6d8 100%);
+}
+.proforma-toolbar{
+  max-width:920px;margin:0 auto 1.15rem;display:flex;flex-wrap:wrap;gap:.65rem;align-items:center;justify-content:space-between;
+  padding:.65rem .85rem;border-radius:16px;background:rgba(255,255,255,.72);backdrop-filter:blur(8px);
+  border:1px solid rgba(45,106,79,.12);box-shadow:0 10px 30px rgba(30,50,41,.08);
+}
+.proforma-toolbar__title{font-weight:900;font-size:.92rem;color:var(--c-primary-dark)}
+.proforma-toolbar__actions{display:flex;flex-wrap:wrap;gap:.45rem}
+.proforma-btn{
+  display:inline-flex;align-items:center;gap:.35rem;padding:.55rem 1rem;border-radius:999px;
+  font:inherit;font-weight:800;font-size:.78rem;cursor:pointer;border:1px solid rgba(61,90,76,.18);
+  background:#fff;color:var(--c-primary-dark);text-decoration:none;transition:transform .15s,box-shadow .15s;
+}
+.proforma-btn:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(30,50,41,.1)}
+.proforma-btn--primary{
+  background:linear-gradient(135deg,#1b4332,#2d6a4f);color:#fff;border-color:transparent;
+  box-shadow:0 8px 22px rgba(27,67,50,.28);
+}
+.proforma-sheet{
+  position:relative;max-width:920px;margin:0 auto;padding:0;
+  background:#fff;border-radius:20px;
+  box-shadow:0 28px 70px rgba(27,67,50,.14),0 0 0 1px rgba(45,106,79,.1);
+  overflow:hidden;
+  display:flex;flex-direction:column;
+}
+.proforma-sheet__frame{
+  position:absolute;inset:12px;border:2px solid rgba(201,168,76,.35);border-radius:14px;pointer-events:none;z-index:0;
+}
+.proforma-sheet__ribbon{
+  position:relative;z-index:2;margin:0;padding:.55rem 1rem;
+  text-align:center;font-size:.72rem;font-weight:900;letter-spacing:.04em;
+  color:#fff;background:linear-gradient(90deg,#1b4332,#2d6a4f 40%,#40916c 70%,#1b4332);
+}
+.proforma-sheet__watermark{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.proforma-sheet__watermark span{
+  position:absolute;top:38%;left:50%;transform:translate(-50%,-50%) rotate(-18deg);
+  font-size:clamp(2.5rem,12vw,4.5rem);font-weight:900;color:rgba(45,106,79,.05);white-space:nowrap;letter-spacing:.2em;
+}
+.proforma-sheet__inner{position:relative;z-index:1;padding:1.15rem 1.35rem .65rem;flex:1 1 auto}
+.proforma-head{
+  display:flex;flex-wrap:wrap;justify-content:space-between;gap:1.25rem;align-items:flex-start;
+  margin-bottom:1.1rem;padding-bottom:1rem;border-bottom:2px solid rgba(45,106,79,.12);
+}
+.proforma-brand{display:flex;gap:.85rem;align-items:flex-start}
+.proforma-brand__mark{
+  width:52px;height:52px;border-radius:14px;display:grid;place-items:center;
+  font-size:1.35rem;font-weight:900;color:#fff;
+  background:linear-gradient(145deg,#2d6a4f,#1b4332);box-shadow:0 8px 20px rgba(27,67,50,.25);
+}
+.proforma-brand strong{display:block;font-size:1.12rem;font-weight:900;color:#1b4332}
+.proforma-brand > div > span{display:block;margin-top:.15rem;font-size:.72rem;color:var(--c-text-2);font-weight:700}
+.proforma-brand__tag{display:inline-block;margin-top:.35rem;padding:.2rem .5rem;border-radius:6px;font-size:.65rem!important;
+  background:rgba(201,168,76,.15);color:#7a6228;border:1px solid rgba(201,168,76,.3)}
+.proforma-head__side{display:flex;flex-wrap:wrap;gap:1rem;align-items:flex-start}
+.proforma-stamp{
+  width:88px;height:88px;border-radius:50%;border:3px double rgba(192,57,43,.45);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  color:#922b21;font-weight:900;font-size:.62rem;line-height:1.35;transform:rotate(-8deg);
+  background:radial-gradient(circle at 30% 30%,#fff,rgba(255,245,240,.9));
+  box-shadow:0 6px 16px rgba(192,57,43,.12);
+}
+.proforma-stamp small{font-size:.55rem;font-weight:800;opacity:.85}
+.proforma-meta{text-align:left;margin:0}
+.proforma-meta dt{font-size:.62rem;font-weight:800;color:var(--c-text-2);margin-bottom:.12rem}
+.proforma-meta dd{margin:0 0 .4rem;font-size:.84rem;font-weight:900;color:var(--c-primary-dark)}
+.proforma-badge-row{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem}
+.proforma-badge{font-size:.66rem;font-weight:900;padding:.32rem .65rem;border-radius:999px;
+  background:rgba(192,57,43,.09);color:#922b21;border:1px solid rgba(192,57,43,.22)}
+.proforma-badge--gold{background:rgba(201,168,76,.14);color:#7a6228;border-color:rgba(201,168,76,.35)}
+.proforma-badge--muted{background:rgba(45,106,79,.08);color:#1b4332;border-color:rgba(45,106,79,.15)}
+.proforma-parties{display:grid;gap:.75rem;margin-bottom:1.15rem}
+@media(min-width:640px){.proforma-parties{grid-template-columns:1fr 1fr}}
+.proforma-party{padding:.85rem .95rem;border-radius:14px;border:1px solid rgba(61,90,76,.1)}
+.proforma-party--buyer{background:linear-gradient(135deg,#f6fbf8,#fff)}
+.proforma-party--terms{background:linear-gradient(135deg,#faf7ef,#fff)}
+.proforma-party h3{margin:0 0 .5rem;font-size:.72rem;font-weight:900;color:var(--c-text-2)}
+.proforma-party__name{margin:0;font-size:.92rem;font-weight:900;color:var(--c-primary-dark)}
+.proforma-party__line{margin:.25rem 0 0;font-size:.8rem;line-height:1.6;font-weight:700;color:var(--c-primary-dark)}
+.proforma-party__line--sub{font-size:.74rem;color:var(--c-text-2)}
+.proforma-party__list{margin:0;padding:0;list-style:none;display:grid;gap:.4rem}
+.proforma-party__list li{display:flex;justify-content:space-between;gap:.5rem;font-size:.76rem}
+.proforma-party__list span{color:var(--c-text-2);font-weight:700}
+.proforma-party__list strong{color:var(--c-primary-dark);font-weight:900;text-align:left}
+.proforma-table-wrap{border-radius:14px;overflow:hidden;border:1px solid rgba(45,106,79,.12);margin-bottom:1rem}
+.proforma-table{width:100%;border-collapse:collapse;font-size:.78rem;margin-bottom:0}
+.proforma-table th{text-align:right;padding:.6rem .55rem;background:linear-gradient(180deg,#2d6a4f,#163d2f);color:#fff;font-weight:800;font-size:.71rem}
+.proforma-table td{padding:.55rem .5rem;border-bottom:1px solid rgba(45,106,79,.08);vertical-align:top}
+.proforma-table tbody tr:nth-child(even){background:rgba(240,247,243,.55)}
+.proforma-table .col-idx{width:2rem;text-align:center;font-weight:900;color:var(--c-text-2)}
+.proforma-table .col-num{text-align:left;direction:ltr;font-variant-numeric:tabular-nums;font-weight:800;white-space:nowrap}
+.proforma-item-name{display:block;font-weight:900;color:var(--c-primary-dark)}
+.proforma-item-var{display:block;margin-top:.15rem;font-size:.7rem;color:var(--c-text-2);font-weight:700}
+.proforma-line-total{color:#1b4332}
+.proforma-summary{display:grid;gap:1rem;margin-bottom:1rem}
+@media(min-width:720px){.proforma-summary{grid-template-columns:1fr minmax(260px,320px);align-items:start}}
+.proforma-summary__note{
+  padding:.85rem .95rem;border-radius:12px;font-size:.74rem;line-height:1.75;font-weight:600;color:#5c4a1f;
+  background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);
+}
+.proforma-totals{padding:.85rem .95rem;border-radius:14px;background:linear-gradient(145deg,#f0faf4,#fff);border:1px solid rgba(45,106,79,.15);max-width:none;margin:0}
+.proforma-totals dl{display:grid;grid-template-columns:1fr auto;gap:.4rem .75rem;font-size:.8rem;margin:0}
+.proforma-totals dt{color:var(--c-text-2);font-weight:700}
+.proforma-totals dd{margin:0;font-weight:900;color:var(--c-primary-dark);text-align:left;direction:ltr}
+.proforma-totals__discount{color:#922b21!important}
+.proforma-totals .grand{font-size:1rem;color:#1b4332;padding-top:.4rem;margin-top:.2rem;border-top:2px dashed rgba(45,106,79,.2)}
+.proforma-totals .grand small{font-size:.72rem;font-weight:800}
+.proforma-legal{
+  margin-top:.5rem;padding:1rem 1.05rem;border-radius:14px;
+  background:linear-gradient(135deg,rgba(192,57,43,.05),rgba(201,168,76,.07));
+  border:1px solid rgba(192,57,43,.16);
+}
+.proforma-legal h3{margin:0 0 .5rem;font-size:.82rem;font-weight:900;color:#922b21}
+.proforma-legal ul{margin:0;padding:0 1rem 0 0;font-size:.68rem;line-height:1.55;color:#4a3f35;font-weight:600}
+.proforma-legal__cols{display:grid;gap:.25rem .85rem}
+@media(min-width:520px){.proforma-legal__cols{grid-template-columns:1fr 1fr}}
+.proforma-legal li{margin-bottom:.2rem}
+.proforma-sheet__bar{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.35rem .65rem;
+  padding:.55rem .85rem;margin:0;
+  font-size:.68rem;font-weight:800;line-height:1.35;text-align:center;
+  color:#fff;
+  background:linear-gradient(90deg,#1b4332,#2d6a4f 50%,#1b4332);
+  border-top:1px solid rgba(255,255,255,.12);
+}
+.proforma-sheet__bar-phone{font-size:.78rem;font-weight:900;letter-spacing:.02em}
+.proforma-sheet__bar-brand{opacity:.92}
+.proforma-customer-note{
+  margin:.65rem 0 0;padding:.5rem .7rem;border-radius:8px;background:#f8fbf9;border:1px dashed rgba(61,90,76,.2);
+  font-size:.7rem;line-height:1.55;
+}
+
+.proforma-analytics-wrap{
+  margin:0 0 1.15rem;
+  padding:.15rem 0 .35rem;
+  border-radius:18px;
+  background:linear-gradient(165deg,rgba(240,247,243,.9),#fff);
+  border:1px solid rgba(45,106,79,.14);
+  box-shadow:0 14px 40px rgba(27,67,50,.08);
+}
+.proforma-analytics-wrap .cart-analytics{
+  margin:0;
+  box-shadow:none;
+  border:none;
+  background:transparent;
+}
+.proforma-analytics-wrap .cart-analytics-title{
+  font-size:1.05rem;
+}
+.proforma-analytics-wrap .cart-chart-donut{
+  width:156px;height:156px;
+}
+.proforma-analytics-wrap .cart-chart-donut-hole{
+  width:96px;height:96px;
+}
+
+@media print{
+  @page{size:A4 portrait;margin:10mm 9mm}
+  html,body{height:auto;margin:0;padding:0}
+  .no-print{display:none!important}
+  .proforma-page{background:#fff;padding:0;min-height:auto}
+  .proforma-sheet{
+    box-shadow:none;border-radius:0;max-width:100%;width:100%;
+  }
+  .proforma-sheet__frame,.proforma-sheet__watermark{display:none}
+  .proforma-head,.proforma-parties,.proforma-summary,.proforma-legal{
+    page-break-inside:avoid;break-inside:avoid;
+  }
+  .proforma-analytics-wrap{
+    page-break-inside:auto;break-inside:auto;
+    margin-bottom:.75rem;
+    box-shadow:none;
+  }
+  .proforma-analytics-wrap .cart-analytics-charts,
+  .proforma-analytics-wrap .cart-chart-donut-wrap,
+  .proforma-analytics-wrap .cart-chart-bars{
+    page-break-inside:avoid;break-inside:avoid;
+  }
+  .proforma-table thead{display:table-header-group}
+  .proforma-table tr{page-break-inside:avoid;break-inside:avoid}
+  .proforma-table-wrap{page-break-inside:auto}
+  .proforma-sheet__bar{
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  }
+  body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}

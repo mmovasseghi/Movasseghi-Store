@@ -1,0 +1,41 @@
+@{
+    var days = (int)(ViewBag.Days ?? 30);
+    var ranges = ViewBag.Ranges as int[] ?? [7, 30, 90];
+    var action = ViewContext.RouteData.Values["action"]?.ToString() ?? "Index";
+
+    string Label(int d) => d switch
+    {
+        1 => "امروز",
+        7 => "۷ روز",
+        14 => "۲ هفته",
+        30 => "۳۰ روز",
+        90 => "۳ ماه",
+        180 => "۶ ماه",
+        365 => "یک سال",
+        _ => $"{d} روز"
+    };
+}
+
+<div class="kit-toolbar kit-rise">
+    <div class="kit-toolbar-grow">
+        <strong style="font-size:.86rem">بازه گزارش</strong>
+        <span class="kit-form-hint" style="margin-top:.15rem">
+            هر عدد با بازه قبلی به همان طول مقایسه می‌شود تا روند مشخص شود.
+        </span>
+    </div>
+
+    <nav class="kit-segment" aria-label="انتخاب بازه زمانی">
+        @foreach (var r in ranges)
+        {
+            <a href="@($"/Admin/Reports/{action}?days={r}")"
+               class="@(days == r ? "is-active" : "")"
+               aria-current="@(days == r ? "page" : null)">@Label(r)</a>
+        }
+    </nav>
+
+    <nav class="kit-segment" aria-label="نوع گزارش">
+        <a href="/Admin/Reports?days=@days" class="@(action == "Index" ? "is-active" : "")">نمای کلی</a>
+        <a href="/Admin/Reports/Traffic?days=@days" class="@(action == "Traffic" ? "is-active" : "")">ترافیک</a>
+        <a href="/Admin/Reports/Sales?days=@days" class="@(action == "Sales" ? "is-active" : "")">فروش</a>
+    </nav>
+</div>

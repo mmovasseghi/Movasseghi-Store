@@ -1,0 +1,53 @@
+@model IEnumerable<Product>
+@inject IWebHostEnvironment Env
+@{
+    ViewData["Title"] = "فروشگاه محصولات | فروشگاه موثقی";
+    var categories = (IEnumerable<Category>)ViewBag.Categories;
+}
+<div class="section">
+    <div class="container">
+        <h1 style="margin-top:0">فروشگاه محصولات آملون</h1>
+
+        <form method="get" class="form-card" style="margin-bottom:2rem;display:grid;grid-template-columns:2fr 1fr 1fr 1fr auto;gap:.75rem;align-items:end">
+            <div class="form-group" style="margin:0">
+                <label>جستجو</label>
+                <input class="form-control" name="q" value="@ViewBag.Query" placeholder="نام محصول..." />
+            </div>
+            <div class="form-group" style="margin:0">
+                <label>دسته</label>
+                <select class="form-control" name="categoryId">
+                    <option value="">همه</option>
+                    @foreach (var c in categories)
+                    {
+                        <option value="@c.Id" selected="@(ViewBag.CategoryId as int? == c.Id)">@c.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group" style="margin:0">
+                <label>بسته‌بندی</label>
+                <select class="form-control" name="packaging">
+                    <option value="">همه</option>
+                    <option value="bulk" selected="@(ViewBag.Packaging == "bulk")">فله</option>
+                    <option value="shrink" selected="@(ViewBag.Packaging == "shrink")">شیرینگ</option>
+                </select>
+            </div>
+            <div class="form-group" style="margin:0">
+                <label>مرتب‌سازی</label>
+                <select class="form-control" name="sort">
+                    <option value="">پیش‌فرض</option>
+                    <option value="price-asc" selected="@(ViewBag.Sort == "price-asc")">ارزان‌ترین</option>
+                    <option value="price-desc" selected="@(ViewBag.Sort == "price-desc")">گران‌ترین</option>
+                    <option value="name" selected="@(ViewBag.Sort == "name")">نام</option>
+                </select>
+            </div>
+            <button class="btn btn-primary" type="submit">اعمال</button>
+        </form>
+
+        <div class="ms-product-grid">
+            @foreach (var p in Model)
+            {
+                <partial name="_ProductCard" model="p" />
+            }
+        </div>
+    </div>
+</div>

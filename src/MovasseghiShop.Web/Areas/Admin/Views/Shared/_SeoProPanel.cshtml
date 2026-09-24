@@ -1,0 +1,296 @@
+@model MovasseghiShop.Web.Models.SeoScoreResult?
+@using MovasseghiShop.Web.Services
+@{
+    var entityId = ViewData["SeoEntityId"] as int? ?? 0;
+    var entityType = ViewData["SeoEntityType"] as string ?? "product";
+    var autoFixAction = entityType switch
+    {
+        "category" => "/Admin/Studio/AutoFixCategory",
+        "blog" => "/Admin/Studio/AutoFixBlog",
+        "news" => "/Admin/Studio/AutoFixNews",
+        _ => "/Admin/Studio/AutoFixProduct"
+    };
+    var score = Model;
+    var u = score?.Ultimate;
+    var readiness = score?.RankingReadiness ?? u?.RankingReadiness ?? 0;
+    var competitive = score?.CompetitiveStrength ?? u?.CompetitiveStrength ?? 0;
+    var overall = u is not null
+        ? SeoUltimateAnalyzer.ResolveDisplayOverall(u)
+        : score?.DisplayTotal ?? 0;
+    var ready = score?.IsPublishReady ?? u?.IsPublishReady ?? false;
+    var gradeFa = u is not null ? SeoUltimateAnalyzer.ResolveGrade(u).GradeFa : null;
+
+    string Tone(int value, int target) => value >= target ? "is-ok" : value >= target - 12 ? "is-warn" : "is-bad";
+    string ScoreTone(int value) => ready && value >= SeoContentRules.PublishThreshold ? "ready" : value >= 70 ? "blocked" : "blocked";
+    var ringClass = ready && overall >= SeoContentRules.PublishThreshold && readiness >= 85 && competitive >= SeoContentRules.MinCompetitiveStrength
+        ? "is-ready"
+        : overall >= 70 ? "is-warn" : "is-low";
+    var limitDim = u is not null
+        ? SeoUltimateAnalyzer.Dimensions(u).OrderBy(d => d.Score).First()
+        : default;
+}
+
+<section class="st-panel st-seo-panel">
+    <div class="st-seo-head">
+        <h2 class="st-seo-panel-title">@SeoPublishGateLabels.AutoFixPanelTitle</h2>
+        @if (u is not null)
+        {
+            <span class="st-seo-grade">@(gradeFa ?? u.GradeFa)</span>
+        }
+    </div>
+
+    <div class="st-score-ring @ringClass" style="--score: @overall">
+        <div class="st-score-ring-inner">
+            <span class="st-score-num @ScoreTone(overall)" title="میانگین وزنی @((u?.WeightedDimensionScore ?? overall)) · آمادگی @readiness · رقابت @competitive">@overall</span>
+            <small class="st-score-label">امتیاز کل<br />از ۱۰۰</small>
+        </div>
+    </div>
+
+    @if (u is not null)
+    {
+        <div class="st-seo-headline st-seo-headline--3">
+            <div><span>@SeoPublishGateLabels.ReadinessLabel</span><strong class="@(readiness >= 85 ? "is-ok" : "is-warn")">@readiness</strong></div>
+            <div><span>قدرت رقابتی</span><strong class="@(competitive >= 85 ? "is-ok" : "is-warn")">@competitive</strong></div>
+            <div><span>وضعیت</span><strong class="@(ready ? "is-ok" : "is-warn")">@(ready ? "تأیید" : "ناقص")</strong></div>
+        </div>
+
+        <p class="st-seo-verdict @(ready ? "is-ok" : "is-warn")">@u.RankingVerdict</p>
+
+        <div class="st-seo-grid">
+            @foreach (var d in MovasseghiShop.Web.Services.SeoUltimateAnalyzer.Dimensions(u))
+            {
+                <div class="st-seo-chip @Tone(d.Score, d.Target)" title="هدف: @d.Target">
+                    <strong>@d.Score</strong>@d.Fa
+                </div>
+            }
+        </div>
+
+        @if (u is not null && limitDim.Score < overall - 8 && limitDim.Score < SeoContentRules.PublishThreshold)
+        {
+            <p class="st-seo-meta st-seo-limit">بُعد محدودکننده انتشار: <strong>@limitDim.Fa</strong> (@limitDim.Score از @limitDim.Target) — امتیاز کل از میانگین وزنی و آمادگی/رقابت است.</p>
+        }
+
+        <div class="st-seo-coverage">
+            <div><span>پوشش موضوعی</span><b>@u.TopicalCoverage.ToString("0")%</b></div>
+            <div><span>تطبیق Intent</span><b>@u.IntentMatch.ToString("0")%</b></div>
+            <div><span>پوشش معنایی</span><b>@u.SemanticCoverage.ToString("0")%</b></div>
+            <div><span>پوشش Entity</span><b>@u.EntityCoverage.ToString("0")%</b></div>
+            <div><span>پاسخ‌دهی AEO</span><b>@u.AeoAnswerCoverage.ToString("0")%</b></div>
+            <div><span>کامل بودن داده</span><b>@u.ProductDataCompleteness.ToString("0")%</b></div>
+            <div><span>جایگذاری Keyword</span><b>@u.PrimaryKeywordCoverage.ToString("0")%</b></div>
+            <div><span>چگالی Keyword</span><b>@u.KeywordDensity.ToString("0.0")%</b></div>
+            <div><span>متن کلیشه‌ای</span><b class="@(u.GenericRisk <= 12 ? "is-ok" : "is-bad")">@u.GenericRisk.ToString("0")%</b></div>
+            <div><span>تکرار محتوا</span><b class="@(u.DuplicationRisk <= 15 ? "is-ok" : "is-bad")">@u.DuplicationRisk.ToString("0")%</b></div>
+        </div>
+
+        <p class="st-seo-meta">
+            @u.WordCount کلمه · Intent غالب: <strong>@u.Intent.DominantFa</strong>
+            @if (entityType == "product")
+            {
+                @: · Scene @(u.HasSceneImage ? "✓" : "✗") · Studio @(u.HasStudioImage ? "✓" : "✗")
+            }
+        </p>
+
+        @if (entityType == "product")
+        {
+            var sceneAlt = ViewData["SceneAlt"] as string;
+            var studioAlt = ViewData["StudioAlt"] as string;
+            <details class="st-seo-block pe-alt-sidebar" open>
+                <summary>Alt تصاویر <span class="st-seo-src">قابل ویرایش</span></summary>
+                <p class="st-seo-note">متن زیر همان Alt است که در سایت نمایش داده می‌شود. از تب <button type="button" class="pe-alt-jump" data-pe-tab-jump="gallery">گالری</button> ویرایش کنید.</p>
+                <div class="pe-alt-sidebar__item">
+                    <span class="pe-alt-sidebar__label">Scene</span>
+                    <p class="pe-alt-sidebar__text" data-alt-sidebar-text="scene">@(string.IsNullOrWhiteSpace(sceneAlt) ? "— خالی —" : sceneAlt)</p>
+                </div>
+                <div class="pe-alt-sidebar__item">
+                    <span class="pe-alt-sidebar__label">Studio</span>
+                    <p class="pe-alt-sidebar__text" data-alt-sidebar-text="studio">@(string.IsNullOrWhiteSpace(studioAlt) ? "— خالی —" : studioAlt)</p>
+                </div>
+            </details>
+        }
+
+        @* ── فاصله با رقبا ── *@
+        <details class="st-seo-block" @(u.Gaps.Any(g => g.IsBehind) ? "open" : "")>
+            <summary>مقایسه با میانگین SERP <span class="st-seo-src">@u.Baseline.SourceLabel</span></summary>
+            @if (u.Baseline.OurPosition is > 0)
+            {
+                <p class="st-seo-note">رتبه فعلی ما برای «@u.Baseline.Keyword»: <strong>@u.Baseline.OurPosition</strong></p>
+            }
+            <table class="st-seo-gaps">
+                <thead><tr><th>بُعد</th><th>ما</th><th>رقبا</th><th>فاصله</th></tr></thead>
+                <tbody>
+                @foreach (var g in u.Gaps)
+                {
+                    <tr class="@(g.IsBehind ? "is-behind" : "")">
+                        <td>@g.DimensionFa</td>
+                        <td>@g.OurScore</td>
+                        <td>@g.CompetitorAvg</td>
+                        <td>@(g.Deficit > 0 ? $"−{g.Deficit}" : "✓")</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </details>
+
+        @* ── Query‌های بی‌پاسخ ── *@
+        var unanswered = u.Queries.Where(q => !q.Answered).ToList();
+        var gscQueries = u.Queries.Where(q => q.FromSearchConsole).ToList();
+
+        @if (unanswered.Count > 0 || gscQueries.Count > 0)
+        {
+            <details class="st-seo-block">
+                <summary>Query‌ها (@u.Queries.Count(q => q.Answered)/@u.Queries.Count پاسخ‌داده‌شده)</summary>
+                @foreach (var q in unanswered.Take(8))
+                {
+                    <div class="st-seo-query is-open">
+                        ✗ @q.Query
+                        @if (q.FromSearchConsole)
+                        {
+                            <em>@q.Impressions.ToString("0") نمایش · رتبه @q.Position?.ToString("0")</em>
+                        }
+                    </div>
+                }
+                @if (unanswered.Count == 0)
+                {
+                    <div class="st-seo-query is-ok">✓ همه Query‌های هدف پاسخ داده شده‌اند</div>
+                }
+            </details>
+        }
+
+        @* ── موضوعات پوشش‌نداده ── *@
+        var missingTopics = u.Topics.Where(t => !t.Covered).ToList();
+
+        @if (missingTopics.Count > 0)
+        {
+            <details class="st-seo-block">
+                <summary>موضوعات پوشش‌نداده (@missingTopics.Count)</summary>
+                <div class="st-seo-tags">
+                    @foreach (var t in missingTopics)
+                    {
+                        <span class="st-seo-tag">@t.Topic</span>
+                    }
+                </div>
+            </details>
+        }
+
+        @* ── Entity Confidence ── *@
+        @if (u.Entities.Count > 0)
+        {
+            <details class="st-seo-block">
+                <summary>اعتبار Entity (GEO)</summary>
+                @foreach (var e in u.Entities.Take(10))
+                {
+                    <div class="st-seo-entity">
+                        <span>@e.Entity <em>@e.Kind</em></span>
+                        <b class="@(e.Confidence >= 50 ? "is-ok" : "is-bad")">@e.Confidence%</b>
+                    </div>
+                }
+            </details>
+        }
+
+        @* ── Cannibalization ── *@
+        @if (u.Cannibalization.Count > 0)
+        {
+            <div class="st-seo-block is-alert">
+                <strong>⚠️ احتمال Keyword Cannibalization</strong>
+                @foreach (var k in u.Cannibalization)
+                {
+                    <div class="st-seo-note">
+                        «@k.EntityName» هم روی «@k.Keyword» هدف‌گذاری شده — @k.Recommendation
+                    </div>
+                }
+            </div>
+        }
+
+        @* ── مشکلات ── *@
+        @foreach (var c in u.CriticalIssues.Take(5))
+        {
+            <div class="st-seo-critical">@c</div>
+        }
+        @foreach (var w in u.Warnings.Take(5))
+        {
+            <div class="st-seo-warn">@w</div>
+        }
+        @foreach (var o in u.Opportunities.Take(5))
+        {
+            <div class="st-seo-opp">@o</div>
+        }
+
+        @* ── کارهایی که فقط انسان می‌تواند انجام دهد ── *@
+        @if (u.ManualTasks.Count > 0)
+        {
+            <div class="st-seo-block is-manual">
+                <strong>🙋 موتور از این‌جا جلوتر نمی‌رود — نیازمند شما</strong>
+                @foreach (var t in u.ManualTasks)
+                {
+                    <div class="st-seo-manual">
+                        <span>@t.Title @if (t.BlocksPublish) { <b>(مانع انتشار)</b> }</span>
+                        <em>@t.Why</em>
+                    </div>
+                }
+            </div>
+        }
+        @if (entityType == "product" && entityId > 0)
+        {
+            <div class="st-seo-block is-manual st-seo-reviews">
+                <strong>نظرات محصول و Schema</strong>
+                <p class="st-seo-note">نظرات پیشنهادی Auto-Fix و نظرات ارسالی از سایت تا تأیید شما در فروشگاه نمایش داده نمی‌شوند.</p>
+                <div class="st-seo-reviews__actions">
+                    <form method="post" action="/Admin/ProductReviewsAdmin/ApproveAllSuggested">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="productId" value="@entityId" />
+                        <button type="submit" class="st-btn st-btn-gold st-btn-sm st-btn-block">تأیید همه پیشنهادی</button>
+                    </form>
+                    <a class="st-btn st-btn-ghost st-btn-sm st-btn-block" href="/Admin/ProductReviewsAdmin?productId=@entityId&amp;status=pending">مدیریت نظرات</a>
+                </div>
+            </div>
+        }
+
+        @* ── لاگ حلقه بهینه‌سازی ── *@
+        @if (u.Iterations.Count > 0)
+        {
+            <details class="st-seo-block" open>
+                <summary>حلقه Auto-Fix (@u.Iterations.Count قدم)</summary>
+                @foreach (var it in u.Iterations)
+                {
+                    <div class="st-seo-iter">
+                        <span class="st-seo-iter-n">@it.Iteration</span>
+                        <div>
+                            <strong>@it.TargetDimension</strong>
+                            <em>@it.Action</em>
+                            @if (it.Stopped && !string.IsNullOrEmpty(it.StopReason))
+                            {
+                                <em class="is-stop">⏹ @it.StopReason</em>
+                            }
+                        </div>
+                        <b class="@(it.Delta > 0 ? "is-ok" : "")">@(it.Delta > 0 ? "+" : "")@it.Delta</b>
+                    </div>
+                }
+            </details>
+        }
+
+        @if (u.PassedChecks.Count > 0)
+        {
+            <details class="st-seo-block">
+                <summary>چک‌های موفق (@u.PassedChecks.Count)</summary>
+                <div class="st-seo-checklist">
+                    @foreach (var ok in u.PassedChecks)
+                    {
+                        <div>@ok</div>
+                    }
+                </div>
+            </details>
+        }
+    }
+    else
+    {
+        <p class="st-seo-hint">برای دریافت گزارش، «@SeoPublishGateLabels.AutoFixButton» را بزنید.</p>
+    }
+
+    <form method="post" action="@autoFixAction" class="st-seo-autofix">
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="id" value="@entityId" />
+        <input type="hidden" name="returnUrl" value="@Context.Request.Path" />
+        <button type="submit" class="st-btn st-btn-gold st-btn-block">@SeoPublishGateLabels.AutoFixButton</button>
+    </form>
+</section>

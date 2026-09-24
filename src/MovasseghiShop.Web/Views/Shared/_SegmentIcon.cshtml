@@ -1,0 +1,46 @@
+@model string
+@{
+    var id = $"sg{Guid.NewGuid():N}"[..8];
+}
+<svg class="ms-icon-svg ms-segment-svg" viewBox="0 0 48 48" width="44" height="44" fill="none" aria-hidden="true">
+    <defs>
+        <linearGradient id="sg1@(id)" x1="4" y1="4" x2="44" y2="44">
+            <stop offset="0%" stop-color="#5f8a72"/>
+            <stop offset="100%" stop-color="#3d5a4c"/>
+        </linearGradient>
+        <linearGradient id="sg2@(id)" x1="0" y1="0" x2="48" y2="48">
+            <stop offset="0%" stop-color="#d4b85a"/>
+            <stop offset="100%" stop-color="#c9a84c"/>
+        </linearGradient>
+        <filter id="sgs@(id)" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="2" stdDeviation="1.5" flood-color="#3d5a4c" flood-opacity=".18"/>
+        </filter>
+    </defs>
+    <circle cx="24" cy="24" r="20" fill="url(#sg1@(id))" opacity=".1"/>
+    <g filter="url(#sgs@(id))">
+    @switch (Model)
+    {
+        case "restaurant":
+            <rect x="13" y="22" width="22" height="16" rx="2" fill="url(#sg1@(id))"/>
+            <path d="M17 14v8M24 12v10M31 14v8" stroke="url(#sg2@(id))" stroke-width="2.8" stroke-linecap="round"/>
+            <path d="M17 26h14" stroke="#fff" stroke-width="1.2" opacity=".35" stroke-linecap="round"/>
+            break;
+        case "cafe":
+            <path d="M14 18h16l-1.5 18H15.5L14 18z" fill="url(#sg1@(id))"/>
+            <path d="M30 20h4c1.5 0 2.5 1.2 2.5 2.8v4" stroke="url(#sg2@(id))" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M18 14c0-2 2.5-4 6-4s6 2 6 4" stroke="url(#sg2@(id))" stroke-width="2" fill="none"/>
+            break;
+        case "catering":
+            <rect x="10" y="17" width="28" height="19" rx="3" fill="url(#sg1@(id))"/>
+            <path d="M10 23h28M18 17v-4h12v4" stroke="url(#sg2@(id))" stroke-width="2.5"/>
+            break;
+        case "store":
+            <path d="M10 21h28l-3 17H13L10 21z" fill="url(#sg1@(id))"/>
+            <path d="M10 21l14-9 14 9" stroke="url(#sg2@(id))" stroke-width="2.5" stroke-linejoin="round" fill="none"/>
+            break;
+        default:
+            <path d="M24 10l3.5 7 7.8 1.1-5.6 5.5 1.5 9L24 29l-8 4 1.5-9L11 17.5 20 16z" fill="url(#sg2@(id))"/>
+            break;
+    }
+    </g>
+</svg>

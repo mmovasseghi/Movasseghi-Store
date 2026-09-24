@@ -1,0 +1,112 @@
+@model CartSummary
+@{
+    ViewData["Title"] = "سبد خرید";
+}
+
+@section Head {
+    <link rel="stylesheet" href="~/css/ux-cart.css" asp-append-version="true" />
+}
+
+<section class="ms-cart-page ms-reveal">
+    <div class="ms-wrap">
+        <header class="ms-cart-page-head">
+            <h1 class="ms-cart-page-title">سبد خرید</h1>
+            <a href="/Catalog" class="ms-cart-page-back">← بازگشت به محصولات</a>
+        </header>
+
+        @if (Model.Items.Count == 0)
+        {
+            var empty = ViewBag.CartEmpty as MovasseghiShop.Web.Models.Entities.ContentAtom;
+            <div class="ms-cart-empty ms-cart-empty--page">
+                <span class="ms-cart-empty-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg>
+                </span>
+                <p>@(empty?.Body ?? "سبد خرید خالی است")</p>
+                <a href="@(empty?.CtaUrl ?? "/Catalog")" class="ms-cart-empty-btn">@(empty?.CtaText ?? "مشاهده محصولات")</a>
+            </div>
+        }
+        else
+        {
+            <div class="cart-page-layout">
+                <div class="cart-page-main">
+                    <div class="ms-cart-page-items">
+                        @foreach (var item in Model.Items)
+                        {
+                            var s = item.Stats;
+                            <article class="ms-cart-item ms-cart-item--page cart-item-card">
+                                <div class="ms-cart-item-info">
+                                    <strong>@item.ProductName</strong>
+                                    <span class="ms-cart-item-meta">@item.VariantLabel</span>
+                                    <div class="cart-item-chips">
+                                        @if (s.NylonCount > 0) { <span class="cart-chip cart-chip--nylon">@CartAnalyticsHelper.FormatCount(s.NylonCount) نایلون</span> }
+                                        @if (s.CartonCount > 0) { <span class="cart-chip cart-chip--carton">@CartAnalyticsHelper.FormatCount(s.CartonCount) کارتن</span> }
+                                        @if (s.PackCount > 0) { <span class="cart-chip cart-chip--pack">@CartAnalyticsHelper.FormatCount(s.PackCount) بسته</span> }
+                                        <span class="cart-chip cart-chip--pieces">@CartAnalyticsHelper.FormatCount(s.PieceCount) قلم</span>
+                                    </div>
+                                    <span class="ms-cart-item-meta">@s.SummaryLine</span>
+                                    <span class="ms-cart-item-line">@s.DetailLine · <strong>@SlugHelper.FormatToman(item.LineTotal) تومان</strong></span>
+                                </div>
+                                <div class="ms-cart-item-actions">
+                                    <form asp-action="Update" method="post" class="ms-cart-update-form">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="variantId" value="@item.VariantId" />
+                                        <span class="ms-cart-qty-label">تعداد @item.UnitName</span>
+                                        <div class="ms-qty-stepper">
+                                            <button type="submit" name="cartons" value="@(Math.Max(1, item.CartonQuantity - 1))" class="ms-qty-btn" aria-label="کم کردن">−</button>
+                                            <span>@item.CartonQuantity</span>
+                                            <button type="submit" name="cartons" value="@(item.CartonQuantity + 1)" class="ms-qty-btn" aria-label="زیاد کردن">+</button>
+                                        </div>
+                                    </form>
+                                    <form asp-action="Remove" method="post">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="variantId" value="@item.VariantId" />
+                                        <button type="submit" class="ms-cart-remove" aria-label="حذف">
+                                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg>
+                                        </button>
+                                    </form>
+                                </div>
+                            </article>
+                        }
+                    </div>
+
+                    <partial name="_CartAnalyticsReport" model="Model" />
+                </div>
+
+                <aside class="cart-page-sidebar">
+                    <partial name="_CartDiscountProgress" model="Model" />
+                    <partial name="_CartPremiumUpsell" model="Model" />
+                    @{ ViewBag.CartPayableHero = true; }
+                    <partial name="_CartTotals" model="Model" />
+
+                    <form asp-action="ApplyCoupon" method="post" class="ms-cart-coupon">
+                        @Html.AntiForgeryToken()
+                        <input class="form-control" name="code" placeholder="کد تخفیف" />
+                        <button class="btn btn-ghost" type="submit">اعمال</button>
+                    </form>
+
+                    @{
+                        var humanOk = ViewBag.HumanVerified as bool? ?? false;
+                        var humanFail = ViewBag.HumanCheckFail as bool? ?? false;
+                    }
+                    @if (Model.MeetsMinimum)
+                    {
+                        <partial name="_CartHumanGate" />
+                        @if (humanFail && !humanOk)
+                        {
+                            <p class="ms-human-gate__hint ms-human-gate__hint--page" role="alert">پاسخ درست نبود — دوباره امتحان کنید یا «سؤال دیگر» بزنید.</p>
+                        }
+                        <a href="@(humanOk ? "/Checkout" : "#")"
+                           class="ms-cart-checkout @(humanOk ? "" : "is-disabled")"
+                           id="checkoutContinue"
+                           @(humanOk ? null : "tabindex=-1")>ادامه ثبت سفارش</a>
+                    }
+                </aside>
+            </div>
+        }
+    </div>
+</section>
+
+@section Scripts {
+    <script defer src="~/js/cart.js" asp-append-version="true"></script>
+    <script src="~/js/cart-human.js" asp-append-version="true"></script>
+}

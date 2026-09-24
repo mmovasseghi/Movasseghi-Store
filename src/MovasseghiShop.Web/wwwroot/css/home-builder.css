@@ -1,0 +1,23 @@
+/* Home section visual builder */
+.st-cms-form-col .hb-form { max-width: none; }
+.hb-form { max-width: 820px; }
+.hb-block {
+  margin: 1rem 0;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--st-border);
+  border-radius: var(--st-radius-sm);
+  background: rgba(0, 0, 0, 0.2);
+}
+.hb-block-title {
+  margin: 0 0 0.85rem;
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--st-green);
+}
+.hb-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem 1rem;
+}
+.hb-full { grid-column: 1 / -1; }
+@media (max-width: 640px) { .hb-grid { grid-template-columns: 1fr; } }

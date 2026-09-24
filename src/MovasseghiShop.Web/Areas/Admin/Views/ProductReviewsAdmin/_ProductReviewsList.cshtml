@@ -1,0 +1,118 @@
+@model List<MovasseghiShop.Web.Models.Entities.ProductReview>
+@using MovasseghiShop.Web.Models.Enums
+@{
+    var list = Model;
+    var approved = list.Count(r => r.Status == ProductReviewStatus.Approved);
+    var rejected = list.Count(r => r.Status == ProductReviewStatus.Rejected);
+    var pendingInList = list.Count(r => r.Status == ProductReviewStatus.Pending);
+    var productId = ViewBag.ProductId as int?;
+    var status = ViewBag.Status as string;
+    var search = ViewBag.Search as string;
+    var replyCounts = ViewBag.StoreReplyCounts as Dictionary<int, (int Total, int Approved)> ?? new Dictionary<int, (int, int)>();
+}
+
+<div id="reviewsListMeta" hidden
+     data-count="@list.Count"
+     data-approved="@approved"
+     data-rejected="@rejected"
+     data-pending="@pendingInList"></div>
+
+@if (list.Count == 0)
+{
+    <div class="kit-empty">
+        <div class="kit-empty-icon" aria-hidden="true">💬</div>
+        <h3>نظری با این جستجو پیدا نشد</h3>
+        <p>نام محصول، نویسنده یا متن نظر را عوض کنید یا فیلتر وضعیت را بردارید.</p>
+    </div>
+}
+else
+{
+    <div class="kit-table-scroll">
+        <table class="kit-table">
+            <thead>
+                <tr>
+                    <th data-sort>محصول</th>
+                    <th data-sort>نویسنده</th>
+                    <th data-sort>امتیاز</th>
+                    <th data-sort>وضعیت</th>
+                    <th>پاسخ فروشگاه</th>
+                    <th data-sort>تاریخ</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var r in list)
+            {
+                <tr>
+                    <td><a class="kit-cell-main" href="/Admin/Products/Edit/@r.ProductId">@(r.Product?.Name ?? "—")</a></td>
+                    <td>@r.AuthorDisplayName</td>
+                    <td class="kit-cell-num">@(r.Rating > 0 ? r.Rating.ToString() : "—")</td>
+                    <td>
+                        @switch (r.Status)
+                        {
+                            case ProductReviewStatus.Approved:
+                                <span class="kit-tag kit-tag--ok">تأیید‌شده</span>
+                                break;
+                            case ProductReviewStatus.Rejected:
+                                <span class="kit-tag kit-tag--bad">رد‌شده</span>
+                                break;
+                            default:
+                                <span class="kit-tag kit-tag--warn">در انتظار</span>
+                                break;
+                        }
+                        @if (r.IsSeoSuggested) { <span class="kit-tag">SEO</span> }
+                        @if (r.Body.Contains('؟') || r.Body.Contains('?'))
+                        {
+                            <span class="kit-tag kit-tag--warn">سوال</span>
+                        }
+                    </td>
+                    <td>
+                        @{
+                            replyCounts.TryGetValue(r.Id, out var rc);
+                            var hasApprovedReply = rc.Approved > 0;
+                        }
+                        @if (hasApprovedReply)
+                        {
+                            <span class="kit-tag kit-tag--ok">پاسخ داده شده</span>
+                        }
+                        else if (rc.Total > 0)
+                        {
+                            <span class="kit-tag kit-tag--warn">پاسخ در انتظار</span>
+                        }
+                        else if (r.Body.Contains('؟') || r.Body.Contains('?'))
+                        {
+                            <span class="kit-tag kit-tag--bad">بدون پاسخ</span>
+                        }
+                        else
+                        {
+                            <span class="kit-form-hint">—</span>
+                        }
+                    </td>
+                    <td class="kit-cell-num" dir="ltr">@r.CreatedAt.ToLocalTime().ToString("yyyy/MM/dd")</td>
+                    <td class="kit-cell-actions">
+                        <a class="st-btn st-btn-ghost st-btn-sm" href="/Admin/ProductReviewsAdmin/Edit/@r.Id">ویرایش</a>
+                        <a class="st-btn st-btn-primary st-btn-sm" href="/Admin/ProductReviewsAdmin/Edit/@r.Id#store-reply">پاسخ</a>
+                        @if (r.Status == ProductReviewStatus.Pending)
+                        {
+                            <form method="post" action="/Admin/ProductReviewsAdmin/Approve/@r.Id" class="js-reviews-moderate" data-kit-nobusy style="display:inline">
+                                @Html.AntiForgeryToken()
+                                @if (productId is > 0) { <input type="hidden" name="productId" value="@productId" /> }
+                                @if (!string.IsNullOrEmpty(status)) { <input type="hidden" name="status" value="@status" /> }
+                                <input type="hidden" name="q" value="@(search ?? "")" class="js-reviews-q" />
+                                <button type="button" class="st-btn st-btn-primary st-btn-sm js-reviews-moderate-btn" data-action="approve">تأیید</button>
+                            </form>
+                            <form method="post" action="/Admin/ProductReviewsAdmin/Reject/@r.Id" class="js-reviews-moderate" data-kit-nobusy style="display:inline">
+                                @Html.AntiForgeryToken()
+                                @if (productId is > 0) { <input type="hidden" name="productId" value="@productId" /> }
+                                @if (!string.IsNullOrEmpty(status)) { <input type="hidden" name="status" value="@status" /> }
+                                <input type="hidden" name="q" value="@(search ?? "")" class="js-reviews-q" />
+                                <button type="button" class="st-btn st-btn-ghost st-btn-sm js-reviews-moderate-btn" data-action="reject">رد</button>
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+}

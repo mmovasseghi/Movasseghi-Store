@@ -1,0 +1,136 @@
+@model IEnumerable<Product>
+@using MovasseghiShop.Web.Models.Enums
+@using MovasseghiShop.Web.Services
+@{
+    var seoScores = (Dictionary<int, int>?)ViewBag.SeoScores ?? new();
+    var seoReadiness = (Dictionary<int, int>?)ViewBag.SeoReadiness ?? new();
+    var seoReady = (Dictionary<int, bool>?)ViewBag.SeoReady ?? new();
+    var seoAudited = (Dictionary<int, bool>?)ViewBag.SeoAudited ?? new();
+    var list = Model.ToList();
+    var active = list.Count(p => p.IsActive);
+    var special = list.Count(p => p.IsHomeSpecialOffer);
+    var featured = list.Count(p => p.IsHomeFeatured);
+    var specialTotal = (int)(ViewBag.HomeSpecialTotal ?? special);
+    var featuredTotal = (int)(ViewBag.HomeFeaturedTotal ?? featured);
+    var weakSeo = list.Count(p => seoAudited.GetValueOrDefault(p.Id, false) && seoScores.GetValueOrDefault(p.Id, 0) < 70);
+}
+
+<div id="productsListMeta" hidden
+     data-count="@list.Count"
+     data-active="@active"
+     data-weak="@weakSeo"
+     data-special="@special"
+     data-featured="@featured"
+     data-special-total="@specialTotal"
+     data-featured-total="@featuredTotal"
+     data-highlight-max="@HomeProductHighlights.MaxPerSlot"></div>
+
+@if (list.Count == 0)
+{
+    <div class="kit-empty">
+        <div class="kit-empty-icon" aria-hidden="true">📦</div>
+        <h3>محصولی با این فیلتر پیدا نشد</h3>
+        <a class="st-btn st-btn-primary" href="/Admin/Products/Create">افزودن محصول</a>
+    </div>
+}
+else
+{
+    <div class="kit-table-scroll">
+        <table class="kit-table kit-table--products">
+            <thead>
+                <tr>
+                    <th class="kit-col-star" scope="col" title="ویژه · برتر">
+                        <span class="kit-sr-only">جایگاه ویژه و برتر</span>
+                        <div class="kit-hi-slot kit-hi-slot--legend" aria-hidden="true">
+                            <span class="kit-hi-seg kit-hi-seg--gold"><partial name="_HomeHighlightIconStar" /></span>
+                            <span class="kit-hi-seg kit-hi-seg--diamond"><partial name="_HomeHighlightIconGem" /></span>
+                        </div>
+                    </th>
+                    <th data-sort>نام</th>
+                    <th data-sort>کد</th>
+                    <th data-sort>دسته</th>
+                    <th data-sort>امتیاز SEO</th>
+                    <th data-sort>گالری</th>
+                    <th data-sort>وضعیت</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in list)
+                {
+                    var displayName = System.Net.WebUtility.HtmlDecode(p.Name);
+                    var hasScene = p.Images.Any(i => i.Role == ProductImageRole.Scene || (i.Url ?? "").Contains("hero", StringComparison.OrdinalIgnoreCase));
+                    var hasStudio = p.Images.Any(i => i.Role == ProductImageRole.Studio || i.IsPrimary);
+                    var gallery = hasScene && hasStudio ? 2 : hasStudio || hasScene ? 1 : 0;
+                    var audited = seoAudited.GetValueOrDefault(p.Id, false);
+                    var seo = seoScores.GetValueOrDefault(p.Id, 0);
+                    var readiness = seoReadiness.GetValueOrDefault(p.Id, 0);
+                    var ready = seoReady.GetValueOrDefault(p.Id, false);
+                    var rowClass = string.Join(" ", new[]
+                    {
+                        p.IsActive ? null : "is-dim",
+                        p.IsHomeSpecialOffer ? "is-home-special" : null,
+                        p.IsHomeFeatured ? "is-home-featured" : null
+                    }.Where(c => c != null));
+                    <tr class="@rowClass">
+                        <td class="kit-col-star">
+                            <button type="button"
+                                    class="kit-hi-slot"
+                                    data-highlight-picker
+                                    data-product-id="@p.Id"
+                                    data-product-name="@displayName"
+                                    data-special="@(p.IsHomeSpecialOffer ? "1" : "0")"
+                                    data-featured="@(p.IsHomeFeatured ? "1" : "0")"
+                                    aria-label="ویژه یا برتر — @displayName"
+                                    title="کلیک برای تنظیم ویژه / برتر">
+                                <span class="kit-hi-seg kit-hi-seg--gold @(p.IsHomeSpecialOffer ? "is-on" : "")" aria-hidden="true">
+                                    <partial name="_HomeHighlightIconStar" />
+                                </span>
+                                <span class="kit-hi-seg kit-hi-seg--diamond @(p.IsHomeFeatured ? "is-on" : "")" aria-hidden="true">
+                                    <partial name="_HomeHighlightIconGem" />
+                                </span>
+                            </button>
+                        </td>
+                        <td>
+                            <span class="kit-cell-main">@displayName</span>
+                            <span class="kit-cell-sub" dir="ltr">/Shop/Product/@p.Slug</span>
+                        </td>
+                        <td class="kit-cell-num" dir="ltr">@(p.ProductCode ?? "—")</td>
+                        <td>@(p.Category?.Name ?? "—")</td>
+                        <td data-sort-value="@(audited ? seo : -1)" title="@(audited ? $"آمادگی رتبه‌گیری: {readiness}" : "هنوز بررسی نشده — ویرایش یا Auto-Fix")">
+                            @if (!audited)
+                            {
+                                <span class="kit-tag kit-tag--muted">—</span>
+                            }
+                            else
+                            {
+                                <span class="kit-tag @(ready ? "kit-tag--ok" : seo >= 70 ? "kit-tag--warn" : "kit-tag--bad")">@seo</span>
+                                @if (ready)
+                                {
+                                    <span class="kit-tag kit-tag--ok" style="margin-inline-start:.25rem">✓</span>
+                                }
+                            }
+                        </td>
+                        <td data-sort-value="@gallery">
+                            <span class="kit-tag @(gallery == 2 ? "kit-tag--ok" : "kit-tag--warn")">@gallery/2</span>
+                        </td>
+                        <td data-sort-value="@(p.IsActive ? 1 : 0)">
+                            <span class="kit-tag @(p.IsActive ? "kit-tag--ok" : "kit-tag--muted")">@(p.IsActive ? "فعال" : "غیرفعال")</span>
+                        </td>
+                        <td class="kit-cell-actions">
+                            <a class="st-btn st-btn-ghost st-btn-sm" href="/Admin/Products/Edit/@p.Id">ویرایش</a>
+                            <form method="post" action="/Admin/Products/Delete/@p.Id" style="display:inline"
+                                  data-kit-confirm="محصول «<strong>@displayName</strong>» حذف می‌شود. اگر در گوگل ایندکس شده، آدرسش ۴۰۴ می‌شود."
+                                  data-kit-confirm-title="حذف محصول"
+                                  data-kit-confirm-ok="حذف کن">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="st-btn st-btn-ghost st-btn-sm">حذف</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <p class="kit-form-hint" style="padding:.7rem 1rem">@list.Count محصول · @specialTotal/@HomeProductHighlights.MaxPerSlot طلایی · @featuredTotal/@HomeProductHighlights.MaxPerSlot الماسی · @SeoPublishGateLabels.GateHint</p>
+}

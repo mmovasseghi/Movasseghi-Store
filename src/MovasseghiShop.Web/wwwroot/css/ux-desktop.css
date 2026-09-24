@@ -1,0 +1,771 @@
+/*
+ * Movasseghi — Desktop Premium Layer (≥768px ONLY)
+ * Mobile styles are NEVER overridden below 767px.
+ */
+
+@media (min-width: 768px) {
+  :root {
+    --dt-max: 1280px;
+    --dt-gutter: clamp(1.25rem, 3vw, 2.5rem);
+    --dt-ease: cubic-bezier(0.22, 1, 0.36, 1);
+    --dt-shadow: 0 24px 64px rgba(26, 31, 38, 0.12);
+    --dt-shadow-lg: 0 40px 100px rgba(26, 31, 38, 0.18);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body.ms-body {
+    padding-bottom: 0;
+    background: linear-gradient(180deg, #eef1f4 0%, var(--c-bg) 120px, var(--c-bg) 100%);
+  }
+
+  .ms-wrap {
+    width: min(var(--dt-max), 92vw);
+    margin-inline: auto;
+  }
+
+  /* ── Promo ── */
+  .ms-promo-bar {
+    padding: 0.62rem var(--dt-gutter);
+    justify-content: center;
+  }
+
+  .ms-promo-line {
+    font-size: 0.82rem;
+    justify-content: center;
+  }
+
+  .ms-promo-slogan--full { display: inline; }
+  .ms-promo-slogan--short { display: none; }
+  .ms-promo-chip--hide-mobile { display: inline-flex; }
+  .ms-promo-badge { display: grid; }
+
+  /* ── Header — glass sticky ── */
+  .ms-top {
+    position: sticky;
+    top: 0;
+    z-index: 400;
+    padding: 0.85rem 0 1rem;
+    background: linear-gradient(180deg, rgba(243, 244, 246, 0.97) 0%, rgba(243, 244, 246, 0.88) 70%, transparent 100%);
+    backdrop-filter: blur(12px);
+    transition: padding 0.35s var(--dt-ease), box-shadow 0.35s;
+  }
+
+  body.ms-dt-scrolled .ms-top {
+    padding-top: 0.5rem;
+    padding-bottom: 0.65rem;
+  }
+
+  .ms-top-card {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 0.7rem 1.35rem;
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(61, 90, 76, 0.1);
+    box-shadow: var(--dt-shadow);
+    transition: box-shadow 0.4s var(--dt-ease), transform 0.4s var(--dt-ease);
+  }
+
+  body.ms-dt-scrolled .ms-top-card {
+    box-shadow: 0 12px 40px rgba(26, 31, 38, 0.1);
+  }
+
+  .ms-logo { height: 52px; max-width: 200px; }
+  .ms-logo-link { min-height: auto; justify-content: flex-start; }
+
+  .ms-top-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.15rem;
+    flex-wrap: wrap;
+  }
+
+  .ms-top-nav a {
+    padding: 0.5rem 0.95rem;
+    border-radius: 999px;
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: var(--c-text-2);
+    transition: color 0.25s, background 0.25s, transform 0.25s;
+  }
+
+  .ms-top-nav a:hover {
+    color: var(--c-primary);
+    background: var(--c-primary-light);
+    transform: translateY(-1px);
+  }
+
+  .ms-top-nav a.is-active {
+    color: #fff;
+    background: linear-gradient(135deg, var(--c-primary-dark), var(--c-primary));
+    box-shadow: 0 6px 20px rgba(36, 56, 48, 0.25);
+  }
+
+  .ms-top-actions { gap: 0.5rem; }
+
+  .ms-top-phone {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--c-primary-light), #fff);
+    border: 1px solid rgba(61, 90, 76, 0.15);
+    font-size: 0.8rem;
+    font-weight: 800;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+
+  .ms-top-phone:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(61, 90, 76, 0.15);
+  }
+
+  .ms-icon-btn {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    transition: transform 0.25s, background 0.25s, box-shadow 0.25s;
+  }
+
+  .ms-icon-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(61, 90, 76, 0.12);
+  }
+
+  .ms-search-wrap {
+    margin-top: 0.85rem;
+    max-width: min(720px, 100%);
+    margin-inline: auto;
+    width: 100%;
+  }
+
+  .ms-search {
+    padding: 0.75rem 1.25rem;
+    border-radius: 999px;
+    border-width: 1.5px;
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.3s, border-color 0.3s, transform 0.3s;
+  }
+
+  .ms-search:hover {
+    box-shadow: 0 12px 36px rgba(61, 90, 76, 0.12);
+  }
+
+  .ms-search:focus-within {
+    transform: translateY(-1px);
+    box-shadow: 0 16px 48px rgba(61, 90, 76, 0.15);
+  }
+
+  .ms-search input { font-size: 0.92rem; }
+
+  /* ── Stories — grid row ── */
+  .ms-stories {
+    padding: 1.25rem 0 1rem;
+    background: transparent;
+    border-bottom: none;
+  }
+
+  .ms-stories-track {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.1rem;
+    overflow: visible;
+    padding: 0;
+    scroll-snap-type: none;
+  }
+
+  .ms-story {
+    width: 88px;
+    flex: 0 0 auto;
+  }
+
+  .ms-story-ring { width: 76px; height: 76px; }
+
+  .ms-story:hover .ms-story-ring {
+    transform: scale(1.08);
+    box-shadow: 0 16px 40px rgba(61, 90, 76, 0.22);
+  }
+
+  /* ── Hero — cinematic banner ── */
+  .ms-hero {
+    padding: 1rem 0 2rem;
+  }
+
+  .ms-hero-wrap {
+    width: min(var(--dt-max), 94vw);
+    margin-inline: auto;
+    padding-inline: 0;
+  }
+
+  .ms-hero-stage {
+    border-radius: 32px;
+    box-shadow: var(--dt-shadow-lg);
+    min-height: 420px;
+  }
+
+  .ms-hero-viewport {
+    padding: 3.25rem clamp(2rem, 4vw, 4rem) 2.75rem;
+    min-height: 420px;
+  }
+
+  .ms-hero-grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(2rem, 4vw, 4rem);
+    align-items: center;
+  }
+
+  .ms-hero-title {
+    font-size: clamp(2.1rem, 3.8vw, 3.4rem);
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+  }
+
+  .ms-hero-desc {
+    font-size: 1.05rem;
+    max-width: 48ch;
+    min-height: auto;
+    -webkit-line-clamp: unset;
+    display: block;
+  }
+
+  .ms-hero-kicker {
+    font-size: 0.88rem;
+    padding: 0.4rem 1rem;
+  }
+
+  .ms-hero-cta {
+    padding: 0.85rem 1.75rem;
+    font-size: 0.92rem;
+    transition: transform 0.3s var(--dt-ease), box-shadow 0.3s;
+  }
+
+  .ms-hero-cta:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+  }
+
+  .ms-hero-product img {
+    max-height: min(380px, 42vh);
+    max-width: min(100%, 420px);
+    filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.35));
+    transition: transform 0.6s var(--dt-ease);
+  }
+
+  .ms-hero-stage:hover .ms-hero-product img {
+    transform: scale(1.03) translateY(-4px);
+  }
+
+  .ms-hero-stat {
+    padding: 0.65rem 1rem;
+    min-width: 88px;
+    border-radius: 18px;
+    transition: transform 0.35s var(--dt-ease);
+  }
+
+  .ms-hero-stat:hover { transform: translateY(-4px) scale(1.04); }
+
+  .ms-hero-stat-a { top: 24px; left: 28px; }
+  .ms-hero-stat-b { bottom: 4rem; left: 28px; }
+
+  .ms-hero-trust {
+    padding: 0.65rem 0;
+    background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.12));
+  }
+
+  /* ── Features band ── */
+  .ms-features {
+    padding: 2.5rem 0;
+  }
+
+  .ms-features-band {
+    border-radius: 28px;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--dt-shadow);
+  }
+
+  .ms-features-track {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.15rem;
+    width: 100%;
+    animation: none !important;
+  }
+
+  .ms-feature-card {
+    animation: none !important;
+    border-radius: 22px;
+    padding: 1.35rem 1.1rem;
+    transition: transform 0.4s var(--dt-ease), box-shadow 0.4s;
+  }
+
+  .ms-feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(61, 90, 76, 0.18);
+  }
+
+  .ms-feature-card--dup { display: none !important; }
+
+  /* ── Special offers — premium grid ── */
+  .ms-offers {
+    margin: 2rem 0;
+    padding: 3rem 0 3.5rem;
+    border-radius: 32px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  }
+
+  .ms-offers-wave { height: 36px; }
+
+  .ms-offers-head h2 {
+    font-size: 1.65rem;
+  }
+
+  .ms-offers-head p {
+    font-size: 0.88rem;
+  }
+
+  .ms-offers-icon {
+    width: 52px;
+    height: 52px;
+    font-size: 1.35rem;
+  }
+
+  .ms-countdown {
+    margin-bottom: 1.5rem;
+    padding: 0.85rem 1.5rem;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    backdrop-filter: blur(8px);
+  }
+
+  .ms-offers-scroll {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 1.15rem;
+    overflow: visible !important;
+    padding-bottom: 0;
+    scroll-snap-type: none;
+  }
+
+  .ms-offer-card {
+    flex: none !important;
+    width: 100% !important;
+    max-width: none !important;
+    padding: 0;
+    border-radius: 22px;
+    overflow: hidden;
+    transition: transform 0.45s var(--dt-ease), box-shadow 0.45s;
+  }
+
+  .ms-offer-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 28px 60px rgba(0, 0, 0, 0.2);
+  }
+
+  .ms-offer-img {
+    margin-bottom: 0;
+    border-radius: 0;
+    padding: 1rem;
+  }
+
+  .ms-offer-body {
+    padding: 0.85rem 1rem 1.1rem;
+  }
+
+  .ms-offer-card h3 {
+    font-size: 0.88rem;
+    min-height: 2.4em;
+  }
+
+  /* ── Categories — full grid ── */
+  .ms-cat-section {
+    padding: 2.5rem 0;
+  }
+
+  .ms-cat-hint-mobile { display: none !important; }
+
+  .ms-cat-scroll-wrap {
+    margin: 0;
+    padding: 0.35rem 0 0;
+    overflow: visible;
+  }
+
+  .ms-cat-scroll-wrap::before,
+  .ms-cat-scroll-wrap::after {
+    display: none !important;
+  }
+
+  /* همهٔ دسته‌ها در یک خط — بدون شکست به چند ردیف */
+  .ms-cat-scroll {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: clamp(0.4rem, 0.85vw, 0.7rem);
+    overflow-x: auto;
+    overflow-y: visible;
+    padding: 0.65rem 2px 0.55rem;
+    scroll-snap-type: none;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(61, 90, 76, 0.28) transparent;
+  }
+
+  .ms-cat-scroll::-webkit-scrollbar {
+    display: block;
+    height: 5px;
+  }
+
+  .ms-cat-scroll::-webkit-scrollbar-thumb {
+    background: rgba(61, 90, 76, 0.28);
+    border-radius: 999px;
+  }
+
+  .ms-cat-chip {
+    flex: 1 1 0;
+    min-width: 74px;
+    max-width: 96px;
+    width: auto;
+    scroll-snap-align: start;
+  }
+
+  .ms-cat-chip-ring {
+    width: clamp(58px, 5.5vw, 68px);
+    height: clamp(58px, 5.5vw, 68px);
+    margin: 0 auto;
+  }
+
+  .ms-cat-chip-ring .ms-icon-svg {
+    width: clamp(30px, 2.9vw, 36px);
+    height: clamp(30px, 2.9vw, 36px);
+  }
+
+  .ms-cat-chip-name {
+    font-size: clamp(0.64rem, 0.45vw + 0.52rem, 0.72rem);
+    max-width: 100%;
+    line-height: 1.35;
+  }
+
+  .ms-cat-chip-count {
+    font-size: 0.62rem;
+  }
+
+  .ms-cat-chip:hover .ms-cat-chip-ring {
+    transform: scale(1.07);
+    box-shadow: 0 14px 36px rgba(61, 90, 76, 0.22);
+  }
+
+  .ms-cat-header h2 {
+    font-size: 1.65rem;
+  }
+
+  /* ── Featured products ── */
+  .ms-featured-section {
+    padding: 2.5rem 0 3rem;
+  }
+
+  .ms-featured-head h2 {
+    font-size: 1.65rem;
+  }
+
+  .ms-featured-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+  }
+
+  .ms-feat-card {
+    border-radius: 22px;
+    transition: transform 0.45s var(--dt-ease), box-shadow 0.45s;
+  }
+
+  .ms-feat-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 24px 56px rgba(61, 90, 76, 0.16);
+  }
+
+  .ms-feat-card:hover .ms-feat-card-img img,
+  .ms-feat-card:hover .ms-feat-card-img .ms-product-img-el {
+    transform: scale(1.06);
+  }
+
+  .ms-feat-card-title {
+    font-size: 0.88rem;
+  }
+
+  /* ── Segments ── */
+  .ms-segments {
+    padding: 2.5rem 0 3rem;
+  }
+
+  .ms-segments-head {
+    text-align: right;
+    margin-bottom: 1.5rem;
+  }
+
+  .ms-segments-head h2 {
+    font-size: 1.65rem;
+  }
+
+  .ms-segments-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.15rem;
+  }
+
+  .ms-seg-tile {
+    padding: 1.35rem 1rem 1.15rem;
+    border-radius: 22px;
+    transition: transform 0.45s var(--dt-ease), box-shadow 0.45s;
+  }
+
+  .ms-seg-tile:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(61, 90, 76, 0.14);
+  }
+
+  /* ── Closing CTA ── */
+  .ms-closing {
+    padding: 3rem 0 3.5rem;
+  }
+
+  .ms-closing-card {
+    grid-template-columns: 140px 1fr;
+    padding: 2rem 2.5rem;
+    border-radius: 28px;
+    box-shadow: var(--dt-shadow-lg);
+    transition: transform 0.45s var(--dt-ease), box-shadow 0.45s;
+  }
+
+  .ms-closing-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 32px 80px rgba(26, 31, 38, 0.14);
+  }
+
+  /* ── News ── */
+  .ms-news {
+    padding: 2.5rem 0 3rem;
+  }
+
+  .ms-news-head h2 {
+    font-size: 1.65rem;
+  }
+
+  .ms-news-track {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    overflow: visible;
+    padding-bottom: 0;
+  }
+
+  .ms-news-card {
+    flex: none;
+    border-radius: 22px;
+    transition: transform 0.45s var(--dt-ease), box-shadow 0.45s;
+  }
+
+  .ms-news-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 24px 56px rgba(61, 90, 76, 0.14);
+  }
+
+  /* ── Footer ── */
+  .ms-footer {
+    padding-bottom: 1.5rem;
+  }
+
+  .ms-footer-top {
+    gap: 3rem;
+  }
+
+  /* ── Catalog ── */
+  .catalog-page {
+    padding: 2rem 0 3rem;
+  }
+
+  .catalog-layout {
+    grid-template-columns: 280px 1fr;
+    gap: 1.75rem;
+  }
+
+  .catalog-sidebar {
+    display: block;
+    position: sticky;
+    top: 140px;
+    align-self: start;
+    border-radius: 22px;
+    box-shadow: var(--shadow);
+  }
+
+  .page-title {
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .ms-product-grid,
+  .product-grid,
+  .catalog-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .ms-product {
+    border-radius: 20px;
+    transition: transform 0.4s var(--dt-ease), box-shadow 0.4s;
+  }
+
+  .ms-product:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 48px rgba(61, 90, 76, 0.14);
+  }
+
+  /* ── Product page ── */
+  .product-page {
+    padding: 2rem 0 3rem;
+  }
+
+  .product-sheet {
+    grid-template-columns: 1fr 1fr;
+    padding: 2rem;
+    border-radius: 28px;
+    box-shadow: var(--dt-shadow);
+    gap: 2rem;
+  }
+
+  .product-info h1 {
+    font-size: 1.65rem;
+  }
+
+  .related-section .ms-product-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  /* ── Cart ── */
+  .ms-cart-page {
+    padding: 2rem 0 3rem;
+  }
+
+  .ms-cart-page-title {
+    font-size: 1.85rem;
+  }
+
+  .ms-cart-page-items,
+  .ms-cart-page-footer {
+    border-radius: 22px;
+    box-shadow: var(--shadow);
+  }
+
+  /* ── Account ── */
+  .ms-account {
+    padding: 2rem 0 3rem;
+  }
+
+  .ms-account-title {
+    font-size: 1.85rem;
+  }
+
+  .ms-account-bento {
+    grid-template-columns: 1.8fr 1fr 1fr;
+    gap: 1.15rem;
+  }
+
+  .ms-account-tabs {
+    border-radius: 24px;
+    padding: 1.35rem;
+  }
+
+  .ms-addr-layout {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+
+  /* ── Modals — centered dialog ── */
+  .ms-modal {
+    place-items: center;
+    padding: 1.5rem;
+  }
+
+  .ms-modal-sheet {
+    width: min(520px, 94vw);
+    max-height: 88vh;
+    border-radius: 28px !important;
+    box-shadow: var(--dt-shadow-lg);
+  }
+
+  .ms-modal-sheet--auth {
+    width: min(480px, 94vw) !important;
+    border-radius: 28px !important;
+  }
+
+  /* ── Trending ── */
+  .ms-trending-track {
+    flex-wrap: wrap;
+    overflow: visible;
+    gap: 0.85rem;
+  }
+
+  .ms-trend-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--dt-shadow);
+  }
+
+  /* Hide mobile-only chrome */
+  .ms-tabbar,
+  .ms-fab-call,
+  .ms-menu-btn,
+  .mobile-filter-bar {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .ms-wrap {
+    width: min(var(--dt-max), 90vw);
+  }
+
+  .ms-top-card {
+    grid-template-columns: auto 1fr auto;
+    gap: 2rem;
+  }
+
+  .ms-offers-scroll {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .ms-news-track {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .ms-hero-viewport {
+    min-height: 480px;
+    padding: 3.75rem 4rem 3rem;
+  }
+
+  .catalog-layout {
+    grid-template-columns: 300px 1fr;
+  }
+}
+
+@media (min-width: 1280px) {
+  .ms-hero-title {
+    font-size: 3.5rem;
+  }
+
+  .ms-featured-grid {
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) and (prefers-reduced-motion: reduce) {
+  .ms-hero-product img,
+  .ms-offer-card,
+  .ms-feat-card,
+  .ms-product,
+  .ms-top-nav a {
+    transition: none !important;
+  }
+}

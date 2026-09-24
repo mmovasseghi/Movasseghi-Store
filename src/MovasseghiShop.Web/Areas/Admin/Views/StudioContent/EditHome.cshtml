@@ -1,0 +1,154 @@
+@model MovasseghiShop.Web.Models.Entities.HomeSection
+@using MovasseghiShop.Web.Models
+@using MovasseghiShop.Web.Services
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "ویرایش " + Model.Key;
+    ViewData["HeroTitle"] = Model.Title;
+    ViewData["HeroSubtitle"] = $"بخش {Model.Key} — ویرایش بصری";
+    ViewData["HeroBadge"] = "PAGE BUILDER";
+    var slides = HomeSectionConfigParser.ParseHeroSlides(Model.ConfigJson);
+    var trust = HomeSectionConfigParser.ParseTrustItems(Model.ConfigJson);
+    var cards = HomeSectionConfigParser.ParseFeatureCards(Model.ConfigJson);
+    var segments = HomeSectionConfigParser.ParseWholesaleSegments(Model.ConfigJson);
+    string bandText = "";
+    string badgeText = "";
+    try {
+        if (!string.IsNullOrEmpty(Model.ConfigJson)) {
+            using var doc = System.Text.Json.JsonDocument.Parse(Model.ConfigJson);
+            if (doc.RootElement.TryGetProperty("bandText", out var bt)) bandText = bt.GetString() ?? "";
+            if (doc.RootElement.TryGetProperty("badge", out var b)) badgeText = b.GetString() ?? "";
+        }
+    } catch { }
+    while (slides.Count < 3) slides.Add(new HeroSlideConfig("", "", null, "", "ورود", "/Catalog", null, null));
+    while (trust.Length < 4) trust = trust.Concat(new[] { "" }).Take(4).ToArray();
+    while (cards.Count < 4) cards.Add(new FeatureCardConfig("shield", "", ""));
+    while (segments.Count < 4) segments.Add(new WholesaleSegmentConfig("", "", "store", "/Catalog"));
+}
+
+@section Head {
+    <link rel="stylesheet" href="~/css/home-builder.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/cms-preview.css" asp-append-version="true" />
+}
+
+<partial name="_AdminHero" />
+
+<div class="st-edit-grid st-edit-grid--cms st-reveal">
+<div class="st-cms-form-col">
+<form method="post" class="st-panel hb-form" id="home-section-form">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <input type="hidden" name="SortOrder" value="@Model.SortOrder" />
+    <input type="hidden" name="ConfigJson" id="ConfigJsonField" value="@Model.ConfigJson" />
+
+    <div class="st-field">
+        <label>عنوان بخش (ادمین)</label>
+        <input name="Title" value="@Model.Title" class="st-input" />
+    </div>
+    @if (Model.Key is "wholesale" or "featured" or "offers")
+    {
+        <div class="st-field">
+            <label>زیرعنوان (نمایش در سایت)</label>
+            <input name="Subtitle" value="@Model.Subtitle" class="st-input" />
+        </div>
+    }
+
+    @if (Model.Key == "hero")
+    {
+        <p class="st-panel-desc">هر اسلاید = یک صفحه در اسلایدر Hero صفحه اصلی</p>
+        @for (var i = 0; i < 3; i++)
+        {
+            var s = slides[i];
+            <div class="hb-block" data-hero-slide="@i">
+                <h3 class="hb-block-title">اسلاید @(i + 1)</h3>
+                <div class="hb-grid">
+                    <div class="st-field"><label>کicker</label><input class="st-input" data-f="kicker" value="@s.Kicker" /></div>
+                    <div class="st-field"><label>عنوان</label><input class="st-input" data-f="title" value="@s.Title" /></div>
+                    <div class="st-field"><label>کلمه برجسته (em)</label><input class="st-input" data-f="titleEm" value="@s.TitleEm" /></div>
+                    <div class="st-field hb-full"><label>توضیح (HTML مجاز)</label><textarea class="st-input" rows="2" data-f="desc">@s.Desc</textarea></div>
+                    <div class="st-field"><label>دکمه ۱</label><input class="st-input" data-f="cta1Text" value="@s.Cta1Text" /></div>
+                    <div class="st-field"><label>لینk ۱</label><input class="st-input" data-f="cta1Url" value="@s.Cta1Url" dir="ltr" /></div>
+                    <div class="st-field"><label>دکمه ۲</label><input class="st-input" data-f="cta2Text" value="@s.Cta2Text" /></div>
+                    <div class="st-field"><label>لینk ۲</label><input class="st-input" data-f="cta2Url" value="@s.Cta2Url" dir="ltr" /></div>
+                </div>
+            </div>
+        }
+        <div class="hb-block">
+            <h3 class="hb-block-title">نوار اعتماد (زیر Hero)</h3>
+            <div class="hb-grid">
+                @for (var t = 0; t < 4; t++)
+                {
+                    <div class="st-field"><label>آیتم @(t+1)</label><input class="st-input" data-trust value="@trust[t]" placeholder="🌿 ۱۰۰٪ گیاهی" /></div>
+                }
+            </div>
+        </div>
+    }
+    else if (Model.Key == "features")
+    {
+        <div class="st-field"><label>متن نوار</label><input class="st-input" id="features-band" value="@bandText" /></div>
+        @for (var i = 0; i < 4; i++)
+        {
+            var c = cards[i];
+            <div class="hb-block" data-feature-card="@i">
+                <h3 class="hb-block-title">کارت @(i + 1)</h3>
+                <div class="hb-grid">
+                    <div class="st-field"><label>آیکون</label>
+                        <select class="st-input" data-f="icon">
+                            @foreach (var ic in new[] { "official", "shield", "box", "truck", "leaf", "star" })
+                            {
+                                if (c.Icon == ic)
+                                {
+                                    <option value="@ic" selected>@ic</option>
+                                }
+                                else
+                                {
+                                    <option value="@ic">@ic</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="st-field"><label>عنوان</label><input class="st-input" data-f="title" value="@c.Title" /></div>
+                    <div class="st-field hb-full"><label>توضیح</label><input class="st-input" data-f="desc" value="@c.Desc" /></div>
+                </div>
+            </div>
+        }
+    }
+    else if (Model.Key == "wholesale")
+    {
+        <div class="st-field"><label>بج</label><input class="st-input" id="wholesale-badge" value="@badgeText" /></div>
+        @for (var i = 0; i < 4; i++)
+        {
+            var seg = segments[i];
+            <div class="hb-block" data-wholesale-seg="@i">
+                <h3 class="hb-block-title">بخش @(i + 1)</h3>
+                <div class="hb-grid">
+                    <div class="st-field"><label>عنوان</label><input class="st-input" data-f="title" value="@seg.Title" /></div>
+                    <div class="st-field"><label>آیکون</label><input class="st-input" data-f="icon" value="@seg.Icon" /></div>
+                    <div class="st-field hb-full"><label>توضیح</label><input class="st-input" data-f="desc" value="@seg.Desc" /></div>
+                    <div class="st-field hb-full"><label>لینk</label><input class="st-input" data-f="url" value="@seg.Url" dir="ltr" /></div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="st-field"><label>بج / برچسب</label><input class="st-input" id="simple-badge" value="@badgeText" /></div>
+        <p class="st-panel-desc">این بخش محصولات را از دیتابیس می‌خواند — فقط متن بج و زیرعنوان قابل ویرایش است.</p>
+    }
+
+    <label class="st-checkbox"><input type="checkbox" name="IsActive" value="true" @(Model.IsActive ? "checked" : "") /> فعال در صفحه اصلی</label>
+
+    <div class="st-btn-row" style="margin-top:1rem">
+        <button type="submit" class="st-btn st-btn-primary">💾 ذخیره</button>
+        <a href="/Admin/StudioContent/Home" class="st-btn st-btn-ghost">← بازگشت</a>
+    </div>
+</form>
+</div>
+<partial name="_CmsLivePreview" model="@CmsPreviewUrls.ForHomeSection(Model.Key)" view-data="@(new ViewDataDictionary(ViewData) { ["PreviewTitle"] = "پیش‌نمایش صفحه اصلی", ["PreviewHint"] = "نمای دسکتاپ — بعد از ذخیره، ↻ را بزنید." })" />
+</div>
+
+@section Scripts {
+    <script src="~/js/home-section-editor.js" asp-append-version="true"></script>
+    <script src="~/js/cms-preview.js" asp-append-version="true"></script>
+    <script>window.__HOME_SECTION_KEY = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.Key));</script>
+}

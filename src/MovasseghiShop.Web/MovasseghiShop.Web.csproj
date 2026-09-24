@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RazorCompileOnBuild>true</RazorCompileOnBuild>
+    <RazorCompileOnPublish>true</RazorCompileOnPublish>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
+  </PropertyGroup>
+
+  <!-- اگر اپ هنوز در حال اجراست، بیلد قفل می‌شود و همان DLL قدیمی لود می‌ماند. -->
+  <Target Name="StopRunningWebBeforeBuild" BeforeTargets="Build"
+          Condition="'$(OS)' == 'Windows_NT' AND Exists('$(OutputPath)$(AssemblyName).exe')">
+    <Exec Command="taskkill /IM $(AssemblyName).exe /F 2&gt;nul" IgnoreExitCode="true" />
+  </Target>
+
+  <Target Name="BuildRichTextEditorBundle" BeforeTargets="Build"
+          Condition="Exists('$(MSBuildProjectDirectory)\..\..\package.json') And Exists('$(MSBuildProjectDirectory)\..\..\node_modules\esbuild\bin\esbuild')">
+    <Exec WorkingDirectory="$(MSBuildProjectDirectory)\..\.."
+          Command="npm run build:rte"
+          IgnoreExitCode="false" />
+  </Target>
+
+  <ItemGroup>
+    <PackageReference Include="ClosedXML" Version="0.105.1" />
+    <PackageReference Include="Google.Apis.SearchConsole.v1" Version="1.75.0.4234" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.11">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="10.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.11" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.6" />
+  </ItemGroup>
+
+</Project>

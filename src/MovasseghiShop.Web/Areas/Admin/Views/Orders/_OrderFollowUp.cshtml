@@ -1,0 +1,40 @@
+@model Order
+@using MovasseghiShop.Web.Models.Enums
+@{
+    var compact = ViewData["FollowUpCompact"] as bool? ?? false;
+    var returnUrl = ViewData["FollowUpReturnUrl"] as string;
+}
+
+@if (Model.Status == OrderStatus.Cancelled)
+{
+    <span class="kit-tag kit-tag--muted">—</span>
+}
+else if (Model.OperatorFollowedUpAt is DateTime followedAt)
+{
+    <span class="kit-tag kit-tag--ok" title="@(Model.OperatorFollowedUpBy ?? "")">
+        @if (compact)
+        {
+            <text>پیگیری شد</text>
+        }
+        else
+        {
+            <text>پیگیری شد · @followedAt.ToLocalTime().ToString("yyyy/MM/dd HH:mm")</text>
+            @if (!string.IsNullOrWhiteSpace(Model.OperatorFollowedUpBy))
+            {
+                <span class="kit-cell-sub" style="display:block;margin-top:.15rem">@Model.OperatorFollowedUpBy</span>
+            }
+        }
+    </span>
+}
+else
+{
+    <form method="post" asp-area="Admin" asp-controller="Orders" asp-action="MarkFollowedUp" class="kit-inline-form" style="margin:0">
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="id" value="@Model.Id" />
+        @if (!string.IsNullOrEmpty(returnUrl))
+        {
+            <input type="hidden" name="returnUrl" value="@returnUrl" />
+        }
+        <button type="submit" class="st-btn st-btn-primary st-btn-sm">پیگیری شد</button>
+    </form>
+}

@@ -1,0 +1,668 @@
+{
+  "okChecks": 116,
+  "mismatchCount": 3,
+  "unmappedPdfCodes": 26,
+  "orphanActiveVariants": 71,
+  "mismatches": [
+    {
+      "productId": 9,
+      "code": "000406",
+      "pdfCode": "201035",
+      "sku": "AM-000406-BC",
+      "expected": 5448000,
+      "actual": 7290000,
+      "kind": "bulk-carton"
+    },
+    {
+      "productId": 86,
+      "code": "000107",
+      "pdfCode": "201062",
+      "sku": "AM-000107-BN",
+      "expected": 705600,
+      "actual": 930800,
+      "expectedUpp": 40,
+      "actualUpp": 40,
+      "kind": "bulk-nylon"
+    },
+    {
+      "productId": 86,
+      "code": "000107",
+      "pdfCode": "201062",
+      "sku": "AM-000107-BC",
+      "expected": 9878400,
+      "actual": 13031200,
+      "kind": "bulk-carton"
+    }
+  ],
+  "unmappedPdf": [
+    {
+      "pdfCode": "201006",
+      "type": "bulk",
+      "name": "راد برد سیرپ ود"
+    },
+    {
+      "pdfCode": "201007",
+      "type": "bulk",
+      "name": "راد برد هناخ ود"
+    },
+    {
+      "pdfCode": "201016",
+      "type": "bulk",
+      "name": "ی غرم هناخ ود"
+    },
+    {
+      "pdfCode": "201017",
+      "type": "bulk",
+      "name": "ب ابک هناخ ود ی"
+    },
+    {
+      "pdfCode": "201018",
+      "type": "bulk",
+      "name": "ب ابک هناخ هس ی"
+    },
+    {
+      "pdfCode": "201020",
+      "type": "bulk",
+      "name": "ب ابک هناخراهچ ی"
+    },
+    {
+      "pdfCode": "201019",
+      "type": "bulk",
+      "name": "ی ی ی تناف ب ابک هناخ راهچ ی"
+    },
+    {
+      "pdfCode": "201021",
+      "type": "bulk",
+      "name": "ی غرم هناخراهچ"
+    },
+    {
+      "pdfCode": "401141",
+      "type": "bulk",
+      "name": "ی ی ی ی تناف غرم هناخ راهچ"
+    },
+    {
+      "pdfCode": "201022",
+      "type": "bulk",
+      "name": "موینیمولآ حرط ب ابک ی"
+    },
+    {
+      "pdfCode": "201024",
+      "type": "bulk",
+      "name": "هناخ کت یاذغ"
+    },
+    {
+      "pdfCode": "201025",
+      "type": "bulk",
+      "name": "ه ناخود یاذغ"
+    },
+    {
+      "pdfCode": "201026",
+      "type": "bulk",
+      "name": "قمع مک یدنب هتسب فرظ"
+    },
+    {
+      "pdfCode": "201028",
+      "type": "bulk",
+      "name": "هناخ ود یدنب هتسب فرظ"
+    },
+    {
+      "pdfCode": "201029",
+      "type": "bulk",
+      "name": "هناخ هس یدنب هتسب فرظ"
+    },
+    {
+      "pdfCode": "201027",
+      "type": "bulk",
+      "name": "ق یمع یدنب هتسب فرظ"
+    },
+    {
+      "pdfCode": "401140",
+      "type": "bulk",
+      "name": "401140"
+    },
+    {
+      "pdfCode": "201055",
+      "type": "bulk",
+      "name": "کچوک سید"
+    },
+    {
+      "pdfCode": "201056",
+      "type": "bulk",
+      "name": "طسوتم سید"
+    },
+    {
+      "pdfCode": "201057",
+      "type": "bulk",
+      "name": "گرزب سید"
+    },
+    {
+      "pdfCode": "201086",
+      "type": "shrink",
+      "name": "201086"
+    },
+    {
+      "pdfCode": "401188",
+      "type": "shrink",
+      "name": "_"
+    },
+    {
+      "pdfCode": "201096",
+      "type": "shrink",
+      "name": "201096"
+    },
+    {
+      "pdfCode": "201078",
+      "type": "shrink",
+      "name": "201078"
+    },
+    {
+      "pdfCode": "201079",
+      "type": "shrink",
+      "name": "201079"
+    },
+    {
+      "pdfCode": "201084",
+      "type": "shrink",
+      "name": "201084"
+    }
+  ],
+  "orphans": [
+    {
+      "productId": 10,
+      "productCode": "000406",
+      "name": "کاسه یکبار مصرف گیاهی 400 سی سی",
+      "sku": "AM-P10-BN",
+      "price": 1362000
+    },
+    {
+      "productId": 17,
+      "productCode": "000212",
+      "name": "ظرف چهارخانه مرغی یکبار مصرف گیاهی",
+      "sku": "AM-P17-BN",
+      "price": 1156000
+    },
+    {
+      "productId": 38,
+      "productCode": "007150",
+      "name": "لیوان یکیار مصرف گیاهی 250 سی‌سی بسته  50 عددی",
+      "sku": "AM-P38-SP",
+      "price": 228300
+    },
+    {
+      "productId": 48,
+      "productCode": "007212",
+      "name": "ظرف غذا تک خانه یکبار مصرف گیاهی – بسته 12 عددی",
+      "sku": "AM-P48-SP",
+      "price": 137500
+    },
+    {
+      "productId": 64,
+      "productCode": "007712",
+      "name": "پیش دستی یکبار مصرف گیاهی – بسته  12 عددی",
+      "sku": "AM-P64-SP",
+      "price": 128300
+    },
+    {
+      "productId": 91,
+      "productCode": "001106",
+      "name": "ظرف غذا طرح آلومینیوم یکبار مصرف گیاهی -800سی سی",
+      "sku": "AM-P91-BN",
+      "price": 981000
+    },
+    {
+      "productId": 94,
+      "productCode": "007112",
+      "name": "لیوان یکبار مصرف گیاهی 250 سی سی-بسته 12 تایی",
+      "sku": "AM-P94-SP",
+      "price": 56200
+    },
+    {
+      "productId": 44,
+      "productCode": "008612",
+      "name": "کاسه یکبار مصرف گیاهی 300 سی سی با درب 12 عددی",
+      "sku": "AM-P44-BN",
+      "price": 385000
+    },
+    {
+      "productId": 53,
+      "productCode": "600022",
+      "name": "ظرف غذا دوپرسی درب دار یکبار مصرف گیاهی",
+      "sku": "AM-P53-BN",
+      "price": 1784000
+    },
+    {
+      "productId": 54,
+      "productCode": "000224",
+      "name": "ظرف دوخانه درب دار یکبار مصرف گیاهی",
+      "sku": "AM-P54-BN",
+      "price": 1844000
+    },
+    {
+      "productId": 13,
+      "productCode": "000232",
+      "name": "ظرف دوخانه مرغی یکبار مصرف گیاهی",
+      "sku": "AM-P13-BN",
+      "price": 2515500
+    },
+    {
+      "productId": 12,
+      "productCode": "000227",
+      "name": "ظرف دوخانه کبابی یکبار مصرف گیاهی",
+      "sku": "AM-P12-BN",
+      "price": 2515500
+    },
+    {
+      "productId": 14,
+      "productCode": "000211",
+      "name": "ظرف چهارخانه کبابی یکبار مصرف گیاهی",
+      "sku": "AM-P14-BN",
+      "price": 1734000
+    },
+    {
+      "productId": 20,
+      "productCode": "000234",
+      "name": "ظرف کبابی طرح آلومینیوم یکبار مصرف گیاهی",
+      "sku": "AM-P20-BN",
+      "price": 1926000
+    },
+    {
+      "productId": 40,
+      "productCode": "000214",
+      "name": "ظرف غذا تک خانه",
+      "sku": "AM-P40-BN",
+      "price": 1560000
+    },
+    {
+      "productId": 55,
+      "productCode": "000233",
+      "name": "ظرف غذا دوخانه یکبار مصرف گیاهی",
+      "sku": "AM-P55-BN",
+      "price": 1455000
+    },
+    {
+      "productId": 58,
+      "productCode": "000326",
+      "name": "ظرف بسته بندی دوخانه یکبار مصرف گیاهی",
+      "sku": "AM-P58-BN",
+      "price": 2446000
+    },
+    {
+      "productId": 57,
+      "productCode": "000325",
+      "name": "ظرف بسته بندی عمیق یکبار مصرف گیاهی",
+      "sku": "AM-P57-BN",
+      "price": 2103000
+    },
+    {
+      "productId": 81,
+      "productCode": "000217",
+      "name": "دیس متوسط یکبار مصرف گیاهی",
+      "sku": "AM-000217-BN",
+      "price": 1402000
+    },
+    {
+      "productId": 44,
+      "productCode": "008612",
+      "name": "کاسه یکبار مصرف گیاهی 300 سی سی با درب 12 عددی",
+      "sku": "AM-P44-BC",
+      "price": 7700
+    },
+    {
+      "productId": 36,
+      "productCode": "000243",
+      "name": "ظرف غذا شش خانه کبابی فانتزی یکبار مصرف گیاهی",
+      "sku": "AM-P36-BN",
+      "price": 3107000
+    },
+    {
+      "productId": 5,
+      "productCode": "007912",
+      "name": "چنگال یکبار مصرف گیاهی – بسته 12 عددی",
+      "sku": "AM-P5-SP",
+      "price": 50500
+    },
+    {
+      "productId": 5,
+      "productCode": "007912",
+      "name": "چنگال یکبار مصرف گیاهی – بسته 12 عددی",
+      "sku": "AM-P5-SC",
+      "price": 3181500
+    },
+    {
+      "productId": 10,
+      "productCode": "000406",
+      "name": "کاسه یکبار مصرف گیاهی 400 سی سی",
+      "sku": "AM-P10-BC",
+      "price": 27240
+    },
+    {
+      "productId": 7,
+      "productCode": "000700",
+      "name": "قاشق، چنگال،کارد یکبار مصرف گیاهی -بسته 12 عددی",
+      "sku": "AM-P7-BN",
+      "price": 510000
+    },
+    {
+      "productId": 7,
+      "productCode": "000700",
+      "name": "قاشق، چنگال،کارد یکبار مصرف گیاهی -بسته 12 عددی",
+      "sku": "AM-P7-BC",
+      "price": 6120
+    },
+    {
+      "productId": 48,
+      "productCode": "007212",
+      "name": "ظرف غذا تک خانه یکبار مصرف گیاهی – بسته 12 عددی",
+      "sku": "AM-P48-SC",
+      "price": 2887500
+    },
+    {
+      "productId": 54,
+      "productCode": "000224",
+      "name": "ظرف دوخانه درب دار یکبار مصرف گیاهی",
+      "sku": "AM-P54-BC",
+      "price": 174020
+    },
+    {
+      "productId": 64,
+      "productCode": "007712",
+      "name": "پیش دستی یکبار مصرف گیاهی – بسته  12 عددی",
+      "sku": "AM-P64-SC",
+      "price": 4618800
+    },
+    {
+      "productId": 94,
+      "productCode": "007112",
+      "name": "لیوان یکبار مصرف گیاهی 250 سی سی-بسته 12 تایی",
+      "sku": "AM-P94-SC",
+      "price": 3540600
+    },
+    {
+      "productId": 38,
+      "productCode": "007150",
+      "name": "لیوان یکیار مصرف گیاهی 250 سی‌سی بسته  50 عددی",
+      "sku": "AM-P38-SC",
+      "price": 5479200
+    },
+    {
+      "productId": 19,
+      "productCode": "000244",
+      "name": "ظرف غذا طرح آلومینیوم یکبار مصرف گیاهی-  1200 سی سی",
+      "sku": "AM-P19-BN",
+      "price": 1764000
+    },
+    {
+      "productId": 19,
+      "productCode": "000244",
+      "name": "ظرف غذا طرح آلومینیوم یکبار مصرف گیاهی-  1200 سی سی",
+      "sku": "AM-P19-BC",
+      "price": 35280
+    },
+    {
+      "productId": 4,
+      "productCode": "008212",
+      "name": "قاشق یکبار مصرف گیاهی بسته 12 عددی",
+      "sku": "AM-P4-SP",
+      "price": 53900
+    },
+    {
+      "productId": 4,
+      "productCode": "008212",
+      "name": "قاشق یکبار مصرف گیاهی بسته 12 عددی",
+      "sku": "AM-P4-SC",
+      "price": 8085000
+    },
+    {
+      "productId": 16,
+      "productCode": "000247",
+      "name": "چهار خانه مرغی کلاسیک یکبار مصرف گیاهی",
+      "sku": "AM-P16-BN",
+      "price": 1734000
+    },
+    {
+      "productId": 46,
+      "productCode": "008706",
+      "name": "کاسه  550 سی سی",
+      "sku": "AM-P46-BN",
+      "price": 510000
+    },
+    {
+      "productId": 46,
+      "productCode": "008706",
+      "name": "کاسه  550 سی سی",
+      "sku": "AM-P46-BC",
+      "price": 6120
+    },
+    {
+      "productId": 46,
+      "productCode": "008706",
+      "name": "کاسه  550 سی سی",
+      "sku": "AM-P46-SP",
+      "price": 66700
+    },
+    {
+      "productId": 46,
+      "productCode": "008706",
+      "name": "کاسه  550 سی سی",
+      "sku": "AM-P46-SC",
+      "price": 2401200
+    },
+    {
+      "productId": 56,
+      "productCode": "000236",
+      "name": "ظرف چهارخانه کبابی فانتزی یکبار مصرف گیاهی",
+      "sku": "AM-P56-BN",
+      "price": 1734000
+    },
+    {
+      "productId": 59,
+      "productCode": null,
+      "name": "ظرف بسته‌بندی سه‌خانه یکبار مصرف گیاهی",
+      "sku": "AM-P59-BN",
+      "price": 1834500
+    },
+    {
+      "productId": 59,
+      "productCode": null,
+      "name": "ظرف بسته‌بندی سه‌خانه یکبار مصرف گیاهی",
+      "sku": "AM-P59-SP",
+      "price": 107300
+    },
+    {
+      "productId": 59,
+      "productCode": null,
+      "name": "ظرف بسته‌بندی سه‌خانه یکبار مصرف گیاهی",
+      "sku": "AM-P59-SC",
+      "price": 2575200
+    },
+    {
+      "productId": 68,
+      "productCode": "001013",
+      "name": "قاشق کوچک یکبار مصرف گیاهی",
+      "sku": "AM-P68-SP",
+      "price": 53900
+    },
+    {
+      "productId": 68,
+      "productCode": "001013",
+      "name": "قاشق کوچک یکبار مصرف گیاهی",
+      "sku": "AM-P68-SC",
+      "price": 8085000
+    },
+    {
+      "productId": 72,
+      "productCode": "002006",
+      "name": "کاسه صدفی یکبار مصرف گیاهی 500 سی سی – بسته 6 عددی",
+      "sku": "AM-P72-BN",
+      "price": 1895000
+    },
+    {
+      "productId": 72,
+      "productCode": "002006",
+      "name": "کاسه صدفی یکبار مصرف گیاهی 500 سی سی – بسته 6 عددی",
+      "sku": "AM-P72-BC",
+      "price": 15160
+    },
+    {
+      "productId": 72,
+      "productCode": "002006",
+      "name": "کاسه صدفی یکبار مصرف گیاهی 500 سی سی – بسته 6 عددی",
+      "sku": "AM-P72-SP",
+      "price": 66700
+    },
+    {
+      "productId": 72,
+      "productCode": "002006",
+      "name": "کاسه صدفی یکبار مصرف گیاهی 500 سی سی – بسته 6 عددی",
+      "sku": "AM-P72-SC",
+      "price": 2401200
+    },
+    {
+      "productId": 73,
+      "productCode": "001433",
+      "name": "سطل یکبار مصرف گیاهی 1000 سی سی بلند –  با درب 6 عددی",
+      "sku": "AM-P73-BN",
+      "price": 510000
+    },
+    {
+      "productId": 73,
+      "productCode": "001433",
+      "name": "سطل یکبار مصرف گیاهی 1000 سی سی بلند –  با درب 6 عددی",
+      "sku": "AM-P73-BC",
+      "price": 6120
+    },
+    {
+      "productId": 73,
+      "productCode": "001433",
+      "name": "سطل یکبار مصرف گیاهی 1000 سی سی بلند –  با درب 6 عددی",
+      "sku": "AM-P73-SP",
+      "price": 66700
+    },
+    {
+      "productId": 73,
+      "productCode": "001433",
+      "name": "سطل یکبار مصرف گیاهی 1000 سی سی بلند –  با درب 6 عددی",
+      "sku": "AM-P73-SC",
+      "price": 2401200
+    },
+    {
+      "productId": 76,
+      "productCode": "000402",
+      "name": "سیب زمینی خوری یکبار مصرف گیاهی",
+      "sku": "AM-P76-BN",
+      "price": 819000
+    },
+    {
+      "productId": 76,
+      "productCode": "000402",
+      "name": "سیب زمینی خوری یکبار مصرف گیاهی",
+      "sku": "AM-P76-BC",
+      "price": 38220
+    },
+    {
+      "productId": 79,
+      "productCode": "008812",
+      "name": "بشقاب یکبار مصرف گیاهی – بسته 12 عددی",
+      "sku": "AM-P79-SP",
+      "price": 128300
+    },
+    {
+      "productId": 79,
+      "productCode": "008812",
+      "name": "بشقاب یکبار مصرف گیاهی – بسته 12 عددی",
+      "sku": "AM-P79-SC",
+      "price": 3849000
+    },
+    {
+      "productId": 83,
+      "productCode": null,
+      "name": "لیوان یکبار مصرف گیاهی 250 سی‌سی",
+      "sku": "AM-P83-SP",
+      "price": 56200
+    },
+    {
+      "productId": 83,
+      "productCode": null,
+      "name": "لیوان یکبار مصرف گیاهی 250 سی‌سی",
+      "sku": "AM-P83-SC",
+      "price": 3540600
+    },
+    {
+      "productId": 87,
+      "productCode": "001208",
+      "name": "فنجان یکبار مصرف گیاهی",
+      "sku": "AM-P87-BN",
+      "price": 705600
+    },
+    {
+      "productId": 87,
+      "productCode": "001208",
+      "name": "فنجان یکبار مصرف گیاهی",
+      "sku": "AM-P87-BC",
+      "price": 246960
+    },
+    {
+      "productId": 89,
+      "productCode": "000401",
+      "name": "کاسه صدفی یکبار مصرف گیاهی 300 سی سی",
+      "sku": "AM-P89-BN",
+      "price": 1895000
+    },
+    {
+      "productId": 89,
+      "productCode": "000401",
+      "name": "کاسه صدفی یکبار مصرف گیاهی 300 سی سی",
+      "sku": "AM-P89-BC",
+      "price": 15160
+    },
+    {
+      "productId": 89,
+      "productCode": "000401",
+      "name": "کاسه صدفی یکبار مصرف گیاهی 300 سی سی",
+      "sku": "AM-P89-SP",
+      "price": 66700
+    },
+    {
+      "productId": 89,
+      "productCode": "000401",
+      "name": "کاسه صدفی یکبار مصرف گیاهی 300 سی سی",
+      "sku": "AM-P89-SC",
+      "price": 2401200
+    },
+    {
+      "productId": 92,
+      "productCode": "009024",
+      "name": "فنجان یکبار مصرف گیاهی 24 تایی",
+      "sku": "AM-P92-SP",
+      "price": 73450
+    },
+    {
+      "productId": 92,
+      "productCode": "009024",
+      "name": "فنجان یکبار مصرف گیاهی 24 تایی",
+      "sku": "AM-P92-SC",
+      "price": 3819400
+    },
+    {
+      "productId": 5,
+      "productCode": "007912",
+      "name": "چنگال یکبار مصرف گیاهی – بسته 12 عددی",
+      "sku": "AM-P5-BN",
+      "price": 687000
+    },
+    {
+      "productId": 5,
+      "productCode": "007912",
+      "name": "چنگال یکبار مصرف گیاهی – بسته 12 عددی",
+      "sku": "AM-P5-BC",
+      "price": 6870
+    },
+    {
+      "productId": 59,
+      "productCode": null,
+      "name": "ظرف بسته‌بندی سه‌خانه یکبار مصرف گیاهی",
+      "sku": "AM-P59-BC",
+      "price": 174020
+    }
+  ]
+}

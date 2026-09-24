@@ -1,0 +1,561 @@
+@using MovasseghiShop.Web.Models
+@inject IWebHostEnvironment Env
+@using MovasseghiShop.Web.Models.Entities
+@using MovasseghiShop.Web.Services
+@{
+    ViewData["Title"] = "فروشگاه موثقی | پخش عمده ظروف یکبار مصرف گیاهی آملون";
+    ViewData["MetaDescription"] = $"فروشگاه موثقی — نمایندگی رسمی آملون در تهران | پخش عمده ظروف یکبار مصرف گیاهی | حداقل {WholesaleRules.FormatMinAmount()} تومان | تخفیف پلکانی تا {WholesaleRules.MaxAutoDiscountPercent}٪";
+    var homeSections = (Dictionary<string, HomeSection>)ViewBag.HomeSections ?? new();
+    homeSections.TryGetValue("hero", out var heroSec);
+    var heroConfigSlides = HomeSectionConfigParser.ParseHeroSlides(heroSec?.ConfigJson);
+    var trustItems = HomeSectionConfigParser.ParseTrustItems(heroSec?.ConfigJson);
+    if (trustItems.Length == 0) trustItems = ["🌿 ۱۰۰٪ گیاهی", "📦 پخش عمده", "✓ اصل آملون", "🚚 ارسال سراسری"];
+    homeSections.TryGetValue("features", out var featSec);
+    var featureCards = HomeSectionConfigParser.ParseFeatureCards(featSec?.ConfigJson);
+    homeSections.TryGetValue("wholesale", out var wholesaleSec);
+    homeSections.TryGetValue("offers", out var offersSec);
+    homeSections.TryGetValue("featured", out var featuredSec);
+    var categoryTypes = (List<(string Type, int Count)>)ViewBag.CategoryTypes ?? new();
+    var featured = ((IEnumerable<Product>)ViewBag.FeaturedProducts ?? Enumerable.Empty<Product>()).ToList();
+    var specialOffers = ((IEnumerable<Product>)ViewBag.SpecialOffers ?? Enumerable.Empty<Product>()).ToList();
+    var storyItems = (List<StoryItemDto>)ViewBag.StoryItems ?? new();
+    var storyJson = System.Text.Json.JsonSerializer.Serialize(storyItems, new System.Text.Json.JsonSerializerOptions { PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase });
+    var wholesaleSegments = (List<(string Title, string Desc, string Icon, string Url)>)ViewBag.WholesaleSegments ?? new();
+    var latestBlog = ((IEnumerable<BlogPost>)ViewBag.LatestBlogPosts ?? Enumerable.Empty<BlogPost>()).ToList();
+    var latestNews = ((IEnumerable<NewsItem>)ViewBag.LatestNews ?? Enumerable.Empty<NewsItem>()).ToList();
+    var productCount = (int)ViewBag.ProductCount;
+    var heroProducts = featured.Take(4).Where(p => ProductImageHelper.GetDisplayUrl(ProductImageHelper.GetPrimary(p.Images), Env) != null).ToList();
+}
+
+<!-- استوری‌ها -->
+<section class="ms-stories ms-reveal">
+    <div class="ms-wrap ms-stories-inner">
+    <div class="ms-stories-track" data-stories>
+        @foreach (var story in storyItems)
+        {
+            <button type="button" class="ms-story" data-story-id="@story.Id" aria-label="@story.Label">
+                <span class="ms-story-ring">
+                    <span class="ms-story-icon-wrap">
+                        @if (!string.IsNullOrWhiteSpace(story.CoverImageUrl))
+                        {
+                            <img src="@story.CoverImageUrl" alt="" class="ms-story-cover" width="76" height="76" loading="lazy" decoding="async" />
+                        }
+                        else
+                        {
+                            <partial name="_StoryIcon" model="story.IconKey" />
+                        }
+                    </span>
+                </span>
+                <span class="ms-story-label">@story.Label</span>
+            </button>
+        }
+    </div>
+    </div>
+</section>
+<script type="application/json" id="msStoriesData">@Html.Raw(storyJson)</script>
+
+<!-- هیرو -->
+<section class="ms-hero ms-reveal" id="ms-hero" data-hero-slider>
+    <div class="ms-hero-wrap">
+        <div class="ms-hero-stage">
+            <div class="ms-hero-aurora" aria-hidden="true"></div>
+            <div class="ms-hero-aurora ms-hero-aurora-2" aria-hidden="true"></div>
+            <div class="ms-hero-orb ms-hero-orb-a" aria-hidden="true"></div>
+            <div class="ms-hero-orb ms-hero-orb-b" aria-hidden="true"></div>
+            <div class="ms-hero-orb ms-hero-orb-c" aria-hidden="true"></div>
+            <div class="ms-hero-shine" aria-hidden="true"></div>
+            <div class="ms-hero-particles" data-hero-particles aria-hidden="true"></div>
+            <div class="ms-hero-grid-lines" aria-hidden="true"></div>
+            <div class="ms-hero-progress" data-hero-progress aria-hidden="true"><span></span></div>
+
+            <div class="ms-hero-beams" aria-hidden="true">
+                <span class="ms-hero-beam ms-hero-beam-a"></span>
+                <span class="ms-hero-beam ms-hero-beam-b"></span>
+            </div>
+            <div class="ms-hero-stat ms-hero-stat-a">
+                <b class="ms-hero-stat-num" data-hero-count="@productCount">@productCount+</b>
+                <span>محصول فعال</span>
+            </div>
+            <div class="ms-hero-stat ms-hero-stat-b">
+                <b class="ms-hero-stat-num">@(WholesaleRules.MaxAutoDiscountPercent)٪</b>
+                <span>تخفیف پلکانی</span>
+            </div>
+
+            <div class="ms-hero-viewport">
+                @if (heroConfigSlides.Count > 0)
+                {
+                    for (var si = 0; si < heroConfigSlides.Count; si++)
+                    {
+                        var slide = heroConfigSlides[si];
+                        var hp = si < heroProducts.Count ? heroProducts[si] : null;
+                        <article class="ms-hero-slide @(si == 0 ? "is-active" : "")" data-slide>
+                            <div class="ms-hero-grid">
+                                <div class="ms-hero-copy">
+                                    <p class="ms-hero-kicker">@slide.Kicker</p>
+                                    @if (si == 0)
+                                    {
+                                        <h1 class="ms-hero-title">@slide.Title@if (!string.IsNullOrEmpty(slide.TitleEm)){<em>@slide.TitleEm</em>}</h1>
+                                    }
+                                    else
+                                    {
+                                        <h2 class="ms-hero-title">@slide.Title@if (!string.IsNullOrEmpty(slide.TitleEm)){<em>@slide.TitleEm</em>}</h2>
+                                    }
+                                    <p class="ms-hero-desc">@Html.Raw(slide.Desc)</p>
+                                    <div class="ms-hero-actions">
+                                        <a href="@slide.Cta1Url" class="ms-hero-cta">@slide.Cta1Text</a>
+                                        @if (!string.IsNullOrEmpty(slide.Cta2Text) && !string.IsNullOrEmpty(slide.Cta2Url))
+                                        {
+                                            <a href="@slide.Cta2Url" class="ms-hero-cta ms-hero-cta-outline">@slide.Cta2Text</a>
+                                        }
+                                    </div>
+                                </div>
+                                @if (hp != null)
+                                {
+                                    var img = ProductImageHelper.GetDisplayUrl(ProductImageHelper.GetPrimary(hp.Images), Env);
+                                    <div class="ms-hero-product">
+                                        <span class="ms-hero-ring" aria-hidden="true"></span>
+                                        <img src="@img" alt="@hp.Name" width="240" height="240" @(si == 0 ? "fetchpriority=\"high\"" : "loading=\"lazy\"") />
+                                    </div>
+                                }
+                            </div>
+                        </article>
+                    }
+                }
+                else
+                {
+                    <article class="ms-hero-slide is-active" data-slide>
+                        <div class="ms-hero-grid">
+                            <div class="ms-hero-copy">
+                                <p class="ms-hero-kicker">✦ نمایندگی رسمی آملون در تهران</p>
+                                <h1 class="ms-hero-title">فروشگاه <em>موثقی</em></h1>
+                                <p class="ms-hero-desc">پخش عمده <strong>ظروف یکبار مصرف گیاهی</strong> — اصل کارخانه، ارسال سراسری، مشاوره رایگان</p>
+                                <div class="ms-hero-actions">
+                                    <a href="/Catalog" class="ms-hero-cta">ورود به فروشگاه</a>
+                                    <a href="tel:@WholesaleRules.CoordinationPhone" class="ms-hero-cta ms-hero-cta-outline">تماس فوری</a>
+                                </div>
+                            </div>
+                            @if (heroProducts.FirstOrDefault() is Product hp1)
+                            {
+                                var img1 = ProductImageHelper.GetDisplayUrl(ProductImageHelper.GetPrimary(hp1.Images), Env);
+                                <div class="ms-hero-product">
+                                    <span class="ms-hero-ring" aria-hidden="true"></span>
+                                    <img src="@img1" alt="@hp1.Name" width="240" height="240" fetchpriority="high" />
+                                </div>
+                            }
+                        </div>
+                    </article>
+                }
+            </div>
+            <div class="ms-hero-trust" aria-hidden="true">
+                <div class="ms-hero-trust-track">
+                    <div class="ms-hero-trust-marquee">
+                        <div class="ms-hero-trust-set">
+                            @for (var rep = 0; rep < 3; rep++)
+                            {
+                                @foreach (var ti in trustItems)
+                                {
+                                    <span class="ms-hero-trust-item">@Html.Raw(ti)</span>
+                                }
+                            }
+                        </div>
+                        <div class="ms-hero-trust-set" aria-hidden="true">
+                            @for (var rep = 0; rep < 3; rep++)
+                            {
+                                @foreach (var ti in trustItems)
+                                {
+                                    <span class="ms-hero-trust-item">@Html.Raw(ti)</span>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ms-hero-dots" data-hero-dots></div>
+    </div>
+</section>
+
+<!-- ویژگی‌ها — چرا موثقی -->
+<section class="ms-features ms-reveal" id="ms-features">
+    <div class="ms-wrap ms-features-wrap">
+        <div class="ms-features-band">
+            <div class="ms-features-band-bg" aria-hidden="true"></div>
+            <div class="ms-features-band-shine" aria-hidden="true"></div>
+            <div class="ms-features-band-inner">
+                <span class="ms-features-band-spark">✦</span>
+                <p>چرا <strong>فروشگاه موثقی</strong>؟</p>
+                <span class="ms-features-band-spark">✦</span>
+            </div>
+        </div>
+        <div class="ms-features-viewport" data-features-viewport>
+            <div class="ms-features-track" data-features-track>
+                <article class="ms-feature-card" style="--feat-i:1">
+                    <span class="ms-feature-card-ring"><partial name="_FeatureIcon" model="@("official")" /></span>
+                    <h3>نمایندگی رسمی</h3>
+                    <p>تنها نماینده آملون در تهران</p>
+                </article>
+                <article class="ms-feature-card" style="--feat-i:2">
+                    <span class="ms-feature-card-ring"><partial name="_FeatureIcon" model="@("shield")" /></span>
+                    <h3>ضمانت اصالت</h3>
+                    <p>محصول مستقیم از کارخانه</p>
+                </article>
+                <article class="ms-feature-card" style="--feat-i:3">
+                    <span class="ms-feature-card-ring"><partial name="_FeatureIcon" model="@("box")" /></span>
+                    <h3>پخش عمده</h3>
+                    <p>حداقل @WholesaleRules.FormatMinAmount() تومان</p>
+                </article>
+                <article class="ms-feature-card" style="--feat-i:4">
+                    <span class="ms-feature-card-ring"><partial name="_FeatureIcon" model="@("truck")" /></span>
+                    <h3>ارسال سراسری</h3>
+                    <p>تحویل ۲ تا ۷ روز کاری</p>
+                </article>
+                <article class="ms-feature-card ms-feature-card--dup" style="--feat-i:1" aria-hidden="true">
+                    <span class="ms-feature-card-ring"><partial name="_FeatureIcon" model="@("official")" /></span>
+                    <h3>نمایندگی رسمی</h3>
+                    <p>تنها نماینده آملون در تهران</p>
+                </article>
+                <article class="ms-feature-card ms-feature-card--dup" style="--feat-i:2" aria-hidden="true">
+                    <span class="ms-feature-card-ring"><partial name="_FeatureIcon" model="@("shield")" /></span>
+                    <h3>ضمانت اصالت</h3>
+                    <p>محصول مستقیم از کارخانه</p>
+                </article>
+                <article class="ms-feature-card ms-feature-card--dup" style="--feat-i:3" aria-hidden="true">
+                    <span class="ms-feature-card-ring"><partial name="_FeatureIcon" model="@("box")" /></span>
+                    <h3>پخش عمده</h3>
+                    <p>حداقل @WholesaleRules.FormatMinAmount() تومان</p>
+                </article>
+                <article class="ms-feature-card ms-feature-card--dup" style="--feat-i:4" aria-hidden="true">
+                    <span class="ms-feature-card-ring"><partial name="_FeatureIcon" model="@("truck")" /></span>
+                    <h3>ارسال سراسری</h3>
+                    <p>تحویل ۲ تا ۷ روز کاری</p>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- پیشنهاد ویژه -->
+@if (specialOffers.Count > 0)
+{
+    <section class="ms-offers ms-reveal" id="ms-offers">
+        <div class="ms-offers-wave"></div>
+        <div class="ms-wrap ms-offers-inner">
+            <header class="ms-offers-head">
+                <div class="ms-offers-title-block">
+                    <span class="ms-offers-icon">٪</span>
+                    <div>
+                        <h2>پیشنهاد ویژه موثقی</h2>
+                        <p>فرصت محدود خرید عمده</p>
+                    </div>
+                </div>
+                <a href="/Catalog" class="ms-offers-more">همه ←</a>
+            </header>
+            <div class="ms-countdown ms-countdown-ltr" data-countdown aria-label="زمان باقی‌مانده">
+                <span><b data-cd-d>۰۰</b><small>روز</small></span>
+                <em>:</em>
+                <span><b data-cd-h>۰۰</b><small>ساعت</small></span>
+                <em>:</em>
+                <span><b data-cd-m>۰۰</b><small>دقیقه</small></span>
+                <em>:</em>
+                <span><b data-cd-s>۰۰</b><small>ثانیه</small></span>
+            </div>
+            <div class="ms-offers-scroll" data-offers-scroll>
+                @foreach (var p in specialOffers)
+                {
+                    var offerSellable = ProductStorefrontResolver.GetSellableVariants(p.Variants);
+                    var price = ProductStorefrontResolver.GetMinPrice(p.Variants);
+                    var offerFrom = offerSellable.Count > 0 && ProductStorefrontResolver.UseFromPricePrefix(offerSellable);
+                    <a href="/Shop/Product/@p.Slug" class="ms-offer-card">
+                        @{ ViewData["StageVariant"] = "offer"; ViewData["StageWidth"] = 140; ViewData["StageHeight"] = 140; }
+                        <partial name="_ProductImageStageFromProduct" model="p" />
+                        <div class="ms-offer-body">
+                            <h3>@p.Name</h3>
+                            <div class="ms-offer-foot">
+                                @if (price.HasValue) { <span class="ms-offer-price">@(offerFrom ? "از " : "")@SlugHelper.FormatToman(price.Value) <small>تومان</small></span> }
+                                else { <span class="ms-offer-inquiry">استعلام قیمت</span> }
+                                <span class="ms-offer-go" aria-hidden="true">↗</span>
+                            </div>
+                        </div>
+                    </a>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+<div class="ms-section-wave ms-section-wave--down" aria-hidden="true"></div>
+
+<!-- دسته‌بندی -->
+@if (categoryTypes.Count > 0)
+{
+    <section class="ms-cat-section ms-reveal">
+        <div class="ms-cat-bg" aria-hidden="true"></div>
+        <div class="ms-wrap ms-cat-inner">
+            <header class="ms-cat-header">
+                <div>
+                    <span class="ms-cat-badge">دسته‌بندی</span>
+                    <h2>انتخاب بر اساس نوع ظرف</h2>
+                    <p>@categoryTypes.Count دسته · @productCount محصول <span class="ms-cat-hint-mobile">— بکشید ←</span></p>
+                </div>
+                <a href="/Catalog" class="ms-cat-all">همه ←</a>
+            </header>
+            <div class="ms-cat-scroll-wrap">
+                <div class="ms-cat-scroll" data-cat-scroll>
+                @foreach (var t in categoryTypes)
+                {
+                    <a href="/Catalog/ByType?type=@Uri.EscapeDataString(t.Type)" class="ms-cat-chip">
+                        <span class="ms-cat-chip-ring">
+                            <partial name="_CategoryTypeIcon" model="t.Type" />
+                        </span>
+                        <span class="ms-cat-chip-name">@t.Type</span>
+                        <span class="ms-cat-chip-count">@t.Count</span>
+                    </a>
+                }
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+<!-- محصولات منتخب — گرید ۲ ستونه -->
+@if (featured.Count > 0)
+{
+    <section class="ms-featured-section ms-reveal" id="ms-featured">
+        <div class="ms-featured-glow" aria-hidden="true"></div>
+        <div class="ms-wrap ms-featured-inner">
+            <header class="ms-featured-head">
+                <div>
+                    <span class="ms-featured-badge">⭐ منتخب</span>
+                    <h2>محصولات برتر موثقی</h2>
+                    <p>جدیدترین کاتالوگ آملون · @Math.Min(featured.Count, 8) محصول</p>
+                </div>
+                <a href="/Catalog" class="ms-featured-all">همه ←</a>
+            </header>
+            <div class="ms-featured-grid" data-featured-grid>
+                @foreach (var p in featured.Take(8))
+                {
+                    var featSellable = ProductStorefrontResolver.GetSellableVariants(p.Variants);
+                    var fPrice = ProductStorefrontResolver.GetMinPrice(p.Variants);
+                    var featFrom = featSellable.Count > 0 && ProductStorefrontResolver.UseFromPricePrefix(featSellable);
+                    <a href="/Shop/Product/@p.Slug" class="ms-feat-card">
+                        @{ ViewData["StageVariant"] = "featured"; ViewData["StageWidth"] = 180; ViewData["StageHeight"] = 180; }
+                        <partial name="_ProductImageStageFromProduct" model="p" />
+                        <span class="ms-feat-card-body">
+                            @if (!string.IsNullOrEmpty(p.ProductCode))
+                            {
+                                <span class="ms-feat-card-code">کد @p.ProductCode</span>
+                            }
+                            <span class="ms-feat-card-title">@p.Name</span>
+                            @if (fPrice.HasValue)
+                            {
+                                <span class="ms-feat-card-price">@(featFrom ? "از " : "")@SlugHelper.FormatToman(fPrice.Value) <small>تومان</small></span>
+                            }
+                            else
+                            {
+                                <span class="ms-feat-card-inquiry">استعلام قیمت</span>
+                            }
+                        </span>
+                    </a>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+<!-- جداکننده انیمیشن‌دار — محصولات برتر ↔ خرید عمده -->
+<div class="ms-spark-divider" aria-hidden="true">
+    <div class="ms-spark-divider-bg"></div>
+    <div class="ms-spark-divider-shine"></div>
+    <div class="ms-spark-divider-orbs">
+        <span class="ms-spark-orb ms-spark-orb-a"></span>
+        <span class="ms-spark-orb ms-spark-orb-b"></span>
+        <span class="ms-spark-orb ms-spark-orb-c"></span>
+    </div>
+    <div class="ms-spark-particles">
+        @for (var i = 0; i < 8; i++)
+        {
+            <span class="ms-spark-particle" style="--i:@i"></span>
+        }
+    </div>
+    <div class="ms-spark-divider-track">
+        <span class="ms-spark-label">محصولات برتر</span>
+        <span class="ms-spark-line"></span>
+        <span class="ms-spark-gem"><span class="ms-spark-gem-core">✦</span></span>
+        <span class="ms-spark-line"></span>
+        <span class="ms-spark-label ms-spark-label--accent">خرید عمده</span>
+    </div>
+</div>
+
+<!-- خرید عمده برای کسب‌وکارها -->
+@if (wholesaleSegments.Count > 0)
+{
+    <section class="ms-segments ms-reveal" id="ms-segments">
+        <div class="ms-segments-glow" aria-hidden="true"></div>
+        <div class="ms-wrap ms-segments-inner">
+            <header class="ms-segments-head">
+                <span class="ms-segments-badge">خرید عمده</span>
+                <h2>مناسب چه کسب‌وکارهایی؟</h2>
+                <p>مسیر سریع به محصولات مورد نیاز شما</p>
+            </header>
+            <div class="ms-segments-grid" data-segments-grid>
+                @foreach (var seg in wholesaleSegments)
+                {
+                    <a href="@seg.Url" class="ms-seg-tile">
+                        <span class="ms-seg-tile-ring">
+                            <partial name="_SegmentIcon" model="seg.Icon" />
+                        </span>
+                        <span class="ms-seg-tile-body">
+                            <strong>@seg.Title</strong>
+                            <small>@seg.Desc</small>
+                        </span>
+                        <span class="ms-seg-tile-go" aria-hidden="true">←</span>
+                    </a>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+<div class="ms-section-wave ms-section-wave--up" aria-hidden="true"></div>
+
+<partial name="_VolumeDiscountGuide" />
+
+<div class="ms-section-wave ms-section-wave--up" aria-hidden="true"></div>
+
+<!-- بلوک پایانی -->
+<section class="ms-closing ms-reveal">
+    <div class="ms-closing-bg" aria-hidden="true"></div>
+    <div class="ms-wrap ms-closing-wrap">
+        <div class="ms-closing-card">
+            <div class="ms-closing-visual" aria-hidden="true">
+                <div class="ms-closing-logo-ring">
+                    <img src="~/images/brand/originallogo.png" alt="فروشگاه موثقی" width="160" height="52" />
+                </div>
+                <span class="ms-closing-seal">رسمی</span>
+            </div>
+            <div class="ms-closing-body">
+                <h2>چرا <span>فروشگاه موثقی</span>؟</h2>
+                <p>نمایندگی رسمی آملون — پخش عمده ظروف گیاهی با ضمانت اصالت</p>
+                <ul class="ms-closing-stats">
+                    <li><b data-count="@productCount">@productCount+</b><span>محصول</span></li>
+                    <li><b>۱۰۰٪</b><span>گیاهی</span></li>
+                    <li><b>۲–۷</b><span>روز ارسال</span></li>
+                    <li><b>@WholesaleRules.FormatMinAmount().Replace(" تومان", "")</b><span>حداقل سفارش</span></li>
+                </ul>
+                <div class="ms-closing-actions">
+                    <a href="/Catalog" class="ms-closing-btn">مشاهده محصولات</a>
+                    <a href="tel:@WholesaleRules.CoordinationPhone" class="ms-closing-phone">@WholesaleRules.CoordinationPhone</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- آخرین اخبار -->
+@if (latestNews.Count > 0)
+{
+    <section class="ms-news ms-news--feed ms-reveal">
+        <div class="ms-news-bg" aria-hidden="true"></div>
+        <div class="ms-wrap ms-news-inner">
+            <header class="ms-news-head">
+                <div>
+                    <span class="ms-news-badge">📢 اخبار موثقی</span>
+                    <h2>آخرین اخبار و رویدادها</h2>
+                    <p>اطلاعیه‌ها، ورود محصول و پیشنهادهای ویژه پخش عمده</p>
+                </div>
+                <a href="/News" class="ms-news-all">همه اخبار ←</a>
+            </header>
+            <div class="ms-news-track" data-news-track>
+                @{ var feedIdx = 0; }
+                @foreach (var item in latestNews)
+                {
+                    feedIdx++;
+                    var pubDate = item.PublishedAt ?? item.CreatedAt;
+                    <a href="/News/Article/@item.Slug" class="ms-news-card" style="--news-i:@feedIdx">
+                        <span class="ms-news-card-shimmer" aria-hidden="true"></span>
+                        <span class="ms-news-card-visual" aria-hidden="true">
+                            @if (!string.IsNullOrEmpty(item.FeaturedImageUrl))
+                            {
+                                <img src="@item.FeaturedImageUrl" alt="" loading="lazy" width="320" height="180" />
+                            }
+                            else
+                            {
+                                <span class="ms-news-card-placeholder">
+                                    <svg viewBox="0 0 48 48" width="36" height="36" fill="none" aria-hidden="true"><path d="M8 12h32v24H8z" stroke="currentColor" stroke-width="2" rx="2"/><path d="M8 18l16 10 16-10" stroke="currentColor" stroke-width="2"/></svg>
+                                </span>
+                            }
+                            <span class="ms-news-card-overlay"></span>
+                        </span>
+                        <span class="ms-news-card-body">
+                            @if (item.IsBreaking) { <span class="ms-news-tag">فوری</span> }
+                            <time class="ms-news-date" datetime="@pubDate.ToString("yyyy-MM-dd")">@pubDate.ToLocalTime().ToString("yyyy/MM/dd")</time>
+                            <strong class="ms-news-title">@item.Title</strong>
+                            @if (!string.IsNullOrWhiteSpace(item.Excerpt))
+                            {
+                                <span class="ms-news-excerpt">@item.Excerpt</span>
+                            }
+                            <span class="ms-news-read">مشاهده خبر ←</span>
+                        </span>
+                    </a>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+<!-- وبلاگ -->
+@if (latestBlog.Count > 0)
+{
+    <section class="ms-news ms-reveal">
+        <div class="ms-news-bg" aria-hidden="true"></div>
+        <div class="ms-wrap ms-news-inner">
+            <header class="ms-news-head">
+                <div>
+                    <span class="ms-news-badge">📚 وبلاگ موثقی</span>
+                    <h2>راهنما و مطالب تخصصی</h2>
+                    <p>نکات خرید عمده، انتخاب ظروف گیاهی و تجربه رستوران‌ها</p>
+                </div>
+                <a href="/Blog" class="ms-news-all">همه مطالب ←</a>
+            </header>
+            <div class="ms-news-track" data-news-track>
+                @{ var newsIdx = 0; }
+                @foreach (var post in latestBlog)
+                {
+                    newsIdx++;
+                    var pubDate = post.PublishedAt ?? post.CreatedAt;
+                    <a href="/Blog/Post/@post.Slug" class="ms-news-card" style="--news-i:@newsIdx">
+                        <span class="ms-news-card-shimmer" aria-hidden="true"></span>
+                        <span class="ms-news-card-visual" aria-hidden="true">
+                            @if (!string.IsNullOrEmpty(post.FeaturedImageUrl))
+                            {
+                                <img src="@post.FeaturedImageUrl" alt="" loading="lazy" width="320" height="180" />
+                            }
+                            else
+                            {
+                                <span class="ms-news-card-placeholder">
+                                    <svg viewBox="0 0 48 48" width="36" height="36" fill="none" aria-hidden="true"><path d="M8 12h32v24H8z" stroke="currentColor" stroke-width="2" rx="2"/><path d="M8 18l16 10 16-10" stroke="currentColor" stroke-width="2"/></svg>
+                                </span>
+                            }
+                            <span class="ms-news-card-overlay"></span>
+                        </span>
+                        <span class="ms-news-card-body">
+                            <time class="ms-news-date" datetime="@pubDate.ToString("yyyy-MM-dd")">@pubDate.ToLocalTime().ToString("yyyy/MM/dd")</time>
+                            <strong class="ms-news-title">@post.Title</strong>
+                            @if (!string.IsNullOrWhiteSpace(post.Excerpt))
+                            {
+                                <span class="ms-news-excerpt">@post.Excerpt</span>
+                            }
+                            <span class="ms-news-read">ادامه مطلب ←</span>
+                        </span>
+                    </a>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+@section Scripts {
+    <script defer src="~/js/stories.js" asp-append-version="true"></script>
+    <script defer src="~/js/home.js" asp-append-version="true"></script>
+    <script defer src="~/js/home-desktop.js" asp-append-version="true"></script>
+}

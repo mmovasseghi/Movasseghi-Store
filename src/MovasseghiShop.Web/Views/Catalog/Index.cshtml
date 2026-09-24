@@ -1,0 +1,341 @@
+@model IEnumerable<Product>
+@{
+    // کنترلر برای صفحه دسته، Title/MetaDescription اختصاصی از پروفایل SEO ست می‌کند.
+    // این‌جا فقط وقتی خالی است مقدار عمومی می‌گذاریم تا بازنویسی نشود.
+    if (string.IsNullOrWhiteSpace(ViewData["Title"] as string))
+        ViewData["Title"] = "فروشگاه محصولات | فروشگاه موثقی";
+    var q = (ProductFilterQuery)ViewBag.Query;
+    var facets = (CatalogFilterModel)ViewBag.Facets;
+    var total = (int)ViewBag.Total;
+    var totalPages = (int)ViewBag.TotalPages;
+    var filtersModel = new CatalogFiltersViewModel { Facets = facets, Query = q };
+    var mobileFiltersModel = new CatalogFiltersViewModel { Facets = facets, Query = q, Mobile = true };
+    var categoryLanding = ViewBag.CategoryLanding as CatalogCategoryLandingViewModel;
+
+    var activeFilters = new List<(string Label, string RemoveUrl)>();
+    if (!string.IsNullOrEmpty(q.Packaging))
+        activeFilters.Add((q.Packaging == "bulk" ? "فله" : "شیرینگ", BuildClearUrl(q, "packaging")));
+    if (!string.IsNullOrEmpty(q.Category))
+    {
+        var catLabel = facets.Categories.FirstOrDefault(c => c.Value == q.Category)?.Label ?? q.Category;
+        activeFilters.Add((catLabel, BuildClearUrl(q, "category")));
+    }
+    if (!string.IsNullOrEmpty(q.ProductType))
+        activeFilters.Add((q.ProductType, BuildClearUrl(q, "productType")));
+    if (q.Compartments.HasValue)
+        activeFilters.Add(($"{q.Compartments} خانه", BuildClearUrl(q, "compartments")));
+    if (q.Microwave == true)
+        activeFilters.Add(("مایکروویو", BuildClearUrl(q, "microwave")));
+    if (!string.IsNullOrEmpty(q.Q))
+        activeFilters.Add(($"جستجو: {q.Q}", BuildClearUrl(q, "q")));
+}
+@section Head {
+    <link rel="stylesheet" href="~/css/ux-catalog.css" asp-append-version="true" />
+    @if (categoryLanding?.HasAnyContent == true)
+    {
+        <link rel="stylesheet" href="~/css/ux-product.css" asp-append-version="true" />
+    }
+}
+<div class="ms-wrap catalog-page">
+    @if (categoryLanding?.HasHero == true)
+    {
+        <header class="catalog-hero catalog-hero--category">
+            <div class="catalog-hero-inner catalog-hero-inner--category">
+                @if (!string.IsNullOrEmpty(categoryLanding.ImageUrl))
+                {
+                    <div class="catalog-hero-cover">
+                        <img src="@categoryLanding.ImageUrl" alt="@categoryLanding.Name" width="120" height="120" loading="eager" />
+                    </div>
+                }
+                <div class="catalog-hero-text">
+                    <span class="catalog-hero-kicker">🌿 دسته‌بندی · خرید عمده آملون</span>
+                    <h1>@categoryLanding.Name</h1>
+                    @if (!string.IsNullOrWhiteSpace(categoryLanding.HeroLead))
+                    {
+                        <p class="catalog-hero-lead">@categoryLanding.HeroLead</p>
+                    }
+                    <p class="catalog-hero-meta"><strong>@total</strong> محصول در این دسته — فیلتر، مقایسه و استعلام قیمت</p>
+                </div>
+            </div>
+        </header>
+    }
+    else
+    {
+        <header class="catalog-hero ms-reveal">
+            <div class="catalog-hero-inner">
+                <span class="catalog-hero-kicker">🌿 ظروف گیاهی آملون</span>
+                <h1>فروشگاه محصولات موثقی</h1>
+                <p>انتخاب آسان از بین @total محصول — فیلتر کنید، مقایسه کنید، استعلام قیمت بگیرید</p>
+                <div class="catalog-hero-stats">
+                    <span class="catalog-hero-stat">📦 حداقل @WholesaleRules.FormatMinAmount() تومان</span>
+                    <span class="catalog-hero-stat">💰 تخفیف تا @(WholesaleRules.MaxAutoDiscountPercent)٪</span>
+                    <span class="catalog-hero-stat">🚚 ارسال سراسری</span>
+                    <span class="catalog-hero-stat">☎️ مشاوره رایگان</span>
+                </div>
+            </div>
+        </header>
+    }
+
+    <div class="catalog-layout">
+        <aside class="catalog-sidebar" id="catalogFilters">
+            <div class="catalog-sidebar-head">
+                <strong>فیلتر محصولات</strong>
+            </div>
+            <partial name="_CatalogFilters" model="filtersModel" />
+        </aside>
+
+        <div class="catalog-main">
+            @{
+                var crumbCategory = ViewBag.CategoryName as string
+                    ?? facets.Categories.FirstOrDefault(c => c.Value == q.Category)?.Label;
+            }
+            <nav class="breadcrumb" aria-label="مسیر صفحه">
+                <a href="/">خانه</a><span aria-hidden="true">/</span>
+                @if (!string.IsNullOrEmpty(crumbCategory))
+                {
+                    <a href="/Catalog">محصولات</a><span aria-hidden="true">/</span><span>@crumbCategory</span>
+                }
+                else
+                {
+                    <span>محصولات</span>
+                }
+            </nav>
+
+            @* BreadcrumbList Schema — گوگل مسیر را در نتایج جستجو نمایش می‌دهد *@
+            <script type="application/ld+json">
+                @Html.Raw(System.Text.Json.JsonSerializer.Serialize(new Dictionary<string, object?>
+                {
+                    ["@context"] = "https://schema.org",
+                    ["@type"] = "BreadcrumbList",
+                    ["itemListElement"] = BuildCrumbs(
+                        $"{Context.Request.Scheme}://{Context.Request.Host}", crumbCategory, q.Category)
+                }, new System.Text.Json.JsonSerializerOptions
+                {
+                    Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+                }))
+            </script>
+
+            <partial name="_CatalogCategorySeo" model="categoryLanding" />
+
+            @if (activeFilters.Count > 0)
+            {
+                <div class="catalog-active-filters" aria-label="فیلترهای فعال">
+                    <span class="catalog-active-label">فیلتر فعال:</span>
+                    @foreach (var f in activeFilters)
+                    {
+                        <span class="catalog-filter-chip">
+                            @f.Label
+                            <a href="@f.RemoveUrl" aria-label="حذف فیلتر @f.Label">✕</a>
+                        </span>
+                    }
+                    <a href="/Catalog" class="btn btn-ghost" style="font-size:.78rem;padding:.35rem .65rem;min-height:36px">پاک کردن همه</a>
+                </div>
+            }
+
+            <div class="catalog-toolbar">
+                <div class="catalog-count"><strong>@total</strong> محصول</div>
+                <form method="get" class="catalog-sort">
+                    @foreach (var key in new[] { "Q", "Category", "ProductType", "Packaging", "Compartments", "Microwave" })
+                    {
+                        var val = typeof(ProductFilterQuery).GetProperty(key)?.GetValue(q)?.ToString();
+                        if (!string.IsNullOrEmpty(val))
+                        {
+                            <input type="hidden" name="@key.ToLowerInvariant()" value="@val" />
+                        }
+                    }
+                    <label class="ms-sr-only" for="catalogSort">مرتب‌سازی</label>
+                    <select id="catalogSort" name="sort" onchange="this.form.submit()">
+                        @{
+                            var sortOpts = new (string Val, string Label)[]
+                            {
+                                ("", "مرتب‌سازی"),
+                                ("name", "نام"),
+                                ("code", "کد محصول"),
+                                ("newest", "جدیدترین")
+                            };
+                        }
+                        @foreach (var opt in sortOpts)
+                        {
+                            var isSelected = (string.IsNullOrEmpty(opt.Val) && string.IsNullOrEmpty(q.Sort)) || q.Sort == opt.Val;
+                            if (isSelected)
+                            {
+                                <option value="@opt.Val" selected>@opt.Label</option>
+                            }
+                            else
+                            {
+                                <option value="@opt.Val">@opt.Label</option>
+                            }
+                        }
+                    </select>
+                </form>
+            </div>
+
+            @if (!Model.Any())
+            {
+                var similar = ViewBag.SimilarProducts as IList<Product>;
+                var isSearch = !string.IsNullOrWhiteSpace(q.Q);
+
+                if (isSearch && similar?.Count > 0)
+                {
+                    <div class="ms-search-miss">
+                        <div class="ms-search-miss-head">
+                            <span class="ms-search-miss-icon" aria-hidden="true">🔍</span>
+                            <div>
+                                <h2>«@q.Q» پیدا نشد</h2>
+                                <p>این محصول را نداریم؛ این‌ها به جستجوی شما نزدیک‌ترند:</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ms-product-grid ms-product-grid--similar">
+                        @foreach (var p in similar!)
+                        {
+                            <partial name="_ProductCard" model="p" />
+                        }
+                    </div>
+                    <div class="ms-search-miss-foot">
+                        <a href="/Catalog" class="btn btn-secondary">مشاهده همه محصولات</a>
+                    </div>
+                }
+                else
+                {
+                    var emptyAtom = isSearch
+                        ? ViewBag.CatalogSearchEmpty as MovasseghiShop.Web.Models.Entities.ContentAtom
+                        : ViewBag.CatalogEmpty as MovasseghiShop.Web.Models.Entities.ContentAtom;
+                    <div class="empty-state">
+                        @if (isSearch)
+                        {
+                            <h2>«@q.Q» پیدا نشد</h2>
+                            <p>@(emptyAtom?.Body ?? "عبارت دیگری امتحان کنید.")</p>
+                        }
+                        else
+                        {
+                            <h2>@(emptyAtom?.Title ?? "محصولی یافت نشد")</h2>
+                            <p>@(emptyAtom?.Body ?? "فیلترها را تغییر دهید.")</p>
+                        }
+                        <a href="@(emptyAtom?.CtaUrl ?? "/Catalog")" class="btn btn-secondary">@(emptyAtom?.CtaText ?? "پاک کردن فیلترها")</a>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="ms-product-grid" data-catalog-grid>
+                    @foreach (var p in Model)
+                    {
+                        <partial name="_ProductCard" model="p" />
+                    }
+                </div>
+
+                @if (totalPages > 1)
+                {
+                    <nav class="pagination" aria-label="صفحه‌بندی">
+                        @if (q.Page > 1)
+                        {
+                            <a href="@BuildPageUrl(q, q.Page - 1)" class="page-link" aria-label="صفحه قبل">‹</a>
+                        }
+                        @{
+                            var startPage = Math.Max(1, q.Page - 2);
+                            var endPage = Math.Min(totalPages, q.Page + 2);
+                            if (startPage > 1)
+                            {
+                                <a href="@BuildPageUrl(q, 1)" class="page-link">1</a>
+                                if (startPage > 2) { <span class="page-ellipsis">…</span> }
+                            }
+                            for (var i = startPage; i <= endPage; i++)
+                            {
+                                <a href="@BuildPageUrl(q, i)" class="page-link @(q.Page == i ? "active" : "")" @(q.Page == i ? "aria-current=page" : "")>@i</a>
+                            }
+                            if (endPage < totalPages)
+                            {
+                                if (endPage < totalPages - 1) { <span class="page-ellipsis">…</span> }
+                                <a href="@BuildPageUrl(q, totalPages)" class="page-link">@totalPages</a>
+                            }
+                        }
+                        @if (q.Page < totalPages)
+                        {
+                            <a href="@BuildPageUrl(q, q.Page + 1)" class="page-link" aria-label="صفحه بعد">›</a>
+                        }
+                    </nav>
+                }
+            }
+        </div>
+    </div>
+
+    <partial name="_VolumeDiscountGuide" />
+
+    <div class="mobile-filter-bar">
+        <button type="button" class="mf-btn" data-open-filters>
+            <span class="mf-btn-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+            </span>
+            <span class="mf-btn-label">فیلتر</span>
+        </button>
+        <button type="button" class="mf-btn" data-open-sort>
+            <span class="mf-btn-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round"><path d="M8 4v16M16 4v16M8 8h12M16 16H4"/></svg>
+            </span>
+            <span class="mf-btn-label">مرتب‌سازی</span>
+        </button>
+    </div>
+    <div class="filter-sheet" id="filterSheet" hidden>
+        <div class="filter-sheet-backdrop" data-close-filters></div>
+        <div class="filter-sheet-panel">
+            <header><strong data-filter-sheet-title>فیلتر و مرتب‌سازی</strong><button type="button" class="filter-sheet-close" data-close-filters aria-label="بستن">✕</button></header>
+            <partial name="_CatalogFilters" model="mobileFiltersModel" />
+        </div>
+    </div>
+</div>
+
+@functions {
+    static List<Dictionary<string, object?>> BuildCrumbs(string origin, string? categoryName, string? categorySlug)
+    {
+        var crumbs = new List<Dictionary<string, object?>>
+        {
+            Crumb(1, "خانه", origin + "/"),
+            Crumb(2, "محصولات", origin + "/Catalog")
+        };
+
+        if (!string.IsNullOrWhiteSpace(categoryName) && !string.IsNullOrWhiteSpace(categorySlug))
+            crumbs.Add(Crumb(3, categoryName,
+                $"{origin}/Catalog?category={Uri.EscapeDataString(categorySlug)}"));
+
+        return crumbs;
+
+        static Dictionary<string, object?> Crumb(int position, string name, string url) => new()
+        {
+            ["@type"] = "ListItem",
+            ["position"] = position,
+            ["name"] = name,
+            ["item"] = url
+        };
+    }
+
+    string BuildPageUrl(ProductFilterQuery q, int page)
+    {
+        var pairs = new List<string>();
+        void Add(string k, string? v) { if (!string.IsNullOrEmpty(v)) pairs.Add($"{k}={Uri.EscapeDataString(v)}"); }
+        Add("q", q.Q); Add("category", q.Category); Add("productType", q.ProductType);
+        Add("packaging", q.Packaging); Add("sort", q.Sort);
+        if (q.Compartments.HasValue) pairs.Add($"compartments={q.Compartments}");
+        if (q.Microwave == true) pairs.Add("microwave=true");
+        if (page > 1) pairs.Add($"page={page}");
+        return "/Catalog" + (pairs.Count > 0 ? "?" + string.Join("&", pairs) : "");
+    }
+
+    string BuildClearUrl(ProductFilterQuery q, string field)
+    {
+        var pairs = new List<string>();
+        void Add(string k, string? v) { if (!string.IsNullOrEmpty(v)) pairs.Add($"{k}={Uri.EscapeDataString(v)}"); }
+        if (field != "q") Add("q", q.Q);
+        if (field != "category") Add("category", q.Category);
+        if (field != "productType") Add("productType", q.ProductType);
+        if (field != "packaging") Add("packaging", q.Packaging);
+        if (field != "compartments" && q.Compartments.HasValue) pairs.Add($"compartments={q.Compartments}");
+        if (field != "microwave" && q.Microwave == true) pairs.Add("microwave=true");
+        Add("sort", q.Sort);
+        return "/Catalog" + (pairs.Count > 0 ? "?" + string.Join("&", pairs) : "");
+    }
+}
+
+@section Scripts {
+    <script defer src="~/js/catalog.js" asp-append-version="true"></script>
+}

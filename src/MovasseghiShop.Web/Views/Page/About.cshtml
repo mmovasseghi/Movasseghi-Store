@@ -1,0 +1,6 @@
+@model CmsPage
+@{ ViewData["Title"] = Model?.Title ?? "درباره ما"; }
+<div class="section"><div class="container">
+    <h1>@(Model?.Title ?? "درباره ما")</h1>
+    <div class="form-card">@Html.Raw(Model?.Content)</div>
+</div></div>

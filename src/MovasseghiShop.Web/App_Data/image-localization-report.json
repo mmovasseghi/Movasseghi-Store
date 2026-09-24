@@ -1,0 +1,15 @@
+{
+  "completedAt": "2026-09-12T14:51:37.833969Z",
+  "ProductsProcessed": 104,
+  "ImagesDownloaded": 98,
+  "WebpGenerated": 98,
+  "failureCount": 6,
+  "failures": [
+    "Product #7 (\u0642\u0627\u0634\u0642\u060C-\u0686\u0646\u06AF\u0627\u0644\u060C\u06A9\u0627\u0631\u062F-\u06CC\u06A9\u0628\u0627\u0631-\u0645\u0635\u0631\u0641-\u06AF\u06CC\u0627\u0647\u06CC-\u0628\u0633\u062A): no source images found on amelon.co",
+    "Product #99 (\u0641\u0646\u062C\u0627\u0646-\u06CC\u06A9\u0628\u0627\u0631-\u0645\u0635\u0631\u0641-\u06AF\u06CC\u0627\u0647\u06CC-008912): no source images found on amelon.co",
+    "Product #100 (\u0638\u0631\u0641-\u0633\u06CC\u0628-\u0632\u0645\u06CC\u0646\u06CC-\u062E\u0648\u0631\u064A-009208): no source images found on amelon.co",
+    "Product #101 (\u0638\u0631\u0641-\u0647\u0645\u062A\u06CC\u06AF\u0631-\u062E\u0648\u0631\u064A-009312): no source images found on amelon.co",
+    "Product #102 (\u0644\u06CC\u0648\u0627\u0646-250-\u0633\u06CC-\u0633\u06CC-\u0628\u0633\u062A\u0647-12-008814): no source images found on amelon.co",
+    "Product #103 (\u0644\u06CC\u0648\u0627\u0646-250-\u0633\u06CC-\u0633\u06CC-\u0628\u0633\u062A\u0647-50-008815): no source images found on amelon.co"
+  ]
+}

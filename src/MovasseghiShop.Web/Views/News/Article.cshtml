@@ -1,0 +1,149 @@
+﻿@model NewsItem
+@using System.Text.Json
+@{
+    var related = ((IEnumerable<NewsItem>)ViewBag.Related ?? Enumerable.Empty<NewsItem>()).ToList();
+    var pubDate = Model.PublishedAt ?? Model.CreatedAt;
+    var pageUrl = $"{Context.Request.Scheme}://{Context.Request.Host}/News/Article/{Model.Slug}";
+    var absImg = !string.IsNullOrEmpty(Model.FeaturedImageUrl) && Model.FeaturedImageUrl.StartsWith("/")
+        ? $"{Context.Request.Scheme}://{Context.Request.Host}{Model.FeaturedImageUrl}"
+        : Model.FeaturedImageUrl;
+
+    ViewData["Title"] = Model.MetaTitle ?? $"{Model.Title} | اخبار موثقی";
+    ViewData["MetaDescription"] = Model.MetaDescription ?? Model.Excerpt ?? Model.Title;
+    ViewData["MetaKeywords"] = Model.MetaKeywords ?? "اخبار موثقی, آملون, ظروف گیاهی";
+    ViewData["CanonicalUrl"] = pageUrl;
+    ViewData["OgTitle"] = ViewData["Title"];
+    ViewData["OgDescription"] = ViewData["MetaDescription"];
+    ViewData["OgType"] = "article";
+    ViewData["OgUrl"] = pageUrl;
+    if (absImg != null) ViewData["OgImage"] = absImg;
+
+    var faqs = new List<(string Q, string A)>
+    {
+        ("حداقل سفارش عمده چقدر است؟", $"حداقل سفارش {WholesaleRules.FormatMinAmount()} تومان است. تخفیف پلکانی از ۳٪ تا ۱۲٪ روی کل فاکتور."),
+        ("تخفیف بیشتر چگونه دریافت کنم؟", $"برای سفارش بالای {WholesaleRules.FormatPremiumAmount()} تومان یا {WholesaleRules.PremiumCartons} کارتن (خاور پر)، تخفیف بیش از ۱۲٪ و ارسال رایگان داخل تهران — با {WholesaleRules.CoordinationPhone} تماس بگیرید."),
+        ("فروشگاه موثقی کجاست؟", "فروشگاه موثقی نمایندگی رسمی آملون در تهران است و به سراسر کشور ارسال دارد."),
+        ("محصولات گیاهی اصل هستند؟", "بله — تمامی محصولات از کارخانه آملون و از طریق نمایندگی رسمی تأمین می‌شوند.")
+    };
+}
+@section Head {
+    <link rel="stylesheet" href="~/css/ux-content.css" asp-append-version="true" />
+    <script type="application/ld+json">@Html.Raw(JsonSerializer.Serialize(new Dictionary<string, object?>
+    {
+        ["@context"] = "https://schema.org",
+        ["@type"] = "NewsArticle",
+        ["headline"] = Model.Title,
+        ["description"] = ViewData["MetaDescription"],
+        ["datePublished"] = pubDate.ToString("o"),
+        ["dateModified"] = Model.UpdatedAt.ToString("o"),
+        ["author"] = new Dictionary<string, object?> { ["@type"] = "Organization", ["name"] = "فروشگاه موثقی" },
+        ["publisher"] = new Dictionary<string, object?>
+        {
+            ["@type"] = "Organization",
+            ["name"] = "فروشگاه موثقی",
+            ["logo"] = new Dictionary<string, object?> { ["@type"] = "ImageObject", ["url"] = $"{Context.Request.Scheme}://{Context.Request.Host}/images/brand/originallogo.png" }
+        },
+        ["mainEntityOfPage"] = pageUrl,
+        ["url"] = pageUrl,
+        ["image"] = absImg,
+        ["inLanguage"] = "fa-IR"
+    }))</script>
+    <script type="application/ld+json">@Html.Raw(JsonSerializer.Serialize(new Dictionary<string, object?>
+    {
+        ["@context"] = "https://schema.org",
+        ["@type"] = "BreadcrumbList",
+        ["itemListElement"] = new object[]
+        {
+            new Dictionary<string, object?> { ["@type"] = "ListItem", ["position"] = 1, ["name"] = "خانه", ["item"] = $"{Context.Request.Scheme}://{Context.Request.Host}/" },
+            new Dictionary<string, object?> { ["@type"] = "ListItem", ["position"] = 2, ["name"] = "اخبار", ["item"] = $"{Context.Request.Scheme}://{Context.Request.Host}/News" },
+            new Dictionary<string, object?> { ["@type"] = "ListItem", ["position"] = 3, ["name"] = Model.Title, ["item"] = pageUrl }
+        }
+    }))</script>
+    <script type="application/ld+json">@Html.Raw(JsonSerializer.Serialize(new Dictionary<string, object?>
+    {
+        ["@context"] = "https://schema.org",
+        ["@type"] = "FAQPage",
+        ["mainEntity"] = faqs.Select(f => new Dictionary<string, object?>
+        {
+            ["@type"] = "Question",
+            ["name"] = f.Q,
+            ["acceptedAnswer"] = new Dictionary<string, object?> { ["@type"] = "Answer", ["text"] = f.A }
+        }).ToList()
+    }))</script>
+}
+
+<article class="ms-wrap ct-page ct-page--article ct-page--news" data-ct-page itemscope itemtype="https://schema.org/NewsArticle">
+    <nav class="ct-breadcrumb" aria-label="مسیر صفحه">
+        <a href="/">خانه</a><span aria-hidden="true">/</span>
+        <a href="/News">اخبار</a><span aria-hidden="true">/</span>
+        <span aria-current="page">@Model.Title</span>
+    </nav>
+
+    <header class="ct-article-head">
+        @if (Model.IsBreaking)
+        {
+            <span class="ct-badge ct-badge--urgent">🔴 خبر فوری</span>
+        }
+        else
+        {
+            <span class="ct-badge">📢 خبر</span>
+        }
+        <h1 class="ct-article-title" itemprop="headline">@Model.Title</h1>
+        @if (!string.IsNullOrWhiteSpace(Model.Excerpt))
+        {
+            <p class="ct-article-lead" itemprop="description">@Model.Excerpt</p>
+        }
+        <div class="ct-article-meta">
+            <time datetime="@pubDate.ToString("yyyy-MM-dd")" itemprop="datePublished">@pubDate.ToLocalTime().ToString("yyyy/MM/dd")</time>
+            <span>فروشگاه موثقی — تهران</span>
+        </div>
+    </header>
+
+    @if (!string.IsNullOrEmpty(Model.FeaturedImageUrl))
+    {
+        <div class="ct-article-cover @(Model.FeaturedImageUrl?.Contains("/products/") == true ? "ct-card-visual--photo" : "ms-img-stage")">
+            <img src="@Model.FeaturedImageUrl" alt="@Model.Title" width="960" height="480" fetchpriority="high" itemprop="image" />
+        </div>
+    }
+
+    <div class="ct-article-body ct-prose" itemprop="articleBody">
+        @Html.Raw(Model.Content)
+    </div>
+
+    <section class="ct-faq" aria-labelledby="ct-faq-title">
+        <h2 id="ct-faq-title">سوالات متداول</h2>
+        @foreach (var (i, faq) in faqs.Select((f, i) => (i, f)))
+        {
+            <div class="ct-faq-item @(i == 0 ? "is-open" : "")">
+                <button type="button" class="ct-faq-q" data-ct-faq aria-expanded="@(i == 0 ? "true" : "false")">@faq.Q</button>
+                <div class="ct-faq-a"><p>@faq.A</p></div>
+            </div>
+        }
+    </section>
+
+    @if (related.Count > 0)
+    {
+        <section class="ct-related" aria-labelledby="ct-related-title">
+            <h2 id="ct-related-title">اخبار مرتبط</h2>
+            <div class="ct-related-grid">
+                @foreach (var r in related)
+                {
+                    var rDate = r.PublishedAt ?? r.CreatedAt;
+                    <a href="/News/Article/@r.Slug" class="ct-related-card">
+                        <strong>@r.Title</strong>
+                        <time datetime="@rDate.ToString("yyyy-MM-dd")">@rDate.ToLocalTime().ToString("yyyy/MM/dd")</time>
+                    </a>
+                }
+            </div>
+        </section>
+    }
+
+    <div class="ct-article-nav">
+        <a href="/News" class="btn btn-ghost">← بازگشت به اخبار</a>
+        <a href="/Catalog" class="btn btn-primary">مشاهده محصولات</a>
+    </div>
+</article>
+
+@section Scripts {
+    <script defer src="~/js/content.js" asp-append-version="true"></script>
+}

@@ -1,0 +1,87 @@
+@model CatalogFiltersViewModel
+@{
+    var q = Model.Query;
+    var mobile = Model.Mobile;
+    var facets = Model.Facets;
+}
+<form method="get" action="/Catalog" class="filters-form @(mobile ? "filters-mobile" : "")">
+    @if (!string.IsNullOrEmpty(q.Q))
+    {
+        <input type="hidden" name="q" value="@q.Q" />
+    }
+
+    @if (mobile)
+    {
+        <fieldset class="filter-group filter-group--sort-mobile" id="catalogSortGroup">
+            <legend>مرتب‌سازی</legend>
+            <label class="filter-check">
+                <input type="radio" name="sort" value="" @(string.IsNullOrEmpty(q.Sort) ? "checked" : "") onchange="this.form.submit()" />
+                <span>پیش‌فرض</span>
+            </label>
+            <label class="filter-check">
+                <input type="radio" name="sort" value="name" @(q.Sort == "name" ? "checked" : "") onchange="this.form.submit()" />
+                <span>نام</span>
+            </label>
+            <label class="filter-check">
+                <input type="radio" name="sort" value="code" @(q.Sort == "code" ? "checked" : "") onchange="this.form.submit()" />
+                <span>کد محصول</span>
+            </label>
+            <label class="filter-check">
+                <input type="radio" name="sort" value="newest" @(q.Sort == "newest" ? "checked" : "") onchange="this.form.submit()" />
+                <span>جدیدترین</span>
+            </label>
+        </fieldset>
+    }
+
+    <fieldset class="filter-group">
+        <legend>بسته‌بندی</legend>
+        @foreach (var f in facets.Packaging.Where(p => p.Count > 0))
+        {
+            <label class="filter-check">
+                <input type="radio" name="packaging" value="@f.Value" @(q.Packaging == f.Value ? "checked" : "") onchange="this.form.submit()" />
+                <span>@f.Label <small>(@f.Count)</small></span>
+            </label>
+        }
+    </fieldset>
+
+    @if (facets.Categories.Count > 0)
+    {
+        <fieldset class="filter-group">
+            <legend>دسته‌بندی</legend>
+            @foreach (var f in facets.Categories)
+            {
+                <label class="filter-check">
+                    <input type="radio" name="category" value="@f.Value" @(q.Category == f.Value ? "checked" : "") onchange="this.form.submit()" />
+                    <span>@f.Label <small>(@f.Count)</small></span>
+                </label>
+            }
+        </fieldset>
+    }
+
+    @if (facets.ProductTypes.Count > 0)
+    {
+        <fieldset class="filter-group">
+            <legend>نوع محصول</legend>
+            @foreach (var f in facets.ProductTypes)
+            {
+                <label class="filter-check">
+                    <input type="radio" name="productType" value="@f.Value" @(q.ProductType == f.Value ? "checked" : "") onchange="this.form.submit()" />
+                    <span>@f.Label <small>(@f.Count)</small></span>
+                </label>
+            }
+        </fieldset>
+    }
+
+    @if (facets.MicrowaveCount > 0)
+    {
+        <fieldset class="filter-group">
+            <legend>ویژگی</legend>
+            <label class="filter-check">
+                <input type="checkbox" name="microwave" value="true" @(q.Microwave == true ? "checked" : "") onchange="this.form.submit()" />
+                <span>مناسب مایکروویو <small>(@facets.MicrowaveCount)</small></span>
+            </label>
+        </fieldset>
+    }
+
+    <a href="/Catalog" class="btn btn-secondary btn-block">پاک کردن فیلترها</a>
+</form>

@@ -1,0 +1,185 @@
+@model List<Insight>
+
+@{
+
+    string Css(InsightKind k) => k switch
+
+    {
+
+        InsightKind.Win => "kit-insight--win",
+
+        InsightKind.Risk => "kit-insight--risk",
+
+        _ => "kit-insight--act"
+
+    };
+
+
+
+    string Icon(InsightKind k) => k switch
+
+    {
+
+        InsightKind.Win => "✅",
+
+        InsightKind.Risk => "⚠️",
+
+        _ => "🎯"
+
+    };
+
+
+
+    string Fa(InsightKind k) => k switch
+
+    {
+
+        InsightKind.Win => "نقطه قوت",
+
+        InsightKind.Risk => "هشدار",
+
+        _ => "اقدام پیشنهادی"
+
+    };
+
+
+
+    var risks = Model.Count(i => i.Kind == InsightKind.Risk);
+
+    var actions = Model.Count(i => i.Kind == InsightKind.Action);
+
+    var wins = Model.Count(i => i.Kind == InsightKind.Win);
+
+}
+
+
+
+<section class="kit-section kit-rise">
+
+    <div class="kit-section-head">
+
+        <div>
+
+            <h2>🧠 تحلیل هوشمند</h2>
+
+            <p>
+
+                @if (Model.Count == 0)
+
+                {
+
+                    <text>در این بازه الگوی قابل‌توجهی پیدا نشد — یا داده هنوز کم است.</text>
+
+                }
+
+                else
+
+                {
+
+                    <text>@Model.Count یافته از دل داده استخراج شد — به ترتیب اهمیت.</text>
+
+                }
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    @if (Model.Count > 0)
+
+    {
+
+        <div class="kit-insight-summary" role="group" aria-label="خلاصه یافته‌ها">
+
+            <div class="kit-insight-pill @(risks > 0 ? "is-risk" : "")">
+
+                <span class="kit-insight-pill-num">@risks</span>
+
+                <span class="kit-insight-pill-label">هشدار</span>
+
+            </div>
+
+            <div class="kit-insight-pill @(actions > 0 ? "is-action" : "")">
+
+                <span class="kit-insight-pill-num">@actions</span>
+
+                <span class="kit-insight-pill-label">اقدام</span>
+
+            </div>
+
+            <div class="kit-insight-pill @(wins > 0 ? "is-win" : "")">
+
+                <span class="kit-insight-pill-num">@wins</span>
+
+                <span class="kit-insight-pill-label">قوت</span>
+
+            </div>
+
+        </div>
+
+    }
+
+
+
+    @if (Model.Count == 0)
+
+    {
+
+        <div class="kit-empty" style="padding:2rem 1rem">
+
+            <div class="kit-empty-icon" aria-hidden="true">📊</div>
+
+            <h3>هنوز الگویی برای گزارش نیست</h3>
+
+            <p>وقتی چند روز ترافیک واقعی جمع شود، این بخش روند رشد، نشتی قیف فروش و فرصت‌های از دست رفته را نشان می‌دهد.</p>
+
+        </div>
+
+    }
+
+    else
+
+    {
+
+        foreach (var insight in Model)
+
+        {
+
+            <article class="kit-insight @Css(insight.Kind)">
+
+                <span class="kit-insight-icon" aria-hidden="true">@Icon(insight.Kind)</span>
+
+                <div class="kit-insight-body">
+
+                    <strong>
+
+                        <span class="kit-tag @(insight.Kind == InsightKind.Win ? "kit-tag--ok" : insight.Kind == InsightKind.Risk ? "kit-tag--bad" : "kit-tag--gold")">@Fa(insight.Kind)</span>
+
+                        @insight.Title
+
+                    </strong>
+
+                    <p>@insight.Detail</p>
+
+                    @if (!string.IsNullOrWhiteSpace(insight.Action))
+
+                    {
+
+                        <em class="kit-insight-action">← @insight.Action</em>
+
+                    }
+
+                </div>
+
+            </article>
+
+        }
+
+    }
+
+</section>
+
+

@@ -1,0 +1,49 @@
+@model CartAddResult
+<div class="ms-cart-add-confirm" data-cart-add-confirm data-cart-count="@Model.CartItemCount">
+    <div class="ms-cart-add-confirm__glow" aria-hidden="true"></div>
+    <div class="ms-cart-add-confirm__inner">
+        <div class="ms-cart-add-confirm__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+        <p class="ms-cart-add-confirm__kicker">به سبد خرید اضافه شد</p>
+        <h2 class="ms-cart-add-confirm__title">@Model.ProductName</h2>
+        <p class="ms-cart-add-confirm__meta">@Model.VariantLabel · @CartAnalyticsHelper.FormatCount(Model.AddedQuantity) @Model.UnitName</p>
+
+        <div class="ms-cart-add-confirm__amount">
+            <span>مبلغ این ردیف</span>
+            <strong>@SlugHelper.FormatToman(Model.AddedLineTotal) تومان</strong>
+        </div>
+
+        <div class="ms-cart-add-confirm__summary">
+            <span class="ms-cart-add-confirm__pill">@Model.CartItemCount قلم در سبد</span>
+            <span class="ms-cart-add-confirm__pill ms-cart-add-confirm__pill--total">جمع @SlugHelper.FormatToman(Model.CartSubTotal) تومان</span>
+            @if (Model.VolumeDiscountPercent > 0)
+            {
+                <span class="ms-cart-add-confirm__pill ms-cart-add-confirm__pill--save">تخفیف @(Model.VolumeDiscountPercent)٪ فعال</span>
+            }
+        </div>
+
+        @if (!Model.MeetsMinimum && Model.AmountToMinimum > 0)
+        {
+            <p class="ms-cart-add-confirm__hint">
+                تا حداقل سفارش عمده
+                <strong>@SlugHelper.FormatToman(Model.AmountToMinimum) تومان</strong>
+                دیگر مانده است.
+            </p>
+        }
+        else if (Model.MeetsMinimum)
+        {
+            <p class="ms-cart-add-confirm__hint ms-cart-add-confirm__hint--ok">حداقل سفارش تأمین شده — می‌توانید ثبت سفارش را ادامه دهید.</p>
+        }
+
+        <div class="ms-cart-add-confirm__actions">
+            <a href="/Cart" class="ms-cart-add-confirm__btn ms-cart-add-confirm__btn--primary">
+                <span>مشاهده سبد خرید</span>
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg>
+            </a>
+            <button type="button" class="ms-cart-add-confirm__btn ms-cart-add-confirm__btn--ghost" data-modal-close>
+                ادامه خرید
+            </button>
+        </div>
+    </div>
+</div>
