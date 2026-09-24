@@ -621,7 +621,7 @@ public class OrdersController(ApplicationDbContext db, IAdminNavBadgeService adm
 
     IActionResult RedirectBack(int id, string? returnUrl) =>
         !string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl)
-            ? Redirect(returnUrl)
+            ? Redirect(MovasseghiShop.Web.AppPath.H(returnUrl, HttpContext))
             : RedirectToAction(nameof(Details), new { id });
 }
 
@@ -1164,7 +1164,7 @@ public class InquiriesController(ApplicationDbContext db, IAdminNavBadgeService 
             ? $"استعلام «{inquiry.CustomerName}» پیگیری‌شده علامت خورد."
             : $"استعلام «{inquiry.CustomerName}» به صندوق باز برگشت.";
         return !string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl)
-            ? Redirect(returnUrl)
+            ? Redirect(MovasseghiShop.Web.AppPath.H(returnUrl, HttpContext))
             : RedirectToAction(nameof(Index));
     }
 

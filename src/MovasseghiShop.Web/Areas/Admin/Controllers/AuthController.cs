@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using MovasseghiShop.Web;
 using MovasseghiShop.Web.Data;
 
 namespace MovasseghiShop.Web.Areas.Admin.Controllers;
@@ -31,7 +32,7 @@ public class AuthController(SignInManager<ApplicationUser> signInManager, UserMa
         }
 
         if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
-            return Redirect(returnUrl);
+            return Redirect(AppPath.H(returnUrl, HttpContext));
 
         return RedirectToAction("Index", "Dashboard");
     }

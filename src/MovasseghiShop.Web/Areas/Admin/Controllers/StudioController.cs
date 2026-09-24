@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using MovasseghiShop.Web;
 using MovasseghiShop.Web.Data;
 using MovasseghiShop.Web.Models.Entities;
 using MovasseghiShop.Web.Services;
@@ -206,7 +207,7 @@ public class StudioController(
               + $"قدرت رقابتی {score.CompetitiveStrength}/100. "
               + SeoPublishGateLabels.AutoFixFollowUpMessage(score);
         if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
-            return Redirect(returnUrl);
+            return Redirect(AppPath.H(returnUrl, HttpContext));
         return RedirectToAction("Edit", "Products", new { id });
     }
 
@@ -220,7 +221,7 @@ public class StudioController(
             ? $"درست‌سازی SEO مقاله انجام شد — امتیاز نمایشی {score.DisplayTotal}/100 · {SeoPublishGateLabels.Verified}"
             : $"درست‌سازی SEO انجام شد — امتیاز نمایشی {score.DisplayTotal}/100. {SeoPublishGateLabels.AutoFixFollowUpMessage(score)}";
         if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
-            return Redirect(returnUrl);
+            return Redirect(AppPath.H(returnUrl, HttpContext));
         return RedirectToAction("Edit", "BlogAdmin", new { id });
     }
 
@@ -234,7 +235,7 @@ public class StudioController(
             ? $"درست‌سازی SEO خبر انجام شد — امتیاز نمایشی {score.DisplayTotal}/100 · {SeoPublishGateLabels.Verified}"
             : $"درست‌سازی SEO انجام شد — امتیاز نمایشی {score.DisplayTotal}/100. {SeoPublishGateLabels.AutoFixFollowUpMessage(score)}";
         if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
-            return Redirect(returnUrl);
+            return Redirect(AppPath.H(returnUrl, HttpContext));
         return RedirectToAction("Edit", "NewsAdmin", new { id });
     }
 
@@ -257,7 +258,7 @@ public class StudioController(
             : $"SEO دسته اعمال شد — امتیاز نمایشی {score.DisplayTotal}/100 · {SeoPublishGateLabels.ReadinessLabel} {score.RankingReadiness}/100. "
               + SeoPublishGateLabels.AutoFixFollowUpMessage(score);
         if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
-            return Redirect(returnUrl);
+            return Redirect(AppPath.H(returnUrl, HttpContext));
         return RedirectToAction("Edit", "Categories", new { id });
     }
 

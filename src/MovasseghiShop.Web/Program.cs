@@ -42,13 +42,14 @@ builder.Services.ConfigureApplicationCookie(options =>
         OnRedirectToLogin = context =>
         {
             var path = context.Request.Path.Value ?? "";
+            var pathBase = context.Request.PathBase.Value ?? "";
             if (path.StartsWith("/Admin", StringComparison.OrdinalIgnoreCase)
                 && !path.StartsWith("/Admin/Auth", StringComparison.OrdinalIgnoreCase))
             {
                 var returnUrl = path + context.Request.QueryString;
-                var loginUrl = string.IsNullOrEmpty(returnUrl) || returnUrl == "/"
-                    ? "/Admin/Auth/Login"
-                    : $"/Admin/Auth/Login?returnUrl={Uri.EscapeDataString(returnUrl)}";
+                var loginUrl = pathBase + "/Admin/Auth/Login";
+                if (!string.IsNullOrEmpty(returnUrl) && returnUrl != "/")
+                    loginUrl += "?returnUrl=" + Uri.EscapeDataString(returnUrl);
                 context.Response.Redirect(loginUrl);
                 return Task.CompletedTask;
             }
@@ -59,9 +60,10 @@ builder.Services.ConfigureApplicationCookie(options =>
         OnRedirectToAccessDenied = context =>
         {
             var path = context.Request.Path.Value ?? "";
+            var pathBase = context.Request.PathBase.Value ?? "";
             if (path.StartsWith("/Admin", StringComparison.OrdinalIgnoreCase))
             {
-                context.Response.Redirect("/Admin/Auth/Login");
+                context.Response.Redirect(pathBase + "/Admin/Auth/Login");
                 return Task.CompletedTask;
             }
 

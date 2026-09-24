@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MovasseghiShop.Web;
 using MovasseghiShop.Web.Data;
 using MovasseghiShop.Web.Models;
 using MovasseghiShop.Web.Models.Entities;
@@ -16,7 +17,7 @@ public class AccountController(
     IOtpService otpService,
     IGeocodingService geocodingService) : Controller
 {
-    public IActionResult Login() => Redirect("/?auth=1");
+    public IActionResult Login() => Redirect(AppPath.H("/?auth=1", HttpContext));
 
     [HttpGet]
     public IActionResult Modal() => PartialView("_AuthModal");
@@ -25,7 +26,7 @@ public class AccountController(
     public async Task<IActionResult> Index()
     {
         var user = await userManager.GetUserAsync(User);
-        if (user == null) return Redirect("/?auth=1");
+        if (user == null) return Redirect(AppPath.H("/?auth=1", HttpContext));
 
         var userId = user.Id;
         var orders = await db.Orders.AsNoTracking()
@@ -302,7 +303,7 @@ public class AccountController(
         if (string.IsNullOrWhiteSpace(phone) || phone.Length < 10)
         {
             if (ajax) return BadRequest(new { error = "شماره موبایل معتبر وارد کنید." });
-            return Redirect("/?auth=1");
+            return Redirect(AppPath.H("/?auth=1", HttpContext));
         }
 
         var exists = await userManager.Users.AnyAsync(u => u.PhoneNumber == phone);
@@ -313,7 +314,7 @@ public class AccountController(
 
         TempData["Phone"] = phone;
         TempData["DevOtp"] = MockOtpService.DevCode;
-        return Redirect("/?auth=1");
+        return Redirect(AppPath.H("/?auth=1", HttpContext));
     }
 
     /// <summary>OTP login — existing users only; new users must complete registration.</summary>
@@ -325,13 +326,13 @@ public class AccountController(
         if (string.IsNullOrWhiteSpace(phone) || string.IsNullOrWhiteSpace(code))
         {
             if (ajax) return BadRequest(new { error = "شماره و کد تأیید الزامی است." });
-            return Redirect("/?auth=1");
+            return Redirect(AppPath.H("/?auth=1", HttpContext));
         }
 
         if (!await otpService.VerifyAsync(phone, code))
         {
             if (ajax) return BadRequest(new { error = "کد نامعتبر یا منقضی شده است." });
-            return Redirect("/?auth=1");
+            return Redirect(AppPath.H("/?auth=1", HttpContext));
         }
 
         var user = await userManager.Users.FirstOrDefaultAsync(u => u.PhoneNumber == phone);
@@ -341,7 +342,7 @@ public class AccountController(
             HttpContext.Session.SetString("PendingRegPhone", phone);
             await HttpContext.Session.CommitAsync();
             if (ajax) return Json(new { ok = true, needsRegistration = true, phone });
-            return Redirect("/?auth=1");
+            return Redirect(AppPath.H("/?auth=1", HttpContext));
         }
 
         HttpContext.Session.Remove("PendingRegPhone");
@@ -360,26 +361,26 @@ public class AccountController(
         if (string.IsNullOrWhiteSpace(phone) || string.IsNullOrWhiteSpace(code))
         {
             if (ajax) return BadRequest(new { error = "شماره و کد تأیید الزامی است." });
-            return Redirect("/?auth=1");
+            return Redirect(AppPath.H("/?auth=1", HttpContext));
         }
 
         if (!await otpService.VerifyAsync(phone, code))
         {
             if (ajax) return BadRequest(new { error = "کد نامعتبر یا منقضی شده است." });
-            return Redirect("/?auth=1");
+            return Redirect(AppPath.H("/?auth=1", HttpContext));
         }
 
         if (await userManager.Users.AnyAsync(u => u.PhoneNumber == phone))
         {
             if (ajax) return BadRequest(new { error = "این شماره قبلاً ثبت شده. وارد شوید." });
-            return Redirect("/?auth=1");
+            return Redirect(AppPath.H("/?auth=1", HttpContext));
         }
 
         HttpContext.Session.SetString("PendingRegPhone", phone);
         await HttpContext.Session.CommitAsync();
 
         if (ajax) return Json(new { ok = true, phone });
-        return Redirect("/?auth=1");
+        return Redirect(AppPath.H("/?auth=1", HttpContext));
     }
 
     [HttpPost]
@@ -390,27 +391,27 @@ public class AccountController(
         if (string.IsNullOrWhiteSpace(phone) || string.IsNullOrWhiteSpace(password))
         {
             if (ajax) return BadRequest(new { error = "شماره و رمز عبور را وارد کنید." });
-            return Redirect("/?auth=1");
+            return Redirect(AppPath.H("/?auth=1", HttpContext));
         }
 
         var user = await userManager.Users.FirstOrDefaultAsync(u => u.PhoneNumber == phone);
         if (user == null)
         {
             if (ajax) return BadRequest(new { error = "کاربری با این شماره یافت نشد. ابتدا ثبت‌نام کنید." });
-            return Redirect("/?auth=1");
+            return Redirect(AppPath.H("/?auth=1", HttpContext));
         }
 
         if (!await userManager.HasPasswordAsync(user))
         {
             if (ajax) return BadRequest(new { error = "رمز عبور برای این حساب تنظیم نشده. با پیامک وارد شوید." });
-            return Redirect("/?auth=1");
+            return Redirect(AppPath.H("/?auth=1", HttpContext));
         }
 
         var result = await signInManager.PasswordSignInAsync(user.UserName!, password, isPersistent: true, lockoutOnFailure: false);
         if (!result.Succeeded)
         {
             if (ajax) return BadRequest(new { error = "رمز عبور اشتباه است." });
-            return Redirect("/?auth=1");
+            return Redirect(AppPath.H("/?auth=1", HttpContext));
         }
 
         if (ajax) return Json(new { ok = true, redirect = Url.Action(nameof(Index)) });
@@ -432,32 +433,32 @@ public class AccountController(
         if (string.IsNullOrWhiteSpace(phone))
         {
             if (ajax) return BadRequest(new { error = "نشست ثبت‌نام منقضی شده. دوباره از اول شروع کنید." });
-            return Redirect("/?auth=1");
+            return Redirect(AppPath.H("/?auth=1", HttpContext));
         }
 
         if (string.IsNullOrWhiteSpace(firstName) || string.IsNullOrWhiteSpace(lastName))
         {
             if (ajax) return BadRequest(new { error = "نام و نام خانوادگی الزامی است." });
-            return Redirect("/?auth=1");
+            return Redirect(AppPath.H("/?auth=1", HttpContext));
         }
 
         if (string.IsNullOrWhiteSpace(password))
         {
             if (ajax) return BadRequest(new { error = "رمز عبور را وارد کنید." });
-            return Redirect("/?auth=1");
+            return Redirect(AppPath.H("/?auth=1", HttpContext));
         }
 
         if (password != confirmPassword)
         {
             if (ajax) return BadRequest(new { error = "رمز عبور و تکرار آن یکسان نیست." });
-            return Redirect("/?auth=1");
+            return Redirect(AppPath.H("/?auth=1", HttpContext));
         }
 
         if (await userManager.Users.AnyAsync(u => u.PhoneNumber == phone))
         {
             HttpContext.Session.Remove("PendingRegPhone");
             if (ajax) return BadRequest(new { error = "این شماره قبلاً ثبت شده. وارد شوید." });
-            return Redirect("/?auth=1");
+            return Redirect(AppPath.H("/?auth=1", HttpContext));
         }
 
         var created = await CreateCustomerAsync(phone, firstName, lastName, email, businessName, password);
@@ -465,7 +466,7 @@ public class AccountController(
         {
             if (ajax) return BadRequest(new { error = created.Error });
             TempData["Error"] = created.Error;
-            return Redirect("/?auth=1");
+            return Redirect(AppPath.H("/?auth=1", HttpContext));
         }
 
         HttpContext.Session.Remove("PendingRegPhone");
