@@ -1,0 +1,6 @@
+@* Icons8 3D Fluency — Phone (https://icons8.com/icon/12776/phone) *@
+@model int?
+@{
+    var px = Model is > 0 and <= 96 ? Model.Value : 20;
+}
+<img src="~/images/icons/phone-fluency.png" alt="" class="ms-icon-phone" width="@px" height="@px" loading="lazy" decoding="async" asp-append-version="true" />
