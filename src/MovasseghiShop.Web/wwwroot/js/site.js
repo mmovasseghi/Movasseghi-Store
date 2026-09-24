@@ -298,9 +298,13 @@
       authModalHtml = html;
     }
     openModal(html, { auth: true });
-    const panel = modalSheet?.querySelector('[data-auth-panel]');
-    if (panel) delete panel.dataset.authReady;
-    if (window.MsAuth?.init) window.MsAuth.init(panel);
+    const bootAuth = () => {
+      const panel = modalSheet?.querySelector('[data-auth-panel]');
+      if (!panel) return;
+      panel.dataset.authReady = '';
+      if (window.MsAuth?.init) window.MsAuth.init(panel);
+    };
+    requestAnimationFrame(() => requestAnimationFrame(bootAuth));
   }
 
   document.querySelectorAll('[data-open-auth]').forEach(el =>

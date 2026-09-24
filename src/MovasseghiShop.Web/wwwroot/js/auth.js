@@ -3,6 +3,8 @@
 
   const hasGsap = typeof gsap !== 'undefined';
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const touchUi = () => matchMedia('(max-width: 767px)').matches;
+  const liteMotion = () => reduced || touchUi();
 
   const STEP_INDEX = { phone: 0, otp: 1, register: 2, 'password-login': 0, success: 3 };
   const BAR_WIDTH = [33, 66, 100, 100];
@@ -96,7 +98,8 @@
   }
 
   function initAuthPanel(panel) {
-    if (!panel || panel.dataset.authReady) return;
+    if (!panel) return;
+    if (panel.dataset.authReady === '1') return;
     panel.dataset.authReady = '1';
 
     const phoneForm = panel.querySelector('[data-auth-phone-form]');
@@ -205,16 +208,18 @@
         next.removeAttribute('hidden');
       };
 
-      if (hasGsap && !reduced && current) {
+      if (hasGsap && !liteMotion() && current) {
         gsap.timeline()
-          .to(current, { opacity: 0, y: dir * -20, filter: 'blur(8px)', duration: 0.28, ease: 'power2.in' })
+          .to(current, { opacity: 0, y: dir * -12, duration: 0.2, ease: 'power2.in' })
           .call(swap)
-          .fromTo(next, { opacity: 0, y: dir * 24, filter: 'blur(10px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.52, ease: 'power3.out' })
-          .from(next.querySelectorAll('.ms-field, .ms-auth-lead, .ms-otp-box, .ms-auth-btn, .ms-auth-hint'), {
-            opacity: 0, y: 14, stagger: 0.045, duration: 0.38, ease: 'power2.out'
-          }, '-=0.28');
+          .fromTo(next, { opacity: 0, y: dir * 10 }, { opacity: 1, y: 0, duration: 0.28, ease: 'power2.out', clearProps: 'opacity,transform' });
       } else {
         swap();
+        if (next) {
+          next.style.opacity = '1';
+          next.style.transform = 'none';
+          next.style.filter = 'none';
+        }
       }
     }
 
@@ -277,23 +282,32 @@
     }
 
     function setMainTab(tab) {
-      if (mainTab === tab) return;
+      const changed = mainTab !== tab;
       mainTab = tab;
       syncTabsUI();
-      resetToEntry();
+      if (changed) resetToEntry();
+      else panel.querySelector('#authPhone')?.focus({ preventScroll: true });
     }
 
     function setLoginMode(mode) {
-      if (loginMode === mode) return;
+      const changed = loginMode !== mode;
       loginMode = mode;
       syncLoginModeUI();
       showError('');
+      if (!changed && mode === 'sms') {
+        panel.querySelector('#authPhone')?.focus({ preventScroll: true });
+        return;
+      }
+      if (!changed && mode === 'password') {
+        panel.querySelector('#authLoginPhone')?.focus({ preventScroll: true });
+        return;
+      }
       if (mode === 'password') {
         goStep('password-login', 1);
-        panel.querySelector('#authLoginPhone')?.focus();
+        panel.querySelector('#authLoginPhone')?.focus({ preventScroll: true });
       } else {
         goStep('phone', -1);
-        panel.querySelector('#authPhone')?.focus();
+        panel.querySelector('#authPhone')?.focus({ preventScroll: true });
       }
     }
 
@@ -339,12 +353,18 @@
     bindPhoneInput(panel.querySelector('#authLoginPhone'));
     bindPasswordToggle(panel);
 
-    panel.querySelectorAll('[data-auth-tab]').forEach(btn => {
-      btn.addEventListener('click', () => setMainTab(btn.dataset.authTab));
-    });
-
-    panel.querySelectorAll('[data-auth-login-mode]').forEach(btn => {
-      btn.addEventListener('click', () => setLoginMode(btn.dataset.authLoginMode));
+    panel.addEventListener('click', e => {
+      const tabBtn = e.target.closest('[data-auth-tab]');
+      if (tabBtn && panel.contains(tabBtn)) {
+        e.preventDefault();
+        setMainTab(tabBtn.dataset.authTab || 'login');
+        return;
+      }
+      const modeBtn = e.target.closest('[data-auth-login-mode]');
+      if (modeBtn && panel.contains(modeBtn)) {
+        e.preventDefault();
+        setLoginMode(modeBtn.dataset.authLoginMode || 'sms');
+      }
     });
 
     panel.querySelector('[data-auth-switch-sms]')?.addEventListener('click', () => setLoginMode('sms'));
@@ -428,7 +448,7 @@
           panel.querySelector('#authFirstName')?.focus();
           return;
         }
-        if (data.redirect) redirectSoon(data.redirect);
+        if (data.redirect) redirectSoon((window.appUrl || (u => u))(data.redirect));
       } finally {
         setLoading(otpForm, false);
       }
@@ -445,7 +465,7 @@
         const res = await fetch('/Account/LoginWithPassword', { method: 'POST', body: fd });
         const data = await res.json().catch(() => ({}));
         if (!res.ok) { showError(data.error || 'خطا در ورود'); return; }
-        if (data.redirect) redirectSoon(data.redirect);
+        if (data.redirect) redirectSoon((window.appUrl || (u => u))(data.redirect));
       } finally {
         setLoading(pwdForm, false);
       }
@@ -471,7 +491,7 @@
         const res = await fetch('/Account/CompleteRegistration', { method: 'POST', body: fd });
         const data = await res.json().catch(() => ({}));
         if (!res.ok) { showError(data.error || 'خطا در ثبت‌نام'); return; }
-        if (data.redirect) redirectSoon(data.redirect);
+        if (data.redirect) redirectSoon((window.appUrl || (u => u))(data.redirect));
       } finally {
         setLoading(regForm, false);
       }
@@ -491,14 +511,13 @@
       });
     });
 
-    syncTabsUI();
-    syncLoginModeUI();
-    updateChrome('phone', 0);
+    requestAnimationFrame(() => {
+      syncTabsUI();
+      syncLoginModeUI();
+      updateChrome('phone', 0);
+    });
 
-    if (hasGsap && !reduced) {
-      gsap.from(panel.querySelectorAll('.ms-auth-head, .ms-auth-switcher, .ms-auth-stepbar, .ms-auth-step.is-active .ms-field'), {
-        opacity: 0, y: 22, stagger: 0.04, duration: 0.58, ease: 'power3.out', delay: 0.06
-      });
+    if (hasGsap && !liteMotion()) {
       gsap.to(panel.querySelector('.ms-auth-bg-ring'), { rotation: 360, duration: 40, repeat: -1, ease: 'none' });
       gsap.to(panel.querySelector('.ms-auth-bg-spark--1'), { y: -18, x: 12, duration: 4, repeat: -1, yoyo: true, ease: 'sine.inOut' });
       gsap.to(panel.querySelector('.ms-auth-bg-spark--2'), { y: 14, x: -10, duration: 5.5, repeat: -1, yoyo: true, ease: 'sine.inOut' });
