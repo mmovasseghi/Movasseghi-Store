@@ -940,6 +940,21 @@ body.ms-drawer-open,body.ms-modal-open,body.ms-sheet-open{overflow:hidden}
   .ms-hero-copy{grid-column:2;grid-row:1;width:auto;min-width:0;padding-inline:0}
   .ms-hero-product{grid-column:1;grid-row:1;width:100%;justify-self:center;margin-top:0;min-width:0}
   .ms-hero-product img{max-height:clamp(88px,22vw,118px);max-width:100%}
+  .ms-page-home .ms-hero .ms-hero-wrap{padding-inline:6px!important}
+  .ms-page-home .ms-hero-viewport{padding:1.55rem .85rem 1.2rem}
+  .ms-page-home .ms-hero-grid{gap:.72rem}
+  .ms-page-home .ms-hero-product img{max-height:clamp(96px,24vw,128px);filter:drop-shadow(0 12px 26px rgba(0,0,0,.32))}
+  .ms-page-home .ms-hero-ring{opacity:.4;border-width:1px}
+  .ms-page-home .ms-hero-orb{filter:blur(28px);opacity:.85}
+  .ms-page-home .ms-hero-particles{opacity:.22}
+  .ms-page-home .ms-hero-title{font-size:clamp(1.05rem,4.9vw,1.36rem);line-height:1.22;text-shadow:0 1px 18px rgba(0,0,0,.12)}
+  .ms-page-home .ms-hero-desc{-webkit-line-clamp:3;line-clamp:3;min-height:0}
+  .ms-page-home .ms-hero-cta{padding:.56rem .82rem;font-size:clamp(.72rem,2.4vw,.78rem);min-height:40px;align-items:center}
+  .ms-page-home .ms-hero-cta-outline{padding:.5rem .65rem;border-width:1.5px}
+  .ms-page-home .ms-hero-stat{background:rgba(255,255,255,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:.34rem .52rem;min-width:58px;box-shadow:0 6px 20px rgba(0,0,0,.12)}
+  .ms-page-home .ms-hero-stat span{font-size:.54rem}
+  .ms-page-home .ms-hero-stat-num{font-size:.95rem}
+  .ms-page-home .ms-hero-trust-item{background:rgba(255,255,255,.16)}
   .ms-hero-title{font-size:clamp(.95rem,4.6vw,1.28rem);line-height:1.2;letter-spacing:-.015em;margin-bottom:.35rem}
   .ms-hero-title em{display:inline}
   .ms-hero-kicker{font-size:clamp(.7rem,2.6vw,.8rem);padding:.32rem .65rem;margin-bottom:.36rem;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}

@@ -386,6 +386,45 @@
     from { transform: translate3d(0, 0, 0); opacity: 1; }
     to { transform: translate3d(0, 100%, 0); opacity: 0.9; }
   }
+
+  /* صفحه اصلی — همان چیدمان، فقط خوانایی و فاصله‌گذاری بهتر */
+  .ms-page-home .ms-stories {
+    padding-top: 0.55rem;
+    padding-bottom: 0.35rem;
+  }
+
+  .ms-page-home .ms-featured-section {
+    padding-top: 1.5rem;
+    padding-bottom: 1.75rem;
+  }
+
+  .ms-page-home .ms-featured-grid {
+    gap: 0.72rem;
+  }
+
+  .ms-page-home .ms-feat-card {
+    box-shadow: 0 6px 22px rgba(26, 31, 38, 0.08);
+  }
+
+  .ms-page-home .ms-feat-card-title {
+    font-size: 0.76rem;
+    line-height: 1.5;
+  }
+
+  .ms-page-home .ms-feat-card-price {
+    font-size: 0.84rem;
+  }
+
+  .ms-page-home .ms-cat-section,
+  .ms-page-home .ms-offers,
+  .ms-page-home .ms-features {
+    padding-top: 1.35rem;
+    padding-bottom: 1.35rem;
+  }
+
+  .ms-page-home .ms-section-title {
+    font-size: 1.08rem;
+  }
 }
 
 @media (max-width: 767px) and (prefers-reduced-motion: reduce) {
