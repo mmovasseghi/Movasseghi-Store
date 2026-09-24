@@ -65,22 +65,38 @@ if [[ -d "$INSTALL_DIR/publish/App_Data" ]]; then
   cp -a "$INSTALL_DIR/publish/App_Data" "$BACKUP_DIR/" 2>/dev/null || true
 fi
 
-echo "==> Stopping $SERVICE_NAME before publish..."
-systemctl stop "$SERVICE_NAME" 2>/dev/null || true
-sleep 2
+PUBLISH_NEW="$INSTALL_DIR/publish-next"
+rm -rf "$PUBLISH_NEW"
+mkdir -p "$PUBLISH_NEW"
 
+echo "==> Publishing to $PUBLISH_NEW (service still running)..."
 dotnet publish src/MovasseghiShop.Web/MovasseghiShop.Web.csproj \
   -c Release \
   -r linux-x64 \
   --self-contained true \
-  -o "$INSTALL_DIR/publish"
+  -o "$PUBLISH_NEW"
+
+echo "==> Stopping $SERVICE_NAME and swapping publish folders..."
+systemctl stop "$SERVICE_NAME" 2>/dev/null || true
+sleep 2
+pkill -f '/MOVASSEGHISTORE/publish/MovasseghiShop.Web' 2>/dev/null || true
+sleep 1
+rm -rf "$INSTALL_DIR/publish-old"
+if [[ -d "$INSTALL_DIR/publish" ]]; then
+  mv "$INSTALL_DIR/publish" "$INSTALL_DIR/publish-old"
+fi
+mv "$PUBLISH_NEW" "$INSTALL_DIR/publish"
 
 if [[ -f "$BACKUP_DIR/movasseghi.db" ]]; then
   cp -a "$BACKUP_DIR/movasseghi.db" "$INSTALL_DIR/publish/"
+elif [[ -f "$INSTALL_DIR/publish-old/movasseghi.db" ]]; then
+  cp -a "$INSTALL_DIR/publish-old/movasseghi.db" "$INSTALL_DIR/publish/"
   echo "==> Restored movasseghi.db after publish"
 fi
 if [[ -f "$BACKUP_DIR/appsettings.Production.json" ]]; then
   cp -a "$BACKUP_DIR/appsettings.Production.json" "$INSTALL_DIR/publish/"
+elif [[ -f "$INSTALL_DIR/publish-old/appsettings.Production.json" ]]; then
+  cp -a "$INSTALL_DIR/publish-old/appsettings.Production.json" "$INSTALL_DIR/publish/"
 else
   cp src/MovasseghiShop.Web/appsettings.Production.json.example \
     "$INSTALL_DIR/publish/appsettings.Production.json"
@@ -88,6 +104,9 @@ fi
 if [[ -d "$BACKUP_DIR/App_Data" ]]; then
   mkdir -p "$INSTALL_DIR/publish/App_Data"
   cp -a "$BACKUP_DIR/App_Data/." "$INSTALL_DIR/publish/App_Data/" 2>/dev/null || true
+elif [[ -d "$INSTALL_DIR/publish-old/App_Data" ]]; then
+  mkdir -p "$INSTALL_DIR/publish/App_Data"
+  cp -a "$INSTALL_DIR/publish-old/App_Data/." "$INSTALL_DIR/publish/App_Data/" 2>/dev/null || true
 fi
 
 if [[ ! -f "$INSTALL_DIR/publish/appsettings.Production.json" ]]; then
