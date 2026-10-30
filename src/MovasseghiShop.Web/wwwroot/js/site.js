@@ -48,11 +48,14 @@
     else setTimeout(warm, 1800);
   }
   wirePanelPrefetch();
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => { prefetchCartPanel(); prefetchAuthModal(); });
-  } else {
-    prefetchCartPanel();
-    prefetchAuthModal();
+  const isHomePage = document.body.classList.contains('ms-page-home');
+  if (!isHomePage) {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => { prefetchCartPanel(); prefetchAuthModal(); });
+    } else {
+      prefetchCartPanel();
+      prefetchAuthModal();
+    }
   }
 
   function readAuthTemplateHtml() {
@@ -562,8 +565,14 @@
 
   /* ── Promo bar animation ── */
   const promoBar = document.querySelector('[data-promo-bar]');
-  if (promoBar && hasGsap && !snappyUi()) {
-    gsap.from(promoBar, { y: -40, opacity: 0, duration: 0.6, ease: 'power3.out', delay: 0.1 });
+  function runPromoAnim() {
+    if (promoBar && typeof gsap !== 'undefined' && !snappyUi()) {
+      gsap.from(promoBar, { y: -40, opacity: 0, duration: 0.6, ease: 'power3.out', delay: 0.1 });
+    }
+  }
+  if (promoBar && hasGsap && !snappyUi()) runPromoAnim();
+  else if (promoBar && document.body.classList.contains('ms-page-home')) {
+    window.addEventListener('ms:gsap-ready', runPromoAnim, { once: true });
   }
 
   /* ── Footer animations (desktop only — mobile uses CSS scroll-reveal) ── */
@@ -623,5 +632,10 @@
 
   if (fabCall && hasGsap && !snappyUi()) {
     gsap.from(fabCall, { scale: 0, opacity: 0, duration: 0.6, ease: 'back.out(2)', delay: 0.8 });
+  } else if (fabCall && document.body.classList.contains('ms-page-home') && !snappyUi()) {
+    window.addEventListener('ms:gsap-ready', () => {
+      if (typeof gsap === 'undefined') return;
+      gsap.from(fabCall, { scale: 0, opacity: 0, duration: 0.6, ease: 'back.out(2)', delay: 0.8 });
+    }, { once: true });
   }
 })();

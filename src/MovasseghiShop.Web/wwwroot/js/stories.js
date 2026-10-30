@@ -11,14 +11,6 @@
   const modal = document.getElementById('msStoryModal');
   if (!dataEl || !modal) return;
 
-  let stories = [];
-  try {
-    const raw = JSON.parse(dataEl.textContent || '[]');
-    stories = raw.map(normalizeStory);
-  } catch {
-    return;
-  }
-
   const progressEl = modal.querySelector('[data-story-progress]');
   const slidesEl = modal.querySelector('[data-story-slides]');
   const labelEl = modal.querySelector('[data-story-viewer-label]');
@@ -28,6 +20,7 @@
   const tapPrev = modal.querySelector('[data-story-prev]');
   const tapNext = modal.querySelector('[data-story-next]');
 
+  let stories = [];
   let viewed = new Set(JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'));
   let storyIdx = 0;
   let slideIdx = 0;
@@ -51,13 +44,32 @@
     };
   }
 
-  document.querySelectorAll('.ms-story[data-story-id]').forEach(btn => {
-    if (viewed.has(btn.dataset.storyId)) btn.classList.add('is-viewed');
-    btn.addEventListener('click', e => {
-      e.preventDefault();
-      open(btn.dataset.storyId);
+  function wireStoryButtons() {
+    document.querySelectorAll('.ms-story[data-story-id]').forEach(btn => {
+      if (viewed.has(btn.dataset.storyId)) btn.classList.add('is-viewed');
+      btn.addEventListener('click', e => {
+        e.preventDefault();
+        open(btn.dataset.storyId);
+      });
     });
-  });
+  }
+
+  function loadStoriesPayload() {
+    const inline = dataEl.textContent?.trim();
+    if (inline) {
+      try {
+        return Promise.resolve(JSON.parse(inline).map(normalizeStory));
+      } catch {
+        return Promise.resolve([]);
+      }
+    }
+    const src = dataEl.dataset.storiesSrc;
+    if (!src) return Promise.resolve([]);
+    return fetch(src, { credentials: 'same-origin' })
+      .then(r => (r.ok ? r.json() : []))
+      .then(raw => (Array.isArray(raw) ? raw : []).map(normalizeStory))
+      .catch(() => []);
+  }
 
   function markViewed(id) {
     viewed.add(id);
@@ -104,7 +116,7 @@
     const slide = story.slides[slideIdx];
     if (slide && slidesEl) {
       const imgSrc = (window.appUrl || (u => u))(slide.image);
-      slidesEl.innerHTML = `<div class="ms-story-slide"><img src="${escapeAttr(imgSrc)}" alt="${escapeAttr(slide.title)}" /></div>`;
+      slidesEl.innerHTML = `<div class="ms-story-slide"><img src="${escapeAttr(imgSrc)}" alt="${escapeAttr(slide.title)}" loading="lazy" decoding="async" /></div>`;
     }
     if (ctaEl && slide) {
       ctaEl.href = slide.link || '#';
@@ -258,4 +270,17 @@
     if (e.key === 'ArrowRight') goNext();
     if (e.key === 'ArrowLeft') goPrev();
   });
+
+  function boot() {
+    wireStoryButtons();
+    const run = () => {
+      loadStoriesPayload().then(list => {
+        stories = list;
+      });
+    };
+    if ('requestIdleCallback' in window) requestIdleCallback(run, { timeout: 4000 });
+    else setTimeout(run, 1200);
+  }
+
+  boot();
 })();

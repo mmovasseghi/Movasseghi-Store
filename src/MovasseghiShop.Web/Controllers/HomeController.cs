@@ -77,6 +77,15 @@ public class HomeController(
         return View();
     }
 
+    /// <summary>داده استوری برای fetch سمت کلاینت — HTML خانه سبک‌تر (GTmetrix/LCP).</summary>
+    [HttpGet("/Home/Stories.json")]
+    [OutputCache(PolicyName = "StaticContent")]
+    public async Task<IActionResult> StoriesJson(CancellationToken ct)
+    {
+        var stories = await homeStories.GetStoriesForHomeAsync(ct);
+        return Json(stories);
+    }
+
     /// <summary>لینک‌های قدیمی /Search → کاتالوگ.</summary>
     public IActionResult Search(string? q)
         => RedirectToAction("Index", "Catalog", new ProductFilterQuery { Q = q });

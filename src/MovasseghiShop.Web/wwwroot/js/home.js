@@ -34,6 +34,24 @@
     }
   }
 
+  function scheduleHeroParticles() {
+    const particleWrap = document.querySelector('[data-hero-particles]');
+    if (!particleWrap || reduced) return;
+    const add = () => {
+      for (let i = 0; i < (isMobile() ? 8 : 14); i++) {
+        const p = document.createElement('span');
+        p.className = 'ms-hero-particle';
+        p.style.left = `${Math.random() * 100}%`;
+        p.style.top = `${Math.random() * 100}%`;
+        particleWrap.appendChild(p);
+      }
+    };
+    if ('requestIdleCallback' in window) requestIdleCallback(add, { timeout: 2500 });
+    else setTimeout(add, 800);
+  }
+  scheduleHeroParticles();
+
+  function initGsapHome() {
   if (reduced || typeof gsap === 'undefined') return;
   gsap.registerPlugin(ScrollTrigger);
 
@@ -44,18 +62,6 @@
       clearProps: 'opacity,transform',
       ...vars
     });
-
-  /* Hero particles — static decorative dots only */
-  const particleWrap = document.querySelector('[data-hero-particles]');
-  if (particleWrap) {
-    for (let i = 0; i < (isMobile() ? 14 : 22); i++) {
-      const p = document.createElement('span');
-      p.className = 'ms-hero-particle';
-      p.style.left = `${Math.random() * 100}%`;
-      p.style.top = `${Math.random() * 100}%`;
-      particleWrap.appendChild(p);
-    }
-  }
 
   /* Hero entrance — one-time only, no continuous float.
      تصویر هیرو عنصر LCP صفحه است. هر انیمیشنی که opacity آن را از صفر شروع کند
@@ -280,4 +286,8 @@
     card.addEventListener('touchstart', () => gsap.to(card, { scale: 0.96, duration: 0.1 }), { passive: true });
     card.addEventListener('touchend', () => gsap.to(card, { scale: 1, duration: 0.25, ease: 'back.out(2)' }), { passive: true });
   });
+  }
+
+  if (typeof gsap !== 'undefined') initGsapHome();
+  else window.addEventListener('ms:gsap-ready', initGsapHome, { once: true });
 })();

@@ -64,9 +64,24 @@
        fonts.googleapis.com و fonts.gstatic.com لازم بود و CSS فونت هم رندر را
        بلاک می‌کرد. نسخه variable هر شش وزن را در یک فایل دارد. *@
     <link rel="preload" href="~/fonts/Vazirmatn-var.woff2" as="font" type="font/woff2" crossorigin asp-append-version="true" />
+    @if (isHome)
+    {
+        <link rel="preload" href="~/css/site.css" as="style" asp-append-version="true" />
+    }
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" media="@(isLocalTunnel ? "not all" : null)" />
-    <link rel="stylesheet" href="~/css/prose.css" asp-append-version="true" media="@(isLocalTunnel ? "not all" : null)" />
-    <link rel="stylesheet" href="~/css/ux-cart.css" asp-append-version="true" media="@(isLocalTunnel ? "not all" : null)" />
+    @if (!isHome)
+    {
+        <link rel="stylesheet" href="~/css/prose.css" asp-append-version="true" media="@(isLocalTunnel ? "not all" : null)" />
+    }
+    @if (isHome)
+    {
+        <link rel="preload" href="~/css/ux-cart.css" as="style" asp-append-version="true" onload="this.onload=null;this.rel='stylesheet'" />
+        <noscript><link rel="stylesheet" href="~/css/ux-cart.css" asp-append-version="true" /></noscript>
+    }
+    else
+    {
+        <link rel="stylesheet" href="~/css/ux-cart.css" asp-append-version="true" media="@(isLocalTunnel ? "not all" : null)" />
+    }
     <link rel="stylesheet" href="~/css/ux-mobile.css" asp-append-version="true" media="@(isLocalTunnel ? "not all" : null)" />
     <link rel="stylesheet" href="~/css/ux-desktop.css" asp-append-version="true" media="@(isLocalTunnel ? "not all" : "(min-width: 768px)")" />
     <link rel="stylesheet" href="~/css/ux-product-dual.css" asp-append-version="true" media="@(isLocalTunnel ? "not all" : null)" />
@@ -442,8 +457,13 @@
    و بدون defer (پارسر را متوقف می‌کرد). حالا محلی و deferred است؛ ترتیب اجرای
    اسکریپت‌ها با defer دقیقاً همان ترتیب سند می‌ماند. *@
 <script defer src="~/js/scroll-reveal.js" asp-append-version="true"></script>
-<script defer src="~/js/vendor/gsap.min.js" asp-append-version="true"></script>
-<script defer src="~/js/vendor/ScrollTrigger.min.js" asp-append-version="true"></script>
+@if (isHome)
+{
+    <script defer src="~/js/ms-gsap-boot.js" asp-append-version="true"
+            data-when="load"
+            data-gsap="@Url.Content("~/js/vendor/gsap.min.js")"
+            data-scroll="@Url.Content("~/js/vendor/ScrollTrigger.min.js")"></script>
+}
 @if (isLocalTunnel)
 {
     <script type="text/tunnel" data-src="@Url.Content("~/js/auth.js")"></script>

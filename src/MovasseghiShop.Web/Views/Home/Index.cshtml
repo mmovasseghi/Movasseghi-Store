@@ -19,7 +19,6 @@
     var featured = ((IEnumerable<Product>)ViewBag.FeaturedProducts ?? Enumerable.Empty<Product>()).ToList();
     var specialOffers = ((IEnumerable<Product>)ViewBag.SpecialOffers ?? Enumerable.Empty<Product>()).ToList();
     var storyItems = (List<StoryItemDto>)ViewBag.StoryItems ?? new();
-    var storyJson = System.Text.Json.JsonSerializer.Serialize(storyItems, new System.Text.Json.JsonSerializerOptions { PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase });
     var wholesaleSegments = (List<(string Title, string Desc, string Icon, string Url)>)ViewBag.WholesaleSegments ?? new();
     var latestBlog = ((IEnumerable<BlogPost>)ViewBag.LatestBlogPosts ?? Enumerable.Empty<BlogPost>()).ToList();
     var latestNews = ((IEnumerable<NewsItem>)ViewBag.LatestNews ?? Enumerable.Empty<NewsItem>()).ToList();
@@ -35,7 +34,7 @@
     @using System.Text.Json
     @if (!string.IsNullOrEmpty(lcpImagePath))
     {
-        <link rel="preload" as="image" href="@AppPath.H(lcpImagePath, Context)" fetchpriority="high" />
+        <link rel="preload" as="image" href="@AppPath.H(lcpImagePath, Context)" fetchpriority="high" imagesizes="(max-width: 767px) 55vw, 240px" />
     }
     <script type="application/ld+json">@Html.Raw(JsonSerializer.Serialize(new Dictionary<string, object?>
     {
@@ -93,7 +92,7 @@
     </div>
     </div>
 </section>
-<script type="application/json" id="msStoriesData">@Html.Raw(storyJson)</script>
+<div id="msStoriesData" hidden data-stories-src="@AppPath.H("/Home/Stories.json", Context)"></div>
 
 <!-- هیرو -->
 <section class="ms-hero ms-reveal" id="ms-hero" data-hero-slider>
@@ -155,7 +154,7 @@
                                     var img = ProductImageHelper.GetDisplayUrl(ProductImageHelper.GetPrimary(hp.Images), Env);
                                     <div class="ms-hero-product">
                                         <span class="ms-hero-ring" aria-hidden="true"></span>
-                                        <img src="@AppPath.H(img, Context)" alt="@hp.Name" width="240" height="240" decoding="async" @(si == 0 ? "fetchpriority=\"high\"" : "loading=\"lazy\" data-ms-lazy=\"true\"") />
+                                        <img src="@AppPath.H(img, Context)" alt="@hp.Name" width="240" height="240" decoding="async" sizes="(max-width: 767px) 55vw, 240px" @(si == 0 ? "fetchpriority=\"high\"" : "loading=\"lazy\" data-ms-lazy=\"true\"") />
                                     </div>
                                 }
                             </div>
@@ -180,7 +179,7 @@
                                 var img1 = ProductImageHelper.GetDisplayUrl(ProductImageHelper.GetPrimary(hp1.Images), Env);
                                 <div class="ms-hero-product">
                                     <span class="ms-hero-ring" aria-hidden="true"></span>
-                                    <img src="@AppPath.H(img1, Context)" alt="@hp1.Name" width="240" height="240" fetchpriority="high" />
+                                    <img src="@AppPath.H(img1, Context)" alt="@hp1.Name" width="240" height="240" fetchpriority="high" decoding="async" sizes="(max-width: 767px) 55vw, 240px" />
                                 </div>
                             }
                         </div>
