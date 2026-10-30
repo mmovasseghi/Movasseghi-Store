@@ -516,10 +516,12 @@ else
     {
         <script defer src="~/js/stories.js" asp-append-version="true"></script>
         <script defer src="~/js/home.js" asp-append-version="true"></script>
+        @* Dual Studio↔Scene (~2KB): defer so the card flip starts with the page,
+           not after idle boot — keeps the animation without pulling site.js early. *@
+        <script defer src="~/js/product-card-dual.js" asp-append-version="true"></script>
         @* site.js (~28KB) فقط بعد از تعامل یا تأخیر — TBT GTmetrix *@
         <script type="text/plain" data-ms-idle src="~/js/auth.js" asp-append-version="true"></script>
         <script type="text/plain" data-ms-idle src="~/js/site.js" asp-append-version="true"></script>
-        <script type="text/plain" data-ms-idle src="~/js/product-card-dual.js" asp-append-version="true"></script>
         <script type="text/plain" data-ms-idle src="~/js/scroll-reveal.js" asp-append-version="true"></script>
         <script>
         (function () {
