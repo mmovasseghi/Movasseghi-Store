@@ -70,35 +70,28 @@
     }
     @if (isHome)
     {
-        <link rel="preload" href="~/css/site.css" as="style" asp-append-version="true" />
+        <link rel="preload" href="~/css/storefront.bundle.css" as="style" asp-append-version="true" />
     }
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" media="@(isLocalTunnel ? "not all" : null)" />
-    @if (!isHome)
+    @if (isLocalTunnel)
     {
-        <link rel="stylesheet" href="~/css/prose.css" asp-append-version="true" media="@(isLocalTunnel ? "not all" : null)" />
-    }
-    @if (isHome)
-    {
-        <link rel="preload" href="~/css/ux-cart.css" as="style" asp-append-version="true" onload="this.onload=null;this.rel='stylesheet'" />
-        <noscript><link rel="stylesheet" href="~/css/ux-cart.css" asp-append-version="true" /></noscript>
-    }
-    else
-    {
-        <link rel="stylesheet" href="~/css/ux-cart.css" asp-append-version="true" media="@(isLocalTunnel ? "not all" : null)" />
-    }
-    <link rel="stylesheet" href="~/css/ux-mobile.css" asp-append-version="true" media="@(isLocalTunnel ? "not all" : null)" />
-    <link rel="stylesheet" href="~/css/ux-desktop.css" asp-append-version="true" media="@(isLocalTunnel ? "not all" : "(min-width: 768px)")" />
-    @if (isHome)
-    {
-        <link rel="preload" href="~/css/ux-product-dual.css" as="style" asp-append-version="true" onload="this.onload=null;this.rel='stylesheet'" />
-        <noscript><link rel="stylesheet" href="~/css/ux-product-dual.css" asp-append-version="true" /></noscript>
-        <link rel="preload" href="~/css/ux-scroll-reveal.css" as="style" asp-append-version="true" onload="this.onload=null;this.rel='stylesheet'" />
-        <noscript><link rel="stylesheet" href="~/css/ux-scroll-reveal.css" asp-append-version="true" /></noscript>
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" media="not all" />
+        @if (!isHome)
+        {
+            <link rel="stylesheet" href="~/css/prose.css" asp-append-version="true" media="not all" />
+        }
+        <link rel="stylesheet" href="~/css/ux-cart.css" asp-append-version="true" media="not all" />
+        <link rel="stylesheet" href="~/css/ux-mobile.css" asp-append-version="true" media="not all" />
+        <link rel="stylesheet" href="~/css/ux-desktop.css" asp-append-version="true" media="not all" />
+        <link rel="stylesheet" href="~/css/ux-product-dual.css" asp-append-version="true" media="not all" />
+        <link rel="stylesheet" href="~/css/ux-scroll-reveal.css" asp-append-version="true" media="not all" />
     }
     else
     {
-        <link rel="stylesheet" href="~/css/ux-product-dual.css" asp-append-version="true" media="@(isLocalTunnel ? "not all" : null)" />
-        <link rel="stylesheet" href="~/css/ux-scroll-reveal.css" asp-append-version="true" media="@(isLocalTunnel ? "not all" : null)" />
+        <link rel="stylesheet" href="~/css/storefront.bundle.css" asp-append-version="true" />
+        @if (!isHome)
+        {
+            <link rel="stylesheet" href="~/css/prose.css" asp-append-version="true" />
+        }
     }
     @await RenderSectionAsync("Head", required: false)
     @if (isLocalTunnel)
@@ -146,7 +139,7 @@
     }
 </head>
 <body class="ms-body@(isHome ? " ms-page-home" : "")">
-<a href="#ms-main" class="ms-skip-link">پرش به محتوای اصلی</a>
+<a href="#main-content" class="ms-skip-link">پرش به محتوای اصلی</a>
 <div class="ms-app">
     <div class="ms-promo-bar" data-promo-bar>
         <div class="ms-promo-shimmer" aria-hidden="true"></div>
@@ -306,7 +299,7 @@
         </aside>
     </div>
 
-    <main class="ms-main" id="ms-main" tabindex="-1">@RenderBody()</main>
+    <main class="ms-main" id="main-content" tabindex="-1">@RenderBody()</main>
 
     <nav class="ms-tabbar" aria-label="ناوبری اصلی">
         <a href="@AppPath.H("/", Context)" class="ms-tab @(isHome ? "is-active" : "")">
@@ -486,15 +479,18 @@
 }
 else
 {
-    <script defer src="~/js/auth.js" asp-append-version="true"></script>
+    @if (isHome)
+    {
+        <script defer src="~/js/ms-auth-lazy.js" asp-append-version="true" data-auth-src="@Url.Content("~/js/auth.js")"></script>
+    }
+    else
+    {
+        <script defer src="~/js/auth.js" asp-append-version="true"></script>
+    }
     <script defer src="~/js/site.js" asp-append-version="true"></script>
     @if (isHome || isCatalog)
     {
         <script defer src="~/js/product-card-dual.js" asp-append-version="true"></script>
-    }
-    @if (isHome)
-    {
-        <script defer src="~/js/desktop.js" asp-append-version="true"></script>
     }
 }
 @await RenderSectionAsync("Scripts", required: false)

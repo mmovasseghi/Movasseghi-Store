@@ -13,7 +13,7 @@
     Alt = dualSlides.StudioAlt,
     AlternateImageUrl = dualSlides.SceneUrl,
     AlternateAlt = dualSlides.SceneAlt,
-    DualCycle = dualSlides.CanCycle,
+    DualCycle = (ViewData["StageDualCycle"] as bool? ?? true) && dualSlides.CanCycle,
     Variant = variant,
     Width = width,
     Height = height,

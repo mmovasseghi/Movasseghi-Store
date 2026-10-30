@@ -32,6 +32,7 @@
   }
 
   function wirePanelPrefetch() {
+    if (document.body.classList.contains('ms-page-home')) return;
     const warm = () => {
       prefetchCartPanel();
       prefetchAuthModal();

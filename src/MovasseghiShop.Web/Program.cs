@@ -635,6 +635,14 @@ app.Use(async (context, next) =>
     context.Response.Headers.TryAdd("X-Frame-Options", "SAMEORIGIN");
     context.Response.Headers.TryAdd("Referrer-Policy", "strict-origin-when-cross-origin");
     context.Response.Headers.TryAdd("Permissions-Policy", "geolocation=(), microphone=(), camera=()");
+    if (!context.Response.Headers.ContainsKey("Content-Security-Policy"))
+    {
+        context.Response.Headers.TryAdd(
+            "Content-Security-Policy",
+            "default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; " +
+            "script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; " +
+            "img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'");
+    }
     await next();
 });
 

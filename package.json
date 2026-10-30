@@ -5,6 +5,8 @@
   "private": true,
   "scripts": {
     "build:rte": "esbuild src/MovasseghiShop.Web/Client/rich-text-editor.mjs --bundle --format=iife --outfile=src/MovasseghiShop.Web/wwwroot/js/rich-text-editor.bundle.js --minify",
+    "build:storefront-css": "node scripts/build-storefront-css.mjs",
+    "build": "npm run build:rte && npm run build:storefront-css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {

@@ -45,13 +45,13 @@
   }
 
   function wireStoryButtons() {
-    document.querySelectorAll('.ms-story[data-story-id]').forEach(btn => {
-      if (viewed.has(btn.dataset.storyId)) btn.classList.add('is-viewed');
-      btn.addEventListener('click', e => {
-        e.preventDefault();
-        open(btn.dataset.storyId);
-      });
+  document.querySelectorAll('.ms-story[data-story-id]').forEach(btn => {
+    if (viewed.has(btn.dataset.storyId)) btn.classList.add('is-viewed');
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      ensureStoriesLoaded().then(() => open(btn.dataset.storyId));
     });
+  });
   }
 
   function loadStoriesPayload() {
@@ -273,13 +273,14 @@
 
   function boot() {
     wireStoryButtons();
-    const run = () => {
-      loadStoriesPayload().then(list => {
-        stories = list;
-      });
-    };
-    if ('requestIdleCallback' in window) requestIdleCallback(run, { timeout: 4000 });
-    else setTimeout(run, 1200);
+  }
+
+  function ensureStoriesLoaded() {
+    if (stories.length) return Promise.resolve(stories);
+    return loadStoriesPayload().then((list) => {
+      stories = list;
+      return stories;
+    });
   }
 
   boot();

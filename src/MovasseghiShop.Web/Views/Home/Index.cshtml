@@ -65,6 +65,54 @@
             ["query-input"] = "required name=search_term_string"
         }
     }))</script>
+    <script type="application/ld+json">@Html.Raw(JsonSerializer.Serialize(new Dictionary<string, object?>
+    {
+        ["@context"] = "https://schema.org",
+        ["@type"] = "Organization",
+        ["name"] = "فروشگاه موثقی",
+        ["url"] = homeUrl,
+        ["logo"] = AppPath.Absolute("/images/brand/originallogo.png", Context),
+        ["telephone"] = WholesaleRules.CoordinationPhone,
+        ["description"] = ViewData["MetaDescription"]
+    }))</script>
+    <script type="application/ld+json">@Html.Raw(JsonSerializer.Serialize(new Dictionary<string, object?>
+    {
+        ["@context"] = "https://schema.org",
+        ["@type"] = "FAQPage",
+        ["mainEntity"] = new object[]
+        {
+            new Dictionary<string, object?>
+            {
+                ["@type"] = "Question",
+                ["name"] = "حداقل مبلغ خرید عمده از موثقی چقدر است؟",
+                ["acceptedAnswer"] = new Dictionary<string, object?>
+                {
+                    ["@type"] = "Answer",
+                    ["text"] = $"حداقل سفارش عمده {WholesaleRules.FormatMinAmount()} تومان است."
+                }
+            },
+            new Dictionary<string, object?>
+            {
+                ["@type"] = "Question",
+                ["name"] = "آیا محصولات اصل آملون هستند؟",
+                ["acceptedAnswer"] = new Dictionary<string, object?>
+                {
+                    ["@type"] = "Answer",
+                    ["text"] = "فروشگاه موثقی نمایندگی رسمی آملون است و ظروف یکبار مصرف گیاهی اصل عرضه می‌کند."
+                }
+            },
+            new Dictionary<string, object?>
+            {
+                ["@type"] = "Question",
+                ["name"] = "ارسال به سراسر کشور انجام می‌شود؟",
+                ["acceptedAnswer"] = new Dictionary<string, object?>
+                {
+                    ["@type"] = "Answer",
+                    ["text"] = "بله، ارسال سراسری برای سفارش‌های عمده انجام می‌شود."
+                }
+            }
+        }
+    }))</script>
 }
 
 <!-- استوری‌ها -->
@@ -218,6 +266,7 @@
 <!-- ویژگی‌ها — چرا موثقی -->
 <section class="ms-features ms-reveal" id="ms-features">
     <div class="ms-wrap ms-features-wrap">
+        <h2 class="ms-sr-only">چرا فروشگاه موثقی</h2>
         <div class="ms-features-band">
             <div class="ms-features-band-bg" aria-hidden="true"></div>
             <div class="ms-features-band-shine" aria-hidden="true"></div>
@@ -306,7 +355,7 @@
                     var price = ProductStorefrontResolver.GetMinPrice(p.Variants);
                     var offerFrom = offerSellable.Count > 0 && ProductStorefrontResolver.UseFromPricePrefix(offerSellable);
                     <a href="@AppPath.H($"/Shop/Product/{p.Slug}", Context)" class="ms-offer-card">
-                        @{ ViewData["StageVariant"] = "offer"; ViewData["StageWidth"] = 140; ViewData["StageHeight"] = 140; }
+                        @{ ViewData["StageVariant"] = "offer"; ViewData["StageWidth"] = 140; ViewData["StageHeight"] = 140; ViewData["StageDualCycle"] = false; }
                         <partial name="_ProductImageStageFromProduct" model="p" />
                         <div class="ms-offer-body">
                             <h3>@p.Name</h3>
@@ -378,7 +427,7 @@
                     var fPrice = ProductStorefrontResolver.GetMinPrice(p.Variants);
                     var featFrom = featSellable.Count > 0 && ProductStorefrontResolver.UseFromPricePrefix(featSellable);
                     <a href="@AppPath.H($"/Shop/Product/{p.Slug}", Context)" class="ms-feat-card">
-                        @{ ViewData["StageVariant"] = "featured"; ViewData["StageWidth"] = 180; ViewData["StageHeight"] = 180; }
+                        @{ ViewData["StageVariant"] = "featured"; ViewData["StageWidth"] = 180; ViewData["StageHeight"] = 180; ViewData["StageDualCycle"] = false; }
                         <partial name="_ProductImageStageFromProduct" model="p" />
                         <span class="ms-feat-card-body">
                             @if (!string.IsNullOrEmpty(p.ProductCode))
@@ -469,7 +518,7 @@
         <div class="ms-closing-card">
             <div class="ms-closing-visual" aria-hidden="true">
                 <div class="ms-closing-logo-ring">
-                    <img src="~/images/brand/originallogo.png" alt="فروشگاه موثقی" width="160" height="52" />
+                    <img src="~/images/brand/originallogo.png" alt="فروشگاه موثقی" width="160" height="52" loading="lazy" decoding="async" />
                 </div>
                 <span class="ms-closing-seal">رسمی</span>
             </div>

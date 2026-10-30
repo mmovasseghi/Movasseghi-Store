@@ -51,7 +51,7 @@ fi
 
 cd "$INSTALL_DIR/src"
 npm ci
-npm run build:rte
+npm run build
 
 BACKUP_DIR="$INSTALL_DIR/backups/$(date +%Y%m%d-%H%M%S)"
 mkdir -p "$BACKUP_DIR"
