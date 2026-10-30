@@ -107,7 +107,7 @@ public class ProductCatalogRepairService(ApplicationDbContext db, ISeoEngineServ
             {
                 if (await db.Products.AnyAsync(p => p.Id == id, ct))
                 {
-                    try { await seo.AutoFixProductAsync(id, ct); }
+                    try { await seo.AutoFixProductAsync(id, ct: ct); }
                     catch { /* ignore per-product */ }
                 }
             }
