@@ -142,22 +142,25 @@ public static class AnalyticsIdentity
         if (http.Items.TryGetValue(SessionItemKey, out var cached) && cached is Identity hit)
             return hit;
 
+        var ua = http.Request.Headers.UserAgent.ToString();
         var isNew = false;
         var visitorId = http.Request.Cookies[VisitorCookie];
 
         if (string.IsNullOrWhiteSpace(visitorId))
         {
+            if (AnalyticsClassifier.IsBot(ua) || ShouldDeferVisitorCookie(http))
+            {
+                var seed = "ephemeral:" + ua + (http.Connection.RemoteIpAddress?.ToString() ?? "") +
+                           DateTime.UtcNow.ToString("yyyyMMddHH");
+                var ephemeral = Hash(seed);
+                var ephemeralIdentity = new Identity(ephemeral, Hash(ephemeral + ":sess"), true);
+                http.Items[SessionItemKey] = ephemeralIdentity;
+                return ephemeralIdentity;
+            }
+
             visitorId = Guid.NewGuid().ToString("N");
             isNew = true;
-            // کوکی first-party و ضروری برای آمار خودِ سایت — بدون داده شخصی
-            http.Response.Cookies.Append(VisitorCookie, visitorId, new CookieOptions
-            {
-                HttpOnly = true,
-                IsEssential = true,
-                SameSite = SameSiteMode.Lax,
-                Secure = http.Request.IsHttps,
-                Expires = DateTimeOffset.UtcNow.AddDays(365)
-            });
+            AppendVisitorCookie(http, visitorId);
         }
 
         // از http.Session استفاده نمی‌کنیم — بارگذاری Session هدر Cache-Control: no-store می‌گذارد.
@@ -170,6 +173,46 @@ public static class AnalyticsIdentity
 
         http.Items[SessionItemKey] = identity;
         return identity;
+    }
+
+    /// <summary>کوکی بازدید بعد از idle (خارج از HTML کش‌شده) ست می‌شود تا nginx/GTmetrix Set-Cookie نبینند.</summary>
+    public static void EnsureVisitorCookie(HttpContext http)
+    {
+        if (http.Request.Cookies.ContainsKey(VisitorCookie)) return;
+        var ua = http.Request.Headers.UserAgent.ToString();
+        if (AnalyticsClassifier.IsBot(ua)) return;
+        AppendVisitorCookie(http, Guid.NewGuid().ToString("N"));
+    }
+
+    static bool ShouldDeferVisitorCookie(HttpContext http)
+    {
+        if (http.User.Identity?.IsAuthenticated == true) return false;
+        if (!HttpMethods.IsGet(http.Request.Method)) return false;
+        var path = http.Request.Path.Value ?? "/";
+        if (path.StartsWith("/Admin", StringComparison.OrdinalIgnoreCase)
+            || path.StartsWith("/Account", StringComparison.OrdinalIgnoreCase)
+            || path.StartsWith("/Checkout", StringComparison.OrdinalIgnoreCase)
+            || path.StartsWith("/Cart", StringComparison.OrdinalIgnoreCase))
+            return false;
+
+        return path == "/"
+               || path.Equals("/Home", StringComparison.OrdinalIgnoreCase)
+               || path.StartsWith("/Catalog", StringComparison.OrdinalIgnoreCase)
+               || path.StartsWith("/Shop/Product/", StringComparison.OrdinalIgnoreCase)
+               || path.StartsWith("/Blog", StringComparison.OrdinalIgnoreCase)
+               || path.StartsWith("/News", StringComparison.OrdinalIgnoreCase);
+    }
+
+    static void AppendVisitorCookie(HttpContext http, string visitorId)
+    {
+        http.Response.Cookies.Append(VisitorCookie, visitorId, new CookieOptions
+        {
+            HttpOnly = true,
+            IsEssential = true,
+            SameSite = SameSiteMode.Lax,
+            Secure = http.Request.IsHttps,
+            Expires = DateTimeOffset.UtcNow.AddDays(365)
+        });
     }
 
     /// <summary>
@@ -195,7 +238,7 @@ public static class AnalyticsClassifier
     static readonly string[] BotMarkers =
     [
         "bot", "crawl", "spider", "slurp", "bingpreview", "facebookexternalhit",
-        "headlesschrome", "lighthouse", "pagespeed", "gtmetrix", "pingdom",
+        "headlesschrome", "lighthouse", "pagespeed", "gtmetrix", "pingdom", "pts/",
         "ahrefs", "semrush", "mj12", "dotbot", "petalbot", "yandex", "applebot",
         "gptbot", "claudebot", "perplexity", "ccbot", "bytespider", "amazonbot"
     ];

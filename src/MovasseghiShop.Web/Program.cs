@@ -735,4 +735,10 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+app.MapGet("/api/analytics/visitor", (HttpContext ctx) =>
+{
+    AnalyticsIdentity.EnsureVisitorCookie(ctx);
+    return Results.NoContent();
+}).AllowAnonymous();
+
 app.Run();

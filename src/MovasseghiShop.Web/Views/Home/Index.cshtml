@@ -44,7 +44,7 @@
                     <span class="ms-story-icon-wrap">
                         @if (!string.IsNullOrWhiteSpace(story.CoverImageUrl))
                         {
-                            <img src="@AppPath.H(story.CoverImageUrl, Context)" alt="" class="ms-story-cover" width="76" height="76" loading="@(storyVisualIndex <= 6 ? "eager" : "lazy")" decoding="async" />
+                            <img src="@AppPath.H(story.CoverImageUrl, Context)" alt="" class="ms-story-cover" width="76" height="76" loading="lazy" fetchpriority="low" decoding="async" />
                         }
                         else
                         {
@@ -578,8 +578,3 @@
         }
     </div>
 </section>
-
-@section Scripts {
-    <script defer src="~/js/stories.js" asp-append-version="true"></script>
-    <script defer src="~/js/home.js" asp-append-version="true"></script>
-}

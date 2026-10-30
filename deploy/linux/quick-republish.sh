@@ -33,6 +33,8 @@ sleep 6
 if [[ -f "$INSTALL_DIR/src/deploy/linux/nginx-movasseghi.conf" ]]; then
   mkdir -p /var/cache/nginx/ms
   printf '%s\n' 'proxy_cache_path /var/cache/nginx/ms levels=1:2 keys_zone=ms_pages:8m max_size=64m inactive=20m use_temp_path=off;' > /etc/nginx/conf.d/ms-cache.conf
+  rm -rf /var/cache/nginx/ms/*
+  rm -rf /var/cache/nginx/ms/*
   cp "$INSTALL_DIR/src/deploy/linux/nginx-movasseghi.conf" /etc/nginx/sites-available/movasseghi-shop
   ln -sf /etc/nginx/sites-available/movasseghi-shop /etc/nginx/sites-enabled/movasseghi-shop
   rm -f /etc/nginx/sites-enabled/default 2>/dev/null || true
