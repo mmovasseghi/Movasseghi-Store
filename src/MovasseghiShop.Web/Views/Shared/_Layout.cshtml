@@ -471,7 +471,10 @@
 @* GSAP از jsDelivr می‌آمد: یک اتصال شخص‌ثالث اضافه، بدون کش طولانی‌مدت خودمان
    و بدون defer (پارسر را متوقف می‌کرد). حالا محلی و deferred است؛ ترتیب اجرای
    اسکریپت‌ها با defer دقیقاً همان ترتیب سند می‌ماند. *@
-<script defer src="~/js/scroll-reveal.js" asp-append-version="true"></script>
+@if (!isHome)
+{
+    <script defer src="~/js/scroll-reveal.js" asp-append-version="true"></script>
+}
 @if (isHome)
 {
     <script defer src="~/js/ms-gsap-boot.js" asp-append-version="true"
@@ -504,6 +507,7 @@ else
     {
         @* GSAP فقط دسکتاپ و بعد از load — TBT/LCP حفظ شود *@
         <script defer src="~/js/home-desktop.js" asp-append-version="true"></script>
+        <script defer src="~/js/scroll-reveal.js" asp-append-version="true"></script>
     }
 }
 @await RenderSectionAsync("Scripts", required: false)

@@ -60,10 +60,10 @@
       try {
         return Promise.resolve(JSON.parse(inline).map(normalizeStory));
       } catch {
-        return Promise.resolve([]);
+        /* fall through to fetch */
       }
     }
-    const src = dataEl.dataset.storiesSrc;
+    const src = dataEl.getAttribute('data-stories-src');
     if (!src) return Promise.resolve([]);
     return fetch(src, { credentials: 'same-origin' })
       .then(r => (r.ok ? r.json() : []))
@@ -274,6 +274,7 @@
 
   function boot() {
     wireStoryButtons();
+    ensureStoriesLoaded().catch(() => {});
   }
 
   function ensureStoriesLoaded() {

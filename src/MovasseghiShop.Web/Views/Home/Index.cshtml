@@ -1,3 +1,4 @@
+@using System.Text.Json
 @using MovasseghiShop.Web.Models
 @inject IWebHostEnvironment Env
 @using MovasseghiShop.Web.Models.Entities
@@ -28,6 +29,7 @@
     string? lcpImagePath = null;
     if (heroProducts.FirstOrDefault() is Product lcpProduct)
         lcpImagePath = ProductImageHelper.GetLcpDisplayUrl(ProductImageHelper.GetPrimary(lcpProduct.Images), Env);
+    var homeStoriesJson = JsonSerializer.Serialize(storyItems, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
 }
 
 @section Head {
@@ -37,7 +39,36 @@
     }
 }
 
-<!-- هیرو — اولین محتوای بدنه برای LCP -->
+<!-- استوری‌ها — بالای هیرو (مثل 28a3849) تا بلافاصله بعد از هدر دیده شوند -->
+<section class="ms-stories" aria-label="استوری‌های فروشگاه">
+    <div class="ms-wrap ms-stories-inner">
+    <div class="ms-stories-track" data-stories>
+        @{ var storyVisualIndex = 0; }
+        @foreach (var story in storyItems)
+        {
+            storyVisualIndex++;
+            <button type="button" class="ms-story" data-story-id="@story.Id" aria-label="@story.Label">
+                <span class="ms-story-ring">
+                    <span class="ms-story-icon-wrap">
+                        @if (!string.IsNullOrWhiteSpace(story.CoverImageUrl))
+                        {
+                            <img src="@AppPath.H(story.CoverImageUrl, Context)" alt="" class="ms-story-cover" width="76" height="76" loading="@(storyVisualIndex <= 6 ? "eager" : "lazy")" decoding="async" />
+                        }
+                        else
+                        {
+                            <partial name="_StoryIcon" model="story.IconKey" />
+                        }
+                    </span>
+                </span>
+                <span class="ms-story-label">@story.Label</span>
+            </button>
+        }
+    </div>
+    </div>
+</section>
+<script type="application/json" id="msStoriesData" data-stories-src="@AppPath.H("/Home/Stories.json", Context)">@Html.Raw(homeStoriesJson)</script>
+
+<!-- هیرو — LCP تصویر محصول -->
 <section class="ms-hero" id="ms-hero" data-hero-slider>
     <div class="ms-hero-wrap">
         <div class="ms-hero-stage">
@@ -162,35 +193,6 @@
     <strong>فروشگاه موثقی</strong> نمایندگی رسمی <strong>آملون</strong> در تهران؛ پخش عمده ظروف یکبار مصرف <strong>گیاهی</strong> برای رستوران، کافه، کیترینگ و فروشگاه.
     حداقل سفارش @WholesaleRules.FormatMinAmount() تومان · تماس @WholesaleRules.CoordinationPhone · کاتالوگ در /Catalog
 </p>
-
-<!-- استوری‌ها -->
-<section class="ms-stories">
-    <div class="ms-wrap ms-stories-inner">
-    <div class="ms-stories-track" data-stories>
-        @{ var storyVisualIndex = 0; }
-        @foreach (var story in storyItems)
-        {
-            storyVisualIndex++;
-            <button type="button" class="ms-story" data-story-id="@story.Id" aria-label="@story.Label">
-                <span class="ms-story-ring">
-                    <span class="ms-story-icon-wrap">
-                        @if (!string.IsNullOrWhiteSpace(story.CoverImageUrl))
-                        {
-                            <img src="@AppPath.H(story.CoverImageUrl, Context)" alt="" class="ms-story-cover" width="76" height="76" loading="lazy" decoding="async" />
-                        }
-                        else
-                        {
-                            <partial name="_StoryIcon" model="story.IconKey" />
-                        }
-                    </span>
-                </span>
-                <span class="ms-story-label">@story.Label</span>
-            </button>
-        }
-    </div>
-    </div>
-</section>
-<div id="msStoriesData" hidden data-stories-src="@AppPath.H("/Home/Stories.json", Context)"></div>
 
 <!-- ویژگی‌ها — چرا موثقی -->
 <section class="ms-features ms-reveal" id="ms-features">
