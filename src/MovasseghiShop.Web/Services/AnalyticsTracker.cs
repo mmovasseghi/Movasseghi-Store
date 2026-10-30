@@ -160,11 +160,12 @@ public static class AnalyticsIdentity
             });
         }
 
-        var sessionId = SafeSessionId(http);
+        // از http.Session استفاده نمی‌کنیم — بارگذاری Session هدر Cache-Control: no-store می‌گذارد.
+        var sessionKeySeed = visitorId + ":" + DateTime.UtcNow.ToString("yyyyMMddHH");
 
         var identity = new Identity(
             Hash(visitorId),
-            Hash(sessionId ?? visitorId + ":" + DateTime.UtcNow.ToString("yyyyMMddHH")),
+            Hash(sessionKeySeed),
             isNew);
 
         http.Items[SessionItemKey] = identity;
