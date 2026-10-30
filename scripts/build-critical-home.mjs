@@ -11,6 +11,8 @@ const criticalClass = /\.ms-(?:promo|top|logo|icon|burger|cart-badge|search|stor
 // Tiny dual stabilizer only — full flip/aurora CSS stays in the async bundle so
 // critical HTML stays lean for GTmetrix while above-the-fold cards do not flash
 // both Studio+Scene slides (CLS) before storefront.bundle.css arrives.
+// Keep chrome/progress visible — never opacity:0 here. Bundle adds the full
+// progress-fill/glow polish; critical only prevents dual-slide CLS flash.
 const dualCriticalStabilize = `
 .ms-product-media--dual{position:relative;overflow:hidden}
 .ms-product-dual__aurora{position:absolute;inset:-30%;opacity:0;pointer-events:none;z-index:0}
@@ -19,7 +21,13 @@ const dualCriticalStabilize = `
 .ms-product-media--dual[data-ms-dual-phase=studio] .ms-product-dual__slide--studio,
 .ms-product-media--dual[data-ms-dual-phase=scene] .ms-product-dual__slide--scene{opacity:1;pointer-events:auto;z-index:2}
 .ms-product-dual__scene-img{position:absolute;inset:0;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;margin:0!important;object-fit:cover;border-radius:0}
-.ms-product-dual__chrome{position:absolute;inset:auto 0 0 0;z-index:3;pointer-events:none;opacity:0}
+.ms-product-dual__chrome{position:absolute;left:.55rem;right:.55rem;bottom:.5rem;z-index:5;display:flex;flex-direction:column;gap:.38rem;pointer-events:none}
+.ms-product-dual__progress{position:relative;height:5px;border-radius:999px;overflow:visible;background:rgba(12,20,16,.28);direction:ltr}
+.ms-product-dual__progress-fill{position:absolute;z-index:1;inset:0;display:block;height:100%;width:100%;border-radius:inherit;background:linear-gradient(90deg,#5fa883 0%,#b8f0d4 42%,#fff 72%,#8fd4b0 100%);transform:scaleX(var(--ms-dual-progress,0));transform-origin:left center}
+.ms-product-dual__progress-glow{position:absolute;z-index:2;top:50%;left:calc(var(--ms-dual-progress,0)*100%);width:18px;height:18px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.95) 0%,rgba(184,240,212,.45) 45%,transparent 70%)}
+.ms-product-dual__pill{opacity:0}
+.ms-product-media--dual[data-ms-dual-phase=studio] .ms-product-dual__pill--studio,
+.ms-product-media--dual[data-ms-dual-phase=scene] .ms-product-dual__pill--scene{opacity:1}
 `;
 
 // Retain the original cascade, selector groups and responsive conditions.
