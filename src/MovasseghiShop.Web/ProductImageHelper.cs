@@ -40,6 +40,23 @@ public static class ProductImageHelper
 
     public const int LcpMaxCssPx = 320;
 
+    static string? ResolveWebRoot(IWebHostEnvironment? env)
+    {
+        if (env is null)
+            return null;
+        if (!string.IsNullOrEmpty(env.WebRootPath))
+            return env.WebRootPath;
+        foreach (var basePath in new[] { env.ContentRootPath, AppContext.BaseDirectory })
+        {
+            if (string.IsNullOrWhiteSpace(basePath))
+                continue;
+            var candidate = Path.Combine(basePath.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar), "wwwroot");
+            if (Directory.Exists(candidate))
+                return candidate;
+        }
+        return null;
+    }
+
     /// <summary>نسخهٔ کوچک LCP: فایل <c>*-lcp.webp</c>، وگرنه همان WebP نمایشی (nginx استاتیک).</summary>
     public static string? GetLcpDisplayUrl(ProductImage? image, IWebHostEnvironment? env)
     {
@@ -47,7 +64,8 @@ public static class ProductImageHelper
         if (url is null || !IsLocal(url))
             return url;
 
-        if (env is not null && !string.IsNullOrEmpty(env.WebRootPath))
+        var webRoot = ResolveWebRoot(env);
+        if (webRoot is not null)
         {
             var lcpUrl = ToLcpVariantUrl(url);
             if (lcpUrl != url)
@@ -59,7 +77,7 @@ public static class ProductImageHelper
                 else
                 {
                     var relative = lcpUrl.TrimStart('/').Replace('/', Path.DirectorySeparatorChar);
-                    var exists = File.Exists(Path.Combine(env.WebRootPath, relative));
+                    var exists = File.Exists(Path.Combine(webRoot, relative));
                     LcpCache[lcpUrl] = exists;
                     if (exists) return lcpUrl;
                 }
