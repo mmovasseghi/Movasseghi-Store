@@ -88,11 +88,14 @@
     }
     else if (isHome)
     {
-        var critFile = Path.Combine(HostEnv.WebRootPath ?? Path.Combine(HostEnv.ContentRootPath, "wwwroot"), "css", "critical-home.css");
-        var critCss = File.Exists(critFile) ? File.ReadAllText(critFile) : "";
+        var webRoot = HostEnv.WebRootPath ?? global::System.IO.Path.Combine(HostEnv.ContentRootPath, "wwwroot");
+        var critFile = global::System.IO.Path.Combine(webRoot, "css", "critical-home.css");
+        var critCss = global::System.IO.File.Exists(critFile) ? global::System.IO.File.ReadAllText(critFile) : "";
+        var bundleFile = global::System.IO.Path.Combine(webRoot, "css", "storefront.bundle.css");
+        var bundleVer = global::System.IO.File.Exists(bundleFile) ? global::System.IO.File.GetLastWriteTimeUtc(bundleFile).Ticks.ToString() : "1";
         <style>@Html.Raw(critCss)</style>
         <noscript><link rel="stylesheet" href="~/css/storefront.bundle.css" asp-append-version="true" /></noscript>
-        <meta id="msFullCss" name="ms-full-css" content="@Url.Content("~/css/storefront.bundle.css")?v=@System.IO.File.GetLastWriteTimeUtc(Path.Combine(HostEnv.WebRootPath ?? Path.Combine(HostEnv.ContentRootPath, "wwwroot"), "css", "storefront.bundle.css")).Ticks" />
+        <meta id="msFullCss" name="ms-full-css" content="@Url.Content("~/css/storefront.bundle.css")?v=@bundleVer" />
     }
     else
     {
