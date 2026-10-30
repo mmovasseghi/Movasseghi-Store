@@ -94,7 +94,42 @@ git add data/movasseghi.db.gz
 
 ## به‌روزرسانی
 
-یک دستور (پیشنهادی — از GitHub، با بکاپ DB و smoke test):
+برای نصب موجود `/MOVASSEGHISTORE`، مسیر بررسی‌شدهٔ به‌روزرسانی:
+
+```bash
+sudo bash /MOVASSEGHISTORE/src/deploy/linux/quick-republish.sh
+```
+
+پیش‌نیاز این مسیر: سرویس `movasseghi-shop` با WorkingDirectory برابر
+`/MOVASSEGHISTORE/publish`، Kestrel فقط روی loopback پورت ۵۰۸۰ و DB واقعی در
+`publish/movasseghi.db`. پیش از اجرا باید ConnectionStrings و overrideهای systemd
+بررسی شوند؛ برای DB خارجی یا مسیر ماندگار متفاوت این اسکریپت را بدون تطبیق اجرا نکنید.
+به Git، npm، .NET، Python 3، nginx، curl، systemctl، flock و ss نیاز دارد.
+
+اسکریپت از checkout تمیز pull می‌کند و build را پیش از توقف برنامه در staging انجام می‌دهد.
+سپس maintenance فقط همین سایت را فعال، از SQLite با backup API کپی سازگار تهیه و
+config، App_Data و تصاویر را حفظ می‌کند. optimizer در maintenance اجرا می‌شود؛ مدت
+قطعی به تعداد و حجم تصاویر وابسته است و هنوز روی VPS اندازه‌گیری نشده است.
+probeهای مستقیم loopback مجازند؛ header فورواردشده مجوز bypass نیست.
+
+`verify-home.py` پیش از بازکردن ترافیک، خانه، ۸+۸ محصول، استوری، تطابق preload و تصویر
+هیرو و WebP واقعی را از Kestrel و nginx بررسی می‌کند. عدم انطباق موجب fail و rollback است؛
+در صورت کمتر بودن محصولات انتخاب‌شده، ابتدا داده/انتخاب ادمین بررسی شود و تست دور زده نشود.
+SHA در `publish/RELEASE_COMMIT` ذخیره می‌شود و باید با `git log -1` روی سرور برابر باشد.
+نسخه و DB قبلی در پوشهٔ `backups-release.*` باقی می‌مانند؛ حذف خودکار نسخه‌های قدیمی انجام نمی‌شود.
+اگر rollback ناموفق باشد، `.deploying` برای جلوگیری از ادامهٔ ترافیک باقی می‌ماند و
+باید پیش از حذف آن سرویس و داده‌ها بازیابی و بررسی شوند.
+
+تست‌های محلی این مسیر (بدون دست‌زدن به سرویس‌های سیستم):
+
+```bash
+python -m unittest discover -s tests/deploy -v
+NGINX_BINARY=/path/to/nginx python scripts/verify-proxy-cache.py
+```
+
+این تست‌ها شبیه‌سازی خطا و اجرای nginx محلی‌اند، نه تأیید انتشار واقعی روی VPS.
+
+روش قدیمی نصب/به‌روزرسانی با `remote-install.sh` (در این تغییر بازبینی کامل نشده است):
 
 ```bash
 sudo bash /MOVASSEGHISTORE/src/deploy/linux/remote-install.sh

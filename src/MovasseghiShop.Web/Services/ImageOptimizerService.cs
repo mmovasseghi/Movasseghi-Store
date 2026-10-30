@@ -61,7 +61,12 @@ public class ImageOptimizerService(IWebHostEnvironment env, ILogger<ImageOptimiz
 
         var files = Directory
             .EnumerateFiles(root, "*.*", SearchOption.AllDirectories)
-            .Where(f => Extensions.Contains(Path.GetExtension(f), StringComparer.OrdinalIgnoreCase));
+            .Where(f => Extensions.Contains(Path.GetExtension(f), StringComparer.OrdinalIgnoreCase))
+            .Where(f => !Path.GetFileNameWithoutExtension(f).EndsWith("-lcp", StringComparison.OrdinalIgnoreCase))
+            .Where(f => !IsProductImagePath(f)
+                || Path.GetExtension(f).Equals(".webp", StringComparison.OrdinalIgnoreCase)
+                || !File.Exists(Path.ChangeExtension(f, ".webp")))
+            .ToArray();
 
         foreach (var file in files)
         {
@@ -73,6 +78,13 @@ public class ImageOptimizerService(IWebHostEnvironment env, ILogger<ImageOptimiz
             {
                 if (info.Length < MinBytesToBother)
                 {
+                    // Transfer size does not determine displayed dimensions.
+                    // A small, compressible source can still need a hero variant.
+                    if (!dryRun && IsProductImagePath(file))
+                    {
+                        using var small = await Image.LoadAsync(file, ct);
+                        await TryWriteLcpVariantAsync(small, file, dryRun, ct);
+                    }
                     skipped++;
                     continue;
                 }
@@ -118,6 +130,11 @@ public class ImageOptimizerService(IWebHostEnvironment env, ILogger<ImageOptimiz
                 // اگر خروجی جدید از فایل موجود بزرگ‌تر شد، دست نزن
                 if (buffer.Length >= existingTargetLength && File.Exists(target))
                 {
+                    if (!dryRun && IsProductImagePath(target))
+                    {
+                        using var existing = await Image.LoadAsync(target, ct);
+                        await TryWriteLcpVariantAsync(existing, target, dryRun, ct);
+                    }
                     skipped++;
                     continue;
                 }
@@ -179,6 +196,10 @@ public class ImageOptimizerService(IWebHostEnvironment env, ILogger<ImageOptimiz
             Path.GetDirectoryName(savedWebpPath)!,
             Path.GetFileNameWithoutExtension(savedWebpPath) + "-lcp.webp");
 
+        if (File.Exists(lcpPath)
+            && File.GetLastWriteTimeUtc(lcpPath) >= File.GetLastWriteTimeUtc(savedWebpPath))
+            return;
+
         using var lcp = source.Clone(ctx =>
         {
             var longest = Math.Max(source.Width, source.Height);
@@ -197,13 +218,6 @@ public class ImageOptimizerService(IWebHostEnvironment env, ILogger<ImageOptimiz
 
         using var lcpBuffer = new MemoryStream();
         await lcp.SaveAsWebpAsync(lcpBuffer, new WebpEncoder { Quality = WebpQuality }, ct);
-
-        if (File.Exists(lcpPath))
-        {
-            var existing = new FileInfo(lcpPath).Length;
-            if (lcpBuffer.Length >= existing)
-                return;
-        }
 
         await File.WriteAllBytesAsync(lcpPath, lcpBuffer.ToArray(), ct);
     }

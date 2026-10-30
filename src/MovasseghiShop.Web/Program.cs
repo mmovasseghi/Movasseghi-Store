@@ -273,6 +273,7 @@ if (args.Contains("--optimize-images", StringComparer.OrdinalIgnoreCase))
         dryRun ? "آزمایشی" : "اعمال شد",
         r.Scanned, r.Rewritten, r.Skipped, r.Failed,
         r.BytesBefore / 1024, r.BytesAfter / 1024, r.PercentSaved);
+    if (r.Failed > 0) Environment.ExitCode = 1;
     return;
 }
 

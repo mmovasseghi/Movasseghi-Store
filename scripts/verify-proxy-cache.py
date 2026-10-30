@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Exercise the production nginx rules against an isolated local upstream."""
 import http.server
+import http.client
 import os
 from pathlib import Path
 import shutil
@@ -47,6 +48,7 @@ with tempfile.TemporaryDirectory(prefix="movasseghi-nginx-") as temporary:
     site = site.replace("listen [::]:80 default_server;", "")
     site = site.replace("127.0.0.1:5080", f"127.0.0.1:{upstream.server_port}")
     site = site.replace("/MOVASSEGHISTORE/publish/wwwroot", str(ROOT / "src/MovasseghiShop.Web/wwwroot"))
+    site = site.replace("/MOVASSEGHISTORE/.deploying", str(directory / ".deploying"))
     config = directory / "nginx.conf"
     config.write_text(f"""pid {directory}/nginx.pid;
 error_log {directory}/error.log;
@@ -95,6 +97,15 @@ http {{
         assert request("/")[1]["X-Cache"] == "HIT"
         assert request("/", "_mv=analytics")[1]["X-Cache"] == "HIT"
         assert request("/", authorization="Bearer local-test")[1]["X-Cache"] == "BYPASS"
+        (directory / ".deploying").touch()
+        assert request("/")[0] == 200  # Direct loopback health probe.
+        connection = http.client.HTTPConnection("127.0.0.1", port, source_address=("127.0.0.2", 0))
+        connection.request("GET", "/", headers={"X-Forwarded-For": "127.0.0.1"})
+        response = connection.getresponse()
+        assert response.status == 503  # Forwarded headers cannot bypass it.
+        response.read()
+        connection.close()
+        (directory / ".deploying").unlink()
         for cookie in ["ms_cart_n=1", ".AspNetCore.Session=existing", ".AspNetCore.Identity.Application=existing"]:
             assert request("/", cookie)[1]["X-Cache"] == "BYPASS", cookie
         for path in ["/Order/Invoice?number=test", "/Payment/Mock", "/Cart/Panel", "/api/analytics/visitor", "/account/modal", "/Admin"]:

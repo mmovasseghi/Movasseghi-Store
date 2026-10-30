@@ -1,4 +1,6 @@
 # Build
+__pycache__/
+*.py[cod]
 bin/
 obj/
 *.user

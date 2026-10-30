@@ -46,7 +46,7 @@
 | تعداد استوری DB نمونه | ۱۲ | ۱۲ |
 | CLS موبایل در تأخیر مصنوعی ۱۵۰۰ms باندل CSS | حدود ۰٫۰۹۴۲ | حدود ۰٫۰۰۳۱ |
 | هندسهٔ header/story/hero پیش و پس از CSS | جابه‌جایی محسوس | در تست همسان، بدون اختلاف معنادار |
-| تست‌های .NET | ۳۴ تست موجود | ۵۰ تست با regressionهای کش |
+| تست‌های .NET | ۳۴ تست موجود | ۵۵ تست با regressionهای کش و تصاویر |
 | nginx | نادیده‌گرفتن هدرهای محافظ و کش عمومی مسیرها | تست HIT عمومی و bypass خصوصی موفق |
 
 این CLS نمونهٔ کوتاه آزمایشگاهی با Chromium محلی است؛ نه نتیجهٔ GTmetrix، نه
@@ -70,6 +70,22 @@ CrUX و نه تضمین رفتار همهٔ دستگاه‌ها. LCP/FCP/TBT/Spe
 تست nginx روی binary نسخهٔ ۱٫۲۶٫۳ با metadata امضاشدهٔ Debian و checksum تأییدشده،
 upstream آزمایشی و پورت موقت اجرا شد؛ nginx سیستم یا VPS تغییر نکرد.
 اسکریپت‌ها: `verify-home-performance.cjs`، `verify-proxy-cache.py` و `PublicCacheSafetyTests.cs`.
+
+اصلاحات تکمیلی مسیر انتشار و LCP:
+
+- تصاویر کم‌حجم محصول نیز نسخهٔ LCP می‌گیرند؛ تصویر WebP انتخاب‌شده برای نمایش بر
+  فایل اصلی هم‌نام اولویت دارد. منبع اصلی حفظ و LCP منقضی با تغییر منبع بازتولید می‌شود.
+- مشتق‌های `-lcp` دوباره به `-lcp-lcp` تبدیل نمی‌شوند. خطای optimizer، CLI را با status ۱
+  تمام می‌کند؛ این رفتار علاوه بر unit test، با اجرای واقعی CLI در پوشهٔ مجزا بررسی شد.
+- انتشار با lock، checkout تمیز، build در staging، validation nginx، maintenance عمومی،
+  توقف کامل برنامه، backup از SQLite با API سازگار با WAL و حفظ config/App_Data/images انجام می‌شود.
+- قبل از بازکردن ترافیک، Kestrel و nginx با ۸+۸ محصول، استوری و همان LCP واقعی بررسی می‌شوند.
+  manifest نسخه `RELEASE_COMMIT` داخل publish ذخیره می‌شود.
+- شکست pull/build/nginx/optimizer/start/smoke باعث گزارش خطا و بازگشت نسخه/config می‌شود؛
+  اگر recovery نیز شکست بخورد، maintenance باقی می‌ماند. marker متعلق به عملیات دیگر حذف نمی‌شود.
+- ۶ تست Python شامل سناریوهای خطا، حفظ سفارش نمونه و آپلود/config، rollback و کنترل
+  سلامت HTTP اجرا و موفق شدند. تست‌های فرمان‌های VPS از fixture استفاده کردند؛
+  این نتیجه اثبات deploy واقعی نیست. محدودیت دورهٔ maintenance و config واقعی سرور هنوز باز است.
 
 ## پرامپت پیشنهادی برای ادامهٔ کار
 
