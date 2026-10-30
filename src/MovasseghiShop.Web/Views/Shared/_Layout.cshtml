@@ -1,5 +1,6 @@
 @inject MovasseghiShop.Web.Services.ICartService CartService
 @inject IConfiguration Config
+@inject IWebHostEnvironment HostEnv
 @using MovasseghiShop.Web.Services
 @{
     var title = ViewData["Title"]?.ToString() ?? SiteKeywordStrategy.SiteTitle;
@@ -22,6 +23,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    @await RenderSectionAsync("Head", required: false)
     <title>@title</title>
     <meta name="description" content="@metaDescription" />
     <meta name="keywords" content="@metaKeywords" />
@@ -62,7 +64,6 @@
     <link rel="alternate" type="text/plain" href="@AppPath.H("/llms.txt", Context)" title="LLMs" />
     <link rel="alternate" type="text/plain" href="@AppPath.H("/ai.txt", Context)" title="AI" />
     <meta name="abstract" content="@metaDescription" />
-    @await RenderSectionAsync("Head", required: false)
     @if (!isHome && !isAccount && !isOrder)
     {
         @await Html.PartialAsync("_StorefrontGlobalJsonLd")
@@ -87,11 +88,11 @@
     }
     else if (isHome)
     {
-        @* Critical CSS بلاک‌کنندهٔ کوچک؛ باندل ۲۲۰KB بعد از اولین paint (LCP/FCP) *@
-        <link rel="stylesheet" href="~/css/critical-home.css" asp-append-version="true" />
-        <link rel="preload" href="~/css/storefront.bundle.css" as="style" asp-append-version="true" />
-        <link rel="stylesheet" href="~/css/storefront.bundle.css" asp-append-version="true" media="print" onload="this.media='all'" />
+        var critFile = Path.Combine(HostEnv.WebRootPath ?? Path.Combine(HostEnv.ContentRootPath, "wwwroot"), "css", "critical-home.css");
+        var critCss = File.Exists(critFile) ? File.ReadAllText(critFile) : "";
+        <style>@Html.Raw(critCss)</style>
         <noscript><link rel="stylesheet" href="~/css/storefront.bundle.css" asp-append-version="true" /></noscript>
+        <meta id="msFullCss" name="ms-full-css" content="@Url.Content("~/css/storefront.bundle.css")?v=@System.IO.File.GetLastWriteTimeUtc(Path.Combine(HostEnv.WebRootPath ?? Path.Combine(HostEnv.ContentRootPath, "wwwroot"), "css", "storefront.bundle.css")).Ticks" />
     }
     else
     {
@@ -488,23 +489,50 @@ else
 {
     @if (isHome)
     {
-        <script defer src="~/js/ms-auth-lazy.js" asp-append-version="true" data-auth-src="@Url.Content("~/js/auth.js")"></script>
+        <script type="text/plain" data-ms-idle src="~/js/ms-auth-lazy.js" asp-append-version="true" data-auth-src="@Url.Content("~/js/auth.js")"></script>
+        <script type="text/plain" data-ms-idle src="~/js/site.js" asp-append-version="true"></script>
+        <script type="text/plain" data-ms-idle src="~/js/product-card-dual.js" asp-append-version="true"></script>
+        <script type="text/plain" data-ms-idle src="~/js/scroll-reveal.js" asp-append-version="true"></script>
     }
     else
     {
         <script defer src="~/js/auth.js" asp-append-version="true"></script>
+        <script defer src="~/js/site.js" asp-append-version="true"></script>
     }
-    <script defer src="~/js/site.js" asp-append-version="true"></script>
-    @if (isHome || isCatalog)
+    @if (isCatalog)
     {
         <script defer src="~/js/product-card-dual.js" asp-append-version="true"></script>
     }
-    @if (isHome)
-    {
-        @* scroll-reveal بعد از site/home — GSAP فقط روی صفحات غیرخانه (LCP/TBT) *@
-        <script defer src="~/js/scroll-reveal.js" asp-append-version="true"></script>
-    }
 }
 @await RenderSectionAsync("Scripts", required: false)
+@if (isHome)
+{
+    <script>
+    (function () {
+      var started = false;
+      function boot() {
+        if (started) return;
+        started = true;
+        document.querySelectorAll('script[data-ms-idle][src]').forEach(function (n) {
+          var s = document.createElement('script');
+          s.src = n.getAttribute('src');
+          s.defer = true;
+          document.body.appendChild(s);
+        });
+        var css = document.getElementById('msFullCss');
+        if (css && !document.getElementById('msFullCssLink')) {
+          var l = document.createElement('link');
+          l.id = 'msFullCssLink';
+          l.rel = 'stylesheet';
+          l.href = css.getAttribute('content');
+          document.head.appendChild(l);
+        }
+      }
+      window.addEventListener('pointerdown', boot, { once: true, passive: true });
+      window.addEventListener('keydown', boot, { once: true });
+      window.addEventListener('load', function () { setTimeout(boot, 4500); });
+    })();
+    </script>
+}
 </body>
 </html>
