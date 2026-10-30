@@ -87,8 +87,10 @@
     }
     else if (isHome)
     {
+        <link rel="stylesheet" href="~/css/critical-home.css" asp-append-version="true" />
         <link rel="preload" href="~/css/storefront.bundle.css" as="style" asp-append-version="true" />
-        <link rel="stylesheet" href="~/css/storefront.bundle.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/storefront.bundle.css" asp-append-version="true" media="print" onload="this.media='all'" />
+        <noscript><link rel="stylesheet" href="~/css/storefront.bundle.css" asp-append-version="true" /></noscript>
     }
     else
     {

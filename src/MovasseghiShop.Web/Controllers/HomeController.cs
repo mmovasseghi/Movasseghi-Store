@@ -39,7 +39,7 @@ public class HomeController(
 
         var featured = await HomeFeaturedProductsSelector.LoadAsync(
             db.Products.AsNoTracking().Include(p => p.Images).Include(p => p.Variants));
-        ViewBag.FeaturedProducts = featured.Take(6).ToList();
+        ViewBag.FeaturedProducts = featured;
         ViewBag.ProductCount = await db.Products.CountAsync(p => p.IsActive);
 
         var storyItems = await homeStories.GetStoriesForHomeAsync();
@@ -48,7 +48,7 @@ public class HomeController(
 
         var specialOffers = await HomeSpecialOffersSelector.LoadAsync(
             db.Products.AsNoTracking().Include(p => p.Images).Include(p => p.Variants));
-        ViewBag.SpecialOffers = specialOffers.Take(6).ToList();
+        ViewBag.SpecialOffers = specialOffers;
 
         var wholesaleFromDb = HomeSectionConfigParser.ParseWholesaleSegments(
             ViewBag.HomeSections is Dictionary<string, HomeSection> hs && hs.TryGetValue("wholesale", out var ws) ? ws.ConfigJson : null);
