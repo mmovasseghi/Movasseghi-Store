@@ -191,7 +191,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddResponseCompression(options =>
 {
     options.EnableForHttps = true;
-    options.Providers.Add<Microsoft.AspNetCore.ResponseCompression.BrotliCompressionProvider>();
+    // فقط gzip سطح Fastest — Brotli/Optimal روی VPS کوچک TTFB را ~۲۰۰ms عقب می‌انداخت (GTmetrix backend).
     options.Providers.Add<Microsoft.AspNetCore.ResponseCompression.GzipCompressionProvider>();
     options.MimeTypes =
     [
@@ -200,10 +200,8 @@ builder.Services.AddResponseCompression(options =>
         "application/ld+json", "image/svg+xml", "application/manifest+json"
     ];
 });
-builder.Services.Configure<Microsoft.AspNetCore.ResponseCompression.BrotliCompressionProviderOptions>(
-    o => o.Level = System.IO.Compression.CompressionLevel.Optimal);
 builder.Services.Configure<Microsoft.AspNetCore.ResponseCompression.GzipCompressionProviderOptions>(
-    o => o.Level = System.IO.Compression.CompressionLevel.Optimal);
+    o => o.Level = System.IO.Compression.CompressionLevel.Fastest);
 
 // ═══ عملکرد: Output Cache ═══
 // صفحات عمومی برای مهمان‌ها از کش سرور پاسخ می‌گیرند تا EF و Razor

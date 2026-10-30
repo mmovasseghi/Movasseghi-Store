@@ -33,24 +33,10 @@ a{color:inherit;text-decoration:none}
 .ms-hero-desc{margin:0 0 .75rem;font-size:.9rem;opacity:.93;line-height:1.6;color:#fff}
 .ms-hero-cta{display:inline-flex;padding:.65rem 1.1rem;background:#fff;color:var(--c-primary-dark);border-radius:999px;font-weight:800;font-size:.85rem}
 .ms-hero-product img{width:240px;height:240px;max-width:100%;object-fit:contain;margin:0 auto}
-.ms-hero-stage{min-height:420px}
 .ms-story-modal{display:none}
 .ms-story-modal.is-open{display:grid}
-.ms-story-icon-wrap{width:100%;height:100%;display:grid;place-items:center;background:#f8fbf9;border-radius:50%;border:2px solid #fff}
-.ms-icon-svg{width:44px;height:44px;display:block}
-.ms-hero-title em{font-style:normal;color:var(--c-gold)}
-.ms-top-nav{display:none}
-.ms-top-actions{display:flex;gap:.25rem;align-items:center}
-.ms-offers,.ms-featured-section,.ms-cat-section,.ms-segments,.ms-news,.ms-closing,.ms-home-faq{content-visibility:auto;contain-intrinsic-size:auto 520px}
 .ms-ai-brief{margin:0 auto 1rem;padding:0 1rem;max-width:72rem;font-size:.92rem;line-height:1.75;color:var(--c-text-2)}
 .ms-tabbar{position:fixed;bottom:0;left:0;right:0;z-index:300;display:grid;grid-template-columns:repeat(5,1fr);align-items:end;background:rgba(255,255,255,.97);backdrop-filter:blur(16px);border-top:1px solid rgba(0,0,0,.08);padding:.4rem .25rem calc(.4rem + var(--safe-b));box-shadow:0 -8px 32px rgba(0,0,0,.08)}
 .ms-tab{display:flex;flex-direction:column;align-items:center;gap:.12rem;padding:.3rem .15rem;font-size:.62rem;font-weight:700;color:var(--c-text-2)}
 .ms-tab.is-active{color:var(--c-primary-dark);font-weight:900}
-@media(min-width:768px){
-  .ms-logo{height:44px;max-width:168px}
-  .ms-tabbar,.ms-fab-call{display:none}
-  .ms-menu-btn{display:none}
-  .ms-top-nav{display:flex;align-items:center;gap:.15rem;flex:1;flex-wrap:wrap}
-  .ms-top-nav a{padding:.42rem .72rem;border-radius:999px;font-size:.8rem;font-weight:700;color:var(--c-text-2);white-space:nowrap}
-  .ms-top-phone{display:inline-flex;align-items:center;gap:.35rem;padding:.4rem .7rem;border-radius:999px;background:var(--c-primary-light);color:var(--c-primary-dark);font-size:.76rem;font-weight:800}
-}
+@media(min-width:768px){.ms-logo{height:52px;max-width:180px}.ms-tabbar{display:none}}

@@ -28,13 +28,7 @@
     string? lcpImagePath = null;
     if (heroProducts.FirstOrDefault() is Product lcpProduct)
         lcpImagePath = ProductImageHelper.GetLcpDisplayUrl(ProductImageHelper.GetPrimary(lcpProduct.Images), Env);
-}
-
-@section Head {
-    @if (!string.IsNullOrEmpty(lcpImagePath))
-    {
-        <link rel="preload" as="image" href="@AppPath.H(lcpImagePath, Context)" fetchpriority="high" imagesizes="(max-width: 767px) 55vw, 240px" />
-    }
+    ViewData["LcpPreload"] = lcpImagePath;
 }
 
 <!-- استوری‌ها — بالای هیرو (مثل 28a3849) تا بلافاصله بعد از هدر دیده شوند -->
@@ -587,5 +581,5 @@
 
 @section Scripts {
     <script defer src="~/js/stories.js" asp-append-version="true"></script>
-    <script type="text/plain" data-ms-idle src="~/js/home.js" asp-append-version="true"></script>
+    <script defer src="~/js/home.js" asp-append-version="true"></script>
 }

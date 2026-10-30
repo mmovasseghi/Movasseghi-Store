@@ -31,8 +31,8 @@
     return authModalInflight;
   }
 
+  const isHomePage = document.body.classList.contains('ms-page-home');
   function wirePanelPrefetch() {
-    if (document.body.classList.contains('ms-page-home')) return;
     const warm = () => {
       prefetchCartPanel();
       prefetchAuthModal();
@@ -45,11 +45,11 @@
       el.addEventListener('touchstart', warm, { passive: true });
       el.addEventListener('mouseenter', warm, { passive: true });
     });
-    if ('requestIdleCallback' in window) requestIdleCallback(warm, { timeout: 2500 });
+    if (isHomePage) warm();
+    else if ('requestIdleCallback' in window) requestIdleCallback(warm, { timeout: 2500 });
     else setTimeout(warm, 1800);
   }
   wirePanelPrefetch();
-  const isHomePage = document.body.classList.contains('ms-page-home');
   if (!isHomePage) {
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', () => { prefetchCartPanel(); prefetchAuthModal(); });

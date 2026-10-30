@@ -30,6 +30,14 @@ if [[ "${RUN_OPTIMIZE_IMAGES:-1}" == "1" ]]; then
 fi
 systemctl start movasseghi-shop
 sleep 6
+if [[ -f "$INSTALL_DIR/src/deploy/linux/nginx-movasseghi.conf" ]]; then
+  mkdir -p /var/cache/nginx/ms
+  printf '%s\n' 'proxy_cache_path /var/cache/nginx/ms levels=1:2 keys_zone=ms_pages:8m max_size=64m inactive=20m use_temp_path=off;' > /etc/nginx/conf.d/ms-cache.conf
+  cp "$INSTALL_DIR/src/deploy/linux/nginx-movasseghi.conf" /etc/nginx/sites-available/movasseghi-shop
+  ln -sf /etc/nginx/sites-available/movasseghi-shop /etc/nginx/sites-enabled/movasseghi-shop
+  rm -f /etc/nginx/sites-enabled/default 2>/dev/null || true
+  nginx -t && systemctl reload nginx
+fi
 curl -s -o /dev/null -w "home:%{http_code}\n" --max-time 15 http://127.0.0.1:5080/
 curl -s -o /dev/null -w "lcp:%{http_code}:%{size_download}\n" \
   --max-time 10 "http://127.0.0.1:5080/images/products/0056/01-lcp.webp" || echo "lcp:missing"
