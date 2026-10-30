@@ -18,10 +18,9 @@
     var cartAriaLabel = cartItemCount > 0 ? $"سبد خرید ({cartItemCount} قلم)" : "سبد خرید";
 }
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa" dir="rtl" class="js">
 <head>
     <meta charset="utf-8" />
-    <script>document.documentElement.classList.add('js');</script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>@title</title>
     <meta name="description" content="@metaDescription" />
@@ -59,23 +58,19 @@
     }
     <meta name="theme-color" content="#2f4a3e" />
     <link rel="icon" href="~/images/brand/originallogo.png" type="image/png" />
+    <link rel="sitemap" type="application/xml" href="@AppPath.H("/sitemap.xml", Context)" />
     <link rel="alternate" type="text/plain" href="@AppPath.H("/llms.txt", Context)" title="LLMs" />
+    <link rel="alternate" type="text/plain" href="@AppPath.H("/ai.txt", Context)" title="AI" />
+    <meta name="abstract" content="@metaDescription" />
+    @await RenderSectionAsync("Head", required: false)
     @if (!isHome && !isAccount && !isOrder)
     {
         @await Html.PartialAsync("_StorefrontGlobalJsonLd")
     }
     @await Html.PartialAsync("_AppPathScript")
-    @* فونت روی همین دامنه میزبانی می‌شود: قبلاً دو اتصال جداگانه به
-       fonts.googleapis.com و fonts.gstatic.com لازم بود و CSS فونت هم رندر را
-       بلاک می‌کرد. نسخه variable هر شش وزن را در یک فایل دارد. *@
-    @* روی خانه فونت preload با LCP رقابت می‌کند — font-display:swap در site.css کافی است *@
     @if (!isHome)
     {
         <link rel="preload" href="~/fonts/Vazirmatn-var.woff2" as="font" type="font/woff2" crossorigin asp-append-version="true" />
-    }
-    @if (isHome)
-    {
-        <link rel="preload" href="~/css/storefront.bundle.css" as="style" asp-append-version="true" />
     }
     @if (isLocalTunnel)
     {
@@ -90,15 +85,18 @@
         <link rel="stylesheet" href="~/css/ux-product-dual.css" asp-append-version="true" media="not all" />
         <link rel="stylesheet" href="~/css/ux-scroll-reveal.css" asp-append-version="true" media="not all" />
     }
+    else if (isHome)
+    {
+        <link rel="stylesheet" href="~/css/critical-home.css" asp-append-version="true" />
+        <link rel="preload" href="~/css/storefront.bundle.css" as="style" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/storefront.bundle.css" media="print" onload="this.media='all'" asp-append-version="true" />
+        <noscript><link rel="stylesheet" href="~/css/storefront.bundle.css" asp-append-version="true" /></noscript>
+    }
     else
     {
         <link rel="stylesheet" href="~/css/storefront.bundle.css" asp-append-version="true" />
-        @if (!isHome)
-        {
-            <link rel="stylesheet" href="~/css/prose.css" asp-append-version="true" />
-        }
+        <link rel="stylesheet" href="~/css/prose.css" asp-append-version="true" />
     }
-    @await RenderSectionAsync("Head", required: false)
     @if (isLocalTunnel)
     {
         <script>
@@ -144,7 +142,7 @@
     }
 </head>
 <body class="ms-body@(isHome ? " ms-page-home" : "")">
-<a href="#main-content" class="ms-skip-link">پرش به محتوای اصلی</a>
+<a href="#main-content" class="ms-skip-link">Skip to main content</a>
 <div class="ms-app">
     <div class="ms-promo-bar" data-promo-bar>
         <div class="ms-promo-shimmer" aria-hidden="true"></div>
@@ -372,21 +370,22 @@
                     </a>
                 </div>
                 <nav class="ms-footer-nav" aria-label="لینک‌های فوتر">
+                    <h2 class="ms-sr-only">ناوبری پاورقی</h2>
                     <div class="ms-footer-col" data-footer-col>
-                        <h4>فروشگاه</h4>
+                        <h3>فروشگاه</h3>
                         <ul>
                             @await Component.InvokeAsync("NavZone", new { zone = "footer-shop" })
                             <li><a href="#" data-open-cart>سبد خرید</a></li>
                         </ul>
                     </div>
                     <div class="ms-footer-col" data-footer-col>
-                        <h4>پشتیبانی</h4>
+                        <h3>پشتیبانی</h3>
                         <ul>
                             @await Component.InvokeAsync("NavZone", new { zone = "footer-support" })
                         </ul>
                     </div>
                     <div class="ms-footer-col ms-footer-col--wide" data-footer-col>
-                        <h4>خرید عمده</h4>
+                        <h3>خرید عمده</h3>
                         <ul class="ms-footer-links-split">
                             @await Component.InvokeAsync("NavZone", new { zone = "footer-wholesale" })
                         </ul>

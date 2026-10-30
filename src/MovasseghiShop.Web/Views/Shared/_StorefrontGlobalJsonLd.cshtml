@@ -1,38 +1,37 @@
-@using System.Text.Json
 @using MovasseghiShop.Web.Services
 @{
     var pageUrl = ViewData["CanonicalUrl"]?.ToString()
         ?? AppPath.Absolute("/", Context)!;
     var orgId = $"{pageUrl.TrimEnd('/')}#organization";
-    var siteName = WholesaleRules.StoreNameFa;
-}
-<script type="application/ld+json">@Html.Raw(JsonSerializer.Serialize(new Dictionary<string, object?>
-{
-    ["@context"] = "https://schema.org",
-    ["@graph"] = new object[]
+    var graph = new Dictionary<string, object?>
     {
-        new Dictionary<string, object?>
+        ["@context"] = "https://schema.org",
+        ["@graph"] = new object[]
         {
-            ["@type"] = "Organization",
-            ["@id"] = orgId,
-            ["name"] = "فروشگاه موثقی",
-            ["url"] = pageUrl,
-            ["logo"] = AppPath.Absolute("/images/brand/originallogo.png", Context),
-            ["telephone"] = WholesaleRules.CoordinationPhone,
-            ["address"] = new Dictionary<string, object?>
+            new Dictionary<string, object?>
             {
-                ["@type"] = "PostalAddress",
-                ["addressCountry"] = "IR",
-                ["addressLocality"] = "تهران"
+                ["@type"] = "Organization",
+                ["@id"] = orgId,
+                ["name"] = "فروشگاه موثقی",
+                ["url"] = pageUrl,
+                ["logo"] = AppPath.Absolute("/images/brand/originallogo.png", Context),
+                ["telephone"] = WholesaleRules.CoordinationPhone,
+                ["address"] = new Dictionary<string, object?>
+                {
+                    ["@type"] = "PostalAddress",
+                    ["addressCountry"] = "IR",
+                    ["addressLocality"] = "تهران"
+                }
+            },
+            new Dictionary<string, object?>
+            {
+                ["@type"] = "WebSite",
+                ["name"] = WholesaleRules.StoreNameFa,
+                ["url"] = pageUrl,
+                ["publisher"] = new Dictionary<string, object?> { ["@id"] = orgId },
+                ["inLanguage"] = "fa-IR"
             }
-        },
-        new Dictionary<string, object?>
-        {
-            ["@type"] = "WebSite",
-            ["name"] = siteName,
-            ["url"] = pageUrl,
-            ["publisher"] = new Dictionary<string, object?> { ["@id"] = orgId },
-            ["inLanguage"] = "fa-IR"
         }
-    }
-}))</script>
+    };
+}
+@StorefrontJsonLd.Script(graph)

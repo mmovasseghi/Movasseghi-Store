@@ -135,7 +135,7 @@
                     ["speakable"] = new Dictionary<string, object?>
                     {
                         ["@type"] = "SpeakableSpecification",
-                        ["cssSelector"] = new[] { ".ms-home-faq", ".ms-hero-title" }
+                        ["cssSelector"] = new[] { ".ms-home-faq", ".ms-hero-title", ".ms-ai-brief" }
                     }
                 },
                 new Dictionary<string, object?>
@@ -146,7 +146,7 @@
             }
         };
     }
-    <script type="application/ld+json">@Html.Raw(JsonSerializer.Serialize(graph))</script>
+    @StorefrontJsonLd.Script(graph)
 }
 
 <!-- استوری‌ها -->
@@ -177,6 +177,11 @@
     </div>
 </section>
 <div id="msStoriesData" hidden data-stories-src="@AppPath.H("/Home/Stories.json", Context)"></div>
+
+<p class="ms-wrap ms-ai-brief" id="about-movasseghi">
+    <strong>فروشگاه موثقی</strong> نمایندگی رسمی <strong>آملون</strong> در تهران؛ پخش عمده ظروف یکبار مصرف <strong>گیاهی</strong> برای رستوران، کافه، کیترینگ و فروشگاه.
+    حداقل سفارش @WholesaleRules.FormatMinAmount() تومان · تماس @WholesaleRules.CoordinationPhone · کاتالوگ در /Catalog
+</p>
 
 <!-- هیرو -->
 <section class="ms-hero" id="ms-hero" data-hero-slider>
@@ -238,7 +243,7 @@
                                     var img = ProductImageHelper.GetDisplayUrl(ProductImageHelper.GetPrimary(hp.Images), Env);
                                     <div class="ms-hero-product">
                                         <span class="ms-hero-ring" aria-hidden="true"></span>
-                                        <img src="@AppPath.H(img, Context)" alt="@hp.Name" width="240" height="240" decoding="async" sizes="(max-width: 767px) 55vw, 240px" @(si == 0 ? "fetchpriority=\"high\"" : "loading=\"lazy\" data-ms-lazy=\"true\"") />
+                                        <img src="@AppPath.H(img, Context)" alt="@hp.Name" width="240" height="240" sizes="(max-width: 767px) 55vw, 240px" @(si == 0 ? "decoding=\"sync\" loading=\"eager\" fetchpriority=\"high\"" : "decoding=\"async\" loading=\"lazy\" data-ms-lazy=\"true\"") />
                                     </div>
                                 }
                             </div>
