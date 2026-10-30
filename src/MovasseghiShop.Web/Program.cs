@@ -213,6 +213,11 @@ builder.Services.AddOutputCache(options =>
 {
     options.AddBasePolicy(policy => policy.NoCache());
 
+    options.AddPolicy("HomePage", policy => policy
+        .Expire(TimeSpan.FromMinutes(15))
+        .SetVaryByHeader("Accept-Encoding")
+        .AddPolicy<MovasseghiShop.Web.Infrastructure.GuestPublicOutputCachePolicy>());
+
     options.AddPolicy("PublicPage", policy => policy
         .Expire(TimeSpan.FromMinutes(5))
         .SetVaryByQuery("category", "productType", "packaging", "sort",

@@ -3,7 +3,7 @@
 
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const root = document.documentElement;
-  root.classList.add('js', 'ms-motion');
+  const deferMotion = document.body.classList.contains('ms-page-home');
 
   function show(el) {
     el.classList.add('is-visible');
@@ -19,11 +19,13 @@
   }
 
   if (reduced) {
+    root.classList.add('js', 'ms-motion');
     document.querySelectorAll('.ms-reveal, [data-reveal-stagger] > *').forEach(show);
     return;
   }
 
   if (!('IntersectionObserver' in window)) {
+    root.classList.add('js', 'ms-motion');
     document.querySelectorAll('.ms-reveal').forEach(show);
     return;
   }
@@ -68,15 +70,25 @@
     });
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      observe();
-      observeImages();
-    });
-  } else {
+  function start() {
+    root.classList.add('js', 'ms-motion');
     observe();
     observeImages();
   }
 
+  function scheduleStart() {
+    if (deferMotion) {
+      if (document.readyState === 'complete') start();
+      else window.addEventListener('load', start, { once: true });
+      return;
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', start);
+    } else {
+      start();
+    }
+  }
+
+  scheduleStart();
   window.MsScrollReveal = { refresh: observe };
 })();

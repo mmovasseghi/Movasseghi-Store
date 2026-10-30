@@ -1,6 +1,14 @@
 /* Scroll reveal — محتوا در HTML برای SEO/crawler؛ فقط با کلاس js انیمیشن فعال می‌شود */
 
 @media (prefers-reduced-motion: no-preference) {
+  /* بالای fold خانه — بدون مخفی‌سازی (LCP / GTmetrix) */
+  html.js.ms-motion .ms-page-home #ms-hero,
+  html.js.ms-motion .ms-page-home .ms-stories,
+  html.js.ms-motion .ms-page-home #ms-features {
+    opacity: 1;
+    transform: none;
+  }
+
   html.js.ms-motion .ms-reveal:not(.is-visible) {
     opacity: 0;
     transform: translate3d(0, 1.65rem, 0);

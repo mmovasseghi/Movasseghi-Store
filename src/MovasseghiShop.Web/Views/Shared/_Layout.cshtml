@@ -63,7 +63,11 @@
     @* فونت روی همین دامنه میزبانی می‌شود: قبلاً دو اتصال جداگانه به
        fonts.googleapis.com و fonts.gstatic.com لازم بود و CSS فونت هم رندر را
        بلاک می‌کرد. نسخه variable هر شش وزن را در یک فایل دارد. *@
-    <link rel="preload" href="~/fonts/Vazirmatn-var.woff2" as="font" type="font/woff2" crossorigin asp-append-version="true" />
+    @* روی خانه فونت preload با LCP رقابت می‌کند — font-display:swap در site.css کافی است *@
+    @if (!isHome)
+    {
+        <link rel="preload" href="~/fonts/Vazirmatn-var.woff2" as="font" type="font/woff2" crossorigin asp-append-version="true" />
+    }
     @if (isHome)
     {
         <link rel="preload" href="~/css/site.css" as="style" asp-append-version="true" />
@@ -84,8 +88,18 @@
     }
     <link rel="stylesheet" href="~/css/ux-mobile.css" asp-append-version="true" media="@(isLocalTunnel ? "not all" : null)" />
     <link rel="stylesheet" href="~/css/ux-desktop.css" asp-append-version="true" media="@(isLocalTunnel ? "not all" : "(min-width: 768px)")" />
-    <link rel="stylesheet" href="~/css/ux-product-dual.css" asp-append-version="true" media="@(isLocalTunnel ? "not all" : null)" />
-    <link rel="stylesheet" href="~/css/ux-scroll-reveal.css" asp-append-version="true" media="@(isLocalTunnel ? "not all" : null)" />
+    @if (isHome)
+    {
+        <link rel="preload" href="~/css/ux-product-dual.css" as="style" asp-append-version="true" onload="this.onload=null;this.rel='stylesheet'" />
+        <noscript><link rel="stylesheet" href="~/css/ux-product-dual.css" asp-append-version="true" /></noscript>
+        <link rel="preload" href="~/css/ux-scroll-reveal.css" as="style" asp-append-version="true" onload="this.onload=null;this.rel='stylesheet'" />
+        <noscript><link rel="stylesheet" href="~/css/ux-scroll-reveal.css" asp-append-version="true" /></noscript>
+    }
+    else
+    {
+        <link rel="stylesheet" href="~/css/ux-product-dual.css" asp-append-version="true" media="@(isLocalTunnel ? "not all" : null)" />
+        <link rel="stylesheet" href="~/css/ux-scroll-reveal.css" asp-append-version="true" media="@(isLocalTunnel ? "not all" : null)" />
+    }
     @await RenderSectionAsync("Head", required: false)
     @if (isLocalTunnel)
     {
@@ -474,7 +488,10 @@ else
 {
     <script defer src="~/js/auth.js" asp-append-version="true"></script>
     <script defer src="~/js/site.js" asp-append-version="true"></script>
-    <script defer src="~/js/product-card-dual.js" asp-append-version="true"></script>
+    @if (isHome || isCatalog)
+    {
+        <script defer src="~/js/product-card-dual.js" asp-append-version="true"></script>
+    }
     @if (isHome)
     {
         <script defer src="~/js/desktop.js" asp-append-version="true"></script>

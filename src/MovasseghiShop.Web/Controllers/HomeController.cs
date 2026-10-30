@@ -15,7 +15,7 @@ public class HomeController(
     IHomeStoryService homeStories,
     IConfiguration config) : Controller
 {
-    [OutputCache(PolicyName = "PublicPage")]
+    [OutputCache(PolicyName = "HomePage")]
     public async Task<IActionResult> Index()
     {
         ViewData["Title"] = SiteKeywordStrategy.SiteTitle;
