@@ -94,12 +94,12 @@
     {
         @* CSS بحرانی داخل HTML تا FCP منتظر یک RTT اضافه از Seattle نماند. باندل کامل preload نمی‌شود تا با تصویر LCP رقابت نکند. *@
         var webRoot = string.IsNullOrEmpty(HostEnv.WebRootPath)
-            ? Path.Combine(HostEnv.ContentRootPath, "wwwroot")
+            ? global::System.IO.Path.Combine(HostEnv.ContentRootPath, "wwwroot")
             : HostEnv.WebRootPath;
-        var criticalPath = Path.Combine(webRoot, "css", "critical-home.css");
-        if (System.IO.File.Exists(criticalPath))
+        var criticalPath = global::System.IO.Path.Combine(webRoot, "css", "critical-home.css");
+        if (global::System.IO.File.Exists(criticalPath))
         {
-            <style>@Html.Raw(System.IO.File.ReadAllText(criticalPath))</style>
+            <style>@Html.Raw(global::System.IO.File.ReadAllText(criticalPath))</style>
         }
         <link rel="stylesheet" href="~/css/storefront.bundle.css" asp-append-version="true" media="print" onload="this.media='all'" />
         <noscript><link rel="stylesheet" href="~/css/storefront.bundle.css" asp-append-version="true" /></noscript>
