@@ -242,7 +242,7 @@
                     var price = ProductStorefrontResolver.GetMinPrice(p.Variants);
                     var offerFrom = offerSellable.Count > 0 && ProductStorefrontResolver.UseFromPricePrefix(offerSellable);
                     <a href="@AppPath.H($"/Shop/Product/{p.Slug}", Context)" class="ms-offer-card">
-                        @{ ViewData["StageVariant"] = "offer"; ViewData["StageWidth"] = 140; ViewData["StageHeight"] = 140; ViewData["StageDualCycle"] = false; }
+                        @{ ViewData["StageVariant"] = "offer"; ViewData["StageWidth"] = 140; ViewData["StageHeight"] = 140; ViewData["StageDualCycle"] = true; }
                         <partial name="_ProductImageStageFromProduct" model="p" />
                         <div class="ms-offer-body">
                             <h3>@p.Name</h3>
@@ -314,7 +314,7 @@
                     var fPrice = ProductStorefrontResolver.GetMinPrice(p.Variants);
                     var featFrom = featSellable.Count > 0 && ProductStorefrontResolver.UseFromPricePrefix(featSellable);
                     <a href="@AppPath.H($"/Shop/Product/{p.Slug}", Context)" class="ms-feat-card">
-                        @{ ViewData["StageVariant"] = "featured"; ViewData["StageWidth"] = 180; ViewData["StageHeight"] = 180; ViewData["StageDualCycle"] = false; }
+                        @{ ViewData["StageVariant"] = "featured"; ViewData["StageWidth"] = 180; ViewData["StageHeight"] = 180; ViewData["StageDualCycle"] = true; }
                         <partial name="_ProductImageStageFromProduct" model="p" />
                         <span class="ms-feat-card-body">
                             @if (!string.IsNullOrEmpty(p.ProductCode))
@@ -405,7 +405,10 @@
         <div class="ms-closing-card">
             <div class="ms-closing-visual" aria-hidden="true">
                 <div class="ms-closing-logo-ring">
-                    <img src="~/images/brand/originallogo.png" alt="فروشگاه موثقی" width="160" height="52" loading="lazy" decoding="async" />
+                    <picture>
+                        <source srcset="@Url.Content("~/images/brand/originallogo.webp")" type="image/webp" />
+                        <img src="~/images/brand/originallogo.png" alt="فروشگاه موثقی" width="160" height="59" loading="lazy" decoding="async" />
+                    </picture>
                 </div>
                 <span class="ms-closing-seal">رسمی</span>
             </div>
@@ -452,7 +455,8 @@
                         <span class="ms-news-card-visual" aria-hidden="true">
                             @if (!string.IsNullOrEmpty(item.FeaturedImageUrl))
                             {
-                                <img src="@AppPath.H(item.FeaturedImageUrl, Context)" alt="" loading="lazy" width="320" height="180" />
+                                var newsImg = ProductImageHelper.PreferLcpVariant(item.FeaturedImageUrl, Env) ?? item.FeaturedImageUrl;
+                                <img src="@AppPath.H(newsImg, Context)" alt="" loading="lazy" width="320" height="180" decoding="async" />
                             }
                             else
                             {
@@ -504,7 +508,8 @@
                         <span class="ms-news-card-visual" aria-hidden="true">
                             @if (!string.IsNullOrEmpty(post.FeaturedImageUrl))
                             {
-                                <img src="@AppPath.H(post.FeaturedImageUrl, Context)" alt="" loading="lazy" width="320" height="180" />
+                                var blogImg = ProductImageHelper.PreferLcpVariant(post.FeaturedImageUrl, Env) ?? post.FeaturedImageUrl;
+                                <img src="@AppPath.H(blogImg, Context)" alt="" loading="lazy" width="320" height="180" decoding="async" />
                             }
                             else
                             {

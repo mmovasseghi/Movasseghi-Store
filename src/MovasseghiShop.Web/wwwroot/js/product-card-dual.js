@@ -10,8 +10,6 @@
 
     let epoch = performance.now();
     let lastPhase = 'studio';
-    let running = false;
-    let rafId = null;
 
     function setPhase(phase) {
       if (phase === lastPhase) return;
@@ -28,9 +26,8 @@
     }
 
     function tick(now) {
-      if (!running) return;
       if (document.hidden) {
-        rafId = requestAnimationFrame(tick);
+        requestAnimationFrame(tick);
         return;
       }
 
@@ -42,36 +39,14 @@
 
       document.documentElement.style.setProperty('--ms-dual-progress', progress.toFixed(4));
       setPhase(phase);
-      rafId = requestAnimationFrame(tick);
+      requestAnimationFrame(tick);
     }
 
-    function start() {
-      if (running) return;
-      running = true;
-      epoch = performance.now();
-      document.documentElement.style.setProperty('--ms-dual-progress', '0');
-      cards.forEach((el) => {
-        el.dataset.msDualPhase = 'studio';
-      });
-      if (!rafId) rafId = requestAnimationFrame(tick);
-    }
-
-    function stop() {
-      running = false;
-    }
-
-    if ('IntersectionObserver' in window) {
-      const io = new IntersectionObserver(
-        (entries) => {
-          if (entries.some((e) => e.isIntersecting)) start();
-          else stop();
-        },
-        { rootMargin: '80px', threshold: 0.01 }
-      );
-      cards.forEach((c) => io.observe(c));
-    } else {
-      start();
-    }
+    document.documentElement.style.setProperty('--ms-dual-progress', '0');
+    cards.forEach((el) => {
+      el.dataset.msDualPhase = 'studio';
+    });
+    requestAnimationFrame(tick);
   }
 
   if (document.readyState === 'loading') {

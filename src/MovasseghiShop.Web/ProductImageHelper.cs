@@ -59,36 +59,74 @@ public static class ProductImageHelper
 
     /// <summary>نسخهٔ کوچک LCP: فایل <c>*-lcp.webp</c>، وگرنه همان WebP نمایشی (nginx استاتیک).</summary>
     public static string? GetLcpDisplayUrl(ProductImage? image, IWebHostEnvironment? env)
-    {
-        var url = GetDisplayUrl(image, env);
-        if (url is null || !IsLocal(url))
-            return url;
+        => PreferLcpVariant(GetDisplayUrl(image, env), env);
 
-        var webRoot = ResolveWebRoot(env);
-        if (webRoot is not null)
+    /// <summary>
+    /// URLهای نمایش کارت: نسخهٔ LCP برای استودیو (و در صورت تمایز برای صحنه)
+    /// بدون از بین بردن اسلایدر Studio↔Scene وقتی هر دو موجودند.
+    /// </summary>
+    public static (string? StudioUrl, string? SceneUrl, bool CanDual) ResolveCardStageUrls(
+        ProductDualCardSlides slides, IWebHostEnvironment? env, bool preferCardSized)
+    {
+        var studio = slides.StudioUrl;
+        var scene = slides.SceneUrl;
+        var dualPossible = slides.CanCycle
+                           && !string.IsNullOrEmpty(studio)
+                           && !string.IsNullOrEmpty(scene)
+                           && !string.Equals(studio, scene, StringComparison.OrdinalIgnoreCase);
+
+        if (!dualPossible)
         {
-            var lcpUrl = ToLcpVariantUrl(url);
-            if (lcpUrl != url)
-            {
-                if (LcpCache.TryGetValue(lcpUrl, out var hasLcp))
-                {
-                    if (hasLcp) return lcpUrl;
-                }
-                else
-                {
-                    var relative = lcpUrl.TrimStart('/').Replace('/', Path.DirectorySeparatorChar);
-                    var exists = File.Exists(Path.Combine(webRoot, relative));
-                    LcpCache[lcpUrl] = exists;
-                    if (exists) return lcpUrl;
-                }
-            }
+            if (preferCardSized)
+                studio = PreferLcpVariant(studio, env);
+            return (studio, null, false);
         }
 
-        return url;
+        if (preferCardSized)
+        {
+            studio = PreferLcpVariant(studio, env) ?? studio;
+            var sceneSized = PreferLcpVariant(scene, env) ?? scene;
+            // Never collapse scene onto the studio URL — that would kill the dual slider.
+            if (!string.Equals(sceneSized, studio, StringComparison.OrdinalIgnoreCase))
+                scene = sceneSized;
+        }
+
+        var canDual = !string.Equals(studio, scene, StringComparison.OrdinalIgnoreCase);
+        return (studio, canDual ? scene : null, canDual);
+    }
+
+    /// <summary>
+    /// برای کارت/هیرو کوچک، اگر <c>*-lcp.webp</c> روی دیسک باشد همان را برمی‌گرداند
+    /// تا GTmetrix «Properly size images» و بایت شبکهٔ above-the-fold کم شود.
+    /// </summary>
+    public static string? PreferLcpVariant(string? displayUrl, IWebHostEnvironment? env)
+    {
+        if (displayUrl is null || !IsLocal(displayUrl))
+            return displayUrl;
+
+        var webRoot = ResolveWebRoot(env);
+        if (webRoot is null)
+            return displayUrl;
+
+        var lcpUrl = ToLcpVariantUrl(displayUrl);
+        if (lcpUrl == displayUrl)
+            return displayUrl;
+
+        // Key includes webRoot so test/prod and publish swaps do not share stale misses.
+        var cacheKey = webRoot + "\n" + lcpUrl;
+        if (LcpCache.TryGetValue(cacheKey, out var hasLcp))
+            return hasLcp ? lcpUrl : displayUrl;
+
+        var relative = lcpUrl.TrimStart('/').Replace('/', Path.DirectorySeparatorChar);
+        var exists = File.Exists(Path.Combine(webRoot, relative));
+        LcpCache[cacheKey] = exists;
+        return exists ? lcpUrl : displayUrl;
     }
 
     static string ToLcpVariantUrl(string displayUrl)
     {
+        if (displayUrl.EndsWith("-lcp.webp", StringComparison.OrdinalIgnoreCase))
+            return displayUrl;
         var dot = displayUrl.LastIndexOf('.');
         if (dot <= 0) return displayUrl;
         return displayUrl[..dot] + "-lcp.webp";
