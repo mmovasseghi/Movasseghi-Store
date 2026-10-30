@@ -152,15 +152,17 @@
 <!-- استوری‌ها -->
 <section class="ms-stories">
     <div class="ms-wrap ms-stories-inner">
-    <div class="ms-stories-track" data-stories data-reveal-stagger>
+    <div class="ms-stories-track" data-stories>
+        @{ var storyVisualIndex = 0; }
         @foreach (var story in storyItems)
         {
+            storyVisualIndex++;
             <button type="button" class="ms-story" data-story-id="@story.Id" aria-label="@story.Label">
                 <span class="ms-story-ring">
                     <span class="ms-story-icon-wrap">
                         @if (!string.IsNullOrWhiteSpace(story.CoverImageUrl))
                         {
-                            <img src="@AppPath.H(story.CoverImageUrl, Context)" alt="" class="ms-story-cover" width="76" height="76" loading="lazy" decoding="async" />
+                            <img src="@AppPath.H(story.CoverImageUrl, Context)" alt="" class="ms-story-cover" width="76" height="76" loading="@(storyVisualIndex <= 6 ? "eager" : "lazy")" decoding="async" />
                         }
                         else
                         {

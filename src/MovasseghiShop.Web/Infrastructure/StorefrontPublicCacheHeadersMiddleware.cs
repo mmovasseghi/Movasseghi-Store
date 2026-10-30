@@ -3,9 +3,8 @@ using MovasseghiShop.Web.Services;
 namespace MovasseghiShop.Web.Infrastructure;
 
 /// <summary>
-/// Session middleware در ASP.NET معمولاً Cache-Control: no-cache, no-store می‌گذارد؛
-/// GTmetrix/Foglift «Add Expires headers» را قرمز می‌کنند. برای مهمان با سبد خالی
-/// روی صفحات فروشگاه هدر عمومی می‌گذاریم — با OnStarting بعد از Session ثبت می‌شود.
+/// Session معمولاً Cache-Control: no-cache, no-store می‌گذارد. این middleware قبل از Session
+/// OnStarting ثبت می‌کند تا بعد از Session اجرا شود و هدر public را نهایی کند.
 /// </summary>
 public sealed class StorefrontPublicCacheHeadersMiddleware(RequestDelegate next)
 {
@@ -38,7 +37,8 @@ public sealed class StorefrontPublicCacheHeadersMiddleware(RequestDelegate next)
 
         if (context.User.Identity?.IsAuthenticated == true)
             return false;
-        if (cart.GetItemCount(context) > 0)
+
+        if (!CartLooksEmpty(context, cart))
             return false;
 
         var controller = context.GetRouteData().Values["controller"]?.ToString();
@@ -51,5 +51,17 @@ public sealed class StorefrontPublicCacheHeadersMiddleware(RequestDelegate next)
 
         maxAge = string.Equals(controller, "Home", StringComparison.OrdinalIgnoreCase) ? 900 : 300;
         return true;
+    }
+
+    static bool CartLooksEmpty(HttpContext context, ICartService cart)
+    {
+        try
+        {
+            return cart.GetItemCount(context) == 0;
+        }
+        catch (InvalidOperationException)
+        {
+            return true;
+        }
     }
 }

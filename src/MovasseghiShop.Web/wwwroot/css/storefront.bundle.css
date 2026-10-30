@@ -3869,70 +3869,71 @@ body.ms-drawer-open,body.ms-modal-open,body.ms-sheet-open{overflow:hidden}
 /* Scroll reveal — محتوا در HTML برای SEO/crawler؛ فقط با کلاس js انیمیشن فعال می‌شود */
 
 @media (prefers-reduced-motion: no-preference) {
-  /* بالای fold خانه — بدون مخفی‌سازی (LCP / GTmetrix) */
+  /* بالای fold خانه — همیشه دیده شود (استوری / هیرو / ویژگی‌ها) */
   html.js.ms-motion .ms-page-home #ms-hero,
   html.js.ms-motion .ms-page-home .ms-stories,
-  html.js.ms-motion .ms-page-home #ms-features {
+  html.js.ms-motion .ms-page-home #ms-features,
+  html.js.ms-motion .ms-page-home .ms-stories .ms-story {
     opacity: 1;
     transform: none;
   }
 
   html.js.ms-motion .ms-reveal:not(.is-visible) {
     opacity: 0;
-    transform: translate3d(0, 1.65rem, 0);
+    transform: translate3d(0, 0.75rem, 0);
   }
 
   html.js.ms-motion .ms-reveal.is-visible {
     opacity: 1;
     transform: none;
     transition:
-      opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-      transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+      opacity 0.35s ease-out,
+      transform 0.35s ease-out;
   }
 
   html.js.ms-motion [data-reveal-stagger] > *:not(.is-visible) {
     opacity: 0;
-    transform: translate3d(0, 1.1rem, 0);
+    transform: translate3d(0, 0.5rem, 0);
   }
 
   html.js.ms-motion [data-reveal-stagger] > *.is-visible {
     opacity: 1;
     transform: none;
     transition:
-      opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-      transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+      opacity 0.3s ease-out,
+      transform 0.3s ease-out;
     transition-delay: var(--ms-reveal-delay, 0s);
   }
 }
 
-/* Lazy image fade-in (native loading="lazy" — بدون JS هم کار می‌کند) */
+/* تصاویر lazy — بدون shimmer چشم‌زن؛ فقط fade کوتاه بعد از load */
 img[data-ms-lazy] {
-  background: linear-gradient(110deg, #eef2ef 8%, #f8faf9 18%, #eef2ef 33%);
-  background-size: 200% 100%;
+  background: #eef2ef;
 }
 
 html.js.ms-motion img[data-ms-lazy]:not(.is-loaded):not(.is-error) {
-  animation: msLazyShimmer 1.4s ease-in-out infinite;
+  opacity: 0.92;
 }
 
 html.js.ms-motion img[data-ms-lazy].is-loaded {
-  animation: none;
+  opacity: 1;
   background: none;
+  transition: opacity 0.25s ease-out;
 }
 
-@keyframes msLazyShimmer {
-  0% { background-position: 100% 0; }
-  100% { background-position: -100% 0; }
-}
-
-/* رندر سریع‌تر بخش‌های پایین صفحه (محتوا در DOM می‌ماند) */
+/* content-visibility باعث pop-in زشت می‌شد — روی خانه خاموش */
 .ms-page-home .ms-offers,
 .ms-page-home .ms-featured-section,
 .ms-page-home .ms-segments,
 .ms-page-home .ms-news,
 .ms-page-home .ms-closing,
+.ms-page-home .ms-home-faq {
+  content-visibility: visible;
+  contain-intrinsic-size: auto;
+}
+
 .ms-footer {
   content-visibility: auto;
-  contain-intrinsic-size: auto 420px;
+  contain-intrinsic-size: auto 320px;
 }
 
