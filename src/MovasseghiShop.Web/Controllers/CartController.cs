@@ -10,7 +10,8 @@ public class CartController(
     IOrderService orderService,
     IStudioContentService studio,
     ICheckoutHumanVerificationService humanVerification,
-    IAnalyticsTracker analytics) : Controller
+    IAnalyticsTracker analytics,
+    Microsoft.AspNetCore.Antiforgery.IAntiforgery antiforgery) : Controller
 {
     private async Task<CartSummary> LoadCartAsync()
     {
@@ -83,6 +84,15 @@ public class CartController(
             prompt = challenge.Prompt,
             options = challenge.Options.Select(o => new { o.Id, o.Label, o.Emoji })
         });
+    }
+
+    [HttpGet]
+    [Route("Cart/Csrf")]
+    [IgnoreAntiforgeryToken]
+    public IActionResult Csrf()
+    {
+        var tokens = antiforgery.GetAndStoreTokens(HttpContext);
+        return Json(new { token = tokens.RequestToken });
     }
 
     [HttpGet]

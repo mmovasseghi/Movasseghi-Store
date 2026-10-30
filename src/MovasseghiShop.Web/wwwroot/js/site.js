@@ -452,8 +452,22 @@
     });
   }
 
+  let csrfTokenPromise = null;
+
+  function fetchCsrfToken() {
+    if (!csrfTokenPromise) {
+      csrfTokenPromise = fetch('/Cart/Csrf', { credentials: 'same-origin' })
+        .then(r => (r.ok ? r.json() : null))
+        .then(data => data?.token || null)
+        .catch(() => null);
+    }
+    return csrfTokenPromise;
+  }
+
   async function cartAjax(url, data) {
-    const token = document.querySelector('#msAntiForgery input[name="__RequestVerificationToken"]')?.value;
+    const token =
+      document.querySelector('#msAntiForgery input[name="__RequestVerificationToken"]')?.value
+      || await fetchCsrfToken();
     const fd = new FormData();
     Object.entries(data).forEach(([k, v]) => fd.append(k, v));
     fd.append('ajax', 'true');
