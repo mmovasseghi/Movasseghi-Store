@@ -1603,3 +1603,14 @@ body.ms-drawer-open,body.ms-modal-open,body.ms-sheet-open{overflow:hidden}
   .ws-policy-tier--premium{grid-column:span 2}
 }
 
+/* Home FAQ — AEO / visible answers */
+.ms-home-faq{margin:2.5rem auto 3rem;padding:0 1rem;max-width:var(--ms-wrap,72rem)}
+.ms-home-faq > h2{margin:0 0 1rem;font-size:1.35rem;font-weight:900;color:var(--c-primary-dark)}
+.ms-home-faq-list{display:flex;flex-direction:column;gap:.65rem}
+.ms-home-faq-item{border:1px solid rgba(61,90,76,.12);border-radius:14px;background:#fff;padding:0;overflow:hidden}
+.ms-home-faq-item > summary{cursor:pointer;list-style:none;padding:.85rem 1rem;font-weight:800;font-size:.92rem;color:var(--c-primary-dark)}
+.ms-home-faq-item > summary::-webkit-details-marker{display:none}
+.ms-home-faq-item > summary::after{content:"+";float:left;font-weight:400;opacity:.6}
+.ms-home-faq-item[open] > summary::after{content:"−"}
+.ms-home-faq-answer{padding:0 1rem 1rem;font-size:.86rem;line-height:1.75;color:var(--c-text-2)}
+.ms-home-faq-answer p{margin:0}

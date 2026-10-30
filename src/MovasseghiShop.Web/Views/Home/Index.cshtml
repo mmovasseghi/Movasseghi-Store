@@ -36,83 +36,117 @@
     {
         <link rel="preload" as="image" href="@AppPath.H(lcpImagePath, Context)" fetchpriority="high" imagesizes="(max-width: 767px) 55vw, 240px" />
     }
-    <script type="application/ld+json">@Html.Raw(JsonSerializer.Serialize(new Dictionary<string, object?>
-    {
-        ["@context"] = "https://schema.org",
-        ["@type"] = "Store",
-        ["name"] = "فروشگاه موثقی",
-        ["url"] = homeUrl,
-        ["description"] = ViewData["MetaDescription"],
-        ["telephone"] = WholesaleRules.CoordinationPhone,
-        ["image"] = AppPath.Absolute("/images/brand/originallogo.png", Context),
-        ["address"] = new Dictionary<string, object?>
+    @{
+        var orgId = $"{homeUrl.TrimEnd('/')}#organization";
+        var localId = $"{homeUrl.TrimEnd('/')}#localbusiness";
+        var webPageId = homeUrl;
+        var faqEntities = StorefrontHomeSeo.FaqItems.Select(f => (object)new Dictionary<string, object?>
         {
-            ["@type"] = "PostalAddress",
-            ["addressCountry"] = "IR",
-            ["addressLocality"] = "تهران"
-        }
-    }))</script>
-    <script type="application/ld+json">@Html.Raw(JsonSerializer.Serialize(new Dictionary<string, object?>
-    {
-        ["@context"] = "https://schema.org",
-        ["@type"] = "WebSite",
-        ["name"] = "فروشگاه موثقی",
-        ["url"] = homeUrl,
-        ["potentialAction"] = new Dictionary<string, object?>
+            ["@type"] = "Question",
+            ["name"] = f.Question,
+            ["acceptedAnswer"] = new Dictionary<string, object?>
+            {
+                ["@type"] = "Answer",
+                ["text"] = f.Answer
+            }
+        }).ToArray();
+        var graph = new Dictionary<string, object?>
         {
-            ["@type"] = "SearchAction",
-            ["target"] = $"{homeUrl.TrimEnd('/')}{AppPath.H("/Catalog", Context)}?q={{search_term_string}}",
-            ["query-input"] = "required name=search_term_string"
-        }
-    }))</script>
-    <script type="application/ld+json">@Html.Raw(JsonSerializer.Serialize(new Dictionary<string, object?>
-    {
-        ["@context"] = "https://schema.org",
-        ["@type"] = "Organization",
-        ["name"] = "فروشگاه موثقی",
-        ["url"] = homeUrl,
-        ["logo"] = AppPath.Absolute("/images/brand/originallogo.png", Context),
-        ["telephone"] = WholesaleRules.CoordinationPhone,
-        ["description"] = ViewData["MetaDescription"]
-    }))</script>
-    <script type="application/ld+json">@Html.Raw(JsonSerializer.Serialize(new Dictionary<string, object?>
-    {
-        ["@context"] = "https://schema.org",
-        ["@type"] = "FAQPage",
-        ["mainEntity"] = new object[]
-        {
-            new Dictionary<string, object?>
+            ["@context"] = "https://schema.org",
+            ["@graph"] = new object[]
             {
-                ["@type"] = "Question",
-                ["name"] = "حداقل مبلغ خرید عمده از موثقی چقدر است؟",
-                ["acceptedAnswer"] = new Dictionary<string, object?>
+                new Dictionary<string, object?>
                 {
-                    ["@type"] = "Answer",
-                    ["text"] = $"حداقل سفارش عمده {WholesaleRules.FormatMinAmount()} تومان است."
-                }
-            },
-            new Dictionary<string, object?>
-            {
-                ["@type"] = "Question",
-                ["name"] = "آیا محصولات اصل آملون هستند؟",
-                ["acceptedAnswer"] = new Dictionary<string, object?>
+                    ["@type"] = "Organization",
+                    ["@id"] = orgId,
+                    ["name"] = "فروشگاه موثقی",
+                    ["url"] = homeUrl,
+                    ["logo"] = AppPath.Absolute("/images/brand/originallogo.png", Context),
+                    ["telephone"] = WholesaleRules.CoordinationPhone,
+                    ["description"] = ViewData["MetaDescription"],
+                    ["address"] = new Dictionary<string, object?>
+                    {
+                        ["@type"] = "PostalAddress",
+                        ["addressCountry"] = "IR",
+                        ["addressLocality"] = "تهران",
+                        ["addressRegion"] = "تهران"
+                    }
+                },
+                new Dictionary<string, object?>
                 {
-                    ["@type"] = "Answer",
-                    ["text"] = "فروشگاه موثقی نمایندگی رسمی آملون است و ظروف یکبار مصرف گیاهی اصل عرضه می‌کند."
-                }
-            },
-            new Dictionary<string, object?>
-            {
-                ["@type"] = "Question",
-                ["name"] = "ارسال به سراسر کشور انجام می‌شود؟",
-                ["acceptedAnswer"] = new Dictionary<string, object?>
+                    ["@type"] = "LocalBusiness",
+                    ["@id"] = localId,
+                    ["name"] = "فروشگاه موثقی",
+                    ["image"] = AppPath.Absolute("/images/brand/originallogo.png", Context),
+                    ["telephone"] = WholesaleRules.CoordinationPhone,
+                    ["url"] = homeUrl,
+                    ["priceRange"] = "$$",
+                    ["parentOrganization"] = new Dictionary<string, object?> { ["@id"] = orgId },
+                    ["geo"] = new Dictionary<string, object?>
+                    {
+                        ["@type"] = "GeoCoordinates",
+                        ["latitude"] = StorefrontHomeSeo.TehranLatitude,
+                        ["longitude"] = StorefrontHomeSeo.TehranLongitude
+                    },
+                    ["areaServed"] = new Dictionary<string, object?>
+                    {
+                        ["@type"] = "Country",
+                        ["name"] = "Iran"
+                    }
+                },
+                new Dictionary<string, object?>
                 {
-                    ["@type"] = "Answer",
-                    ["text"] = "بله، ارسال سراسری برای سفارش‌های عمده انجام می‌شود."
+                    ["@type"] = "Store",
+                    ["name"] = "فروشگاه موثقی",
+                    ["url"] = homeUrl,
+                    ["description"] = ViewData["MetaDescription"],
+                    ["telephone"] = WholesaleRules.CoordinationPhone,
+                    ["image"] = AppPath.Absolute("/images/brand/originallogo.png", Context),
+                    ["address"] = new Dictionary<string, object?>
+                    {
+                        ["@type"] = "PostalAddress",
+                        ["addressCountry"] = "IR",
+                        ["addressLocality"] = "تهران"
+                    }
+                },
+                new Dictionary<string, object?>
+                {
+                    ["@type"] = "WebSite",
+                    ["name"] = WholesaleRules.StoreNameFa,
+                    ["url"] = homeUrl,
+                    ["publisher"] = new Dictionary<string, object?> { ["@id"] = orgId },
+                    ["inLanguage"] = "fa-IR",
+                    ["potentialAction"] = new Dictionary<string, object?>
+                    {
+                        ["@type"] = "SearchAction",
+                        ["target"] = $"{homeUrl.TrimEnd('/')}{AppPath.H("/Catalog", Context)}?q={{search_term_string}}",
+                        ["query-input"] = "required name=search_term_string"
+                    }
+                },
+                new Dictionary<string, object?>
+                {
+                    ["@type"] = "WebPage",
+                    ["@id"] = webPageId,
+                    ["url"] = homeUrl,
+                    ["name"] = ViewData["Title"],
+                    ["description"] = ViewData["MetaDescription"],
+                    ["isPartOf"] = new Dictionary<string, object?> { ["@id"] = homeUrl },
+                    ["about"] = new Dictionary<string, object?> { ["@id"] = orgId },
+                    ["speakable"] = new Dictionary<string, object?>
+                    {
+                        ["@type"] = "SpeakableSpecification",
+                        ["cssSelector"] = new[] { ".ms-home-faq", ".ms-hero-title" }
+                    }
+                },
+                new Dictionary<string, object?>
+                {
+                    ["@type"] = "FAQPage",
+                    ["mainEntity"] = faqEntities
                 }
             }
-        }
-    }))</script>
+        };
+    }
+    <script type="application/ld+json">@Html.Raw(JsonSerializer.Serialize(graph))</script>
 }
 
 <!-- استوری‌ها -->
@@ -643,8 +677,21 @@
     </section>
 }
 
+<section class="ms-wrap ms-home-faq" aria-labelledby="home-faq-heading">
+    <h2 id="home-faq-heading">سوالات متداول</h2>
+    <div class="ms-home-faq-list">
+        @foreach (var faq in StorefrontHomeSeo.FaqItems)
+        {
+            <details class="ms-home-faq-item">
+                <summary>@faq.Question</summary>
+                <div class="ms-home-faq-answer"><p>@faq.Answer</p></div>
+            </details>
+        }
+    </div>
+</section>
+
 @section Scripts {
     <script defer src="~/js/stories.js" asp-append-version="true"></script>
     <script defer src="~/js/home.js" asp-append-version="true"></script>
-    <script defer src="~/js/home-desktop.js" asp-append-version="true"></script>
+    <script defer src="~/js/home-desktop.js" asp-append-version="true" media="(min-width: 768px)"></script>
 }

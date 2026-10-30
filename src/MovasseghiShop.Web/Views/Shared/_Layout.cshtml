@@ -59,6 +59,11 @@
     }
     <meta name="theme-color" content="#2f4a3e" />
     <link rel="icon" href="~/images/brand/originallogo.png" type="image/png" />
+    <link rel="alternate" type="text/plain" href="@AppPath.H("/llms.txt", Context)" title="LLMs" />
+    @if (!isHome && !isAccount && !isOrder)
+    {
+        @await Html.PartialAsync("_StorefrontGlobalJsonLd")
+    }
     @await Html.PartialAsync("_AppPathScript")
     @* فونت روی همین دامنه میزبانی می‌شود: قبلاً دو اتصال جداگانه به
        fonts.googleapis.com و fonts.gstatic.com لازم بود و CSS فونت هم رندر را
@@ -165,7 +170,7 @@
             <a href="@AppPath.H("/", Context)" class="ms-logo-link">
                 @if (isHome)
                 {
-                    <img src="~/images/brand/originallogo.png" alt="فروشگاه موثقی" class="ms-logo" width="320" height="104" decoding="async" loading="eager" />
+                    <img src="~/images/brand/originallogo.png" alt="فروشگاه موثقی" class="ms-logo" width="320" height="104" decoding="async" loading="eager" fetchpriority="low" />
                 }
                 else
                 {
@@ -431,13 +436,11 @@
 
 <template id="msAuthModalTpl">@await Html.PartialAsync("_AuthModal")</template>
 
-<!-- Modal overlay -->
 <div class="ms-modal" id="appModal" hidden>
     <div class="ms-modal-backdrop" data-modal-close></div>
     <div class="ms-modal-sheet" data-modal-sheet></div>
 </div>
 
-<!-- Story viewer -->
 <div class="ms-story-modal" id="msStoryModal" hidden>
     <div class="ms-story-modal-backdrop" data-story-close tabindex="-1"></div>
     <div class="ms-story-viewer" role="dialog" aria-modal="true" aria-label="استوری">

@@ -25,7 +25,17 @@ public sealed class GuestPublicOutputCachePolicy : IOutputCachePolicy
         => ValueTask.CompletedTask;
 
     public ValueTask ServeResponseAsync(OutputCacheContext context, CancellationToken cancellationToken)
-        => ValueTask.CompletedTask;
+    {
+        if (context.AllowCacheStorage && context.HttpContext.Response.StatusCode == StatusCodes.Status200OK)
+        {
+            var controller = context.HttpContext.GetRouteData().Values["controller"]?.ToString();
+            var maxAge = string.Equals(controller, "Home", StringComparison.OrdinalIgnoreCase) ? 900 : 300;
+            context.HttpContext.Response.Headers.CacheControl =
+                $"public, max-age={maxAge}, s-maxage={maxAge}";
+        }
+
+        return ValueTask.CompletedTask;
+    }
 
     static void DisableCache(OutputCacheContext context)
     {

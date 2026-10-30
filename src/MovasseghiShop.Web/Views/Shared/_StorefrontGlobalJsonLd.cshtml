@@ -1,0 +1,38 @@
+@using System.Text.Json
+@using MovasseghiShop.Web.Services
+@{
+    var pageUrl = ViewData["CanonicalUrl"]?.ToString()
+        ?? AppPath.Absolute("/", Context)!;
+    var orgId = $"{pageUrl.TrimEnd('/')}#organization";
+    var siteName = WholesaleRules.StoreNameFa;
+}
+<script type="application/ld+json">@Html.Raw(JsonSerializer.Serialize(new Dictionary<string, object?>
+{
+    ["@context"] = "https://schema.org",
+    ["@graph"] = new object[]
+    {
+        new Dictionary<string, object?>
+        {
+            ["@type"] = "Organization",
+            ["@id"] = orgId,
+            ["name"] = "فروشگاه موثقی",
+            ["url"] = pageUrl,
+            ["logo"] = AppPath.Absolute("/images/brand/originallogo.png", Context),
+            ["telephone"] = WholesaleRules.CoordinationPhone,
+            ["address"] = new Dictionary<string, object?>
+            {
+                ["@type"] = "PostalAddress",
+                ["addressCountry"] = "IR",
+                ["addressLocality"] = "تهران"
+            }
+        },
+        new Dictionary<string, object?>
+        {
+            ["@type"] = "WebSite",
+            ["name"] = siteName,
+            ["url"] = pageUrl,
+            ["publisher"] = new Dictionary<string, object?> { ["@id"] = orgId },
+            ["inLanguage"] = "fa-IR"
+        }
+    }
+}))</script>
