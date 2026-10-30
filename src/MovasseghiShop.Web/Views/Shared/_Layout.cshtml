@@ -82,10 +82,7 @@
             @await Html.PartialAsync("_AppPathScript")
         }
     }
-    @if (!isHome)
-    {
-        <link rel="preload" href="~/fonts/Vazirmatn-var.woff2" as="font" type="font/woff2" crossorigin asp-append-version="true" />
-    }
+    <link rel="preload" href="~/fonts/Vazirmatn-var.woff2" as="font" type="font/woff2" crossorigin />
     @if (isLocalTunnel)
     {
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" media="not all" />
@@ -512,32 +509,50 @@ else
         <script defer src="~/js/stories.js" asp-append-version="true"></script>
         <script defer src="~/js/home.js" asp-append-version="true"></script>
         @* site.js (~28KB) فقط بعد از تعامل یا تأخیر — TBT GTmetrix *@
-        <script type="text/plain" data-ms-idle src="~/js/ms-auth-lazy.js" asp-append-version="true" data-auth-src="@Url.Content("~/js/auth.js")"></script>
+        <script type="text/plain" data-ms-idle src="~/js/auth.js" asp-append-version="true"></script>
         <script type="text/plain" data-ms-idle src="~/js/site.js" asp-append-version="true"></script>
         <script type="text/plain" data-ms-idle src="~/js/product-card-dual.js" asp-append-version="true"></script>
         <script type="text/plain" data-ms-idle src="~/js/scroll-reveal.js" asp-append-version="true"></script>
         <script>
         (function () {
-          var started = false;
+          var loading;
+          var ready = false;
           function bootHeavy() {
-            if (started) return;
-            started = true;
-            try {
-              fetch('/api/analytics/visitor', { credentials: 'same-origin', keepalive: true });
-            } catch (e) {}
-            document.querySelectorAll('script[data-ms-idle][src]').forEach(function (n) {
-              var s = document.createElement('script');
-              s.src = n.getAttribute('src');
-              s.defer = true;
-              if (n.dataset.authSrc) s.dataset.authSrc = n.dataset.authSrc;
-              document.body.appendChild(s);
+            if (loading) return loading;
+            loading = Promise.all(Array.from(document.querySelectorAll('script[data-ms-idle][src]')).map(function (n) {
+              return new Promise(function (resolve, reject) {
+                var s = document.createElement('script');
+                s.src = n.getAttribute('src');
+                s.async = false;
+                s.onload = resolve;
+                s.onerror = function () { reject(new Error('Unable to load ' + s.src)); };
+                document.body.appendChild(s);
+              });
+            })).then(function () {
+              ready = true;
+              fetch('@AppPath.H("/api/analytics/visitor", Context)', { credentials: 'same-origin', keepalive: true }).catch(function () {});
             });
+            return loading;
           }
           window.addEventListener('click', function (e) {
-            if (!e.target.closest('.ms-story,[data-story-id],[data-open-cart],[data-open-auth],[data-menu-toggle],.ms-drawer-quick-btn,.ms-search')) return;
-            bootHeavy();
+            var target = e.target instanceof Element && e.target.closest('[data-open-cart],[data-open-auth],[data-menu-toggle],.ms-drawer-quick-btn');
+            if (!target || ready) return;
+            // The first click arrived before site.js registered its handlers.
+            // Replay it once, after the ordered scripts have initialized.
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            target.setAttribute('aria-busy', 'true');
+            bootHeavy().then(function () {
+              if (target.isConnected) target.click();
+            }).catch(function (error) {
+              console.error(error);
+            }).finally(function () { target.removeAttribute('aria-busy'); });
           }, true);
-          window.addEventListener('load', function () { setTimeout(bootHeavy, 6000); });
+          document.addEventListener('focusin', function () { bootHeavy().catch(function () {}); }, { once: true });
+          window.addEventListener('load', function () {
+            if ('requestIdleCallback' in window) requestIdleCallback(function () { bootHeavy().catch(function () {}); }, { timeout: 2000 });
+            else bootHeavy().catch(function () {});
+          }, { once: true });
         })();
         </script>
     }

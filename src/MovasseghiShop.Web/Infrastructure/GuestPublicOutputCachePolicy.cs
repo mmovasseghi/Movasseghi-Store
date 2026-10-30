@@ -9,9 +9,11 @@ public sealed class GuestPublicOutputCachePolicy : IOutputCachePolicy
     public ValueTask CacheRequestAsync(OutputCacheContext context, CancellationToken cancellationToken)
     {
         var http = context.HttpContext;
-        if (http.User.Identity?.IsAuthenticated == true)
+        if (http.User.Identity?.IsAuthenticated == true
+            || !string.IsNullOrEmpty(http.Request.Headers.Authorization))
             DisableCache(context);
-        else if (CartService.ReadCountCookie(http) > 0)
+        else if (CartService.ReadCountCookie(http) > 0
+            || http.Request.Cookies.ContainsKey(".AspNetCore.Session"))
             DisableCache(context);
 
         return ValueTask.CompletedTask;

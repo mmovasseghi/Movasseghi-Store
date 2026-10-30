@@ -15,16 +15,27 @@ public sealed class StorefrontPublicCacheHeadersMiddleware(RequestDelegate next)
 
     public async Task InvokeAsync(HttpContext context, ICartService cart)
     {
-        if (TryGetMaxAge(context, cart, out var maxAge))
+        var isPublic = TryGetMaxAge(context, cart, out var maxAge);
+        context.Response.OnStarting(() =>
         {
-            context.Response.OnStarting(() =>
+            // Never make errors, session/antiforgery cookies or explicitly
+            // private responses cacheable at a shared proxy.
+            var response = context.Response;
+            if (!isPublic || response.StatusCode != StatusCodes.Status200OK
+                || response.Headers.ContainsKey("Set-Cookie")
+                || response.Headers.CacheControl.ToString().Contains("private", StringComparison.OrdinalIgnoreCase)
+                || response.Headers.CacheControl.ToString().Contains("no-store", StringComparison.OrdinalIgnoreCase))
             {
-                context.Response.Headers.CacheControl = $"public, max-age={maxAge}, s-maxage={maxAge}";
-                context.Response.Headers.Remove("Pragma");
-                context.Response.Headers.Remove("Expires");
+                if (!response.Headers.CacheControl.ToString().Contains("no-store", StringComparison.OrdinalIgnoreCase))
+                    response.Headers.CacheControl = "private, no-store";
                 return Task.CompletedTask;
-            });
-        }
+            }
+
+            context.Response.Headers.CacheControl = $"public, max-age={maxAge}, s-maxage={maxAge}";
+            context.Response.Headers.Remove("Pragma");
+            context.Response.Headers.Remove("Expires");
+            return Task.CompletedTask;
+        });
 
         await next(context);
     }
@@ -36,6 +47,12 @@ public sealed class StorefrontPublicCacheHeadersMiddleware(RequestDelegate next)
             return false;
 
         if (context.User.Identity?.IsAuthenticated == true)
+            return false;
+
+        if (!string.IsNullOrEmpty(context.Request.Headers.Authorization))
+            return false;
+
+        if (context.Request.Cookies.ContainsKey(".AspNetCore.Session"))
             return false;
 
         if (!CartLooksEmpty(context, cart))

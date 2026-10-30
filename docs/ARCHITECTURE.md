@@ -17,7 +17,9 @@ Browser ──► nginx (:443) ──► Kestrel (MovasseghiShop.Web)
 
 ## SEO integrity
 
-امتیاز کلی UI از `SeoUltimateAnalyzer.ResolveDisplayOverall` — حداکثرِ میانگین وزنی، readiness و competitive strength؛ بدون دادهٔ SERP/GSC عدد ساختگی نشان داده نمی‌شود.
+امتیاز کلی UI از `SeoUltimateAnalyzer.ResolveDisplayOverall` — حداقلِ میانگین وزنی، readiness و competitive strength همراه با سقف‌های نبود دادهٔ زنده؛ بدون دادهٔ SERP/GSC عدد ساختگی نشان داده نمی‌شود.
+
+نقشهٔ بخش‌ها، قراردادها، محدودیت‌ها و ریسک‌های بررسی‌شده: [PROJECT-MAP.fa.md](PROJECT-MAP.fa.md).
 
 ## فرانت فروشگاه
 

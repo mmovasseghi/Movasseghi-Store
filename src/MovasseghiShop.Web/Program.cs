@@ -634,60 +634,6 @@ app.UseOutputCache();
 
 app.Use(async (context, next) =>
 {
-    await next();
-    if (context.Response.HasStarted || context.Response.StatusCode != StatusCodes.Status200OK)
-        return;
-    if (!HttpMethods.IsGet(context.Request.Method))
-        return;
-    if (context.User.Identity?.IsAuthenticated == true)
-        return;
-
-    var cart = context.RequestServices.GetService<ICartService>();
-    if (context.User.Identity?.IsAuthenticated == true)
-    {
-        if (cart != null)
-        {
-            try
-            {
-                if (cart.GetItemCount(context) > 0) return;
-            }
-            catch (InvalidOperationException)
-            {
-                /* ignore */
-            }
-        }
-    }
-    else if (CartService.ReadCountCookie(context) > 0)
-        return;
-
-    var path = context.Request.Path.Value ?? "/";
-    if (path.StartsWith("/Admin", StringComparison.OrdinalIgnoreCase)
-        || path.StartsWith("/Account", StringComparison.OrdinalIgnoreCase)
-        || path.StartsWith("/Checkout", StringComparison.OrdinalIgnoreCase)
-        || path.StartsWith("/Cart", StringComparison.OrdinalIgnoreCase))
-        return;
-
-    int? maxAge = path == "/" || path.Equals("/Home", StringComparison.OrdinalIgnoreCase)
-        ? 900
-        : path.StartsWith("/Catalog", StringComparison.OrdinalIgnoreCase)
-          || path.StartsWith("/Shop", StringComparison.OrdinalIgnoreCase)
-          || path.StartsWith("/Blog", StringComparison.OrdinalIgnoreCase)
-          || path.StartsWith("/News", StringComparison.OrdinalIgnoreCase)
-          || path.StartsWith("/sitemap", StringComparison.OrdinalIgnoreCase)
-          || path.Equals("/robots.txt", StringComparison.OrdinalIgnoreCase)
-          || path.Equals("/llms.txt", StringComparison.OrdinalIgnoreCase)
-            ? 300
-            : null;
-
-    if (maxAge is null) return;
-
-    context.Response.Headers.CacheControl = $"public, max-age={maxAge.Value}, s-maxage={maxAge.Value}";
-    context.Response.Headers.Remove("Pragma");
-    context.Response.Headers.Remove("Expires");
-});
-
-app.Use(async (context, next) =>
-{
     context.Response.Headers.TryAdd("X-Content-Type-Options", "nosniff");
     context.Response.Headers.TryAdd("X-Frame-Options", "SAMEORIGIN");
     context.Response.Headers.TryAdd("Referrer-Policy", "strict-origin-when-cross-origin");
