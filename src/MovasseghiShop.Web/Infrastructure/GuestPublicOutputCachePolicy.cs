@@ -11,12 +11,8 @@ public sealed class GuestPublicOutputCachePolicy : IOutputCachePolicy
         var http = context.HttpContext;
         if (http.User.Identity?.IsAuthenticated == true)
             DisableCache(context);
-        else
-        {
-            var cart = http.RequestServices.GetService<ICartService>();
-            if (cart != null && cart.GetItemCount(http) > 0)
-                DisableCache(context);
-        }
+        else if (CartService.ReadCountCookie(http) > 0)
+            DisableCache(context);
 
         return ValueTask.CompletedTask;
     }

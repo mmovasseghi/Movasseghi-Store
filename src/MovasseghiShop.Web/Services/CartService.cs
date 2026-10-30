@@ -11,6 +11,8 @@ public interface ICartService
 {
     Task<CartSummary> GetCartAsync(HttpContext httpContext);
     int GetItemCount(HttpContext httpContext);
+    /// <summary>برای layout — مهمان فقط از کوکی می‌خواند تا Session و no-store فعال نشود.</summary>
+    int GetBadgeCount(HttpContext httpContext);
     Task AddItemAsync(HttpContext httpContext, int variantId, int cartons);
     Task UpdateItemAsync(HttpContext httpContext, int variantId, int cartons);
     Task RemoveItemAsync(HttpContext httpContext, int variantId);
@@ -23,6 +25,21 @@ public class CartService(ApplicationDbContext db) : ICartService
 {
     private const string CartKey = "cart";
     private const string CouponKey = "coupon";
+    public const string CountCookieName = "ms_cart_n";
+
+    public static int ReadCountCookie(HttpContext httpContext)
+    {
+        if (httpContext.Request.Cookies.TryGetValue(CountCookieName, out var v) && int.TryParse(v, out var n))
+            return Math.Max(0, n);
+        return 0;
+    }
+
+    public int GetBadgeCount(HttpContext httpContext)
+    {
+        if (httpContext.User.Identity?.IsAuthenticated == true)
+            return GetItemCount(httpContext);
+        return ReadCountCookie(httpContext);
+    }
 
     public async Task<CartSummary> GetCartAsync(HttpContext httpContext)
     {
@@ -96,6 +113,7 @@ public class CartService(ApplicationDbContext db) : ICartService
     {
         httpContext.Session.Remove(CartKey);
         httpContext.Session.Remove(CouponKey);
+        httpContext.Response.Cookies.Delete(CountCookieName);
         return Task.CompletedTask;
     }
 
@@ -115,5 +133,20 @@ public class CartService(ApplicationDbContext db) : ICartService
     }
 
     private static void SaveItems(HttpContext httpContext, List<CartItem> items)
-        => httpContext.Session.SetString(CartKey, JsonSerializer.Serialize(items));
+    {
+        httpContext.Session.SetString(CartKey, JsonSerializer.Serialize(items));
+        var count = items.Count;
+        if (count <= 0)
+            httpContext.Response.Cookies.Delete(CountCookieName);
+        else
+        {
+            httpContext.Response.Cookies.Append(CountCookieName, count.ToString(), new CookieOptions
+            {
+                Path = "/",
+                MaxAge = TimeSpan.FromDays(30),
+                SameSite = SameSiteMode.Lax,
+                IsEssential = true
+            });
+        }
+    }
 }

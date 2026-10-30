@@ -641,17 +641,22 @@ app.Use(async (context, next) =>
         return;
 
     var cart = context.RequestServices.GetService<ICartService>();
-    if (cart != null)
+    if (context.User.Identity?.IsAuthenticated == true)
     {
-        try
+        if (cart != null)
         {
-            if (cart.GetItemCount(context) > 0) return;
-        }
-        catch (InvalidOperationException)
-        {
-            /* session not ready */
+            try
+            {
+                if (cart.GetItemCount(context) > 0) return;
+            }
+            catch (InvalidOperationException)
+            {
+                /* ignore */
+            }
         }
     }
+    else if (CartService.ReadCountCookie(context) > 0)
+        return;
 
     var path = context.Request.Path.Value ?? "/";
     if (path.StartsWith("/Admin", StringComparison.OrdinalIgnoreCase)

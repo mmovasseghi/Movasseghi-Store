@@ -79,13 +79,18 @@ public sealed class StorefrontPublicCacheHeadersMiddleware(RequestDelegate next)
 
     static bool CartLooksEmpty(HttpContext context, ICartService cart)
     {
-        try
+        if (context.User.Identity?.IsAuthenticated == true)
         {
-            return cart.GetItemCount(context) == 0;
+            try
+            {
+                return cart.GetItemCount(context) == 0;
+            }
+            catch (InvalidOperationException)
+            {
+                return true;
+            }
         }
-        catch (InvalidOperationException)
-        {
-            return true;
-        }
+
+        return CartService.ReadCountCookie(context) == 0;
     }
 }

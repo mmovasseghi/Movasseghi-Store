@@ -14,7 +14,7 @@
     var isOrder = ctrl == "Order";
     var isLocalTunnel = Context.Request.Host.Host.EndsWith(".loca.lt", StringComparison.OrdinalIgnoreCase);
     var isLoggedIn = User.Identity?.IsAuthenticated == true;
-    var cartItemCount = CartService.GetItemCount(Context);
+    var cartItemCount = CartService.GetBadgeCount(Context);
     var cartAriaLabel = cartItemCount > 0 ? $"سبد خرید ({cartItemCount} قلم)" : "سبد خرید";
 }
 <!DOCTYPE html>
