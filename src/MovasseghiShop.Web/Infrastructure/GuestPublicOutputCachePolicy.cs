@@ -6,8 +6,6 @@ namespace MovasseghiShop.Web.Infrastructure;
 /// <summary>Output cache فقط برای مهمان با سبد خالی — جلوگیری از HTML شخصی‌سازی‌شده در کش.</summary>
 public sealed class GuestPublicOutputCachePolicy : IOutputCachePolicy
 {
-    public static readonly GuestPublicOutputCachePolicy Instance = new();
-
     public ValueTask CacheRequestAsync(OutputCacheContext context, CancellationToken cancellationToken)
     {
         var http = context.HttpContext;

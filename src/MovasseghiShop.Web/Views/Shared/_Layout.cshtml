@@ -141,7 +141,14 @@
                 </span>
             </button>
             <a href="@AppPath.H("/", Context)" class="ms-logo-link">
-                <img src="~/images/brand/originallogo.png" alt="فروشگاه موثقی" class="ms-logo" width="320" height="104" @(isHome ? null : "fetchpriority=\"high\"") decoding="async" loading="eager" />
+                @if (isHome)
+                {
+                    <img src="~/images/brand/originallogo.png" alt="فروشگاه موثقی" class="ms-logo" width="320" height="104" decoding="async" loading="eager" />
+                }
+                else
+                {
+                    <img src="~/images/brand/originallogo.png" alt="فروشگاه موثقی" class="ms-logo" width="320" height="104" fetchpriority="high" decoding="async" loading="eager" />
+                }
             </a>
             <nav class="ms-top-nav" aria-label="ناوبری دسکتاپ">
                 @await Component.InvokeAsync("NavZone", new { zone = "header" })
