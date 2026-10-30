@@ -12,7 +12,6 @@ public sealed class MediaController(IWebHostEnvironment env, ILogger<MediaContro
     const int DefaultQuality = 82;
 
     [HttpGet("{maxEdge:int}/{**assetPath}")]
-    [ResponseCache(Duration = 86400 * 30, Location = ResponseCacheLocation.Any, VaryByQueryKeys = ["maxEdge"])]
     public async Task<IActionResult> Resize(int maxEdge, string assetPath, CancellationToken ct)
     {
         maxEdge = Math.Clamp(maxEdge, 64, 960);

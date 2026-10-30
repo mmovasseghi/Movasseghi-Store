@@ -45,13 +45,14 @@ public class ImageOptimizerService(IWebHostEnvironment env, ILogger<ImageOptimiz
 
     public async Task<ImageOptimizationResult> OptimizeAllAsync(bool dryRun = false, CancellationToken ct = default)
     {
-        if (string.IsNullOrEmpty(env.WebRootPath))
+        var webRoot = ResolveWebRoot();
+        if (string.IsNullOrEmpty(webRoot))
         {
             logger.LogWarning("WebRootPath خالی است؛ بهینه‌سازی تصویر رد شد.");
             return new ImageOptimizationResult(0, 0, 0, 0, 0, 0);
         }
 
-        var root = Path.Combine(env.WebRootPath, "images");
+        var root = Path.Combine(webRoot, "images");
         if (!Directory.Exists(root))
             return new ImageOptimizationResult(0, 0, 0, 0, 0, 0);
 
@@ -140,6 +141,14 @@ public class ImageOptimizerService(IWebHostEnvironment env, ILogger<ImageOptimiz
             result.Scanned, result.Rewritten, result.BytesSaved / 1024, result.PercentSaved);
 
         return result;
+    }
+
+    string? ResolveWebRoot()
+    {
+        if (!string.IsNullOrEmpty(env.WebRootPath))
+            return env.WebRootPath;
+        var candidate = Path.Combine(env.ContentRootPath, "wwwroot");
+        return Directory.Exists(candidate) ? candidate : null;
     }
 
     static bool IsProductImagePath(string path)

@@ -40,7 +40,7 @@ public static class ProductImageHelper
 
     public const int LcpMaxCssPx = 320;
 
-    /// <summary>نسخهٔ کوچک LCP: فایل <c>*-lcp.webp</c>، وگرنه <c>/media/480/…</c>.</summary>
+    /// <summary>نسخهٔ کوچک LCP: فایل <c>*-lcp.webp</c>، وگرنه همان WebP نمایشی (nginx استاتیک).</summary>
     public static string? GetLcpDisplayUrl(ProductImage? image, IWebHostEnvironment? env)
     {
         var url = GetDisplayUrl(image, env);
@@ -66,8 +66,7 @@ public static class ProductImageHelper
             }
         }
 
-        var path = url.TrimStart('/');
-        return $"/media/{LcpMaxCssPx}/{path}";
+        return url;
     }
 
     static string ToLcpVariantUrl(string displayUrl)

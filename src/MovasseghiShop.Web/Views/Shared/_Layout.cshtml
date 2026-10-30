@@ -22,10 +22,6 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    @if (isHome && ViewData["CanonicalUrl"] is string homeCanon && !string.IsNullOrWhiteSpace(homeCanon))
-    {
-        @await Html.PartialAsync("_HomeStructuredData", homeCanon)
-    }
     <title>@title</title>
     <meta name="description" content="@metaDescription" />
     <meta name="keywords" content="@metaKeywords" />
@@ -91,16 +87,18 @@
     }
     else if (isHome)
     {
-        <link rel="stylesheet" href="~/css/critical-home.css" asp-append-version="true" />
         <link rel="preload" href="~/css/storefront.bundle.css" as="style" asp-append-version="true" />
-        <link rel="stylesheet" href="~/css/storefront.bundle.css" media="print" onload="this.media='all'" asp-append-version="true" />
-        <noscript><link rel="stylesheet" href="~/css/storefront.bundle.css" asp-append-version="true" /></noscript>
+        <link rel="stylesheet" href="~/css/storefront.bundle.css" asp-append-version="true" />
     }
     else
     {
         <link rel="stylesheet" href="~/css/storefront.bundle.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/css/ux-scroll-reveal.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/css/prose.css" asp-append-version="true" />
+    }
+    @if (isHome && ViewData["CanonicalUrl"] is string homeCanon && !string.IsNullOrWhiteSpace(homeCanon))
+    {
+        @await Html.PartialAsync("_HomeStructuredData", homeCanon)
     }
     @if (isLocalTunnel)
     {
@@ -173,7 +171,7 @@
             <a href="@AppPath.H("/", Context)" class="ms-logo-link">
                 @if (isHome)
                 {
-                    <img src="~/images/brand/originallogo.png" alt="فروشگاه موثقی" class="ms-logo" width="320" height="104" decoding="async" loading="lazy" fetchpriority="low" />
+                    <img src="~/images/brand/originallogo.png" alt="فروشگاه موثقی" class="ms-logo" width="320" height="104" decoding="async" loading="eager" fetchpriority="low" />
                 }
                 else
                 {
@@ -473,9 +471,13 @@
 @* GSAP از jsDelivr می‌آمد: یک اتصال شخص‌ثالث اضافه، بدون کش طولانی‌مدت خودمان
    و بدون defer (پارسر را متوقف می‌کرد). حالا محلی و deferred است؛ ترتیب اجرای
    اسکریپت‌ها با defer دقیقاً همان ترتیب سند می‌ماند. *@
-@if (!isHome)
+<script defer src="~/js/scroll-reveal.js" asp-append-version="true"></script>
+@if (isHome)
 {
-    <script defer src="~/js/scroll-reveal.js" asp-append-version="true"></script>
+    <script defer src="~/js/ms-gsap-boot.js" asp-append-version="true"
+            data-when="load"
+            data-gsap="@Url.Content("~/js/vendor/gsap.min.js")"
+            data-scroll="@Url.Content("~/js/vendor/ScrollTrigger.min.js")"></script>
 }
 @if (isLocalTunnel)
 {
@@ -488,20 +490,15 @@ else
     @if (isHome)
     {
         <script defer src="~/js/ms-auth-lazy.js" asp-append-version="true" data-auth-src="@Url.Content("~/js/auth.js")"></script>
-        <script defer src="~/js/site-defer-home.js" asp-append-version="true" data-src="@Url.Content("~/js/site.js")"></script>
     }
     else
     {
         <script defer src="~/js/auth.js" asp-append-version="true"></script>
-        <script defer src="~/js/site.js" asp-append-version="true"></script>
     }
-    @if (isCatalog)
+    <script defer src="~/js/site.js" asp-append-version="true"></script>
+    @if (isHome || isCatalog)
     {
         <script defer src="~/js/product-card-dual.js" asp-append-version="true"></script>
-    }
-    @if (isHome)
-    {
-        <script defer src="~/js/product-card-dual-lazy.js" asp-append-version="true" data-src="@Url.Content("~/js/product-card-dual.js")"></script>
     }
 }
 @await RenderSectionAsync("Scripts", required: false)
