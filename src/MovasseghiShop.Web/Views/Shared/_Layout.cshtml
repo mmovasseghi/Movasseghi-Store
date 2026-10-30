@@ -110,21 +110,8 @@
         {
             <style>@Html.Raw(global::System.IO.File.ReadAllText(criticalPath))</style>
         }
-        var bundlePath = global::System.IO.Path.Combine(webRoot, "css", "storefront.bundle.css");
-        var bundleVer = global::System.IO.File.Exists(bundlePath)
-            ? global::System.IO.File.GetLastWriteTimeUtc(bundlePath).Ticks.ToString()
-            : "1";
-        var bundleHref = $"{Url.Content("~/css/storefront.bundle.css")}?v={bundleVer}";
-        <link id="msDeferredBundle" rel="stylesheet" href="@bundleHref" media="not all" />
-        <noscript><link rel="stylesheet" href="@bundleHref" /></noscript>
-        <script>
-        window.addEventListener('load', function () {
-          setTimeout(function () {
-            var l = document.getElementById('msDeferredBundle');
-            if (l) l.media = 'all';
-          }, 5000);
-        });
-        </script>
+        <link rel="stylesheet" href="~/css/storefront.bundle.css" asp-append-version="true" media="print" onload="this.media='all'" />
+        <noscript><link rel="stylesheet" href="~/css/storefront.bundle.css" asp-append-version="true" /></noscript>
     }
     else
     {
@@ -522,9 +509,9 @@ else
 {
     @if (isHome)
     {
-        @* هیچ JS سنگینی در مسیر defer اولیه — فقط بعد از تعامل یا تأخیر طولانی (GTmetrix TBT) *@
-        <script type="text/plain" data-ms-idle src="~/js/stories.js" asp-append-version="true"></script>
-        <script type="text/plain" data-ms-idle src="~/js/home.js" asp-append-version="true"></script>
+        <script defer src="~/js/stories.js" asp-append-version="true"></script>
+        <script defer src="~/js/home.js" asp-append-version="true"></script>
+        @* site.js (~28KB) فقط بعد از تعامل یا تأخیر — TBT GTmetrix *@
         <script type="text/plain" data-ms-idle src="~/js/ms-auth-lazy.js" asp-append-version="true" data-auth-src="@Url.Content("~/js/auth.js")"></script>
         <script type="text/plain" data-ms-idle src="~/js/site.js" asp-append-version="true"></script>
         <script type="text/plain" data-ms-idle src="~/js/product-card-dual.js" asp-append-version="true"></script>
@@ -532,7 +519,7 @@ else
         <script>
         (function () {
           var started = false;
-          function boot() {
+          function bootHeavy() {
             if (started) return;
             started = true;
             try {
@@ -547,10 +534,10 @@ else
             });
           }
           window.addEventListener('click', function (e) {
-            if (!e.target.closest('.ms-story,[data-story-id],[data-open-cart],[data-open-auth],[data-menu-toggle],[data-menu-close],.ms-drawer-quick-btn')) return;
-            boot();
+            if (!e.target.closest('.ms-story,[data-story-id],[data-open-cart],[data-open-auth],[data-menu-toggle],.ms-drawer-quick-btn,.ms-search')) return;
+            bootHeavy();
           }, true);
-          window.addEventListener('load', function () { setTimeout(boot, 15000); });
+          window.addEventListener('load', function () { setTimeout(bootHeavy, 6000); });
         })();
         </script>
     }

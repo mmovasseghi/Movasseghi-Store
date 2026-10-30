@@ -56,3 +56,9 @@ a{color:inherit;text-decoration:none}
 .ms-cat-scroll{display:flex;gap:.5rem;overflow-x:auto;padding:.25rem 0}
 .ms-cat-chip{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:.25rem;padding:.5rem;background:#fff;border-radius:12px;min-width:72px}
 @media(max-width:767px){.ms-hero-aurora,.ms-hero-orb,.ms-hero-particles,.ms-hero-beams,.ms-hero-stat{display:none}}
+.ms-product-shot{position:relative;width:78%;aspect-ratio:1;padding:.5rem;border-radius:18px;display:grid;place-items:center;background:linear-gradient(145deg,#96a899,#849890);box-shadow:0 8px 22px rgba(26,31,38,.12)}
+.ms-product-stage{width:100%;height:100%;border-radius:14px;display:grid;place-items:center;background:linear-gradient(180deg,#f3f7f4,#dfe8e1)}
+.ms-product-stage img,.ms-product-stage .ms-product-img-el{max-width:74%!important;max-height:74%!important;object-fit:contain}
+.ms-offer-img .ms-product-shot{width:80%;padding:.35rem;border-radius:14px}
+.ms-feat-card-img .ms-product-shot{width:80%;padding:.4rem;border-radius:16px}
+.ms-offer-img,.ms-feat-card-img{display:grid;place-items:center;aspect-ratio:1;margin-bottom:.35rem}
