@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
 using Microsoft.EntityFrameworkCore;
 using MovasseghiShop.Web.Data;
 using MovasseghiShop.Web.Models;
@@ -10,8 +11,10 @@ namespace MovasseghiShop.Web.Controllers;
 public class CatalogController(
     IProductCatalogService catalog,
     IStudioContentService studio,
-    ApplicationDbContext db) : Controller
+    ApplicationDbContext db,
+    IConfiguration config) : Controller
 {
+    [OutputCache(PolicyName = "PublicPage")]
     public async Task<IActionResult> Index([FromQuery] ProductFilterQuery filter)
     {
         if (!string.IsNullOrWhiteSpace(filter.Q))
@@ -33,8 +36,26 @@ public class CatalogController(
             ViewBag.SimilarProducts = await catalog.FindSimilarProductsAsync(filter.Q);
 
         await ApplyCategorySeoAsync(filter);
+        ApplyDefaultCatalogSeo(filter);
 
         return View(items);
+    }
+
+    void ApplyDefaultCatalogSeo(ProductFilterQuery filter)
+    {
+        if (ViewData["CanonicalUrl"] is not string)
+        {
+            ViewData["CanonicalUrl"] = StorefrontUrls.CatalogCanonical(HttpContext, config, filter);
+            ViewData["OgTitle"] ??= ViewData["Title"] ?? "فروشگاه محصولات | فروشگاه موثقی";
+            ViewData["OgDescription"] ??= ViewData["MetaDescription"]
+                ?? "خرید عمده ظروف یکبار مصرف گیاهی آملون — فیلتر، مقایسه و استعلام قیمت از فروشگاه موثقی.";
+            ViewData["OgType"] = "website";
+            ViewData["OgUrl"] = ViewData["CanonicalUrl"];
+            ViewData["OgImage"] ??= AppPath.Absolute("/images/brand/originallogo.png", HttpContext);
+        }
+
+        if (StorefrontUrls.CatalogRobots(filter) is { } robots)
+            ViewData["Robots"] = robots;
     }
 
     /// <summary>لینک ادمین «مشاهده» — با روت پیش‌فرض MVC پارامتر سوم <c>id</c> است نه slug.</summary>
@@ -108,7 +129,7 @@ public class CatalogController(
         if (!string.IsNullOrWhiteSpace(title)) ViewData["Title"] = title;
         if (!string.IsNullOrWhiteSpace(metaDesc)) ViewData["MetaDescription"] = metaDesc;
 
-        var canonical = $"{Request.Scheme}://{Request.Host}/Catalog?category={Uri.EscapeDataString(category.Slug)}";
+        var canonical = StorefrontUrls.CatalogCanonical(HttpContext, config, filter);
         ViewData["CanonicalUrl"] = canonical;
         ViewData["OgTitle"] = title ?? category.Name;
         ViewData["OgDescription"] = metaDesc;

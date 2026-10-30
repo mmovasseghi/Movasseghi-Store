@@ -37,6 +37,10 @@
     {
         <link rel="canonical" href="@canonical" />
     }
+    @if (ViewData["Robots"] is string robotsContent && !string.IsNullOrWhiteSpace(robotsContent))
+    {
+        <meta name="robots" content="@robotsContent" />
+    }
     @if (ViewData["OgTitle"] is string ogTitle)
     {
         <meta property="og:title" content="@ogTitle" />
@@ -54,6 +58,7 @@
         @if (ViewData["OgImage"] is string twImg) { <meta name="twitter:image" content="@twImg" /> }
     }
     <meta name="theme-color" content="#2f4a3e" />
+    <link rel="icon" href="~/images/brand/originallogo.png" type="image/png" />
     @await Html.PartialAsync("_AppPathScript")
     @* فونت روی همین دامنه میزبانی می‌شود: قبلاً دو اتصال جداگانه به
        fonts.googleapis.com و fonts.gstatic.com لازم بود و CSS فونت هم رندر را
@@ -136,7 +141,7 @@
                 </span>
             </button>
             <a href="@AppPath.H("/", Context)" class="ms-logo-link">
-                <img src="~/images/brand/originallogo.png" alt="فروشگاه موثقی" class="ms-logo" width="320" height="104" fetchpriority="high" decoding="async" loading="eager" />
+                <img src="~/images/brand/originallogo.png" alt="فروشگاه موثقی" class="ms-logo" width="320" height="104" @(isHome ? null : "fetchpriority=\"high\"") decoding="async" loading="eager" />
             </a>
             <nav class="ms-top-nav" aria-label="ناوبری دسکتاپ">
                 @await Component.InvokeAsync("NavZone", new { zone = "header" })
@@ -443,7 +448,10 @@ else
     <script defer src="~/js/auth.js" asp-append-version="true"></script>
     <script defer src="~/js/site.js" asp-append-version="true"></script>
     <script defer src="~/js/product-card-dual.js" asp-append-version="true"></script>
-    <script defer src="~/js/desktop.js" asp-append-version="true"></script>
+    @if (isHome)
+    {
+        <script defer src="~/js/desktop.js" asp-append-version="true"></script>
+    }
 }
 @await RenderSectionAsync("Scripts", required: false)
 </body>

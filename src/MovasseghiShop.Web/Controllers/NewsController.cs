@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
 using Microsoft.EntityFrameworkCore;
 using MovasseghiShop.Web.Data;
 
@@ -6,6 +7,7 @@ namespace MovasseghiShop.Web.Controllers;
 
 public class NewsController(ApplicationDbContext db) : Controller
 {
+    [OutputCache(PolicyName = "PublicPage")]
     public async Task<IActionResult> Index(int page = 1)
     {
         const int pageSize = 9;
@@ -18,6 +20,7 @@ public class NewsController(ApplicationDbContext db) : Controller
         return View(await query.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync());
     }
 
+    [OutputCache(PolicyName = "PublicPage")]
     public async Task<IActionResult> Article(string slug)
     {
         var item = await db.NewsItems.FirstOrDefaultAsync(n => n.Slug == slug && n.IsPublished);

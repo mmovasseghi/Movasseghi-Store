@@ -217,7 +217,8 @@ builder.Services.AddOutputCache(options =>
         .Expire(TimeSpan.FromMinutes(5))
         .SetVaryByQuery("category", "productType", "packaging", "sort",
                         "capacity", "compartments", "microwave", "page", "q")
-        .SetVaryByHeader("Accept-Encoding"));
+        .SetVaryByHeader("Accept-Encoding")
+        .AddPolicy(MovasseghiShop.Web.Infrastructure.GuestPublicOutputCachePolicy.Instance));
 
     options.AddPolicy("StaticContent", policy => policy
         .Expire(TimeSpan.FromMinutes(30))

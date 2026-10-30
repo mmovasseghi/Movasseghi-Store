@@ -35,6 +35,20 @@
     {
         <link rel="stylesheet" href="~/css/ux-product.css" asp-append-version="true" />
     }
+    @{
+        var origin = StorefrontUrls.PublicBase(Context, Context.RequestServices.GetRequiredService<IConfiguration>());
+    }
+    @if (totalPages > 1 && string.IsNullOrWhiteSpace(q.Q))
+    {
+        if (q.Page > 1)
+        {
+            <link rel="prev" href="@(origin + AppPath.H(BuildPageUrl(q, q.Page - 1), Context))" />
+        }
+        if (q.Page < totalPages)
+        {
+            <link rel="next" href="@(origin + AppPath.H(BuildPageUrl(q, q.Page + 1), Context))" />
+        }
+    }
 }
 <div class="ms-wrap catalog-page">
     @if (categoryLanding?.HasHero == true)

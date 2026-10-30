@@ -166,6 +166,11 @@ SyslogIdentifier=movasseghi-shop
 WantedBy=multi-user.target
 EOF
 
+if [[ "${RUN_OPTIMIZE_IMAGES:-1}" == "1" ]]; then
+  echo "==> Optimizing uploaded images for LCP (set RUN_OPTIMIZE_IMAGES=0 to skip)..."
+  "$INSTALL_DIR/publish/MovasseghiShop.Web" --optimize-images || echo "WARN: --optimize-images failed"
+fi
+
 systemctl daemon-reload
 systemctl enable "$SERVICE_NAME"
 systemctl restart "$SERVICE_NAME"

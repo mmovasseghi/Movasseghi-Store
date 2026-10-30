@@ -40,7 +40,15 @@
   );
 
   function observe() {
-    document.querySelectorAll('.ms-reveal:not(.is-visible)').forEach((el) => observer.observe(el));
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    document.querySelectorAll('.ms-reveal:not(.is-visible)').forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < vh * 0.94 && rect.bottom > 0) {
+        show(el);
+        return;
+      }
+      observer.observe(el);
+    });
   }
 
   function observeImages() {

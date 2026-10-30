@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
 using Microsoft.EntityFrameworkCore;
 using MovasseghiShop.Web.Data;
 using MovasseghiShop.Web.Models;
@@ -11,6 +12,7 @@ public class ShopController(ApplicationDbContext db, IProductReviewService revie
 {
     public IActionResult Index() => RedirectToAction("Index", "Catalog");
 
+    [OutputCache(PolicyName = "PublicPage")]
     public async Task<IActionResult> Product(string slug)
     {
         var product = await ProductStorefrontResolver.ResolveActiveBySlugAsync(db, slug);

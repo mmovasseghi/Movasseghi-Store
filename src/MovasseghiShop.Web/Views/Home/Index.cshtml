@@ -25,6 +25,47 @@
     var latestNews = ((IEnumerable<NewsItem>)ViewBag.LatestNews ?? Enumerable.Empty<NewsItem>()).ToList();
     var productCount = (int)ViewBag.ProductCount;
     var heroProducts = featured.Take(4).Where(p => ProductImageHelper.GetDisplayUrl(ProductImageHelper.GetPrimary(p.Images), Env) != null).ToList();
+    var homeUrl = ViewData["CanonicalUrl"]?.ToString() ?? AppPath.Absolute("/", Context)!;
+    string? lcpImagePath = null;
+    if (heroProducts.FirstOrDefault() is Product lcpProduct)
+        lcpImagePath = ProductImageHelper.GetDisplayUrl(ProductImageHelper.GetPrimary(lcpProduct.Images), Env);
+}
+
+@section Head {
+    @using System.Text.Json
+    @if (!string.IsNullOrEmpty(lcpImagePath))
+    {
+        <link rel="preload" as="image" href="@AppPath.H(lcpImagePath, Context)" fetchpriority="high" />
+    }
+    <script type="application/ld+json">@Html.Raw(JsonSerializer.Serialize(new Dictionary<string, object?>
+    {
+        ["@context"] = "https://schema.org",
+        ["@type"] = "Store",
+        ["name"] = "فروشگاه موثقی",
+        ["url"] = homeUrl,
+        ["description"] = ViewData["MetaDescription"],
+        ["telephone"] = WholesaleRules.CoordinationPhone,
+        ["image"] = AppPath.Absolute("/images/brand/originallogo.png", Context),
+        ["address"] = new Dictionary<string, object?>
+        {
+            ["@type"] = "PostalAddress",
+            ["addressCountry"] = "IR",
+            ["addressLocality"] = "تهران"
+        }
+    }))</script>
+    <script type="application/ld+json">@Html.Raw(JsonSerializer.Serialize(new Dictionary<string, object?>
+    {
+        ["@context"] = "https://schema.org",
+        ["@type"] = "WebSite",
+        ["name"] = "فروشگاه موثقی",
+        ["url"] = homeUrl,
+        ["potentialAction"] = new Dictionary<string, object?>
+        {
+            ["@type"] = "SearchAction",
+            ["target"] = $"{homeUrl.TrimEnd('/')}{AppPath.H("/Catalog", Context)}?q={{search_term_string}}",
+            ["query-input"] = "required name=search_term_string"
+        }
+    }))</script>
 }
 
 <!-- استوری‌ها -->

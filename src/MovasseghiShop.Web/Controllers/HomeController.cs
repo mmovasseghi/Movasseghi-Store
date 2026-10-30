@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
 using Microsoft.EntityFrameworkCore;
 using MovasseghiShop.Web.Data;
 using MovasseghiShop.Web.Models;
@@ -11,13 +12,22 @@ public class HomeController(
     ApplicationDbContext db,
     IProductCatalogService catalog,
     IStudioContentService studio,
-    IHomeStoryService homeStories) : Controller
+    IHomeStoryService homeStories,
+    IConfiguration config) : Controller
 {
+    [OutputCache(PolicyName = "PublicPage")]
     public async Task<IActionResult> Index()
     {
         ViewData["Title"] = SiteKeywordStrategy.SiteTitle;
         ViewData["MetaDescription"] = SiteKeywordStrategy.SiteDescription;
         ViewData["MetaKeywords"] = SiteKeywordStrategy.MetaKeywords;
+        var homeUrl = StorefrontUrls.PublicBase(HttpContext, config) + AppPath.H("/", HttpContext);
+        ViewData["CanonicalUrl"] = homeUrl;
+        ViewData["OgTitle"] = SiteKeywordStrategy.SiteTitle;
+        ViewData["OgDescription"] = SiteKeywordStrategy.SiteDescription;
+        ViewData["OgType"] = "website";
+        ViewData["OgUrl"] = homeUrl;
+        ViewData["OgImage"] = AppPath.Absolute("/images/brand/originallogo.png", HttpContext);
 
         ViewBag.HomeSections = await studio.GetHomeSectionsAsync();
         var types = await catalog.GetProductTypesAsync();
