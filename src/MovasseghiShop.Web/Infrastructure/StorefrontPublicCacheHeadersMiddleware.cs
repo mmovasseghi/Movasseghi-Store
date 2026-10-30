@@ -41,16 +41,40 @@ public sealed class StorefrontPublicCacheHeadersMiddleware(RequestDelegate next)
         if (!CartLooksEmpty(context, cart))
             return false;
 
+        var path = context.Request.Path.Value ?? "/";
+        if (path.StartsWith("/Admin", StringComparison.OrdinalIgnoreCase)
+            || path.StartsWith("/Account", StringComparison.OrdinalIgnoreCase)
+            || path.StartsWith("/Checkout", StringComparison.OrdinalIgnoreCase)
+            || path.StartsWith("/Cart", StringComparison.OrdinalIgnoreCase))
+            return false;
+
+        if (path == "/" || path.Equals("/Home", StringComparison.OrdinalIgnoreCase))
+        {
+            maxAge = 900;
+            return true;
+        }
+
+        if (path.StartsWith("/Catalog", StringComparison.OrdinalIgnoreCase)
+            || path.StartsWith("/Shop", StringComparison.OrdinalIgnoreCase)
+            || path.StartsWith("/Blog", StringComparison.OrdinalIgnoreCase)
+            || path.StartsWith("/News", StringComparison.OrdinalIgnoreCase)
+            || path.StartsWith("/sitemap", StringComparison.OrdinalIgnoreCase)
+            || path.Equals("/robots.txt", StringComparison.OrdinalIgnoreCase)
+            || path.Equals("/llms.txt", StringComparison.OrdinalIgnoreCase))
+        {
+            maxAge = 300;
+            return true;
+        }
+
         var controller = context.GetRouteData().Values["controller"]?.ToString();
-        if (string.IsNullOrEmpty(controller) || !PublicControllers.Contains(controller))
-            return false;
+        if (!string.IsNullOrEmpty(controller) && PublicControllers.Contains(controller)
+            && string.IsNullOrEmpty(context.GetRouteData().Values["area"]?.ToString()))
+        {
+            maxAge = string.Equals(controller, "Home", StringComparison.OrdinalIgnoreCase) ? 900 : 300;
+            return true;
+        }
 
-        var area = context.GetRouteData().Values["area"]?.ToString();
-        if (!string.IsNullOrEmpty(area))
-            return false;
-
-        maxAge = string.Equals(controller, "Home", StringComparison.OrdinalIgnoreCase) ? 900 : 300;
-        return true;
+        return false;
     }
 
     static bool CartLooksEmpty(HttpContext context, ICartService cart)
