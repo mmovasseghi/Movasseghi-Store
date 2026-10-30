@@ -1,4 +1,3 @@
-@using System.Text.Json
 @using MovasseghiShop.Web.Models
 @inject IWebHostEnvironment Env
 @using MovasseghiShop.Web.Models.Entities
@@ -29,7 +28,6 @@
     string? lcpImagePath = null;
     if (heroProducts.FirstOrDefault() is Product lcpProduct)
         lcpImagePath = ProductImageHelper.GetLcpDisplayUrl(ProductImageHelper.GetPrimary(lcpProduct.Images), Env);
-    var homeStoriesJson = JsonSerializer.Serialize(storyItems, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
 }
 
 @section Head {
@@ -66,7 +64,7 @@
     </div>
     </div>
 </section>
-<script type="application/json" id="msStoriesData" data-stories-src="@AppPath.H("/Home/Stories.json", Context)">@Html.Raw(homeStoriesJson)</script>
+<div id="msStoriesData" hidden data-stories-src="@AppPath.H("/Home/Stories.json", Context)"></div>
 
 <!-- هیرو — LCP تصویر محصول -->
 <section class="ms-hero" id="ms-hero" data-hero-slider>

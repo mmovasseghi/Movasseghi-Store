@@ -6,9 +6,6 @@
     var pageTitle = ViewData["Title"]?.ToString();
     var logo = AppPath.Absolute("/images/brand/originallogo.png", Context);
     var searchUrl = $"{homeUrl.TrimEnd('/')}{AppPath.H("/Catalog", Context)}?q={{search_term_string}}";
-    var blocks = StorefrontHomeJsonLd.BuildBlocks(homeUrl, metaDescription, pageTitle, logo, searchUrl);
+    var graph = StorefrontHomeJsonLd.BuildGraphDocument(homeUrl, metaDescription, pageTitle, logo, searchUrl);
 }
-@foreach (var block in blocks)
-{
-    @StorefrontJsonLd.Script(block)
-}
+@StorefrontJsonLd.Script(graph)

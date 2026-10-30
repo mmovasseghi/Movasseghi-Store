@@ -116,4 +116,32 @@ public static class StorefrontHomeJsonLd
             }).ToArray()
         };
     }
+
+    /// <summary>یک بلوک JSON-LD برای parse سریع‌تر Lighthouse (به‌جای چند تگ script).</summary>
+    public static object BuildGraphDocument(
+        string homeUrl,
+        string? metaDescription,
+        string? pageTitle,
+        string? logoAbsolute,
+        string catalogSearchUrl)
+    {
+        var nodes = BuildBlocks(homeUrl, metaDescription, pageTitle, logoAbsolute, catalogSearchUrl)
+            .Select(static block =>
+            {
+                if (block is Dictionary<string, object?> d)
+                {
+                    var node = new Dictionary<string, object?>(d);
+                    node.Remove("@context");
+                    return (object)node;
+                }
+                return block;
+            })
+            .ToArray();
+
+        return new Dictionary<string, object?>
+        {
+            ["@context"] = "https://schema.org",
+            ["@graph"] = nodes
+        };
+    }
 }

@@ -3,6 +3,7 @@ set -euo pipefail
 export PATH="/usr/share/dotnet:/usr/local/bin:/usr/bin:/bin"
 INSTALL_DIR="/MOVASSEGHISTORE"
 cd "$INSTALL_DIR/src"
+git pull --ff-only origin main || true
 PUBLISH_NEW="$INSTALL_DIR/publish-next"
 rm -rf "$PUBLISH_NEW"
 dotnet publish src/MovasseghiShop.Web/MovasseghiShop.Web.csproj \
@@ -18,8 +19,17 @@ cp -a "$INSTALL_DIR/publish-old/movasseghi.db" \
 if [[ -d "$INSTALL_DIR/publish-old/App_Data" ]]; then
   cp -a "$INSTALL_DIR/publish-old/App_Data" "$INSTALL_DIR/publish/"
 fi
+if [[ -d "$INSTALL_DIR/publish-old/wwwroot/images" ]]; then
+  mkdir -p "$INSTALL_DIR/publish/wwwroot/images"
+  cp -a "$INSTALL_DIR/publish-old/wwwroot/images/." "$INSTALL_DIR/publish/wwwroot/images/" 2>/dev/null || true
+fi
 chown -R www-data:www-data "$INSTALL_DIR/publish"
+if [[ "${RUN_OPTIMIZE_IMAGES:-1}" == "1" ]]; then
+  echo "==> Optimizing product images (-lcp.webp for hero)..."
+  (cd "$INSTALL_DIR/publish" && "$INSTALL_DIR/publish/MovasseghiShop.Web" --optimize-images) || echo "WARN: --optimize-images failed"
+fi
 systemctl start movasseghi-shop
 sleep 6
-curl -s -o /dev/null -w "media:%{http_code}:%{size_download}\n" \
-  "http://127.0.0.1:5080/media/320/images/products/0056/01.webp"
+curl -s -o /dev/null -w "home:%{http_code}\n" --max-time 15 http://127.0.0.1:5080/
+curl -s -o /dev/null -w "lcp:%{http_code}:%{size_download}\n" \
+  --max-time 10 "http://127.0.0.1:5080/images/products/0056/01-lcp.webp" || echo "lcp:missing"

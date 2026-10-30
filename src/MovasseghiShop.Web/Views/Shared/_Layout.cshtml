@@ -475,13 +475,6 @@
 {
     <script defer src="~/js/scroll-reveal.js" asp-append-version="true"></script>
 }
-@if (isHome)
-{
-    <script defer src="~/js/ms-gsap-boot.js" asp-append-version="true"
-            data-when="load"
-            data-gsap="@Url.Content("~/js/vendor/gsap.min.js")"
-            data-scroll="@Url.Content("~/js/vendor/ScrollTrigger.min.js")"></script>
-}
 @if (isLocalTunnel)
 {
     <script type="text/tunnel" data-src="@Url.Content("~/js/auth.js")"></script>
@@ -505,8 +498,7 @@ else
     }
     @if (isHome)
     {
-        @* GSAP فقط دسکتاپ و بعد از load — TBT/LCP حفظ شود *@
-        <script defer src="~/js/home-desktop.js" asp-append-version="true"></script>
+        @* scroll-reveal بعد از site/home — GSAP فقط روی صفحات غیرخانه (LCP/TBT) *@
         <script defer src="~/js/scroll-reveal.js" asp-append-version="true"></script>
     }
 }
