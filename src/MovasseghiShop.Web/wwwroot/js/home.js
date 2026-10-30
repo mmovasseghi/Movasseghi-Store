@@ -190,10 +190,11 @@
   });
 
   if (isMobile()) {
-    window.addEventListener('load', () => { if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh(); });
-    return;
-  }
-
+    window.addEventListener('load', () => {
+      window.MsScrollReveal?.refresh?.();
+      if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+    });
+  } else {
   reveal('.ms-features-band', { opacity: 0, y: 24, duration: 0.6, ease: 'power3.out' }, '.ms-features', 'top 92%');
   reveal('.ms-feature-card:not(.ms-feature-card--dup)', {
     opacity: 0, y: 28, scale: 0.92, stagger: 0.1, duration: 0.55, ease: 'back.out(1.7)', delay: 0.15
@@ -271,14 +272,12 @@
     opacity: 0, y: 20, stagger: 0.1, duration: 0.5, ease: 'power3.out'
   }, '.ms-offers', 'top 90%');
 
+  window.addEventListener('load', () => ScrollTrigger.refresh());
+  }
+
   document.querySelectorAll('.ms-product, .ms-offer-card, .ms-cat-chip, .ms-seg-tile, .ms-feat-card, .ms-news-card').forEach(card => {
+    if (typeof gsap === 'undefined') return;
     card.addEventListener('touchstart', () => gsap.to(card, { scale: 0.96, duration: 0.1 }), { passive: true });
     card.addEventListener('touchend', () => gsap.to(card, { scale: 1, duration: 0.25, ease: 'back.out(2)' }), { passive: true });
   });
-
-  if (!isMobile()) {
-    /* Desktop hover lift handled by ux-desktop.css + desktop.js 3D tilt */
-  }
-
-  window.addEventListener('load', () => ScrollTrigger.refresh());
 })();

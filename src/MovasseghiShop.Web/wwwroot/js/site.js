@@ -562,13 +562,13 @@
 
   /* ── Promo bar animation ── */
   const promoBar = document.querySelector('[data-promo-bar]');
-  if (promoBar && hasGsap && !reduced) {
+  if (promoBar && hasGsap && !snappyUi()) {
     gsap.from(promoBar, { y: -40, opacity: 0, duration: 0.6, ease: 'power3.out', delay: 0.1 });
   }
 
-  /* ── Footer animations ── */
+  /* ── Footer animations (desktop only — mobile uses CSS scroll-reveal) ── */
   const footer = document.querySelector('[data-footer]');
-  if (footer && hasGsap && !reduced) {
+  if (footer && hasGsap && !snappyUi()) {
     gsap.from('[data-footer-brand]', {
       scrollTrigger: { trigger: footer, start: 'top 92%', once: true },
       opacity: 0, y: 36, duration: 0.7, ease: 'power3.out'
@@ -621,18 +621,7 @@
   if (document.fonts?.ready) document.fonts.ready.then(syncFabPosition);
   setTimeout(syncFabPosition, 150);
 
-  if (fabCall && hasGsap && !reduced) {
+  if (fabCall && hasGsap && !snappyUi()) {
     gsap.from(fabCall, { scale: 0, opacity: 0, duration: 0.6, ease: 'back.out(2)', delay: 0.8 });
-  }
-
-  /* ── Global reveal (skip sections animated in home.js) ── */
-  if (hasGsap && !reduced && !touchUi()) {
-    gsap.utils.toArray('.ms-reveal:not(.ms-hero):not(.ms-stories):not(.ms-features):not(.ms-offers):not(.ms-cat-section):not(.ms-featured-section):not(.ms-segments):not(.ms-closing):not(.ms-news)').forEach(el => {
-      gsap.from(el, {
-        scrollTrigger: { trigger: el, start: 'top 92%', once: true },
-        opacity: 0, y: 32, duration: 0.65, ease: 'power3.out',
-        clearProps: 'opacity,transform'
-      });
-    });
   }
 })();

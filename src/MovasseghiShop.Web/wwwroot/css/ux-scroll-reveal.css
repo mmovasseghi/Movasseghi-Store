@@ -1,0 +1,61 @@
+/* Scroll reveal — محتوا در HTML برای SEO/crawler؛ فقط با کلاس js انیمیشن فعال می‌شود */
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js.ms-motion .ms-reveal:not(.is-visible) {
+    opacity: 0;
+    transform: translate3d(0, 1.65rem, 0);
+  }
+
+  html.js.ms-motion .ms-reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  html.js.ms-motion [data-reveal-stagger] > *:not(.is-visible) {
+    opacity: 0;
+    transform: translate3d(0, 1.1rem, 0);
+  }
+
+  html.js.ms-motion [data-reveal-stagger] > *.is-visible {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--ms-reveal-delay, 0s);
+  }
+}
+
+/* Lazy image fade-in (native loading="lazy" — بدون JS هم کار می‌کند) */
+img[data-ms-lazy] {
+  background: linear-gradient(110deg, #eef2ef 8%, #f8faf9 18%, #eef2ef 33%);
+  background-size: 200% 100%;
+}
+
+html.js.ms-motion img[data-ms-lazy]:not(.is-loaded):not(.is-error) {
+  animation: msLazyShimmer 1.4s ease-in-out infinite;
+}
+
+html.js.ms-motion img[data-ms-lazy].is-loaded {
+  animation: none;
+  background: none;
+}
+
+@keyframes msLazyShimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+/* رندر سریع‌تر بخش‌های پایین صفحه (محتوا در DOM می‌ماند) */
+.ms-page-home .ms-offers,
+.ms-page-home .ms-featured-section,
+.ms-page-home .ms-segments,
+.ms-page-home .ms-news,
+.ms-page-home .ms-closing,
+.ms-footer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 420px;
+}

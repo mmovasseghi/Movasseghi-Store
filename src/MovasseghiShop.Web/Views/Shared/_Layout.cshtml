@@ -21,6 +21,7 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="utf-8" />
+    <script>document.documentElement.classList.add('js');</script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>@title</title>
     <meta name="description" content="@metaDescription" />
@@ -64,6 +65,7 @@
     <link rel="stylesheet" href="~/css/ux-mobile.css" asp-append-version="true" media="@(isLocalTunnel ? "not all" : null)" />
     <link rel="stylesheet" href="~/css/ux-desktop.css" asp-append-version="true" media="@(isLocalTunnel ? "not all" : "(min-width: 768px)")" />
     <link rel="stylesheet" href="~/css/ux-product-dual.css" asp-append-version="true" media="@(isLocalTunnel ? "not all" : null)" />
+    <link rel="stylesheet" href="~/css/ux-scroll-reveal.css" asp-append-version="true" media="@(isLocalTunnel ? "not all" : null)" />
     @await RenderSectionAsync("Head", required: false)
     @if (isLocalTunnel)
     {
@@ -134,7 +136,7 @@
                 </span>
             </button>
             <a href="@AppPath.H("/", Context)" class="ms-logo-link">
-                <img src="~/images/brand/originallogo.png" alt="فروشگاه موثقی" class="ms-logo" width="320" height="104" />
+                <img src="~/images/brand/originallogo.png" alt="فروشگاه موثقی" class="ms-logo" width="320" height="104" fetchpriority="high" decoding="async" loading="eager" />
             </a>
             <nav class="ms-top-nav" aria-label="ناوبری دسکتاپ">
                 @await Component.InvokeAsync("NavZone", new { zone = "header" })
@@ -427,6 +429,7 @@
 @* GSAP از jsDelivr می‌آمد: یک اتصال شخص‌ثالث اضافه، بدون کش طولانی‌مدت خودمان
    و بدون defer (پارسر را متوقف می‌کرد). حالا محلی و deferred است؛ ترتیب اجرای
    اسکریپت‌ها با defer دقیقاً همان ترتیب سند می‌ماند. *@
+<script defer src="~/js/scroll-reveal.js" asp-append-version="true"></script>
 <script defer src="~/js/vendor/gsap.min.js" asp-append-version="true"></script>
 <script defer src="~/js/vendor/ScrollTrigger.min.js" asp-append-version="true"></script>
 @if (isLocalTunnel)

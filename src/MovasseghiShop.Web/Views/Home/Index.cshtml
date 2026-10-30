@@ -30,7 +30,7 @@
 <!-- استوری‌ها -->
 <section class="ms-stories ms-reveal">
     <div class="ms-wrap ms-stories-inner">
-    <div class="ms-stories-track" data-stories>
+    <div class="ms-stories-track" data-stories data-reveal-stagger>
         @foreach (var story in storyItems)
         {
             <button type="button" class="ms-story" data-story-id="@story.Id" aria-label="@story.Label">
@@ -114,7 +114,7 @@
                                     var img = ProductImageHelper.GetDisplayUrl(ProductImageHelper.GetPrimary(hp.Images), Env);
                                     <div class="ms-hero-product">
                                         <span class="ms-hero-ring" aria-hidden="true"></span>
-                                        <img src="@AppPath.H(img, Context)" alt="@hp.Name" width="240" height="240" @(si == 0 ? "fetchpriority=\"high\"" : "loading=\"lazy\"") />
+                                        <img src="@AppPath.H(img, Context)" alt="@hp.Name" width="240" height="240" decoding="async" @(si == 0 ? "fetchpriority=\"high\"" : "loading=\"lazy\" data-ms-lazy=\"true\"") />
                                     </div>
                                 }
                             </div>
@@ -259,7 +259,7 @@
                 <em>:</em>
                 <span><b data-cd-s>۰۰</b><small>ثانیه</small></span>
             </div>
-            <div class="ms-offers-scroll" data-offers-scroll>
+            <div class="ms-offers-scroll" data-offers-scroll data-reveal-stagger>
                 @foreach (var p in specialOffers)
                 {
                     var offerSellable = ProductStorefrontResolver.GetSellableVariants(p.Variants);
@@ -331,7 +331,7 @@
                 </div>
                 <a href="@AppPath.H("/Catalog", Context)" class="ms-featured-all">همه ←</a>
             </header>
-            <div class="ms-featured-grid" data-featured-grid>
+            <div class="ms-featured-grid" data-featured-grid data-reveal-stagger>
                 @foreach (var p in featured.Take(8))
                 {
                     var featSellable = ProductStorefrontResolver.GetSellableVariants(p.Variants);
@@ -397,7 +397,7 @@
                 <h2>مناسب چه کسب‌وکارهایی؟</h2>
                 <p>مسیر سریع به محصولات مورد نیاز شما</p>
             </header>
-            <div class="ms-segments-grid" data-segments-grid>
+            <div class="ms-segments-grid" data-segments-grid data-reveal-stagger>
                 @foreach (var seg in wholesaleSegments)
                 {
                     <a href="@AppPath.H(seg.Url, Context)" class="ms-seg-tile">
@@ -465,7 +465,7 @@
                 </div>
                 <a href="@AppPath.H("/News", Context)" class="ms-news-all">همه اخبار ←</a>
             </header>
-            <div class="ms-news-track" data-news-track>
+            <div class="ms-news-track" data-news-track data-reveal-stagger>
                 @{ var feedIdx = 0; }
                 @foreach (var item in latestNews)
                 {
@@ -517,7 +517,7 @@
                 </div>
                 <a href="@AppPath.H("/Blog", Context)" class="ms-news-all">همه مطالب ←</a>
             </header>
-            <div class="ms-news-track" data-news-track>
+            <div class="ms-news-track" data-news-track data-reveal-stagger>
                 @{ var newsIdx = 0; }
                 @foreach (var post in latestBlog)
                 {
