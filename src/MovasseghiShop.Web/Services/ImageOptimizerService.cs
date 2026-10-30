@@ -154,8 +154,17 @@ public class ImageOptimizerService(IWebHostEnvironment env, ILogger<ImageOptimiz
     {
         if (!string.IsNullOrEmpty(env.WebRootPath))
             return env.WebRootPath;
-        var candidate = Path.Combine(env.ContentRootPath, "wwwroot");
-        return Directory.Exists(candidate) ? candidate : null;
+
+        foreach (var basePath in new[] { env.ContentRootPath, AppContext.BaseDirectory, Directory.GetCurrentDirectory() })
+        {
+            if (string.IsNullOrWhiteSpace(basePath))
+                continue;
+            var candidate = Path.Combine(basePath.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar), "wwwroot");
+            if (Directory.Exists(candidate))
+                return candidate;
+        }
+
+        return null;
     }
 
     static bool IsProductImagePath(string path)

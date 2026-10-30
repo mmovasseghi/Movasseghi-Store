@@ -168,7 +168,7 @@ EOF
 
 if [[ "${RUN_OPTIMIZE_IMAGES:-1}" == "1" ]]; then
   echo "==> Optimizing uploaded images for LCP (set RUN_OPTIMIZE_IMAGES=0 to skip)..."
-  "$INSTALL_DIR/publish/MovasseghiShop.Web" --optimize-images || echo "WARN: --optimize-images failed"
+  (cd "$INSTALL_DIR/publish" && "$INSTALL_DIR/publish/MovasseghiShop.Web" --optimize-images) || echo "WARN: --optimize-images failed"
 fi
 
 systemctl daemon-reload
