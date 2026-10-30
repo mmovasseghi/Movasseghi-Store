@@ -70,15 +70,17 @@ public static class ProductImageHelper
             var lcpUrl = ToLcpVariantUrl(url);
             if (lcpUrl != url)
             {
-                if (!LcpCache.TryGetValue(lcpUrl, out var hasLcp))
+                if (LcpCache.TryGetValue(lcpUrl, out var hasLcp))
+                {
+                    if (hasLcp) return lcpUrl;
+                }
+                else
                 {
                     var relative = lcpUrl.TrimStart('/').Replace('/', Path.DirectorySeparatorChar);
-                    hasLcp = File.Exists(Path.Combine(webRoot, relative));
-                    LcpCache[lcpUrl] = hasLcp;
+                    var exists = File.Exists(Path.Combine(webRoot, relative));
+                    LcpCache[lcpUrl] = exists;
+                    if (exists) return lcpUrl;
                 }
-
-                if (hasLcp)
-                    return lcpUrl;
             }
         }
 

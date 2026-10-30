@@ -33,8 +33,8 @@ public class ImageOptimizerService(IWebHostEnvironment env, ILogger<ImageOptimiz
     /// <summary>بزرگ‌ترین ضلع مجاز. صفحه محصول حداکثر ~۷۰۰ پیکسل نشان می‌دهد؛ ۱۴۰۰ برای نمایشگر Retina و زوم کافی است.</summary>
     public const int MaxEdge = 1400;
 
-    /// <summary>هیرو صفحهٔ اول حداکثر ~۲۴۰px CSS — نسخهٔ LCP جدا ذخیره می‌شود.</summary>
-    public const int LcpMaxEdge = 640;
+    /// <summary>هیرو صفحهٔ اول ~۲۴۰px CSS — نسخهٔ LCP (~۲۵۶px) جدا ذخیره می‌شود.</summary>
+    public const int LcpMaxEdge = 256;
 
     public const int WebpQuality = 82;
 

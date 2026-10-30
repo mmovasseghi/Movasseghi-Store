@@ -1346,9 +1346,10 @@ body.ms-drawer-open,body.ms-modal-open,body.ms-sheet-open{overflow:hidden}
 .ms-story-icon-wrap::before{content:'';position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 35% 28%,rgba(255,255,255,.85),transparent 55%);pointer-events:none;z-index:1}
 .ms-icon-svg,.ms-story-svg{display:block;position:relative;z-index:2;width:44px;height:44px}
 
-/* Story viewer modal */
-.ms-story-modal{position:fixed;inset:0;z-index:700;display:grid;place-items:center;padding:1rem}
-.ms-story-modal[hidden]{display:none}
+/* Story viewer modal — فقط وقتی is-open است نمایش/کلیک بگیرد (overlay نامرئی کل سایت را قفل نکند) */
+.ms-story-modal{position:fixed;inset:0;z-index:700;display:none;place-items:center;padding:1rem;pointer-events:none}
+.ms-story-modal.is-open{display:grid;pointer-events:auto}
+.ms-story-modal[hidden]{display:none!important;pointer-events:none}
 .ms-story-open{overflow:hidden}
 .ms-story-modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,0);transition:background .4s ease;backdrop-filter:blur(0)}
 .ms-story-modal.is-open .ms-story-modal-backdrop{background:rgba(0,0,0,.88);backdrop-filter:blur(10px)}

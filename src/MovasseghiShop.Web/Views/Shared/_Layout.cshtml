@@ -500,6 +500,11 @@ else
     {
         <script defer src="~/js/product-card-dual.js" asp-append-version="true"></script>
     }
+    @if (isHome)
+    {
+        @* GSAP فقط دسکتاپ و بعد از load — TBT/LCP حفظ شود *@
+        <script defer src="~/js/home-desktop.js" asp-append-version="true"></script>
+    }
 }
 @await RenderSectionAsync("Scripts", required: false)
 </body>

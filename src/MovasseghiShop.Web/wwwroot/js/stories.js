@@ -91,10 +91,11 @@
 
   function close() {
     modal.classList.remove('is-open');
+    modal.hidden = true;
+    document.body.classList.remove('ms-story-open');
     stopTimer();
+    clearTimeout(closeTimer);
     closeTimer = setTimeout(() => {
-      modal.hidden = true;
-      document.body.classList.remove('ms-story-open');
       if (slidesEl) slidesEl.innerHTML = '';
     }, FADE_MS);
   }
