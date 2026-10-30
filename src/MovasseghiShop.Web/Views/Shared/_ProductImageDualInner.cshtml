@@ -7,7 +7,7 @@
     <div class="ms-product-dual__slide ms-product-dual__slide--studio" data-ms-dual-slide="studio">
         <div class="ms-product-shot">
             <div class="ms-product-stage">
-                <img class="ms-product-img-el" src="@U(Model.ImageUrl)" alt="@Model.Alt" width="@Model.Width" height="@Model.Height" loading="@Model.Loading" decoding="async" @(Model.FetchPriority ? "fetchpriority=\"high\"" : null) data-ms-lazy="@(Model.Loading == "lazy" ? "true" : null)" />
+                <img class="ms-product-img-el" src="@U(Model.ImageUrl)" alt="@Model.Alt" width="@Model.Width" height="@Model.Height" loading="@Model.Loading" decoding="async" fetchpriority="@(Model.FetchPriority ? "high" : null)" data-ms-lazy="@(Model.Loading == "lazy" ? "true" : null)" />
             </div>
         </div>
     </div>

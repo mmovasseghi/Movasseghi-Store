@@ -84,6 +84,13 @@ public class ImageOptimizerService(IWebHostEnvironment env, ILogger<ImageOptimiz
                 // فایل کوچک‌مقیاس ولی حجیم هم ارزش بازفشرده‌سازی دارد (مثلاً PNG بدون فشرده‌سازی)
                 if (!oversized && info.Length < 250 * 1024)
                 {
+                    if (!dryRun
+                        && file.EndsWith(".webp", StringComparison.OrdinalIgnoreCase)
+                        && IsProductImagePath(file)
+                        && !Path.GetFileName(file).Contains("-lcp", StringComparison.OrdinalIgnoreCase))
+                    {
+                        await TryWriteLcpVariantAsync(image, file, dryRun, ct);
+                    }
                     skipped++;
                     continue;
                 }
