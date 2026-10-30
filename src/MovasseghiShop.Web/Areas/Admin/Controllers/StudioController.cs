@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using MovasseghiShop.Web;
 using MovasseghiShop.Web.Data;
+using MovasseghiShop.Web.Models;
 using MovasseghiShop.Web.Models.Entities;
 using MovasseghiShop.Web.Services;
 using MovasseghiShop.Web.Services.Editorial;
