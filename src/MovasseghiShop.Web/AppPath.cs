@@ -2,7 +2,7 @@ using System.Text.RegularExpressions;
 
 namespace MovasseghiShop.Web;
 
-/// <summary>لینک‌های ریشه‌ای (/Catalog) را با PathBase (مثلاً /MOVASSEGHISTORE) یکی می‌کند.</summary>
+/// <summary>لینک‌های ریشه‌ای (/Catalog) را در صورت نیاز با PathBase (زیرمسیر reverse proxy) یکی می‌کند.</summary>
 public static class AppPath
 {
     static readonly Regex HtmlRootAttrRegex = new(

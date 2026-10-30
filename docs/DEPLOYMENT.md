@@ -12,6 +12,12 @@
 | nginx | reverse proxy + SSL (certbot) |
 | فضا | حداقل 2GB RAM، 10GB دیسک |
 
+## URL عمومی
+
+فروشگاه روی **ریشهٔ دامنه** سرو می‌شود (`PathBase` خالی در `appsettings.Production.json`). آدرس IP موقت: `http://185.93.88.81/` — بعد از DNS، `PUBLIC_BASE_URL=https://movasseghi.ir` برای `remote-install.sh`.
+
+مسیر `/MOVASSEGHISTORE/...` در nginx با **301** به ریشه redirect می‌شود (لینک‌های قدیمی).
+
 ## مسیر پیشنهادی روی سرور
 
 ```

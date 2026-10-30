@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Usage: smoke-test.sh [BASE_URL] [PATH_PREFIX]
-# Example: smoke-test.sh http://127.0.0.1 /MOVASSEGHISTORE
+# Example: smoke-test.sh http://127.0.0.1 ""
 set -euo pipefail
 BASE="${1:-http://127.0.0.1:5080}"
 PREFIX="${2:-}"

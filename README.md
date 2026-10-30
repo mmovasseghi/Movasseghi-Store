@@ -40,11 +40,12 @@ dotnet run --project src/MovasseghiShop.Web/MovasseghiShop.Web.csproj
 
 ## استقرار روی سرور
 
-مسیر پیشنهادی: **`/opt/MOVASSEGHISTORE`**
+فروشگاه روی **ریشهٔ دامنه** (`PathBase` خالی) — مثلاً `http://185.93.88.81/` یا `https://movasseghi.ir/`.
 
-```bash
-sudo bash deploy/linux/setup-from-github.sh /opt/MOVASSEGHISTORE
-```
+| محیط | مسیر فایل روی VPS | اسکریپت |
+|------|-------------------|---------|
+| سرور رسمی فعلی | `/MOVASSEGHISTORE/src` + `publish/` | `sudo PUBLIC_BASE_URL=http://185.93.88.81 bash deploy/linux/remote-install.sh` |
+| نصب جایگزین | `/opt/MOVASSEGHISTORE` | `sudo bash deploy/linux/setup-from-github.sh /opt/MOVASSEGHISTORE` |
 
 راهنمای کامل SSL، دیتابیس، nginx و به‌روزرسانی: **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)**
 

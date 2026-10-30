@@ -59,9 +59,10 @@ systemctl restart "$SERVICE_NAME"
 
 if command -v nginx >/dev/null 2>&1; then
   cp deploy/linux/nginx-movasseghi.conf /etc/nginx/sites-available/movasseghi
+  rm -f /etc/nginx/sites-enabled/default
   ln -sf /etc/nginx/sites-available/movasseghi /etc/nginx/sites-enabled/movasseghi
   nginx -t && systemctl reload nginx
 fi
 
-echo "==> Done. App listens on http://127.0.0.1:5080 (behind nginx on :80)"
+echo "==> Done. Site root via nginx :80 (Kestrel http://127.0.0.1:5080)"
 echo "==> Admin: /Admin/Auth/Login — change default admin password after first login."

@@ -3,6 +3,7 @@
 set -euo pipefail
 
 INSTALL_DIR="/MOVASSEGHISTORE"
+PUBLIC_BASE_URL="${PUBLIC_BASE_URL:-http://185.93.88.81}"
 REPO_PATH="mmovasseghi/Movasseghi-Store.git"
 if [[ -n "${GITHUB_TOKEN:-}" ]]; then
   REPO_URL="https://x-access-token:${GITHUB_TOKEN}@github.com/${REPO_PATH}"
@@ -117,16 +118,21 @@ if [[ ! -f "$INSTALL_DIR/publish/appsettings.Production.json" ]]; then
     "$INSTALL_DIR/publish/appsettings.Production.json"
 fi
 
-# First-time defaults only (preserve restored Production config)
-python3 - <<'PY'
-import json, pathlib
-p = pathlib.Path("/MOVASSEGHISTORE/publish/appsettings.Production.json")
+# Production URL at site root (PathBase empty). Override: PUBLIC_BASE_URL=https://movasseghi.ir
+export INSTALL_DIR PUBLIC_BASE_URL
+python3 - <<PY
+import json, os, pathlib
+install = os.environ["INSTALL_DIR"]
+public = os.environ["PUBLIC_BASE_URL"].rstrip("/")
+p = pathlib.Path(install) / "publish" / "appsettings.Production.json"
 data = json.loads(p.read_text(encoding="utf-8"))
 data["AllowedHosts"] = "*"
-data["PathBase"] = "/MOVASSEGHISTORE"
+data["PathBase"] = ""
 data.setdefault("ConnectionStrings", {})["DefaultConnection"] = "Data Source=movasseghi.db"
 data["SiteSettings"] = data.get("SiteSettings") or {}
-data["SiteSettings"]["PublicBaseUrl"] = "http://85.133.244.142/MOVASSEGHISTORE"
+data["SiteSettings"]["PublicBaseUrl"] = public
+gsc = data.setdefault("GoogleSearchConsole", {})
+gsc["PropertyUrl"] = public.rstrip("/") + "/"
 data.setdefault("EditorialGrowth", {})["Enabled"] = False
 data.setdefault("Seo", {}).setdefault("Maintenance", {})["RunFullCatalogOnStartup"] = False
 if not data.get("Security", {}).get("CheckoutHmacSecret"):
@@ -164,59 +170,9 @@ systemctl daemon-reload
 systemctl enable "$SERVICE_NAME"
 systemctl restart "$SERVICE_NAME"
 
-# nginx: shop under /MOVASSEGHISTORE only; root empty; keep /Airlock
-cat > /etc/nginx/sites-available/movasseghi-shop <<'NGX'
-server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-    server_name _;
-    client_max_body_size 32M;
-
-    location = / {
-        default_type text/plain;
-        return 204;
-    }
-
-    location /Airlock {
-        proxy_pass http://127.0.0.1:3000;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection "upgrade";
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-        proxy_cache_bypass $http_upgrade;
-    }
-
-    location = /MOVASSEGHISTORE {
-        return 301 /MOVASSEGHISTORE/;
-    }
-
-    # Absolute /images and /fonts from old HTML/CSS still hit the shop static files
-    location /images/ {
-        proxy_pass http://127.0.0.1:5080/MOVASSEGHISTORE/images/;
-        proxy_http_version 1.1;
-        proxy_set_header Host $host;
-    }
-    location /fonts/ {
-        proxy_pass http://127.0.0.1:5080/MOVASSEGHISTORE/fonts/;
-        proxy_http_version 1.1;
-        proxy_set_header Host $host;
-    }
-
-    location /MOVASSEGHISTORE/ {
-        proxy_pass http://127.0.0.1:5080/MOVASSEGHISTORE/;
-        proxy_http_version 1.1;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-    }
-}
-NGX
-
-rm -f /etc/nginx/sites-enabled/weswap-landing
+# nginx: shop at site root (same as deploy/linux/nginx-movasseghi.conf)
+cp "$INSTALL_DIR/src/deploy/linux/nginx-movasseghi.conf" /etc/nginx/sites-available/movasseghi-shop
+rm -f /etc/nginx/sites-enabled/default /etc/nginx/sites-enabled/weswap-landing
 ln -sf /etc/nginx/sites-available/movasseghi-shop /etc/nginx/sites-enabled/movasseghi-shop
 nginx -t
 systemctl reload nginx
@@ -224,7 +180,7 @@ systemctl reload nginx
 echo "==> Waiting for Kestrel (up to 3 min on warm DB)..."
 ready=0
 for _ in $(seq 1 36); do
-  code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 5 http://127.0.0.1:5080/MOVASSEGHISTORE/ 2>/dev/null || echo "000")
+  code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 5 http://127.0.0.1:5080/ 2>/dev/null || echo "000")
   if [[ "$code" == "200" ]]; then ready=1; break; fi
   sleep 5
 done
@@ -233,10 +189,10 @@ if [[ "$ready" -ne 1 ]]; then
   journalctl -u "$SERVICE_NAME" -n 25 --no-pager || true
 fi
 
-bash "$INSTALL_DIR/src/deploy/linux/smoke-test.sh" "http://127.0.0.1:5080" "/MOVASSEGHISTORE" || true
-bash "$INSTALL_DIR/src/deploy/linux/smoke-test.sh" "http://127.0.0.1" "/MOVASSEGHISTORE" || true
+bash "$INSTALL_DIR/src/deploy/linux/smoke-test.sh" "http://127.0.0.1:5080" "" || true
+bash "$INSTALL_DIR/src/deploy/linux/smoke-test.sh" "http://127.0.0.1" "" || true
 root_code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 5 http://127.0.0.1/ 2>/dev/null || echo "000")
-echo "Root / HTTP $root_code (expect 204)"
+echo "Root / HTTP $root_code (expect 200)"
 systemctl is-active "$SERVICE_NAME"
 
-echo "==> Install complete: http://85.133.244.142/MOVASSEGHISTORE/"
+echo "==> Install complete: ${PUBLIC_BASE_URL}/"
