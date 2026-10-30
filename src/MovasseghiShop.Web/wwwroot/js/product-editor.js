@@ -119,6 +119,8 @@
     return block;
   }
 
+  const adminUrl = (path) => (typeof window.appUrl === 'function' ? window.appUrl(path) : path);
+
   document.querySelectorAll('[data-gallery-file]').forEach(input => {
     input.addEventListener('change', async () => {
       const file = input.files?.[0];
@@ -147,7 +149,7 @@
       body.append('__RequestVerificationToken', antiforgery());
 
       try {
-        const resp = await fetch(`/Admin/Products/UploadGallery/${productId}`, {
+        const resp = await fetch(adminUrl(`/Admin/Products/UploadGallery/${productId}`), {
           method: 'POST',
           body,
           credentials: 'same-origin',
@@ -253,7 +255,7 @@
     input.classList.add('is-saving');
     if (hint) { hint.hidden = true; hint.classList.remove('is-ok', 'is-error'); }
     try {
-      const resp = await fetch(`/Admin/Products/UpdateImageAlt/${productId}`, {
+      const resp = await fetch(adminUrl(`/Admin/Products/UpdateImageAlt/${productId}`), {
         method: 'POST',
         body,
         credentials: 'same-origin',
@@ -317,7 +319,7 @@
       const body = new FormData();
       body.append('__RequestVerificationToken', antiforgery());
       try {
-        const resp = await fetch(`/Admin/Products/GenerateImageAlts/${productId}`, {
+        const resp = await fetch(adminUrl(`/Admin/Products/GenerateImageAlts/${productId}`), {
           method: 'POST',
           body,
           credentials: 'same-origin'

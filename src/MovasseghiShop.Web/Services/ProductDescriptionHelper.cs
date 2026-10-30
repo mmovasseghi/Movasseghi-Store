@@ -49,6 +49,15 @@ public static class ProductDescriptionHelper
         return body + specs;
     }
 
+    /// <summary>آیا متن ویرایشگر (بدون specs) برای قفل SEO یا نمایش فروشگاه کافی است؟</summary>
+    public static bool HasSubstantiveProse(string? proseHtml)
+    {
+        if (string.IsNullOrWhiteSpace(proseHtml)) return false;
+        var plain = SeoText.StripHtml(proseHtml).Trim();
+        if (plain.Length == 0) return false;
+        return SeoText.CountWords(plain) >= 12;
+    }
+
     static string StripSpecsSections(string html)
     {
         if (string.IsNullOrWhiteSpace(html)) return "";

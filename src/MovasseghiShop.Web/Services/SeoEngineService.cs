@@ -10,7 +10,7 @@ public interface ISeoEngineService
 {
     Task<SeoProfile> GetOrCreateProductProfileAsync(Product product, CancellationToken ct = default);
     Task<SeoScoreResult> AuditProductAsync(int productId, CancellationToken ct = default);
-    Task<SeoScoreResult> AutoFixProductAsync(int productId, CancellationToken ct = default);
+    Task<SeoScoreResult> AutoFixProductAsync(int productId, bool forceRegenerate = false, CancellationToken ct = default);
     Task<bool> CanPublishProductAsync(int productId, CancellationToken ct = default);
     (string Primary, string Secondary) SuggestKeywords(Product product);
     Task<BulkSeoResult> AutoFixAllProductsAsync(CancellationToken ct = default);
@@ -52,8 +52,13 @@ public class SeoEngineService(
     public async Task<SeoScoreResult> AuditProductAsync(int productId, CancellationToken ct = default) =>
         Map(await engine.AuditProductAsync(productId, ct));
 
-    public async Task<SeoScoreResult> AutoFixProductAsync(int productId, CancellationToken ct = default) =>
-        Map(await engine.AutoFixProductAsync(productId, 5, SeoProductContentMode.RegenerateWhenUnlocked, ct));
+    public async Task<SeoScoreResult> AutoFixProductAsync(int productId, bool forceRegenerate = false, CancellationToken ct = default)
+    {
+        var mode = forceRegenerate
+            ? SeoProductContentMode.ForceRegenerate
+            : SeoProductContentMode.RegenerateWhenUnlocked;
+        return Map(await engine.AutoFixProductAsync(productId, 5, mode, ct));
+    }
 
     public async Task<bool> CanPublishProductAsync(int productId, CancellationToken ct = default) =>
         (await engine.AuditProductAsync(productId, ct)).IsPublishReady;

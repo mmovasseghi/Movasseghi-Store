@@ -209,9 +209,15 @@ public class SeoAutoFixEngine(
         if (profile.LockProductDescription)
         {
             var lockedProse = ProductDescriptionHelper.GetProseForEditor(product.Description);
-            product.Description = ProductDescriptionHelper.MergeDescription(lockedProse, product);
-            product.UpdatedAt = DateTime.UtcNow;
-            return;
+            if (ProductDescriptionHelper.HasSubstantiveProse(lockedProse))
+            {
+                product.Description = ProductDescriptionHelper.MergeDescription(lockedProse, product);
+                product.UpdatedAt = DateTime.UtcNow;
+                await ApplyProductLightMaintenanceAsync(product, profile, ct);
+                return;
+            }
+
+            profile.LockProductDescription = false;
         }
 
         var gsc = await serp.GetSearchConsoleQueriesAsync(ct);

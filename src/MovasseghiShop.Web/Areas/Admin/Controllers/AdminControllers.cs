@@ -171,8 +171,16 @@ public class ProductsController(
         };
         db.Products.Add(product);
         await db.SaveChangesAsync();
-        await seo.AutoFixProductAsync(product.Id);
-        TempData["Success"] = "محصول ایجاد شد — SEO اولیه اعمال شد.";
+        try
+        {
+            await seo.AutoFixProductAsync(product.Id, forceRegenerate: true);
+            TempData["Success"] = "محصول ایجاد شد — SEO اولیه اعمال شد.";
+        }
+        catch (Exception)
+        {
+            TempData["Success"] = "محصول ایجاد شد.";
+            TempData["Warn"] = "SEO اولیه خودکار کامل نشد — در تب SEO دکمه «درست‌سازی خودکار SEO» را بزنید.";
+        }
         return RedirectToAction(nameof(Edit), new { id = product.Id });
     }
 
@@ -295,11 +303,7 @@ public class ProductsController(
         {
             var prose = (descriptionHtml ?? Request.Form["Description"].ToString() ?? model.Description ?? "").Trim();
             var existingProse = ProductDescriptionHelper.GetProseForEditor(product.Description);
-            if (string.IsNullOrWhiteSpace(prose) && !string.IsNullOrWhiteSpace(existingProse))
-            {
-                TempData["Warn"] = "متن توضیحات کامل از فرم نرسید — نسخهٔ قبلی در دیتابیس نگه داشته شد. صفحه را با Ctrl+F5 رفرش کنید و دوباره ذخیره کنید.";
-            }
-            else
+            if (ProductDescriptionHelper.HasSubstantiveProse(prose))
             {
                 product.Description = ProductDescriptionHelper.MergeDescription(prose, product);
 
@@ -312,6 +316,21 @@ public class ProductsController(
                 }
                 seoProfile.LockProductDescription = true;
                 seoProfile.UpdatedAt = DateTime.UtcNow;
+            }
+            else if (ProductDescriptionHelper.HasSubstantiveProse(existingProse)
+                     && !ProductDescriptionHelper.HasSubstantiveProse(prose))
+            {
+                TempData["Warn"] = "متن توضیحات کامل از فرم نرسید — نسخهٔ قبلی در دیتابیس نگه داشته شد. صفحه را با Ctrl+F5 رفرش کنید و دوباره ذخیره کنید.";
+            }
+            else if (!ProductDescriptionHelper.HasSubstantiveProse(existingProse))
+            {
+                var seoProfile = await db.SeoProfiles
+                    .FirstOrDefaultAsync(s => s.EntityType == "product" && s.EntityId == id);
+                if (seoProfile != null)
+                {
+                    seoProfile.LockProductDescription = false;
+                    seoProfile.UpdatedAt = DateTime.UtcNow;
+                }
             }
         }
         product.KeywordPrimary = model.KeywordPrimary?.Trim();

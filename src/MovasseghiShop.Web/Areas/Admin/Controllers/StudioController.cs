@@ -188,7 +188,18 @@ public class StudioController(
     {
         var wasActive = await db.Products.Where(p => p.Id == id).Select(p => p.IsActive).FirstOrDefaultAsync();
 
-        var score = await seo.AutoFixProductAsync(id);
+        SeoScoreResult score;
+        try
+        {
+            score = await seo.AutoFixProductAsync(id, forceRegenerate: true);
+        }
+        catch (Exception ex)
+        {
+            TempData["Error"] = $"Auto-Fix SEO ناموفق بود: {ex.Message}";
+            if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                return Redirect(AppPath.H(returnUrl, HttpContext));
+            return RedirectToAction("Edit", "Products", new { id, tab = "seo" });
+        }
 
         var product = await db.Products.FindAsync(id);
         if (product != null)
@@ -208,7 +219,7 @@ public class StudioController(
               + SeoPublishGateLabels.AutoFixFollowUpMessage(score);
         if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
             return Redirect(AppPath.H(returnUrl, HttpContext));
-        return RedirectToAction("Edit", "Products", new { id });
+        return RedirectToAction("Edit", "Products", new { id, tab = "seo" });
     }
 
     [HttpPost]

@@ -40,7 +40,7 @@
 
     ViewData["HeroTitle"] = System.Net.WebUtility.HtmlDecode(Model.Name);
 
-    ViewData["HeroSubtitle"] = $"کد {Model.ProductCode} · ویرایش محتوا، مشخصات و SEO";
+    ViewData["HeroSubtitle"] = $"کد {(string.IsNullOrWhiteSpace(Model.ProductCode) ? "—" : Model.ProductCode)} · ویرایش محتوا، مشخصات و SEO";
 
     ViewData["HeroBadge"] = ready ? SeoPublishGateLabels.VerifiedBadge : SeoPublishGateLabels.NotVerified;
 

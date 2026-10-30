@@ -241,7 +241,7 @@
                         <input type="hidden" name="productId" value="@entityId" />
                         <button type="submit" class="st-btn st-btn-gold st-btn-sm st-btn-block">تأیید همه پیشنهادی</button>
                     </form>
-                    <a class="st-btn st-btn-ghost st-btn-sm st-btn-block" href="/Admin/ProductReviewsAdmin?productId=@entityId&amp;status=pending">مدیریت نظرات</a>
+                    <a class="st-btn st-btn-ghost st-btn-sm st-btn-block" href="@AppPath.H($"/Admin/ProductReviewsAdmin?productId={entityId}&status=pending", Context)">مدیریت نظرات</a>
                 </div>
             </div>
         }
@@ -287,7 +287,7 @@
         <p class="st-seo-hint">برای دریافت گزارش، «@SeoPublishGateLabels.AutoFixButton» را بزنید.</p>
     }
 
-    <form method="post" action="@autoFixAction" class="st-seo-autofix">
+    <form method="post" action="@AppPath.H(autoFixAction, Context)" class="st-seo-autofix">
         @Html.AntiForgeryToken()
         <input type="hidden" name="id" value="@entityId" />
         <input type="hidden" name="returnUrl" value="@Context.Request.Path" />
