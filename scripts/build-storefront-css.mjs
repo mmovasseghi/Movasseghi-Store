@@ -10,7 +10,6 @@ const parts = [
   'ux-desktop.css',
   'ux-cart.css',
   'ux-product-dual.css',
-  'ux-scroll-reveal.css',
 ];
 
 let out = `/* storefront.bundle.css — generated ${new Date().toISOString().slice(0, 10)} */\n`;

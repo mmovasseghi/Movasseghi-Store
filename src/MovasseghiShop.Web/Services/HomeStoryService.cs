@@ -270,7 +270,7 @@ public class HomeStoryService(
 
         foreach (var t in types)
         {
-            if (storyItems.Count >= 12) break;
+            if (storyItems.Count >= 8) break;
 
             var url = $"/Catalog/ByType?type={Uri.EscapeDataString(t.Type)}";
             var slides = ProductSlides(productsWithImages.Where(p => p.ProductType == t.Type));

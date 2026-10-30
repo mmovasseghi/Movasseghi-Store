@@ -49,15 +49,15 @@
 }
 @section Head {
     <link rel="stylesheet" href="~/css/ux-product.css" asp-append-version="true" />
-    <script type="application/ld+json">@Html.Raw(JsonSerializer.Serialize(BuildProductSchema(Model, pageUrl, absImg, minPrice, hasPrice, reviewsSection.Average, reviewsSection.Count)))</script>
-    <script type="application/ld+json">@Html.Raw(JsonSerializer.Serialize(BuildBreadcrumbSchema(pageUrl, Model)))</script>
+    @StorefrontJsonLd.Script(BuildProductSchema(Model, pageUrl, absImg, minPrice, hasPrice, reviewsSection.Average, reviewsSection.Count))
+    @StorefrontJsonLd.Script(BuildBreadcrumbSchema(pageUrl, Model))
     @if (faqs.Count > 0)
     {
-        <script type="application/ld+json">@Html.Raw(JsonSerializer.Serialize(BuildFaqSchema(faqs)))</script>
+        @StorefrontJsonLd.Script(BuildFaqSchema(faqs))
     }
     @if (reviewsSection.Items.Count > 0)
     {
-        <script type="application/ld+json">@Html.Raw(JsonSerializer.Serialize(BuildReviewListSchema(reviewsSection, pageUrl)))</script>
+        @StorefrontJsonLd.Script(BuildReviewListSchema(reviewsSection, pageUrl))
     }
 }
 

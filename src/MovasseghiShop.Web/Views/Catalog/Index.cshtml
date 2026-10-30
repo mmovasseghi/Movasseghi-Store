@@ -116,18 +116,13 @@
             </nav>
 
             @* BreadcrumbList Schema — گوگل مسیر را در نتایج جستجو نمایش می‌دهد *@
-            <script type="application/ld+json">
-                @Html.Raw(System.Text.Json.JsonSerializer.Serialize(new Dictionary<string, object?>
-                {
-                    ["@context"] = "https://schema.org",
-                    ["@type"] = "BreadcrumbList",
-                    ["itemListElement"] = BuildCrumbs(
-                        $"{Context.Request.Scheme}://{Context.Request.Host}", crumbCategory, q.Category)
-                }, new System.Text.Json.JsonSerializerOptions
-                {
-                    Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
-                }))
-            </script>
+            @StorefrontJsonLd.Script(new Dictionary<string, object?>
+            {
+                ["@context"] = "https://schema.org",
+                ["@type"] = "BreadcrumbList",
+                ["itemListElement"] = BuildCrumbs(
+                    $"{Context.Request.Scheme}://{Context.Request.Host}", crumbCategory, q.Category)
+            })
 
             <partial name="_CatalogCategorySeo" model="categoryLanding" />
 

@@ -38,6 +38,47 @@ public static class ProductImageHelper
         return PreferWebp(url, env);
     }
 
+    public const int LcpMaxCssPx = 320;
+
+    /// <summary>نسخهٔ کوچک LCP: فایل <c>*-lcp.webp</c>، وگرنه <c>/media/480/…</c>.</summary>
+    public static string? GetLcpDisplayUrl(ProductImage? image, IWebHostEnvironment? env)
+    {
+        var url = GetDisplayUrl(image, env);
+        if (url is null || !IsLocal(url))
+            return url;
+
+        if (env is not null && !string.IsNullOrEmpty(env.WebRootPath))
+        {
+            var lcpUrl = ToLcpVariantUrl(url);
+            if (lcpUrl != url)
+            {
+                if (LcpCache.TryGetValue(lcpUrl, out var hasLcp))
+                {
+                    if (hasLcp) return lcpUrl;
+                }
+                else
+                {
+                    var relative = lcpUrl.TrimStart('/').Replace('/', Path.DirectorySeparatorChar);
+                    var exists = File.Exists(Path.Combine(env.WebRootPath, relative));
+                    LcpCache[lcpUrl] = exists;
+                    if (exists) return lcpUrl;
+                }
+            }
+        }
+
+        var path = url.TrimStart('/');
+        return $"/media/{LcpMaxCssPx}/{path}";
+    }
+
+    static string ToLcpVariantUrl(string displayUrl)
+    {
+        var dot = displayUrl.LastIndexOf('.');
+        if (dot <= 0) return displayUrl;
+        return displayUrl[..dot] + "-lcp.webp";
+    }
+
+    static readonly System.Collections.Concurrent.ConcurrentDictionary<string, bool> LcpCache = new();
+
     /// <summary>
     /// مسیر ذخیره‌شده در دیتابیس معمولاً به PNG اصلی اشاره می‌کند، در حالی که
     /// نسخه WebP هم کنارش روی دیسک هست. تا امروز همان PNG سنگین سرو می‌شد؛

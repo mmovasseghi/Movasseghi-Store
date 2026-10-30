@@ -27,163 +27,17 @@
     var homeUrl = ViewData["CanonicalUrl"]?.ToString() ?? AppPath.Absolute("/", Context)!;
     string? lcpImagePath = null;
     if (heroProducts.FirstOrDefault() is Product lcpProduct)
-        lcpImagePath = ProductImageHelper.GetDisplayUrl(ProductImageHelper.GetPrimary(lcpProduct.Images), Env);
+        lcpImagePath = ProductImageHelper.GetLcpDisplayUrl(ProductImageHelper.GetPrimary(lcpProduct.Images), Env);
 }
 
 @section Head {
-    @using System.Text.Json
     @if (!string.IsNullOrEmpty(lcpImagePath))
     {
         <link rel="preload" as="image" href="@AppPath.H(lcpImagePath, Context)" fetchpriority="high" imagesizes="(max-width: 767px) 55vw, 240px" />
     }
-    @{
-        var orgId = $"{homeUrl.TrimEnd('/')}#organization";
-        var localId = $"{homeUrl.TrimEnd('/')}#localbusiness";
-        var webPageId = homeUrl;
-        var faqEntities = StorefrontHomeSeo.FaqItems.Select(f => (object)new Dictionary<string, object?>
-        {
-            ["@type"] = "Question",
-            ["name"] = f.Question,
-            ["acceptedAnswer"] = new Dictionary<string, object?>
-            {
-                ["@type"] = "Answer",
-                ["text"] = f.Answer
-            }
-        }).ToArray();
-        var graph = new Dictionary<string, object?>
-        {
-            ["@context"] = "https://schema.org",
-            ["@graph"] = new object[]
-            {
-                new Dictionary<string, object?>
-                {
-                    ["@type"] = "Organization",
-                    ["@id"] = orgId,
-                    ["name"] = "فروشگاه موثقی",
-                    ["url"] = homeUrl,
-                    ["logo"] = AppPath.Absolute("/images/brand/originallogo.png", Context),
-                    ["telephone"] = WholesaleRules.CoordinationPhone,
-                    ["description"] = ViewData["MetaDescription"],
-                    ["address"] = new Dictionary<string, object?>
-                    {
-                        ["@type"] = "PostalAddress",
-                        ["addressCountry"] = "IR",
-                        ["addressLocality"] = "تهران",
-                        ["addressRegion"] = "تهران"
-                    }
-                },
-                new Dictionary<string, object?>
-                {
-                    ["@type"] = "LocalBusiness",
-                    ["@id"] = localId,
-                    ["name"] = "فروشگاه موثقی",
-                    ["image"] = AppPath.Absolute("/images/brand/originallogo.png", Context),
-                    ["telephone"] = WholesaleRules.CoordinationPhone,
-                    ["url"] = homeUrl,
-                    ["priceRange"] = "$$",
-                    ["parentOrganization"] = new Dictionary<string, object?> { ["@id"] = orgId },
-                    ["geo"] = new Dictionary<string, object?>
-                    {
-                        ["@type"] = "GeoCoordinates",
-                        ["latitude"] = StorefrontHomeSeo.TehranLatitude,
-                        ["longitude"] = StorefrontHomeSeo.TehranLongitude
-                    },
-                    ["areaServed"] = new Dictionary<string, object?>
-                    {
-                        ["@type"] = "Country",
-                        ["name"] = "Iran"
-                    }
-                },
-                new Dictionary<string, object?>
-                {
-                    ["@type"] = "Store",
-                    ["name"] = "فروشگاه موثقی",
-                    ["url"] = homeUrl,
-                    ["description"] = ViewData["MetaDescription"],
-                    ["telephone"] = WholesaleRules.CoordinationPhone,
-                    ["image"] = AppPath.Absolute("/images/brand/originallogo.png", Context),
-                    ["address"] = new Dictionary<string, object?>
-                    {
-                        ["@type"] = "PostalAddress",
-                        ["addressCountry"] = "IR",
-                        ["addressLocality"] = "تهران"
-                    }
-                },
-                new Dictionary<string, object?>
-                {
-                    ["@type"] = "WebSite",
-                    ["name"] = WholesaleRules.StoreNameFa,
-                    ["url"] = homeUrl,
-                    ["publisher"] = new Dictionary<string, object?> { ["@id"] = orgId },
-                    ["inLanguage"] = "fa-IR",
-                    ["potentialAction"] = new Dictionary<string, object?>
-                    {
-                        ["@type"] = "SearchAction",
-                        ["target"] = $"{homeUrl.TrimEnd('/')}{AppPath.H("/Catalog", Context)}?q={{search_term_string}}",
-                        ["query-input"] = "required name=search_term_string"
-                    }
-                },
-                new Dictionary<string, object?>
-                {
-                    ["@type"] = "WebPage",
-                    ["@id"] = webPageId,
-                    ["url"] = homeUrl,
-                    ["name"] = ViewData["Title"],
-                    ["description"] = ViewData["MetaDescription"],
-                    ["isPartOf"] = new Dictionary<string, object?> { ["@id"] = homeUrl },
-                    ["about"] = new Dictionary<string, object?> { ["@id"] = orgId },
-                    ["speakable"] = new Dictionary<string, object?>
-                    {
-                        ["@type"] = "SpeakableSpecification",
-                        ["cssSelector"] = new[] { ".ms-home-faq", ".ms-hero-title", ".ms-ai-brief" }
-                    }
-                },
-                new Dictionary<string, object?>
-                {
-                    ["@type"] = "FAQPage",
-                    ["mainEntity"] = faqEntities
-                }
-            }
-        };
-    }
-    @StorefrontJsonLd.Script(graph)
 }
 
-<!-- استوری‌ها -->
-<section class="ms-stories">
-    <div class="ms-wrap ms-stories-inner">
-    <div class="ms-stories-track" data-stories>
-        @{ var storyVisualIndex = 0; }
-        @foreach (var story in storyItems)
-        {
-            storyVisualIndex++;
-            <button type="button" class="ms-story" data-story-id="@story.Id" aria-label="@story.Label">
-                <span class="ms-story-ring">
-                    <span class="ms-story-icon-wrap">
-                        @if (!string.IsNullOrWhiteSpace(story.CoverImageUrl))
-                        {
-                            <img src="@AppPath.H(story.CoverImageUrl, Context)" alt="" class="ms-story-cover" width="76" height="76" loading="@(storyVisualIndex <= 6 ? "eager" : "lazy")" decoding="async" />
-                        }
-                        else
-                        {
-                            <partial name="_StoryIcon" model="story.IconKey" />
-                        }
-                    </span>
-                </span>
-                <span class="ms-story-label">@story.Label</span>
-            </button>
-        }
-    </div>
-    </div>
-</section>
-<div id="msStoriesData" hidden data-stories-src="@AppPath.H("/Home/Stories.json", Context)"></div>
-
-<p class="ms-wrap ms-ai-brief" id="about-movasseghi">
-    <strong>فروشگاه موثقی</strong> نمایندگی رسمی <strong>آملون</strong> در تهران؛ پخش عمده ظروف یکبار مصرف <strong>گیاهی</strong> برای رستوران، کافه، کیترینگ و فروشگاه.
-    حداقل سفارش @WholesaleRules.FormatMinAmount() تومان · تماس @WholesaleRules.CoordinationPhone · کاتالوگ در /Catalog
-</p>
-
-<!-- هیرو -->
+<!-- هیرو — اولین محتوای بدنه برای LCP -->
 <section class="ms-hero" id="ms-hero" data-hero-slider>
     <div class="ms-hero-wrap">
         <div class="ms-hero-stage">
@@ -240,10 +94,10 @@
                                 </div>
                                 @if (hp != null)
                                 {
-                                    var img = ProductImageHelper.GetDisplayUrl(ProductImageHelper.GetPrimary(hp.Images), Env);
+                                    var img = ProductImageHelper.GetLcpDisplayUrl(ProductImageHelper.GetPrimary(hp.Images), Env);
                                     <div class="ms-hero-product">
                                         <span class="ms-hero-ring" aria-hidden="true"></span>
-                                        <img src="@AppPath.H(img, Context)" alt="@hp.Name" width="240" height="240" sizes="(max-width: 767px) 55vw, 240px" @(si == 0 ? "decoding=\"sync\" loading=\"eager\" fetchpriority=\"high\"" : "decoding=\"async\" loading=\"lazy\" data-ms-lazy=\"true\"") />
+                                        <img src="@AppPath.H(img, Context)" alt="@hp.Name" width="240" height="240" sizes="(max-width: 767px) 55vw, 240px" @(si == 0 ? "decoding=\"async\" loading=\"eager\" fetchpriority=\"high\"" : "decoding=\"async\" loading=\"lazy\" data-ms-lazy=\"true\"") />
                                     </div>
                                 }
                             </div>
@@ -265,10 +119,10 @@
                             </div>
                             @if (heroProducts.FirstOrDefault() is Product hp1)
                             {
-                                var img1 = ProductImageHelper.GetDisplayUrl(ProductImageHelper.GetPrimary(hp1.Images), Env);
+                                var img1 = ProductImageHelper.GetLcpDisplayUrl(ProductImageHelper.GetPrimary(hp1.Images), Env);
                                 <div class="ms-hero-product">
                                     <span class="ms-hero-ring" aria-hidden="true"></span>
-                                    <img src="@AppPath.H(img1, Context)" alt="@hp1.Name" width="240" height="240" fetchpriority="high" decoding="async" sizes="(max-width: 767px) 55vw, 240px" />
+                                    <img src="@AppPath.H(img1, Context)" alt="@hp1.Name" width="240" height="240" fetchpriority="high" decoding="async" loading="eager" sizes="(max-width: 767px) 55vw, 240px" />
                                 </div>
                             }
                         </div>
@@ -279,7 +133,7 @@
                 <div class="ms-hero-trust-track">
                     <div class="ms-hero-trust-marquee">
                         <div class="ms-hero-trust-set">
-                            @for (var rep = 0; rep < 3; rep++)
+                            @for (var rep = 0; rep < 2; rep++)
                             {
                                 @foreach (var ti in trustItems)
                                 {
@@ -288,7 +142,7 @@
                             }
                         </div>
                         <div class="ms-hero-trust-set" aria-hidden="true">
-                            @for (var rep = 0; rep < 3; rep++)
+                            @for (var rep = 0; rep < 2; rep++)
                             {
                                 @foreach (var ti in trustItems)
                                 {
@@ -303,6 +157,40 @@
         <div class="ms-hero-dots" data-hero-dots></div>
     </div>
 </section>
+
+<p class="ms-wrap ms-ai-brief" id="about-movasseghi">
+    <strong>فروشگاه موثقی</strong> نمایندگی رسمی <strong>آملون</strong> در تهران؛ پخش عمده ظروف یکبار مصرف <strong>گیاهی</strong> برای رستوران، کافه، کیترینگ و فروشگاه.
+    حداقل سفارش @WholesaleRules.FormatMinAmount() تومان · تماس @WholesaleRules.CoordinationPhone · کاتالوگ در /Catalog
+</p>
+
+<!-- استوری‌ها -->
+<section class="ms-stories">
+    <div class="ms-wrap ms-stories-inner">
+    <div class="ms-stories-track" data-stories>
+        @{ var storyVisualIndex = 0; }
+        @foreach (var story in storyItems)
+        {
+            storyVisualIndex++;
+            <button type="button" class="ms-story" data-story-id="@story.Id" aria-label="@story.Label">
+                <span class="ms-story-ring">
+                    <span class="ms-story-icon-wrap">
+                        @if (!string.IsNullOrWhiteSpace(story.CoverImageUrl))
+                        {
+                            <img src="@AppPath.H(story.CoverImageUrl, Context)" alt="" class="ms-story-cover" width="76" height="76" loading="lazy" decoding="async" />
+                        }
+                        else
+                        {
+                            <partial name="_StoryIcon" model="story.IconKey" />
+                        }
+                    </span>
+                </span>
+                <span class="ms-story-label">@story.Label</span>
+            </button>
+        }
+    </div>
+    </div>
+</section>
+<div id="msStoriesData" hidden data-stories-src="@AppPath.H("/Home/Stories.json", Context)"></div>
 
 <!-- ویژگی‌ها — چرا موثقی -->
 <section class="ms-features ms-reveal" id="ms-features">
@@ -698,7 +586,6 @@
 </section>
 
 @section Scripts {
-    <script defer src="~/js/stories.js" asp-append-version="true"></script>
+    <script defer src="~/js/stories-lazy.js" asp-append-version="true" data-src="@Url.Content("~/js/stories.js")"></script>
     <script defer src="~/js/home.js" asp-append-version="true"></script>
-    <script defer src="~/js/home-desktop.js" asp-append-version="true" media="(min-width: 768px)"></script>
 }

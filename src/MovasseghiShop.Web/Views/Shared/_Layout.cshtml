@@ -22,6 +22,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    @if (isHome && ViewData["CanonicalUrl"] is string homeCanon && !string.IsNullOrWhiteSpace(homeCanon))
+    {
+        @await Html.PartialAsync("_HomeStructuredData", homeCanon)
+    }
     <title>@title</title>
     <meta name="description" content="@metaDescription" />
     <meta name="keywords" content="@metaKeywords" />
@@ -95,6 +99,7 @@
     else
     {
         <link rel="stylesheet" href="~/css/storefront.bundle.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/ux-scroll-reveal.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/css/prose.css" asp-append-version="true" />
     }
     @if (isLocalTunnel)
@@ -168,7 +173,7 @@
             <a href="@AppPath.H("/", Context)" class="ms-logo-link">
                 @if (isHome)
                 {
-                    <img src="~/images/brand/originallogo.png" alt="فروشگاه موثقی" class="ms-logo" width="320" height="104" decoding="async" loading="eager" fetchpriority="low" />
+                    <img src="~/images/brand/originallogo.png" alt="فروشگاه موثقی" class="ms-logo" width="320" height="104" decoding="async" loading="lazy" fetchpriority="low" />
                 }
                 else
                 {
@@ -361,7 +366,10 @@
         </div>
         <div class="ms-wrap ms-footer-inner">
             <div class="ms-footer-top">
-                <div class="ms-footer-brand" data-footer-brand>
+                <div class="ms-footer-brand" data-footer-brand itemscope itemtype="https://schema.org/Organization">
+                    <meta itemprop="name" content="فروشگاه موثقی" />
+                    <meta itemprop="url" content="@AppPath.Absolute("/", Context)" />
+                    <meta itemprop="telephone" content="@WholesaleRules.CoordinationPhone" />
                     <a href="@AppPath.H("/", Context)" class="ms-footer-logo-link"><img src="~/images/brand/blackandwhitelogo.png" alt="فروشگاه موثقی" class="ms-footer-logo" width="260" height="120" /></a>
                     <p class="ms-footer-tagline">نمایندگی رسمی آملون در تهران<br/>پخش عمده ظروف یکبار مصرف گیاهی</p>
                     <a href="tel:@WholesaleRules.CoordinationPhone" class="ms-footer-phone">
@@ -395,7 +403,7 @@
             <div class="ms-footer-trust-viewport">
                 <div class="ms-footer-trust-marquee" data-footer-trust>
                     <div class="ms-footer-trust-row">
-                        @for (var rep = 0; rep < 3; rep++)
+                        @for (var rep = 0; rep < 2; rep++)
                         {
                             <span>✓ نمایندگی رسمی</span>
                             <span>✓ اصل کارخانه</span>
@@ -405,7 +413,7 @@
                         }
                     </div>
                     <div class="ms-footer-trust-row" aria-hidden="true">
-                        @for (var rep = 0; rep < 3; rep++)
+                        @for (var rep = 0; rep < 2; rep++)
                         {
                             <span>✓ نمایندگی رسمی</span>
                             <span>✓ اصل کارخانه</span>
@@ -465,13 +473,9 @@
 @* GSAP از jsDelivr می‌آمد: یک اتصال شخص‌ثالث اضافه، بدون کش طولانی‌مدت خودمان
    و بدون defer (پارسر را متوقف می‌کرد). حالا محلی و deferred است؛ ترتیب اجرای
    اسکریپت‌ها با defer دقیقاً همان ترتیب سند می‌ماند. *@
-<script defer src="~/js/scroll-reveal.js" asp-append-version="true"></script>
-@if (isHome)
+@if (!isHome)
 {
-    <script defer src="~/js/ms-gsap-boot.js" asp-append-version="true"
-            data-when="load"
-            data-gsap="@Url.Content("~/js/vendor/gsap.min.js")"
-            data-scroll="@Url.Content("~/js/vendor/ScrollTrigger.min.js")"></script>
+    <script defer src="~/js/scroll-reveal.js" asp-append-version="true"></script>
 }
 @if (isLocalTunnel)
 {
@@ -484,15 +488,20 @@ else
     @if (isHome)
     {
         <script defer src="~/js/ms-auth-lazy.js" asp-append-version="true" data-auth-src="@Url.Content("~/js/auth.js")"></script>
+        <script defer src="~/js/site-defer-home.js" asp-append-version="true" data-src="@Url.Content("~/js/site.js")"></script>
     }
     else
     {
         <script defer src="~/js/auth.js" asp-append-version="true"></script>
+        <script defer src="~/js/site.js" asp-append-version="true"></script>
     }
-    <script defer src="~/js/site.js" asp-append-version="true"></script>
-    @if (isHome || isCatalog)
+    @if (isCatalog)
     {
         <script defer src="~/js/product-card-dual.js" asp-append-version="true"></script>
+    }
+    @if (isHome)
+    {
+        <script defer src="~/js/product-card-dual-lazy.js" asp-append-version="true" data-src="@Url.Content("~/js/product-card-dual.js")"></script>
     }
 }
 @await RenderSectionAsync("Scripts", required: false)

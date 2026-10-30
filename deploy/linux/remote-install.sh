@@ -4,7 +4,7 @@ set -euo pipefail
 
 INSTALL_DIR="/MOVASSEGHISTORE"
 PUBLIC_BASE_URL="${PUBLIC_BASE_URL:-http://185.93.88.81}"
-REPO_PATH="mmovasseghi/Movasseghi-Store.git"
+REPO_PATH="mmovasseghi/movasseghi-store.git"
 if [[ -n "${GITHUB_TOKEN:-}" ]]; then
   REPO_URL="https://x-access-token:${GITHUB_TOKEN}@github.com/${REPO_PATH}"
 else

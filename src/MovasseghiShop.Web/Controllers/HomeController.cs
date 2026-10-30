@@ -39,16 +39,16 @@ public class HomeController(
 
         var featured = await HomeFeaturedProductsSelector.LoadAsync(
             db.Products.AsNoTracking().Include(p => p.Images).Include(p => p.Variants));
-        ViewBag.FeaturedProducts = featured;
+        ViewBag.FeaturedProducts = featured.Take(6).ToList();
         ViewBag.ProductCount = await db.Products.CountAsync(p => p.IsActive);
 
         var storyItems = await homeStories.GetStoriesForHomeAsync();
         ViewBag.StoryItems = storyItems;
-        ViewBag.CategoryTypes = types.Select(t => (t.Type, t.Count)).ToList();
+        ViewBag.CategoryTypes = types.Select(t => (t.Type, t.Count)).Take(12).ToList();
 
         var specialOffers = await HomeSpecialOffersSelector.LoadAsync(
             db.Products.AsNoTracking().Include(p => p.Images).Include(p => p.Variants));
-        ViewBag.SpecialOffers = specialOffers;
+        ViewBag.SpecialOffers = specialOffers.Take(6).ToList();
 
         var wholesaleFromDb = HomeSectionConfigParser.ParseWholesaleSegments(
             ViewBag.HomeSections is Dictionary<string, HomeSection> hs && hs.TryGetValue("wholesale", out var ws) ? ws.ConfigJson : null);

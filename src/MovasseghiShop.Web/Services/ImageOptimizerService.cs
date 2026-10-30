@@ -33,6 +33,9 @@ public class ImageOptimizerService(IWebHostEnvironment env, ILogger<ImageOptimiz
     /// <summary>بزرگ‌ترین ضلع مجاز. صفحه محصول حداکثر ~۷۰۰ پیکسل نشان می‌دهد؛ ۱۴۰۰ برای نمایشگر Retina و زوم کافی است.</summary>
     public const int MaxEdge = 1400;
 
+    /// <summary>هیرو صفحهٔ اول حداکثر ~۲۴۰px CSS — نسخهٔ LCP جدا ذخیره می‌شود.</summary>
+    public const int LcpMaxEdge = 640;
+
     public const int WebpQuality = 82;
 
     /// <summary>زیر این حجم، سود بازفشرده‌سازی ناچیز است و ارزش ریسک افت کیفیت را ندارد.</summary>
@@ -42,6 +45,12 @@ public class ImageOptimizerService(IWebHostEnvironment env, ILogger<ImageOptimiz
 
     public async Task<ImageOptimizationResult> OptimizeAllAsync(bool dryRun = false, CancellationToken ct = default)
     {
+        if (string.IsNullOrEmpty(env.WebRootPath))
+        {
+            logger.LogWarning("WebRootPath خالی است؛ بهینه‌سازی تصویر رد شد.");
+            return new ImageOptimizationResult(0, 0, 0, 0, 0, 0);
+        }
+
         var root = Path.Combine(env.WebRootPath, "images");
         if (!Directory.Exists(root))
             return new ImageOptimizationResult(0, 0, 0, 0, 0, 0);
@@ -113,7 +122,10 @@ public class ImageOptimizerService(IWebHostEnvironment env, ILogger<ImageOptimiz
                 // اشاره می‌کند و PreferWebp فقط هنگام نمایش، مسیر را به WebP برمی‌گرداند.
                 // حذف اصل یعنی اگر جایی از این مسیر رد شود، تصویر ۴۰۴ می‌دهد.
                 if (!dryRun)
+                {
                     await File.WriteAllBytesAsync(target, buffer.ToArray(), ct);
+                    await TryWriteLcpVariantAsync(image, target, dryRun, ct);
+                }
             }
             catch (Exception ex)
             {
@@ -128,5 +140,46 @@ public class ImageOptimizerService(IWebHostEnvironment env, ILogger<ImageOptimiz
             result.Scanned, result.Rewritten, result.BytesSaved / 1024, result.PercentSaved);
 
         return result;
+    }
+
+    static bool IsProductImagePath(string path)
+        => path.Contains($"{Path.DirectorySeparatorChar}products{Path.DirectorySeparatorChar}", StringComparison.OrdinalIgnoreCase);
+
+    async Task TryWriteLcpVariantAsync(Image source, string savedWebpPath, bool dryRun, CancellationToken ct)
+    {
+        if (dryRun || !IsProductImagePath(savedWebpPath))
+            return;
+
+        var lcpPath = Path.Combine(
+            Path.GetDirectoryName(savedWebpPath)!,
+            Path.GetFileNameWithoutExtension(savedWebpPath) + "-lcp.webp");
+
+        using var lcp = source.Clone(ctx =>
+        {
+            var longest = Math.Max(source.Width, source.Height);
+            if (longest > LcpMaxEdge)
+            {
+                var scale = (double)LcpMaxEdge / longest;
+                ctx.Resize(
+                    (int)Math.Round(source.Width * scale),
+                    (int)Math.Round(source.Height * scale));
+            }
+        });
+
+        lcp.Metadata.ExifProfile = null;
+        lcp.Metadata.IptcProfile = null;
+        lcp.Metadata.XmpProfile = null;
+
+        using var lcpBuffer = new MemoryStream();
+        await lcp.SaveAsWebpAsync(lcpBuffer, new WebpEncoder { Quality = WebpQuality }, ct);
+
+        if (File.Exists(lcpPath))
+        {
+            var existing = new FileInfo(lcpPath).Length;
+            if (lcpBuffer.Length >= existing)
+                return;
+        }
+
+        await File.WriteAllBytesAsync(lcpPath, lcpBuffer.ToArray(), ct);
     }
 }

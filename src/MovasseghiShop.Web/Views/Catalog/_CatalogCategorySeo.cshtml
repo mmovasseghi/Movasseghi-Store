@@ -1,4 +1,5 @@
 @model CatalogCategoryLandingViewModel?
+@using MovasseghiShop.Web.Services
 @if (Model != null && Model.HasAnyContent)
 {
     <section class="catalog-seo" aria-labelledby="catalog-seo-title">
@@ -48,26 +49,21 @@
 
         @if (Model.HasFaqs)
         {
-            <script type="application/ld+json">
-                @Html.Raw(System.Text.Json.JsonSerializer.Serialize(new Dictionary<string, object?>
+            @StorefrontJsonLd.Script(new Dictionary<string, object?>
+            {
+                ["@context"] = "https://schema.org",
+                ["@type"] = "FAQPage",
+                ["mainEntity"] = Model.Faqs.Select(f => new Dictionary<string, object?>
                 {
-                    ["@context"] = "https://schema.org",
-                    ["@type"] = "FAQPage",
-                    ["mainEntity"] = Model.Faqs.Select(f => new Dictionary<string, object?>
+                    ["@type"] = "Question",
+                    ["name"] = f.Question,
+                    ["acceptedAnswer"] = new Dictionary<string, object?>
                     {
-                        ["@type"] = "Question",
-                        ["name"] = f.Question,
-                        ["acceptedAnswer"] = new Dictionary<string, object?>
-                        {
-                            ["@type"] = "Answer",
-                            ["text"] = f.PlainAnswer
-                        }
-                    }).ToList()
-                }, new System.Text.Json.JsonSerializerOptions
-                {
-                    Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
-                }))
-            </script>
+                        ["@type"] = "Answer",
+                        ["text"] = f.PlainAnswer
+                    }
+                }).ToList()
+            })
         }
     </section>
 }

@@ -1,7 +1,7 @@
 (function () {
   'use strict';
   const tag = document.currentScript;
-  if (!tag || tag.dataset.when !== 'load') return;
+  if (!tag) return;
 
   const urls = [tag.dataset.gsap, tag.dataset.scroll].filter(Boolean);
   if (!urls.length) return;
@@ -23,6 +23,11 @@
     loadNext(0);
   }
 
-  if (document.readyState === 'complete') start();
-  else window.addEventListener('load', start, { once: true });
+  function schedule() {
+    if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 3500 });
+    else setTimeout(start, 1500);
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', schedule, { once: true });
+  else schedule();
 })();

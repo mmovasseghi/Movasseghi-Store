@@ -1,5 +1,6 @@
-﻿@model NewsItem
+@model NewsItem
 @using System.Text.Json
+@using MovasseghiShop.Web.Services
 @{
     var related = ((IEnumerable<NewsItem>)ViewBag.Related ?? Enumerable.Empty<NewsItem>()).ToList();
     var pubDate = Model.PublishedAt ?? Model.CreatedAt;
@@ -26,7 +27,7 @@
 }
 @section Head {
     <link rel="stylesheet" href="~/css/ux-content.css" asp-append-version="true" />
-    <script type="application/ld+json">@Html.Raw(JsonSerializer.Serialize(new Dictionary<string, object?>
+    @StorefrontJsonLd.Script(new Dictionary<string, object?>
     {
         ["@context"] = "https://schema.org",
         ["@type"] = "NewsArticle",
@@ -45,8 +46,8 @@
         ["url"] = pageUrl,
         ["image"] = absImg,
         ["inLanguage"] = "fa-IR"
-    }))</script>
-    <script type="application/ld+json">@Html.Raw(JsonSerializer.Serialize(new Dictionary<string, object?>
+    })
+    @StorefrontJsonLd.Script(new Dictionary<string, object?>
     {
         ["@context"] = "https://schema.org",
         ["@type"] = "BreadcrumbList",
@@ -56,8 +57,8 @@
             new Dictionary<string, object?> { ["@type"] = "ListItem", ["position"] = 2, ["name"] = "اخبار", ["item"] = $"{Context.Request.Scheme}://{Context.Request.Host}/News" },
             new Dictionary<string, object?> { ["@type"] = "ListItem", ["position"] = 3, ["name"] = Model.Title, ["item"] = pageUrl }
         }
-    }))</script>
-    <script type="application/ld+json">@Html.Raw(JsonSerializer.Serialize(new Dictionary<string, object?>
+    })
+    @StorefrontJsonLd.Script(new Dictionary<string, object?>
     {
         ["@context"] = "https://schema.org",
         ["@type"] = "FAQPage",
@@ -67,7 +68,7 @@
             ["name"] = f.Q,
             ["acceptedAnswer"] = new Dictionary<string, object?> { ["@type"] = "Answer", ["text"] = f.A }
         }).ToList()
-    }))</script>
+    })
 }
 
 <article class="ms-wrap ct-page ct-page--article ct-page--news" data-ct-page itemscope itemtype="https://schema.org/NewsArticle">

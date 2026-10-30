@@ -1,5 +1,6 @@
-﻿@model IEnumerable<NewsItem>
+@model IEnumerable<NewsItem>
 @using System.Text.Json
+@using MovasseghiShop.Web.Services
 @{
     var breaking = (IEnumerable<NewsItem>)ViewBag.Breaking ?? Enumerable.Empty<NewsItem>();
     var page = (int)ViewBag.Page;
@@ -19,7 +20,7 @@
 }
 @section Head {
     <link rel="stylesheet" href="~/css/ux-content.css" asp-append-version="true" />
-    <script type="application/ld+json">@Html.Raw(JsonSerializer.Serialize(new Dictionary<string, object?>
+    @StorefrontJsonLd.Script(new Dictionary<string, object?>
     {
         ["@context"] = "https://schema.org",
         ["@type"] = "CollectionPage",
@@ -42,8 +43,8 @@
                 }
             }).ToList()
         }
-    }))</script>
-    <script type="application/ld+json">@Html.Raw(JsonSerializer.Serialize(new Dictionary<string, object?>
+    })
+    @StorefrontJsonLd.Script(new Dictionary<string, object?>
     {
         ["@context"] = "https://schema.org",
         ["@type"] = "BreadcrumbList",
@@ -52,7 +53,7 @@
             new Dictionary<string, object?> { ["@type"] = "ListItem", ["position"] = 1, ["name"] = "خانه", ["item"] = $"{Context.Request.Scheme}://{Context.Request.Host}/" },
             new Dictionary<string, object?> { ["@type"] = "ListItem", ["position"] = 2, ["name"] = "اخبار", ["item"] = pageUrl }
         }
-    }))</script>
+    })
 }
 
 <div class="ms-wrap ct-page ct-page--news" data-ct-page>

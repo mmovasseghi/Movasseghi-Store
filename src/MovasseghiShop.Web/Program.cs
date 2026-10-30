@@ -579,16 +579,20 @@ if (!string.IsNullOrEmpty(configuredPathBase))
     app.UsePathBase(configuredPathBase);
 }
 
+var publicBaseUrl = app.Configuration["SiteSettings:PublicBaseUrl"]?.Trim() ?? "";
+var siteUsesHttps = publicBaseUrl.StartsWith("https://", StringComparison.OrdinalIgnoreCase);
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    app.UseHsts();
+    if (siteUsesHttps)
+        app.UseHsts();
 }
 
 // فشرده‌سازی باید قبل از هر چیزی باشد که پاسخ می‌نویسد
 app.UseResponseCompression();
 
-if (!app.Environment.IsDevelopment())
+if (!app.Environment.IsDevelopment() && siteUsesHttps)
     app.UseHttpsRedirection();
 
 // ═══ فایل‌های استاتیک با کش طولانی ═══

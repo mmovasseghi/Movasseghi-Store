@@ -3,35 +3,30 @@
     var pageUrl = ViewData["CanonicalUrl"]?.ToString()
         ?? AppPath.Absolute("/", Context)!;
     var orgId = $"{pageUrl.TrimEnd('/')}#organization";
-    var graph = new Dictionary<string, object?>
-    {
-        ["@context"] = "https://schema.org",
-        ["@graph"] = new object[]
-        {
-            new Dictionary<string, object?>
-            {
-                ["@type"] = "Organization",
-                ["@id"] = orgId,
-                ["name"] = "فروشگاه موثقی",
-                ["url"] = pageUrl,
-                ["logo"] = AppPath.Absolute("/images/brand/originallogo.png", Context),
-                ["telephone"] = WholesaleRules.CoordinationPhone,
-                ["address"] = new Dictionary<string, object?>
-                {
-                    ["@type"] = "PostalAddress",
-                    ["addressCountry"] = "IR",
-                    ["addressLocality"] = "تهران"
-                }
-            },
-            new Dictionary<string, object?>
-            {
-                ["@type"] = "WebSite",
-                ["name"] = WholesaleRules.StoreNameFa,
-                ["url"] = pageUrl,
-                ["publisher"] = new Dictionary<string, object?> { ["@id"] = orgId },
-                ["inLanguage"] = "fa-IR"
-            }
-        }
-    };
+    var logo = AppPath.Absolute("/images/brand/originallogo.png", Context);
 }
-@StorefrontJsonLd.Script(graph)
+@StorefrontJsonLd.Script(new Dictionary<string, object?>
+{
+    ["@context"] = "https://schema.org",
+    ["@type"] = "Organization",
+    ["@id"] = orgId,
+    ["name"] = "فروشگاه موثقی",
+    ["url"] = pageUrl,
+    ["logo"] = logo,
+    ["telephone"] = WholesaleRules.CoordinationPhone,
+    ["address"] = new Dictionary<string, object?>
+    {
+        ["@type"] = "PostalAddress",
+        ["addressCountry"] = "IR",
+        ["addressLocality"] = "تهران"
+    }
+})
+@StorefrontJsonLd.Script(new Dictionary<string, object?>
+{
+    ["@context"] = "https://schema.org",
+    ["@type"] = "WebSite",
+    ["name"] = WholesaleRules.StoreNameFa,
+    ["url"] = pageUrl,
+    ["publisher"] = new Dictionary<string, object?> { ["@id"] = orgId },
+    ["inLanguage"] = "fa-IR"
+})
