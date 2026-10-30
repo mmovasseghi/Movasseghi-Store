@@ -121,9 +121,13 @@ http {{
         assert request("/?set_cookie=1")[1].get("Set-Cookie")
         status, headers = request("/Shop/missing")
         assert status == 404 and headers["Cache-Control"] == "public, max-age=60"
-        for query, expected in [("", "max-age=3600"), ("?v=contenthash", "max-age=31536000, immutable")]:
+        for query, expected in [("", "max-age=86400"), ("?v=contenthash", "max-age=31536000, immutable")]:
             status, headers = request("/css/critical-home.css" + query)
-            assert status == 200 and expected in headers["Cache-Control"]
+            assert status == 200 and expected in headers["Cache-Control"], (query, headers.get("Cache-Control"))
+        status, headers = request("/fonts/Vazirmatn-var.woff2")
+        assert status == 200 and "max-age=31536000" in headers["Cache-Control"] and "immutable" not in headers["Cache-Control"]
+        status, headers = request("/images/brand/originallogo.png")
+        assert status == 200 and "max-age=2592000" in headers["Cache-Control"] and "immutable" not in headers["Cache-Control"]
         print("nginx syntax, public cache HIT, analytics cookie, session/cart bypass, private paths, Set-Cookie, private headers, errors and asset versioning: PASS")
     finally:
         process.terminate()

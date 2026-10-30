@@ -405,7 +405,10 @@
         <div class="ms-closing-card">
             <div class="ms-closing-visual" aria-hidden="true">
                 <div class="ms-closing-logo-ring">
-                    <img src="~/images/brand/originallogo.png" alt="فروشگاه موثقی" width="160" height="52" loading="lazy" decoding="async" />
+                    <picture>
+                        <source srcset="@Url.Content("~/images/brand/originallogo.webp")" type="image/webp" />
+                        <img src="~/images/brand/originallogo.png" alt="فروشگاه موثقی" width="160" height="59" loading="lazy" decoding="async" />
+                    </picture>
                 </div>
                 <span class="ms-closing-seal">رسمی</span>
             </div>
@@ -452,7 +455,8 @@
                         <span class="ms-news-card-visual" aria-hidden="true">
                             @if (!string.IsNullOrEmpty(item.FeaturedImageUrl))
                             {
-                                <img src="@AppPath.H(item.FeaturedImageUrl, Context)" alt="" loading="lazy" width="320" height="180" />
+                                var newsImg = ProductImageHelper.PreferLcpVariant(item.FeaturedImageUrl, Env) ?? item.FeaturedImageUrl;
+                                <img src="@AppPath.H(newsImg, Context)" alt="" loading="lazy" width="320" height="180" decoding="async" />
                             }
                             else
                             {
@@ -504,7 +508,8 @@
                         <span class="ms-news-card-visual" aria-hidden="true">
                             @if (!string.IsNullOrEmpty(post.FeaturedImageUrl))
                             {
-                                <img src="@AppPath.H(post.FeaturedImageUrl, Context)" alt="" loading="lazy" width="320" height="180" />
+                                var blogImg = ProductImageHelper.PreferLcpVariant(post.FeaturedImageUrl, Env) ?? post.FeaturedImageUrl;
+                                <img src="@AppPath.H(blogImg, Context)" alt="" loading="lazy" width="320" height="180" decoding="async" />
                             }
                             else
                             {

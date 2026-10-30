@@ -59,36 +59,40 @@ public static class ProductImageHelper
 
     /// <summary>نسخهٔ کوچک LCP: فایل <c>*-lcp.webp</c>، وگرنه همان WebP نمایشی (nginx استاتیک).</summary>
     public static string? GetLcpDisplayUrl(ProductImage? image, IWebHostEnvironment? env)
+        => PreferLcpVariant(GetDisplayUrl(image, env), env);
+
+    /// <summary>
+    /// برای کارت/هیرو کوچک، اگر <c>*-lcp.webp</c> روی دیسک باشد همان را برمی‌گرداند
+    /// تا GTmetrix «Properly size images» و بایت شبکهٔ above-the-fold کم شود.
+    /// </summary>
+    public static string? PreferLcpVariant(string? displayUrl, IWebHostEnvironment? env)
     {
-        var url = GetDisplayUrl(image, env);
-        if (url is null || !IsLocal(url))
-            return url;
+        if (displayUrl is null || !IsLocal(displayUrl))
+            return displayUrl;
 
         var webRoot = ResolveWebRoot(env);
-        if (webRoot is not null)
-        {
-            var lcpUrl = ToLcpVariantUrl(url);
-            if (lcpUrl != url)
-            {
-                if (LcpCache.TryGetValue(lcpUrl, out var hasLcp))
-                {
-                    if (hasLcp) return lcpUrl;
-                }
-                else
-                {
-                    var relative = lcpUrl.TrimStart('/').Replace('/', Path.DirectorySeparatorChar);
-                    var exists = File.Exists(Path.Combine(webRoot, relative));
-                    LcpCache[lcpUrl] = exists;
-                    if (exists) return lcpUrl;
-                }
-            }
-        }
+        if (webRoot is null)
+            return displayUrl;
 
-        return url;
+        var lcpUrl = ToLcpVariantUrl(displayUrl);
+        if (lcpUrl == displayUrl)
+            return displayUrl;
+
+        // Key includes webRoot so test/prod and publish swaps do not share stale misses.
+        var cacheKey = webRoot + "\n" + lcpUrl;
+        if (LcpCache.TryGetValue(cacheKey, out var hasLcp))
+            return hasLcp ? lcpUrl : displayUrl;
+
+        var relative = lcpUrl.TrimStart('/').Replace('/', Path.DirectorySeparatorChar);
+        var exists = File.Exists(Path.Combine(webRoot, relative));
+        LcpCache[cacheKey] = exists;
+        return exists ? lcpUrl : displayUrl;
     }
 
     static string ToLcpVariantUrl(string displayUrl)
     {
+        if (displayUrl.EndsWith("-lcp.webp", StringComparison.OrdinalIgnoreCase))
+            return displayUrl;
         var dot = displayUrl.LastIndexOf('.');
         if (dot <= 0) return displayUrl;
         return displayUrl[..dot] + "-lcp.webp";

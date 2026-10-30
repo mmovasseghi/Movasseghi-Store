@@ -6,12 +6,17 @@
     var height = ViewData["StageHeight"] as int? ?? 220;
     var fetchPriority = ViewData["StageFetchPriority"] as bool? ?? false;
     var dualSlides = ProductImageHelper.ResolveDualCardSlides(Model.Images, Env, Model.Name);
+    // Card/list stages are ≤ ~320 CSS px; prefer *-lcp.webp when present.
+    var useCardSized = !string.Equals(variant, "detail", StringComparison.OrdinalIgnoreCase)
+                       && width <= ProductImageHelper.LcpMaxCssPx;
+    var studioUrl = useCardSized ? ProductImageHelper.PreferLcpVariant(dualSlides.StudioUrl, Env) : dualSlides.StudioUrl;
+    var sceneUrl = useCardSized ? ProductImageHelper.PreferLcpVariant(dualSlides.SceneUrl, Env) : dualSlides.SceneUrl;
 }
 @await Html.PartialAsync("_ProductImageStage", new ProductImageStageModel
 {
-    ImageUrl = dualSlides.StudioUrl,
+    ImageUrl = studioUrl,
     Alt = dualSlides.StudioAlt,
-    AlternateImageUrl = dualSlides.SceneUrl,
+    AlternateImageUrl = sceneUrl,
     AlternateAlt = dualSlides.SceneAlt,
     DualCycle = (ViewData["StageDualCycle"] as bool? ?? true) && dualSlides.CanCycle,
     Variant = variant,
