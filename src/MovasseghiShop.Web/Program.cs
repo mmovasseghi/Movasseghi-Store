@@ -623,9 +623,10 @@ app.UseStaticFiles(new StaticFileOptions
 });
 
 app.UseRouting();
-app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseMiddleware<MovasseghiShop.Web.Infrastructure.StorefrontPublicCacheHeadersMiddleware>();
+app.UseSession();
 app.UseRateLimiter();
 app.UseOutputCache();
 
@@ -649,7 +650,6 @@ app.Use(async (context, next) =>
 // ثبت بازدید بعد از احراز هویت تا وضعیت لاگین کاربر معلوم باشد،
 // و بعد از Session تا شناسه نشست در دسترس باشد.
 app.UseMiddleware<AnalyticsMiddleware>();
-app.UseMiddleware<MovasseghiShop.Web.Infrastructure.StorefrontPublicCacheHeadersMiddleware>();
 
 app.MapControllerRoute(
     name: "product",

@@ -5,7 +5,7 @@ namespace MovasseghiShop.Web.Infrastructure;
 /// <summary>
 /// Session middleware در ASP.NET معمولاً Cache-Control: no-cache, no-store می‌گذارد؛
 /// GTmetrix/Foglift «Add Expires headers» را قرمز می‌کنند. برای مهمان با سبد خالی
-/// روی صفحات فروشگاه هدر عمومی می‌گذاریم.
+/// روی صفحات فروشگاه هدر عمومی می‌گذاریم — با OnStarting بعد از Session ثبت می‌شود.
 /// </summary>
 public sealed class StorefrontPublicCacheHeadersMiddleware(RequestDelegate next)
 {
@@ -16,31 +16,40 @@ public sealed class StorefrontPublicCacheHeadersMiddleware(RequestDelegate next)
 
     public async Task InvokeAsync(HttpContext context, ICartService cart)
     {
-        await next(context);
+        if (TryGetMaxAge(context, cart, out var maxAge))
+        {
+            context.Response.OnStarting(() =>
+            {
+                context.Response.Headers.CacheControl = $"public, max-age={maxAge}, s-maxage={maxAge}";
+                context.Response.Headers.Remove("Pragma");
+                context.Response.Headers.Remove("Expires");
+                return Task.CompletedTask;
+            });
+        }
 
+        await next(context);
+    }
+
+    static bool TryGetMaxAge(HttpContext context, ICartService cart, out int maxAge)
+    {
+        maxAge = 0;
         if (!HttpMethods.IsGet(context.Request.Method))
-            return;
-        if (context.Response.StatusCode != StatusCodes.Status200OK)
-            return;
+            return false;
+
         if (context.User.Identity?.IsAuthenticated == true)
-            return;
+            return false;
         if (cart.GetItemCount(context) > 0)
-            return;
+            return false;
 
         var controller = context.GetRouteData().Values["controller"]?.ToString();
         if (string.IsNullOrEmpty(controller) || !PublicControllers.Contains(controller))
-            return;
+            return false;
 
         var area = context.GetRouteData().Values["area"]?.ToString();
         if (!string.IsNullOrEmpty(area))
-            return;
+            return false;
 
-        var maxAge = string.Equals(controller, "Home", StringComparison.OrdinalIgnoreCase)
-            ? 900
-            : 300;
-
-        context.Response.Headers.CacheControl = $"public, max-age={maxAge}, s-maxage={maxAge}";
-        context.Response.Headers.Remove("Pragma");
-        context.Response.Headers.Remove("Expires");
+        maxAge = string.Equals(controller, "Home", StringComparison.OrdinalIgnoreCase) ? 900 : 300;
+        return true;
     }
 }
