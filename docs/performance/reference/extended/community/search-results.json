@@ -1,0 +1,948 @@
+[
+  {
+    "query": "gtmetrix \"structure\"",
+    "total": 168,
+    "results": [
+      {
+        "url": "https://github.com/ColoredCow/performance-adapter-wp/issues/44",
+        "title": "Automatic root-cause attribution for page-load spikes (GTmetrix data currently unused)",
+        "snippet": "Problem\n\nToday, when the Fully Loaded Time trend spikes on the dashboard, there is no way to know why without manual\ninvestigation — opening the individual GTmetrix report for that test, reading its ..."
+      },
+      {
+        "url": "https://github.com/Chocobozzz/PeerTube/issues/6223",
+        "title": "Make Peertube perform better over GTmetrix analysis",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/aisayko/python-gtmetrix/issues/24",
+        "title": " Getting error: No module named 'settings'",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/ms0uto/esports-web/issues/7",
+        "title": "Improve image compression for the site",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/mini136/HlasovaciAplikace/issues/2",
+        "title": "performance test",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/karan/nojs.club/issues/95",
+        "title": "bebyx.co.ua",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/xionnon/xionnon/issues/4",
+        "title": "web 性能诊断工具",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/dankonscious/seneca/issues/365",
+        "title": "Page Duplicate",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/elementor/elementor/issues/12131",
+        "title": "Section causes Analysis Error in GtMetrix with 95+ second Onload time after WP upgrade",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/webRunes/WRIO-InternetOS/issues/132",
+        "title": "Optimization",
+        "snippet": ""
+      }
+    ]
+  },
+  {
+    "query": "gtmetrix \"audit\"",
+    "total": 99,
+    "results": [
+      {
+        "url": "https://github.com/andreasbm/web-skills/issues/81",
+        "title": "Feature suggestion: Add GTmetrix to Audits section",
+        "snippet": "I think GTmetrix could be a good audit tool to include. I personally like using Lighthouse more, but it s good to have\nmore options that provide a different opinion or perspective.\n"
+      },
+      {
+        "url": "https://github.com/creativestyle/shopin/issues/120",
+        "title": "TASK: Performance Optimization Audit for Core Page Templates",
+        "snippet": "User Story\n\nIn order to provide a fast user experience, reduce bounce rates, and improve search engine rankings (SEO) through\noptimized page load speeds\nAs a Product Owner\nI want to audit the ..."
+      },
+      {
+        "url": "https://github.com/VermontDepartmentOfHealth/docgov/issues/68",
+        "title": "Run Audit Tools",
+        "snippet": "Run site audits for\n\n  - Performance\n  - A11y\n  - SEO\n\nOptions:\n\n  - Lighthouse | results\n  - webpagetest | results\n  - gtmetrix | results\n  - google search console\n"
+      },
+      {
+        "url": "https://github.com/stereobooster/react-snap/issues/471",
+        "title": "page load is slower, audit score is lower",
+        "snippet": "I have two applications that are built using create react app. One with react snap, and the other without it. Testing\nwith LightHouse and GTmetrix, the one with react snap resulted in a lower score ..."
+      },
+      {
+        "url": "https://github.com/backdrop/backdrop-issues/issues/5243",
+        "title": "Avoid CSS @import in core",
+        "snippet": "...  the following code inside style1.css:\n\n@import url( style2.css )\n\nLighthouse doesn t consider the usage of CSS @import in any of its audits; however, we at GTmetrix still feel that they\nplay an ..."
+      },
+      {
+        "url": "https://github.com/vocdoni/vocdoni.io/issues/69",
+        "title": "Improve performance",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/mini136/HlasovaciAplikace/issues/2",
+        "title": "performance test",
+        "snippet": "...  structure of the web page\n\n1.  Structural Improvements (Target: 99%)\n    \n    Defer Non-Critical JS: Audit all script tags. Ensure 3rd-party scripts and non-essential UI logic use the defer\n    attribute ..."
+      },
+      {
+        "url": "https://github.com/cerebro-iiitv/cerebro-web-2020/issues/57",
+        "title": "Optimize Site Accessibility",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/duy13/vDDoS-Protection/issues/64",
+        "title": "reduce server response time",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/GoogleChrome/lighthouse/issues/17176",
+        "title": "Third-party scripts detect Lighthouse via its injected globals (__nativePromise / __nativePerformance) to evade measurement",
+        "snippet": ""
+      }
+    ]
+  },
+  {
+    "query": "gtmetrix \"weight\"",
+    "total": 39,
+    "results": [
+      {
+        "url": "https://github.com/Automattic/jetpack/issues/54323",
+        "title": "[Enhancement] Site Chat (Reader Chat): option to load the agents-manager bundle on click or after page load",
+        "snippet": "...  production site, a GTmetrix report\n(Lighthouse 12.6.1, Chrome 154, Chicago, Oct 29 2026) showed reader-chat.min.js as the single largest resource on the\nhomepage (~38% of total page weight), with 345 KB ..."
+      },
+      {
+        "url": "https://github.com/ColoredCow/performance-adapter-wp/issues/44",
+        "title": "Automatic root-cause attribution for page-load spikes (GTmetrix data currently unused)",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/karan/nojs.club/issues/111",
+        "title": "www.jontynewman.com",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/duy13/vDDoS-Protection/issues/64",
+        "title": "reduce server response time",
+        "snippet": "hello,\n\nI m installed lastest version of vddos. and i use test sites speed test for gtmetrix.\n\nGTmetrix all sites gives Reduce initial server response time and response times too high for industry ..."
+      },
+      {
+        "url": "https://github.com/KickButtowski80/web-it-easier/issues/90",
+        "title": "## ⚡🚀 SEO Benefits of Fast Websites 💸🔍",
+        "snippet": "...  automations for blog clusters\n  - Audit checklist per tier (Google Lighthouse + GTmetrix)\n\n💬 Discussion Starters:\n\n  - Do you want client-facing visuals or internal process flows?\n  - Add tier comparison ..."
+      },
+      {
+        "url": "https://github.com/etippei/cloakimg-frontend/issues/39",
+        "title": "AI Image Optimization for WordPress: Speed Up Your Site and Rank Higher",
+        "snippet": "...  WordPress sites often suffer from a common problem: slow loading speeds caused by unoptimized images. Images account\nfor 60-80% of a typical webpage s weight, making image optimization one of the highest ..."
+      },
+      {
+        "url": "https://github.com/aksasebastian/DigitalX-Marketers-Academy/issues/34",
+        "title": "How Can I Improve the Performance of My Website?",
+        "snippet": "...  Google PageSpeed Insights or GTmetrix to run a free audit. They ll tell you exactly what s dragging your load time\ndown.\n\n2.  Make Mobile Experience a Priority, Not an Afterthought More than half of ..."
+      },
+      {
+        "url": "https://github.com/Shifana09/Shifana-Portfolio/issues/1",
+        "title": "Portfolio",
+        "snippet": "... ); backdrop-filter:\nblur(12px); border-bottom: 1px solid var(--border); }\n\n.nav-logo { font-family: Playfair Display , serif; font-size: 1.4rem; font-weight: 900; color: var(--teal);\nletter-spacing: -0.5px ..."
+      },
+      {
+        "url": "https://github.com/XpertStack/SEO-Workplace/issues/11",
+        "title": "SEO: Out of Box",
+        "snippet": "... :\n      - Google’s PageSpeed Insights tool\n      - GTMetrix.com\n      - WebPageTest.org\n\n6.  Step 07: Create and Publish a Skyscraper Post\n\n  - The Skyscraper Technique aka White Hat SEO\n"
+      },
+      {
+        "url": "https://github.com/robhunter/agentdeals/issues/2960",
+        "title": "Hetzner guide: say what Hetzner says about the Cost-Optimized plans (stock-limited, \"check back later\") and that cx22-cx52 stopped working by name on 1 January 2026",
+        "snippet": ""
+      }
+    ]
+  },
+  {
+    "query": "gtmetrix \"Keep-Alive\"",
+    "total": 15,
+    "results": [
+      {
+        "url": "https://github.com/apache/incubator-pagespeed-ngx/issues/430",
+        "title": "mismatching hashes for css",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/milliHQ/terraform-aws-next-js/issues/248",
+        "title": "Add Support for Provisioned Concurrency",
+        "snippet": "...  that invokes our site every minute to\nkeep 1 alive, however, it still is not enough to keep things happy.\n\nIf not - I can put together a PR in order to get provisioned concurrency up for this module. Let me know.\n"
+      },
+      {
+        "url": "https://github.com/aws-samples/aws-refarch-wordpress/issues/68",
+        "title": "Slow Plugin Install time (504 Gateway Timeout errors)",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/nuxt/nuxt/issues/15275",
+        "title": "GTmetrics error Analyze",
+        "snippet": "Environment\n\nNuxi 3.0.0-rc.12 node 18.4.0\n\nReproduction\n\nNuxi 3.0.0-rc.12\n\nDescribe the bug\n\nAnalysis Error The URL did not appear to be an HTML page (missing or empty Content-Type)\n\nGTmetrix only ..."
+      },
+      {
+        "url": "https://github.com/kiwix/libkiwix/issues/854",
+        "title": "kiwix-serve should compress web fonts",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/filamentgroup/loadCSS/issues/110",
+        "title": "Chrome Bug (to be fixed by Chrome team): loadCSS creates two requests for one css file in Chrome",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/siamkreative/STS/issues/4",
+        "title": "Run performance tests between Heroku (Free) & DigitalOcean (5 USD/month)",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/jsdelivr/bootstrapcdn/issues/731",
+        "title": "HTTP/2",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/ariya/phantomjs/issues/12750",
+        "title": "Operation canceled on some pages",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/ProjectSidewalk/SidewalkWebpage/issues/578",
+        "title": "Need to Examine Memory and CPU Usage With New Landing Page and Optimize Accordingly",
+        "snippet": "...  videos. I will keep investigating.\n\nGiftOfSpeed gives us a 51%, GTMetrix notes that our landing page is 7.80MB compared to the average of 2.62MB and gives\nus a PageSpeed score of 36% and a YSlow score of ..."
+      }
+    ]
+  },
+  {
+    "query": "gtmetrix \"sprites\"",
+    "total": 11,
+    "results": [
+      {
+        "url": "https://github.com/apache/incubator-pagespeed-ngx/issues/430",
+        "title": "mismatching hashes for css",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/geekelo/dsa_practice/issues/47",
+        "title": "What techniques do you use to optimize the performance of a web application?",
+        "snippet": "...  are some key techniques:\n\nFront-End Optimization\n\n1.  Minimize HTTP Requests:\n    \n      - Combine multiple CSS and JavaScript files into single files.\n      - Use CSS sprites to combine multiple ..."
+      },
+      {
+        "url": "https://github.com/siamkreative/STS/issues/4",
+        "title": "Run performance tests between Heroku (Free) & DigitalOcean (5 USD/month)",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/gitcoinco/web/issues/3512",
+        "title": "As a Gitcoin user of gitcoin.co, I'm impatient, and I don't want to wait long for a page to load.",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/WoollyinWalesIT/jomres/issues/395",
+        "title": "Use CSS Stripes for property feature images",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/nopSolutions/nopCommerce/issues/1457",
+        "title": "Get 100 points on Google tools (and other performance tools)",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/Automattic/jetpack/issues/10660",
+        "title": "Top Posts & Pages Widget",
+        "snippet": "Top Posts Pages Widget is used on many sites and blogs. But unfortunately it also leads some performance problems. For\nexample, PageSpeed Score from GTmetrix is very low for „Combine images using CSS ..."
+      },
+      {
+        "url": "https://github.com/GSA/digitalgov.gov/issues/788",
+        "title": "DRAFT: A Guide to Creating Mobile-Friendly Websites",
+        "snippet": "...  download each one. CSS Sprites\ncombine multiple images into a single image file for use on a website to speed up delivery and load time. The file can\nthen be cut-up using CSS.\n\nSolution - You can find many ..."
+      },
+      {
+        "url": "https://github.com/engintron/engintron/issues/723",
+        "title": "Combine images using CSS sprites",
+        "snippet": "Overall thumbs up for Engintron performance, just have a small issue of Combine images using CSS sprites fix occur in\nGtmetrix. Any help? Thanks\n"
+      },
+      {
+        "url": "https://github.com/Koken-Community-Support/OxyGen3/issues/2",
+        "title": "Enhancement suggestion: CSS sprites",
+        "snippet": ""
+      }
+    ]
+  },
+  {
+    "query": "gtmetrix \"CDN\"",
+    "total": 159,
+    "results": [
+      {
+        "url": "https://github.com/ELATLASS/my-data-portfolio/issues/15",
+        "title": "🔍 Optimiser la vitesse de chargement des pages",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/CreateJS/EaselJS/issues/798",
+        "title": "Add Expires headers to CDN",
+        "snippet": "Is it possible to add expirs headers to cdn ?\n"
+      },
+      {
+        "url": "https://github.com/marcelduran/yslow/issues/178",
+        "title": "azureedge.net is the new Azure CDN endpoint",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/wpsharks/comet-cache-kb/issues/71",
+        "title": "Domain Sharding / Multiple CDN Host Names",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/SamiSahirBaig/Opensuit/issues/11",
+        "title": "[P2 - MEDIUM] Implement CDN for Static Assets",
+        "snippet": "Priority: P2 (MEDIUM - Performance Optimization)\n\nDescription\n\nServe static assets (images, CSS, JS) from CDN for faster global load times and reduced server load.\n\nBenefits\n\n  - Faster page loads ..."
+      },
+      {
+        "url": "https://github.com/alaca/WP-Performance/issues/16",
+        "title": "GZIP, and Specify a Vary",
+        "snippet": "...  over the network\n\nBUT, it seems GTMetrix has not detected it even after purging the website, and the CDN cache. We are using NuCDN.\n\nIs there something we can do about this?\n\nBackground: Breeze was f ..."
+      },
+      {
+        "url": "https://github.com/karan/nojs.club/issues/111",
+        "title": "www.jontynewman.com",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/mini136/HlasovaciAplikace/issues/2",
+        "title": "performance test",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/mozfr/transvision/issues/578",
+        "title": "Enable Gzip compression for JavaScript files",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/RinteRface/shinyMobile/issues/189",
+        "title": "Serve Framework7 and shinyMobile assets (CSS and JS) in CDN",
+        "snippet": ""
+      }
+    ]
+  },
+  {
+    "query": "gtmetrix \"A+\"",
+    "total": 1331,
+    "results": [
+      {
+        "url": "https://github.com/Automattic/jetpack/issues/54323",
+        "title": "[Enhancement] Site Chat (Reader Chat): option to load the agents-manager bundle on click or after page load",
+        "snippet": "...  production site, a GTmetrix report\n(Lighthouse 12.6.1, Chrome 154, Chicago, Oct 29 2026) showed reader-chat.min.js as the single largest resource on the\nhomepage (~38% of total page weight), with 345 KB ..."
+      },
+      {
+        "url": "https://github.com/ColoredCow/performance-adapter-wp/issues/44",
+        "title": "Automatic root-cause attribution for page-load spikes (GTmetrix data currently unused)",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/rockstor/rockstor-website/issues/11",
+        "title": "Suggestions from gtmetrix.com",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/karan/nojs.club/issues/13",
+        "title": "GTmetrix requires JavaScript",
+        "snippet": "Tried to use it on my browser and if I don t enable javascript GTMetrix doesn t loads past the queue.\n"
+      },
+      {
+        "url": "https://github.com/aryan2621/antidote/issues/534",
+        "title": "[triage] GitHub:imagewize/wp-ops@c9acdc77f9be092fc13d689300414b9b728342e2 (high)",
+        "snippet": "...  matches\n\n| Severity | ID | Where | Evidence |\n| --- | --- | --- | --- |\n| medium | AGT-R-0102 — Downloads a script and pipes it straight into a\nshell | wp-ops-c9acdc77f9be092fc13d689300414b9b728342e2 ..."
+      },
+      {
+        "url": "https://github.com/woocommerce/woocommerce-gateway-stripe/issues/1439",
+        "title": "Payment buttons massively impact page speed",
+        "snippet": "...  degradation of speed metrics (GTMetrix drop\nfrom A- B, Pingdom drop A- C, Pagespeed drop 77- 39 ) which results in bad user experience and lower ranking in search\nresults. On our pages, activating the ..."
+      },
+      {
+        "url": "https://github.com/saicaca/fuwari/issues/123",
+        "title": "Fails GTMetrix First Contentful Paint Test",
+        "snippet": "Hey, just wanted to share this issue from GTMetrix:\n\nimage\n\nVia their blog, it mentions:\n\nWe commonly see pages that use specific lazy-loading techniques fail on this error – particularly ones that ..."
+      },
+      {
+        "url": "https://github.com/alaca/WP-Performance/issues/16",
+        "title": "GZIP, and Specify a Vary",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/andreasbm/web-skills/issues/81",
+        "title": "Feature suggestion: Add GTmetrix to Audits section",
+        "snippet": "I think GTmetrix could be a good audit tool to include. I personally like using Lighthouse more, but it s good to have\nmore options that provide a different opinion or perspective.\n"
+      },
+      {
+        "url": "https://github.com/Chocobozzz/PeerTube/issues/6223",
+        "title": "Make Peertube perform better over GTmetrix analysis",
+        "snippet": "Describe the current behavior\n\nPeertube can be by default built to give better performance by solving the issues reported by gtmetrix.\n\nFounded issues:\n\n  - Avoid chaining critical requests [med-high ..."
+      }
+    ]
+  },
+  {
+    "query": "gtmetrix \"fully loaded\"",
+    "total": 22,
+    "results": [
+      {
+        "url": "https://github.com/ColoredCow/performance-adapter-wp/issues/44",
+        "title": "Automatic root-cause attribution for page-load spikes (GTmetrix data currently unused)",
+        "snippet": "Problem\n\nToday, when the Fully Loaded Time trend spikes on the dashboard, there is no way to know why without manual\ninvestigation — opening the individual GTmetrix report for that test, reading its ..."
+      },
+      {
+        "url": "https://github.com/blueceasolutions/clario-lane/issues/15",
+        "title": "Load Test - GTmetrix Grade Test",
+        "snippet": "Summary\n\nThis is to test the load time of the website.\n\n1.  LCP(Largest Contentful Paint: standard is 2.5 - part of your site that is loaded and customers can interact with it,\n    even if it’s not fully loaded\n2.  Full Load Time: 1.3s (This is good, but 1s is better).\n"
+      },
+      {
+        "url": "https://github.com/cerebro-iiitv/cerebro-web-2020/issues/57",
+        "title": "Optimize Site Accessibility",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/Lex-2008/python-gtmetrix2/issues/1",
+        "title": "Issue in fetch function",
+        "snippet": "... \nattributes of the report. For example, First Contentful Paint is available under report[ attributes ][\nfirst_contentful_paint ], and Fully Loaded Time is under report[ attributes ][ fully_loaded ..."
+      },
+      {
+        "url": "https://github.com/webguyio/blankslate/issues/57",
+        "title": "How do you use BlankSlate?",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/gg8899/fe-interview/issues/270",
+        "title": "你使用过哪些前端性能分析工具",
+        "snippet": "... ：\n      - 测试从不同地理位置、不同网络条件下的加载速度。\n      - 提供详细的时间线视图、请求水fall图等，帮助开发者识别性能瓶颈。\n      - 提供 First Byte、DOM Interactive、Fully Loaded 等多个时间指标。\n\n4. Perfume.js\n\n  - 用途：Perfume.js 是一个轻量级的前端性能监控库，主要用于监控和分析页面性能。\n  - 功 ..."
+      },
+      {
+        "url": "https://github.com/nirjan-dev/learning-to-code/issues/315",
+        "title": "Every Web Performance Test Tool",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/LUISDACA/immuno-clinic-ucc/issues/50",
+        "title": "[PW-011] Evaluacion de rendimiento con GTmetrix",
+        "snippet": "...  sistema.\n\nPasos\n\n1.  Ingresar a GTmetrix.\n2.  Pegar la URL.\n3.  Ejecutar analisis.\n4.  Revisar Performance, Structure, LCP, TBT y CLS.\n5.  Guardar reporte.\n\nMetricas a documentar\n\n| Metrica | Valor | Grade ..."
+      },
+      {
+        "url": "https://github.com/nolimits4web/swiper/issues/4076",
+        "title": "Swiper CLS (Cumulative Layout Shift) on PageSpeed Insights",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/wp-media/wp-rocket/issues/3142",
+        "title": "Delay JS - Links needs to be clicked twice on iOS / Safari",
+        "snippet": ""
+      }
+    ]
+  },
+  {
+    "query": "gtmetrix \"Lighthouse\" \"different\"",
+    "total": 45,
+    "results": [
+      {
+        "url": "https://github.com/andreasbm/web-skills/issues/81",
+        "title": "Feature suggestion: Add GTmetrix to Audits section",
+        "snippet": "I think GTmetrix could be a good audit tool to include. I personally like using Lighthouse more, but it s good to have\nmore options that provide a different opinion or perspective.\n"
+      },
+      {
+        "url": "https://github.com/backdrop/backdrop-issues/issues/5243",
+        "title": "Avoid CSS @import in core",
+        "snippet": "...  the following code inside style1.css:\n\n@import url( style2.css )\n\nLighthouse doesn t consider the usage of CSS @import in any of its audits; however, we at GTmetrix still feel that they\nplay an ..."
+      },
+      {
+        "url": "https://github.com/nitinpatil-mf/mutual-fund-landing-page/issues/1",
+        "title": "Performance Optimization - PageSpeed & Loading",
+        "snippet": "🎯 Objective\n\nOptimize website performance for fast loading, excellent user experience, and high Google PageSpeed scores. Target:\nLighthouse score 95+ across all categories with sub-2-second load ..."
+      },
+      {
+        "url": "https://github.com/gridsome/gridsome/issues/1435",
+        "title": "Is there any way to split the app.js bundle into multiple chunks ?",
+        "snippet": "...  problem in the\npast. Similarly, I was working on a website with about 100 pages or so, and it ended up with 5MB according to gtmetrix\nwhich was not ideal for my case. I actually had to go back to gatsby ..."
+      },
+      {
+        "url": "https://github.com/jharter1/jharter1.github.io/issues/51",
+        "title": "Implement SEO optimizations and performance improvements",
+        "snippet": "... \n\nPerformance Improvements\n\nImage Optimization\n\n  - Responsive Images: Multiple sizes for different screens\n  - Modern Formats: WebP with fallbacks\n  - Lazy Loading: Load images as needed\n  - Image ..."
+      },
+      {
+        "url": "https://github.com/d-oit/d-oit.github.io/issues/18",
+        "title": "Testing the performance and dimensions of the images",
+        "snippet": "Image Load Times: Measure and analyze the loading times of individual images and groups of images. Tools: Browser\ndeveloper tools (Network tab), Lighthouse, GTmetrix, WebPageTest. Metrics: Time to ..."
+      },
+      {
+        "url": "https://github.com/GoogleChrome/lighthouse/issues/10869",
+        "title": "Lighthouse NO_LCP error due to offscreen animation",
+        "snippet": "Since Lighthouse was updated to include the LCP metric my site doesn t get a performance score anymore. The error text\nasks me to rerun Lighthouse but I have done so multiple times and there s no ..."
+      },
+      {
+        "url": "https://github.com/litespeedtech/lscache_wp/issues/877",
+        "title": "Inconsistent JavaScript Optimization – Intermittent JS Delay Failure – Pagespeed Test",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/GoogleChrome/lighthouse/issues/17244",
+        "title": "PageSpeed Insights / Lighthouse synthetic performance results may not always measure the same page lifecycle experienced by a normal first-time user.",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/elementor/elementor/issues/25091",
+        "title": "🐞 LCP & CLS increases dramatically at random on selected viewport elements with PageSpeed",
+        "snippet": "...  well be related, but disabling Optimized Image Loading does not fix the ridiculous LCP Load Delay on our sites,\nnor does it improve any other metric.\n\nIn Lighthouse our LCP is\nsection.elementor ..."
+      }
+    ]
+  },
+  {
+    "query": "gtmetrix \"cache\" \"cookies\"",
+    "total": 27,
+    "results": [
+      {
+        "url": "https://github.com/GoogleChrome/lighthouse/issues/17244",
+        "title": "PageSpeed Insights / Lighthouse synthetic performance results may not always measure the same page lifecycle experienced by a normal first-time user.",
+        "snippet": "...  page-speed scores because\nservices such as GTmetrix and PageSpeed Insights will receive a cached, highly optimized page.\n\nRelevant code behavior\n\nThe current LiteSpeed Cache WordPress source contains ..."
+      },
+      {
+        "url": "https://github.com/JamesrPrince/Full-Stack-Port/issues/5",
+        "title": "🚀 Deploy & Test - Production Readiness & Quality Assurance",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/wpallstars/seoprostack/issues/92",
+        "title": "research: what Freesoul Deactivate Plugins still does that SEO Pro Stack does not",
+        "snippet": "... ). Nothing to do: the s.w.org\nprefetch (WordPress 7.1 no longer adds it), WooCommerce block styles (WooCommerce 11.1 loads them only where blocks\nshow). dirsize_cache: corrected. New saves get an expiry ..."
+      },
+      {
+        "url": "https://github.com/XpertStack/SEO-Workplace/issues/11",
+        "title": "SEO: Out of Box",
+        "snippet": "... :\n      - Google’s PageSpeed Insights tool\n      - GTMetrix.com\n      - WebPageTest.org\n\n6.  Step 07: Create and Publish a Skyscraper Post\n\n  - The Skyscraper Technique aka White Hat SEO\n"
+      },
+      {
+        "url": "https://github.com/aishwin1/issueFinder/issues/3",
+        "title": "page was loading long time in mobile",
+        "snippet": "...  supported by all browsers.\n3.  Use a content delivery network (CDN). A CDN can help to improve page load times by caching static assets (such as\n    images and stylesheets) closer to the user s ..."
+      },
+      {
+        "url": "https://github.com/open-contracting/deploy/issues/568",
+        "title": "Consider WordPress performance options",
+        "snippet": "If we notice performance issues. Right now, on the public sites, I m getting high 90s on Google Chrome s Lighthouse tab,\nand A grades on GTmetrix, for both www.open-spending.eu and the draft www.open ..."
+      },
+      {
+        "url": "https://github.com/GoogleChrome/lighthouse/issues/16886",
+        "title": "Random Google PageSpeed Insights Errors (NO_FCP, ERR_ABORTED, DEADLINE_EXCEEDED) on Angular 17 SSR with Nginx & Docker",
+        "snippet": "...  production and UAT environments.\nWhile tools like GTMetrix and KeyCDN report the site is healthy and fast, PSI frequently fails with a rotating set of\nerrors: NO_FCP, ERR_ABORTED, NO_SCREENSHOT, and ..."
+      },
+      {
+        "url": "https://github.com/magento/magento2/issues/40272",
+        "title": "Missing Vary-Cookie makes pages uncachable (for Varnish)",
+        "snippet": "Preconditions and environment\n\n  - Magento version: = 2.4.8\n  - not logged in customer\n\nSteps to reproduce\n\nJust setup Varnish with the default-configurations\n\nExpected result\n\nCacheable Pages, like ..."
+      },
+      {
+        "url": "https://github.com/Rede-Medica-D-Excelencia-Vitalis/Vitalis-web-paciente/issues/10",
+        "title": "VT - 13 - Testes de Compatibilidade",
+        "snippet": "... : Verificar funcionamento completo no Chrome\n\nPré-condições:\n\n  - Chrome atualizado (versão mais recente)\n  - Extensões desabilitadas\n  - Cache limpo\n\nPassos:\n\n1.  Acessar todas as funcionalidades ..."
+      },
+      {
+        "url": "https://github.com/woocommerce/woocommerce/issues/46699",
+        "title": "Dynamic update of wp_wc_product_attributes_lookup not working as expected",
+        "snippet": ""
+      }
+    ]
+  },
+  {
+    "query": "gtmetrix \"onload\"",
+    "total": 21,
+    "results": [
+      {
+        "url": "https://github.com/elementor/elementor/issues/12131",
+        "title": "Section causes Analysis Error in GtMetrix with 95+ second Onload time after WP upgrade",
+        "snippet": "...  95+ second load-time. Causes GTmetrics to either return a\ntimeout error or ~95 second Onload time. Once section is removed, site loads properly in under 3.5 seconds.\n\nSite loads in browser but with ..."
+      },
+      {
+        "url": "https://github.com/bojue/bojue.github.io/issues/108",
+        "title": "前端性能优化量化指标",
+        "snippet": "测试知乎首页浏览器渲染过程数据：Chrome Perfomance\n\nimage\n\nGTmetrix知乎首页性能测试报告\n\nimage\n\n前端页面渲染涉及到可量化的性能指标：\n\n  - First Paint\n  - First Contentful Paint\n  - Largeset Contentful Paint\n  - Onload Time\n  - Full Loaded Time\n\n参考\n\n  - GT Metrix\n  - 前端性能优化指南[7]--Web 性能指标\n"
+      },
+      {
+        "url": "https://github.com/wp-media/imagify-plugin/issues/517",
+        "title": "Undefined request (404 error) on Divi when using WebP <picture> tag method",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/gajus/youtube-player/issues/59",
+        "title": "Add defer and async to injected script",
+        "snippet": "Hey guys, how are you?\n\nI m testing a project in GTMetrix and it s asking to...\n\n1.1MiB of JavaScript is parsed during initial page load. Defer parsing JavaScript to reduce blocking of page rendering ..."
+      },
+      {
+        "url": "https://github.com/miromannino/Justified-Gallery/issues/248",
+        "title": "Question: avoid unnecessarily retrieving \"default\" thumbnail",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/dnnsoftware/Dnn.Platform/issues/5913",
+        "title": "[Bug]:  Registers an unload listener",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/geekelo/dsa_practice/issues/47",
+        "title": "What techniques do you use to optimize the performance of a web application?",
+        "snippet": "...  or defer attributes to prevent blocking page rendering.\n      - Load CSS files in a non-blocking manner using techniques like media= print  and onload.\n\n7.  Reduce Render-Blocking Resources ..."
+      },
+      {
+        "url": "https://github.com/LUISDACA/immuno-clinic-ucc/issues/50",
+        "title": "[PW-011] Evaluacion de rendimiento con GTmetrix",
+        "snippet": "...  sistema.\n\nPasos\n\n1.  Ingresar a GTmetrix.\n2.  Pegar la URL.\n3.  Ejecutar analisis.\n4.  Revisar Performance, Structure, LCP, TBT y CLS.\n5.  Guardar reporte.\n\nMetricas a documentar\n\n| Metrica | Valor | Grade ..."
+      },
+      {
+        "url": "https://github.com/apache/incubator-pagespeed-ngx/issues/1720",
+        "title": "URL is not in cache",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/wp-media/wp-rocket/issues/3142",
+        "title": "Delay JS - Links needs to be clicked twice on iOS / Safari",
+        "snippet": ""
+      }
+    ]
+  },
+  {
+    "query": "gtmetrix \"performance score\"",
+    "total": 80,
+    "results": [
+      {
+        "url": "https://github.com/creativestyle/shopin/issues/120",
+        "title": "TASK: Performance Optimization Audit for Core Page Templates",
+        "snippet": "...  Core Web Vitals (LCP, INP, and CLS)\n    on the Google PageSpeed Insights tool for both Mobile and Desktop.\n  - [ ] Performance Score Threshold: Each tested template must reach a minimum Performance ..."
+      },
+      {
+        "url": "https://github.com/woocommerce/woocommerce-gateway-stripe/issues/1439",
+        "title": "Payment buttons massively impact page speed",
+        "snippet": "...  degradation of speed metrics (GTMetrix drop\nfrom A- B, Pingdom drop A- C, Pagespeed drop 77- 39 ) which results in bad user experience and lower ranking in search\nresults. On our pages, activating the ..."
+      },
+      {
+        "url": "https://github.com/ms0uto/esports-web/issues/7",
+        "title": "Improve image compression for the site",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/mini136/HlasovaciAplikace/issues/2",
+        "title": "performance test",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/amnestywebsite/humanity-theme/issues/623",
+        "title": "Epic - Improve Core Web Vital in particular Cumulative layout Shift",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/oleeskild/obsidian-digital-garden/issues/311",
+        "title": "PageSpeed rating of 36 / eliminate unnecessary JS",
+        "snippet": "Hello!\n\nMy digital garden has a perfect score on GTMetrix. On Google PageSpeed Insights it is ok on desktop. However, on mobile\nI always have a very low performance score of 36.\n\nPerhaps a few things ..."
+      },
+      {
+        "url": "https://github.com/SamiSahirBaig/Opensuit/issues/11",
+        "title": "[P2 - MEDIUM] Implement CDN for Static Assets",
+        "snippet": "... \n\nPerformance Testing\n\n  - Before: Test with GTmetrix\n  - After: Retest and compare scores\n  - Target: 90% performance score\n\nEstimated Time: 2-3 hours\n"
+      },
+      {
+        "url": "https://github.com/kaanmuar/kaanmuar.github.io/issues/1125",
+        "title": "BE: Flag oversized images, missing WebP or AVIF, missing width and height, and missing lazy loading",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/ninenines/cowboy/issues/1237",
+        "title": "How to gzip static files?",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/okkur/syna/issues/761",
+        "title": "Showcase Syna speed and flexibility better",
+        "snippet": "... , kinda fool people by saying this because people probably\nexpect a fast generated website and not being fast during the generation process, most of theme are slow and score with\naverage performance, while a website ..."
+      }
+    ]
+  },
+  {
+    "query": "gtmetrix \"recommendations\"",
+    "total": 51,
+    "results": [
+      {
+        "url": "https://github.com/binnur/binnur.github.io/issues/16",
+        "title": "Review and implement gtmetrix performance recommendations",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/SAP/spartacus/issues/8422",
+        "title": "Performance. GTMetrix. Leverage Browser Caching",
+        "snippet": "Performance Improvement Request on Homepage.\n\nGrade C. PageSpeed Recommendations\n\nLeverage browser caching for the following cacheable resources: Screen Shot 2020-08-03 at 7 47 53 PM\n"
+      },
+      {
+        "url": "https://github.com/SAP/spartacus/issues/8421",
+        "title": "Performance. GTMetrix. Minify Javascript Improvements",
+        "snippet": "Performance Improvement Request on Homepage.\n\nGrade F. PageSpeed Recommendations:\n\nMinify JavaScript for the following resources to reduce their size by 449.8KiB (30% reduction).\n\nScreen Shot 2020-08-03 at 7 39 51 PM\n"
+      },
+      {
+        "url": "https://github.com/rockstor/rockstor-website/issues/11",
+        "title": "Suggestions from gtmetrix.com",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/elementor/elementor/issues/11348",
+        "title": "🐞 Image dimensions are not specified in the Image Carousel",
+        "snippet": "... .\n\nOne of the recommendations will be to Specify image dimensions.\n\nPerformance_Report_GTmetrix\n\nThe image carousel widget does not add width and height attributes to img tags. See source here:\nhttps ..."
+      },
+      {
+        "url": "https://github.com/lennystepn-hue/agentcheck/issues/1",
+        "title": "Programmatic SEO: Public report pages for scanned websites",
+        "snippet": "...  amazon.de visible to AI agents\n  - ChatGPT SEO check shopify.com\n  - AI readiness score nike.com\n\nThis is the same strategy GTmetrix, SecurityHeaders, and PageSpeed Insights use — every scan = a new ..."
+      },
+      {
+        "url": "https://github.com/continuous-architecture/toolkit/issues/62",
+        "title": "Implement SEO Optimization for the New Website",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/SAP/spartacus/issues/8500",
+        "title": "Spike. Generate Spartacus Meaningful Performance Statistics",
+        "snippet": "...  as a whole. 1.b. Spartacus can t be\n    responsible for delays in backend.\n2.  Gather performance reports from Lighthouse, GTMetrix and Dynatrace.\n3.  Review performance issues encountered by customers ..."
+      },
+      {
+        "url": "https://github.com/d-oit/d-oit.github.io/issues/18",
+        "title": "Testing the performance and dimensions of the images",
+        "snippet": "Image Load Times: Measure and analyze the loading times of individual images and groups of images. Tools: Browser\ndeveloper tools (Network tab), Lighthouse, GTmetrix, WebPageTest. Metrics: Time to ..."
+      },
+      {
+        "url": "https://github.com/m0nq/portfolio/issues/17",
+        "title": "[Spike]: Investigate Google Lighthouse Alternatives",
+        "snippet": ""
+      }
+    ]
+  },
+  {
+    "query": "gtmetrix \"preload\"",
+    "total": 55,
+    "results": [
+      {
+        "url": "https://github.com/influxdata/clockface/issues/520",
+        "title": "EPIC: Improve page load times by compressing and preloading fonts & imgs",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/Kostrhoun1/cesky-etf-databaze/issues/17",
+        "title": "⚡ FÁZE 0.C: Core Web Vitals optimalizace a performance",
+        "snippet": "...  Implementovat preload pro main fonts\n  - [ ] C.3.3 Optimalizovat CSS delivery (critical CSS inline)\n  - [ ] C.3.4 Nastavit resource hints (dns-prefetch, preconnect)\n\nC.4 Nastavit GTMetrix monitoring ..."
+      },
+      {
+        "url": "https://github.com/IIED-org/IIED-main/issues/729",
+        "title": "Performance review",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/enchf/enchf.github.io/issues/14",
+        "title": "Phase 5: Performance optimization",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/primabata/primatasdebata.github.io/issues/54",
+        "title": "[MEDIUM] Optimize Page Load Performance",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/liufengyuqing/Tool/issues/1",
+        "title": "Improve Page Performance — Optimize Largest Contentful Paint (LCP) for Main Heading",
+        "snippet": "... , GTMetrix\n\nPossible Causes:\n\nDelayed font loading for heading text.\n\nRender-blocking JavaScript or CSS.\n\nLazy-loading misconfiguration for hero image (if any).\n\nProposed Solution:\n\n1.  Preload primary web ..."
+      },
+      {
+        "url": "https://github.com/xionnon/xionnon/issues/4",
+        "title": "web 性能诊断工具",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/xantifox/taller-de-programacion-web-utp-proyecto-final/issues/9",
+        "title": "[EPIC] ⚡Optimización y Performance - Core Web Vitals + Best Practices",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/netlify/ask-netlify/issues/43",
+        "title": "How to stop duplication of assets with identical contents",
+        "snippet": "About me\n\n  - My name: Jonathan Dilks\n  - I ve used Netlify: quite a while now\n\nMy question in a little more detail\n\nI use GTmetrix to measure my website s performance regularly. It makes suggestions ..."
+      },
+      {
+        "url": "https://github.com/nitinpatil-mf/mutual-fund-landing-page/issues/1",
+        "title": "Performance Optimization - PageSpeed & Loading",
+        "snippet": "...  (faster)\n      - Limit custom fonts to 2-3 families\n      - Use variable fonts to reduce files\n      - Preload critical fonts\n\n  - Font Loading:\n    \n      - Use font-display: swap for FOUT (Flash of ..."
+      }
+    ]
+  },
+  {
+    "query": "gtmetrix \"font\"",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "query": "gtmetrix \"critical request\"",
+    "total": 8,
+    "results": [
+      {
+        "url": "https://github.com/Chocobozzz/PeerTube/issues/6223",
+        "title": "Make Peertube perform better over GTmetrix analysis",
+        "snippet": "Describe the current behavior\n\nPeertube can be by default built to give better performance by solving the issues reported by gtmetrix.\n\nFounded issues:\n\n  - Avoid chaining critical requests [med-high ..."
+      },
+      {
+        "url": "https://github.com/feather-page/cms/issues/453",
+        "title": "Exported sites: cache images and fonts, generate image variants per role",
+        "snippet": "... .\n\nOut of scope\n\n  - A CDN and the latency to distant test locations (rocu.de scores 90 % Performance from Seattle).\n  - The critical request chain from HTML to the stylesheet (ADR-0021).\n  - The http → https redirect when a test starts from an http URL, and the DOM size.\n"
+      },
+      {
+        "url": "https://github.com/jharter1/jharter1.github.io/issues/51",
+        "title": "Implement SEO optimizations and performance improvements",
+        "snippet": "... \n  - Critical CSS: Inline above-the-fold styles\n  - Resource Bundling: Reduce HTTP requests\n  - Gzip Compression: Server-side compression\n\nCaching Strategies\n\n  - Browser Caching: Long-term asset caching ..."
+      },
+      {
+        "url": "https://github.com/LUISDACA/immuno-clinic-ucc/issues/50",
+        "title": "[PW-011] Evaluacion de rendimiento con GTmetrix",
+        "snippet": "...  sistema.\n\nPasos\n\n1.  Ingresar a GTmetrix.\n2.  Pegar la URL.\n3.  Ejecutar analisis.\n4.  Revisar Performance, Structure, LCP, TBT y CLS.\n5.  Guardar reporte.\n\nMetricas a documentar\n\n| Metrica | Valor | Grade ..."
+      },
+      {
+        "url": "https://github.com/midnghtsapphire/revvel-standards/issues/13584",
+        "title": "[WR] ship to market benchmarking-tool",
+        "snippet": "...  application request\nwith commercial intent, but the description is extremely sparse and repetitive.\n\nSuggested Labels\n\n  - work-request - Primary WR classification\n  - wr:new - New work request ..."
+      },
+      {
+        "url": "https://github.com/NexGenStudioDev/ednora-web/issues/138",
+        "title": "Improve Website Performance - Ensure All Components Load Instantly",
+        "snippet": "...  necessary.\n\n4.  Code Minification Bundling:\n    \n      - Minify CSS, JavaScript, and HTML files.\n      - Bundle multiple JavaScript or CSS files together to reduce the number of HTTP requests.\n\n5 ..."
+      },
+      {
+        "url": "https://github.com/mempool/mempool/issues/5342",
+        "title": "About page hangs due to too many network requests",
+        "snippet": "...  exacerbated by the total number of images loaded.\n\nBut the real problem is that the stalled image requests end up blocking the loading of critical javascript files.\n\nScreenshots\n\nimage\n\nDevice or machine\n\nAll ..."
+      },
+      {
+        "url": "https://github.com/GoogleChrome/lighthouse/issues/9505",
+        "title": "Unexplainable high loading times of manifest json ",
+        "snippet": "...  s request\n    time in FCP is incorrectly inflated.\n2.  We shouldn t be flagging manifest files in Critical Request Chains at all, though in this case it was extremely\n    helpful for debugging why the ..."
+      }
+    ]
+  },
+  {
+    "query": "gtmetrix \"blocking\"",
+    "total": 108,
+    "results": [
+      {
+        "url": "https://github.com/Automattic/jetpack/issues/54323",
+        "title": "[Enhancement] Site Chat (Reader Chat): option to load the agents-manager bundle on click or after page load",
+        "snippet": "...  production site, a GTmetrix report\n(Lighthouse 12.6.1, Chrome 154, Chicago, Oct 29 2026) showed reader-chat.min.js as the single largest resource on the\nhomepage (~38% of total page weight), with 345 KB ..."
+      },
+      {
+        "url": "https://github.com/ColoredCow/performance-adapter-wp/issues/44",
+        "title": "Automatic root-cause attribution for page-load spikes (GTmetrix data currently unused)",
+        "snippet": "Problem\n\nToday, when the Fully Loaded Time trend spikes on the dashboard, there is no way to know why without manual\ninvestigation — opening the individual GTmetrix report for that test, reading its ..."
+      },
+      {
+        "url": "https://github.com/creativestyle/shopin/issues/120",
+        "title": "TASK: Performance Optimization Audit for Core Page Templates",
+        "snippet": "...  score of 90+ on Desktop and\n    75+ on Mobile as measured by Lighthouse-based URL checkers.\n  - [ ] Resource Optimization: Automated reports from GTmetrix must show zero critical warnings for Unsized ..."
+      },
+      {
+        "url": "https://github.com/Polkadex-Substrate/Polkadex-Open-Beta/issues/253",
+        "title": "Performance metrics",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/wpsharks/comet-cache/issues/917",
+        "title": "Feature Request: Defer parsing JavaScript to reduce blocking of page rendering",
+        "snippet": "When we use GTMetrix to analyze our site, we get the notice:\n\nJavaScript is parsed during initial page load. Defer parsing JavaScript to reduce blocking of page rendering.\n\nWhen I inspect the files ..."
+      },
+      {
+        "url": "https://github.com/OpenDevelopmentMekong/wp-odm_theme/issues/1341",
+        "title": "Enhance Performance of the platform",
+        "snippet": "Based on the result generated by GTmertrix, there are two top issues that are labeled as critical:\n\n  - Enormous network payloads\n  - Render blocking resource\n\nWe would need to seek for a proper ..."
+      },
+      {
+        "url": "https://github.com/mini136/HlasovaciAplikace/issues/2",
+        "title": "performance test",
+        "snippet": "...  to prevent render-blocking.\n    \n    Inline Critical CSS: Identify and inline above-the-fold styles to the head to minimize the initial paint delay.\n    \n    Preconnect to External Origins: Add link ..."
+      },
+      {
+        "url": "https://github.com/mediaelement/mediaelement/issues/2711",
+        "title": "Defer loading JS",
+        "snippet": "Running gtmetrix report and getting performance hit by render blocking javascript. I can change the enqueque code but\nrequesting you add to your todo list to load the JS differently . Thanks!\n"
+      },
+      {
+        "url": "https://github.com/NextCommunity/NextCommunity.github.io/issues/134",
+        "title": "404 not found for `favicon.ico`",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/HakaiInstitute/cde/issues/389",
+        "title": "CDE Performance",
+        "snippet": ""
+      }
+    ]
+  },
+  {
+    "query": "gtmetrix \"test location\"",
+    "total": 22,
+    "results": [
+      {
+        "url": "https://github.com/IIED-org/IIED-main/issues/729",
+        "title": "Performance review",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/nitinpatil-mf/mutual-fund-landing-page/issues/1",
+        "title": "Performance Optimization - PageSpeed & Loading",
+        "snippet": "...  track targets\n\nTesting Locations\n\n  - Test from multiple geographic locations\n  - Test on mobile (Nexus 5X emulation minimum)\n  - Test on 4G network (throttled)\n  - Test on slow devices (3G, old ..."
+      },
+      {
+        "url": "https://github.com/feather-page/cms/issues/453",
+        "title": "Exported sites: cache images and fonts, generate image variants per role",
+        "snippet": "... .\n\nOut of scope\n\n  - A CDN and the latency to distant test locations (rocu.de scores 90 % Performance from Seattle).\n  - The critical request chain from HTML to the stylesheet (ADR-0021).\n  - The http → https redirect when a test starts from an http URL, and the DOM size.\n"
+      },
+      {
+        "url": "https://github.com/nirjan-dev/learning-to-code/issues/315",
+        "title": "Every Web Performance Test Tool",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/LUISDACA/immuno-clinic-ucc/issues/50",
+        "title": "[PW-011] Evaluacion de rendimiento con GTmetrix",
+        "snippet": "...  sistema.\n\nPasos\n\n1.  Ingresar a GTmetrix.\n2.  Pegar la URL.\n3.  Ejecutar analisis.\n4.  Revisar Performance, Structure, LCP, TBT y CLS.\n5.  Guardar reporte.\n\nMetricas a documentar\n\n| Metrica | Valor | Grade ..."
+      },
+      {
+        "url": "https://github.com/sdcuike/issueBlog/issues/93",
+        "title": "400+ Free Resources for DevOps and Sysadmins",
+        "snippet": ""
+      },
+      {
+        "url": "https://github.com/wp-media/pyvat/issues/9",
+        "title": "Add Canada specific regions VAT rates with feature flag",
+        "snippet": "Next steps for this issue, it is currently blocked until we know the Canadian VAT rates.\n\n  - [ ] Once we get Canadian VAT rates and GTmetrix is ready: update Pyvat and create a version\n  - [ ] Deploy Monies on staging, QA all apps on staging\n"
+      },
+      {
+        "url": "https://github.com/RuCoder-sudo/RuCoder-sudo/issues/1",
+        "title": "Ускорение WordPress",
+        "snippet": "...  Benchmarking Sites\n\n  - WebPageTest - Run a free website speed test from multiple locations around the globe using real browsers (IE and\n    Chrome) and at real consumer connection speeds. You can run simple ..."
+      },
+      {
+        "url": "https://github.com/wp-media/wp-rocket/issues/7784",
+        "title": "Rocket Insights - Cloudflare geolocation",
+        "snippet": "About this issue, the main issue is that the SaaS is currently geolocalizing website to send the request to GTMetrix to\nthe right datacenter for the test. However, with CF, we are being blocked to ..."
+      },
+      {
+        "url": "https://github.com/GoogleChrome/lighthouse/issues/6708",
+        "title": "☔ Pagespeed Insights results differ from lighthouse in chrome",
+        "snippet": "...  to calibrate a test based on the benchmarkIndex, but that has not been completed\nyet.\n\nComparing tests conducted in different locations, on different hardware is not going to yield the same result ..."
+      }
+    ]
+  }
+]

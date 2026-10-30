@@ -1,0 +1,404 @@
+[
+  {
+    "id": "ynumreq",
+    "title": "Make fewer HTTP requests",
+    "weight": 8,
+    "config": {
+      "max_js": 3,
+      "points_js": 4,
+      "max_css": 2,
+      "points_css": 4,
+      "max_cssimages": 6,
+      "points_cssimages": 3
+    },
+    "scoreFunction": {
+      "expression": "function (doc, cset, config) {\n        var js = cset.getComponentsByType('js').length - config.max_js,\n            css = cset.getComponentsByType('css').length - config.max_css,\n            cssimg = cset.getComponentsByType('cssimage').length - config.max_cssimages,\n            score = 100,\n            messages = [];\n\n        if (js > 0) {\n            score -= js * config.points_js;\n            messages[messages.length] = 'This page has ' + YSLOW.util.plural('%num% external Javascript script%s%', (js + config.max_js)) + '.  Try combining them into one.';\n        }\n        if (css > 0) {\n            score -= css * config.points_css;\n            messages[messages.length] = 'This page has ' + YSLOW.util.plural('%num% external stylesheet%s%', (css + config.max_css)) + '.  Try combining them into one.';\n        }\n        if (cssimg > 0) {\n            score -= cssimg * config.points_cssimages;\n            messages[messages.length] = 'This page has ' + YSLOW.util.plural('%num% external background image%s%', (cssimg + config.max_cssimages)) + '.  Try combining them with CSS sprites.';\n        }\n\n        return {\n            score: score,\n            message: messages.join('\\n'),\n            components: []\n        };\n    }"
+    },
+    "sourceLine": 40,
+    "scope": "YSlow historical; NOT GTmetrix Structure"
+  },
+  {
+    "id": "ycdn",
+    "title": "Use a Content Delivery Network (CDN)",
+    "weight": 6,
+    "config": {
+      "points": 10,
+      "patterns": [
+        "^([^\\.]*)\\.([^\\.]*)\\.yimg\\.com/[^/]*\\.yimg\\.com/.*$",
+        "^([^\\.]*)\\.([^\\.]*)\\.yimg\\.com/[^/]*\\.yahoo\\.com/.*$",
+        "^sec.yimg.com/",
+        "^a248.e.akamai.net",
+        "^[dehlps].yimg.com",
+        "^(ads|cn|mail|maps|s1).yimg.com",
+        "^[\\d\\w\\.]+.yimg.com",
+        "^a.l.yimg.com",
+        "^us.(js|a)2.yimg.com",
+        "^yui.yahooapis.com",
+        "^adz.kr.yahoo.com",
+        "^img.yahoo.co.kr",
+        "^img.(shopping|news|srch).yahoo.co.kr",
+        "^pimg.kr.yahoo.com",
+        "^kr.img.n2o.yahoo.com",
+        "^s3.amazonaws.com",
+        "^(www.)?google-analytics.com",
+        ".cloudfront.net",
+        ".ak.fbcdn.net",
+        "platform.twitter.com",
+        "cdn.api.twitter.com",
+        "apis.google.com",
+        ".akamaihd.net",
+        ".rackcdn.com"
+      ],
+      "exceptions": [
+        "^chart.yahoo.com",
+        "^(a1|f3|f5|f3c|f5c).yahoofs.com",
+        "^us.(a1c|f3).yahoofs.com"
+      ],
+      "servers": [
+        "cloudflare-nginx"
+      ],
+      "types": [
+        "js",
+        "css",
+        "image",
+        "cssimage",
+        "flash",
+        "favicon"
+      ]
+    },
+    "scoreFunction": {
+      "expression": "function (doc, cset, config) {\n        var i, j, url, re, match, hostname,\n            offender, len, lenJ, comp, patterns, headers,\n            score = 100,\n            offenders = [],\n            exceptions = [],\n            message = '',\n            util = YSLOW.util,\n            plural = util.plural,\n            kbSize = util.kbSize,\n            getHostname = util.getHostname,\n            docDomain = getHostname(cset.doc_comp.url),\n            comps = cset.getComponentsByType(config.types),\n            userCdns = util.Preference.getPref('cdnHostnames', ''),\n            hasPref = util.Preference.nativePref;\n\n        // array of custom cdns\n        if (userCdns) {\n            userCdns = userCdns.split(',');\n        }\n\n        for (i = 0, len = comps.length; i < len; i += 1) {\n            comp = comps[i];\n            url = comp.url;\n            hostname = getHostname(url);\n            headers = comp.headers;\n\n            // ignore /favicon.ico\n            if (comp.type === 'favicon' && hostname === docDomain) {\n                continue;\n            }\n\n            // experimental custom header, use lowercase\n            match = headers['x-cdn'] || headers['x-amz-cf-id'] || headers['x-edge-location'] || headers['powered-by-chinacache'];\n            if (match) {\n                continue;\n            }\n\n            // by hostname\n            patterns = config.patterns;\n            for (j = 0, lenJ = patterns.length; j < lenJ; j += 1) {\n                re = new RegExp(patterns[j]);\n                if (re.test(hostname)) {\n                    match = 1;\n                    break;\n                }\n            }\n            // by custom hostnames\n            if (userCdns) {\n                for (j = 0, lenJ = userCdns.length; j < lenJ; j += 1) {\n                    re = new RegExp(util.trim(userCdns[j]));\n                    if (re.test(hostname)) {\n                        match = 1;\n                        break;\n                    }\n                }\n            }\n\n            if (!match) {\n                // by Server HTTP header\n                patterns = config.servers;\n                for (j = 0, lenJ = patterns.length; j < lenJ; j += 1) {\n                    re = new RegExp(patterns[j]);\n                    if (re.test(headers.server)) {\n                        match = 1;\n                        break;\n                    }\n                }\n                if (!match) {\n                    // by exception\n                    patterns = config.exceptions;\n                    for (j = 0, lenJ = patterns.length; j < lenJ; j += 1) {\n                        re = new RegExp(patterns[j]);\n                        if (re.test(hostname)) {\n                            exceptions.push(comp);\n                            match = 1;\n                            break;\n                        }\n                    }\n                    if (!match) {\n                        offenders.push(comp);\n                    }\n                }\n            }\n        }\n\n        score -= offenders.length * config.points;\n\n        offenders.concat(exceptions);\n\n        if (offenders.length > 0) {\n            message = plural('There %are% %num% static component%s% ' +\n                'that %are% not on CDN. ', offenders.length);\n        }\n        if (exceptions.length > 0) {\n            message += plural('There %are% %num% component%s% that %are% not ' +\n                'on CDN, but %are% exceptions:', exceptions.length) + '<ul>';\n            for (i = 0, len = offenders.length; i < len; i += 1) {\n                message += '<li>' + util.prettyAnchor(exceptions[i].url,\n                    exceptions[i].url, null, true, 120, null,\n                    exceptions[i].type) + '</li>';\n            }\n            message += '</ul>';\n        }\n\n        if (userCdns) {\n            message += '<p>Using these CDN hostnames from your preferences: ' +\n                userCdns + '</p>';\n        } else {\n            message += '<p>You can specify CDN hostnames in your ' +\n                'preferences. See <a href=\"javascript:document.ysview.' +\n                'openLink(\\'http://yslow.org/faq/#faq_cdn\\')\">YSlow FAQ</a> ' +\n                'for details.</p>';\n        }\n\n        // list unique domains only to avoid long list of offenders\n        if (offenders.length) {\n            offenders = util.summaryByDomain(offenders,\n                ['size', 'size_compressed'], true);\n            for (i = 0, len = offenders.length; i < len; i += 1) {\n                offender = offenders[i];\n                offenders[i] = offender.domain + ': ' +\n                    plural('%num% component%s%, ', offender.count) +\n                    kbSize(offender.sum_size) + (\n                        offender.sum_size_compressed > 0 ? ' (' +\n                        kbSize(offender.sum_size_compressed) + ' GZip)' : ''\n                    ) + (hasPref ? (\n                    ' <button onclick=\"javascript:document.ysview.addCDN(\\'' +\n                    offender.domain + '\\')\">Add as CDN</button>') : '');\n            }\n        }\n\n        return {\n            score: score,\n            message: message,\n            components: offenders\n        };\n    }"
+    },
+    "sourceLine": 88,
+    "scope": "YSlow historical; NOT GTmetrix Structure"
+  },
+  {
+    "id": "yemptysrc",
+    "title": "Avoid empty src or href",
+    "weight": 30,
+    "config": {
+      "points": 100
+    },
+    "scoreFunction": {
+      "expression": "function (doc, cset, config) {\n        var type, score, count,\n            emptyUrl = cset.empty_url,\n            offenders = [],\n            messages = [],\n            msg = '',\n            points = parseInt(config.points, 10);\n\n        score = 100;\n        if (emptyUrl) {\n            for (type in emptyUrl) {\n                if (emptyUrl.hasOwnProperty(type)) {\n                    count = emptyUrl[type];\n                    score -= count * points;\n                    messages.push(count + ' ' + type);\n                }\n            }\n            msg = messages.join(', ') + YSLOW.util.plural(\n                ' component%s% with empty link were found.',\n                messages.length\n            );\n        }\n\n        return {\n            score: score,\n            message: msg,\n            components: offenders\n        };\n    }"
+    },
+    "sourceLine": 1213,
+    "scope": "YSlow historical; NOT GTmetrix Structure"
+  },
+  {
+    "id": "yexpires",
+    "title": "Add Expires headers",
+    "weight": 10,
+    "config": {
+      "points": 11,
+      "howfar": 172800,
+      "types": [
+        "css",
+        "js",
+        "image",
+        "cssimage",
+        "flash",
+        "favicon"
+      ]
+    },
+    "scoreFunction": {
+      "expression": "function (doc, cset, config) {\n        var ts, i, expiration, score, len,\n            // far-ness in milliseconds\n            far = parseInt(config.howfar, 10) * 1000,\n            offenders = [],\n            comps = cset.getComponentsByType(config.types);\n\n        for (i = 0, len = comps.length; i < len; i += 1) {\n            expiration = comps[i].expires;\n            if (typeof expiration === 'object' &&\n                    typeof expiration.getTime === 'function') {\n                // looks like a Date object\n                ts = new Date().getTime();\n                if (expiration.getTime() > ts + far) {\n                    continue;\n                }\n            }\n            offenders.push(comps[i]);\n        }\n\n        score = 100 - offenders.length * parseInt(config.points, 10);\n\n        return {\n            score: score,\n            message: (offenders.length > 0) ? YSLOW.util.plural(\n                'There %are% %num% static component%s%',\n                offenders.length\n            ) + ' without a far-future expiration date.' : '',\n            components: offenders\n        };\n    }"
+    },
+    "sourceLine": 278,
+    "scope": "YSlow historical; NOT GTmetrix Structure"
+  },
+  {
+    "id": "ycompress",
+    "title": "Compress components with gzip",
+    "weight": 8,
+    "config": {
+      "min_filesize": 500,
+      "types": [
+        "doc",
+        "iframe",
+        "xhr",
+        "js",
+        "css"
+      ],
+      "points": 11
+    },
+    "scoreFunction": {
+      "expression": "function (doc, cset, config) {\n        var i, len, score, comp,\n            offenders = [],\n            comps = cset.getComponentsByType(config.types);\n\n        for (i = 0, len = comps.length; i < len; i += 1) {\n            comp = comps[i];\n            if (comp.compressed || comp.size < 500) {\n                continue;\n            }\n            offenders.push(comp);\n        }\n\n        score = 100 - offenders.length * parseInt(config.points, 10);\n\n        return {\n            score: score,\n            message: (offenders.length > 0) ? YSLOW.util.plural(\n                'There %are% %num% plain text component%s%',\n                offenders.length\n            ) + ' that should be sent compressed' : '',\n            components: offenders\n        };\n    }"
+    },
+    "sourceLine": 326,
+    "scope": "YSlow historical; NOT GTmetrix Structure"
+  },
+  {
+    "id": "ycsstop",
+    "title": "Put CSS at top",
+    "weight": 4,
+    "config": {
+      "points": 10
+    },
+    "scoreFunction": {
+      "expression": "function (doc, cset, config) {\n        var i, len, score, comp,\n            comps = cset.getComponentsByType('css'),\n            offenders = [];\n\n        // expose all offenders\n        for (i = 0, len = comps.length; i < len; i += 1) {\n            comp = comps[i];\n            if (comp.containerNode === 'body') {\n                offenders.push(comp);\n            }\n        }\n\n        score = 100;\n        if (offenders.length > 0) {\n            // start at 99 so each ding drops us a grade\n            score -= 1 + offenders.length * parseInt(config.points, 10);\n        }\n\n        return {\n            score: score,\n            message: (offenders.length > 0) ? YSLOW.util.plural(\n                'There %are% %num% stylesheet%s%',\n                offenders.length\n            ) + ' found in the body of the document' : '',\n            components: offenders\n        };\n    }"
+    },
+    "sourceLine": 367,
+    "scope": "YSlow historical; NOT GTmetrix Structure"
+  },
+  {
+    "id": "yjsbottom",
+    "title": "Put JavaScript at bottom",
+    "weight": 4,
+    "config": {
+      "points": 5
+    },
+    "scoreFunction": {
+      "expression": "function (doc, cset, config) {\n        var i, len, comp, score,\n            offenders = [],\n            comps = cset.getComponentsByType('js');\n\n        // offenders are components not injected (tag found on document payload)\n        // except if they have either defer or async attributes\n        for (i = 0, len = comps.length; i < len; i += 1) {\n            comp = comps[i];\n            if (comp.containerNode === 'head' &&\n                    !comp.injected && (!comp.defer || !comp.async)) {\n                offenders.push(comp);\n            }\n        }\n\n        score = 100 - offenders.length * parseInt(config.points, 10);\n\n        return {\n            score: score,\n            message: (offenders.length > 0) ?\n                YSLOW.util.plural(\n                    'There %are% %num% JavaScript script%s%',\n                    offenders.length\n                ) + ' found in the head of the document' : '',\n            components: offenders\n        };\n    }"
+    },
+    "sourceLine": 407,
+    "scope": "YSlow historical; NOT GTmetrix Structure"
+  },
+  {
+    "id": "yexpressions",
+    "title": "Avoid CSS expressions",
+    "weight": 3,
+    "config": {
+      "points": 2
+    },
+    "scoreFunction": {
+      "expression": "function (doc, cset, config) {\n        var i, len, expr_count, comp,\n            instyles = (cset.inline && cset.inline.styles) || [],\n            comps = cset.getComponentsByType('css'),\n            offenders = [],\n            score = 100,\n            total = 0;\n\n        for (i = 0, len = comps.length; i < len; i += 1) {\n            comp = comps[i];\n            if (typeof comp.expr_count === 'undefined') {\n                expr_count = YSLOW.util.countExpressions(comp.body);\n                comp.expr_count = expr_count;\n            } else {\n                expr_count = comp.expr_count;\n            }\n\n            // offence\n            if (expr_count > 0) {\n                comp.yexpressions = YSLOW.util.plural(\n                    '%num% expression%s%',\n                    expr_count\n                );\n                total += expr_count;\n                offenders.push(comp);\n            }\n        }\n\n        for (i = 0, len = instyles.length; i < len; i += 1) {\n            expr_count = YSLOW.util.countExpressions(instyles[i].body);\n            if (expr_count > 0) {\n                offenders.push('inline &lt;style&gt; tag #' + (i + 1) + ' (' +\n                    YSLOW.util.plural(\n                        '%num% expression%s%',\n                        expr_count\n                    ) + ')'\n                    );\n                total += expr_count;\n            }\n        }\n\n        if (total > 0) {\n            score = 90 - total * config.points;\n        }\n\n        return {\n            score: score,\n            message: total > 0 ? 'There is a total of ' +\n                YSLOW.util.plural('%num% expression%s%', total) : '',\n            components: offenders\n        };\n    }"
+    },
+    "sourceLine": 445,
+    "scope": "YSlow historical; NOT GTmetrix Structure"
+  },
+  {
+    "id": "yexternal",
+    "title": "Make JavaScript and CSS external",
+    "weight": 4,
+    "config": {},
+    "scoreFunction": {
+      "expression": "function (doc, cset, config) {\n        var message,\n            inline = cset.inline,\n            styles = (inline && inline.styles) || [],\n            scripts = (inline && inline.scripts) || [],\n            offenders = [];\n\n        if (styles.length) {\n            message = YSLOW.util.plural(\n                'There is a total of %num% inline css',\n                styles.length\n            );\n            offenders.push(message);\n        }\n\n        if (scripts.length) {\n            message = YSLOW.util.plural(\n                'There is a total of %num% inline script%s%',\n                scripts.length\n            );\n            offenders.push(message);\n        }\n\n        return {\n            score: 'n/a',\n            message: 'Only consider this if your property is a common user home page.',\n            components: offenders\n        };\n    }"
+    },
+    "sourceLine": 509,
+    "scope": "YSlow historical; NOT GTmetrix Structure"
+  },
+  {
+    "id": "ydns",
+    "title": "Reduce DNS lookups",
+    "weight": 3,
+    "config": {
+      "max_domains": 4,
+      "points": 5
+    },
+    "scoreFunction": {
+      "expression": "function (doc, cset, config) {\n        var i, len, domain,\n            util = YSLOW.util,\n            kbSize = util.kbSize,\n            plural = util.plural,\n            score = 100,\n            domains = util.summaryByDomain(cset.components,\n                ['size', 'size_compressed'], true);\n\n        if (domains.length > config.max_domains) {\n            score -= (domains.length - config.max_domains) * config.points;\n        }\n\n        // list unique domains only to avoid long list of offenders\n        if (domains.length) {\n            for (i = 0, len = domains.length; i < len; i += 1) {\n                domain = domains[i];\n                domains[i] = domain.domain + ': ' +\n                    plural('%num% component%s%, ', domain.count) +\n                    kbSize(domain.sum_size) + (\n                        domain.sum_size_compressed > 0 ? ' (' +\n                        kbSize(domain.sum_size_compressed) + ' GZip)' : ''\n                    );\n            }\n        }\n\n        return {\n            score: score,\n            message: (domains.length > config.max_domains) ? plural(\n                'The components are split over more than %num% domain%s%',\n                config.max_domains\n            ) : '',\n            components: domains\n        };\n    }"
+    },
+    "sourceLine": 547,
+    "scope": "YSlow historical; NOT GTmetrix Structure"
+  },
+  {
+    "id": "yminify",
+    "title": "Minify JavaScript and CSS",
+    "weight": 4,
+    "config": {
+      "points": 10,
+      "types": [
+        "js",
+        "css"
+      ]
+    },
+    "scoreFunction": {
+      "expression": "function (doc, cset, config) {\n        var i, len, score, minified, comp,\n            inline = cset.inline,\n            styles = (inline && inline.styles) || [],\n            scripts = (inline && inline.scripts) || [],\n            comps = cset.getComponentsByType(config.types),\n            offenders = [];\n\n        // check all peeled components\n        for (i = 0, len = comps.length; i < len; i += 1) {\n            comp = comps[i];\n            // set/get minified flag\n            if (typeof comp.minified === 'undefined') {\n                minified = YSLOW.util.isMinified(comp.body);\n                comp.minified = minified;\n            } else {\n                minified = comp.minified;\n            }\n\n            if (!minified) {\n                offenders.push(comp);\n            }\n        }\n\n        // check inline scripts/styles/whatever\n        for (i = 0, len = styles.length; i < len; i += 1) {\n            if (!YSLOW.util.isMinified(styles[i].body)) {\n                offenders.push('inline &lt;style&gt; tag #' + (i + 1));\n            }\n        }\n        for (i = 0, len = scripts.length; i < len; i += 1) {\n            if (!YSLOW.util.isMinified(scripts[i].body)) {\n                offenders.push('inline &lt;script&gt; tag #' + (i + 1));\n            }\n        }\n\n        score = 100 - offenders.length * config.points;\n\n        return {\n            score: score,\n            message: (offenders.length > 0) ? YSLOW.util.plural('There %are% %num% component%s% that can be minified', offenders.length) : '',\n            components: offenders\n        };\n    }"
+    },
+    "sourceLine": 597,
+    "scope": "YSlow historical; NOT GTmetrix Structure"
+  },
+  {
+    "id": "yredirects",
+    "title": "Avoid URL redirects",
+    "weight": 4,
+    "config": {
+      "points": 10
+    },
+    "scoreFunction": {
+      "expression": "function (doc, cset, config) {\n        var i, len, comp, score,\n            offenders = [],\n            briefUrl = YSLOW.util.briefUrl,\n            comps = cset.getComponentsByType('redirect');\n\n        for (i = 0, len = comps.length; i < len; i += 1) {\n            comp = comps[i];\n            offenders.push(briefUrl(comp.url, 80) + ' redirects to ' +\n                briefUrl(comp.headers.location, 60));\n        }\n        score = 100 - comps.length * parseInt(config.points, 10);\n\n        return {\n            score: score,\n            message: (comps.length > 0) ? YSLOW.util.plural(\n                'There %are% %num% redirect%s%',\n                comps.length\n            ) : '',\n            components: offenders\n        };\n    }"
+    },
+    "sourceLine": 656,
+    "scope": "YSlow historical; NOT GTmetrix Structure"
+  },
+  {
+    "id": "ydupes",
+    "title": "Remove duplicate JavaScript and CSS",
+    "weight": 4,
+    "config": {
+      "points": 5,
+      "types": [
+        "js",
+        "css"
+      ]
+    },
+    "scoreFunction": {
+      "expression": "function (doc, cset, config) {\n        var i, url, score, len,\n            hash = {},\n            offenders = [],\n            comps = cset.getComponentsByType(config.types);\n\n        for (i = 0, len = comps.length; i < len; i += 1) {\n            url = comps[i].url;\n            if (typeof hash[url] === 'undefined') {\n                hash[url] = {\n                    count: 1,\n                    compindex: i\n                };\n            } else {\n                hash[url].count += 1;\n            }\n        }\n\n        for (i in hash) {\n            if (hash.hasOwnProperty(i) && hash[i].count > 1) {\n                offenders.push(comps[hash[i].compindex]);\n            }\n        }\n\n        score = 100 - offenders.length * parseInt(config.points, 10);\n\n        return {\n            score: score,\n            message: (offenders.length > 0) ? YSLOW.util.plural(\n                'There %are% %num% duplicate component%s%',\n                offenders.length\n            ) : '',\n            components: offenders\n        };\n    }"
+    },
+    "sourceLine": 690,
+    "scope": "YSlow historical; NOT GTmetrix Structure"
+  },
+  {
+    "id": "yetags",
+    "title": "Configure entity tags (ETags)",
+    "weight": 2,
+    "config": {
+      "points": 11,
+      "types": [
+        "flash",
+        "js",
+        "css",
+        "cssimage",
+        "image",
+        "favicon"
+      ]
+    },
+    "scoreFunction": {
+      "expression": "function (doc, cset, config) {\n\n        var i, len, score, comp, etag,\n            offenders = [],\n            comps = cset.getComponentsByType(config.types);\n\n        for (i = 0, len = comps.length; i < len; i += 1) {\n            comp = comps[i];\n            etag = comp.headers && comp.headers.etag;\n            if (etag && !YSLOW.util.isETagGood(etag)) {\n                offenders.push(comp);\n            }\n        }\n\n        score = 100 - offenders.length * parseInt(config.points, 10);\n\n        return {\n            score: score,\n            message: (offenders.length > 0) ? YSLOW.util.plural(\n                'There %are% %num% component%s% with misconfigured ETags',\n                offenders.length\n            ) : '',\n            components: offenders\n        };\n    }"
+    },
+    "sourceLine": 740,
+    "scope": "YSlow historical; NOT GTmetrix Structure"
+  },
+  {
+    "id": "yxhr",
+    "title": "Make AJAX cacheable",
+    "weight": 4,
+    "config": {
+      "points": 5,
+      "min_cache_time": 3600
+    },
+    "scoreFunction": {
+      "expression": "function (doc, cset, config) {\n        var i, expiration, ts, score, cache_control,\n            // far-ness in milliseconds\n            min = parseInt(config.min_cache_time, 10) * 1000,\n            offenders = [],\n            comps = cset.getComponentsByType('xhr');\n\n        for (i = 0; i < comps.length; i += 1) {\n            // check for cache-control: no-cache and cache-control: no-store\n            cache_control = comps[i].headers['cache-control'];\n            if (cache_control) {\n                if (cache_control.indexOf('no-cache') !== -1 ||\n                        cache_control.indexOf('no-store') !== -1) {\n                    continue;\n                }\n            }\n\n            expiration = comps[i].expires;\n            if (typeof expiration === 'object' &&\n                    typeof expiration.getTime === 'function') {\n                // looks like a Date object\n                ts = new Date().getTime();\n                if (expiration.getTime() > ts + min) {\n                    continue;\n                }\n                // expires less than min_cache_time => BAD.\n            }\n            offenders.push(comps[i]);\n        }\n\n        score = 100 - offenders.length * parseInt(config.points, 10);\n\n        return {\n            score: score,\n            message: (offenders.length > 0) ? YSLOW.util.plural(\n                'There %are% %num% XHR component%s% that %are% not cacheable',\n                offenders.length\n            ) : '',\n            components: offenders\n        };\n    }"
+    },
+    "sourceLine": 780,
+    "scope": "YSlow historical; NOT GTmetrix Structure"
+  },
+  {
+    "id": "yxhrmethod",
+    "title": "Use GET for AJAX requests",
+    "weight": 3,
+    "config": {
+      "points": 5
+    },
+    "scoreFunction": {
+      "expression": "function (doc, cset, config) {\n        var i, score,\n            offenders = [],\n            comps = cset.getComponentsByType('xhr');\n\n        for (i = 0; i < comps.length; i += 1) {\n            if (typeof comps[i].method === 'string') {\n                if (comps[i].method !== 'GET' && comps[i].method !== 'unknown') {\n                    offenders.push(comps[i]);\n                }\n            }\n        }\n        score = 100 - offenders.length * parseInt(config.points, 10);\n\n        return {\n            score: score,\n            message: (offenders.length > 0) ? YSLOW.util.plural(\n                'There %are% %num% XHR component%s% that %do% not use GET HTTP method',\n                offenders.length\n            ) : '',\n            components: offenders\n        };\n    }"
+    },
+    "sourceLine": 836,
+    "scope": "YSlow historical; NOT GTmetrix Structure"
+  },
+  {
+    "id": "ymindom",
+    "title": "Reduce the number of DOM elements",
+    "weight": 3,
+    "config": {
+      "range": 250,
+      "points": 10,
+      "maxdom": 900
+    },
+    "scoreFunction": {
+      "expression": "function (doc, cset, config) {\n        var numdom = cset.domElementsCount,\n            score = 100;\n\n        if (numdom > config.maxdom) {\n            score = 99 - Math.ceil((numdom - parseInt(config.maxdom, 10)) /\n                parseInt(config.range, 10)) * parseInt(config.points, 10);\n        }\n\n        return {\n            score: score,\n            message: (numdom > config.maxdom) ? YSLOW.util.plural(\n                'There %are% %num% DOM element%s% on the page',\n                numdom\n            ) : '',\n            components: []\n        };\n    }"
+    },
+    "sourceLine": 873,
+    "scope": "YSlow historical; NOT GTmetrix Structure"
+  },
+  {
+    "id": "yno404",
+    "title": "Avoid HTTP 404 (Not Found) error",
+    "weight": 4,
+    "config": {
+      "points": 5,
+      "types": [
+        "css",
+        "js",
+        "image",
+        "cssimage",
+        "flash",
+        "xhr",
+        "favicon"
+      ]
+    },
+    "scoreFunction": {
+      "expression": "function (doc, cset, config) {\n        var i, len, comp, score,\n            offenders = [],\n            comps = cset.getComponentsByType(config.types);\n\n        for (i = 0, len = comps.length; i < len; i += 1) {\n            comp = comps[i];\n            if (parseInt(comp.status, 10) === 404) {\n                offenders.push(comp);\n            }\n        }\n        score = 100 - offenders.length * parseInt(config.points, 10);\n        return {\n            score: score,\n            message: (offenders.length > 0) ? YSLOW.util.plural(\n                'There %are% %num% request%s% that %are% 404 Not Found',\n                offenders.length\n            ) : '',\n            components: offenders\n        };\n    }"
+    },
+    "sourceLine": 908,
+    "scope": "YSlow historical; NOT GTmetrix Structure"
+  },
+  {
+    "id": "ymincookie",
+    "title": "Reduce cookie size",
+    "weight": 3,
+    "config": {
+      "points": 10,
+      "max_cookie_size": 1000
+    },
+    "scoreFunction": {
+      "expression": "function (doc, cset, config) {\n        var n,\n            cookies = cset.cookies,\n            cookieSize = (cookies && cookies.length) || 0,\n            message = '',\n            score = 100;\n\n        if (cookieSize > config.max_cookie_size) {\n            n = Math.floor(cookieSize / config.max_cookie_size);\n            score -= 1 + n * parseInt(config.points, 10);\n            message = YSLOW.util.plural(\n                'There %are% %num% byte%s% of cookies on this page',\n                cookieSize\n            );\n        }\n\n        return {\n            score: score,\n            message: message,\n            components: []\n        };\n    }"
+    },
+    "sourceLine": 944,
+    "scope": "YSlow historical; NOT GTmetrix Structure"
+  },
+  {
+    "id": "ycookiefree",
+    "title": "Use cookie-free domains",
+    "weight": 3,
+    "config": {
+      "points": 5,
+      "types": [
+        "js",
+        "css",
+        "image",
+        "cssimage",
+        "flash",
+        "favicon"
+      ]
+    },
+    "scoreFunction": {
+      "expression": "function (doc, cset, config) {\n        var i, len, score, comp, cookie,\n            offenders = [],\n            getHostname = YSLOW.util.getHostname,\n            docDomain = getHostname(cset.doc_comp.url),\n            comps = cset.getComponentsByType(config.types);\n\n        for (i = 0, len = comps.length; i < len; i += 1) {\n            comp = comps[i];\n\n            // ignore /favicon.ico\n            if (comp.type === 'favicon' &&\n                    getHostname(comp.url) === docDomain) {\n                continue;\n            }\n\n            cookie = comp.cookie;\n            if (typeof cookie === 'string' && cookie.length) {\n                offenders.push(comps[i]);\n            }\n        }\n        score = 100 - offenders.length * parseInt(config.points, 10);\n\n        return {\n            score: score,\n            message: (offenders.length > 0) ? YSLOW.util.plural(\n                'There %are% %num% component%s% that %are% not cookie-free',\n                offenders.length\n            ) : '',\n            components: offenders\n        };\n    }"
+    },
+    "sourceLine": 981,
+    "scope": "YSlow historical; NOT GTmetrix Structure"
+  },
+  {
+    "id": "ynofilter",
+    "title": "Avoid AlphaImageLoader filter",
+    "weight": 4,
+    "config": {
+      "points": 5,
+      "halfpoints": 2
+    },
+    "scoreFunction": {
+      "expression": "function (doc, cset, config) {\n        var i, len, score, comp, type, count, filter_count,\n            instyles = (cset.inline && cset.inline.styles) || [],\n            comps = cset.getComponentsByType('css'),\n            offenders = [],\n            filter_total = 0,\n            hack_filter_total = 0;\n\n        for (i = 0, len = comps.length; i < len; i += 1) {\n            comp = comps[i];\n            if (typeof comp.filter_count === 'undefined') {\n                filter_count = YSLOW.util.countAlphaImageLoaderFilter(comp.body);\n                comp.filter_count = filter_count;\n            } else {\n                filter_count = comp.filter_count;\n            }\n\n            // offence\n            count = 0;\n            for (type in filter_count) {\n                if (filter_count.hasOwnProperty(type)) {\n                    if (type === 'hackFilter') {\n                        hack_filter_total += filter_count[type];\n                        count += filter_count[type];\n                    } else {\n                        filter_total += filter_count[type];\n                        count += filter_count[type];\n                    }\n                }\n            }\n            if (count > 0) {\n                comps[i].yfilters = YSLOW.util.plural('%num% filter%s%', count);\n                offenders.push(comps[i]);\n            }\n        }\n\n        for (i = 0, len = instyles.length; i < len; i += 1) {\n            filter_count = YSLOW.util.countAlphaImageLoaderFilter(instyles[i].body);\n            count = 0;\n            for (type in filter_count) {\n                if (filter_count.hasOwnProperty(type)) {\n                    if (type === 'hackFilter') {\n                        hack_filter_total += filter_count[type];\n                        count += filter_count[type];\n                    } else {\n                        filter_total += filter_count[type];\n                        count += filter_count[type];\n                    }\n                }\n            }\n            if (count > 0) {\n                offenders.push('inline &lt;style&gt; tag #' + (i + 1) + ' (' +\n                    YSLOW.util.plural('%num% filter%s%', count) + ')');\n            }\n        }\n\n        score = 100 - (filter_total * config.points + hack_filter_total *\n            config.halfpoints);\n\n        return {\n            score: score,\n            message: (filter_total + hack_filter_total) > 0 ?\n                'There is a total of ' + YSLOW.util.plural(\n                    '%num% filter%s%',\n                    filter_total + hack_filter_total\n                ) : '',\n            components: offenders\n        };\n    }"
+    },
+    "sourceLine": 1028,
+    "scope": "YSlow historical; NOT GTmetrix Structure"
+  },
+  {
+    "id": "yimgnoscale",
+    "title": "Do not scale images in HTML",
+    "weight": 3,
+    "config": {
+      "points": 5
+    },
+    "scoreFunction": {
+      "expression": "function (doc, cset, config) {\n        var i, prop, score,\n            offenders = [],\n            comps = cset.getComponentsByType('image');\n\n        for (i = 0; i < comps.length; i += 1) {\n            prop = comps[i].object_prop;\n            if (prop && typeof prop.width !== 'undefined' &&\n                    typeof prop.height !== 'undefined' &&\n                    typeof prop.actual_width !== 'undefined' &&\n                    typeof prop.actual_height !== 'undefined') {\n                if (prop.width < prop.actual_width ||\n                        prop.height < prop.actual_height) {\n                    // allow scale up\n                    offenders.push(comps[i]);\n                }\n            }\n        }\n        score = 100 - offenders.length * parseInt(config.points, 10);\n\n        return {\n            score: score,\n            message: (offenders.length > 0) ? YSLOW.util.plural(\n                'There %are% %num% image%s% that %are% scaled down',\n                offenders.length\n            ) : '',\n            components: offenders\n        };\n    }"
+    },
+    "sourceLine": 1112,
+    "scope": "YSlow historical; NOT GTmetrix Structure"
+  },
+  {
+    "id": "yfavicon",
+    "title": "Make favicon small and cacheable",
+    "weight": 2,
+    "config": {
+      "points": 5,
+      "size": 2000,
+      "min_cache_time": 3600
+    },
+    "scoreFunction": {
+      "expression": "function (doc, cset, config) {\n        var ts, expiration, comp, score, cacheable,\n            messages = [],\n            min = parseInt(config.min_cache_time, 10) * 1000,\n            comps = cset.getComponentsByType('favicon');\n\n        if (comps.length) {\n            comp = comps[0];\n\n            // check if favicon was found\n            if (parseInt(comp.status, 10) === 404) {\n                messages.push('Favicon was not found');\n            }\n\n            // check size\n            if (comp.size > config.size) {\n                messages.push(YSLOW.util.plural(\n                    'Favicon is more than %num% bytes',\n                    config.size\n                ));\n            }\n            // check cacheability\n            expiration = comp.expires;\n\n            if (typeof expiration === 'object' &&\n                    typeof expiration.getTime === 'function') {\n                // looks like a Date object\n                ts = new Date().getTime();\n                cacheable = expiration.getTime() >= ts + min;\n            }\n            if (!cacheable) {\n                messages.push('Favicon is not cacheable');\n            }\n        }\n        score = 100 - messages.length * parseInt(config.points, 10);\n\n        return {\n            score: score,\n            message: (messages.length > 0) ? messages.join('\\n') : '',\n            components: []\n        };\n    }"
+    },
+    "sourceLine": 1153,
+    "scope": "YSlow historical; NOT GTmetrix Structure"
+  }
+]

@@ -27,6 +27,8 @@
     var homeUrl = ViewData["CanonicalUrl"]?.ToString() ?? AppPath.Absolute("/", Context)!;
 }
 
+<partial name="_HomeIconDefinitions" />
+
 <!-- استوری‌ها — بالای هیرو (مثل 28a3849) تا بلافاصله بعد از هدر دیده شوند -->
 <section class="ms-stories" aria-label="استوری‌های فروشگاه">
     <div class="ms-wrap ms-stories-inner">
@@ -116,7 +118,7 @@
                                     var img = ProductImageHelper.GetLcpDisplayUrl(ProductImageHelper.GetPrimary(hp.Images), Env);
                                     <div class="ms-hero-product">
                                         <span class="ms-hero-ring" aria-hidden="true"></span>
-                                        <img src="@AppPath.H(img, Context)" alt="@hp.Name" width="240" height="240" sizes="(max-width: 767px) 55vw, 240px" decoding="async" loading="@(si == 0 ? "eager" : "lazy")" @Html.Raw(si == 0 ? "fetchpriority=\"high\"" : "data-ms-lazy=\"true\"") />
+                                        <img asp-append-version="true" src="@AppPath.H(img, Context)" alt="@hp.Name" width="240" height="240" sizes="(max-width: 767px) 55vw, 420px" decoding="async" loading="eager" fetchpriority="@(si == 0 ? "high" : "low")" />
                                     </div>
                                 }
                             </div>
@@ -141,7 +143,7 @@
                                 var img1 = ProductImageHelper.GetLcpDisplayUrl(ProductImageHelper.GetPrimary(hp1.Images), Env);
                                 <div class="ms-hero-product">
                                     <span class="ms-hero-ring" aria-hidden="true"></span>
-                                    <img src="@AppPath.H(img1, Context)" alt="@hp1.Name" width="240" height="240" fetchpriority="high" decoding="async" loading="eager" sizes="(max-width: 767px) 55vw, 240px" />
+                                    <img asp-append-version="true" src="@AppPath.H(img1, Context)" alt="@hp1.Name" width="240" height="240" fetchpriority="high" decoding="async" loading="eager" sizes="(max-width: 767px) 55vw, 240px" />
                                 </div>
                             }
                         </div>

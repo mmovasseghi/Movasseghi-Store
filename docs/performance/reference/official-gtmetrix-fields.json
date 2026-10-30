@@ -1,0 +1,102 @@
+[
+  [
+    "pagespeed_score",
+    "PageSpeed score"
+  ],
+  [
+    "yslow_score",
+    "YSlow score"
+  ],
+  [
+    "fully_loaded_time",
+    "Fully Loaded"
+  ],
+  [
+    "time_to_first_byte",
+    "Time to First Byte"
+  ],
+  [
+    "redirect_duration",
+    "Redirect Duration"
+  ],
+  [
+    "connect_duration",
+    "Connect Duration"
+  ],
+  [
+    "backend_duration",
+    "Backend Duration"
+  ],
+  [
+    "onload_time",
+    "Onload"
+  ],
+  [
+    "onload_duration",
+    "Onload Duration"
+  ],
+  [
+    "page_bytes",
+    "Total Size"
+  ],
+  [
+    "page_requests",
+    "Total Requests"
+  ],
+  [
+    "html_bytes",
+    "HTML Size"
+  ],
+  [
+    "first_paint_time",
+    "First Paint"
+  ],
+  [
+    "dom_interactive_time",
+    "DOM Interactive"
+  ],
+  [
+    "dom_content_loaded_time",
+    "DOM Content Loaded"
+  ],
+  [
+    "dom_content_loaded_duration",
+    "DOM Content Loaded Duration"
+  ],
+  [
+    "gtmetrix_grade",
+    "GTmetrix Grade"
+  ],
+  [
+    "performance_score",
+    "Performance Score"
+  ],
+  [
+    "structure_score",
+    "Structure Score"
+  ],
+  [
+    "largest_contentful_paint",
+    "Largest Contentful Paint"
+  ],
+  [
+    "first_contentful_paint",
+    "First Contentful Paint"
+  ],
+  [
+    "total_blocking_time",
+    "Total Blocking Time"
+  ],
+  [
+    "cumulative_layout_shift",
+    "Cumulative Layout Shift"
+  ],
+  [
+    "time_to_interactive",
+    "Time to Interactive"
+  ],
+  [
+    "speed_index",
+    "Speed Index"
+  ]
+]

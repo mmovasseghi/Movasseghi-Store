@@ -1,0 +1,22 @@
+id,name,impact,detail,priority,plan,report_id
+layout-shifts,Avoid large layout shifts,Medium,3 layout shifts,P0,رزرو هندسه و CSS بحرانی؛ تطبیق عناصر جابه‌جاشده با trace,S1
+lcp-lazy-loaded,Don't lazy load Largest Contentful Paint image,Medium,LCP was lazy loaded,P0,تمام تصاویر هیرو eager؛ اولی high و بقیه low؛ تست تا دو چرخهٔ اسلاید,S2
+uses-http2,Use HTTP/2 for all resources,Medium,Potential savings 4.9 s,P1,HTTPS و HTTP/2 در لبه؛ پورت HTTP بین nginx و Kestrel تعیین‌کنندهٔ پروتکل مرورگر نیست,S3
+gt-cdn,Use a Content Delivery Network (CDN),Medium-Low,16 resources,P2,کار زیرساخت جدا؛ دامنه/CDN تنظیم نشده و تشخیص ابزار باید راستی‌آزمایی شود,S4
+dom-size,Avoid an excessive DOM size,Medium-Low,1596 elements,P1,اشتراک SVG paint definitions با حفظ هندسه و محتوای تمام بخش‌ها,S5
+uses-long-cache-ttl,Serve static assets with an efficient cache policy,Medium-Low,13.8 KB potential savings; 8 images at 30 days,P1,fingerprint محتوایی؛ URL جدید برای فایل تغییرکرده؛ HTML شخصی private,S6
+redirects,Avoid multiple page redirects,Low,224 ms; two leading 307,P1,ثبت Location و زنجیرهٔ واقعی در سرور؛ در محیط محلی خانه redirect ندارد,S7
+long-tasks,Avoid long main-thread tasks,Low,9 long tasks,P1,پروفایل trace؛ حذف حلقهٔ RAF سراسری و read/writeهای layout در dual,S8
+unused-css-rules,Reduce unused CSS,Low,24.3 KB savings,P2,minify و تفکیک امن؛ حذف بر اساس coverage یک صفحه ممنوع، چون modal/منو نیاز دارند,S9
+uses-responsive-images,Properly size images,Low,49.7 KB savings,P2,مقایسهٔ اندازهٔ واقعی با CSS و DPR؛ جلوگیری از upscale و حفظ اصل تصویر,S10
+critical-request-chains,Avoid chaining critical requests,Low,1 chain,P1,preload یکسان با تصویر مصرف‌شده و فونت fingerprintدار؛ بدون زنجیرهٔ @import,S11
+non-composited-animations,Avoid non-composited animations,Low,47 animated elements,P1,transform برای progress و زمینهٔ promo؛ حفظ تمام افکت‌ها و بررسی باقی موارد با trace,S12
+server-response-time,Reduce initial server response time,Low,215 ms root document,P2,تفکیک زمان سرور از RTT/redirect؛ guest cache ایمن؛ بدون کش حساب/سبد,S13
+total-byte-weight,Avoid enormous network payloads,Low,411 KB,P3,اندازه‌گیری انتقال واقعی؛ بدون حذف قابلیت یا بهینه‌سازی آسیب‌زننده به کیفیت,S14
+bootup-time,Reduce JavaScript execution time,N/A / informational,82 ms,P3,زمان اجرای JS با زمان style/layout یکی نیست؛ علت TBT را صرفاً JS فرض نکنید,S15
+largest-contentful-paint-element,Largest Contentful Paint element,N/A / informational,8230 ms,P0,عنصر و اسلاید واقعی، چهار جزء LCP و زمان درخواست باید از trace استخراج شود,S16
+mainthread-work-breakdown,Minimize main-thread work,N/A / informational,2.1 s busy,P1,style/layout/paint/parse را جدا بررسی کنید؛ مجموع busy همان TBT نیست,S17
+third-party-summary,Reduce the impact of third-party code,N/A / informational,181 B,P3,در این گزارش شخص ثالث کم‌حجم است؛ علت اصلی بدون trace به آن منتسب نشود,S18
+legacy-javascript,Avoid serving legacy JavaScript to modern browsers,N/A / informational,No numeric summary,P3,گزارش به‌تنهایی وضعیت قبول همهٔ JSها را اثبات نمی‌کند,S19
+render-blocking-resources,Eliminate render-blocking resources,N/A / informational,0 ms savings,P2,CSS کامل async فوری + critical inline؛ صفر بودن این audit سلامت ظاهر را تضمین نمی‌کند,S20
+user-timings,User Timing marks and measures,N/A / informational,No numeric summary,P3,اطلاعات تشخیصی؛ امتیاز مستقل فرض نشود,S21

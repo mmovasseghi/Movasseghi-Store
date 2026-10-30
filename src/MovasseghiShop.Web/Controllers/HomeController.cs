@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.OutputCaching;
 using Microsoft.EntityFrameworkCore;
 using MovasseghiShop.Web.Data;
@@ -15,7 +16,8 @@ public class HomeController(
     IStudioContentService studio,
     IHomeStoryService homeStories,
     IConfiguration config,
-    IWebHostEnvironment env) : Controller
+    IWebHostEnvironment env,
+    IFileVersionProvider fileVersions) : Controller
 {
     [OutputCache(PolicyName = "HomePage")]
     public async Task<IActionResult> Index()
@@ -76,14 +78,17 @@ public class HomeController(
             .Take(4)
             .ToListAsync();
 
-        var featuredList = featured.ToList();
-        if (featuredList.FirstOrDefault() is Product lcpProduct)
+        // Match the view: skip products without an available image within the
+        // same four hero candidates, otherwise the preload targets the wrong URL.
+        var lcpProduct = featured.Take(4).FirstOrDefault(p =>
+            ProductImageHelper.GetDisplayUrl(ProductImageHelper.GetPrimary(p.Images), env) != null);
+        if (lcpProduct is not null)
         {
             var lcpPath = ProductImageHelper.GetLcpDisplayUrl(ProductImageHelper.GetPrimary(lcpProduct.Images), env);
             if (!string.IsNullOrWhiteSpace(lcpPath))
             {
-                ViewData["LcpPreload"] = lcpPath;
-                var lcpUrl = AppPath.H(lcpPath, HttpContext);
+                var lcpUrl = fileVersions.AddFileVersionToPath(Request.PathBase, AppPath.H(lcpPath, HttpContext));
+                ViewData["LcpPreload"] = lcpUrl;
                 Response.Headers.Append("Link", $"<{lcpUrl}>; rel=preload; as=image; fetchpriority=high");
             }
         }

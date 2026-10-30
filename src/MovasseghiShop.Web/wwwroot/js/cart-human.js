@@ -136,7 +136,8 @@
         const options = gate.querySelector('.ms-human-gate__options');
         const tokenInput = form?.querySelector('[data-human-token-input]');
         if (!options || !data.options || !tokenInput) return;
-        gate.querySelector('.ms-human-gate__prompt')?.textContent = data.prompt;
+        const prompt = gate.querySelector('.ms-human-gate__prompt');
+        if (prompt) prompt.textContent = data.prompt;
         tokenInput.value = data.token;
         options.innerHTML = data.options
           .map(

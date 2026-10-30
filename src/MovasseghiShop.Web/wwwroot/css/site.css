@@ -69,8 +69,10 @@ a{color:inherit;text-decoration:none}
 .ms-app{background:var(--c-bg);overflow-x:hidden;width:100%;max-width:100%}
 
 /* Promo bar — single static line */
-.ms-promo-bar{display:flex;align-items:center;gap:.75rem;flex-wrap:nowrap;background:linear-gradient(90deg,#1a2e26,#243830 45%,#2f4a3e);background-size:200% 100%;animation:msPromoBg 10s ease-in-out infinite alternate;color:rgba(255,255,255,.92);font-weight:600;padding:.55rem .85rem;width:100%;max-width:100%;overflow:hidden;position:relative;border-bottom:1px solid rgba(255,255,255,.08)}
-@keyframes msPromoBg{0%{background-position:0% 50%}100%{background-position:100% 50%}}
+.ms-promo-bar{display:flex;align-items:center;gap:.75rem;flex-wrap:nowrap;background:linear-gradient(90deg,#1a2e26,#243830 45%,#2f4a3e);color:rgba(255,255,255,.92);font-weight:600;padding:.55rem .85rem;width:100%;max-width:100%;overflow:hidden;position:relative;border-bottom:1px solid rgba(255,255,255,.08)}
+/* Move the same 200%-wide gradient on its own layer; keep content stationary. */
+.ms-promo-bar::before{content:"";position:absolute;inset:0 auto 0 0;width:200%;background:linear-gradient(90deg,#1a2e26,#243830 45%,#2f4a3e);animation:msPromoBg 10s ease-in-out infinite alternate;pointer-events:none}
+@keyframes msPromoBg{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 .ms-promo-bar a{color:#fff;font-weight:800}
 .ms-promo-shimmer{position:absolute;inset:0;background:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.09) 50%,transparent 58%);transform:translateX(-120%);pointer-events:none;z-index:0;animation:msPromoShimmer 5s ease-in-out infinite}
 @keyframes msPromoShimmer{0%,100%{transform:translateX(-120%);opacity:0}45%,55%{opacity:1}100%{transform:translateX(120%);opacity:0}}
@@ -210,7 +212,7 @@ body.ms-drawer-open,body.ms-modal-open,body.ms-sheet-open{overflow:hidden}
 .ms-hero-aurora{position:absolute;inset:0;background:linear-gradient(135deg,var(--c-primary-dark) 0%,var(--c-primary) 45%,var(--c-accent) 100%);z-index:0}
 .ms-hero-aurora-2{opacity:.55;background:linear-gradient(225deg,transparent 30%,rgba(201,168,76,.25) 70%,var(--c-accent-light) 100%)}
 .ms-hero-progress{position:absolute;top:0;right:0;left:0;height:3px;z-index:5;background:rgba(255,255,255,.12);overflow:hidden}
-.ms-hero-progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--c-gold),#fff,var(--c-gold));transform-origin:right}
+.ms-hero-progress span{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--c-gold),#fff,var(--c-gold));transform:scaleX(0);transform-origin:right}
 .ms-hero-shine{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 70% 20%,rgba(255,255,255,.2),transparent 60%),radial-gradient(ellipse 50% 40% at 20% 80%,rgba(201,168,76,.15),transparent 55%);z-index:1;pointer-events:none}
 .ms-hero-grid-lines{position:absolute;inset:0;z-index:1;opacity:.06;background-image:linear-gradient(rgba(255,255,255,.8) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.8) 1px,transparent 1px);background-size:32px 32px;pointer-events:none}
 .ms-hero-orb{position:absolute;border-radius:50%;filter:blur(40px);z-index:1;pointer-events:none}

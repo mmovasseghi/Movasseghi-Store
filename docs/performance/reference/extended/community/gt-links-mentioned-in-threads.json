@@ -1,0 +1,17 @@
+{
+  "https://gtmetrix.com/reports/crimes.media/g3PzFdW5/": [
+    "https://github.com/Chocobozzz/PeerTube/issues/6223"
+  ],
+  "https://gtmetrix.com/avoid-css-import.html": [
+    "https://github.com/backdrop/backdrop-issues/issues/5243"
+  ],
+  "https://gtmetrix.com/enable-gzip-compression.html": [
+    "https://github.com/rockstor/rockstor-website/issues/11"
+  ],
+  "https://gtmetrix.com/leverage-browser-caching.html": [
+    "https://github.com/rockstor/rockstor-website/issues/11"
+  ],
+  "http://gtmetrix.com/parallelize-downloads-across-hostnames.html": [
+    "https://github.com/wpsharks/comet-cache-kb/issues/71"
+  ]
+}

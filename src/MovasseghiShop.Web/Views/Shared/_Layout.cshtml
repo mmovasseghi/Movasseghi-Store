@@ -17,6 +17,7 @@
     var isLoggedIn = User.Identity?.IsAuthenticated == true;
     var cartItemCount = CartService.GetBadgeCount(Context);
     var cartAriaLabel = cartItemCount > 0 ? $"سبد خرید ({cartItemCount} قلم)" : "سبد خرید";
+    var logoUrl = ProductImageHelper.PreferWebp("/images/brand/originallogo.png", HostEnv)!;
 }
 <!DOCTYPE html>
 <html lang="fa" dir="rtl" class="js">
@@ -25,7 +26,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     @if (isHome && ViewData["LcpPreload"] is string lcpPreload && !string.IsNullOrWhiteSpace(lcpPreload))
     {
-        <link rel="preload" as="image" href="@AppPath.H(lcpPreload, Context)" fetchpriority="high" imagesizes="(max-width: 767px) 55vw, 240px" />
+        <link rel="preload" as="image" href="@AppPath.H(lcpPreload, Context)" fetchpriority="high" imagesizes="(max-width: 767px) 55vw, 420px" />
     }
     <title>@title</title>
     <meta name="description" content="@metaDescription" />
@@ -65,7 +66,7 @@
         @if (ViewData["OgImage"] is string twImg) { <meta name="twitter:image" content="@twImg" /> }
     }
     <meta name="theme-color" content="#2f4a3e" />
-    <link rel="icon" href="~/images/brand/originallogo.png" type="image/png" />
+    <link rel="icon" href="@AppPath.H(logoUrl, Context)" type="@(logoUrl.EndsWith(".webp") ? "image/webp" : "image/png")" asp-append-version="true" />
     <link rel="sitemap" type="application/xml" href="@AppPath.H("/sitemap.xml", Context)" />
     <link rel="alternate" type="text/plain" href="@AppPath.H("/llms.txt", Context)" title="LLMs" />
     <link rel="alternate" type="text/plain" href="@AppPath.H("/ai.txt", Context)" title="AI" />
@@ -82,7 +83,7 @@
             @await Html.PartialAsync("_AppPathScript")
         }
     }
-    <link rel="preload" href="~/fonts/Vazirmatn-var.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="~/fonts/Vazirmatn-var.woff2" asp-append-version="true" as="font" type="font/woff2" crossorigin />
     @if (isLocalTunnel)
     {
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" media="not all" />
@@ -187,11 +188,11 @@
             <a href="@AppPath.H("/", Context)" class="ms-logo-link">
                 @if (isHome)
                 {
-                    <img src="~/images/brand/originallogo.png" alt="فروشگاه موثقی" class="ms-logo" width="320" height="104" decoding="async" loading="eager" fetchpriority="low" />
+                    <img src="@AppPath.H(logoUrl, Context)" asp-append-version="true" alt="فروشگاه موثقی" class="ms-logo" width="320" height="104" decoding="async" loading="eager" fetchpriority="low" />
                 }
                 else
                 {
-                    <img src="~/images/brand/originallogo.png" alt="فروشگاه موثقی" class="ms-logo" width="320" height="104" fetchpriority="high" decoding="async" loading="eager" />
+                    <img src="@AppPath.H(logoUrl, Context)" asp-append-version="true" alt="فروشگاه موثقی" class="ms-logo" width="320" height="104" fetchpriority="high" decoding="async" loading="eager" />
                 }
             </a>
             <nav class="ms-top-nav" aria-label="ناوبری دسکتاپ">
@@ -384,7 +385,7 @@
                     <meta itemprop="name" content="فروشگاه موثقی" />
                     <meta itemprop="url" content="@AppPath.Absolute("/", Context)" />
                     <meta itemprop="telephone" content="@WholesaleRules.CoordinationPhone" />
-                    <a href="@AppPath.H("/", Context)" class="ms-footer-logo-link"><img src="~/images/brand/blackandwhitelogo.png" alt="فروشگاه موثقی" class="ms-footer-logo" width="260" height="120" /></a>
+                    <a href="@AppPath.H("/", Context)" class="ms-footer-logo-link"><img src="~/images/brand/blackandwhitelogo.png" asp-append-version="true" alt="فروشگاه موثقی" class="ms-footer-logo" width="260" height="120" /></a>
                     <p class="ms-footer-tagline">نمایندگی رسمی آملون در تهران<br/>پخش عمده ظروف یکبار مصرف گیاهی</p>
                     <a href="tel:@WholesaleRules.CoordinationPhone" class="ms-footer-phone">
                         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.89.3 1.77.57 2.61a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.84.27 1.72.45 2.61.57A2 2 0 0 1 22 16.92z"/></svg>
@@ -517,20 +518,32 @@ else
         (function () {
           var loading;
           var ready = false;
+          var scripts = new WeakMap();
+          function loadScript(n) {
+            if (scripts.has(n)) return scripts.get(n);
+            var pending = new Promise(function (resolve, reject) {
+              var s = document.createElement('script');
+              s.src = n.getAttribute('src');
+              s.async = false;
+              s.onload = resolve;
+              s.onerror = function () {
+                scripts.delete(n);
+                s.remove();
+                reject(new Error('Unable to load ' + s.src));
+              };
+              document.body.appendChild(s);
+            });
+            scripts.set(n, pending);
+            return pending;
+          }
           function bootHeavy() {
             if (loading) return loading;
-            loading = Promise.all(Array.from(document.querySelectorAll('script[data-ms-idle][src]')).map(function (n) {
-              return new Promise(function (resolve, reject) {
-                var s = document.createElement('script');
-                s.src = n.getAttribute('src');
-                s.async = false;
-                s.onload = resolve;
-                s.onerror = function () { reject(new Error('Unable to load ' + s.src)); };
-                document.body.appendChild(s);
-              });
-            })).then(function () {
+            loading = Promise.all(Array.from(document.querySelectorAll('script[data-ms-idle][src]')).map(loadScript)).then(function () {
               ready = true;
               fetch('@AppPath.H("/api/analytics/visitor", Context)', { credentials: 'same-origin', keepalive: true }).catch(function () {});
+            }).catch(function (error) {
+              loading = null;
+              throw error;
             });
             return loading;
           }

@@ -1,0 +1,478 @@
+{
+  "provenance": "User-provided transcript; original report/HAR not fetched independently",
+  "id": "JjzgQGnk",
+  "url": "https://gtmetrix.com/reports/185.93.88.81/JjzgQGnk/",
+  "tested_url": "http://185.93.88.81/",
+  "generated": "2026-10-30T07:29:00-07:00",
+  "location": "Seattle, WA, USA",
+  "browser": "Chrome 154.0.0.0",
+  "lighthouse": "12.6.1",
+  "metrics": {
+    "grade": "E",
+    "performance": 28,
+    "structure": 84,
+    "lcp_ms": 8230,
+    "tbt_ms": 403,
+    "cls": 0.58,
+    "fcp_ms": 1500,
+    "speed_index_ms": 1800,
+    "tti_ms": 2400,
+    "ttfb_ms": 658,
+    "fully_loaded_ms": 8200,
+    "compressed_kb": 410,
+    "uncompressed_kb": 767,
+    "requests": 25,
+    "dom_elements": 1596
+  },
+  "browser_timings_ms": {
+    "redirect": 224,
+    "connection": 218,
+    "backend": 216,
+    "ttfb": 658,
+    "dom_interactive": 1300,
+    "first_paint": 1500,
+    "dom_content_loaded": 2100,
+    "onload": 2400,
+    "fully_loaded": 8200
+  },
+  "audits": [
+    {
+      "id": "layout-shifts",
+      "name": "Avoid large layout shifts",
+      "impact": "Medium",
+      "detail": "3 layout shifts",
+      "priority": "P0",
+      "plan": "رزرو هندسه و CSS بحرانی؛ تطبیق عناصر جابه‌جاشده با trace",
+      "report_id": "S1"
+    },
+    {
+      "id": "lcp-lazy-loaded",
+      "name": "Don't lazy load Largest Contentful Paint image",
+      "impact": "Medium",
+      "detail": "LCP was lazy loaded",
+      "priority": "P0",
+      "plan": "تمام تصاویر هیرو eager؛ اولی high و بقیه low؛ تست تا دو چرخهٔ اسلاید",
+      "report_id": "S2"
+    },
+    {
+      "id": "uses-http2",
+      "name": "Use HTTP/2 for all resources",
+      "impact": "Medium",
+      "detail": "Potential savings 4.9 s",
+      "priority": "P1",
+      "plan": "HTTPS و HTTP/2 در لبه؛ پورت HTTP بین nginx و Kestrel تعیین‌کنندهٔ پروتکل مرورگر نیست",
+      "report_id": "S3"
+    },
+    {
+      "id": "gt-cdn",
+      "name": "Use a Content Delivery Network (CDN)",
+      "impact": "Medium-Low",
+      "detail": "16 resources",
+      "priority": "P2",
+      "plan": "کار زیرساخت جدا؛ دامنه/CDN تنظیم نشده و تشخیص ابزار باید راستی‌آزمایی شود",
+      "report_id": "S4"
+    },
+    {
+      "id": "dom-size",
+      "name": "Avoid an excessive DOM size",
+      "impact": "Medium-Low",
+      "detail": "1596 elements",
+      "priority": "P1",
+      "plan": "اشتراک SVG paint definitions با حفظ هندسه و محتوای تمام بخش‌ها",
+      "report_id": "S5"
+    },
+    {
+      "id": "uses-long-cache-ttl",
+      "name": "Serve static assets with an efficient cache policy",
+      "impact": "Medium-Low",
+      "detail": "13.8 KB potential savings; 8 images at 30 days",
+      "priority": "P1",
+      "plan": "fingerprint محتوایی؛ URL جدید برای فایل تغییرکرده؛ HTML شخصی private",
+      "report_id": "S6"
+    },
+    {
+      "id": "redirects",
+      "name": "Avoid multiple page redirects",
+      "impact": "Low",
+      "detail": "224 ms; two leading 307",
+      "priority": "P1",
+      "plan": "ثبت Location و زنجیرهٔ واقعی در سرور؛ در محیط محلی خانه redirect ندارد",
+      "report_id": "S7"
+    },
+    {
+      "id": "long-tasks",
+      "name": "Avoid long main-thread tasks",
+      "impact": "Low",
+      "detail": "9 long tasks",
+      "priority": "P1",
+      "plan": "پروفایل trace؛ حذف حلقهٔ RAF سراسری و read/writeهای layout در dual",
+      "report_id": "S8"
+    },
+    {
+      "id": "unused-css-rules",
+      "name": "Reduce unused CSS",
+      "impact": "Low",
+      "detail": "24.3 KB savings",
+      "priority": "P2",
+      "plan": "minify و تفکیک امن؛ حذف بر اساس coverage یک صفحه ممنوع، چون modal/منو نیاز دارند",
+      "report_id": "S9"
+    },
+    {
+      "id": "uses-responsive-images",
+      "name": "Properly size images",
+      "impact": "Low",
+      "detail": "49.7 KB savings",
+      "priority": "P2",
+      "plan": "مقایسهٔ اندازهٔ واقعی با CSS و DPR؛ جلوگیری از upscale و حفظ اصل تصویر",
+      "report_id": "S10"
+    },
+    {
+      "id": "critical-request-chains",
+      "name": "Avoid chaining critical requests",
+      "impact": "Low",
+      "detail": "1 chain",
+      "priority": "P1",
+      "plan": "preload یکسان با تصویر مصرف‌شده و فونت fingerprintدار؛ بدون زنجیرهٔ @import",
+      "report_id": "S11"
+    },
+    {
+      "id": "non-composited-animations",
+      "name": "Avoid non-composited animations",
+      "impact": "Low",
+      "detail": "47 animated elements",
+      "priority": "P1",
+      "plan": "transform برای progress و زمینهٔ promo؛ حفظ تمام افکت‌ها و بررسی باقی موارد با trace",
+      "report_id": "S12"
+    },
+    {
+      "id": "server-response-time",
+      "name": "Reduce initial server response time",
+      "impact": "Low",
+      "detail": "215 ms root document",
+      "priority": "P2",
+      "plan": "تفکیک زمان سرور از RTT/redirect؛ guest cache ایمن؛ بدون کش حساب/سبد",
+      "report_id": "S13"
+    },
+    {
+      "id": "total-byte-weight",
+      "name": "Avoid enormous network payloads",
+      "impact": "Low",
+      "detail": "411 KB",
+      "priority": "P3",
+      "plan": "اندازه‌گیری انتقال واقعی؛ بدون حذف قابلیت یا بهینه‌سازی آسیب‌زننده به کیفیت",
+      "report_id": "S14"
+    },
+    {
+      "id": "bootup-time",
+      "name": "Reduce JavaScript execution time",
+      "impact": "N/A / informational",
+      "detail": "82 ms",
+      "priority": "P3",
+      "plan": "زمان اجرای JS با زمان style/layout یکی نیست؛ علت TBT را صرفاً JS فرض نکنید",
+      "report_id": "S15"
+    },
+    {
+      "id": "largest-contentful-paint-element",
+      "name": "Largest Contentful Paint element",
+      "impact": "N/A / informational",
+      "detail": "8230 ms",
+      "priority": "P0",
+      "plan": "عنصر و اسلاید واقعی، چهار جزء LCP و زمان درخواست باید از trace استخراج شود",
+      "report_id": "S16"
+    },
+    {
+      "id": "mainthread-work-breakdown",
+      "name": "Minimize main-thread work",
+      "impact": "N/A / informational",
+      "detail": "2.1 s busy",
+      "priority": "P1",
+      "plan": "style/layout/paint/parse را جدا بررسی کنید؛ مجموع busy همان TBT نیست",
+      "report_id": "S17"
+    },
+    {
+      "id": "third-party-summary",
+      "name": "Reduce the impact of third-party code",
+      "impact": "N/A / informational",
+      "detail": "181 B",
+      "priority": "P3",
+      "plan": "در این گزارش شخص ثالث کم‌حجم است؛ علت اصلی بدون trace به آن منتسب نشود",
+      "report_id": "S18"
+    },
+    {
+      "id": "legacy-javascript",
+      "name": "Avoid serving legacy JavaScript to modern browsers",
+      "impact": "N/A / informational",
+      "detail": "No numeric summary",
+      "priority": "P3",
+      "plan": "گزارش به‌تنهایی وضعیت قبول همهٔ JSها را اثبات نمی‌کند",
+      "report_id": "S19"
+    },
+    {
+      "id": "render-blocking-resources",
+      "name": "Eliminate render-blocking resources",
+      "impact": "N/A / informational",
+      "detail": "0 ms savings",
+      "priority": "P2",
+      "plan": "CSS کامل async فوری + critical inline؛ صفر بودن این audit سلامت ظاهر را تضمین نمی‌کند",
+      "report_id": "S20"
+    },
+    {
+      "id": "user-timings",
+      "name": "User Timing marks and measures",
+      "impact": "N/A / informational",
+      "detail": "No numeric summary",
+      "priority": "P3",
+      "plan": "اطلاعات تشخیصی؛ امتیاز مستقل فرض نشود",
+      "report_id": "S21"
+    }
+  ],
+  "waterfall": [
+    {
+      "path_or_name": "/",
+      "status": 307,
+      "compressed_kb": 0,
+      "duration": "0 ms",
+      "index": 1
+    },
+    {
+      "path_or_name": "/",
+      "status": 307,
+      "compressed_kb": 0,
+      "duration": "0 ms",
+      "index": 2
+    },
+    {
+      "path_or_name": "/",
+      "status": 200,
+      "compressed_kb": 42.5,
+      "duration": "~864 ms",
+      "index": 3
+    },
+    {
+      "path_or_name": "images/products/0056/01-lcp.webp",
+      "status": 200,
+      "compressed_kb": 18.5,
+      "duration": "~634 ms",
+      "index": 4
+    },
+    {
+      "path_or_name": "Vazirmatn-var.woff2",
+      "status": 200,
+      "compressed_kb": 109,
+      "duration": "~1.1 s",
+      "index": 5
+    },
+    {
+      "path_or_name": "storefront.bundle.css?v=...",
+      "status": 200,
+      "compressed_kb": 37.5,
+      "duration": "~691 ms",
+      "index": 6
+    },
+    {
+      "path_or_name": "originallogo.webp",
+      "status": 200,
+      "compressed_kb": 10.3,
+      "duration": "~424 ms",
+      "index": 7
+    },
+    {
+      "path_or_name": "phone-fluency.png?v=...",
+      "status": 200,
+      "compressed_kb": 8.71,
+      "duration": "~243 ms",
+      "index": 8
+    },
+    {
+      "path_or_name": "images/products/0017/01-lcp.webp",
+      "status": 200,
+      "compressed_kb": 19.3,
+      "duration": "~244 ms",
+      "index": 9
+    },
+    {
+      "path_or_name": "images/products/0086/01-lcp.webp",
+      "status": 200,
+      "compressed_kb": 13.5,
+      "duration": "~435 ms",
+      "index": 10
+    },
+    {
+      "path_or_name": "stories.js?v=...",
+      "status": 200,
+      "compressed_kb": 2.71,
+      "duration": "~451 ms",
+      "index": 11
+    },
+    {
+      "path_or_name": "home.js?v=...",
+      "status": 200,
+      "compressed_kb": 2.09,
+      "duration": "~448 ms",
+      "index": 12
+    },
+    {
+      "path_or_name": "images/products/0079/01-lcp.webp",
+      "status": 200,
+      "compressed_kb": 26,
+      "duration": "~462 ms",
+      "index": 13
+    },
+    {
+      "path_or_name": "images/products/0094/01-lcp.webp",
+      "status": 200,
+      "compressed_kb": 19.2,
+      "duration": "~224 ms",
+      "index": 14
+    },
+    {
+      "path_or_name": "images/products/0080/01-lcp.webp",
+      "status": 200,
+      "compressed_kb": 18,
+      "duration": "~224 ms",
+      "index": 15
+    },
+    {
+      "path_or_name": "images/products/0075/01-lcp.webp",
+      "status": 200,
+      "compressed_kb": 22.7,
+      "duration": "~224 ms",
+      "index": 16
+    },
+    {
+      "path_or_name": "Stories.json",
+      "status": 200,
+      "compressed_kb": 3.9,
+      "duration": "~255 ms",
+      "index": 17
+    },
+    {
+      "path_or_name": "originallogo.png",
+      "status": 200,
+      "compressed_kb": 36.2,
+      "duration": "~222 ms",
+      "index": 18
+    },
+    {
+      "path_or_name": "auth.js?v=...",
+      "status": 200,
+      "compressed_kb": 5.32,
+      "duration": "~216 ms",
+      "index": 19
+    },
+    {
+      "path_or_name": "site.js?v=...",
+      "status": 200,
+      "compressed_kb": 7.15,
+      "duration": "~222 ms",
+      "index": 20
+    },
+    {
+      "path_or_name": "product-card-dual.js?v=...",
+      "status": 200,
+      "compressed_kb": 1.18,
+      "duration": "~221 ms",
+      "index": 21
+    },
+    {
+      "path_or_name": "scroll-reveal.js?v=...",
+      "status": 200,
+      "compressed_kb": 1.28,
+      "duration": "~221 ms",
+      "index": 22
+    },
+    {
+      "path_or_name": "Panel",
+      "status": 200,
+      "compressed_kb": 1.33,
+      "duration": "~221 ms",
+      "index": 23
+    },
+    {
+      "path_or_name": "Modal",
+      "status": 200,
+      "compressed_kb": 4.21,
+      "duration": "~226 ms",
+      "index": 24
+    },
+    {
+      "path_or_name": "visitor",
+      "status": "canceled",
+      "compressed_kb": 0,
+      "duration": "~223 ms",
+      "index": 25
+    }
+  ],
+  "waterfall_limit": "Durations approximate. Full URL association for identically named images inferred from expanded cache list; original HAR required to confirm exact row-to-path mapping. No start timestamps, headers, initiators or response bodies supplied.",
+  "other_tabs": {
+    "crux": "No data; INP not supplied; TBT is not INP",
+    "video": "Player visible; full playback account restricted, no frame-by-frame data",
+    "history": "Earlier same-day approximate LCP 2.5 s, CLS .03; not a verified deployment comparison",
+    "alerts": "Owner restricted; No Alerts set"
+  },
+  "limits": [
+    "No-impact/passed audit names not captured",
+    "Expanded element/resource details missing for all but cache",
+    "No full HAR or trace",
+    "No verified live commit/deployment match"
+  ],
+  "page_breakdown_approx": {
+    "images_kb": 156,
+    "font_kb": 109,
+    "other_kb": 45.6,
+    "html_kb": 42.5,
+    "css_kb": 37.5,
+    "js_kb": "Not separately labeled; do not infer an exact residual",
+    "requests_by_type": {
+      "images": 9,
+      "js": 6,
+      "other": 5,
+      "html": 3,
+      "css_and_font": "remaining"
+    }
+  },
+  "cache_detail": {
+    "ttl_days": 30,
+    "savings_kb": 13.8,
+    "resources": [
+      {
+        "path": "/images/products/0079/01-lcp.webp",
+        "kb": 25.9
+      },
+      {
+        "path": "/images/products/0075/01-lcp.webp",
+        "kb": 22.7
+      },
+      {
+        "path": "/images/products/0017/01-lcp.webp",
+        "kb": 19.3
+      },
+      {
+        "path": "/images/products/0094/01-lcp.webp",
+        "kb": 19.2
+      },
+      {
+        "path": "/images/products/0056/01-lcp.webp",
+        "kb": 18.5
+      },
+      {
+        "path": "/images/products/0080/01-lcp.webp",
+        "kb": 18
+      },
+      {
+        "path": "/images/products/0086/01-lcp.webp",
+        "kb": 13.5
+      },
+      {
+        "path": "/images/brand/originallogo.webp",
+        "kb": 10.3
+      }
+    ]
+  },
+  "ui_note": "No impactful audits found / No other impactful audits found refers to additional high-impact findings; does not erase the 21 listed items.",
+  "resource_graph_observations": {
+    "cpu_peak_percent_approx": 57.6,
+    "memory_mb_approx": 420,
+    "network_end": "mostly quiet"
+  }
+}

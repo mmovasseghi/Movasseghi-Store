@@ -1,0 +1,53 @@
+[
+  {
+    "ruleset": "kCoreRules",
+    "rules": [
+      "avoidbadrequests",
+      "avoidcharsetinmetatag",
+      "avoidcssimport",
+      "avoidlandingpageredirects",
+      "avoidlongrunningscripts",
+      "deferparsingjavascript",
+      "enablegzipcompression",
+      "enablekeepalive",
+      "inlinesmallcss",
+      "inlinesmalljavascript",
+      "leveragebrowsercaching",
+      "minifycss",
+      "minifyjavascript",
+      "minimizeredirects",
+      "minimizerequestsize",
+      "optimizeimages",
+      "putcssinthedocumenthead",
+      "serveresourcesfromaconsistenturl",
+      "serverresponsetime",
+      "servescaledimages",
+      "specifyacachevalidator",
+      "specifycharsetearly",
+      "specifyimagedimensions",
+      "spriteimages"
+    ]
+  },
+  {
+    "ruleset": "kOldBrowserRules",
+    "rules": [
+      "combineexternalcss",
+      "combineexternaljavascript",
+      "minimizednslookups",
+      "parallelizedownloadsacrosshostnames"
+    ]
+  },
+  {
+    "ruleset": "kNewBrowserRules",
+    "rules": [
+      "preferasyncresources"
+    ]
+  },
+  {
+    "ruleset": "kMobileBrowserRules",
+    "rules": [
+      "core",
+      "avoidplugins"
+    ]
+  }
+]

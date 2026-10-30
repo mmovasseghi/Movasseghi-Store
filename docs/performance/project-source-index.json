@@ -1,0 +1,3752 @@
+{
+  "baseline_commit": "7ba093827480ac86c98d8c763f7cb787642af0ff",
+  "includes_vendor_sources": true,
+  "files": [
+    {
+      "path": "deploy/linux/quick-republish.sh",
+      "lines": 168,
+      "sha256": "10e96ca83362ba321460557d5a8446d8184c46bd780af6a293f41211b8d4ea60",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "deploy/linux/remote-install.sh",
+      "lines": 203,
+      "sha256": "acdf9fb642eb8bc3d3906f9d613ca3855e282ead3807add66fa1940eaec4c4dd",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "deploy/linux/setup-from-github.sh",
+      "lines": 68,
+      "sha256": "d9050f508f7af8392c4064031fac26c37c76fd558f4ccc50723c1ce633a8fa1d",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "deploy/linux/smoke-test.sh",
+      "lines": 45,
+      "sha256": "a7104b0071a955da76df2fa368f18e4f1f26ff2992643a7f4251c2d8bf78fac9",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "deploy/linux/verify-home.py",
+      "lines": 82,
+      "sha256": "879c59f00ac2fdec693adb35c9c79dd877246cdceba4abcced06e99ba18c24e6",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "scripts/audit-admin-mobile.mjs",
+      "lines": 60,
+      "sha256": "e89fc5de5ec4f21cf00897ba3846f57aa1d4f7954cab118c0a18aba89cce8436",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "scripts/audit-bulk-nylon-prices.py",
+      "lines": 58,
+      "sha256": "f47fa1c34f23a84bc05d2d1e52fe90564e270c8de8d7d40a6a73f3dbbe9a39a1",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "scripts/build-critical-home.mjs",
+      "lines": 64,
+      "sha256": "50369c3542f105fb9cb3dd512a80f32013396d647a986f5c4a1ad68a63564c43",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "scripts/build-storefront-css.mjs",
+      "lines": 35,
+      "sha256": "73f5d910477d1dd29fb18c25e2e41bebb8abbe0b5cefd311ad98fdc589fa68ff",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "scripts/db-stats-remote.sh",
+      "lines": 2,
+      "sha256": "dd074ed67470f9fc5876a50aa4f54f869630bdb86e71229b259218dbcf83e137",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "scripts/db-stats.py",
+      "lines": 13,
+      "sha256": "6e89c1372083585df05323fc446a9d9db82aaab34244d8ebacf20c781d05ca36",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "scripts/e2e-product-61-save.mjs",
+      "lines": 75,
+      "sha256": "912b0a0eac9cf55193c7eec84bf1c164cc5a1d47f5685c27214f6a14396ec428",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "scripts/e2e-product-edit.mjs",
+      "lines": 41,
+      "sha256": "742c9a27e0dc21fedbd9143a183a4085c74cc56aae6823175d8cb1bce7c6d010",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "scripts/fix-cshtml-app-paths.py",
+      "lines": 31,
+      "sha256": "a2ff0301f0d16745ff11586bf75c5193a0d5db61333a41c66695471984cf310f",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "scripts/parse-price-pdfs.py",
+      "lines": 166,
+      "sha256": "9cb378ffb80a6d9b1f51da73d73676af1187e64201e95526df0c5dbc91da306d",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "scripts/probe-home.sh",
+      "lines": 6,
+      "sha256": "940df7752250a8d657713e6aa4013b3e86f775e84fa90f59b9b6d9989caf7969",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "scripts/query-products.py",
+      "lines": 14,
+      "sha256": "54d3fe853ac648c6f41378c634a51a0cfb548f62a886acb408458d96e88ca3a1",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "scripts/reapply-bulk-prices.py",
+      "lines": 194,
+      "sha256": "ca664b94c843f0ec7277ebdaf7dcbed17c7dc41ef0b313acb51f05f3dce20ff4",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "scripts/rte-cdn-fail.mjs",
+      "lines": 30,
+      "sha256": "862b36d1b7eee8d6b37229c59d6a5c3e6e3e670ee2c17f4eb743d1b6d6da39d7",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "scripts/rte-check.mjs",
+      "lines": 49,
+      "sha256": "cb0c3bdf86d2de3e6eca262a8bc2b9e439c772b6b060fb02338a27d6cb39419c",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "scripts/screenshot-admin-mobile.mjs",
+      "lines": 65,
+      "sha256": "2a9e56a678dc4969420bfffb75359c4033b181c644a73b37f4160489866e9ced",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "scripts/screenshot-checkout-delivery.mjs",
+      "lines": 89,
+      "sha256": "6b02924a09010d3c15039c15e03ffa394e264875fc9cd19835555cee84bef673",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "scripts/strict-price-audit.py",
+      "lines": 233,
+      "sha256": "7050f5bb4327e757eb55a9c0dea4a37c0831c7da152c871569c6f039dc433015",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "scripts/verify-auth.mjs",
+      "lines": 52,
+      "sha256": "d6499c2baee590caeb88d8bab6483f35f1d877849eca8155400832f3cce1215d",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "scripts/verify-desktop-screenshots.mjs",
+      "lines": 60,
+      "sha256": "c494691a5c0784e9396838fa38e72ba4cb2c2a2203d8e7a92fdf9f7b7f83a1b3",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "scripts/verify-geocode.mjs",
+      "lines": 48,
+      "sha256": "6afe5742ef7bd40f4eb3afb363db97cba67521f11d1cfbbabcc5b975fd8dbe13",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "scripts/verify-hero.mjs",
+      "lines": 105,
+      "sha256": "6e44b0169dae04929ff4005ba488e9abaef96cbebc7c86125b031e80910013bc",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "scripts/verify-mobile-menu.mjs",
+      "lines": 43,
+      "sha256": "0ba1db2a8244ee7216b7cacb327f387fbd5851c97af3e358e6c6bf6ed525e939",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "scripts/verify-promo.mjs",
+      "lines": 66,
+      "sha256": "726bf50a613c9f1d244f75923976139991b55a5c486d14d40a4433954fd1dee4",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "scripts/verify-proxy-cache.py",
+      "lines": 131,
+      "sha256": "a9b37df80790c50fe88e7c30cb5d224e5ac334fe99e39860e837775b830d8aba",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "scripts/verify-site.mjs",
+      "lines": 146,
+      "sha256": "7fb4962b68e3a8a242faa23638bccb33659052205bd390bcb09ee00cdcdad1a8",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/AppPath.cs",
+      "lines": 65,
+      "sha256": "d18686fce18ef45b86e80cd12c3972a614a064a1ba19884f2b203ce68b164383",
+      "types": [
+        "AppPath"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/AdminNavBadgeFilter.cs",
+      "lines": 52,
+      "sha256": "d1ba11fb99708393f00c6941b65664151571461d0b29c8ed79ed0124eb824659",
+      "types": [
+        "AdminNavBadgeFilter",
+        "IMemoryCacheAccessor",
+        "MemoryCacheAccessor"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/AdminNavBadgeService.cs",
+      "lines": 36,
+      "sha256": "3ac5492c9370ef6d8ab6b07d41209105532e69517480db546aaeec20d35c4c56",
+      "types": [
+        "IAdminNavBadgeService",
+        "AdminNavBadgeService"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Controllers/AdminControllers.cs",
+      "lines": 1564,
+      "sha256": "1527ffe88453e31c2cf7b1b0629e24d9c2e88b297285e6038439e7910aee8111",
+      "types": [
+        "ProductsController",
+        "OrdersController",
+        "CouponsController",
+        "BlogAdminController",
+        "NewsAdminController",
+        "InquiriesController",
+        "FaqAdminController",
+        "ProductReviewsAdminController",
+        "AdminSeoListBags"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Controllers/AuthController.cs",
+      "lines": 48,
+      "sha256": "80800f2cc16d2e9548afe54fe14f6a53f18067d472d45f2f95c2ed5d02848e04",
+      "types": [
+        "AuthController"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Controllers/CategoriesController.cs",
+      "lines": 169,
+      "sha256": "a282829a47d8b8e5d1538c51ed40d76e1b0fe77951061ca5001d8ca61f0805b4",
+      "types": [
+        "CategoriesController"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Controllers/DashboardController.cs",
+      "lines": 95,
+      "sha256": "826328abffb520065160e98cd458150d0cb6cec37c3f2f53e4d2b9badc0e6567",
+      "types": [
+        "DashboardController"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Controllers/ReportsController.cs",
+      "lines": 61,
+      "sha256": "db8e74d6967a70c1370c8409569de77a44c1412c0b708a859f5cf8d2166062d1",
+      "types": [
+        "ReportsController"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Controllers/StoriesAdminController.cs",
+      "lines": 167,
+      "sha256": "ad1aaf6cf9f1f48e9761927b9e1e99fd14b9017e79d35af41133b52d7882ce02",
+      "types": [
+        "StoriesAdminController"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Controllers/StudioContentController.cs",
+      "lines": 200,
+      "sha256": "bb3b6b201cc1ce5834a296fd0b7d0abc2d8512ad1a194e55aa92db6aa09cb892",
+      "types": [
+        "StudioContentController"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Controllers/StudioController.cs",
+      "lines": 395,
+      "sha256": "65271d396e5406ccc701f0bea89e465e6442756ddaaf22edd5a601e90071af53",
+      "types": [
+        "StudioController"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Controllers/UsersController.cs",
+      "lines": 99,
+      "sha256": "6bd55a39f0082a0f21a1c52a8372e7e7bd249646a32a63deec8f226d85de895f",
+      "types": [
+        "UsersController"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/Auth/Login.cshtml",
+      "lines": 55,
+      "sha256": "dc86398c66b1b86cd89ea6e07971337a33ef6b1671ba2b62e8440faed485c3ee",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/BlogAdmin/Edit.cshtml",
+      "lines": 243,
+      "sha256": "53ffb744bafa47f50e4d453157510d1cd4fd5ebe8bbdfe23edd46dc4248ea2d0",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/BlogAdmin/Index.cshtml",
+      "lines": 145,
+      "sha256": "f9990bb62f51acd05b29109b3e37e5eaf3f34ae028caddf04d71f34634723a8b",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/Categories/Create.cshtml",
+      "lines": 14,
+      "sha256": "96d3766bd5cb7067a4be94ca41b242bdc5bc6af6ef9ebc0e5827b5307e9aef9f",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/Categories/Edit.cshtml",
+      "lines": 86,
+      "sha256": "eb8bf47ef1f280729b98608e09030a6592e3c69e50a546442e04ccff65314b6e",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/Categories/Index.cshtml",
+      "lines": 101,
+      "sha256": "65e0348793c3aff6ee7a554660898ccee0b29700cb4f2ccd55b32e4874358c66",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/Coupons/Edit.cshtml",
+      "lines": 111,
+      "sha256": "db6c4a1dfcba0e8908b429268492f1b43be3704e496d08c64279bf350610e246",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/Coupons/Index.cshtml",
+      "lines": 155,
+      "sha256": "c7b5d5d4c625c3a29a27d799ae1ce3fb86584935827bfd28bf097a55e72d7447",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/Dashboard/Index.cshtml",
+      "lines": 234,
+      "sha256": "cd7f1ba6075bcb38ea5ddf38a72633a59f64c2db2c3b022b2907c4506c89e392",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/FaqAdmin/Edit.cshtml",
+      "lines": 85,
+      "sha256": "6e9f800d6e5318ef59eef565526d28741250ceddfd04457c4195161ebefc24dd",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/FaqAdmin/Index.cshtml",
+      "lines": 110,
+      "sha256": "8e8a4a676b5c29a07925d093064235ce90ba8a5eb209c425c3cc9b7f81717217",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/Inquiries/Index.cshtml",
+      "lines": 143,
+      "sha256": "11c6a387bd81e336a24bd7337a27da382d8855fee2622a5d1082d66943045fb7",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/NewsAdmin/Edit.cshtml",
+      "lines": 163,
+      "sha256": "1a14465faf57775f5079041e11bf3249048d206687cfdc622cbd806e50243197",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/NewsAdmin/Index.cshtml",
+      "lines": 154,
+      "sha256": "362becc7f00797c1f8dcd267d087a02262fe04718972daf263730a561cc01648",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/Orders/Details.cshtml",
+      "lines": 403,
+      "sha256": "9b9d06f9af189f6a24025ee4dc00caafe82e562e6b2313e33ec2ed9257313f6d",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/Orders/Index.cshtml",
+      "lines": 144,
+      "sha256": "1d7efcd85b8cfe8246d9023f77b3d01fddab356076b4cba9df575c445c7d4e2f",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/Orders/_OrderField.cshtml",
+      "lines": 19,
+      "sha256": "727abd683cb00d5d2d942652585d426e8c99233e36570c063821e8cfa340538a",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/Orders/_OrderFollowUp.cshtml",
+      "lines": 40,
+      "sha256": "852b38d5a6e1499bdb127d7b8b420ff6bcfc49b4ce9ddddee3031ff45820c512",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/ProductReviewsAdmin/Edit.cshtml",
+      "lines": 175,
+      "sha256": "c385718ddba67773c5a900e9ca09cdab556bad7632655f9d8d7ed41ac2470d4f",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/ProductReviewsAdmin/Index.cshtml",
+      "lines": 155,
+      "sha256": "412c3e957a3a0dfa7b00aedc5fac327d37962f3756b6469f91807438a8991ada",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/ProductReviewsAdmin/_ProductReviewsList.cshtml",
+      "lines": 118,
+      "sha256": "8200a92fb3823eb00a5bc9f3a94938c8c30c9dae29944825809ba77785df27e4",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/Products/Create.cshtml",
+      "lines": 29,
+      "sha256": "d7f5e39fca2c569b62328637c5ab111c73e7c4374611ea68ed3b29748286bff5",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/Products/Edit.cshtml",
+      "lines": 510,
+      "sha256": "fbc1685bfde5ed65f3f7d970849b493a26c9ab88f8be82eb7ef07fb3f5d418b7",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/Products/Index.cshtml",
+      "lines": 128,
+      "sha256": "67592a90f2a5cd7f9f0126891206dc976b96ec6153e3610d04fd0351edb95755",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/Products/_HomeHighlightIconGem.cshtml",
+      "lines": 4,
+      "sha256": "b4fb0090c55e3975733c220e76d8dd8d76c6e514083f8a2f0cc3d10c8f954be9",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/Products/_HomeHighlightIconStar.cshtml",
+      "lines": 3,
+      "sha256": "5dc6f6646946312a836de7da63b4926a275ec76441ea88331c8ea5cf0718760b",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/Products/_HomeHighlightModal.cshtml",
+      "lines": 58,
+      "sha256": "6a0e4e1bee9bdecf5e16db1f779b6b0eabe265506996dcc7b4fa3611378fe411",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/Products/_ProductImageAltEditor.cshtml",
+      "lines": 53,
+      "sha256": "84acecaa4331807f84df43c3380aa810a8f2bfab4aba88aa49bea637b63768eb",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/Products/_ProductPackagingEditor.cshtml",
+      "lines": 125,
+      "sha256": "d8832bc859252507d3d70a87469e8afe954867d35a32fda0ab8794dcc387aa4c",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/Products/_ProductsList.cshtml",
+      "lines": 136,
+      "sha256": "ec3e59e56b05bdd3651072068d57aa7998b6c871aa81918245ec202b4969309c",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/Reports/Index.cshtml",
+      "lines": 357,
+      "sha256": "4cbcb62acf7a484e1d2977f8e72e67c1e55e24b2c07c4694796c989dcf5e4758",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/Reports/Sales.cshtml",
+      "lines": 251,
+      "sha256": "b99b0efc7ba7eeb32e942978ba2b2e30efa3065937138805818e6c2e8365b06f",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/Reports/Traffic.cshtml",
+      "lines": 398,
+      "sha256": "c025841000a7218aa3e5db397da8a309c97ee62a95278c95ad967bbda6bdce15",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/Shared/_AdminHero.cshtml",
+      "lines": 16,
+      "sha256": "71c59c4d77d4a294c6b8b3b016c8b8f01d6d6064790250d40bba420cc00af80d",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/Shared/_AdminLayout.cshtml",
+      "lines": 240,
+      "sha256": "20685fd6107985df534aa8d5bdacf50cf754ad5d9c1f2b224ab292920a0f7fac",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/Shared/_CmsLivePreview.cshtml",
+      "lines": 48,
+      "sha256": "983096e160f91fd42828fe006e78fa350e3c31838ed30d4ec4c8f6c0258c0451",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/Shared/_ReportInsights.cshtml",
+      "lines": 185,
+      "sha256": "855b52c0ba7131393a1a9bf32aacc881b6fefa0e30661c9df6227aa1bd02909d",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/Shared/_ReportRange.cshtml",
+      "lines": 41,
+      "sha256": "5233576a03b9f6b6374cde72d10e42cbd2b9b2dac5110119104a4bd92011fe55",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/Shared/_RichTextEditor.cshtml",
+      "lines": 62,
+      "sha256": "5071fcab69e1d7ffb9dfb155ea02474feda8bcd98f7c67696f528b8706833c84",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/Shared/_SeoProPanel.cshtml",
+      "lines": 296,
+      "sha256": "f13fd369c46005fbdfb1fdda87cb21dc39199f2187a316047a7f3764237c28f4",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/Shared/_TipTapEditor.cshtml",
+      "lines": 3,
+      "sha256": "22612bed616994aa0aca76632ee2f5cd375de9d181567d93d30504cfd23b69a0",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/StoriesAdmin/Edit.cshtml",
+      "lines": 180,
+      "sha256": "78298b2d3ad3b590970e61a94fe714cd34cf887fbde7dcbcaf36b7acf39658a4",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/StoriesAdmin/Index.cshtml",
+      "lines": 163,
+      "sha256": "918fc3a82970faf221fffd63333377eb2c03e363c28e12b391e6d72fbde0cf43",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/Studio/CommandCenter.cshtml",
+      "lines": 328,
+      "sha256": "85660ffecc3a2d356eb15c08118d7d7b466e6495539774ec61e0490a2da666ed",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/Studio/EditorialHub.cshtml",
+      "lines": 239,
+      "sha256": "e510fe3079f9ba600fbce7bb995dbd630282332b0fdc324ca732f7936b1f4961",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/Studio/RankRadar.cshtml",
+      "lines": 132,
+      "sha256": "411f6a3dda748525cca748dfb9e414aede1350361814bd830ecf0476632d3d6d",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/StudioContent/Atoms.cshtml",
+      "lines": 37,
+      "sha256": "6095d9d13d5a7e887df367c09afde3a429286e1a9274e545ba0e3726c3004dc8",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/StudioContent/Authority.cshtml",
+      "lines": 65,
+      "sha256": "f53bd8806efdbab026a3a9f849bdfc71b183148771a081bcf38cf6285674ce21",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/StudioContent/Competitors.cshtml",
+      "lines": 87,
+      "sha256": "bc119f4f937429c7f1dbbcefad49e0cf5616bacdf9ce4d545f0f904e3b65a7dc",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/StudioContent/EditAtom.cshtml",
+      "lines": 64,
+      "sha256": "d6f6f8fb83400eb9250c222e2c5ef7e7bd9672c6dd062d8af132537934c5aac1",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/StudioContent/EditHome.cshtml",
+      "lines": 154,
+      "sha256": "bb9a93786b01503967b0e2b056e565b8fdfd4dae600a661f34deb65de9e4974b",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/StudioContent/EditNav.cshtml",
+      "lines": 43,
+      "sha256": "c1e8149a6354dfc57ddc129618f25e7337e4b5e636792e59ffe40cdb0d9ab8be",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/StudioContent/EditPage.cshtml",
+      "lines": 41,
+      "sha256": "0d9410168dd892d5f8b8709a3057c969b406064ce4a50b2f97f42fb36da92a3b",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/StudioContent/Home.cshtml",
+      "lines": 55,
+      "sha256": "1cd519350cb63f78e00e16aa37240b711f541d2846d6e1960e4c970b31f5bc64",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/StudioContent/Nav.cshtml",
+      "lines": 74,
+      "sha256": "ff90e60fc5f79fffbeef0366a8110f139f73213c4625f3cbca9d05e801b70235",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/StudioContent/Pages.cshtml",
+      "lines": 45,
+      "sha256": "287b0a5687bbdaf6ff8180a2ced05ff580484bf0add9479669f98063e2dcea5d",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/StudioContent/ReportDetail.cshtml",
+      "lines": 112,
+      "sha256": "9812ca6b1fbbbe315f63b30971cf864de7201a99d0714b1a2a90ae621a515be1",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/StudioContent/Reports.cshtml",
+      "lines": 53,
+      "sha256": "827c23d09d2304501d5cff25830399fe91ce2aa060fead946e7ce5189d3620d2",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/Users/Index.cshtml",
+      "lines": 158,
+      "sha256": "779c63c748f2399eced96264a938914cda303f58494c484117b2654cf6feb453",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/_ViewImports.cshtml",
+      "lines": 6,
+      "sha256": "6967017dd18e5643a3a5f1f0b58515474741f3d95e5d49ebac635953da8cfd29",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Areas/Admin/Views/_ViewStart.cshtml",
+      "lines": 5,
+      "sha256": "c78cf6bff2eb29ce1d75b03081df44eb1055eefc3f8039b715d93eaf253561b2",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/CartAnalyticsHelper.cs",
+      "lines": 246,
+      "sha256": "65156e4d281dda3aa8efaef872c56f18c41c16076ae518ad5a86904711e3a8c2",
+      "types": [
+        "CartItemStats",
+        "CartPackagingSlice",
+        "CartAggregateStats",
+        "CartAnalyticsHelper"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Client/rich-text-editor.mjs",
+      "lines": 289,
+      "sha256": "11099c33c135bbadeea171a4ac8d9f6e076edc59d76188a056d3f9a8cf7c35c0",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Controllers/AccountController.cs",
+      "lines": 566,
+      "sha256": "ca437e33d9c93d47b8b8592126f346ad4530bfc27aedc18dd05727f6043095be",
+      "types": [
+        "AccountController",
+        "ProfileController"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Controllers/BlogController.cs",
+      "lines": 128,
+      "sha256": "977574d3d8bf1b8aa179e0828750d3b0462e19ee4059782418bc318902a75311",
+      "types": [
+        "BlogController",
+        "PageController"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Controllers/CartController.cs",
+      "lines": 174,
+      "sha256": "8ec5e7880b6503e3cba772ee9ca2b711d5fe3282ca26d6a67a1ceaf3aaa53313",
+      "types": [
+        "CartController"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Controllers/CatalogController.cs",
+      "lines": 225,
+      "sha256": "cc49f5a1daa23241e5ee2b41066e64a01feb952117584d30b6f5d7fa5a4926fa",
+      "types": [
+        "CatalogController",
+        "InquiryController",
+        "AnalyticsApiController",
+        "TrackRequest"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Controllers/CheckoutController.cs",
+      "lines": 79,
+      "sha256": "3687fec28ceb39e278a1eba6b3d42b85b0adc2d58987b118509bda1c51ed3949",
+      "types": [
+        "CheckoutController"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Controllers/HomeController.cs",
+      "lines": 114,
+      "sha256": "bb95e1b2faf9bfa302807026375e423f1f4e7f8689b16a47580614df605bdf4c",
+      "types": [
+        "HomeController"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Controllers/MediaController.cs",
+      "lines": 58,
+      "sha256": "1ede9af833d47773fa2960feea0f0f186213be9786b84e923e581d769bdc53f8",
+      "types": [
+        "MediaController"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Controllers/NewsController.cs",
+      "lines": 37,
+      "sha256": "35abe25cbfee6f71965b15246ba2fa97b35bf8d17f78c0e5f61674ca139a3e4f",
+      "types": [
+        "NewsController"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Controllers/OrderController.cs",
+      "lines": 152,
+      "sha256": "73ce3ecbedc0b4d06a5ec7982364d6cb19a82e5eab4b3e6c8a01ebe303d572aa",
+      "types": [
+        "OrderController"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Controllers/PaymentController.cs",
+      "lines": 43,
+      "sha256": "6d7e2e41868b8f43f18af509d030a823382d9b9e7b3b42fbdceab84276c3bd90",
+      "types": [
+        "PaymentController"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Controllers/ShopController.cs",
+      "lines": 105,
+      "sha256": "7b0a0dab34dda372868a3e1798bd15766e7d152088b87a497280e7c6c1896d58",
+      "types": [
+        "ShopController"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Controllers/SitemapController.cs",
+      "lines": 77,
+      "sha256": "6588c97b93fee8d1ebe03ef1449e8503aa248dbd65a3f521d21908cd9e09564d",
+      "types": [
+        "SitemapController"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Data/ApplicationDbContext.cs",
+      "lines": 177,
+      "sha256": "897f3350bb47a87f5182466c457d0c2defd2bbef7505d46469d1035e90781c8c",
+      "types": [
+        "ApplicationDbContext"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Data/ApplicationUser.cs",
+      "lines": 21,
+      "sha256": "daf7d47049b19e12d0ad6325eb9dcf9a697de516e71a2423ea904a17d0036696",
+      "types": [
+        "ApplicationUser"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Data/DbInitializer.cs",
+      "lines": 1173,
+      "sha256": "26ede8088b16cf8e5687c0d5b732e91721a60c4aa34e6a7424424b2a88ef8ddc",
+      "types": [
+        "DbInitializer"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Data/PillarPageContent.cs",
+      "lines": 87,
+      "sha256": "7a4cbe1436f89f8a81c798bdb530a5f813164742721d61df9d8c9375a621e1ca",
+      "types": [
+        "PillarPageContent"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Data/StudioSeedData.cs",
+      "lines": 116,
+      "sha256": "bc9332db5d638d85882090fa5077ab6ce1b0816ce832fe39cd00614fced6220f",
+      "types": [
+        "StudioSeedData"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Infrastructure/GuestPublicOutputCachePolicy.cs",
+      "lines": 34,
+      "sha256": "7d18ff55b5c4e456d1ce16a00bbb0322326e686ea2164d3aa560c843930c609b",
+      "types": [
+        "GuestPublicOutputCachePolicy"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Infrastructure/StorefrontPublicCacheHeadersMiddleware.cs",
+      "lines": 113,
+      "sha256": "f3084ba887d490f322828384369f3e18300038cf4c95b53bd3dc561cea1c7017",
+      "types": [
+        "StorefrontPublicCacheHeadersMiddleware"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/AccountViewModels.cs",
+      "lines": 100,
+      "sha256": "70544669158cb3e5b16fca124cb857edeecc8d91d9e21225bd19b576ff80a021",
+      "types": [
+        "AccountDashboardViewModel",
+        "OrderStatusLabels"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/Admin/ProductPackagingInput.cs",
+      "lines": 35,
+      "sha256": "860f62f1bce1576b71a22766fcd995152bdb05db19b6b2b5fd7344bf082ffb0f",
+      "types": [
+        "ProductPackagingInput",
+        "ProductPackagingViewModel"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/AnalyticsModels.cs",
+      "lines": 239,
+      "sha256": "04561c6c4726d3a8e0c45d2e6f0fe921d0fa5c9d9187878dbeb7f471bd1f83cd",
+      "types": [
+        "LabelCount",
+        "DailyPoint",
+        "RevenuePoint",
+        "InsightKind",
+        "Insight",
+        "PageRow",
+        "ChannelRow",
+        "FunnelStep",
+        "ProductOpportunity",
+        "ProductSalesRow",
+        "StatusRow",
+        "TrafficReport",
+        "SalesReport",
+        "OverviewReport"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/CartModels.cs",
+      "lines": 54,
+      "sha256": "5dfcaf7e3c219b0c88cbc7ac9df67ea09775a0b8f87f33e9e96d32863928aca8",
+      "types": [
+        "CartItem",
+        "CartSummary",
+        "CartAddResult"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/CatalogModels.cs",
+      "lines": 61,
+      "sha256": "c0f8c5f3b9ad4c8766a57c017d2cfbba5fb17016cfc40c07ece5211dea72e5d5",
+      "types": [
+        "ProductFilterQuery",
+        "FilterOption",
+        "CatalogFilterModel",
+        "CatalogFiltersViewModel",
+        "CatalogCategoryLandingViewModel"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/ContentPageChrome.cs",
+      "lines": 10,
+      "sha256": "f9f0c28c4094529ba38f661a42501d1bd5a33849ac5a833f4b0d0898cbb84cdf",
+      "types": [
+        "ContentPageHeader"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/Entities/AuthorityCheckItem.cs",
+      "lines": 13,
+      "sha256": "d3d204f90e87173debbd20df93ba997d32b93c95c952ca7411ed9873bd7625d4",
+      "types": [
+        "AuthorityCheckItem"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/Entities/BlogPost.cs",
+      "lines": 18,
+      "sha256": "a6d6a502271a4bb0fd89f5721b60d7b8253a2183692eae3c4e6432003cf6dd30",
+      "types": [
+        "BlogPost"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/Entities/Category.cs",
+      "lines": 16,
+      "sha256": "281ec80293d4a1891ddb811cd353ecc19d46bc7b3be22a1d8462cd4ad9be458f",
+      "types": [
+        "Category"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/Entities/CmsPage.cs",
+      "lines": 12,
+      "sha256": "f7f6f14f0f3ff5075eaa7e938683f2492e2d040e38a14c32ea4911f2867738b3",
+      "types": [
+        "CmsPage"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/Entities/CompetitorSnapshot.cs",
+      "lines": 14,
+      "sha256": "54675f7970b7e4bf95cfd191a4948b486bbd461d0b94dfd4553e0d9d9bd63db0",
+      "types": [
+        "CompetitorSnapshot"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/Entities/ContentAtom.cs",
+      "lines": 14,
+      "sha256": "01194fa5bce1f1105f0661ee30435e220d14e6159ecb7b9a5fb2cedab6242763",
+      "types": [
+        "ContentAtom"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/Entities/Coupon.cs",
+      "lines": 18,
+      "sha256": "8ccb9eca6ed46f5624979129c6eafd6516f74ef6383a80c1c3b122a7fd639e29",
+      "types": [
+        "Coupon"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/Entities/EditorialTopicQueue.cs",
+      "lines": 21,
+      "sha256": "bf02bf33fb59b2ab8bd6d2a26b57ba1601d4b133edfa36921bd9f13b74b1a5dc",
+      "types": [
+        "EditorialTopicQueue"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/Entities/FaqItem.cs",
+      "lines": 10,
+      "sha256": "510b547946812b221111807fa8830af273579c1197ed047fae2fbf14c24b15b1",
+      "types": [
+        "FaqItem"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/Entities/GrowthAction.cs",
+      "lines": 15,
+      "sha256": "287fe8dbf0d3b3ccdeda3770738e83a9b281ab09be6a858bdba14b60b965290b",
+      "types": [
+        "GrowthAction"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/Entities/GrowthReport.cs",
+      "lines": 11,
+      "sha256": "7b87fe59e5a4593af8ae11936334832fef49e92b4e002eca3cea0f9d45425e50",
+      "types": [
+        "GrowthReport"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/Entities/HomeSection.cs",
+      "lines": 14,
+      "sha256": "94d4b3c04bc5de711bbf7705a4a8fbd0bdd11221e517b11c95ef5ef705f7b499",
+      "types": [
+        "HomeSection"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/Entities/HomeStory.cs",
+      "lines": 17,
+      "sha256": "3d51e151f4f9e1d4ba7c2baa8a06c1c5e18b7249ad109fa710481c3ef45d3d26",
+      "types": [
+        "HomeStory"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/Entities/HomeStorySlide.cs",
+      "lines": 13,
+      "sha256": "1d03acde2b220c5e24bdf7740ebd6a2a5f206a7e811ae20b1e86aa92263b8881",
+      "types": [
+        "HomeStorySlide"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/Entities/NavItem.cs",
+      "lines": 12,
+      "sha256": "a5859b2216fd4309876a524c22f0577903adc31eaedbc6abac5400b8ecec9faa",
+      "types": [
+        "NavItem"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/Entities/NewsItem.cs",
+      "lines": 19,
+      "sha256": "c409c06d41b05d7e6e60b80c542a6582db2b1719dcdad44f048e6c4fdec7c5df",
+      "types": [
+        "NewsItem"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/Entities/Order.cs",
+      "lines": 79,
+      "sha256": "0192ac68eae1c7699d982d153c76a173e8a2d1405d62ad679d431df838fce90c",
+      "types": [
+        "Order",
+        "OrderItem",
+        "OrderVehicleInfo",
+        "OrderDeliveryAddress"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/Entities/OtpCode.cs",
+      "lines": 11,
+      "sha256": "6820e94889677ad4449bfbf7fe79abaff4c0e0ff6ae08ca34196ec200b7c3fb6",
+      "types": [
+        "OtpCode"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/Entities/PageVisit.cs",
+      "lines": 101,
+      "sha256": "2e9cbae1f7382da2e572c7b023aeb074ee771c5789151371c21496b6deb89d1f",
+      "types": [
+        "PageVisit",
+        "SiteEvent"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/Entities/PillarKeyword.cs",
+      "lines": 12,
+      "sha256": "9c46840a47cf66b8b34019fd02c7cf329dc76f768e0b10d64e9fd69e3db19928",
+      "types": [
+        "PillarKeyword"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/Entities/Product.cs",
+      "lines": 45,
+      "sha256": "86ee7cc573a57c157fb2b175ca9eadf1a8a9c1f28782ae0a725d275a6d048bef",
+      "types": [
+        "Product"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/Entities/ProductImage.cs",
+      "lines": 15,
+      "sha256": "b27a903a5f50c16f67cdbf49ebe8855faee107054fa861fcac6aa61c6e5a9ddf",
+      "types": [
+        "ProductImage"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/Entities/ProductReview.cs",
+      "lines": 26,
+      "sha256": "c67e8da071bdfe9a89324defbe14f2d15158d07b2099320197d91427de441288",
+      "types": [
+        "ProductReview"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/Entities/ProductVariant.cs",
+      "lines": 20,
+      "sha256": "387e369c3b63cfbcf7763477ebbed5a3be53b25602665ef75750146687e79e46",
+      "types": [
+        "ProductVariant"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/Entities/PurchaseInquiry.cs",
+      "lines": 15,
+      "sha256": "1da93af671d9f24eb0cbd56eccc2af9ef4b448bdb686b538c4c8ba4dceced16f",
+      "types": [
+        "PurchaseInquiry"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/Entities/RankSnapshot.cs",
+      "lines": 14,
+      "sha256": "f66e55419bf1e8b5467a82030e0a47b2462f651da96d9855cd57c3ddde8d0e6d",
+      "types": [
+        "RankSnapshot"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/Entities/SeoProfile.cs",
+      "lines": 55,
+      "sha256": "bd5a04f588cb5e990e85ee0e1fa603861c5bb849960448a146e43a9183c0fc28",
+      "types": [
+        "SeoProfile"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/Entities/UserAddress.cs",
+      "lines": 21,
+      "sha256": "ffffede8b184529e53f4a316494b2c398cd1ecfa328d73fa3fc0b52e042c9888",
+      "types": [
+        "UserAddress"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/Enums/CouponType.cs",
+      "lines": 7,
+      "sha256": "5a17cb32e05bb090a9ebaa3bc78be7e72407e8d368459c1d44c138e535371b7b",
+      "types": [
+        "CouponType"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/Enums/DeliveryMethod.cs",
+      "lines": 7,
+      "sha256": "b599694d48057d77e9a887c58d1039f9d6bece00cc316f56e47f70dff477c4eb",
+      "types": [
+        "DeliveryMethod"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/Enums/OrderStatus.cs",
+      "lines": 14,
+      "sha256": "947a8d8cb3d71fb60a6f554436600e7854c624222e253ec7714fd18aa8948e95",
+      "types": [
+        "OrderStatus"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/Enums/PackagingType.cs",
+      "lines": 7,
+      "sha256": "455a7de2bfd1fb1a5d11139ae7e56c5c8f975e9a4ab4bc29ee45af7ffb7d88cb",
+      "types": [
+        "PackagingType"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/Enums/PaymentMethod.cs",
+      "lines": 7,
+      "sha256": "fc1035e9fe7153cc270236b5ea7e52527e44349deb61cbaf95c66b669fe51e33",
+      "types": [
+        "PaymentMethod"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/Enums/ProductImageRole.cs",
+      "lines": 8,
+      "sha256": "79c8617137c893921dc0703e4409bb7e43f9cf391bce10f116fa56888bc03da2",
+      "types": [
+        "ProductImageRole"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/Enums/ProductReviewStatus.cs",
+      "lines": 8,
+      "sha256": "21d28221a3af40518c6f1eef0166398f6b30dc070e1735804484544a1e21be4a",
+      "types": [
+        "ProductReviewStatus"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/Enums/SellUnitType.cs",
+      "lines": 9,
+      "sha256": "98d00650ca085917923ee8bb7ecfc2b21a843739c6f941f5e0c1316e327c27c4",
+      "types": [
+        "SellUnitType"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/ErrorViewModel.cs",
+      "lines": 8,
+      "sha256": "71ca629bf7cb47527aece3f36f49996917c7abec9e8358d029ee9211a079378a",
+      "types": [
+        "ErrorViewModel"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/HomeSectionConfig.cs",
+      "lines": 86,
+      "sha256": "414ca6f2c5fc243702396e8fbfeefd70f0c10418d9a10eea27ed6c24b3404ddd",
+      "types": [
+        "HeroSlideConfig",
+        "FeatureCardConfig",
+        "WholesaleSegmentConfig",
+        "PromoBarConfig",
+        "HomeSectionConfigParser"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/ProductImageStageModel.cs",
+      "lines": 20,
+      "sha256": "1159b22ac61b12c599ba9b41ba86aebe38929c6aedcc690d92aac439f9f7bf8f",
+      "types": [
+        "ProductImageStageModel"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/ProductReviewsSectionModel.cs",
+      "lines": 23,
+      "sha256": "6aacb3a4de7af27558b9ccb049a36216c2a4ef9ff9c108215a7b54401a893f9f",
+      "types": [
+        "ProductReviewsSectionModel",
+        "AdminProductReviewEditViewModel"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/ProformaInvoiceViewModel.cs",
+      "lines": 9,
+      "sha256": "68e9b57a289c9f808eb54c07545fd9484c85396343d47ed2cb4aab44803e9b08",
+      "types": [
+        "ProformaInvoiceViewModel"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/SearchSuggestionDto.cs",
+      "lines": 3,
+      "sha256": "34aa77b79da2ba875f1dd3d01f595f3a6252adccbfb7dee5a0d76c0a65b9dde8",
+      "types": [
+        "SearchSuggestionDto"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/SeoContentPipelineModels.cs",
+      "lines": 74,
+      "sha256": "db4700192e92a11dde3cfa52220047a6e0c1485be4ca4c0cf3cdb8b202872b7e",
+      "types": [
+        "SeoContentPipelineConfig",
+        "CompetitorPageResearch",
+        "SeoContentResearchBundle",
+        "ContentGapInsight",
+        "KeywordMappingEntry",
+        "SeoContentQualityGateResult",
+        "SeoContentPipelineResult"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/SeoProReport.cs",
+      "lines": 37,
+      "sha256": "bf146b7bb7e6539ef59d2bee1e1cc7d6f3b7910c2f0ca6a73eab216d4fa306bd",
+      "types": [
+        "SeoProReport",
+        "SeoActionItem"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/SeoScoreResult.cs",
+      "lines": 34,
+      "sha256": "8f6d3a2c0b642dd77e7cf6228a6370a9c4baea28172c987ba251d2b3d5e7fea3",
+      "types": [
+        "SeoScoreResult"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/SeoUltimateReport.cs",
+      "lines": 214,
+      "sha256": "7cac14ebda70508072b641ffe6508568c602151c5b89e4acbac0f78858dc8761",
+      "types": [
+        "SeoUltimateReport",
+        "SeoIntentMix",
+        "SeoSerpBaseline",
+        "SeoDimensionGap",
+        "SeoTopicCoverage",
+        "SeoEntityScore",
+        "SeoQueryTarget",
+        "SeoCannibalRisk",
+        "SeoManualTask",
+        "SeoIterationStep"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Models/StoryViewModels.cs",
+      "lines": 10,
+      "sha256": "1649000c080e2d137d21a682caf1f85c09521281ca85adb792cff56d4cd6659b",
+      "types": [
+        "StorySlideDto",
+        "StoryItemDto"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/MovasseghiShop.Web.csproj",
+      "lines": 38,
+      "sha256": "d50ff055a9c73b91a86b4e7ffeeeab5467fba4e3a6257f84aef84ab240aaa004",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/ProductImageHelper.cs",
+      "lines": 377,
+      "sha256": "c12257ae5b412f651e223a9ec4c85c8325844cd4c3956cb4e2313eaa6142ff3d",
+      "types": [
+        "ProductGallerySlide",
+        "ProductDualCardSlides",
+        "ProductImageHelper"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Program.cs",
+      "lines": 691,
+      "sha256": "7235be2a373959e1352403995ce46be827e3f3886bd179b6231bb4221469e3a8",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/AmelonImportService.cs",
+      "lines": 625,
+      "sha256": "7a23f82be76a3d88300416d0e1e7726afef65cde6ef76aacf538543d4966b3a3",
+      "types": [
+        "IAmelonImportService",
+        "AmelonImportService",
+        "SpecFields",
+        "ParsedProduct"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/AmelonPriceSyncService.cs",
+      "lines": 655,
+      "sha256": "b662474450560f9381eccb75c647b1a444fb2a714bc003c5023dc05893b7168d",
+      "types": [
+        "IAmelonPriceSyncService",
+        "PriceSyncResult",
+        "PriceSyncAuditReport",
+        "PriceListEntry",
+        "WholesaleMapEntry",
+        "AmelonPriceSyncService",
+        "StringHtmlExt"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/AmelonProductImageParser.cs",
+      "lines": 170,
+      "sha256": "350e2904d5dba0f0fcdfda14442f1eeb591e6b3ee1965c3e6a296d8b470af81f",
+      "types": [
+        "AmelonProductImageParser"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/AnalyticsReportService.cs",
+      "lines": 790,
+      "sha256": "82256ff6a4275ac8057c176f98e9d8ffc39cfad1b196f7d9c969ca2f1b69e858",
+      "types": [
+        "IAnalyticsReportService",
+        "AnalyticsReportService",
+        "با"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/AnalyticsTracker.cs",
+      "lines": 529,
+      "sha256": "3ec29e5dbc4b30c57caf80a7af5c1baca8d0089896718b5e289fc12ea2737f5b",
+      "types": [
+        "IAnalyticsTracker",
+        "AnalyticsTracker",
+        "AnalyticsIdentity",
+        "Identity",
+        "AnalyticsClassifier",
+        "AnalyticsMiddleware",
+        "AnalyticsFlushService"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/CartService.cs",
+      "lines": 152,
+      "sha256": "214961b050a6721324e1d7b284cb89033f280103803c5f35af22cdbd4c10d21f",
+      "types": [
+        "ICartService",
+        "CartService"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/CatalogCapacityBands.cs",
+      "lines": 55,
+      "sha256": "caf79eff450b5ad78b5b325a22a9f3864d17718e54d64021a3a2e399a47d5e6f",
+      "types": [
+        "CatalogCapacityBands",
+        "Band"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/CatalogLandingRules.cs",
+      "lines": 14,
+      "sha256": "32408ad8b78f94a086fcd9181409883143d298b0b583e42e3fcc9fc1fe5466e9",
+      "types": [
+        "CatalogLandingRules"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/CheckoutHumanVerificationService.cs",
+      "lines": 125,
+      "sha256": "b2a187b43df923b517120deffc5ae42cc4fcbd04b6db82202b506b8e63571941",
+      "types": [
+        "HumanChallengeDto",
+        "HumanChallengeOption",
+        "ICheckoutHumanVerificationService",
+        "CheckoutHumanVerificationService"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/CmsPreviewUrls.cs",
+      "lines": 25,
+      "sha256": "75806ab56deb1d95220238462a43c1dc1d36c9333085006d94546bc4adc2070b",
+      "types": [
+        "CmsPreviewUrls"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/CompetitorAnalysisService.cs",
+      "lines": 66,
+      "sha256": "10c6e252b07b61a0ec3cdaf2afba758f366b2749fd62f79aa5703db57df3e742",
+      "types": [
+        "ICompetitorAnalysisService",
+        "CompetitorAnalysisService"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/ContentPipeline/CompetitorPageFetcher.cs",
+      "lines": 61,
+      "sha256": "4e6c089c8d985321828a2f174dbeba3e149fa682d61f27fc64ea0aeb9e7c3f78",
+      "types": [
+        "CompetitorPageFetcher"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/ContentPipeline/SeoContentGapModule.cs",
+      "lines": 119,
+      "sha256": "a9d425eaf9957f24874940c2ba230346733ede8b33e1a3c241c2b4657ae203f9",
+      "types": [
+        "SeoContentGapModule"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/ContentPipeline/SeoContentPipelinePrompts.cs",
+      "lines": 43,
+      "sha256": "84bcd6e7d848757f72ff1443fd5a66d70a26a476695ded938da0574365353c65",
+      "types": [
+        "SeoContentPipelinePrompts"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/ContentPipeline/SeoContentPipelineService.cs",
+      "lines": 105,
+      "sha256": "bf37c28e42ebb4878634a53eb0e57d1a90d2249f0d3dae4b38f100d699720b79",
+      "types": [
+        "ISeoContentPipelineService",
+        "SeoContentPipelineService"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/ContentPipeline/SeoContentQualityGate.cs",
+      "lines": 114,
+      "sha256": "6eb4d20c0287b9c513dbec8c877912abf721123e045c64d3083e192b4e658126",
+      "types": [
+        "SeoContentQualityGate"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/ContentPipeline/SeoContentRelevanceModule.cs",
+      "lines": 107,
+      "sha256": "b9fd9707353a178308e385ccbf4be0b156ba341eac6dae50bc82690494b7a97c",
+      "types": [
+        "SeoContentRelevanceModule"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/ContentPipeline/SeoEditorialContentPipeline.cs",
+      "lines": 177,
+      "sha256": "f744f5bf40493229e0849911fee8bfe038c6ac789a9ef49d806f54ec6abc1788",
+      "types": [
+        "IEditorialContentPipelineService",
+        "EditorialPipelineResult",
+        "EditorialContentPipelineService"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/ContentPipeline/SeoHumanizationFilter.cs",
+      "lines": 43,
+      "sha256": "76a89a326f876ecec6b9ff748ab1fad9d84980fcc048afe1fd6619ca8e9de608",
+      "types": [
+        "SeoHumanizationFilter"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/ContentPipeline/SeoKeywordPriorityEngine.cs",
+      "lines": 86,
+      "sha256": "50856a03f51be36f5bdb06dbbf5bbe57cd67db37345f9cb40a6de9e3f14bbc9f",
+      "types": [
+        "SeoKeywordPriorityEngine"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/ContentPipeline/SeoResearchAwareWriter.cs",
+      "lines": 97,
+      "sha256": "80eaf26aad08ed45437377839d187a806118bff998a8016af6b715a94d26442a",
+      "types": [
+        "SeoResearchAwareWriter"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/ContentPipeline/SerpOrganicSearchService.cs",
+      "lines": 106,
+      "sha256": "22d851a6043d15be4c8d1a524611250efadb954b79d8c9cb142b9cb7996fd5be",
+      "types": [
+        "ISerpOrganicSearchService",
+        "SerpOrganicSearchService"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/Editorial/BlogEditorialAdminService.cs",
+      "lines": 92,
+      "sha256": "b044be89cb945eb32f969dd29f982ed870a9f1d21fd5d80aa3f30c4d3a4e3259",
+      "types": [
+        "BlogRecoveryResult",
+        "IBlogEditorialAdminService",
+        "BlogEditorialAdminService"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/Editorial/EditorialGrowthBackgroundService.cs",
+      "lines": 59,
+      "sha256": "0b3dffad0410387a78289314069c1ba91ace862ed7a2d25aeda9835b47a86e1c",
+      "types": [
+        "EditorialGrowthBackgroundService"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/Editorial/EditorialGrowthOptions.cs",
+      "lines": 54,
+      "sha256": "69d61d6ee5f51b9d6ae4d51f08a6fb667b3c2cd777e931fd0890f6a87358aaf2",
+      "types": [
+        "EditorialGrowthOptions"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/Editorial/EditorialGrowthService.cs",
+      "lines": 606,
+      "sha256": "460d212adba183932776ee8fac080b14b31d7cf9ee831ed58c0b284dac101b0f",
+      "types": [
+        "EditorialPublishSlot",
+        "EditorialGrowthStatus",
+        "IEditorialGrowthService",
+        "EditorialGrowthRunResult",
+        "EditorialGrowthService"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/Editorial/EditorialHtmlImages.cs",
+      "lines": 51,
+      "sha256": "d4136181d7c7d55d1b228eab41607d9c0a8f85836f2eb8bb7d903989e5a03c44",
+      "types": [
+        "EditorialInlineImage",
+        "EditorialHtmlImages"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/Editorial/EditorialHubModels.cs",
+      "lines": 27,
+      "sha256": "66c10f46bb06ea3dc80a757852e6fd99263a08825b0bbaa8ecf511adaccf09b0",
+      "types": [
+        "EditorialImagePick",
+        "EditorialBlogInventoryRow",
+        "EditorialTimelineStep",
+        "EditorialQualitySweepResult"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/Editorial/EditorialHumanSchedule.cs",
+      "lines": 138,
+      "sha256": "7c6e93d86ea5449a400bcea3369d0e0d1fb394da23affa315819509d638a7cb6",
+      "types": [
+        "EditorialHumanSchedule"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/Editorial/EditorialImageResolver.cs",
+      "lines": 170,
+      "sha256": "9d72304c8404ca30a4dcdcf817ea74f204e7d467916fe698df916ef8966d521c",
+      "types": [
+        "EditorialImageResolver"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/Editorial/EditorialKeywordSync.cs",
+      "lines": 50,
+      "sha256": "027f7909d0faa90117ed9aa44c2fb4d31b14c48e52f05d9c483a0f4529d7708e",
+      "types": [
+        "EditorialKeywordSync"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/Editorial/EditorialParagraphDiversifier.cs",
+      "lines": 67,
+      "sha256": "b2b019d3b3dcb8949cf22d9b6bc7b28c88bd9d7065ad66ff79e080ae46c1ce4e",
+      "types": [
+        "EditorialParagraphDiversifier"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/Editorial/EditorialTopicPlanner.cs",
+      "lines": 150,
+      "sha256": "b6b2eb7d36823826e3bd91b411923b65eafd3832bb42e860f447aa42a70988b1",
+      "types": [
+        "EditorialTopicCandidate",
+        "EditorialTopicPlanner"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/Editorial/SeoEditorialWriter.cs",
+      "lines": 444,
+      "sha256": "3a552963b68fed7def0ab46b0681502e0f926e7982870c178eb29afc3bdf2844",
+      "types": [
+        "SeoEditorialWriter",
+        "ProductLink"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/GeocodingService.cs",
+      "lines": 131,
+      "sha256": "888d4f3e46c33a8f43d9cdc505795e2747f58e3bd119375b026a349526ee57f9",
+      "types": [
+        "ReverseGeocodeResult",
+        "IGeocodingService",
+        "NominatimGeocodingService"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/GoogleSearchConsoleService.cs",
+      "lines": 177,
+      "sha256": "bc90b2f340adb95fd629cb8676951ac637d39f9f661d6f6afa5210f3ba788092",
+      "types": [
+        "GscQueryRow",
+        "GscSyncResult",
+        "IGoogleSearchConsoleService",
+        "GoogleSearchConsoleService"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/GrowthEngineService.cs",
+      "lines": 473,
+      "sha256": "339b7cd82a0cfaf794c7ef682910547d709e8393395f7488346afeb4d1633919",
+      "types": [
+        "IGrowthEngineService",
+        "GrowthDashboardModel",
+        "GrowthEngineService"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/GrowthReportService.cs",
+      "lines": 134,
+      "sha256": "cfd366b77eab735393eccca58136bd36b9d3bb3106e2ce4147f278a8e838a3cd",
+      "types": [
+        "IAuthorityChecklistService",
+        "AuthorityChecklistService",
+        "IGrowthReportService",
+        "GrowthReportService"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/GscStartupSyncService.cs",
+      "lines": 30,
+      "sha256": "7376f0bbc7d183481aedcb64ad4f474cd6624311e2a94dbd55c03bab3ec2d849",
+      "types": [
+        "GscStartupSyncService"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/HomeFeaturedProductsSelector.cs",
+      "lines": 20,
+      "sha256": "c5aa987e2bfb76aaa3d97e659e541b53b1162ffbb24084d25d8fab133f90fe6a",
+      "types": [
+        "HomeFeaturedProductsSelector"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/HomeProductHighlights.cs",
+      "lines": 45,
+      "sha256": "b98db6eab6aafdbee337c3df6910b007bc56deb1aa07894fd299de2503a1df9d",
+      "types": [
+        "HomeProductHighlights"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/HomeSectionConfigBuilder.cs",
+      "lines": 21,
+      "sha256": "4a9d59675ba8862bff6642048f0e4d12c81d4be61dd239151f55286dea0cf0ca",
+      "types": [
+        "HomeSectionConfigBuilder"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/HomeSpecialOffersSelector.cs",
+      "lines": 20,
+      "sha256": "80c13d7f674ac9722af73e9a83cbaa34d81a518351cda94b18686c84f2a57b86",
+      "types": [
+        "HomeSpecialOffersSelector"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/HomeStoryService.cs",
+      "lines": 360,
+      "sha256": "6b82eab697f5afe49f9d8ef66edc2564ae66199d9c8288d2fff8198aebf0799f",
+      "types": [
+        "HomeStoryService"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/IHomeStoryService.cs",
+      "lines": 26,
+      "sha256": "ea2d49a4c9a6b20c28c78395d765db5ff435bbf3d40ff33b916070c2ec7dd7d0",
+      "types": [
+        "IHomeStoryService"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/IProductReviewService.cs",
+      "lines": 96,
+      "sha256": "70918db676770453829abe0d3a83a6358147c9a5073b655bbac985bf44236a5e",
+      "types": [
+        "IProductReviewService",
+        "ProductReviewService"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/ImageOptimizerService.cs",
+      "lines": 224,
+      "sha256": "53b3f5587a03c199f3757c73da47e2d4a8a380cb91e30477d0bdaf702329021d",
+      "types": [
+        "ImageOptimizationResult",
+        "IImageOptimizerService",
+        "ImageOptimizerService"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/MissingProductCatalog.cs",
+      "lines": 72,
+      "sha256": "d42c9d04b83181e3f8d227eb9c9443937bfff5866d4a18bcb70dab326f858c12",
+      "types": [
+        "MissingProductStub",
+        "MissingProductCatalog"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/OrderService.cs",
+      "lines": 193,
+      "sha256": "08a092eed53288f8f4ff883710e6a3002f51e5fcec6e2136f8ad47611601a85a",
+      "types": [
+        "IOrderService",
+        "CheckoutInput",
+        "OrderService"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/OtpService.cs",
+      "lines": 65,
+      "sha256": "975fef9dcad1772c1dfad2c07d607688c8de447db1fc6d1e9e838c4765606860",
+      "types": [
+        "IOtpService",
+        "MockOtpService"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/PaymentGateway.cs",
+      "lines": 23,
+      "sha256": "777841a7b2e324ca6547bb0b43ebd297c20bcea8f21d50312a7af83fd1d07aa9",
+      "types": [
+        "IPaymentGateway",
+        "PaymentResult",
+        "PaymentVerifyResult",
+        "MockPaymentGateway"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/ProductCatalogRepairService.cs",
+      "lines": 175,
+      "sha256": "7aff7e07597f8bf3f9dc1e5d5d0fc8e65acf894df83a977e158ebb211898b12c",
+      "types": [
+        "IProductCatalogRepairService",
+        "ProductCatalogRepairService"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/ProductCatalogService.cs",
+      "lines": 376,
+      "sha256": "3e3d029c8cc2e43b1406a06ae99bc28f371cf491af9cee7ca00548ed27d52613",
+      "types": [
+        "IProductCatalogService",
+        "ProductCatalogService"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/ProductDescriptionHelper.cs",
+      "lines": 75,
+      "sha256": "228fd79ad3b05c9d73febe51f792060fc2490094c1b15584db2a907c21ed24f4",
+      "types": [
+        "ProductDescriptionHelper"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/ProductImageLocalizerService.cs",
+      "lines": 273,
+      "sha256": "d3a876ecf772173675067f013982b4ca1dda27b1523c531b450814750019d9ec",
+      "types": [
+        "ImageLocalizationResult",
+        "IProductImageLocalizerService",
+        "ProductImageLocalizerService"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/ProductSeoHelper.cs",
+      "lines": 65,
+      "sha256": "a8762ec63646a9618df227282f9ec45675516b8735d3d568983dc01b97966e16",
+      "types": [
+        "ProductSeoHelper",
+        "ProductFaq"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/ProductStorefrontResolver.cs",
+      "lines": 217,
+      "sha256": "d7f0600b183244e3458036c39e72a344594c80cf7a188fd4b40dbfb6776ccda4",
+      "types": [
+        "ProductStorefrontResolver"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/ProductVariantAdminService.cs",
+      "lines": 325,
+      "sha256": "d7d670fbf2c96172f80d8a0f67a33023824cfa9dacfaaee903a02550f9f022cd",
+      "types": [
+        "IProductVariantAdminService",
+        "ProductVariantAdminService"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/RankSyncBackgroundService.cs",
+      "lines": 76,
+      "sha256": "543f6fbc2986eca1bc4930399afb1ff94d28f10840a7a126e34cee4d306e7c32",
+      "types": [
+        "RankSyncBackgroundService",
+        "WeeklyReportBackgroundService"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/RankTrackerService.cs",
+      "lines": 212,
+      "sha256": "50fcd1b777baf3ab96c377b227e94a7a8e2d2ef4c59d84c411430f0202e44fb3",
+      "types": [
+        "IRankTrackerService",
+        "RankSyncResult",
+        "RankRadarRow",
+        "RankRadarModel",
+        "RankTrackerService"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/SeoArticleBuilder.cs",
+      "lines": 84,
+      "sha256": "13f354db4d2436dee66c367beae48131c7d62e18e1568f2f962bf1432e79daed",
+      "types": [
+        "SeoArticleBuilder"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/SeoAutoFixEngine.cs",
+      "lines": 1707,
+      "sha256": "a3e05d0b5c481ce08f7955a25ffd94ebc3304f18af87bc56f2397be3a5133e27",
+      "types": [
+        "ISeoAutoFixEngine",
+        "SeoAutoFixEngine"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/SeoCategoryBuilder.cs",
+      "lines": 325,
+      "sha256": "8fb2558c4ba100124edba683a8464e8327ecb094324ccd98b13f89b18baa59af",
+      "types": [
+        "SeoCategoryBuilder"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/SeoContentRules.cs",
+      "lines": 684,
+      "sha256": "00dda6c2a866bcbd332d6f50b86c32bc13b965a9961130a5506e9cce7a8c37c2",
+      "types": [
+        "SeoContentRules",
+        "SeoContentAnalysis",
+        "SeoMediaAnalysis",
+        "SeoProductDataHeuristics",
+        "SeoMediaAnalyzer",
+        "SeoText",
+        "SeoContentAnalyzer"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/SeoEngineService.cs",
+      "lines": 245,
+      "sha256": "20d16e72db5230033bbe73a22f426dafb3a8558bd721b16d4a7a7ba86a85f8aa",
+      "types": [
+        "ISeoEngineService",
+        "BulkSeoResult",
+        "SeoEngineService"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/SeoGeoSummaryMaintainer.cs",
+      "lines": 39,
+      "sha256": "9465b098901b665610e7b79c8c9e3584f79b2ce5fa09695583d933e1c0693a4a",
+      "types": [
+        "SeoGeoSummaryMaintainer"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/SeoKeywordResearch.cs",
+      "lines": 98,
+      "sha256": "aa4f42031a33f0e4a07d48ba3b723ea69e3d038c74b4e7028ca5ab957a816725",
+      "types": [
+        "SeoKeywordResearch"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/SeoKnowledge.cs",
+      "lines": 514,
+      "sha256": "800e34bb548d57dcf8d8cc6e6e93455049c48cb0d3e714a23a5d842ea04389fc",
+      "types": [
+        "SeoFaq",
+        "SeoFaqStore",
+        "SeoGenericDetector",
+        "SeoIntentDetector",
+        "SeoTopicDef",
+        "SeoTopicModel",
+        "SeoEntityDef",
+        "SeoEntityGraph",
+        "SeoQueryExpander"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/SeoMaintenanceService.cs",
+      "lines": 465,
+      "sha256": "5937fb28bf8d3d1817aff2ee2a86099ca58dcf2780298aee32f7c4cbd66f5fa3",
+      "types": [
+        "SeoMaintenanceOptions",
+        "SeoMaintenanceSnapshot",
+        "SeoMaintenanceJobKind",
+        "SeoMaintenanceJob",
+        "ISeoMaintenanceCoordinator",
+        "SeoMaintenanceCoordinator",
+        "SeoMaintenanceBackgroundService",
+        "SeoStartupMaintenanceService"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/SeoProductContentMode.cs",
+      "lines": 14,
+      "sha256": "9e663282d87ba605e53ecab17187f54e0389f499ec7ad892ef703408b6491d5b",
+      "types": [
+        "SeoProductContentMode"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/SeoProductDifferentiation.cs",
+      "lines": 226,
+      "sha256": "203cc6a357bdfd87f30553f07d8109b3b720c61897a4f2d6ee042ebe37364620",
+      "types": [
+        "SeoProductDifferentiation",
+        "ProductDifferentiators"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/SeoProductIdentity.cs",
+      "lines": 70,
+      "sha256": "b3bc2a0198c08614c8ae8eef9fbb970ca8dda679ffe238cf835c203daa18c3de",
+      "types": [
+        "SeoProductIdentity"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/SeoProductReviewGenerator.cs",
+      "lines": 81,
+      "sha256": "186334645aab95d47fbf25a53d1c28dbd1def8dce92979e7ac45e931fcb270a2",
+      "types": [
+        "SeoProductReviewGenerator"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/SeoProfileEditorialLocks.cs",
+      "lines": 67,
+      "sha256": "c3a65d2dcaf653f16188758a3a462ffc52cbc422932e152462af45cac3a2293c",
+      "types": [
+        "SeoProfileEditorialLocks"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/SeoPublishGateLabels.cs",
+      "lines": 49,
+      "sha256": "ee640cb1e2dfda8405f047618a48dad250b44819da4f7546a10ccb700d500b89",
+      "types": [
+        "SeoPublishGateLabels"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/SeoSerpIntelligence.cs",
+      "lines": 255,
+      "sha256": "46e158ba2b5b34160ce5dd3f962b87df93a173e2486021d20b05e01c448fdf40",
+      "types": [
+        "ISeoSerpIntelligence",
+        "SeoSerpIntelligence",
+        "SeoCompetitiveModel"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/SeoSiteUniqueness.cs",
+      "lines": 192,
+      "sha256": "c6392ca3b3c8d72659963fc5098b9111df68db93f61ad55b2c361d181a8f71c9",
+      "types": [
+        "SeoSiteUniqueness",
+        "CorpusEntry"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/SeoStorefrontDisplay.cs",
+      "lines": 98,
+      "sha256": "194f220f56783d0da92144cdde18ef61aefb255b34eddcb2392dd18bbbc29c60",
+      "types": [
+        "SeoStorefrontDisplay"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/SeoTemplateTokens.cs",
+      "lines": 42,
+      "sha256": "a8b92d76717fc0b6401797f8e547a43af71cf31490d6c270cdd3e00f85fd76f3",
+      "types": [
+        "SeoTemplateTokens"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/SeoUltimateAnalyzer.cs",
+      "lines": 1140,
+      "sha256": "26c3400d07d5c9d01509124047cc9ab268bafd4e2924ed2416fe05f84564db16",
+      "types": [
+        "SeoUltimateContext",
+        "SeoUltimateAnalyzer"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/SeoUltimateWriter.cs",
+      "lines": 949,
+      "sha256": "bff5b157f6dad4e10f779dc8e9756b8597adc8e291e77fb7eab725f40973cae6",
+      "types": [
+        "SeoKeywordPlacer",
+        "SeoContentMode",
+        "SeoContentBuildOptions",
+        "SeoUltimateWriter",
+        "SeoContentBuilder"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/SerpRankProvider.cs",
+      "lines": 66,
+      "sha256": "cc2e66b06df912897cf3b37619e6ac9d8605f5f0e9d200962947e499f236d109",
+      "types": [
+        "SerpOrganicResult",
+        "SerpRankResult",
+        "ISerpRankProvider",
+        "SerpApiRankProvider",
+        "NullSerpRankProvider"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/SiteKeywordStrategy.cs",
+      "lines": 145,
+      "sha256": "250465bd4b0fa5195bb4702068f1fd3fb7c554bbfb35e51bbfb1916a0687e184",
+      "types": [
+        "SiteKeywordStrategy",
+        "struct"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/StorefrontHomeJsonLd.cs",
+      "lines": 147,
+      "sha256": "8820420a65ccad638fd22a5567eefba7b21ee76a5559f1afac1b4361e82100b2",
+      "types": [
+        "StorefrontHomeJsonLd"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/StorefrontHomeSeo.cs",
+      "lines": 29,
+      "sha256": "bdb2e4797505877d84854e7a2991bbd6a30f5d72e34b28c2dcae15c0c2fe2cc4",
+      "types": [
+        "StorefrontHomeSeo"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/StorefrontJsonLd.cs",
+      "lines": 21,
+      "sha256": "49a5b9da3b23536192406f05b81ce5de6cf10b6ebd16165c31a2e88ba9800f3b",
+      "types": [
+        "StorefrontJsonLd"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/StudioContentService.cs",
+      "lines": 122,
+      "sha256": "6c99436976dd70edd623ce250999ce45a654421be75cb68e65ceaa8ac5e8ad04",
+      "types": [
+        "IStudioContentService",
+        "StudioContentService"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Services/WholesalePriceCalculator.cs",
+      "lines": 60,
+      "sha256": "67d08b684cfc0cb5dcb8805e91c885b71e8b173c6521c96c113b31e4b6ee4404",
+      "types": [
+        "WholesalePriceCalculator",
+        "ComputedPrices"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/SlugHelper.cs",
+      "lines": 29,
+      "sha256": "fa0410ffeefe3894a5ad68f7c4cc5feca9207e6ca19c287c8d598870b60dc74c",
+      "types": [
+        "SlugHelper"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/StorefrontUrls.cs",
+      "lines": 59,
+      "sha256": "c336cc76079d7d46fe534b911a5bde3a4c58749667d9f5a3b63c980eec3ba0ba",
+      "types": [
+        "StorefrontUrls"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/VariantLabelHelper.cs",
+      "lines": 37,
+      "sha256": "ac1990594e3cf2688305ed949997e853c4bff12f7a204918501a132c686c8152",
+      "types": [
+        "VariantLabelHelper"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/ViewComponents/StudioViewComponents.cs",
+      "lines": 35,
+      "sha256": "ddbd4677b4a344b7561c40ec6c8a74656e243d3ed16a2c823caef936e1fedd85",
+      "types": [
+        "NavZoneViewComponent",
+        "ContentAtomViewComponent"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Account/AccessDenied.cshtml",
+      "lines": 8,
+      "sha256": "e28da8c344f836f6cbbbf1a9d01924ab99d9b40ddf82b4c41757dec8cfda8e3c",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Account/Index.cshtml",
+      "lines": 334,
+      "sha256": "57fab4db48cb4c171a88e1488126d8df7687c2bde453ba275b18d70059d28cd4",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Account/Login.cshtml",
+      "lines": 12,
+      "sha256": "7f3fe6398ecaf30a8d912569292aad775977c0289d34da60fa47ff6cbe1b361a",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Account/VerifyOtp.cshtml",
+      "lines": 15,
+      "sha256": "32f74ee8e81df35c99fedba06a8fe399270486d313d203666ec26693a1bd5d2c",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Blog/Index.cshtml",
+      "lines": 155,
+      "sha256": "1afae24bbbff23ebae838895a9ecfcaaf3df59e4c51d058fa00fa3e8c643afaf",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Blog/Post.cshtml",
+      "lines": 144,
+      "sha256": "40e6dd3afd931fd99010dc7323fca811433fea87a6a3e198c94ebf4cc8b2bf00",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Cart/Index.cshtml",
+      "lines": 112,
+      "sha256": "d60e60566c5db84343b2bed065157e6269e1587a3ad84dddf24522ec38c74df5",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Cart/_CartAddConfirm.cshtml",
+      "lines": 49,
+      "sha256": "bc58dd8c2488c9a1d52cc60475b2c3e00e2fb3395e0e637a8fdf2aac6544048c",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Cart/_CartHumanGate.cshtml",
+      "lines": 41,
+      "sha256": "ba3edb3050274aeab7aa0f22ca9be0b2b7f09bd254a140d954a46135aaf07831",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Cart/_CartPanel.cshtml",
+      "lines": 112,
+      "sha256": "256ff55313813ea607611d1ddc238be0b1e4a252104db78cb007936d7c496e41",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Catalog/Index.cshtml",
+      "lines": 350,
+      "sha256": "1f1921cea39213d7210897174627919dc37ca0d40e36ba0e0e75213c79159de0",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Catalog/_CatalogCategorySeo.cshtml",
+      "lines": 69,
+      "sha256": "ba100c107775f9e17e5815ceb82d7e4f267e5d257d23ddeb27749a9e6a62bacc",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Checkout/BelowMinimum.cshtml",
+      "lines": 14,
+      "sha256": "09fb585ef129f9c914b46610a12516a2e650915d552528e94f4c20f6fba295f7",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Checkout/Index.cshtml",
+      "lines": 281,
+      "sha256": "a55152d76f387934bf79d06c3151e83c208cfa004fbebabcbc41762fd0761e9a",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Home/Index.cshtml",
+      "lines": 546,
+      "sha256": "3d79fd388aff24a45d5a2ce83eb48226021a9ecc2c15ff45cb1b33198e442967",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Home/_HomeHelpers.cshtml",
+      "lines": 27,
+      "sha256": "42dc5c91fddc74f29fc6f6ea59d252b2bbaeacac3d0f622ccc1adb07998c6e36",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/News/Article.cshtml",
+      "lines": 148,
+      "sha256": "0c7b341b22362ddc2f8a9e9eb70bd09bb86aaee2cb96e2d3ab0a0dfc3ade83b3",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/News/Index.cshtml",
+      "lines": 143,
+      "sha256": "3be7ed00a242ce6b22bd687e281f47f3bd22dfb87c59c8f0eff78f5f8583eaa0",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Order/Invoice.cshtml",
+      "lines": 58,
+      "sha256": "83a22ef42f3f420883b2f2199b6fbb1162609f513534272a0d43ab27e4db77d5",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Order/Success.cshtml",
+      "lines": 58,
+      "sha256": "a3650704591a67b2f76870191f53b327066bc938f7b0dd7acf1a551b6cd8db40",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Order/Track.cshtml",
+      "lines": 61,
+      "sha256": "257e2618eb956e6bb05dda7d42b0076ca8096a33f50caa099c4397197ecd9cf6",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Order/TrackResult.cshtml",
+      "lines": 40,
+      "sha256": "96e01d66180bf4094c70513ae39e34196af7f0fa8494b494e38ec29e8fd67e42",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Order/_OrderTrackResult.cshtml",
+      "lines": 227,
+      "sha256": "e8f7a81d7ef6d33da088561adb2f2276f002dd14e54b0aa3ce4ea695444cdf41",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Order/_ProformaBody.cshtml",
+      "lines": 157,
+      "sha256": "af153ea27971ddf16242f0d5334ce411462b6e640ec7a3915a398cc2b963dc1d",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Page/About.cshtml",
+      "lines": 6,
+      "sha256": "517fef02f239bf59c96170be6572a92e73586faf94418d390a5829257a15c3bd",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Page/Contact.cshtml",
+      "lines": 11,
+      "sha256": "430a34fec9c7d074503cacd99393b53c5ea01f68a58db8c694825b1444de224d",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Page/Faq.cshtml",
+      "lines": 9,
+      "sha256": "a3b250ed3fbc7a4056507517630b470ae89d0e2f8719aa6c274746b65017665d",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Page/Pillar.cshtml",
+      "lines": 9,
+      "sha256": "2ef1f1071dd6ecd2ed49bd525f9c2dd37cd6240ad5e66a9a8014d47b1a975ea0",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Page/Privacy.cshtml",
+      "lines": 3,
+      "sha256": "daae91f9e5466a0f3c9e85067c445cb6c9be14a76e825bd84adc555256d69159",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Page/Terms.cshtml",
+      "lines": 3,
+      "sha256": "daae91f9e5466a0f3c9e85067c445cb6c9be14a76e825bd84adc555256d69159",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Payment/Mock.cshtml",
+      "lines": 15,
+      "sha256": "0c9a059f5d8bb8b71bd4066382e062f2516e7be6ac14cf5d024ff72b4d8e1a46",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Profile/Index.cshtml",
+      "lines": 17,
+      "sha256": "3a44165130470eee42cfbb9f4643e8645873cd5602a7550dabf747f7a8f90409",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shared/Components/ContentAtom/Default.cshtml",
+      "lines": 21,
+      "sha256": "4cfe40735b1cc85d2ad7096dc1cf61e71801e31d9413af1d0b660d62eb7cf522",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shared/Components/NavZone/Default.cshtml",
+      "lines": 49,
+      "sha256": "632631289fac3f2b387b36909b19fe46b9e3264d17742309db2119a6d1b5b399",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shared/Error.cshtml",
+      "lines": 25,
+      "sha256": "3c6d2ecdb88e20eecc9a4717bfe26b047ecdbafc0d64b7114bc58b436aaf1e42",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shared/_AppPathScript.cshtml",
+      "lines": 88,
+      "sha256": "5299e8c94e9cb2db3b21eb8130ece2ed709d1685ca14f4bf5053b71ff01c59fc",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shared/_AuthModal.cshtml",
+      "lines": 167,
+      "sha256": "25ee10fe75e2a0b2f120da128ab0618a92ca38db9ac5a783b3a98a816633ca57",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shared/_CartAnalyticsReport.cshtml",
+      "lines": 167,
+      "sha256": "a61745510fb3683b0382ee30216fa639392a5a74d3e56242776c46352e12fda3",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shared/_CartBadge.cshtml",
+      "lines": 6,
+      "sha256": "37b68798cdabe78705beb8422b8e9563d4e77dcaf62a151116a541e224c97653",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shared/_CartDiscountProgress.cshtml",
+      "lines": 121,
+      "sha256": "b65f10de9e2fa109361d127d11e0728b3a5507fb2596229ce7d3da120c950dd8",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shared/_CartPremiumCard.cshtml",
+      "lines": 36,
+      "sha256": "43c5d1625ff9fe6e459792a9d177090d15dd874826fcf5bdc6ce819c54e52750",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shared/_CartPremiumUpsell.cshtml",
+      "lines": 10,
+      "sha256": "fcfa7413c483529bcade81301607aacf65dd07a063bf9a717382f6cf7c1cec46",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shared/_CartTotals.cshtml",
+      "lines": 117,
+      "sha256": "5cc33f1a2da1f53f44d5dc2b1da4dbdc6ad713c10ce5b8927b9d7fd6f9e6bc1d",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shared/_CatalogFilters.cshtml",
+      "lines": 87,
+      "sha256": "0bdc24d3cc012f4383bc6dcb2b4f0fa28b49c20c6f4e0df4133de0ddc8be109d",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shared/_CategoryTypeIcon.cshtml",
+      "lines": 2,
+      "sha256": "c32095250d3865e8cc699759678168b6aae322a72ea0dde7d3ff07677403d3c3",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shared/_ContentClosing.cshtml",
+      "lines": 26,
+      "sha256": "9d1859368db6de162da57e1484dc2e0a8bb992080c140a170bcd5b89bc9b575d",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shared/_ContentHero.cshtml",
+      "lines": 38,
+      "sha256": "4cfe1e98cbc9eb0a17c8c6e91ea1c00e3b3a154963293a8e8e8925e64876c93e",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shared/_ContentPageCta.cshtml",
+      "lines": 25,
+      "sha256": "b7658ccb8ba4f7b7462582e9332a42ef1a4759b7f4001a3e98497ad7bf3dc153",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shared/_ContentPageHero.cshtml",
+      "lines": 42,
+      "sha256": "7719f495a2792fb897de44f01ae2796c68b6c8162184081dcdcdf23fed3ef53d",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shared/_FeatureIcon.cshtml",
+      "lines": 32,
+      "sha256": "9cfcbc8336207b08b636ce1af2bf089cd9f64dd545f335b71f02f5fe405b159c",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shared/_HomeIconDefinitions.cshtml",
+      "lines": 39,
+      "sha256": "4f3b71dfa7cc79f6421cd72ae6cca10522928f18ca592c1b7ef5c08eb40c6da8",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shared/_HomeStructuredData.cshtml",
+      "lines": 11,
+      "sha256": "3cfd429b5bc441bf716034996deeddd226b7d596619fafa1395f6d0e4a25c1a6",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shared/_Layout.cshtml",
+      "lines": 584,
+      "sha256": "6476d0f003437501f256e08e6e10b476f9fd7d62d401bc305749b005c078fd74",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shared/_Layout.cshtml.css",
+      "lines": 48,
+      "sha256": "1fe98c23430e23af20e98ab9e62fe39c7b6eaef1e3d9d4b59f3e85b31843077c",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shared/_PhoneIcon.cshtml",
+      "lines": 6,
+      "sha256": "e047a5a6a5eae7a867bf92107c3444d9323a23547e5f4989a0508c5e4cce9592",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shared/_ProductCard.cshtml",
+      "lines": 30,
+      "sha256": "4b39b0eb8a0e94c988ee49c327825f8121e283212772cb82c113dc8db36b0dbc",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shared/_ProductImageDualInner.cshtml",
+      "lines": 26,
+      "sha256": "9842d3bf065ddb8f123936b7f585000d7bbfb19b0aaa89cf9801f443a894b6a3",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shared/_ProductImageStage.cshtml",
+      "lines": 73,
+      "sha256": "168b5f9be127e4984fa0588cef00797d39327b159026d5b1cbd5d8b7e3c99748",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shared/_ProductImageStageFromProduct.cshtml",
+      "lines": 21,
+      "sha256": "5b8233dffef7ae12094abc38c232f55c47019753bc22d9f97ae47d15b1d2508a",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shared/_PromoItems.cshtml",
+      "lines": 9,
+      "sha256": "e5e087bb9a761436c3d84935f1760c93bb269a1f52104c9643682162852069b1",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shared/_SegmentIcon.cshtml",
+      "lines": 30,
+      "sha256": "45d975837f43f916fda87ee67dc16a41f08088c14525781694f42019d59b136f",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shared/_StorefrontGlobalJsonLd.cshtml",
+      "lines": 32,
+      "sha256": "ec7708895af0639fbf07ad3a7dd73aa606d1a7f33dd1a711b8704bd05fb74a7e",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shared/_StoryIcon.cshtml",
+      "lines": 104,
+      "sha256": "3559876451411095f196e5efef4c2a29a43ab10a889d393c4569be6f4a33c1bf",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shared/_ValidationScriptsPartial.cshtml",
+      "lines": 2,
+      "sha256": "cb3a005661c9d28230463c96fef6e84fe00be28f51e869b8790c31a3813c91b1",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shared/_VolumeDiscountGuide.cshtml",
+      "lines": 43,
+      "sha256": "2687188a78e41b97eeb52535cf456b5fca7748919c6b0c95603a117083efce8c",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shared/_WholesalePolicy.cshtml",
+      "lines": 23,
+      "sha256": "ef27ac3712bdefac6ea29e565cf4b9a1317604466a16e4fea9490bec6ddce494",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shop/Index.cshtml",
+      "lines": 53,
+      "sha256": "6488537621c91b190aa8af497ef8bcf14d5dbdb74c0f73b5b7e36956507ae936",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shop/Product.cshtml",
+      "lines": 598,
+      "sha256": "e20bd2ce7ebaa650f7cdef59cbe738cba72ff7147afe880ec3d7b151c8a78766",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shop/_ProductReviewCarousel.cshtml",
+      "lines": 115,
+      "sha256": "c7578661b1e6fd89d09d3348119cca1e1fc95c3a15b37639f72abd995e5f852b",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shop/_ProductReviewForm.cshtml",
+      "lines": 44,
+      "sha256": "cbcd9bc0f908876fb1853085816e579fc971d810c766e748970faef61524f9a7",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shop/_ProductReviews.cshtml",
+      "lines": 4,
+      "sha256": "68c808312c799f1db4ef9ff9f1e4526ee4195c46f141722013dd35c543d76f8f",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shop/_ProductVariantRow.cshtml",
+      "lines": 27,
+      "sha256": "bb87dc8217b018500ab9df9440af55a4ccdc63b49b092e911c5cbfeebc8e3f88",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/Shop/_ReviewStars.cshtml",
+      "lines": 15,
+      "sha256": "6d87f70bfe8e4228fc37e921699098e8fb0fcf6cd06323f44c725a789d19f544",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/_ViewImports.cshtml",
+      "lines": 8,
+      "sha256": "2a6a018ece45c01cb380ba94ddc1a13f291142715a8d2269f9bafbb24da27fe0",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/Views/_ViewStart.cshtml",
+      "lines": 3,
+      "sha256": "f6dceb9e6258ad80525250b5faf8454ab7688b0f5d58a253529149f42d4ec50c",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/WholesaleRules.cs",
+      "lines": 72,
+      "sha256": "f21889bc3a8d5c601f114eca44ee91bb63f9d319ce5a23e3e3d246dee95ad01e",
+      "types": [
+        "struct",
+        "WholesaleRules"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/css/admin-kit.css",
+      "lines": 1466,
+      "sha256": "375c1283ce9835ad0bcb6c63abba082de34d3094cad940504c05cfb917a680e5",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/css/admin-mobile-shell.css",
+      "lines": 449,
+      "sha256": "691300d18ba6675e6442519158b3f44671f9e84c4dbbe80c047dbdb4aa6ad769",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/css/admin-mobile.css",
+      "lines": 445,
+      "sha256": "d220a7ac5fef6d03bf01929eea6e9c5128b096626edd734c482e2fa7e6ff8737",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/css/admin-orders.css",
+      "lines": 354,
+      "sha256": "6b66036d0f4124d9635d006e60c7d555933360b9be58b64e45556298472a8a10",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/css/admin-studio.css",
+      "lines": 1442,
+      "sha256": "ebcf7fcc492a633b74e855ffb1b5074f7597ae46ba0d0bc7601b478304b03602",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/css/cms-preview.css",
+      "lines": 235,
+      "sha256": "ea90ba99e092494e623a3c8cbb2b5d5a883119f6a80b4d0924a48303bdf9388c",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/css/editorial-hub.css",
+      "lines": 237,
+      "sha256": "21430f8df349e8515ad8f3eac5a245bb510be25aaeb18fb8977d9b179089ff49",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/css/home-builder.css",
+      "lines": 23,
+      "sha256": "659fb9777ebb9c88826a6f96165f28cd667edbb7a7560c94db65b32c2d07c9a9",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/css/product-editor.css",
+      "lines": 592,
+      "sha256": "6afc4bfbc6e8e1ad649b250de2c23ba699f11de068fd28a13bed8596790232d1",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/css/prose.css",
+      "lines": 282,
+      "sha256": "1b97b74db52f8a7201be6ad9e7233074c2738a71225362ea80967c35a4a96eca",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/css/site.css",
+      "lines": 1619,
+      "sha256": "6bbf467d57d8aeb1ec5230b2ae104d960d6a1562cb8d6b356fef6e3e6a9329a8",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/css/ux-cart.css",
+      "lines": 786,
+      "sha256": "1594b55be5cf29780e8eb4fdfe61cbab8f2f5bb9347f5a05df2e4a8d5c41b66d",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/css/ux-catalog.css",
+      "lines": 620,
+      "sha256": "f48063433244dc9c94c9ddd3867e307eea8cc8e74e8ab3ad18ef96c0ce04331f",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/css/ux-checkout.css",
+      "lines": 187,
+      "sha256": "943895e18b09f83fb80d81b812f3bf738570caa3656049479dd3024ae26984d6",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/css/ux-content.css",
+      "lines": 882,
+      "sha256": "83e2020d3b4e8b4dd922cd8e680bc19df775e59b1ac80f31aeebd1bf0b3a64be",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/css/ux-desktop.css",
+      "lines": 771,
+      "sha256": "9b9b7219cf33ab215752c79ddbd034e78c6df9d58f9002a1c469faa2ac84fe82",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/css/ux-mobile.css",
+      "lines": 438,
+      "sha256": "3d21a08196a7430765d83606afa3176dd3ead3f0f3ea962a069b702996720255",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/css/ux-order-account.css",
+      "lines": 631,
+      "sha256": "87e4cf09e03a6560a48f0c8332f477a996b43327d8ef61255cd45a73f4afeba1",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/css/ux-order-proforma.css",
+      "lines": 192,
+      "sha256": "2d6ed6cc8498eaaa6f3da4eb3f0ae0b4a4e9de622ec86eced1608449e6721086",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/css/ux-order-track.css",
+      "lines": 480,
+      "sha256": "e17aa94c06c28d4aec1902f3e32f24265ffcc6d0b3c8f97a0dc3d6cff6012c1e",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/css/ux-order.css",
+      "lines": 127,
+      "sha256": "1f6e41e376b1df819e3bf3f36bd890cbdbf7961ddea82a012592e4c891e9f2a0",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/css/ux-product-dual.css",
+      "lines": 248,
+      "sha256": "74e01a77161edf7083066baaac9a78cb14c4a61498b4ae2250d039ae82586c45",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/css/ux-product.css",
+      "lines": 2508,
+      "sha256": "fdaf41fa34ec42050bf5e5b2641c7a13c4c85327866e5ae474b7c38f28bc75e3",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/css/ux-scroll-reveal.css",
+      "lines": 70,
+      "sha256": "8bf56d4b6310bee449270ee14b1318cf76c45723808da4967f44eb7d4f7063e5",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/js/account.js",
+      "lines": 548,
+      "sha256": "50a7ca5089284e06e85be3e61d5a7a749fd7e1b56c35a462a927fec4dcd30a5e",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/js/admin-content-forms.js",
+      "lines": 45,
+      "sha256": "e17b19e03d929d3a7546e3ea1450715f79ed1b481c8bfa207097c39fe346e943",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/js/admin-kit.js",
+      "lines": 478,
+      "sha256": "1edc9e5540ea44513c914fe9f62720f708b9cfe20800aa9f74cfe4ce55aff9c7",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/js/admin-price-inputs.js",
+      "lines": 48,
+      "sha256": "92f969327f09d6bfc12014d7677a3ac60dc5d10054f9aefa6e8ae1dbe362cf37",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/js/admin-product-reviews.js",
+      "lines": 265,
+      "sha256": "c6459cfb7be2cde29cf5b5d56e76469afa9d9be80b282f0c534a8cd8daf192a6",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/js/admin-products.js",
+      "lines": 298,
+      "sha256": "8ea6198fbdaac81c07521f88be923a7d65ad437b60e48e284dcf16cd990dd8be",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/js/admin-studio.js",
+      "lines": 66,
+      "sha256": "fc0d090352edde6fa9b7d27cf3b3a929b184574f6383325b66ea885b49adbba3",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/js/auth.js",
+      "lines": 529,
+      "sha256": "facf1143db4b772065ad7a0f29106afc2dbe92702fe6be2cfa213ca1a8a82758",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/js/blog-editorial-images.js",
+      "lines": 126,
+      "sha256": "79648f913e750a55c3467be545304ba6c2a4f72771133128baae1088dea3ac87",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/js/cart-human.js",
+      "lines": 166,
+      "sha256": "dce7dbe3486665beec9f8e71ccff7632f30b368ce0ae6581771c5d7b55513cae",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/js/cart.js",
+      "lines": 104,
+      "sha256": "98f72be3df5d78b8ea0df7dac8a904ed08b69d4cf1fa5a83185651b7530477d5",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/js/catalog.js",
+      "lines": 82,
+      "sha256": "5052f73b75ed63b3fe32884519008a250b93966866ba3de5f5166e07a8731565",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/js/cms-preview.js",
+      "lines": 79,
+      "sha256": "2e9c7bf58f82fc6a3e91df711a4a6051ab2f0f59df5752e050c7754212ec8c93",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/js/content.js",
+      "lines": 20,
+      "sha256": "d95677a5853ca2bbf88ce7a606fbac79b8022bbd957d03e980dc250ae5def6ab",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/js/desktop.js",
+      "lines": 78,
+      "sha256": "461c64409538929730f23b839abde601920fa2b5fd5fc9fd3ecdd82ecbadb3d7",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/js/home-desktop.js",
+      "lines": 72,
+      "sha256": "5fb460990c8df85e9ffb268d86b35aaf25d821668d3c0d5913b8bb34625a5122",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/js/home-section-editor.js",
+      "lines": 52,
+      "sha256": "768a57f04ac107c67361c5da028525297d92f836c67a44eb5498e68302312091",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/js/home.js",
+      "lines": 124,
+      "sha256": "c253bbb991adf037a708328bbab713b868d9351f06fb9418f3dc8e3247b9659f",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/js/ms-auth-lazy.js",
+      "lines": 22,
+      "sha256": "a7b6e95d67ec7eb44570cc5b5ac47cc69254797ea7ba85b67266089efe2ef0c9",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/js/ms-gsap-boot.js",
+      "lines": 33,
+      "sha256": "acc564ca627ec6c2a589ef885b0490f92ebf17e359a133dc1d4bffcced5d5913",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/js/order-track.js",
+      "lines": 129,
+      "sha256": "138edb8a57e9fc9d34a31d92fd219237683b4eac42d2f5f4c643beeff363fa19",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/js/product-card-dual-lazy.js",
+      "lines": 14,
+      "sha256": "b312c65077894be430fe8834068c67e48973f1f43696cc1c62d2a58d185aea8c",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/js/product-card-dual.js",
+      "lines": 101,
+      "sha256": "9b975b445089712f42630e7d0e5ae98b8fbef96ffa52e08b6e0f27009d12465e",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/js/product-editor.js",
+      "lines": 444,
+      "sha256": "080e1131b7115fed77aef3e574bd4f9638e2f3b0e57d40d999b0348f08ee68ae",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/js/product.js",
+      "lines": 518,
+      "sha256": "1174335415d3542cacddd3b099328f720b2e65c431f3e6d48df0c573b7623d4c",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/js/rich-text-editor.js",
+      "lines": 11,
+      "sha256": "8dadd9e16dd7552a6d814bda05f5092dd4ac8e5a71a69e41f1513bc2eb8181b8",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/js/scroll-reveal.js",
+      "lines": 94,
+      "sha256": "207755d46f37ef9df9c4e87b604d9cc35f98f535fe0cb491774b14e89257a1ad",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/js/site-defer-home.js",
+      "lines": 22,
+      "sha256": "b96541446402e707adf0f7589545f3ddd29b5bf285ddd6945730269c0054f963",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/js/site.js",
+      "lines": 656,
+      "sha256": "f25a077ad350ef5d6008f448afdca3a307819936cef740c8bde2e4eb4de1ce75",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/js/stories-lazy.js",
+      "lines": 28,
+      "sha256": "b73b19061d21d8aecad38888defd7cd647bfe13870703d8552f4e533bbf19a75",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/js/stories.js",
+      "lines": 289,
+      "sha256": "aebea96a595c72da1515fed602ce09f359e5020ca9f51c20b69fae3bec5ab405",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/js/studio-command-center.js",
+      "lines": 195,
+      "sha256": "2646dc98caf3d7b787a10df75c25f0ea93ca5979ddd199ecbc06064623197cd8",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/js/vendor/ScrollTrigger.min.js",
+      "lines": 11,
+      "sha256": "ad33c2df9ada8a663c2147357828f980d0b7ca731ef33eb3c6e4f327c3b2cda5",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/js/vendor/gsap.min.js",
+      "lines": 11,
+      "sha256": "28033e449a31ebcc396e5be8b13b63152bf03094288fb5867034321927bce087",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css",
+      "lines": 4085,
+      "sha256": "632e7f841a919a6536309d532b03f6697a133baf8e8f3acb98922c0b65b2e07f",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css",
+      "lines": 6,
+      "sha256": "e670c73068b27d91e5dd45de3ee84b0d047d9dc3df051d4725e64b5f224d576e",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css",
+      "lines": 4084,
+      "sha256": "099c6817cce368b97256472f5420e573c09e411d70d5132bbe0631df472cf243",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css",
+      "lines": 6,
+      "sha256": "bccc5372f902e0bcbb2e2013dc6f32132f44a53afb1607b849ccd6a74effa779",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css",
+      "lines": 597,
+      "sha256": "968f5823cd8e174defa2376ef97391dfe0d1acb229321a7364d9876cce420cc0",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css",
+      "lines": 6,
+      "sha256": "97cbede68a33bfde7c78c77d4c5b0f016825f4924af5829f6d54acf2672143ce",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css",
+      "lines": 594,
+      "sha256": "57ca6c9c7a094bf30f9425d6c1cfc9ded1ada7d7378061519aab08420a67f868",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css",
+      "lines": 6,
+      "sha256": "ffc8e1f217043052b24ba8285aa9cdbbbb7713364f0867506603bab02908f2d2",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css",
+      "lines": 5402,
+      "sha256": "d81b9b80d50f950485ff4c0b15c45743f623ce4f6fb146c301e2b640cfa1fb2a",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css",
+      "lines": 6,
+      "sha256": "2b213dc5b28ef42b98c741d7a482a0b1622f5e401f213b62435ef68f6eb0991b",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css",
+      "lines": 5393,
+      "sha256": "1fac2405b4b08ee6b6bde2684e1268e2ecb5eb58e9f833a2653968525719eaa4",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css",
+      "lines": 6,
+      "sha256": "18052e9ba163c10f07ad719aa054671d3a9040ba658d719abd3ee6057f04f6a5",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/lib/bootstrap/dist/css/bootstrap.css",
+      "lines": 12057,
+      "sha256": "18a105d7cb38e01e5ed0ca255c092992a2e211b39594a7fa57262bfc6fc4ea9c",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css",
+      "lines": 6,
+      "sha256": "3c8f27e6009ccfd710a905e6dcf12d0ee3c6f2ac7da05b0572d3e0d12e736fc8",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css",
+      "lines": 12030,
+      "sha256": "8f91385c88f5a7590d9c38b4c75b5e5fd457a21d7f14d94fbc230bf589918764",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css",
+      "lines": 6,
+      "sha256": "879944ecd9bc4a4788a411c763137df6ca4fdd5b8614a97935982ca1c8a5ef39",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js",
+      "lines": 4447,
+      "sha256": "7b189764d243c2e7177ee8dedc26d73dbb92ebe12bcb7cfdb0ffa9826be1f270",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js",
+      "lines": 7,
+      "sha256": "4197454f564d765cb8ae681406d5e65c54bd054d454dafac3deea1efde2c1514",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/lib/bootstrap/dist/js/bootstrap.js",
+      "lines": 4494,
+      "sha256": "f945bcd36c2055f9e36926ddc321cb954ec056995bd164e83a5bcdd429f321a7",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js",
+      "lines": 7,
+      "sha256": "de040986d9a3ed89d5d5f9ad6d5727015e9e238c2cd13af8f1b55909386d0864",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js",
+      "lines": 435,
+      "sha256": "c0941a2745f29c11367eae827b15d78712aeedfb2d56641ced5d8c1cd4e8f964",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js",
+      "lines": 8,
+      "sha256": "6096bb5bc12241d429924f778861238e72d25164694496d27f37d4461d64c73e",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/lib/jquery-validation/dist/additional-methods.js",
+      "lines": 1505,
+      "sha256": "46d2b9ff1697dc7d4640dc39817ee54c41ad0d772a943f23feb82cd1b10f03a7",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/lib/jquery-validation/dist/additional-methods.min.js",
+      "lines": 4,
+      "sha256": "32d100f35f5996ce9db4bb794b906910c3a189f3f2cfb81fcdf82d36d63be651",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/lib/jquery-validation/dist/jquery.validate.js",
+      "lines": 1703,
+      "sha256": "9112fcdb7ef6babe58ad54e3156a7d9ae6a8f72794f00a0b889c526f97a49878",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js",
+      "lines": 4,
+      "sha256": "ba66d3685c4fdf516fe8ed62b692d2ff7fafe5f3805832ce533966bce19a295e",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/lib/jquery/dist/jquery.js",
+      "lines": 10716,
+      "sha256": "78a85aca2f0b110c29e0d2b137e09f0a1fb7a8e554b499f740d6744dc8962cfe",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/lib/jquery/dist/jquery.min.js",
+      "lines": 2,
+      "sha256": "fc9a93dd241f6b045cbff0481cf4e1901becd0e12fb45166a8f17f95823f0b1a",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/lib/jquery/dist/jquery.slim.js",
+      "lines": 8617,
+      "sha256": "520bef37cbc19203b496e3d2525dacf13225392611a061405f88e50889bd01d7",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "src/MovasseghiShop.Web/wwwroot/lib/jquery/dist/jquery.slim.min.js",
+      "lines": 2,
+      "sha256": "9261efb3407e3a9096e4654750d8eff6b3a663422f48845c7fbcc65034c340cf",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "tests/MovasseghiShop.Web.Tests/EditorialTopicPlannerTests.cs",
+      "lines": 34,
+      "sha256": "ae549dfcc71317ac259350e8feddf1afb83571b7d2492bb1150518ba91cd297c",
+      "types": [
+        "EditorialTopicPlannerTests"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "tests/MovasseghiShop.Web.Tests/HomeFeaturedProductsSelectorTests.cs",
+      "lines": 69,
+      "sha256": "4a75e8bf2e35b2412a7b9df979a55fb80cc2d0abf1f259271e8f084d75f976d9",
+      "types": [
+        "HomeFeaturedProductsSelectorTests"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "tests/MovasseghiShop.Web.Tests/HomeSpecialOffersSelectorTests.cs",
+      "lines": 87,
+      "sha256": "d05bc19ba8394f9e67ab6112d00be56cbd79b8097f4ebad126dc637588ed4454",
+      "types": [
+        "HomeSpecialOffersSelectorTests"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "tests/MovasseghiShop.Web.Tests/ImageOptimizerTests.cs",
+      "lines": 106,
+      "sha256": "f89afe801cfe1537c488592c236daf29eb6ce2ddd5af9aceebe35bddd6f898db",
+      "types": [
+        "ImageOptimizerTests",
+        "TestEnvironment"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "tests/MovasseghiShop.Web.Tests/MovasseghiShop.Web.Tests.csproj",
+      "lines": 24,
+      "sha256": "06c600f1d3276aca4834c88dbff9a65d5238e1f2745710d9cda177563046ce59",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "tests/MovasseghiShop.Web.Tests/ProductCatalogSearchTests.cs",
+      "lines": 43,
+      "sha256": "14eac8e9be713f93aadf3e65a05b8797d3ac47c43f9b90c758beee911fc9c42f",
+      "types": [
+        "ProductCatalogSearchTests"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "tests/MovasseghiShop.Web.Tests/ProductDescriptionHelperTests.cs",
+      "lines": 25,
+      "sha256": "e23d72bd984c9cf11cdfdcad918e04cd8f57e9c458b641cf6a0a3acd5e1f26e4",
+      "types": [
+        "ProductDescriptionHelperTests"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "tests/MovasseghiShop.Web.Tests/ProductStorefrontResolverTests.cs",
+      "lines": 68,
+      "sha256": "00110ba9fe5b40d7ed89f36913f6b453a89b9539cbda8878c0a349699c63eebf",
+      "types": [
+        "ProductStorefrontResolverTests"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "tests/MovasseghiShop.Web.Tests/PublicCacheSafetyTests.cs",
+      "lines": 86,
+      "sha256": "39a9cffdda438c50e97990e3ed563fd3e5acfbe3dce59125461a4514806bd8c9",
+      "types": [
+        "PublicCacheSafetyTests",
+        "StartingResponseFeature"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "tests/MovasseghiShop.Web.Tests/SeoContentRelevanceModuleTests.cs",
+      "lines": 42,
+      "sha256": "ad47b6eacde199a2e338f4d4f5d4d43d8f29de79bb9eaf4b351d6e462b6a1dce",
+      "types": [
+        "SeoContentRelevanceModuleTests"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "tests/MovasseghiShop.Web.Tests/SeoEditorialPublishGateTests.cs",
+      "lines": 55,
+      "sha256": "eadaa7720b570a5754382ebbdabdbe031e5e12f9b9ca863929d3a0ff7ddcaac6",
+      "types": [
+        "SeoEditorialPublishGateTests"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "tests/MovasseghiShop.Web.Tests/SeoGeoSummaryMaintainerTests.cs",
+      "lines": 45,
+      "sha256": "bb63a65ff9e5d58165f1800baf72e038b8f1b788c304d0a49973480c0c06b269",
+      "types": [
+        "SeoGeoSummaryMaintainerTests"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "tests/MovasseghiShop.Web.Tests/SeoKeywordDensityTests.cs",
+      "lines": 26,
+      "sha256": "fb0810ee97bc499f59d80d143b9aa5c676db5bef828bbd798ebc1dd145441f98",
+      "types": [
+        "SeoKeywordDensityTests"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "tests/MovasseghiShop.Web.Tests/WholesalePriceCalculatorTests.cs",
+      "lines": 57,
+      "sha256": "1229bac8c0073026534344c8e4623ab3e85c6ac0a49450dc37723fb27a9ed939",
+      "types": [
+        "WholesalePriceCalculatorTests"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "tests/MovasseghiShop.Web.Tests/WholesaleRulesDeliveryTests.cs",
+      "lines": 27,
+      "sha256": "ad62e096754184123b7c33651432d5dc53f83dc3ac352cd598b06850e560a6c3",
+      "types": [
+        "WholesaleRulesDeliveryTests"
+      ],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "tests/deploy/test_quick_republish.py",
+      "lines": 117,
+      "sha256": "af48e4ac68ed0b7e9d2f70c5af0a71ebc2cb4f20a26c939c0b60438696d91af9",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    },
+    {
+      "path": "tests/deploy/test_release_smoke.py",
+      "lines": 62,
+      "sha256": "0294cddaf7de8516aa9e9225267188d1caa452ced427d0a43a1098629ec9818e",
+      "types": [],
+      "note": "Indexed source; not a claim of line-by-line correctness review"
+    }
+  ]
+}

@@ -1,0 +1,4026 @@
+[
+  {
+    "id": "first-contentful-paint",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/metrics/first-contentful-paint.js",
+    "metadata": {
+      "id": "first-contentful-paint",
+      "title": {
+        "expression": "str_(i18n.UIStrings.firstContentfulPaintMetric)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.NUMERIC"
+      },
+      "supportedModes": [
+        "navigation"
+      ],
+      "requiredArtifacts": [
+        "traces",
+        "devtoolsLogs",
+        "GatherContext",
+        "URL"
+      ]
+    },
+    "defaultOptions": [
+      {
+        "line": 38,
+        "value": {
+          "mobile": {
+            "scoring": {
+              "p10": 1800,
+              "median": 3000
+            }
+          },
+          "desktop": {
+            "scoring": {
+              "p10": 934,
+              "median": 1600
+            }
+          }
+        }
+      }
+    ],
+    "constants": {},
+    "scoreExpressions": [
+      {
+        "line": 73,
+        "expression": "Audit.computeLogNormalScore(\n        options.scoring,\n        metricResult.timing\n      )"
+      }
+    ],
+    "conditions": [],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "largest-contentful-paint",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/metrics/largest-contentful-paint.js",
+    "metadata": {
+      "id": "largest-contentful-paint",
+      "title": {
+        "expression": "str_(i18n.UIStrings.largestContentfulPaintMetric)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.NUMERIC"
+      },
+      "supportedModes": [
+        "navigation"
+      ],
+      "requiredArtifacts": [
+        "HostUserAgent",
+        "traces",
+        "devtoolsLogs",
+        "GatherContext",
+        "URL"
+      ]
+    },
+    "defaultOptions": [
+      {
+        "line": 38,
+        "value": {
+          "mobile": {
+            "scoring": {
+              "p10": 2500,
+              "median": 4000
+            }
+          },
+          "desktop": {
+            "scoring": {
+              "p10": 1200,
+              "median": 2400
+            }
+          }
+        }
+      }
+    ],
+    "constants": {},
+    "scoreExpressions": [
+      {
+        "line": 82,
+        "expression": "Audit.computeLogNormalScore(\n        options.scoring,\n        metricResult.timing\n      )"
+      }
+    ],
+    "conditions": [],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "total-blocking-time",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/metrics/total-blocking-time.js",
+    "metadata": {
+      "id": "total-blocking-time",
+      "title": {
+        "expression": "str_(i18n.UIStrings.totalBlockingTimeMetric)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.NUMERIC"
+      },
+      "requiredArtifacts": [
+        "traces",
+        "devtoolsLogs",
+        "GatherContext",
+        "URL"
+      ]
+    },
+    "defaultOptions": [
+      {
+        "line": 38,
+        "value": {
+          "mobile": {
+            "scoring": {
+              "p10": 200,
+              "median": 600
+            }
+          },
+          "desktop": {
+            "scoring": {
+              "p10": 150,
+              "median": 350
+            }
+          }
+        }
+      }
+    ],
+    "constants": {},
+    "scoreExpressions": [
+      {
+        "line": 97,
+        "expression": "1"
+      },
+      {
+        "line": 106,
+        "expression": "Audit.computeLogNormalScore(\n        options.scoring,\n        metricResult.timing\n      )"
+      }
+    ],
+    "conditions": [
+      {
+        "line": 93,
+        "condition": "gatherContext.gatherMode === 'timespan' &&\n      context.settings.throttlingMethod === 'simulate'"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "cumulative-layout-shift",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/metrics/cumulative-layout-shift.js",
+    "metadata": {
+      "id": "cumulative-layout-shift",
+      "title": {
+        "expression": "str_(i18n.UIStrings.cumulativeLayoutShiftMetric)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.NUMERIC"
+      },
+      "requiredArtifacts": [
+        "traces"
+      ]
+    },
+    "defaultOptions": [
+      {
+        "line": 41,
+        "value": {
+          "p10": 0.1,
+          "median": 0.25
+        }
+      }
+    ],
+    "constants": {},
+    "scoreExpressions": [
+      {
+        "line": 72,
+        "expression": "Audit.computeLogNormalScore(\n        scoringOptions,\n        cumulativeLayoutShift\n      )"
+      }
+    ],
+    "conditions": [],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "speed-index",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/metrics/speed-index.js",
+    "metadata": {
+      "id": "speed-index",
+      "title": {
+        "expression": "str_(i18n.UIStrings.speedIndexMetric)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.NUMERIC"
+      },
+      "supportedModes": [
+        "navigation"
+      ],
+      "requiredArtifacts": [
+        "traces",
+        "devtoolsLogs",
+        "GatherContext",
+        "URL"
+      ]
+    },
+    "defaultOptions": [
+      {
+        "line": 38,
+        "value": {
+          "mobile": {
+            "scoring": {
+              "p10": 3387,
+              "median": 5800
+            }
+          },
+          "desktop": {
+            "scoring": {
+              "p10": 1311,
+              "median": 2300
+            }
+          }
+        }
+      }
+    ],
+    "constants": {},
+    "scoreExpressions": [
+      {
+        "line": 76,
+        "expression": "Audit.computeLogNormalScore(\n        options.scoring,\n        metricResult.timing\n      )"
+      }
+    ],
+    "conditions": [],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "interaction-to-next-paint",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/metrics/interaction-to-next-paint.js",
+    "metadata": {
+      "id": "interaction-to-next-paint",
+      "title": {
+        "expression": "str_(i18n.UIStrings.interactionToNextPaint)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.NUMERIC"
+      },
+      "supportedModes": [
+        "timespan"
+      ],
+      "requiredArtifacts": [
+        "traces"
+      ]
+    },
+    "defaultOptions": [
+      {
+        "line": 42,
+        "value": {
+          "p10": 200,
+          "median": 500
+        }
+      }
+    ],
+    "constants": {},
+    "scoreExpressions": [
+      {
+        "line": 61,
+        "expression": "null"
+      },
+      {
+        "line": 70,
+        "expression": "null"
+      },
+      {
+        "line": 76,
+        "expression": "Audit.computeLogNormalScore({p10: context.options.p10, median: context.options.median},\n        timing)"
+      }
+    ],
+    "conditions": [
+      {
+        "line": 60,
+        "condition": "settings.throttlingMethod === 'simulate'"
+      },
+      {
+        "line": 69,
+        "condition": "interactionEvent === null"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "interactive",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/metrics/interactive.js",
+    "metadata": {
+      "id": "interactive",
+      "title": {
+        "expression": "str_(i18n.UIStrings.interactiveMetric)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.NUMERIC"
+      },
+      "supportedModes": [
+        "navigation"
+      ],
+      "requiredArtifacts": [
+        "traces",
+        "devtoolsLogs",
+        "GatherContext",
+        "URL"
+      ]
+    },
+    "defaultOptions": [
+      {
+        "line": 44,
+        "value": {
+          "mobile": {
+            "scoring": {
+              "p10": 3785,
+              "median": 7300
+            }
+          },
+          "desktop": {
+            "scoring": {
+              "p10": 2468,
+              "median": 4500
+            }
+          }
+        }
+      }
+    ],
+    "constants": {},
+    "scoreExpressions": [
+      {
+        "line": 81,
+        "expression": "Audit.computeLogNormalScore(\n        options.scoring,\n        timeInMs\n      )"
+      }
+    ],
+    "conditions": [],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "max-potential-fid",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/metrics/max-potential-fid.js",
+    "metadata": {
+      "id": "max-potential-fid",
+      "title": {
+        "expression": "str_(i18n.UIStrings.maxPotentialFIDMetric)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.NUMERIC"
+      },
+      "supportedModes": [
+        "navigation"
+      ],
+      "requiredArtifacts": [
+        "traces",
+        "devtoolsLogs",
+        "GatherContext",
+        "URL"
+      ]
+    },
+    "defaultOptions": [
+      {
+        "line": 54,
+        "value": {
+          "p10": 130,
+          "median": 250
+        }
+      }
+    ],
+    "constants": {},
+    "scoreExpressions": [
+      {
+        "line": 133,
+        "expression": "Audit.computeLogNormalScore(\n        {p10: context.options.p10, median: context.options.median},\n        metricResult.timing\n      )"
+      }
+    ],
+    "conditions": [
+      {
+        "line": 74,
+        "condition": "loafEvents.length === 0"
+      },
+      {
+        "line": 85,
+        "condition": "loafDuration === undefined || loafBlocking === undefined"
+      },
+      {
+        "line": 94,
+        "condition": "loafEvent.ts < firstContentfulPaint"
+      },
+      {
+        "line": 96,
+        "condition": "loafDuration > currentMaxDuration"
+      },
+      {
+        "line": 100,
+        "condition": "loafBlocking > currentMaxBlocking"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "render-blocking-resources",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/byte-efficiency/render-blocking-resources.js",
+    "metadata": {
+      "id": "render-blocking-resources",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "supportedModes": [
+        "navigation"
+      ],
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.METRIC_SAVINGS"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "guidanceLevel": 2,
+      "requiredArtifacts": [
+        "URL",
+        "traces",
+        "devtoolsLogs",
+        "Stylesheets",
+        "CSSUsage",
+        "GatherContext",
+        "Stacks"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {
+      "MINIMUM_WASTED_MS": 50
+    },
+    "scoreExpressions": [
+      {
+        "line": 305,
+        "expression": "results.length ? 0 : 1"
+      }
+    ],
+    "conditions": [
+      {
+        "line": 54,
+        "condition": "node.type !== 'network'"
+      },
+      {
+        "line": 70,
+        "condition": "!nodeTiming"
+      },
+      {
+        "line": 73,
+        "condition": "!difference"
+      },
+      {
+        "line": 92,
+        "condition": "Stacks.some(stack => stack.id === 'amp')"
+      },
+      {
+        "line": 96,
+        "condition": "node.type === BaseNode.TYPES.NETWORK &&\n        node.record.resourceType === NetworkRequest.TYPES.Stylesheet &&\n        nodeTiming.endTime > 2100"
+      },
+      {
+        "line": 140,
+        "condition": "renderBlocking instanceof Error"
+      },
+      {
+        "line": 163,
+        "condition": "!nodeAndTiming"
+      },
+      {
+        "line": 174,
+        "condition": "wastedMs < MINIMUM_WASTED_MS"
+      },
+      {
+        "line": 183,
+        "condition": "!results.length"
+      },
+      {
+        "line": 228,
+        "condition": "node.type !== BaseNode.TYPES.NETWORK"
+      },
+      {
+        "line": 232,
+        "condition": "canDeferRequest && isStylesheet"
+      },
+      {
+        "line": 240,
+        "condition": "minimalFCPGraph.type !== 'network'"
+      },
+      {
+        "line": 289,
+        "condition": "results.length > 0"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "uses-responsive-images",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/byte-efficiency/uses-responsive-images.js",
+    "metadata": {
+      "id": "uses-responsive-images",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "scoreDisplayMode": {
+        "expression": "ByteEfficiencyAudit.SCORING_MODES.METRIC_SAVINGS"
+      },
+      "guidanceLevel": 2,
+      "requiredArtifacts": [
+        "ImageElements",
+        "ViewportDimensions",
+        "GatherContext",
+        "devtoolsLogs",
+        "traces",
+        "URL"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {
+      "IGNORE_THRESHOLD_IN_BYTES": 4096,
+      "IGNORE_THRESHOLD_IN_BYTES_BREAKPOINTS_PRESENT": 12288
+    },
+    "scoreExpressions": [],
+    "conditions": [
+      {
+        "line": 61,
+        "condition": "image.displayedWidth && image.displayedHeight"
+      },
+      {
+        "line": 76,
+        "condition": "imageAspectRatio > viewportAspectRatio"
+      },
+      {
+        "line": 97,
+        "condition": "!networkRecord"
+      },
+      {
+        "line": 125,
+        "condition": "image.srcset || image.isPicture"
+      },
+      {
+        "line": 151,
+        "condition": "image.mimeType === 'image/svg+xml' || image.isCss"
+      },
+      {
+        "line": 156,
+        "condition": "!image.naturalDimensions"
+      },
+      {
+        "line": 160,
+        "condition": "!naturalWidth || !naturalHeight"
+      },
+      {
+        "line": 166,
+        "condition": "!processed"
+      },
+      {
+        "line": 173,
+        "condition": "exceedsAllowableWaste && !passedImageList.includes(processed.url)"
+      },
+      {
+        "line": 174,
+        "condition": "!existing || existing.wastedBytes > processed.wastedBytes"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "offscreen-images",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/byte-efficiency/offscreen-images.js",
+    "metadata": {
+      "id": "offscreen-images",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "scoreDisplayMode": {
+        "expression": "ByteEfficiencyAudit.SCORING_MODES.METRIC_SAVINGS"
+      },
+      "supportedModes": [
+        "navigation"
+      ],
+      "guidanceLevel": 2,
+      "requiredArtifacts": [
+        "ImageElements",
+        "ViewportDimensions",
+        "GatherContext",
+        "devtoolsLogs",
+        "traces",
+        "URL"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {
+      "IGNORE_THRESHOLD_IN_BYTES": 2048,
+      "IGNORE_THRESHOLD_IN_PERCENT": 75,
+      "IGNORE_THRESHOLD_IN_MS": 50
+    },
+    "scoreExpressions": [],
+    "conditions": [
+      {
+        "line": 87,
+        "condition": "!networkRecord"
+      },
+      {
+        "line": 89,
+        "condition": "image.loading === 'lazy' || image.loading === 'eager'"
+      },
+      {
+        "line": 99,
+        "condition": "!Number.isFinite(wastedRatio)"
+      },
+      {
+        "line": 128,
+        "condition": "node.type === 'cpu' && timing.duration >= 50"
+      },
+      {
+        "line": 130,
+        "condition": "node.type === 'network'"
+      },
+      {
+        "line": 137,
+        "condition": "image.wastedBytes < IGNORE_THRESHOLD_IN_BYTES"
+      },
+      {
+        "line": 138,
+        "condition": "image.wastedPercent < IGNORE_THRESHOLD_IN_PERCENT"
+      },
+      {
+        "line": 153,
+        "condition": "image.wastedBytes < IGNORE_THRESHOLD_IN_BYTES"
+      },
+      {
+        "line": 154,
+        "condition": "image.wastedPercent < IGNORE_THRESHOLD_IN_PERCENT"
+      },
+      {
+        "line": 179,
+        "condition": "processed === null"
+      },
+      {
+        "line": 183,
+        "condition": "processed instanceof Error"
+      },
+      {
+        "line": 191,
+        "condition": "!existing || existing.wastedBytes > processed.wastedBytes"
+      },
+      {
+        "line": 214,
+        "condition": "context.settings.throttlingMethod === 'simulate'"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "unminified-css",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/byte-efficiency/unminified-css.js",
+    "metadata": {
+      "id": "unminified-css",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "scoreDisplayMode": {
+        "expression": "ByteEfficiencyAudit.SCORING_MODES.METRIC_SAVINGS"
+      },
+      "guidanceLevel": 3,
+      "requiredArtifacts": [
+        "Stylesheets",
+        "devtoolsLogs",
+        "traces",
+        "URL",
+        "GatherContext"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {
+      "IGNORE_THRESHOLD_IN_PERCENT": 5,
+      "IGNORE_THRESHOLD_IN_BYTES": 2048
+    },
+    "scoreExpressions": [],
+    "conditions": [
+      {
+        "line": 64,
+        "condition": "!url || stylesheet.header.isInline"
+      },
+      {
+        "line": 91,
+        "condition": "!stylesheet.content"
+      },
+      {
+        "line": 97,
+        "condition": "result.wastedPercent < IGNORE_THRESHOLD_IN_PERCENT ||\n          result.wastedBytes < IGNORE_THRESHOLD_IN_BYTES ||\n          !Number.isFinite(result.wastedBytes)"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "unminified-javascript",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/byte-efficiency/unminified-javascript.js",
+    "metadata": {
+      "id": "unminified-javascript",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "scoreDisplayMode": {
+        "expression": "ByteEfficiencyAudit.SCORING_MODES.METRIC_SAVINGS"
+      },
+      "guidanceLevel": 3,
+      "requiredArtifacts": [
+        "Scripts",
+        "devtoolsLogs",
+        "traces",
+        "GatherContext",
+        "URL"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {
+      "IGNORE_THRESHOLD_IN_PERCENT": 10,
+      "IGNORE_THRESHOLD_IN_BYTES": 2048
+    },
+    "scoreExpressions": [],
+    "conditions": [
+      {
+        "line": 83,
+        "condition": "!script.content"
+      },
+      {
+        "line": 94,
+        "condition": "result.wastedPercent < IGNORE_THRESHOLD_IN_PERCENT ||\n          result.wastedBytes < IGNORE_THRESHOLD_IN_BYTES ||\n          !Number.isFinite(result.wastedBytes)"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "unused-css-rules",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/byte-efficiency/unused-css-rules.js",
+    "metadata": {
+      "id": "unused-css-rules",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "scoreDisplayMode": {
+        "expression": "ByteEfficiencyAudit.SCORING_MODES.METRIC_SAVINGS"
+      },
+      "guidanceLevel": 1,
+      "requiredArtifacts": [
+        "Stylesheets",
+        "CSSUsage",
+        "URL",
+        "devtoolsLogs",
+        "traces",
+        "GatherContext"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {
+      "IGNORE_THRESHOLD_IN_BYTES": {
+        "expression": "10 * 1024"
+      }
+    },
+    "scoreExpressions": [],
+    "conditions": [],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "unused-javascript",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/byte-efficiency/unused-javascript.js",
+    "metadata": {
+      "id": "unused-javascript",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "scoreDisplayMode": {
+        "expression": "ByteEfficiencyAudit.SCORING_MODES.METRIC_SAVINGS"
+      },
+      "guidanceLevel": 1,
+      "requiredArtifacts": [
+        "JsUsage",
+        "Scripts",
+        "SourceMaps",
+        "GatherContext",
+        "devtoolsLogs",
+        "traces",
+        "URL"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {
+      "UNUSED_BYTES_IGNORE_THRESHOLD": {
+        "expression": "20 * 1024"
+      },
+      "UNUSED_BYTES_IGNORE_BUNDLE_SOURCE_THRESHOLD": 512
+    },
+    "scoreExpressions": [],
+    "conditions": [
+      {
+        "line": 30,
+        "condition": "!strings.length"
+      },
+      {
+        "line": 49,
+        "condition": "!commonPrefix"
+      },
+      {
+        "line": 95,
+        "condition": "!script"
+      },
+      {
+        "line": 100,
+        "condition": "unusedJsSummary.wastedBytes === 0 || unusedJsSummary.totalBytes === 0"
+      },
+      {
+        "line": 112,
+        "condition": "item.wastedBytes <= unusedThreshold"
+      },
+      {
+        "line": 117,
+        "condition": "!bundle || 'errorMessage' in bundle.sizes"
+      },
+      {
+        "line": 121,
+        "condition": "unusedJsSummary.sourcesWastedBytes"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "uses-optimized-images",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/byte-efficiency/uses-optimized-images.js",
+    "metadata": {
+      "id": "uses-optimized-images",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "scoreDisplayMode": {
+        "expression": "ByteEfficiencyAudit.SCORING_MODES.METRIC_SAVINGS"
+      },
+      "guidanceLevel": 2,
+      "requiredArtifacts": [
+        "OptimizedImages",
+        "ImageElements",
+        "GatherContext",
+        "devtoolsLogs",
+        "traces",
+        "URL"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {
+      "IGNORE_THRESHOLD_IN_BYTES": 4096
+    },
+    "scoreExpressions": [],
+    "conditions": [
+      {
+        "line": 86,
+        "condition": "image.failed"
+      },
+      {
+        "line": 89,
+        "condition": "/(jpeg|bmp)/.test(image.mimeType) === false"
+      },
+      {
+        "line": 96,
+        "condition": "typeof jpegSize === 'undefined'"
+      },
+      {
+        "line": 97,
+        "condition": "!imageElement"
+      },
+      {
+        "line": 103,
+        "condition": "!imageElement.naturalDimensions"
+      },
+      {
+        "line": 107,
+        "condition": "!naturalHeight || !naturalWidth"
+      },
+      {
+        "line": 113,
+        "condition": "image.originalSize < jpegSize + IGNORE_THRESHOLD_IN_BYTES"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "modern-image-formats",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/byte-efficiency/modern-image-formats.js",
+    "metadata": {
+      "id": "modern-image-formats",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "scoreDisplayMode": {
+        "expression": "ByteEfficiencyAudit.SCORING_MODES.METRIC_SAVINGS"
+      },
+      "guidanceLevel": 3,
+      "requiredArtifacts": [
+        "OptimizedImages",
+        "devtoolsLogs",
+        "traces",
+        "URL",
+        "GatherContext",
+        "ImageElements"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {
+      "IGNORE_THRESHOLD_IN_BYTES": 8192
+    },
+    "scoreExpressions": [],
+    "conditions": [
+      {
+        "line": 79,
+        "condition": "!otherFormatSizes.jpegSize || !otherFormatSizes.webpSize"
+      },
+      {
+        "line": 109,
+        "condition": "image.failed"
+      },
+      {
+        "line": 115,
+        "condition": "image.mimeType === 'image/webp' || image.mimeType === 'image/avif'"
+      },
+      {
+        "line": 125,
+        "condition": "typeof webpSize === 'undefined'"
+      },
+      {
+        "line": 126,
+        "condition": "!imageElement"
+      },
+      {
+        "line": 132,
+        "condition": "!imageElement.naturalDimensions"
+      },
+      {
+        "line": 136,
+        "condition": "!naturalWidth || !naturalHeight"
+      },
+      {
+        "line": 149,
+        "condition": "webpSize === undefined || avifSize === undefined"
+      },
+      {
+        "line": 154,
+        "condition": "wastedBytes < IGNORE_THRESHOLD_IN_BYTES"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "uses-text-compression",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/byte-efficiency/uses-text-compression.js",
+    "metadata": {
+      "id": "uses-text-compression",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "scoreDisplayMode": {
+        "expression": "ByteEfficiencyAudit.SCORING_MODES.METRIC_SAVINGS"
+      },
+      "guidanceLevel": 3,
+      "requiredArtifacts": [
+        "ResponseCompression",
+        "GatherContext",
+        "devtoolsLogs",
+        "traces",
+        "URL"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {
+      "IGNORE_THRESHOLD_IN_BYTES": 1400,
+      "IGNORE_THRESHOLD_IN_PERCENT": 0.1
+    },
+    "scoreExpressions": [],
+    "conditions": [
+      {
+        "line": 56,
+        "condition": "!record.gzipSize || record.gzipSize < 0"
+      },
+      {
+        "line": 64,
+        "condition": "1 - gzipSize / originalSize < IGNORE_THRESHOLD_IN_PERCENT ||\n          gzipSavings < IGNORE_THRESHOLD_IN_BYTES ||\n          record.transferSize < gzipSize"
+      },
+      {
+        "line": 75,
+        "condition": "isDuplicate"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "uses-rel-preconnect",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/uses-rel-preconnect.js",
+    "metadata": {
+      "id": "uses-rel-preconnect",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "supportedModes": [
+        "navigation"
+      ],
+      "guidanceLevel": 3,
+      "requiredArtifacts": [
+        "traces",
+        "devtoolsLogs",
+        "URL",
+        "LinkElements"
+      ],
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.METRIC_SAVINGS"
+      }
+    },
+    "defaultOptions": [],
+    "constants": {
+      "PRECONNECT_SOCKET_MAX_IDLE_IN_MS": 15000,
+      "IGNORE_THRESHOLD_IN_MS": 50
+    },
+    "scoreExpressions": [
+      {
+        "line": 253,
+        "expression": "1"
+      },
+      {
+        "line": 270,
+        "expression": "results.length ? 0 : 1"
+      }
+    ],
+    "conditions": [
+      {
+        "line": 85,
+        "condition": "!record.timing"
+      },
+      {
+        "line": 89,
+        "condition": "record.timing.dnsStart === -1 && record.timing.dnsEnd === -1 &&\n      record.timing.connectStart === -1 && record.timing.connectEnd === -1"
+      },
+      {
+        "line": 98,
+        "condition": "record.timing.dnsEnd - record.timing.dnsStart === 0 &&\n      record.timing.connectEnd - record.timing.connectStart === 0"
+      },
+      {
+        "line": 149,
+        "condition": "node.type === 'network'"
+      },
+      {
+        "line": 156,
+        "condition": "node.type === 'network'"
+      },
+      {
+        "line": 163,
+        "condition": "!UsesRelPreconnectAudit.hasValidTiming(record) ||\n          // Filter out all resources that are loaded by the document. Connections are already early.\n          record.initiator.url === mainResource.url ||\n          // Filter out urls that do not have an origin (data, file, etc).\n          !record.parsedURL || !record.parsedURL.securityOrigin ||\n          // Filter out all resources that have the same origin. We're already connected.\n          mainResource.parsedURL.securityOrigin === record.parsedURL.securityOrigin ||\n          // Filter out anything that wasn't part of LCP. Only recommend important origins.\n          !lcpGraphURLs.has(record.url) ||\n          // Filter out all resources where origins are already resolved.\n          UsesRelPreconnectAudit.hasAlreadyConnectedToOrigin(record) ||\n          // Make sure the requests are below the PRECONNECT_SOCKET_MAX_IDLE_IN_MS (15s) mark.\n          !UsesRelPreconnectAudit.socketStartTimeIsBelowThreshold(record, mainResource)"
+      },
+      {
+        "line": 202,
+        "condition": "!firstRecordOfOrigin.timing"
+      },
+      {
+        "line": 212,
+        "condition": "firstRecordOfOrigin.parsedURL.scheme === 'https'"
+      },
+      {
+        "line": 220,
+        "condition": "wastedMs < IGNORE_THRESHOLD_IN_MS"
+      },
+      {
+        "line": 222,
+        "condition": "preconnectOrigins.has(securityOrigin)"
+      },
+      {
+        "line": 230,
+        "condition": "fcpGraphURLs.has(firstRecordOfOrigin.url)"
+      },
+      {
+        "line": 244,
+        "condition": "!origin"
+      },
+      {
+        "line": 245,
+        "condition": "networkRecords.some(record => origin === record.parsedURL.securityOrigin)"
+      },
+      {
+        "line": 251,
+        "condition": "preconnectLinks.length >= 2"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "server-response-time",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/server-response-time.js",
+    "metadata": {
+      "id": "server-response-time",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "failureTitle": {
+        "expression": "str_(UIStrings.failureTitle)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "supportedModes": [
+        "navigation"
+      ],
+      "guidanceLevel": 1,
+      "requiredArtifacts": [
+        "devtoolsLogs",
+        "URL",
+        "GatherContext"
+      ],
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.METRIC_SAVINGS"
+      }
+    },
+    "defaultOptions": [],
+    "constants": {
+      "TOO_SLOW_THRESHOLD_MS": 600,
+      "TARGET_MS": 100
+    },
+    "scoreExpressions": [
+      {
+        "line": 94,
+        "expression": "Number(passed)"
+      }
+    ],
+    "conditions": [
+      {
+        "line": 53,
+        "condition": "global.isLightrider && record.lrStatistics"
+      },
+      {
+        "line": 55,
+        "condition": "!record.timing"
+      },
+      {
+        "line": 71,
+        "condition": "responseTime === null"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "redirects",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/redirects.js",
+    "metadata": {
+      "id": "redirects",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.METRIC_SAVINGS"
+      },
+      "supportedModes": [
+        "navigation"
+      ],
+      "guidanceLevel": 2,
+      "requiredArtifacts": [
+        "URL",
+        "GatherContext",
+        "devtoolsLogs",
+        "traces"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [
+      {
+        "line": 147,
+        "expression": "tableRows.length ? 0 : 1"
+      }
+    ],
+    "conditions": [
+      {
+        "line": 60,
+        "condition": "event.name !== 'navigationStart'"
+      },
+      {
+        "line": 63,
+        "condition": "!data.documentLoaderURL || !data.isLoadingMainFrame"
+      },
+      {
+        "line": 73,
+        "condition": "!documentRequests.length"
+      },
+      {
+        "line": 100,
+        "condition": "node.type === 'network'"
+      },
+      {
+        "line": 114,
+        "condition": "documentRequests.length < 2"
+      },
+      {
+        "line": 121,
+        "condition": "!initialTiming || !redirectedTiming"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "uses-http2",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/dobetterweb/uses-http2.js",
+    "metadata": {
+      "id": "uses-http2",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.METRIC_SAVINGS"
+      },
+      "guidanceLevel": 3,
+      "supportedModes": [
+        "timespan",
+        "navigation"
+      ],
+      "requiredArtifacts": [
+        "URL",
+        "devtoolsLogs",
+        "traces",
+        "GatherContext"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [
+      {
+        "line": 231,
+        "expression": "resources.length ? 0 : 1"
+      },
+      {
+        "line": 271,
+        "expression": "resources.length ? 0 : 1"
+      }
+    ],
+    "conditions": [
+      {
+        "line": 89,
+        "condition": "node.type !== 'network'"
+      },
+      {
+        "line": 90,
+        "condition": "!urlsToChange.has(node.record.url)"
+      },
+      {
+        "line": 100,
+        "condition": "node.type !== 'network'"
+      },
+      {
+        "line": 102,
+        "condition": "originalProtocol === undefined"
+      },
+      {
+        "line": 126,
+        "condition": "!STATIC_RESOURCE_TYPES.has(networkRequest.resourceType)"
+      },
+      {
+        "line": 130,
+        "condition": "networkRequest.resourceSize < 100"
+      },
+      {
+        "line": 132,
+        "condition": "entity"
+      },
+      {
+        "line": 134,
+        "condition": "classifiedEntities.firstParty?.name === entity.name"
+      },
+      {
+        "line": 136,
+        "condition": "!entity.isUnrecognized"
+      },
+      {
+        "line": 175,
+        "condition": "!UsesHTTP2Audit.isMultiplexableStaticAsset(record, classifiedEntities)"
+      },
+      {
+        "line": 176,
+        "condition": "UrlUtils.isLikeLocalhost(record.parsedURL.host)"
+      },
+      {
+        "line": 184,
+        "condition": "seenURLs.has(record.url)"
+      },
+      {
+        "line": 187,
+        "condition": "record.fetchedViaServiceWorker"
+      },
+      {
+        "line": 190,
+        "condition": "!isOldHttp"
+      },
+      {
+        "line": 193,
+        "condition": "group.length < 6"
+      },
+      {
+        "line": 215,
+        "condition": "resources.length > 0"
+      },
+      {
+        "line": 220,
+        "condition": "artifacts.GatherContext.gatherMode === 'timespan'"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "efficient-animated-content",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/byte-efficiency/efficient-animated-content.js",
+    "metadata": {
+      "id": "efficient-animated-content",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "scoreDisplayMode": {
+        "expression": "ByteEfficiencyAudit.SCORING_MODES.METRIC_SAVINGS"
+      },
+      "guidanceLevel": 3,
+      "requiredArtifacts": [
+        "devtoolsLogs",
+        "traces",
+        "GatherContext",
+        "URL"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {
+      "GIF_BYTE_THRESHOLD": {
+        "expression": "100 * 1024"
+      }
+    },
+    "scoreExpressions": [],
+    "conditions": [],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "duplicated-javascript",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/byte-efficiency/duplicated-javascript.js",
+    "metadata": {
+      "id": "duplicated-javascript",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "scoreDisplayMode": {
+        "expression": "ByteEfficiencyAudit.SCORING_MODES.METRIC_SAVINGS"
+      },
+      "guidanceLevel": 2,
+      "requiredArtifacts": [
+        "devtoolsLogs",
+        "traces",
+        "SourceMaps",
+        "Scripts",
+        "GatherContext",
+        "URL"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {
+      "IGNORE_THRESHOLD_IN_BYTES": 1024
+    },
+    "scoreExpressions": [],
+    "conditions": [
+      {
+        "line": 64,
+        "condition": "source[0] === '@'"
+      },
+      {
+        "line": 81,
+        "condition": "!source.includes('node_modules')"
+      },
+      {
+        "line": 90,
+        "condition": "!sourceData"
+      },
+      {
+        "line": 160,
+        "condition": "i === 0"
+      },
+      {
+        "line": 165,
+        "condition": "wastedBytesTotal <= ignoreThresholdInBytes"
+      },
+      {
+        "line": 187,
+        "condition": "overflowWastedBytes > ignoreThresholdInBytes"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "legacy-javascript",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/byte-efficiency/legacy-javascript.js",
+    "metadata": {
+      "id": "legacy-javascript",
+      "scoreDisplayMode": {
+        "expression": "ByteEfficiencyAudit.SCORING_MODES.METRIC_SAVINGS"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "guidanceLevel": 2,
+      "requiredArtifacts": [
+        "devtoolsLogs",
+        "traces",
+        "Scripts",
+        "SourceMaps",
+        "GatherContext",
+        "URL"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [],
+    "conditions": [
+      {
+        "line": 85,
+        "condition": "isNewline"
+      },
+      {
+        "line": 92,
+        "condition": "seen.has(pattern)"
+      },
+      {
+        "line": 94,
+        "condition": "existingMatch"
+      },
+      {
+        "line": 137,
+        "condition": "object"
+      },
+      {
+        "line": 148,
+        "condition": "object"
+      },
+      {
+        "line": 157,
+        "condition": "object"
+      },
+      {
+        "line": 162,
+        "condition": "object"
+      },
+      {
+        "line": 334,
+        "condition": "!script.content"
+      },
+      {
+        "line": 341,
+        "condition": "bundle"
+      },
+      {
+        "line": 344,
+        "condition": "matches.some(m => m.name === name)"
+      },
+      {
+        "line": 349,
+        "condition": "!source"
+      },
+      {
+        "line": 352,
+        "condition": "mapping"
+      },
+      {
+        "line": 360,
+        "condition": "!matches.length"
+      },
+      {
+        "line": 380,
+        "condition": "!modules"
+      },
+      {
+        "line": 395,
+        "condition": "!pattern || !pattern.estimateBytes"
+      },
+      {
+        "line": 463,
+        "condition": "classifiedEntities.isFirstParty(item.url)"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "prioritize-lcp-image",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/prioritize-lcp-image.js",
+    "metadata": {
+      "id": "prioritize-lcp-image",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "supportedModes": [
+        "navigation"
+      ],
+      "guidanceLevel": 4,
+      "requiredArtifacts": [
+        "traces",
+        "devtoolsLogs",
+        "GatherContext",
+        "URL",
+        "TraceElements"
+      ],
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.METRIC_SAVINGS"
+      }
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [
+      {
+        "line": 247,
+        "expression": "null"
+      },
+      {
+        "line": 284,
+        "expression": "results.length ? 0 : 1"
+      }
+    ],
+    "conditions": [
+      {
+        "line": 55,
+        "condition": "request.isLinkPreload"
+      },
+      {
+        "line": 57,
+        "condition": "NetworkRequest.isNonNetworkRequest(request)"
+      },
+      {
+        "line": 59,
+        "condition": "initiatorPath.length <= 2"
+      },
+      {
+        "line": 71,
+        "condition": "node.type !== 'network'"
+      },
+      {
+        "line": 72,
+        "condition": "node.record.requestId === lcpRecord.requestId"
+      },
+      {
+        "line": 99,
+        "condition": "request.initiatorRequest && request.initiatorRequest === request.redirectSource"
+      },
+      {
+        "line": 104,
+        "condition": "!request.initiatorRequest && !mainResourceReached"
+      },
+      {
+        "line": 111,
+        "condition": "mainResourceReached"
+      },
+      {
+        "line": 127,
+        "condition": "!lcpRecord"
+      },
+      {
+        "line": 130,
+        "condition": "!lcpNode"
+      },
+      {
+        "line": 151,
+        "condition": "!lcpNode"
+      },
+      {
+        "line": 173,
+        "condition": "node.type !== 'network'"
+      },
+      {
+        "line": 175,
+        "condition": "node.isMainDocument()"
+      },
+      {
+        "line": 177,
+        "condition": "node.id === lcpNode.id"
+      },
+      {
+        "line": 182,
+        "condition": "!mainDocumentNode"
+      },
+      {
+        "line": 187,
+        "condition": "!modifiedLCPNode"
+      },
+      {
+        "line": 200,
+        "condition": "!lcpTimingsBefore"
+      },
+      {
+        "line": 202,
+        "condition": "!lcpTimingsAfter"
+      },
+      {
+        "line": 212,
+        "condition": "!node"
+      },
+      {
+        "line": 246,
+        "condition": "!lcpElement || lcpElement.type !== 'image'"
+      },
+      {
+        "line": 275,
+        "condition": "initiatorPath"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "total-byte-weight",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/byte-efficiency/total-byte-weight.js",
+    "metadata": {
+      "id": "total-byte-weight",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "failureTitle": {
+        "expression": "str_(UIStrings.failureTitle)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.METRIC_SAVINGS"
+      },
+      "guidanceLevel": 1,
+      "requiredArtifacts": [
+        "devtoolsLogs"
+      ]
+    },
+    "defaultOptions": [
+      {
+        "line": 48,
+        "value": {
+          "p10": {
+            "expression": "2667 * 1024"
+          },
+          "median": {
+            "expression": "4000 * 1024"
+          }
+        }
+      }
+    ],
+    "constants": {},
+    "scoreExpressions": [
+      {
+        "line": 101,
+        "expression": "score"
+      }
+    ],
+    "conditions": [
+      {
+        "line": 72,
+        "condition": "NetworkRequest.isNonNetworkRequest(record) || !record.transferSize"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "uses-long-cache-ttl",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/byte-efficiency/uses-long-cache-ttl.js",
+    "metadata": {
+      "id": "uses-long-cache-ttl",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "failureTitle": {
+        "expression": "str_(UIStrings.failureTitle)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.METRIC_SAVINGS"
+      },
+      "guidanceLevel": 3,
+      "requiredArtifacts": [
+        "devtoolsLogs"
+      ]
+    },
+    "defaultOptions": [
+      {
+        "line": 57,
+        "value": {
+          "p10": {
+            "expression": "28 * 1024"
+          },
+          "median": {
+            "expression": "128 * 1024"
+          }
+        }
+      }
+    ],
+    "constants": {
+      "IGNORE_THRESHOLD_IN_PERCENT": 0.925
+    },
+    "scoreExpressions": [
+      {
+        "line": 283,
+        "expression": "results.length ? 0 : 1"
+      }
+    ],
+    "conditions": [
+      {
+        "line": 79,
+        "condition": "RESOURCE_AGE_IN_HOURS_DECILES.length !== 12"
+      },
+      {
+        "line": 89,
+        "condition": "upperDecileIndex === RESOURCE_AGE_IN_HOURS_DECILES.length - 1"
+      },
+      {
+        "line": 90,
+        "condition": "upperDecileIndex === 0"
+      },
+      {
+        "line": 115,
+        "condition": "cacheControl && cacheControl['max-age'] !== undefined"
+      },
+      {
+        "line": 120,
+        "condition": "expiresHeaders"
+      },
+      {
+        "line": 123,
+        "condition": "!expires"
+      },
+      {
+        "line": 158,
+        "condition": "NetworkRequest.isNonNetworkRequest(record)"
+      },
+      {
+        "line": 175,
+        "condition": "!cacheControl && (headers.get('pragma') || '').includes('no-cache')"
+      },
+      {
+        "line": 180,
+        "condition": "cacheControl &&\n      (\n        cacheControl['must-revalidate'] ||\n        cacheControl['no-cache'] ||\n        cacheControl['no-store'] ||\n        cacheControl['stale-while-revalidate'] ||\n        cacheControl['private'])"
+      },
+      {
+        "line": 205,
+        "condition": "!CacheHeaders.isCacheableAsset(record)"
+      },
+      {
+        "line": 210,
+        "condition": "headers.has(header.name.toLowerCase())"
+      },
+      {
+        "line": 220,
+        "condition": "this.shouldSkipRecord(headers, cacheControl)"
+      },
+      {
+        "line": 227,
+        "condition": "cacheLifetimeInSeconds !== null &&\n        (!Number.isFinite(cacheLifetimeInSeconds) || cacheLifetimeInSeconds <= 0)"
+      },
+      {
+        "line": 235,
+        "condition": "cacheHitProbability > IGNORE_THRESHOLD_IN_PERCENT"
+      },
+      {
+        "line": 246,
+        "condition": "cacheControl"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "dom-size",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/dobetterweb/dom-size.js",
+    "metadata": {
+      "id": "dom-size",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "failureTitle": {
+        "expression": "str_(UIStrings.failureTitle)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.METRIC_SAVINGS"
+      },
+      "guidanceLevel": 1,
+      "requiredArtifacts": [
+        "DOMStats",
+        "URL",
+        "GatherContext"
+      ],
+      "__internalOptionalArtifacts": [
+        "traces",
+        "devtoolsLogs"
+      ]
+    },
+    "defaultOptions": [
+      {
+        "line": 68,
+        "value": {
+          "p10": 818,
+          "median": 1400
+        }
+      }
+    ],
+    "constants": {},
+    "scoreExpressions": [
+      {
+        "line": 170,
+        "expression": "score"
+      }
+    ],
+    "conditions": [
+      {
+        "line": 87,
+        "condition": "GatherContext.gatherMode !== 'navigation'"
+      },
+      {
+        "line": 93,
+        "condition": "!devtoolsLogs?.[Audit.DEFAULT_PASS] || !traces?.[Audit.DEFAULT_PASS]"
+      },
+      {
+        "line": 108,
+        "condition": "task.group.id !== 'styleLayout'"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "critical-request-chains",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/critical-request-chains.js",
+    "metadata": {
+      "id": "critical-request-chains",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.INFORMATIVE"
+      },
+      "supportedModes": [
+        "navigation"
+      ],
+      "guidanceLevel": 1,
+      "requiredArtifacts": [
+        "traces",
+        "devtoolsLogs",
+        "URL"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [
+      {
+        "line": 206,
+        "expression": "Number(chainCount === 0)"
+      }
+    ],
+    "conditions": [
+      {
+        "line": 60,
+        "condition": "children.length === 0"
+      },
+      {
+        "line": 65,
+        "condition": "!networkRequestTime"
+      },
+      {
+        "line": 79,
+        "condition": "child.children"
+      },
+      {
+        "line": 101,
+        "condition": "duration > longest.duration"
+      },
+      {
+        "line": 134,
+        "condition": "chain"
+      },
+      {
+        "line": 143,
+        "condition": "opts.node.children"
+      },
+      {
+        "line": 150,
+        "condition": "!chain.children"
+      },
+      {
+        "line": 185,
+        "condition": "child.children"
+      },
+      {
+        "line": 199,
+        "condition": "initialNavChildren && Object.keys(initialNavChildren).length > 0"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "user-timings",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/user-timings.js",
+    "metadata": {
+      "id": "user-timings",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.INFORMATIVE"
+      },
+      "guidanceLevel": 2,
+      "requiredArtifacts": [
+        "traces"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [
+      {
+        "line": 110,
+        "expression": "Number(userTimings.length === 0)"
+      }
+    ],
+    "conditions": [
+      {
+        "line": 80,
+        "condition": "itemA.timingType === itemB.timingType"
+      },
+      {
+        "line": 83,
+        "condition": "itemA.timingType === 'Measure'"
+      },
+      {
+        "line": 104,
+        "condition": "userTimings.length"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "bootup-time",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/bootup-time.js",
+    "metadata": {
+      "id": "bootup-time",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "failureTitle": {
+        "expression": "str_(UIStrings.failureTitle)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.METRIC_SAVINGS"
+      },
+      "guidanceLevel": 1,
+      "requiredArtifacts": [
+        "traces",
+        "devtoolsLogs",
+        "URL",
+        "GatherContext"
+      ]
+    },
+    "defaultOptions": [
+      {
+        "line": 61,
+        "value": {
+          "p10": 1282,
+          "median": 3500,
+          "thresholdInMs": 50
+        }
+      }
+    ],
+    "constants": {},
+    "scoreExpressions": [
+      {
+        "line": 175,
+        "expression": "score"
+      }
+    ],
+    "conditions": [
+      {
+        "line": 83,
+        "condition": "groupId !== 'scriptEvaluation' && groupId !== 'scriptParseCompile'"
+      },
+      {
+        "line": 132,
+        "condition": "totalExecutionTimeForURL >= context.options.thresholdInMs"
+      },
+      {
+        "line": 153,
+        "condition": "hadExcessiveChromeExtension"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "mainthread-work-breakdown",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/mainthread-work-breakdown.js",
+    "metadata": {
+      "id": "mainthread-work-breakdown",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "failureTitle": {
+        "expression": "str_(UIStrings.failureTitle)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.METRIC_SAVINGS"
+      },
+      "guidanceLevel": 1,
+      "requiredArtifacts": [
+        "traces",
+        "devtoolsLogs",
+        "URL",
+        "GatherContext"
+      ]
+    },
+    "defaultOptions": [
+      {
+        "line": 58,
+        "value": {
+          "p10": 2017,
+          "median": 4000
+        }
+      }
+    ],
+    "constants": {},
+    "scoreExpressions": [
+      {
+        "line": 144,
+        "expression": "score"
+      }
+    ],
+    "conditions": [],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "font-display",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/font-display.js",
+    "metadata": {
+      "id": "font-display",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "failureTitle": {
+        "expression": "str_(UIStrings.failureTitle)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "supportedModes": [
+        "navigation"
+      ],
+      "guidanceLevel": 3,
+      "requiredArtifacts": [
+        "devtoolsLogs",
+        "Stylesheets",
+        "URL"
+      ],
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.METRIC_SAVINGS"
+      }
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [
+      {
+        "line": 187,
+        "expression": "Number(results.length === 0)"
+      }
+    ],
+    "conditions": [
+      {
+        "line": 80,
+        "condition": "!rawFontURLs"
+      },
+      {
+        "line": 94,
+        "condition": "/^('|\").*\\1$/.test(s)"
+      },
+      {
+        "line": 128,
+        "condition": "!origin"
+      },
+      {
+        "line": 162,
+        "condition": "failingURLs.has(record.url)"
+      },
+      {
+        "line": 164,
+        "condition": "!passingURLs.has(record.url)"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "third-party-summary",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/third-party-summary.js",
+    "metadata": {
+      "id": "third-party-summary",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "failureTitle": {
+        "expression": "str_(UIStrings.failureTitle)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "guidanceLevel": 1,
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.METRIC_SAVINGS"
+      },
+      "requiredArtifacts": [
+        "traces",
+        "devtoolsLogs",
+        "URL",
+        "GatherContext"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {
+      "PASS_THRESHOLD_IN_MS": 250
+    },
+    "scoreExpressions": [
+      {
+        "line": 207,
+        "expression": "1"
+      },
+      {
+        "line": 219,
+        "expression": "Number(passed)"
+      }
+    ],
+    "conditions": [
+      {
+        "line": 117,
+        "condition": "!entity"
+      },
+      {
+        "line": 205,
+        "condition": "!results.length"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "third-party-facades",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/third-party-facades.js",
+    "metadata": {
+      "id": "third-party-facades",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "failureTitle": {
+        "expression": "str_(UIStrings.failureTitle)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "supportedModes": [
+        "navigation"
+      ],
+      "guidanceLevel": 3,
+      "requiredArtifacts": [
+        "traces",
+        "devtoolsLogs",
+        "URL",
+        "GatherContext"
+      ],
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.METRIC_SAVINGS"
+      }
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [
+      {
+        "line": 207,
+        "expression": "1"
+      },
+      {
+        "line": 223,
+        "expression": "0"
+      }
+    ],
+    "conditions": [
+      {
+        "line": 106,
+        "condition": "splitIndex === -1 || splitIndex > 5"
+      },
+      {
+        "line": 108,
+        "condition": "splitIndex >= items.length - 1"
+      },
+      {
+        "line": 118,
+        "condition": "finalItem.transferSize < 1000"
+      },
+      {
+        "line": 134,
+        "condition": "!entity || classifiedEntities.isFirstParty(url)"
+      },
+      {
+        "line": 137,
+        "condition": "!product || !product.facades || !product.facades.length"
+      },
+      {
+        "line": 139,
+        "condition": "facadableProductMap.has(product.name)"
+      },
+      {
+        "line": 176,
+        "condition": "categoryTemplate"
+      },
+      {
+        "line": 186,
+        "condition": "!urls || !entitySummary"
+      },
+      {
+        "line": 205,
+        "condition": "!results.length"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "largest-contentful-paint-element",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/largest-contentful-paint-element.js",
+    "metadata": {
+      "id": "largest-contentful-paint-element",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.METRIC_SAVINGS"
+      },
+      "guidanceLevel": 1,
+      "supportedModes": [
+        "navigation"
+      ],
+      "requiredArtifacts": [
+        "traces",
+        "TraceElements",
+        "devtoolsLogs",
+        "GatherContext",
+        "settings",
+        "URL"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [
+      {
+        "line": 131,
+        "expression": "null"
+      },
+      {
+        "line": 165,
+        "expression": "lcpSavings ? 0 : 1"
+      }
+    ],
+    "conditions": [
+      {
+        "line": 64,
+        "condition": "!lcpElement"
+      },
+      {
+        "line": 89,
+        "condition": "loadStart && loadEnd"
+      },
+      {
+        "line": 129,
+        "condition": "!elementTable"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "lcp-lazy-loaded",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/lcp-lazy-loaded.js",
+    "metadata": {
+      "id": "lcp-lazy-loaded",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "failureTitle": {
+        "expression": "str_(UIStrings.failureTitle)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "supportedModes": [
+        "navigation"
+      ],
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.METRIC_SAVINGS"
+      },
+      "guidanceLevel": 3,
+      "requiredArtifacts": [
+        "TraceElements",
+        "ViewportDimensions",
+        "ImageElements",
+        "traces",
+        "devtoolsLogs",
+        "GatherContext",
+        "URL"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {
+      "ESTIMATED_PERCENT_SAVINGS": 0.15
+    },
+    "scoreExpressions": [
+      {
+        "line": 71,
+        "expression": "null"
+      },
+      {
+        "line": 105,
+        "expression": "wasLazyLoaded ? 0 : 1"
+      }
+    ],
+    "conditions": [
+      {
+        "line": 68,
+        "condition": "!lcpElementImage ||\n      !this.isImageInViewport(lcpElementImage, artifacts.ViewportDimensions)"
+      },
+      {
+        "line": 95,
+        "condition": "wasLazyLoaded && lcpBreakdown.loadStart !== undefined"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "layout-shifts",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/layout-shifts.js",
+    "metadata": {
+      "id": "layout-shifts",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.METRIC_SAVINGS"
+      },
+      "guidanceLevel": 2,
+      "requiredArtifacts": [
+        "traces",
+        "RootCauses",
+        "TraceElements"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {
+      "MAX_LAYOUT_SHIFTS": 15
+    },
+    "scoreExpressions": [
+      {
+        "line": 124,
+        "expression": "event.args.data.weighted_score_delta"
+      },
+      {
+        "line": 148,
+        "expression": "passed ? 1 : 0"
+      }
+    ],
+    "conditions": [
+      {
+        "line": 89,
+        "condition": "rootCauses"
+      },
+      {
+        "line": 140,
+        "condition": "items.length > 0"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "uses-passive-event-listeners",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/dobetterweb/uses-passive-event-listeners.js",
+    "metadata": {
+      "id": "uses-passive-event-listeners",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "failureTitle": {
+        "expression": "str_(UIStrings.failureTitle)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "guidanceLevel": 3,
+      "requiredArtifacts": [
+        "ConsoleMessages",
+        "SourceMaps",
+        "Scripts"
+      ],
+      "scoreDisplayMode": {
+        "expression": "ViolationAudit.SCORING_MODES.METRIC_SAVINGS"
+      }
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [
+      {
+        "line": 62,
+        "expression": "Number(results.length === 0)"
+      }
+    ],
+    "conditions": [],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "no-document-write",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/dobetterweb/no-document-write.js",
+    "metadata": {
+      "id": "no-document-write",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "failureTitle": {
+        "expression": "str_(UIStrings.failureTitle)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "guidanceLevel": 2,
+      "requiredArtifacts": [
+        "ConsoleMessages",
+        "SourceMaps",
+        "Scripts"
+      ],
+      "scoreDisplayMode": {
+        "expression": "ViolationAudit.SCORING_MODES.METRIC_SAVINGS"
+      }
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [
+      {
+        "line": 79,
+        "expression": "Number(results.length === 0)"
+      }
+    ],
+    "conditions": [],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "long-tasks",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/long-tasks.js",
+    "metadata": {
+      "id": "long-tasks",
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.INFORMATIVE"
+      },
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "requiredArtifacts": [
+        "traces",
+        "devtoolsLogs",
+        "URL",
+        "GatherContext"
+      ],
+      "guidanceLevel": 1
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [
+      {
+        "line": 248,
+        "expression": "results.length === 0 ? 1 : 0"
+      }
+    ],
+    "conditions": [
+      {
+        "line": 44,
+        "condition": "index > -1"
+      },
+      {
+        "line": 97,
+        "condition": "taskTiming.duration > 0"
+      },
+      {
+        "line": 163,
+        "condition": "taskTimingsByEvent"
+      },
+      {
+        "line": 190,
+        "condition": "settings.throttlingMethod === 'simulate'"
+      },
+      {
+        "line": 198,
+        "condition": "node.type !== 'cpu'"
+      },
+      {
+        "line": 243,
+        "condition": "results.length > 0"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "non-composited-animations",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/non-composited-animations.js",
+    "metadata": {
+      "id": "non-composited-animations",
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.INFORMATIVE"
+      },
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "guidanceLevel": 2,
+      "requiredArtifacts": [
+        "TraceElements",
+        "HostUserAgent"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [
+      {
+        "line": 127,
+        "expression": "1"
+      },
+      {
+        "line": 198,
+        "expression": "results.length === 0 ? 1 : 0"
+      }
+    ],
+    "conditions": [
+      {
+        "line": 93,
+        "condition": "reason.text === UIStrings.unsupportedCSSProperty"
+      },
+      {
+        "line": 125,
+        "condition": "!match || Number(match[1]) < 86"
+      },
+      {
+        "line": 137,
+        "condition": "element.traceEventType !== 'animation'"
+      },
+      {
+        "line": 142,
+        "condition": "!failureReasonsMask"
+      },
+      {
+        "line": 146,
+        "condition": "name"
+      },
+      {
+        "line": 154,
+        "condition": "!animationReasons.size"
+      },
+      {
+        "line": 182,
+        "condition": "shouldAddAnimationNameColumn"
+      },
+      {
+        "line": 193,
+        "condition": "results.length > 0"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "unsized-images",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/unsized-images.js",
+    "metadata": {
+      "id": "unsized-images",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "failureTitle": {
+        "expression": "str_(UIStrings.failureTitle)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "guidanceLevel": 4,
+      "requiredArtifacts": [
+        "ImageElements"
+      ],
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.METRIC_SAVINGS"
+      }
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [
+      {
+        "line": 156,
+        "expression": "unsizedImages.length > 0 ? 0 : 1"
+      }
+    ],
+    "conditions": [
+      {
+        "line": 50,
+        "condition": "!attrValue"
+      },
+      {
+        "line": 57,
+        "condition": "attrValue.startsWith('+')"
+      },
+      {
+        "line": 71,
+        "condition": "!property"
+      },
+      {
+        "line": 86,
+        "condition": "image.cssEffectiveRules === undefined"
+      },
+      {
+        "line": 129,
+        "condition": "isFixedImage"
+      },
+      {
+        "line": 133,
+        "condition": "UnsizedImages.isNonNetworkSvg(image)"
+      },
+      {
+        "line": 136,
+        "condition": "UnsizedImages.isSizedImage(image)"
+      },
+      {
+        "line": 141,
+        "condition": "isNotDisplayed"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "viewport",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/viewport.js",
+    "metadata": {
+      "id": "viewport",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "failureTitle": {
+        "expression": "str_(UIStrings.failureTitle)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "guidanceLevel": 3,
+      "requiredArtifacts": [
+        "MetaElements"
+      ],
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.METRIC_SAVINGS"
+      }
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [
+      {
+        "line": 54,
+        "expression": "0"
+      },
+      {
+        "line": 76,
+        "expression": "Number(viewportMeta.isMobileOptimized)"
+      }
+    ],
+    "conditions": [
+      {
+        "line": 52,
+        "condition": "!viewportMeta.hasViewportTag"
+      },
+      {
+        "line": 62,
+        "condition": "viewportMeta.isMobileOptimized"
+      },
+      {
+        "line": 68,
+        "condition": "viewportMeta.rawContentString !== undefined"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "uses-responsive-images-snapshot",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/byte-efficiency/uses-responsive-images-snapshot.js",
+    "metadata": {
+      "id": "uses-responsive-images-snapshot",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "failureTitle": {
+        "expression": "str_(UIStrings.failureTitle)"
+      },
+      "description": {
+        "expression": "UsesResponsiveImages.str_(UsesResponsiveImages.UIStrings.description)"
+      },
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.METRIC_SAVINGS"
+      },
+      "supportedModes": [
+        "snapshot"
+      ],
+      "guidanceLevel": 2,
+      "requiredArtifacts": [
+        "ImageElements",
+        "ViewportDimensions"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {
+      "IGNORE_THRESHOLD_IN_PIXELS": 1365
+    },
+    "scoreExpressions": [
+      {
+        "line": 99,
+        "expression": "score"
+      }
+    ],
+    "conditions": [
+      {
+        "line": 63,
+        "condition": "image.isCss"
+      },
+      {
+        "line": 65,
+        "condition": "!image.naturalDimensions"
+      },
+      {
+        "line": 75,
+        "condition": "actualPixels <= usedPixels"
+      },
+      {
+        "line": 76,
+        "condition": "actualPixels - usedPixels > IGNORE_THRESHOLD_IN_PIXELS"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "work-during-interaction",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/work-during-interaction.js",
+    "metadata": {
+      "id": "work-during-interaction",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "failureTitle": {
+        "expression": "str_(UIStrings.failureTitle)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.METRIC_SAVINGS"
+      },
+      "supportedModes": [
+        "timespan"
+      ],
+      "guidanceLevel": 1,
+      "requiredArtifacts": [
+        "traces",
+        "devtoolsLogs",
+        "TraceElements"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {
+      "TASK_THRESHOLD": 1
+    },
+    "scoreExpressions": [
+      {
+        "line": 228,
+        "expression": "null"
+      },
+      {
+        "line": 240,
+        "expression": "null"
+      },
+      {
+        "line": 272,
+        "expression": "passed ? 1 : 0"
+      }
+    ],
+    "conditions": [
+      {
+        "line": 101,
+        "condition": "task.parent"
+      },
+      {
+        "line": 207,
+        "condition": "!responsivenessElement"
+      },
+      {
+        "line": 226,
+        "condition": "settings.throttlingMethod === 'simulate'"
+      },
+      {
+        "line": 238,
+        "condition": "interactionEvent === null"
+      },
+      {
+        "line": 249,
+        "condition": "traceElementItem"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "bf-cache",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/bf-cache.js",
+    "metadata": {
+      "id": "bf-cache",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "failureTitle": {
+        "expression": "str_(UIStrings.failureTitle)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "supportedModes": [
+        "navigation",
+        "timespan"
+      ],
+      "guidanceLevel": 4,
+      "requiredArtifacts": [
+        "BFCacheFailures",
+        "HostProduct"
+      ],
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.BINARY"
+      }
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [
+      {
+        "line": 77,
+        "expression": "null"
+      },
+      {
+        "line": 84,
+        "expression": "1"
+      },
+      {
+        "line": 128,
+        "expression": "results.length ? 0 : 1"
+      }
+    ],
+    "conditions": [
+      {
+        "line": 75,
+        "condition": "/HeadlessChrome/.test(artifacts.HostProduct)"
+      },
+      {
+        "line": 84,
+        "condition": "!failures.length"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "network-requests",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/network-requests.js",
+    "metadata": {
+      "id": "network-requests",
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.INFORMATIVE"
+      },
+      "title": "Network Requests",
+      "description": "Lists the network requests that were made during page load.",
+      "requiredArtifacts": [
+        "devtoolsLogs",
+        "URL",
+        "GatherContext"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [
+      {
+        "line": 130,
+        "expression": "1"
+      }
+    ],
+    "conditions": [
+      {
+        "line": 47,
+        "condition": "artifacts.GatherContext.gatherMode === 'navigation'"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "network-rtt",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/network-rtt.js",
+    "metadata": {
+      "id": "network-rtt",
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.INFORMATIVE"
+      },
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "requiredArtifacts": [
+        "devtoolsLogs"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [
+      {
+        "line": 47,
+        "expression": "1"
+      },
+      {
+        "line": 79,
+        "expression": "1"
+      }
+    ],
+    "conditions": [
+      {
+        "line": 45,
+        "condition": "!records.length"
+      },
+      {
+        "line": 61,
+        "condition": "!origin.startsWith('http')"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "network-server-latency",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/network-server-latency.js",
+    "metadata": {
+      "id": "network-server-latency",
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.INFORMATIVE"
+      },
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "requiredArtifacts": [
+        "devtoolsLogs"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [
+      {
+        "line": 47,
+        "expression": "1"
+      },
+      {
+        "line": 79,
+        "expression": "Math.max(1 - (maxLatency / 500), 0)"
+      }
+    ],
+    "conditions": [
+      {
+        "line": 45,
+        "condition": "!records.length"
+      },
+      {
+        "line": 60,
+        "condition": "!origin.startsWith('http')"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "main-thread-tasks",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/main-thread-tasks.js",
+    "metadata": {
+      "id": "main-thread-tasks",
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.INFORMATIVE"
+      },
+      "title": "Tasks",
+      "description": "Lists the toplevel main thread tasks that executed during page load.",
+      "requiredArtifacts": [
+        "traces"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [
+      {
+        "line": 52,
+        "expression": "1"
+      }
+    ],
+    "conditions": [],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "diagnostics",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/diagnostics.js",
+    "metadata": {
+      "id": "diagnostics",
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.INFORMATIVE"
+      },
+      "title": "Diagnostics",
+      "description": "Collection of useful page vitals.",
+      "supportedModes": [
+        "navigation"
+      ],
+      "requiredArtifacts": [
+        "URL",
+        "traces",
+        "devtoolsLogs"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [
+      {
+        "line": 69,
+        "expression": "1"
+      }
+    ],
+    "conditions": [],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "metrics",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/metrics.js",
+    "metadata": {
+      "id": "metrics",
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.INFORMATIVE"
+      },
+      "title": "Metrics",
+      "description": "Collects all available metrics.",
+      "supportedModes": [
+        "navigation"
+      ],
+      "requiredArtifacts": [
+        "traces",
+        "devtoolsLogs",
+        "GatherContext",
+        "URL"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [
+      {
+        "line": 63,
+        "expression": "1"
+      }
+    ],
+    "conditions": [
+      {
+        "line": 50,
+        "condition": "typeof value === 'number' && !DECIMAL_METRIC_KEYS.has(key)"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "screenshot-thumbnails",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/screenshot-thumbnails.js",
+    "metadata": {
+      "id": "screenshot-thumbnails",
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.INFORMATIVE"
+      },
+      "title": "Screenshot Thumbnails",
+      "description": "This is what the load of your site looked like.",
+      "requiredArtifacts": [
+        "traces",
+        "GatherContext"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [
+      {
+        "line": 133,
+        "expression": "1"
+      },
+      {
+        "line": 160,
+        "expression": "1"
+      }
+    ],
+    "conditions": [
+      {
+        "line": 91,
+        "condition": "!analyzedFrames.length || !Number.isFinite(timelineEnd)"
+      },
+      {
+        "line": 101,
+        "condition": "i === numberOfThumbnails"
+      },
+      {
+        "line": 105,
+        "condition": "frame.getTimeStamp() <= targetTimestamp"
+      },
+      {
+        "line": 113,
+        "condition": "cachedThumbnail"
+      },
+      {
+        "line": 115,
+        "condition": "thumbnailWidth !== null"
+      },
+      {
+        "line": 159,
+        "condition": "noFramesErrors.has(err.code) && artifacts.GatherContext.gatherMode === 'timespan'"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "final-screenshot",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/final-screenshot.js",
+    "metadata": {
+      "id": "final-screenshot",
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.INFORMATIVE"
+      },
+      "title": "Final Screenshot",
+      "description": "The last screenshot captured of the pageload.",
+      "requiredArtifacts": [
+        "traces",
+        "GatherContext"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [
+      {
+        "line": 40,
+        "expression": "1"
+      },
+      {
+        "line": 47,
+        "expression": "1"
+      }
+    ],
+    "conditions": [
+      {
+        "line": 38,
+        "condition": "!finalScreenshot"
+      },
+      {
+        "line": 40,
+        "condition": "artifacts.GatherContext.gatherMode === 'timespan'"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "script-treemap-data",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/script-treemap-data.js",
+    "metadata": {
+      "id": "script-treemap-data",
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.INFORMATIVE"
+      },
+      "title": "Script Treemap Data",
+      "description": "Used for treemap app",
+      "requiredArtifacts": [
+        "traces",
+        "devtoolsLogs",
+        "SourceMaps",
+        "Scripts",
+        "JsUsage",
+        "URL"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [
+      {
+        "line": 281,
+        "expression": "1"
+      }
+    ],
+    "conditions": [
+      {
+        "line": 75,
+        "condition": "data.unusedBytes"
+      },
+      {
+        "line": 82,
+        "condition": "sourcePathSegment.length === 0"
+      },
+      {
+        "line": 87,
+        "condition": "!child"
+      },
+      {
+        "line": 96,
+        "condition": "data.unusedBytes"
+      },
+      {
+        "line": 99,
+        "condition": "isLeaf && data.duplicatedNormalizedModuleName !== undefined"
+      },
+      {
+        "line": 121,
+        "condition": "node.children"
+      },
+      {
+        "line": 132,
+        "condition": "!sourceRootNode.name"
+      },
+      {
+        "line": 174,
+        "condition": "script.scriptLanguage !== 'JavaScript'"
+      },
+      {
+        "line": 187,
+        "condition": "bundle && !('errorMessage' in bundle.sizes)"
+      },
+      {
+        "line": 198,
+        "condition": "unusedJavascriptSummary?.sourcesWastedBytes"
+      },
+      {
+        "line": 206,
+        "condition": "bundle.rawMap.sourceRoot && source.startsWith(bundle.rawMap.sourceRoot)"
+      },
+      {
+        "line": 211,
+        "condition": "duplicationByPath.has(key)"
+      },
+      {
+        "line": 216,
+        "condition": "bundle.sizes.unmappedBytes"
+      },
+      {
+        "line": 221,
+        "condition": "unusedJavascriptSummary?.sourcesWastedBytes"
+      },
+      {
+        "line": 239,
+        "condition": "isInline(script)"
+      },
+      {
+        "line": 241,
+        "condition": "!htmlNode"
+      },
+      {
+        "line": 252,
+        "condition": "node.unusedBytes"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "resource-summary",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/resource-summary.js",
+    "metadata": {
+      "id": "resource-summary",
+      "title": "Resources Summary",
+      "description": "Aggregates all network requests and groups them by type",
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.INFORMATIVE"
+      },
+      "requiredArtifacts": [
+        "devtoolsLogs",
+        "URL"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [
+      {
+        "line": 82,
+        "expression": "null"
+      }
+    ],
+    "conditions": [],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "first-meaningful-paint",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.0.0/core/audits/metrics/first-meaningful-paint.js",
+    "metadata": {
+      "id": "first-meaningful-paint",
+      "title": {
+        "expression": "str_(i18n.UIStrings.firstMeaningfulPaintMetric)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "scoreDisplayMode": {
+        "expression": "Audit.SCORING_MODES.NUMERIC"
+      },
+      "supportedModes": [
+        "navigation"
+      ],
+      "requiredArtifacts": [
+        "traces",
+        "devtoolsLogs",
+        "GatherContext",
+        "URL"
+      ]
+    },
+    "defaultOptions": [
+      {
+        "line": 38,
+        "value": {
+          "mobile": {
+            "scoring": {
+              "p10": 2336,
+              "median": 4000
+            }
+          },
+          "desktop": {
+            "scoring": {
+              "p10": 934,
+              "median": 1600
+            }
+          }
+        }
+      }
+    ],
+    "constants": {},
+    "scoreExpressions": [
+      {
+        "line": 77,
+        "expression": "Audit.computeLogNormalScore(\n        options.scoring,\n        metricResult.timing\n      )"
+      }
+    ],
+    "conditions": [],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "cache-insight",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.8.2/core/audits/insights/cache-insight.js",
+    "metadata": {
+      "id": "cache-insight",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "failureTitle": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "guidanceLevel": 3,
+      "requiredArtifacts": [
+        "Trace",
+        "SourceMaps"
+      ],
+      "replacesAudits": [
+        "uses-long-cache-ttl"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [],
+    "conditions": [],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "cls-culprits-insight",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.8.2/core/audits/insights/cls-culprits-insight.js",
+    "metadata": {
+      "id": "cls-culprits-insight",
+      "title": {
+        "expression": "insightStr_(InsightUIStrings.title)"
+      },
+      "failureTitle": {
+        "expression": "insightStr_(InsightUIStrings.title)"
+      },
+      "description": {
+        "expression": "insightStr_(InsightUIStrings.description)"
+      },
+      "guidanceLevel": 3,
+      "requiredArtifacts": [
+        "Trace",
+        "TraceElements",
+        "SourceMaps"
+      ],
+      "replacesAudits": [
+        "layout-shifts",
+        "non-composited-animations",
+        "unsized-images"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {
+      "MAX_LAYOUT_SHIFTS_PER_CLUSTER": 5
+    },
+    "scoreExpressions": [
+      {
+        "line": 119,
+        "expression": "event.args.data?.weighted_score_delta"
+      },
+      {
+        "line": 125,
+        "expression": "cluster.clusterCumulativeScore"
+      }
+    ],
+    "conditions": [
+      {
+        "line": 53,
+        "condition": "!culprits"
+      },
+      {
+        "line": 79,
+        "condition": "subItems.length"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "document-latency-insight",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.8.2/core/audits/insights/document-latency-insight.js",
+    "metadata": {
+      "id": "document-latency-insight",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "failureTitle": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "guidanceLevel": 3,
+      "requiredArtifacts": [
+        "Trace",
+        "TraceElements",
+        "SourceMaps"
+      ],
+      "replacesAudits": [
+        "redirects",
+        "server-response-time",
+        "uses-text-compression"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [],
+    "conditions": [
+      {
+        "line": 39,
+        "condition": "!insight.data"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "dom-size-insight",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.8.2/core/audits/insights/dom-size-insight.js",
+    "metadata": {
+      "id": "dom-size-insight",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "failureTitle": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "guidanceLevel": 3,
+      "requiredArtifacts": [
+        "Trace",
+        "TraceElements",
+        "SourceMaps"
+      ],
+      "replacesAudits": [
+        "dom-size"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [],
+    "conditions": [
+      {
+        "line": 39,
+        "condition": "!insight.maxDOMStats?.args.data.maxChildren || !insight.maxDOMStats?.args.data.maxDepth"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "duplicated-javascript-insight",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.8.2/core/audits/insights/duplicated-javascript-insight.js",
+    "metadata": {
+      "id": "duplicated-javascript-insight",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "failureTitle": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "guidanceLevel": 2,
+      "requiredArtifacts": [
+        "Trace",
+        "SourceMaps"
+      ],
+      "replacesAudits": [
+        "duplicated-javascript"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [],
+    "conditions": [],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "font-display-insight",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.8.2/core/audits/insights/font-display-insight.js",
+    "metadata": {
+      "id": "font-display-insight",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "failureTitle": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "guidanceLevel": 3,
+      "requiredArtifacts": [
+        "Trace",
+        "TraceElements",
+        "SourceMaps"
+      ],
+      "replacesAudits": [
+        "font-display"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [],
+    "conditions": [],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "forced-reflow-insight",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.8.2/core/audits/insights/forced-reflow-insight.js",
+    "metadata": {
+      "id": "forced-reflow-insight",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "failureTitle": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "guidanceLevel": 3,
+      "requiredArtifacts": [
+        "Trace",
+        "TraceElements",
+        "SourceMaps"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [],
+    "conditions": [
+      {
+        "line": 96,
+        "condition": "insight.topLevelFunctionCallData"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "image-delivery-insight",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.8.2/core/audits/insights/image-delivery-insight.js",
+    "metadata": {
+      "id": "image-delivery-insight",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "failureTitle": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "guidanceLevel": 3,
+      "requiredArtifacts": [
+        "Trace",
+        "TraceElements",
+        "SourceMaps"
+      ],
+      "replacesAudits": [
+        "modern-image-formats",
+        "uses-optimized-images",
+        "efficient-animated-content",
+        "uses-responsive-images"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [],
+    "conditions": [],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "inp-breakdown-insight",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.8.2/core/audits/insights/inp-breakdown-insight.js",
+    "metadata": {
+      "id": "inp-breakdown-insight",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "failureTitle": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "guidanceLevel": 3,
+      "requiredArtifacts": [
+        "Trace",
+        "TraceElements",
+        "SourceMaps"
+      ],
+      "replacesAudits": [
+        "work-during-interaction"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [],
+    "conditions": [
+      {
+        "line": 40,
+        "condition": "!event"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "lcp-breakdown-insight",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.8.2/core/audits/insights/lcp-breakdown-insight.js",
+    "metadata": {
+      "id": "lcp-breakdown-insight",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "failureTitle": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "guidanceLevel": 3,
+      "requiredArtifacts": [
+        "Trace",
+        "TraceElements",
+        "SourceMaps"
+      ],
+      "replacesAudits": [
+        "largest-contentful-paint-element"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [],
+    "conditions": [
+      {
+        "line": 55,
+        "condition": "loadDelay === undefined"
+      },
+      {
+        "line": 58,
+        "condition": "loadDuration === undefined"
+      },
+      {
+        "line": 72,
+        "condition": "!insight.subparts"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "lcp-discovery-insight",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.8.2/core/audits/insights/lcp-discovery-insight.js",
+    "metadata": {
+      "id": "lcp-discovery-insight",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "failureTitle": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "guidanceLevel": 3,
+      "requiredArtifacts": [
+        "Trace",
+        "TraceElements",
+        "SourceMaps"
+      ],
+      "replacesAudits": [
+        "prioritize-lcp-image",
+        "lcp-lazy-loaded"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [],
+    "conditions": [
+      {
+        "line": 39,
+        "condition": "!insight.checklist"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "legacy-javascript-insight",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.8.2/core/audits/insights/legacy-javascript-insight.js",
+    "metadata": {
+      "id": "legacy-javascript-insight",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "failureTitle": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "guidanceLevel": 2,
+      "requiredArtifacts": [
+        "Trace",
+        "Scripts",
+        "SourceMaps"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [],
+    "conditions": [],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "modern-http-insight",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.8.2/core/audits/insights/modern-http-insight.js",
+    "metadata": {
+      "id": "modern-http-insight",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "failureTitle": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "guidanceLevel": 3,
+      "requiredArtifacts": [
+        "Trace",
+        "SourceMaps"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [],
+    "conditions": [],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "network-dependency-tree-insight",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.8.2/core/audits/insights/network-dependency-tree-insight.js",
+    "metadata": {
+      "id": "network-dependency-tree-insight",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "failureTitle": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "guidanceLevel": 1,
+      "requiredArtifacts": [
+        "Trace",
+        "SourceMaps",
+        "TraceElements"
+      ],
+      "replacesAudits": [
+        "critical-request-chains",
+        "uses-rel-preconnect"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [],
+    "conditions": [
+      {
+        "line": 75,
+        "condition": "insight.preconnectedOrigins.length"
+      },
+      {
+        "line": 87,
+        "condition": "c.unused"
+      },
+      {
+        "line": 90,
+        "condition": "c.crossorigin"
+      },
+      {
+        "line": 119,
+        "condition": "insight.preconnectCandidates.length"
+      },
+      {
+        "line": 143,
+        "condition": "insight.preconnectedOrigins.length > TOO_MANY_PRECONNECTS_THRESHOLD"
+      }
+    ],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "render-blocking-insight",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.8.2/core/audits/insights/render-blocking-insight.js",
+    "metadata": {
+      "id": "render-blocking-insight",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "failureTitle": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "guidanceLevel": 3,
+      "requiredArtifacts": [
+        "Trace",
+        "TraceElements",
+        "SourceMaps"
+      ],
+      "replacesAudits": [
+        "render-blocking-resources"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [],
+    "conditions": [],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "third-parties-insight",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.8.2/core/audits/insights/third-parties-insight.js",
+    "metadata": {
+      "id": "third-parties-insight",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "failureTitle": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "guidanceLevel": 3,
+      "requiredArtifacts": [
+        "Trace",
+        "TraceElements",
+        "SourceMaps"
+      ],
+      "replacesAudits": [
+        "third-party-summary"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [],
+    "conditions": [],
+    "GT_structure_weight": null
+  },
+  {
+    "id": "viewport-insight",
+    "source": "https://raw.githubusercontent.com/GoogleChrome/lighthouse/v12.8.2/core/audits/insights/viewport-insight.js",
+    "metadata": {
+      "id": "viewport-insight",
+      "title": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "failureTitle": {
+        "expression": "str_(UIStrings.title)"
+      },
+      "description": {
+        "expression": "str_(UIStrings.description)"
+      },
+      "guidanceLevel": 3,
+      "requiredArtifacts": [
+        "Trace",
+        "TraceElements",
+        "SourceMaps"
+      ],
+      "replacesAudits": [
+        "viewport"
+      ]
+    },
+    "defaultOptions": [],
+    "constants": {},
+    "scoreExpressions": [],
+    "conditions": [],
+    "GT_structure_weight": null
+  }
+]

@@ -60,6 +60,7 @@
     const SLIDE_MS = 6000;
     let idx = 0;
     let timer;
+    let progressAnimation;
     let animating = false;
 
     slides.forEach((slide, i) => {
@@ -83,17 +84,17 @@
       dots[idx]?.classList.add('is-active');
       prev.classList.remove('is-active');
       next.classList.add('is-active');
+      resetProgress();
       animating = false;
     }
 
     function resetProgress() {
       if (!progressBar) return;
-      progressBar.style.transition = 'none';
-      progressBar.style.width = '0%';
-      requestAnimationFrame(() => {
-        progressBar.style.transition = `width ${SLIDE_MS}ms linear`;
-        progressBar.style.width = '100%';
-      });
+      progressAnimation?.cancel();
+      progressAnimation = progressBar.animate(
+        [{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }],
+        { duration: SLIDE_MS, easing: 'linear', fill: 'forwards' }
+      );
     }
 
     function autoplay() {

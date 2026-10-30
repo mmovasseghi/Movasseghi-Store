@@ -1,0 +1,1590 @@
+[
+  {
+    "file": "package/models/trace/insights/CLSCulprits.js",
+    "version": "@paulirish/trace_engine@0.0.59",
+    "conditions": [
+      {
+        "line": 194,
+        "condition": "!failureMask"
+      },
+      {
+        "line": 216,
+        "condition": "!failures"
+      },
+      {
+        "line": 222,
+        "condition": "!nextPrePaint"
+      },
+      {
+        "line": 226,
+        "condition": "!isInRootCauseWindow(animation, nextPrePaint)"
+      },
+      {
+        "line": 231,
+        "condition": "!shifts"
+      },
+      {
+        "line": 236,
+        "condition": "!rootCausesForShift"
+      },
+      {
+        "line": 254,
+        "condition": "firstShiftIndex === null"
+      },
+      {
+        "line": 260,
+        "condition": "shift.ts >= prePaintEvent.ts && shift.ts <= prePaintEvent.ts + prePaintEvent.dur"
+      },
+      {
+        "line": 264,
+        "condition": "shift.ts > prePaintEvent.ts + prePaintEvent.dur"
+      },
+      {
+        "line": 278,
+        "condition": "index === null"
+      },
+      {
+        "line": 291,
+        "condition": "!nextPrePaint"
+      },
+      {
+        "line": 296,
+        "condition": "!shifts"
+      },
+      {
+        "line": 301,
+        "condition": "!rootCausesForShift"
+      },
+      {
+        "line": 310,
+        "condition": "domEvent?.args.frame"
+      },
+      {
+        "line": 314,
+        "condition": "processes && processes.size > 0"
+      },
+      {
+        "line": 334,
+        "condition": "!paintImage"
+      },
+      {
+        "line": 339,
+        "condition": "!matchingNode"
+      },
+      {
+        "line": 345,
+        "condition": "!rootCausesForShift"
+      },
+      {
+        "line": 368,
+        "condition": "!nextPrePaint"
+      },
+      {
+        "line": 372,
+        "condition": "!isInRootCauseWindow(req, nextPrePaint)"
+      },
+      {
+        "line": 378,
+        "condition": "!shifts"
+      },
+      {
+        "line": 384,
+        "condition": "!rootCausesForShift"
+      },
+      {
+        "line": 401,
+        "condition": "!culprits"
+      },
+      {
+        "line": 426,
+        "condition": "causes.length >= MAX_TOP_CULPRITS"
+      },
+      {
+        "line": 434,
+        "condition": "partialModel.worstCluster"
+      },
+      {
+        "line": 436,
+        "condition": "classification === Handlers.ModelHandlers.PageLoadMetrics.ScoreClassification.GOOD"
+      },
+      {
+        "line": 479,
+        "condition": "worstCluster"
+      },
+      {
+        "line": 498,
+        "condition": "!worstCluster"
+      }
+    ],
+    "states": [
+      {
+        "line": 449,
+        "expression": "state"
+      }
+    ],
+    "constants": [
+      {
+        "name": "MAX_TOP_CULPRITS",
+        "line": 396,
+        "expression": "3"
+      }
+    ]
+  },
+  {
+    "file": "package/models/trace/insights/Cache.js",
+    "version": "@paulirish/trace_engine@0.0.59",
+    "conditions": [
+      {
+        "line": 59,
+        "condition": "Helpers.Network.NON_NETWORK_SCHEMES.includes(request.args.data.protocol)"
+      },
+      {
+        "line": 69,
+        "condition": "cacheControl?.['max-age'] !== undefined"
+      },
+      {
+        "line": 73,
+        "condition": "expiresHeaders"
+      },
+      {
+        "line": 76,
+        "condition": "!expires"
+      },
+      {
+        "line": 100,
+        "condition": "upperDecileIndex === RESOURCE_AGE_IN_HOURS_DECILES.length - 1"
+      },
+      {
+        "line": 103,
+        "condition": "upperDecileIndex === 0"
+      },
+      {
+        "line": 118,
+        "condition": "headers.get(name)"
+      },
+      {
+        "line": 135,
+        "condition": "!cacheControl && pragma?.includes('no-cache')"
+      },
+      {
+        "line": 139,
+        "condition": "parsedCacheControl &&\n        (parsedCacheControl['must-revalidate'] || parsedCacheControl['no-cache'] || parsedCacheControl['no-store'] ||\n            parsedCacheControl['private'])"
+      },
+      {
+        "line": 153,
+        "condition": "!req.args.data.responseHeaders || !isCacheable(req)"
+      },
+      {
+        "line": 160,
+        "condition": "cachingDisabled(headers, parsedDirectives)"
+      },
+      {
+        "line": 165,
+        "condition": "ttl !== null && (!Number.isFinite(ttl) || ttl <= 0)"
+      },
+      {
+        "line": 171,
+        "condition": "ttlDays >= 30"
+      },
+      {
+        "line": 176,
+        "condition": "cacheHitProbability > IGNORE_THRESHOLD_IN_PERCENT"
+      }
+    ],
+    "states": [
+      {
+        "line": 47,
+        "expression": "partialModel.requests.length > 0 ? 'fail' : 'pass'"
+      }
+    ],
+    "constants": [
+      {
+        "name": "IGNORE_THRESHOLD_IN_PERCENT",
+        "line": 39,
+        "expression": "0.925"
+      }
+    ]
+  },
+  {
+    "file": "package/models/trace/insights/Common.js",
+    "version": "@paulirish/trace_engine@0.0.59",
+    "conditions": [
+      {
+        "line": 11,
+        "condition": "insight instanceof Error"
+      },
+      {
+        "line": 19,
+        "condition": "!insight || !insight.lcpMs || !insight.lcpEvent"
+      },
+      {
+        "line": 27,
+        "condition": "!insight?.longestInteractionEvent?.dur"
+      },
+      {
+        "line": 35,
+        "condition": "!insight"
+      },
+      {
+        "line": 43,
+        "condition": "cluster.clusterCumulativeScore > maxScore"
+      },
+      {
+        "line": 68,
+        "condition": "scope"
+      },
+      {
+        "line": 78,
+        "condition": "typeof value === 'string'"
+      },
+      {
+        "line": 81,
+        "condition": "typeof value === 'number' && Number.isFinite(value)"
+      },
+      {
+        "line": 89,
+        "condition": "result"
+      },
+      {
+        "line": 97,
+        "condition": "!cruxFieldData"
+      },
+      {
+        "line": 101,
+        "condition": "!pageResult"
+      },
+      {
+        "line": 124,
+        "condition": "!cruxFieldData"
+      },
+      {
+        "line": 128,
+        "condition": "!fieldMetrics"
+      },
+      {
+        "line": 141,
+        "condition": "!invertedSum"
+      },
+      {
+        "line": 156,
+        "condition": "node.type !== 'network'"
+      },
+      {
+        "line": 160,
+        "condition": "!wastedBytes"
+      },
+      {
+        "line": 170,
+        "condition": "node.type !== 'network'"
+      },
+      {
+        "line": 174,
+        "condition": "originalTransferSize === undefined"
+      },
+      {
+        "line": 187,
+        "condition": "!context.navigation || !context.lantern"
+      },
+      {
+        "line": 190,
+        "condition": "!wastedBytesByRequestId.size"
+      },
+      {
+        "line": 205,
+        "condition": "!request.args.data.responseHeaders"
+      },
+      {
+        "line": 218,
+        "condition": "!request.args.data.responseHeaders || request.args.data.failed"
+      },
+      {
+        "line": 222,
+        "condition": "request.args.data.statusCode === 304"
+      },
+      {
+        "line": 231,
+        "condition": "ratio < 0.01"
+      },
+      {
+        "line": 249,
+        "condition": "!request || isRequestServedFromBrowserCache(request)"
+      },
+      {
+        "line": 270,
+        "condition": "!isRequestCompressed(request)"
+      },
+      {
+        "line": 282,
+        "condition": "request.args.data.resourceType === resourceType"
+      },
+      {
+        "line": 297,
+        "condition": "!script.request"
+      },
+      {
+        "line": 304,
+        "condition": "contentLength === 0 || compressedSize === 0"
+      },
+      {
+        "line": 311,
+        "condition": "docRequest.args.data.protocol === 'file'"
+      },
+      {
+        "line": 316,
+        "condition": "!timing"
+      }
+    ],
+    "states": [],
+    "constants": [
+      {
+        "name": "GRAPH_SAVINGS_PRECISION",
+        "line": 8,
+        "expression": "50"
+      }
+    ]
+  },
+  {
+    "file": "package/models/trace/insights/DOMSize.js",
+    "version": "@paulirish/trace_engine@0.0.59",
+    "conditions": [
+      {
+        "line": 89,
+        "condition": "thread.type !== Handlers.Threads.ThreadType.MAIN_THREAD"
+      },
+      {
+        "line": 92,
+        "condition": "mainTid === undefined"
+      },
+      {
+        "line": 95,
+        "condition": "!thread.processIsOnMainFrame"
+      },
+      {
+        "line": 99,
+        "condition": "thread.tid !== mainTid"
+      },
+      {
+        "line": 103,
+        "condition": "!rendererThread"
+      },
+      {
+        "line": 107,
+        "condition": "!entries.length"
+      },
+      {
+        "line": 113,
+        "condition": "!Helpers.Timing.boundsIncludeTimeRange({ timeRange, bounds: context.bounds })"
+      },
+      {
+        "line": 117,
+        "condition": "event.dur < DOM_SIZE_DURATION_THRESHOLD || !isWithinContext(event)"
+      },
+      {
+        "line": 121,
+        "condition": "dirtyObjects > LAYOUT_OBJECTS_THRESHOLD"
+      },
+      {
+        "line": 126,
+        "condition": "event.dur < DOM_SIZE_DURATION_THRESHOLD || !isWithinContext(event)"
+      },
+      {
+        "line": 130,
+        "condition": "elementCount > STYLE_RECALC_ELEMENTS_THRESHOLD"
+      },
+      {
+        "line": 156,
+        "condition": "navigationPid && domStats.pid !== navigationPid"
+      },
+      {
+        "line": 159,
+        "condition": "!maxDOMStats || domStats.args.data.totalElements > maxDOMStats.args.data.totalElements"
+      }
+    ],
+    "states": [
+      {
+        "line": 77,
+        "expression": "relatedEvents.length > 0 ? 'informative' : 'pass'"
+      }
+    ],
+    "constants": [
+      {
+        "name": "DOM_SIZE_DURATION_THRESHOLD",
+        "line": 63,
+        "expression": "Helpers.Timing.milliToMicro(Types.Timing.Milli(40))"
+      },
+      {
+        "name": "LAYOUT_OBJECTS_THRESHOLD",
+        "line": 67,
+        "expression": "100"
+      },
+      {
+        "name": "STYLE_RECALC_ELEMENTS_THRESHOLD",
+        "line": 68,
+        "expression": "300"
+      }
+    ]
+  },
+  {
+    "file": "package/models/trace/insights/DocumentLatency.js",
+    "version": "@paulirish/trace_engine@0.0.59",
+    "conditions": [
+      {
+        "line": 76,
+        "condition": "lanternRequest?.serverResponseTime !== undefined"
+      },
+      {
+        "line": 80,
+        "condition": "!timing"
+      },
+      {
+        "line": 88,
+        "condition": "isCompressed"
+      },
+      {
+        "line": 142,
+        "condition": "partialModel.data"
+      },
+      {
+        "line": 157,
+        "condition": "!context.navigation"
+      },
+      {
+        "line": 161,
+        "condition": "!documentRequest"
+      },
+      {
+        "line": 165,
+        "condition": "serverResponseTime === null"
+      },
+      {
+        "line": 170,
+        "condition": "serverResponseTime > TOO_SLOW_THRESHOLD_MS"
+      },
+      {
+        "line": 216,
+        "condition": "!model.data?.documentRequest"
+      },
+      {
+        "line": 223,
+        "condition": "model.data.redirectDuration"
+      },
+      {
+        "line": 228,
+        "condition": "!model.data.checklist.serverResponseIsFast.value"
+      },
+      {
+        "line": 236,
+        "condition": "model.data.uncompressedResponseBytes"
+      },
+      {
+        "line": 241,
+        "condition": "sections.length"
+      }
+    ],
+    "states": [
+      {
+        "line": 152,
+        "expression": "hasFailure ? 'fail' : 'pass'"
+      }
+    ],
+    "constants": [
+      {
+        "name": "TOO_SLOW_THRESHOLD_MS",
+        "line": 63,
+        "expression": "600"
+      },
+      {
+        "name": "IGNORE_THRESHOLD_IN_BYTES",
+        "line": 66,
+        "expression": "1400"
+      }
+    ]
+  },
+  {
+    "file": "package/models/trace/insights/DuplicatedJavaScript.js",
+    "version": "@paulirish/trace_engine@0.0.59",
+    "conditions": [
+      {
+        "line": 43,
+        "condition": "script.frame !== context.frameId"
+      },
+      {
+        "line": 46,
+        "condition": "script.url?.startsWith('chrome-extension://')"
+      },
+      {
+        "line": 53,
+        "condition": "script.request"
+      },
+      {
+        "line": 63,
+        "condition": "!sourceData.script.request"
+      }
+    ],
+    "states": [
+      {
+        "line": 33,
+        "expression": "Boolean(partialModel.duplication.values().next().value) ? 'fail' : 'pass'"
+      }
+    ],
+    "constants": []
+  },
+  {
+    "file": "package/models/trace/insights/FontDisplay.js",
+    "version": "@paulirish/trace_engine@0.0.59",
+    "conditions": [
+      {
+        "line": 38,
+        "condition": "!Helpers.Timing.eventIsInBounds(event, context.bounds)"
+      },
+      {
+        "line": 43,
+        "condition": "!request"
+      },
+      {
+        "line": 46,
+        "condition": "!/^(block|fallback|auto)$/.test(remoteFont.display)"
+      },
+      {
+        "line": 52,
+        "condition": "wastedTime === 0"
+      }
+    ],
+    "states": [
+      {
+        "line": 30,
+        "expression": "partialModel.fonts.find(font => font.wastedTime > 0) ? 'fail' : 'pass'"
+      }
+    ],
+    "constants": []
+  },
+  {
+    "file": "package/models/trace/insights/ForcedReflow.js",
+    "version": "@paulirish/trace_engine@0.0.59",
+    "conditions": [
+      {
+        "line": 48,
+        "condition": "forcedReflowEvents.length === 0"
+      },
+      {
+        "line": 54,
+        "condition": "!traceNode"
+      },
+      {
+        "line": 62,
+        "condition": "Types.Events.isProfileCall(eventData)"
+      },
+      {
+        "line": 68,
+        "condition": "Types.Events.isFunctionCall(eventData) && eventData.args.data &&\n                    Types.Events.objectIsCallFrame(eventData.args.data)"
+      },
+      {
+        "line": 77,
+        "condition": "!topLevelFunctionCall || !topLevelFunctionCallEvent"
+      },
+      {
+        "line": 91,
+        "condition": "!topTimeConsumingData || data.totalReflowTime > topTimeConsumingData.totalReflowTime"
+      },
+      {
+        "line": 116,
+        "condition": "frameId !== context.frameId"
+      },
+      {
+        "line": 142,
+        "condition": "!model.topLevelFunctionCallData"
+      }
+    ],
+    "states": [
+      {
+        "line": 104,
+        "expression": "partialModel.aggregatedBottomUpData.length !== 0 ? 'fail' : 'pass'"
+      }
+    ],
+    "constants": []
+  },
+  {
+    "file": "package/models/trace/insights/INPBreakdown.js",
+    "version": "@paulirish/trace_engine@0.0.59",
+    "conditions": [
+      {
+        "line": 62,
+        "condition": "!interactionEvents.length"
+      },
+      {
+        "line": 70,
+        "condition": "!longest || event.dur > longest.dur"
+      },
+      {
+        "line": 99,
+        "condition": "subpartIndex !== -1"
+      },
+      {
+        "line": 113,
+        "condition": "!event"
+      }
+    ],
+    "states": [
+      {
+        "line": 54,
+        "expression": "partialModel.longestInteractionEvent ? 'informative' : 'pass'"
+      }
+    ],
+    "constants": []
+  },
+  {
+    "file": "package/models/trace/insights/ImageDelivery.js",
+    "version": "@paulirish/trace_engine@0.0.59",
+    "conditions": [
+      {
+        "line": 151,
+        "condition": "request.args.data.resourceType !== 'Image'"
+      },
+      {
+        "line": 154,
+        "condition": "request.args.data.mimeType === 'image/svg+xml'"
+      },
+      {
+        "line": 162,
+        "condition": "!imagePaints?.length"
+      },
+      {
+        "line": 179,
+        "condition": "request.args.data.mimeType === 'image/gif'"
+      },
+      {
+        "line": 180,
+        "condition": "imageBytes > GIF_SIZE_THRESHOLD"
+      },
+      {
+        "line": 186,
+        "condition": "bytesPerPixel > TARGET_BYTES_PER_PIXEL_AVIF"
+      },
+      {
+        "line": 189,
+        "condition": "request.args.data.mimeType !== 'image/webp' && request.args.data.mimeType !== 'image/avif'"
+      },
+      {
+        "line": 204,
+        "condition": "wastedPixelRatio > 0 && !largestImagePaint.args.data.isCSS"
+      },
+      {
+        "line": 207,
+        "condition": "!hadBreakpoints || byteSavings > BYTE_SAVINGS_THRESHOLD_RESPONSIVE_BREAKPOINTS"
+      },
+      {
+        "line": 227,
+        "condition": "optimizations.length > 0"
+      },
+      {
+        "line": 242,
+        "condition": "b.byteSavings !== a.byteSavings"
+      }
+    ],
+    "states": [
+      {
+        "line": 118,
+        "expression": "partialModel.optimizableImages.length > 0 ? 'fail' : 'pass'"
+      }
+    ],
+    "constants": [
+      {
+        "name": "TARGET_BYTES_PER_PIXEL_AVIF",
+        "line": 72,
+        "expression": "2 * 1 / 12"
+      },
+      {
+        "name": "GIF_SIZE_THRESHOLD",
+        "line": 77,
+        "expression": "100 * 1024"
+      },
+      {
+        "name": "BYTE_SAVINGS_THRESHOLD",
+        "line": 78,
+        "expression": "4096"
+      },
+      {
+        "name": "BYTE_SAVINGS_THRESHOLD_RESPONSIVE_BREAKPOINTS",
+        "line": 80,
+        "expression": "12288"
+      }
+    ]
+  },
+  {
+    "file": "package/models/trace/insights/LCPBreakdown.js",
+    "version": "@paulirish/trace_engine@0.0.59",
+    "conditions": [
+      {
+        "line": 69,
+        "condition": "firstDocByteTs === null"
+      },
+      {
+        "line": 77,
+        "condition": "!lcpRequest"
+      },
+      {
+        "line": 86,
+        "condition": "anyValuesNaN(ttfb.range, renderDelay.range)"
+      },
+      {
+        "line": 109,
+        "condition": "anyValuesNaN(ttfb.range, loadDelay.range, loadDuration.range, renderDelay.range)"
+      },
+      {
+        "line": 121,
+        "condition": "partialModel.lcpEvent"
+      },
+      {
+        "line": 124,
+        "condition": "partialModel.lcpRequest"
+      },
+      {
+        "line": 139,
+        "condition": "!context.navigation"
+      },
+      {
+        "line": 144,
+        "condition": "!frameMetrics"
+      },
+      {
+        "line": 148,
+        "condition": "!navMetrics"
+      },
+      {
+        "line": 153,
+        "condition": "!lcpEvent || !Types.Events.isLargestContentfulPaintCandidate(lcpEvent)"
+      },
+      {
+        "line": 162,
+        "condition": "!docRequest"
+      },
+      {
+        "line": 174,
+        "condition": "!model.subparts || !model.lcpTs"
+      },
+      {
+        "line": 184,
+        "condition": "model.lcpRequest"
+      }
+    ],
+    "states": [
+      {
+        "line": 133,
+        "expression": "partialModel.lcpEvent || partialModel.lcpRequest ? 'informative' : 'pass'"
+      }
+    ],
+    "constants": []
+  },
+  {
+    "file": "package/models/trace/insights/LCPDiscovery.js",
+    "version": "@paulirish/trace_engine@0.0.59",
+    "conditions": [
+      {
+        "line": 75,
+        "condition": "!context.navigation"
+      },
+      {
+        "line": 80,
+        "condition": "!frameMetrics"
+      },
+      {
+        "line": 84,
+        "condition": "!navMetrics"
+      },
+      {
+        "line": 89,
+        "condition": "!lcpEvent || !Types.Events.isLargestContentfulPaintCandidate(lcpEvent)"
+      },
+      {
+        "line": 93,
+        "condition": "!docRequest"
+      },
+      {
+        "line": 97,
+        "condition": "!lcpRequest"
+      },
+      {
+        "line": 129,
+        "condition": "!model.lcpRequest || !model.checklist"
+      },
+      {
+        "line": 138,
+        "condition": "!imageLCP"
+      },
+      {
+        "line": 147,
+        "condition": "model.earliestDiscoveryTimeTs && model.lcpRequest"
+      },
+      {
+        "line": 155,
+        "condition": "!imageResults?.discoveryDelay"
+      }
+    ],
+    "states": [
+      {
+        "line": 65,
+        "expression": "partialModel.lcpRequest && partialModel.checklist &&\n            (!partialModel.checklist.eagerlyLoaded.value || !partialModel.checklist.requestDiscoverable.value ||\n                !partialModel.checklist.priorityHinted.value) ?\n            'fail' :\n            'pass'"
+      }
+    ],
+    "constants": []
+  },
+  {
+    "file": "package/models/trace/insights/LegacyJavaScript.js",
+    "version": "@paulirish/trace_engine@0.0.59",
+    "conditions": [
+      {
+        "line": 45,
+        "condition": "script.frame !== context.frameId"
+      },
+      {
+        "line": 48,
+        "condition": "script.url?.startsWith('chrome-extension://')"
+      },
+      {
+        "line": 56,
+        "condition": "!script.content || script.content.length < BYTE_THRESHOLD"
+      },
+      {
+        "line": 60,
+        "condition": "result.estimatedByteSavings < BYTE_THRESHOLD"
+      },
+      {
+        "line": 68,
+        "condition": "script.request"
+      }
+    ],
+    "states": [
+      {
+        "line": 35,
+        "expression": "requests.length ? 'fail' : 'pass'"
+      }
+    ],
+    "constants": [
+      {
+        "name": "BYTE_THRESHOLD",
+        "line": 26,
+        "expression": "5000"
+      }
+    ]
+  },
+  {
+    "file": "package/models/trace/insights/Models.js",
+    "version": "@paulirish/trace_engine@0.0.59",
+    "conditions": [],
+    "states": [],
+    "constants": []
+  },
+  {
+    "file": "package/models/trace/insights/ModernHTTP.js",
+    "version": "@paulirish/trace_engine@0.0.59",
+    "conditions": [
+      {
+        "line": 42,
+        "condition": "!Helpers.Network.STATIC_RESOURCE_TYPES.has(request.args.data.resourceType)"
+      },
+      {
+        "line": 47,
+        "condition": "request.args.data.decodedBodyLength < 100"
+      },
+      {
+        "line": 49,
+        "condition": "entity"
+      },
+      {
+        "line": 51,
+        "condition": "firstPartyEntity?.name === entity.name"
+      },
+      {
+        "line": 55,
+        "condition": "!entity.isUnrecognized"
+      },
+      {
+        "line": 86,
+        "condition": "!isMultiplexableStaticAsset(record, entityMappings, firstPartyEntity)"
+      },
+      {
+        "line": 89,
+        "condition": "Helpers.Network.isSyntheticNetworkRequestLocalhost(record)"
+      },
+      {
+        "line": 98,
+        "condition": "seenURLs.has(request.args.data.url)"
+      },
+      {
+        "line": 103,
+        "condition": "request.args.data.fromServiceWorker"
+      },
+      {
+        "line": 108,
+        "condition": "!isOldHttp"
+      },
+      {
+        "line": 114,
+        "condition": "group.length < 6"
+      },
+      {
+        "line": 130,
+        "condition": "node.type !== 'network'"
+      },
+      {
+        "line": 133,
+        "condition": "!urlsToChange.has(node.request.url)"
+      },
+      {
+        "line": 142,
+        "condition": "node.type !== 'network'"
+      },
+      {
+        "line": 146,
+        "condition": "originalProtocol === undefined"
+      },
+      {
+        "line": 155,
+        "condition": "!context.navigation || !context.lantern"
+      }
+    ],
+    "states": [
+      {
+        "line": 173,
+        "expression": "partialModel.http1Requests.length > 0 ? 'fail' : 'pass'"
+      }
+    ],
+    "constants": []
+  },
+  {
+    "file": "package/models/trace/insights/NetworkDependencyTree.js",
+    "version": "@paulirish/trace_engine@0.0.59",
+    "conditions": [
+      {
+        "line": 114,
+        "condition": "request.args.data.requestId === context.navigationId"
+      },
+      {
+        "line": 118,
+        "condition": "request.args.data.isLinkPreload"
+      },
+      {
+        "line": 124,
+        "condition": "nonCriticalResourceTypes.has(request.args.data.resourceType) || isIframe ||\n        // Treat any missed images, primarily favicons, as non-critical resources\n        request.args.data.mimeType.startsWith('image/')"
+      },
+      {
+        "line": 132,
+        "condition": "!initiatorUrl"
+      },
+      {
+        "line": 140,
+        "condition": "node.children.length === 0"
+      },
+      {
+        "line": 146,
+        "condition": "leaf.timeFromInitialRequest > maxLeaf.timeFromInitialRequest"
+      },
+      {
+        "line": 154,
+        "condition": "node.children.length > 0"
+      },
+      {
+        "line": 171,
+        "condition": "path.length === 0"
+      },
+      {
+        "line": 174,
+        "condition": "path.length >= 2"
+      },
+      {
+        "line": 180,
+        "condition": "totalChainTime > maxTime"
+      },
+      {
+        "line": 189,
+        "condition": "!found"
+      },
+      {
+        "line": 215,
+        "condition": "node.type !== 'network'"
+      },
+      {
+        "line": 219,
+        "condition": "!isCritical(networkNode.rawRequest, context)"
+      },
+      {
+        "line": 224,
+        "condition": "networkPath.some(request => (!isCritical(request, context)))"
+      },
+      {
+        "line": 228,
+        "condition": "node.isNonNetworkProtocol"
+      },
+      {
+        "line": 234,
+        "condition": "longestChain.length > 0"
+      },
+      {
+        "line": 238,
+        "condition": "found"
+      },
+      {
+        "line": 260,
+        "condition": "!trimmedPart"
+      },
+      {
+        "line": 267,
+        "condition": "urlStart !== 0 || urlEnd === -1 || urlEnd <= urlStart"
+      },
+      {
+        "line": 272,
+        "condition": "!url"
+      },
+      {
+        "line": 278,
+        "condition": "paramsString"
+      },
+      {
+        "line": 282,
+        "condition": "!trimmedParam"
+      },
+      {
+        "line": 286,
+        "condition": "eqIndex === -1"
+      },
+      {
+        "line": 293,
+        "condition": "paramValue.startsWith('\"') && paramValue.endsWith('\"')"
+      },
+      {
+        "line": 296,
+        "condition": "paramName === 'rel' && paramValue === 'preconnect'"
+      },
+      {
+        "line": 312,
+        "condition": "!linkHeaderValue"
+      },
+      {
+        "line": 318,
+        "condition": "firstUrlEnd === -1"
+      },
+      {
+        "line": 327,
+        "condition": "partEnd + 1 <= i"
+      },
+      {
+        "line": 333,
+        "condition": "preconnectedOrigin"
+      },
+      {
+        "line": 358,
+        "condition": "header.name.toLowerCase() === 'link'"
+      },
+      {
+        "line": 382,
+        "condition": "!timing"
+      },
+      {
+        "line": 387,
+        "condition": "timing.dnsStart === -1 && timing.dnsEnd === -1 && timing.connectStart === -1 && timing.connectEnd === -1"
+      },
+      {
+        "line": 392,
+        "condition": "timing.dnsEnd - timing.dnsStart === 0 && timing.connectEnd - timing.connectStart === 0"
+      },
+      {
+        "line": 404,
+        "condition": "!hasValidTiming(request)"
+      },
+      {
+        "line": 408,
+        "condition": "parsedTrace.NetworkRequests.eventToInitiator.get(request) === mainResource"
+      },
+      {
+        "line": 413,
+        "condition": "url.origin === 'null'"
+      },
+      {
+        "line": 418,
+        "condition": "url.origin === mainOrigin"
+      },
+      {
+        "line": 422,
+        "condition": "!lcpGraphURLs.has(request.args.data.url)"
+      },
+      {
+        "line": 426,
+        "condition": "hasAlreadyConnectedToOrigin(request)"
+      },
+      {
+        "line": 430,
+        "condition": "!socketStartTimeIsBelowThreshold(request, mainResource)"
+      },
+      {
+        "line": 440,
+        "condition": "!context.lantern"
+      },
+      {
+        "line": 444,
+        "condition": "!documentRequest"
+      },
+      {
+        "line": 452,
+        "condition": "node.type === 'network'"
+      },
+      {
+        "line": 458,
+        "condition": "node.type === 'network'"
+      },
+      {
+        "line": 469,
+        "condition": "!firstRequestOfOrigin.args.data.timing"
+      },
+      {
+        "line": 480,
+        "condition": "firstRequestOfOriginParsedURL.scheme === 'https'"
+      },
+      {
+        "line": 487,
+        "condition": "wastedMs < IGNORE_THRESHOLD_IN_MILLISECONDS"
+      },
+      {
+        "line": 491,
+        "condition": "fcpGraphURLs.has(firstRequestOfOrigin.args.data.url)"
+      },
+      {
+        "line": 503,
+        "condition": "!context.navigation"
+      },
+      {
+        "line": 546,
+        "condition": "path.indexOf('..') === -1 && path.indexOf('.') === -1"
+      },
+      {
+        "line": 554,
+        "condition": "segment === '.'"
+      },
+      {
+        "line": 557,
+        "condition": "segment === '..'"
+      },
+      {
+        "line": 565,
+        "condition": "path[0] === '/' && normalizedPath"
+      },
+      {
+        "line": 568,
+        "condition": "normalizedPath[normalizedPath.length - 1] !== '/' &&\n        ((path[path.length - 1] === '/') || (segments[segments.length - 1] === '.') ||\n            (segments[segments.length - 1] === '..'))"
+      },
+      {
+        "line": 611,
+        "condition": "match"
+      },
+      {
+        "line": 613,
+        "condition": "isBlobUrl"
+      },
+      {
+        "line": 628,
+        "condition": "this.url.startsWith('data:')"
+      },
+      {
+        "line": 632,
+        "condition": "this.url.startsWith('blob:')"
+      },
+      {
+        "line": 636,
+        "condition": "this.url === 'about:blank'"
+      },
+      {
+        "line": 643,
+        "condition": "lastSlashExceptTrailingIndex !== -1"
+      },
+      {
+        "line": 650,
+        "condition": "lastSlashIndex !== -1"
+      },
+      {
+        "line": 656,
+        "condition": "parsedURL.isValid"
+      },
+      {
+        "line": 671,
+        "condition": "path.startsWith('/')"
+      },
+      {
+        "line": 695,
+        "condition": "!preEncodedPath.startsWith('file://')"
+      },
+      {
+        "line": 696,
+        "condition": "preEncodedPath.startsWith('/')"
+      },
+      {
+        "line": 712,
+        "condition": "isWindows"
+      },
+      {
+        "line": 752,
+        "condition": "hashIndex !== -1"
+      },
+      {
+        "line": 758,
+        "condition": "ParsedURL.urlRegexInstance"
+      },
+      {
+        "line": 792,
+        "condition": "indexOfQuestionMark !== -1"
+      },
+      {
+        "line": 796,
+        "condition": "lastIndexOfSlash !== -1"
+      },
+      {
+        "line": 800,
+        "condition": "lastIndexOfDot !== -1"
+      },
+      {
+        "line": 803,
+        "condition": "lastIndexOfPercent !== -1"
+      },
+      {
+        "line": 818,
+        "condition": "href.startsWith('data:') || href.startsWith('blob:') || href.startsWith('javascript:') ||\n            href.startsWith('mailto:')"
+      },
+      {
+        "line": 825,
+        "condition": "parsedHref?.scheme"
+      },
+      {
+        "line": 833,
+        "condition": "!parsedURL"
+      },
+      {
+        "line": 836,
+        "condition": "parsedURL.isDataURL()"
+      },
+      {
+        "line": 839,
+        "condition": "href.length > 1 && href.charAt(0) === '/' && href.charAt(1) === '/'"
+      },
+      {
+        "line": 847,
+        "condition": "!href.length"
+      },
+      {
+        "line": 850,
+        "condition": "href.charAt(0) === '#'"
+      },
+      {
+        "line": 853,
+        "condition": "href.charAt(0) === '?'"
+      },
+      {
+        "line": 857,
+        "condition": "!hrefMatches || !href.length"
+      },
+      {
+        "line": 862,
+        "condition": "hrefPath.charAt(0) !== '/'"
+      },
+      {
+        "line": 872,
+        "condition": "beforePathMatch"
+      },
+      {
+        "line": 881,
+        "condition": "!lineColumnMatch"
+      },
+      {
+        "line": 884,
+        "condition": "typeof (lineColumnMatch[1]) === 'string'"
+      },
+      {
+        "line": 889,
+        "condition": "typeof (lineColumnMatch[2]) === 'string'"
+      },
+      {
+        "line": 894,
+        "condition": "lineColumnMatch[1] === undefined && lineColumnMatch[2] === undefined"
+      },
+      {
+        "line": 897,
+        "condition": "wasmCodeOffsetMatch && typeof (wasmCodeOffsetMatch[1]) === 'string'"
+      },
+      {
+        "line": 908,
+        "condition": "wasmFunctionIndex === -1"
+      },
+      {
+        "line": 943,
+        "condition": "this.isDataURL()"
+      },
+      {
+        "line": 949,
+        "condition": "this.isDataURL()"
+      },
+      {
+        "line": 956,
+        "condition": "this.scheme && this.url.startsWith(this.scheme + '://')"
+      }
+    ],
+    "states": [
+      {
+        "line": 108,
+        "expression": "partialModel.fail ? 'fail' : 'pass'"
+      }
+    ],
+    "constants": [
+      {
+        "name": "PRECONNECT_SOCKET_MAX_IDLE_IN_MS",
+        "line": 98,
+        "expression": "Types.Timing.Milli(15_000)"
+      },
+      {
+        "name": "IGNORE_THRESHOLD_IN_MILLISECONDS",
+        "line": 99,
+        "expression": "Types.Timing.Milli(50)"
+      },
+      {
+        "name": "TOO_MANY_PRECONNECTS_THRESHOLD",
+        "line": 100,
+        "expression": "4"
+      }
+    ]
+  },
+  {
+    "file": "package/models/trace/insights/RenderBlocking.js",
+    "version": "@paulirish/trace_engine@0.0.59",
+    "conditions": [
+      {
+        "line": 48,
+        "condition": "node.type !== 'network'"
+      },
+      {
+        "line": 66,
+        "condition": "minimalFCPGraph.type !== 'network'"
+      },
+      {
+        "line": 83,
+        "condition": "!context.lantern"
+      },
+      {
+        "line": 92,
+        "condition": "!nodeAndTiming"
+      },
+      {
+        "line": 100,
+        "condition": "wastedMs < MINIMUM_WASTED_MS"
+      },
+      {
+        "line": 105,
+        "condition": "requestIdToWastedMs.size"
+      },
+      {
+        "line": 108,
+        "condition": "!hasImageLCP(parsedTrace, context)"
+      },
+      {
+        "line": 126,
+        "condition": "!context.navigation"
+      },
+      {
+        "line": 135,
+        "condition": "!firstPaintTs"
+      },
+      {
+        "line": 143,
+        "condition": "req.args.data.frame !== context.frameId"
+      },
+      {
+        "line": 146,
+        "condition": "!Helpers.Network.isSyntheticNetworkRequestEventRenderBlocking(req)"
+      },
+      {
+        "line": 149,
+        "condition": "req.args.data.syntheticData.finishTime > firstPaintTs"
+      },
+      {
+        "line": 158,
+        "condition": "req.args.data.renderBlocking === 'in_body_parser_blocking'"
+      },
+      {
+        "line": 162,
+        "condition": "priority !== \"VeryHigh\" /* Protocol.Network.ResourcePriority.VeryHigh */ && !isBlockingScript"
+      },
+      {
+        "line": 167,
+        "condition": "navigation === context.navigation"
+      }
+    ],
+    "states": [
+      {
+        "line": 121,
+        "expression": "partialModel.renderBlockingRequests.length > 0 ? 'fail' : 'pass'"
+      }
+    ],
+    "constants": []
+  },
+  {
+    "file": "package/models/trace/insights/SlowCSSSelector.js",
+    "version": "@paulirish/trace_engine@0.0.59",
+    "conditions": [
+      {
+        "line": 57,
+        "condition": "event.args.beginData?.frame !== context.frameId"
+      },
+      {
+        "line": 60,
+        "condition": "!Helpers.Timing.eventIsInBounds(event, context.bounds)"
+      },
+      {
+        "line": 66,
+        "condition": "findTiming !== undefined"
+      },
+      {
+        "line": 92,
+        "condition": "!selectorStatsData"
+      },
+      {
+        "line": 106,
+        "condition": "selectorTimings.length > 0"
+      },
+      {
+        "line": 112,
+        "condition": "topSelectorElapsedMs && topSelectorElapsedMs[SelectorTimingsKey.Elapsed] < slowCSSSelectorThreshold"
+      }
+    ],
+    "states": [
+      {
+        "line": 86,
+        "expression": "partialModel.topSelectorElapsedMs && partialModel.topSelectorMatchAttempts ? 'informative' : 'pass'"
+      }
+    ],
+    "constants": []
+  },
+  {
+    "file": "package/models/trace/insights/Statistics.js",
+    "version": "@paulirish/trace_engine@0.0.59",
+    "conditions": [
+      {
+        "line": 46,
+        "condition": "median <= 0"
+      },
+      {
+        "line": 49,
+        "condition": "p10 <= 0"
+      },
+      {
+        "line": 53,
+        "condition": "p10 >= median"
+      },
+      {
+        "line": 57,
+        "condition": "value <= 0"
+      },
+      {
+        "line": 72,
+        "condition": "value <= p10"
+      },
+      {
+        "line": 76,
+        "condition": "value <= median"
+      }
+    ],
+    "states": [],
+    "constants": [
+      {
+        "name": "MIN_PASSING_SCORE",
+        "line": 11,
+        "expression": "0.90000000000000002220446049250313080847263336181640625"
+      },
+      {
+        "name": "MAX_AVERAGE_SCORE",
+        "line": 12,
+        "expression": "0.899999999999999911182158029987476766109466552734375"
+      },
+      {
+        "name": "MIN_AVERAGE_SCORE",
+        "line": 13,
+        "expression": "0.5"
+      },
+      {
+        "name": "MAX_FAILING_SCORE",
+        "line": 14,
+        "expression": "0.499999999999999944488848768742172978818416595458984375"
+      }
+    ]
+  },
+  {
+    "file": "package/models/trace/insights/ThirdParties.js",
+    "version": "@paulirish/trace_engine@0.0.59",
+    "conditions": [
+      {
+        "line": 34,
+        "condition": "summary.entity !== firstPartyEntity"
+      },
+      {
+        "line": 71,
+        "condition": "event.dur === undefined || event.dur < 1_000"
+      },
+      {
+        "line": 87,
+        "condition": "summary.entity === model.firstPartyEntity"
+      }
+    ],
+    "states": [
+      {
+        "line": 47,
+        "expression": "partialModel.entitySummaries.find(summary => summary.entity !== partialModel.firstPartyEntity) ?\n            'informative' :\n            'pass'"
+      }
+    ],
+    "constants": []
+  },
+  {
+    "file": "package/models/trace/insights/Viewport.js",
+    "version": "@paulirish/trace_engine@0.0.59",
+    "conditions": [
+      {
+        "line": 37,
+        "condition": "event.args.data.frame !== context.frameId"
+      },
+      {
+        "line": 43,
+        "condition": "event.args.frame !== context.frameId"
+      },
+      {
+        "line": 48,
+        "condition": "viewportEvent && event.ts < viewportEvent.ts"
+      },
+      {
+        "line": 53,
+        "condition": "!compositorEvents.length"
+      },
+      {
+        "line": 62,
+        "condition": "!event.args.is_mobile_optimized"
+      },
+      {
+        "line": 85,
+        "condition": "!model.longPointerInteractions"
+      }
+    ],
+    "states": [
+      {
+        "line": 31,
+        "expression": "partialModel.mobileOptimized === false ? 'fail' : 'pass'"
+      }
+    ],
+    "constants": []
+  },
+  {
+    "file": "package/models/trace/insights/insights.js",
+    "version": "@paulirish/trace_engine@0.0.59",
+    "conditions": [],
+    "states": [],
+    "constants": []
+  },
+  {
+    "file": "package/models/trace/insights/types.js",
+    "version": "@paulirish/trace_engine@0.0.59",
+    "conditions": [],
+    "states": [],
+    "constants": []
+  }
+]
