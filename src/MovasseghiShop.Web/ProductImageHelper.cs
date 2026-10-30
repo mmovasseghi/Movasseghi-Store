@@ -62,6 +62,40 @@ public static class ProductImageHelper
         => PreferLcpVariant(GetDisplayUrl(image, env), env);
 
     /// <summary>
+    /// URLهای نمایش کارت: نسخهٔ LCP برای استودیو (و در صورت تمایز برای صحنه)
+    /// بدون از بین بردن اسلایدر Studio↔Scene وقتی هر دو موجودند.
+    /// </summary>
+    public static (string? StudioUrl, string? SceneUrl, bool CanDual) ResolveCardStageUrls(
+        ProductDualCardSlides slides, IWebHostEnvironment? env, bool preferCardSized)
+    {
+        var studio = slides.StudioUrl;
+        var scene = slides.SceneUrl;
+        var dualPossible = slides.CanCycle
+                           && !string.IsNullOrEmpty(studio)
+                           && !string.IsNullOrEmpty(scene)
+                           && !string.Equals(studio, scene, StringComparison.OrdinalIgnoreCase);
+
+        if (!dualPossible)
+        {
+            if (preferCardSized)
+                studio = PreferLcpVariant(studio, env);
+            return (studio, null, false);
+        }
+
+        if (preferCardSized)
+        {
+            studio = PreferLcpVariant(studio, env) ?? studio;
+            var sceneSized = PreferLcpVariant(scene, env) ?? scene;
+            // Never collapse scene onto the studio URL — that would kill the dual slider.
+            if (!string.Equals(sceneSized, studio, StringComparison.OrdinalIgnoreCase))
+                scene = sceneSized;
+        }
+
+        var canDual = !string.Equals(studio, scene, StringComparison.OrdinalIgnoreCase);
+        return (studio, canDual ? scene : null, canDual);
+    }
+
+    /// <summary>
     /// برای کارت/هیرو کوچک، اگر <c>*-lcp.webp</c> روی دیسک باشد همان را برمی‌گرداند
     /// تا GTmetrix «Properly size images» و بایت شبکهٔ above-the-fold کم شود.
     /// </summary>

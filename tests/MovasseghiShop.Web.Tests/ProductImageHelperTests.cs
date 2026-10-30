@@ -48,6 +48,52 @@ public class ProductImageHelperTests : IDisposable
         Assert.Equal("/images/products/0079/01-lcp.webp", sized);
     }
 
+    [Fact]
+    public void ResolveCardStageUrls_keeps_dual_when_studio_and_scene_differ()
+    {
+        var dir = Path.Combine(root, "images", "products", "0079");
+        File.WriteAllText(Path.Combine(dir, "01.webp"), "studio");
+        File.WriteAllText(Path.Combine(dir, "01-lcp.webp"), "studio-lcp");
+        File.WriteAllText(Path.Combine(dir, "01-hero.webp"), "scene");
+        File.WriteAllText(Path.Combine(dir, "01-hero-lcp.webp"), "scene-lcp");
+        var env = new TestEnvironment { WebRootPath = root };
+        var slides = new ProductDualCardSlides(
+            "/images/products/0079/01.webp",
+            "/images/products/0079/01-hero.webp",
+            "studio",
+            "scene",
+            true);
+
+        var (studio, scene, canDual) = ProductImageHelper.ResolveCardStageUrls(slides, env, preferCardSized: true);
+
+        Assert.True(canDual);
+        Assert.Equal("/images/products/0079/01-lcp.webp", studio);
+        Assert.Equal("/images/products/0079/01-hero-lcp.webp", scene);
+    }
+
+    [Fact]
+    public void ResolveCardStageUrls_does_not_collapse_scene_onto_studio_lcp()
+    {
+        var dir = Path.Combine(root, "images", "products", "0079");
+        File.WriteAllText(Path.Combine(dir, "01.webp"), "studio");
+        File.WriteAllText(Path.Combine(dir, "01-lcp.webp"), "studio-lcp");
+        // Scene has no dedicated LCP; PreferLcpVariant would wrongly map a same-stem collision
+        // only if URLs equal — keep original scene when sized equals studio.
+        var env = new TestEnvironment { WebRootPath = root };
+        var slides = new ProductDualCardSlides(
+            "/images/products/0079/01.webp",
+            "/images/products/0079/01.webp",
+            "studio",
+            "scene",
+            true);
+
+        var (studio, scene, canDual) = ProductImageHelper.ResolveCardStageUrls(slides, env, preferCardSized: true);
+
+        Assert.False(canDual);
+        Assert.Equal("/images/products/0079/01-lcp.webp", studio);
+        Assert.Null(scene);
+    }
+
     public void Dispose()
     {
         if (Directory.Exists(root)) Directory.Delete(root, recursive: true);
