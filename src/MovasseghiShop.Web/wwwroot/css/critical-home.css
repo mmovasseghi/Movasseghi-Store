@@ -40,3 +40,19 @@ a{color:inherit;text-decoration:none}
 .ms-tab{display:flex;flex-direction:column;align-items:center;gap:.12rem;padding:.3rem .15rem;font-size:.62rem;font-weight:700;color:var(--c-text-2)}
 .ms-tab.is-active{color:var(--c-primary-dark);font-weight:900}
 @media(min-width:768px){.ms-logo{height:52px;max-width:180px}.ms-tabbar{display:none}}
+.ms-offers{background:linear-gradient(165deg,#243830,#162820);padding:1.25rem 0 1rem;color:#fff;margin-top:.35rem}
+.ms-offers-head h2{margin:0;font-size:1rem;font-weight:900}
+.ms-offers-scroll{display:flex;gap:.65rem;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:.25rem}
+.ms-offer-card{flex:0 0 min(62vw,200px);scroll-snap-align:start;background:#fff;border-radius:16px;padding:.65rem;color:#1a1f26;display:block}
+.ms-offer-card h3{margin:0 0 .35rem;font-size:.78rem;font-weight:800;line-height:1.4}
+.ms-offer-price{font-weight:900;color:#243830;font-size:.85rem}
+.ms-featured-section{padding:1.25rem 0;background:linear-gradient(180deg,#e8f0eb,#fff)}
+.ms-featured-head h2{margin:0;font-size:1.05rem;font-weight:900}
+.ms-featured-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.65rem}
+@media(min-width:768px){.ms-featured-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.ms-feat-card{background:#fff;border-radius:16px;padding:.65rem;box-shadow:0 8px 24px rgba(26,31,38,.08);display:block}
+.ms-feat-card-title{display:block;font-size:.78rem;font-weight:800;line-height:1.4;margin-top:.35rem}
+.ms-feat-card-price{display:block;font-weight:900;color:#243830;font-size:.82rem;margin-top:.25rem}
+.ms-cat-scroll{display:flex;gap:.5rem;overflow-x:auto;padding:.25rem 0}
+.ms-cat-chip{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:.25rem;padding:.5rem;background:#fff;border-radius:12px;min-width:72px}
+@media(max-width:767px){.ms-hero-aurora,.ms-hero-orb,.ms-hero-particles,.ms-hero-beams,.ms-hero-stat{display:none}}

@@ -376,6 +376,13 @@ public class AnalyticsMiddleware(RequestDelegate next, AnalyticsTracker tracker,
     public async Task InvokeAsync(HttpContext http)
     {
         var path = http.Request.Path.Value ?? "/";
+        var ua = http.Request.Headers.UserAgent.ToString();
+
+        if (AnalyticsClassifier.IsBot(ua))
+        {
+            await next(http);
+            return;
+        }
 
         if (!ShouldTrack(http, path))
         {

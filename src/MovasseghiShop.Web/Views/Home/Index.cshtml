@@ -25,10 +25,6 @@
     var productCount = (int)ViewBag.ProductCount;
     var heroProducts = featured.Take(4).Where(p => ProductImageHelper.GetDisplayUrl(ProductImageHelper.GetPrimary(p.Images), Env) != null).ToList();
     var homeUrl = ViewData["CanonicalUrl"]?.ToString() ?? AppPath.Absolute("/", Context)!;
-    string? lcpImagePath = null;
-    if (heroProducts.FirstOrDefault() is Product lcpProduct)
-        lcpImagePath = ProductImageHelper.GetLcpDisplayUrl(ProductImageHelper.GetPrimary(lcpProduct.Images), Env);
-    ViewData["LcpPreload"] = lcpImagePath;
 }
 
 <!-- استوری‌ها — بالای هیرو (مثل 28a3849) تا بلافاصله بعد از هدر دیده شوند -->
@@ -156,21 +152,9 @@
                 <div class="ms-hero-trust-track">
                     <div class="ms-hero-trust-marquee">
                         <div class="ms-hero-trust-set">
-                            @for (var rep = 0; rep < 2; rep++)
+                            @foreach (var ti in trustItems)
                             {
-                                @foreach (var ti in trustItems)
-                                {
-                                    <span class="ms-hero-trust-item">@Html.Raw(ti)</span>
-                                }
-                            }
-                        </div>
-                        <div class="ms-hero-trust-set" aria-hidden="true">
-                            @for (var rep = 0; rep < 2; rep++)
-                            {
-                                @foreach (var ti in trustItems)
-                                {
-                                    <span class="ms-hero-trust-item">@Html.Raw(ti)</span>
-                                }
+                                <span class="ms-hero-trust-item">@Html.Raw(ti)</span>
                             }
                         </div>
                     </div>
@@ -217,26 +201,6 @@
                     <p>حداقل @WholesaleRules.FormatMinAmount() تومان</p>
                 </article>
                 <article class="ms-feature-card" style="--feat-i:4">
-                    <span class="ms-feature-card-ring"><partial name="_FeatureIcon" model="@("truck")" /></span>
-                    <h3>ارسال سراسری</h3>
-                    <p>تحویل ۲ تا ۷ روز کاری</p>
-                </article>
-                <article class="ms-feature-card ms-feature-card--dup" style="--feat-i:1" aria-hidden="true">
-                    <span class="ms-feature-card-ring"><partial name="_FeatureIcon" model="@("official")" /></span>
-                    <h3>نمایندگی رسمی</h3>
-                    <p>تنها نماینده آملون در تهران</p>
-                </article>
-                <article class="ms-feature-card ms-feature-card--dup" style="--feat-i:2" aria-hidden="true">
-                    <span class="ms-feature-card-ring"><partial name="_FeatureIcon" model="@("shield")" /></span>
-                    <h3>ضمانت اصالت</h3>
-                    <p>محصول مستقیم از کارخانه</p>
-                </article>
-                <article class="ms-feature-card ms-feature-card--dup" style="--feat-i:3" aria-hidden="true">
-                    <span class="ms-feature-card-ring"><partial name="_FeatureIcon" model="@("box")" /></span>
-                    <h3>پخش عمده</h3>
-                    <p>حداقل @WholesaleRules.FormatMinAmount() تومان</p>
-                </article>
-                <article class="ms-feature-card ms-feature-card--dup" style="--feat-i:4" aria-hidden="true">
                     <span class="ms-feature-card-ring"><partial name="_FeatureIcon" model="@("truck")" /></span>
                     <h3>ارسال سراسری</h3>
                     <p>تحویل ۲ تا ۷ روز کاری</p>

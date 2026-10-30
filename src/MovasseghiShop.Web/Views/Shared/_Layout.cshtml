@@ -29,7 +29,10 @@
     }
     <title>@title</title>
     <meta name="description" content="@metaDescription" />
-    <meta name="keywords" content="@metaKeywords" />
+    @if (!string.IsNullOrWhiteSpace(metaKeywords))
+    {
+        <meta name="keywords" content="@metaKeywords" />
+    }
     @{
         var gscVerify = Config["GoogleSearchConsole:SiteVerificationMeta"]?.Trim();
         if (!string.IsNullOrWhiteSpace(gscVerify))
@@ -72,7 +75,13 @@
     {
         @await Html.PartialAsync("_StorefrontGlobalJsonLd")
     }
-    @await Html.PartialAsync("_AppPathScript")
+    @{
+        var pathBase = Context.Request.PathBase.Value ?? "";
+        if (!string.IsNullOrEmpty(pathBase))
+        {
+            @await Html.PartialAsync("_AppPathScript")
+        }
+    }
     @if (!isHome)
     {
         <link rel="preload" href="~/fonts/Vazirmatn-var.woff2" as="font" type="font/woff2" crossorigin asp-append-version="true" />
@@ -101,8 +110,21 @@
         {
             <style>@Html.Raw(global::System.IO.File.ReadAllText(criticalPath))</style>
         }
-        <link rel="stylesheet" href="~/css/storefront.bundle.css" asp-append-version="true" media="print" onload="this.media='all'" />
-        <noscript><link rel="stylesheet" href="~/css/storefront.bundle.css" asp-append-version="true" /></noscript>
+        var bundlePath = global::System.IO.Path.Combine(webRoot, "css", "storefront.bundle.css");
+        var bundleVer = global::System.IO.File.Exists(bundlePath)
+            ? global::System.IO.File.GetLastWriteTimeUtc(bundlePath).Ticks.ToString()
+            : "1";
+        var bundleHref = $"{Url.Content("~/css/storefront.bundle.css")}?v={bundleVer}";
+        <link id="msDeferredBundle" rel="stylesheet" href="@bundleHref" media="not all" />
+        <noscript><link rel="stylesheet" href="@bundleHref" /></noscript>
+        <script>
+        window.addEventListener('load', function () {
+          setTimeout(function () {
+            var l = document.getElementById('msDeferredBundle');
+            if (l) l.media = 'all';
+          }, 5000);
+        });
+        </script>
     }
     else
     {
@@ -524,10 +546,11 @@ else
               document.body.appendChild(s);
             });
           }
-          window.addEventListener('pointerdown', boot, { once: true, passive: true });
-          window.addEventListener('touchstart', boot, { once: true, passive: true });
-          window.addEventListener('keydown', boot, { once: true });
-          window.addEventListener('load', function () { setTimeout(boot, 12000); });
+          window.addEventListener('click', function (e) {
+            if (!e.target.closest('.ms-story,[data-story-id],[data-open-cart],[data-open-auth],[data-menu-toggle],[data-menu-close],.ms-drawer-quick-btn')) return;
+            boot();
+          }, true);
+          window.addEventListener('load', function () { setTimeout(boot, 15000); });
         })();
         </script>
     }

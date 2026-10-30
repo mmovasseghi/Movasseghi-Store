@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OutputCaching;
 using Microsoft.EntityFrameworkCore;
@@ -13,14 +14,15 @@ public class HomeController(
     IProductCatalogService catalog,
     IStudioContentService studio,
     IHomeStoryService homeStories,
-    IConfiguration config) : Controller
+    IConfiguration config,
+    IWebHostEnvironment env) : Controller
 {
     [OutputCache(PolicyName = "HomePage")]
     public async Task<IActionResult> Index()
     {
         ViewData["Title"] = SiteKeywordStrategy.SiteTitle;
         ViewData["MetaDescription"] = SiteKeywordStrategy.SiteDescription;
-        ViewData["MetaKeywords"] = SiteKeywordStrategy.MetaKeywords;
+        ViewData["MetaKeywords"] = null;
         var homeUrl = StorefrontUrls.PublicBase(HttpContext, config) + AppPath.H("/", HttpContext);
         ViewData["CanonicalUrl"] = homeUrl;
         ViewData["OgTitle"] = SiteKeywordStrategy.SiteTitle;
@@ -73,6 +75,18 @@ public class HomeController(
             .OrderByDescending(n => n.PublishedAt ?? n.CreatedAt)
             .Take(4)
             .ToListAsync();
+
+        var featuredList = featured.ToList();
+        if (featuredList.FirstOrDefault() is Product lcpProduct)
+        {
+            var lcpPath = ProductImageHelper.GetLcpDisplayUrl(ProductImageHelper.GetPrimary(lcpProduct.Images), env);
+            if (!string.IsNullOrWhiteSpace(lcpPath))
+            {
+                ViewData["LcpPreload"] = lcpPath;
+                var lcpUrl = AppPath.H(lcpPath, HttpContext);
+                Response.Headers.Append("Link", $"<{lcpUrl}>; rel=preload; as=image; fetchpriority=high");
+            }
+        }
 
         return View();
     }
