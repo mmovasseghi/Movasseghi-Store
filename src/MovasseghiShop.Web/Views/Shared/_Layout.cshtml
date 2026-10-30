@@ -434,7 +434,7 @@
     </span>
 </a>
 
-<template id="msAuthModalTpl">@await Html.PartialAsync("_AuthModal")</template>
+@* مودال ورود با fetch /Account/Modal لود می‌شود — بدون AntiForgery در HTML خانه (Cache-Control). *@
 
 <div class="ms-modal" id="appModal" hidden>
     <div class="ms-modal-backdrop" data-modal-close></div>
