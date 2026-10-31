@@ -606,10 +606,8 @@ else
     {
         <script defer src="~/js/auth.js" asp-append-version="true"></script>
         <script defer src="~/js/site.js" asp-append-version="true"></script>
-        @if (isCatalog)
-        {
-            <script defer src="~/js/product-card-dual.js" asp-append-version="true"></script>
-        }
+        @* Dual no-ops when no [data-ms-product-dual] cards are on the page. *@
+        <script defer src="~/js/product-card-dual.js" asp-append-version="true"></script>
         @await RenderSectionAsync("Scripts", required: false)
     }
 }
