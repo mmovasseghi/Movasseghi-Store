@@ -63,7 +63,30 @@ Trace خلاصه (اجرای ۲): `UpdateLayoutTree` تا ~28ms، `Layout` تا 
 - بدون دامنهٔ DNS + گواهی + HTTP/2/CDN نزدیک کاربر، ممیزی‌های Structure HTTP/2 و CDN و بخش بزرگی از TTFB قابل بستن نیستند.
 - تا گزارش GTmetrix تازه هدف را تأیید نکرده، ادعای Grade A یا Perf/Struct >۹۵ نمی‌شود.
 
+## انتشار و نتیجهٔ واقعی پس از اصلاح
+
+- SHA منتشرشده: `fb35054eaf1c076f2beb1a187436dd3dc0ba933b`
+- `publish/RELEASE_COMMIT` روی سرور با همین SHA برابر است.
+- تأیید UX زنده: ۸+۸، ۱۲ استوری+modal، هیرو، dual progress، منو، ورود، سبد؛ بدون console error؛ بدون preload اسکریپت؛ فقط preload فونت + تصویر LCP.
+
+### GTmetrix تازه (هم‌شرط Seattle)
+
+گزارش: https://gtmetrix.com/reports/185.93.88.81/mDQriT19/  
+Chrome 154 / Lighthouse 12.6.1 / Sat Oct 31, 2026 7:20 AM -0700
+
+| شاخص | ndzkdzH1 (قبل) | mDQriT19 (بعد) |
+| --- | ---: | ---: |
+| Grade | B | B |
+| Performance | 75% | **84%** |
+| Structure | 94% | 93% |
+| LCP | 2.0s | **1.8s** |
+| TBT | 251ms | **137ms** |
+| CLS | 0.01 | **0** |
+
+**ادعای Grade A یا Perf/Struct >۹۵ نمی‌شود.**  
+بهبود TBT (زیر آستانهٔ ۱۵۰ms) و LCP جزئی با اصلاح frontend تأیید شد. سقف باقی‌مانده عمدتاً زیرساختی است: تأخیر Seattle→VPS، نبود DNS دامنه برای TLS/HTTP/2/CDN، و زنجیرهٔ HTTPS-First لاب روی IP.
+
 ## وضعیت ادامه
 
-- پس از انتشار این SHA، GTmetrix Seattle تازه گرفته می‌شود و جدول قبل/بعد تکمیل می‌گردد.
-- اگر TBT پایین آمد ولی LCP به‌خاطر TTFB جغرافیایی ماند، گام بعدی زیرساختی (دامنه+TLS+HTTP/2 و در صورت امکان CDN) است نه حذف UX.
+- گام بعدی مؤثر برای نزدیک‌شدن به A/>۹۵: اتصال دامنهٔ resolveشونده، گواهی معتبر، HTTP/2 و در صورت امکان CDN نزدیک کاربر/آزمایش.
+- بدون آن، تکرار حدسی روی dual/CSS کامل خانه یا حذف انیمیشن ممنوع و کم‌بازده است.
