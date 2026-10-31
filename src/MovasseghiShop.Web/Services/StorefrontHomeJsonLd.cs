@@ -96,7 +96,7 @@ public static class StorefrontHomeJsonLd
             ["speakable"] = new Dictionary<string, object?>
             {
                 ["@type"] = "SpeakableSpecification",
-                ["cssSelector"] = new[] { ".ms-home-faq", ".ms-hero-title", ".ms-ai-brief" }
+                ["cssSelector"] = new[] { ".ms-home-faq", ".ms-hero-title" }
             }
         };
 
