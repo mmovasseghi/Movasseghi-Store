@@ -62,29 +62,6 @@
 <section class="ms-hero" id="ms-hero" data-hero-slider>
     <div class="ms-hero-wrap">
         <div class="ms-hero-stage">
-            <div class="ms-hero-aurora" aria-hidden="true"></div>
-            <div class="ms-hero-aurora ms-hero-aurora-2" aria-hidden="true"></div>
-            <div class="ms-hero-orb ms-hero-orb-a" aria-hidden="true"></div>
-            <div class="ms-hero-orb ms-hero-orb-b" aria-hidden="true"></div>
-            <div class="ms-hero-orb ms-hero-orb-c" aria-hidden="true"></div>
-            <div class="ms-hero-shine" aria-hidden="true"></div>
-            <div class="ms-hero-particles" data-hero-particles aria-hidden="true"></div>
-            <div class="ms-hero-grid-lines" aria-hidden="true"></div>
-            <div class="ms-hero-progress" data-hero-progress aria-hidden="true"><span></span></div>
-
-            <div class="ms-hero-beams" aria-hidden="true">
-                <span class="ms-hero-beam ms-hero-beam-a"></span>
-                <span class="ms-hero-beam ms-hero-beam-b"></span>
-            </div>
-            <div class="ms-hero-stat ms-hero-stat-a">
-                <b class="ms-hero-stat-num" data-hero-count="@productCount">@productCount+</b>
-                <span>محصول فعال</span>
-            </div>
-            <div class="ms-hero-stat ms-hero-stat-b">
-                <b class="ms-hero-stat-num">@(WholesaleRules.MaxAutoDiscountPercent)٪</b>
-                <span>تخفیف پلکانی</span>
-            </div>
-
             <div class="ms-hero-viewport">
                 @if (heroConfigSlides.Count > 0)
                 {
@@ -168,6 +145,30 @@
                     </div>
                 </div>
             </div>
+            @* Flow content establishes the height before percentage-positioned layers paint. *@
+            <div class="ms-hero-aurora" aria-hidden="true"></div>
+            <div class="ms-hero-aurora ms-hero-aurora-2" aria-hidden="true"></div>
+            <div class="ms-hero-orb ms-hero-orb-a" aria-hidden="true"></div>
+            <div class="ms-hero-orb ms-hero-orb-b" aria-hidden="true"></div>
+            <div class="ms-hero-orb ms-hero-orb-c" aria-hidden="true"></div>
+            <div class="ms-hero-shine" aria-hidden="true"></div>
+            <div class="ms-hero-particles" data-hero-particles aria-hidden="true"></div>
+            <div class="ms-hero-grid-lines" aria-hidden="true"></div>
+            <div class="ms-hero-progress" data-hero-progress aria-hidden="true"><span></span></div>
+
+            <div class="ms-hero-beams" aria-hidden="true">
+                <span class="ms-hero-beam ms-hero-beam-a"></span>
+                <span class="ms-hero-beam ms-hero-beam-b"></span>
+            </div>
+            <div class="ms-hero-stat ms-hero-stat-a">
+                <b class="ms-hero-stat-num" data-hero-count="@productCount">@productCount+</b>
+                <span>محصول فعال</span>
+            </div>
+            <div class="ms-hero-stat ms-hero-stat-b">
+                <b class="ms-hero-stat-num">@(WholesaleRules.MaxAutoDiscountPercent)٪</b>
+                <span>تخفیف پلکانی</span>
+            </div>
+
         </div>
         <div class="ms-hero-dots" data-hero-dots></div>
     </div>

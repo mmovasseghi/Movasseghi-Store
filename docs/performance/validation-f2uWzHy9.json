@@ -1,0 +1,2213 @@
+{
+  "at": "2026-10-31T08:53:42.069876+00:00",
+  "base_commit": "4788c3cc660d40ebda8881e36622be663dc6a24d",
+  "real_report": "f2uWzHy9; user-supplied B / Performance79 / Structure95 remains latest actual report. NO FRESH GT RETEST, NO VPS DEPLOYMENT.",
+  "goal_A_and_both_over_95": "OPEN",
+  "scope": "Isolated Production Release, cloned sample data and repository nginx config. Local provided timings behind an explicitly synthetic HTTP/1.1 model. Not Seattle or an exact replay of the unknown deployed commit/viewport.",
+  "assembly_sha256": "ba48b597fab53bcc7a17553eaa12795d406b9b5ab2abf6a84bb8f9c3e107da19",
+  "tests": {
+    "dotnet": 74,
+    "deploy": 13,
+    "js_syntax": 33,
+    "css_parser": 6,
+    "nginx": "guest/private cache, gzip/identity, versioning PASS",
+    "strict_nginx_smoke": "same-origin responsive LCP, preload matching, MIME, 8+8, stories, fingerprinted TTL and guest HIT PASS",
+    "responsive_image_cases": 24,
+    "public_routes": 10,
+    "hero_marquee_phase_checks": 56,
+    "browser": "first clicks, stories, original blur/dual cycles, all initial CSS, storage restrictions, font fallback and geometry/colour/typography comparison PASS"
+  },
+  "compression": [
+    {
+      "variant": "baseline",
+      "bytes": 100645,
+      "milliseconds": 45.147926997742616,
+      "cache": "MISS"
+    },
+    {
+      "variant": "baseline",
+      "bytes": 100645,
+      "milliseconds": 0.8311479905387387,
+      "cache": "HIT"
+    },
+    {
+      "variant": "baseline",
+      "bytes": 100645,
+      "milliseconds": 0.5616039998130873,
+      "cache": "HIT"
+    },
+    {
+      "variant": "release",
+      "bytes": 72378,
+      "milliseconds": 8.806543002719991,
+      "cache": "MISS"
+    },
+    {
+      "variant": "release",
+      "bytes": 72378,
+      "milliseconds": 4.216285000438802,
+      "cache": "HIT"
+    },
+    {
+      "variant": "release",
+      "bytes": 72378,
+      "milliseconds": 4.257337001035921,
+      "cache": "HIT"
+    }
+  ],
+  "images": {
+    "original_files_unchanged": 242,
+    "generated": 72,
+    "smaller_than_previous": 56,
+    "quality_note": "Quality 100 is lossy, not RGBA-identical. Original uploads, old lossless variants and alpha are preserved. Pipeline gates decoded alpha equality, <=16/255 max visible RGB error and <=1/255 mean visible RGB error; independent libwebp decode may round channels by one level.",
+    "variants": [
+      {
+        "path": "images/products/0086/01-display-v2-420w.webp",
+        "previous_min_bytes": 26780,
+        "bytes": 12780,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 8.109804153442383,
+        "mean_visible_rgb_delta_libwebp": 0.6662958860397339
+      },
+      {
+        "path": "images/products/0010/01-display-v2-420w.webp",
+        "previous_min_bytes": 41088,
+        "bytes": 15186,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 8.078431129455566,
+        "mean_visible_rgb_delta_libwebp": 0.7496257424354553
+      },
+      {
+        "path": "images/products/0082/01-display-v2-420w.webp",
+        "previous_min_bytes": 58974,
+        "bytes": 58974,
+        "smaller": false,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 0.0,
+        "mean_visible_rgb_delta_libwebp": 0.0
+      },
+      {
+        "path": "images/products/0059/01-display-v2-420w.webp",
+        "previous_min_bytes": 38332,
+        "bytes": 38332,
+        "smaller": false,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 0.0,
+        "mean_visible_rgb_delta_libwebp": 0.0
+      },
+      {
+        "path": "images/products/0077/01-display-v2-420w.webp",
+        "previous_min_bytes": 42736,
+        "bytes": 42736,
+        "smaller": false,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 0.0,
+        "mean_visible_rgb_delta_libwebp": 0.0
+      },
+      {
+        "path": "images/products/0043/01-display-v2-420w.webp",
+        "previous_min_bytes": 40580,
+        "bytes": 17232,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 7.764706134796143,
+        "mean_visible_rgb_delta_libwebp": 0.8329976797103882
+      },
+      {
+        "path": "images/products/0029/01-display-v2-420w.webp",
+        "previous_min_bytes": 56724,
+        "bytes": 18506,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 10.0,
+        "mean_visible_rgb_delta_libwebp": 0.6080883741378784
+      },
+      {
+        "path": "images/products/0035/01-display-v2-420w.webp",
+        "previous_min_bytes": 58666,
+        "bytes": 17108,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 11.980392456054688,
+        "mean_visible_rgb_delta_libwebp": 0.6361785531044006
+      },
+      {
+        "path": "images/products/0024/01-display-v2-420w.webp",
+        "previous_min_bytes": 38968,
+        "bytes": 16366,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 9.0,
+        "mean_visible_rgb_delta_libwebp": 0.7717161178588867
+      },
+      {
+        "path": "images/products/0037/01-display-v2-420w.webp",
+        "previous_min_bytes": 75768,
+        "bytes": 75768,
+        "smaller": false,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 0.0,
+        "mean_visible_rgb_delta_libwebp": 0.0
+      },
+      {
+        "path": "images/products/0026/01-display-v2-420w.webp",
+        "previous_min_bytes": 59802,
+        "bytes": 22196,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 8.470588684082031,
+        "mean_visible_rgb_delta_libwebp": 0.7467818856239319
+      },
+      {
+        "path": "images/products/0062/01-display-v2-420w.webp",
+        "previous_min_bytes": 40118,
+        "bytes": 11628,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 7.0,
+        "mean_visible_rgb_delta_libwebp": 0.6846435070037842
+      },
+      {
+        "path": "images/products/0054/01-display-v2-420w.webp",
+        "previous_min_bytes": 80674,
+        "bytes": 30060,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 9.792157173156738,
+        "mean_visible_rgb_delta_libwebp": 0.7168800830841064
+      },
+      {
+        "path": "images/products/0068/01-display-v2-420w.webp",
+        "previous_min_bytes": 17920,
+        "bytes": 8756,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 6.0,
+        "mean_visible_rgb_delta_libwebp": 0.6810165047645569
+      },
+      {
+        "path": "images/products/0063/01-display-v2-420w.webp",
+        "previous_min_bytes": 35692,
+        "bytes": 13026,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 8.290196418762207,
+        "mean_visible_rgb_delta_libwebp": 0.7349549531936646
+      },
+      {
+        "path": "images/products/0063/02-studio-display-v2-420w.webp",
+        "previous_min_bytes": 35692,
+        "bytes": 13026,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 8.290196418762207,
+        "mean_visible_rgb_delta_libwebp": 0.7349549531936646
+      },
+      {
+        "path": "images/products/0093/01-display-v2-420w.webp",
+        "previous_min_bytes": 44642,
+        "bytes": 16448,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 8.011764526367188,
+        "mean_visible_rgb_delta_libwebp": 0.7128849625587463
+      },
+      {
+        "path": "images/products/0050/01-display-v2-420w.webp",
+        "previous_min_bytes": 62746,
+        "bytes": 62746,
+        "smaller": false,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 0.0,
+        "mean_visible_rgb_delta_libwebp": 0.0
+      },
+      {
+        "path": "images/products/0001/01-display-v2-420w.webp",
+        "previous_min_bytes": 31950,
+        "bytes": 13676,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 10.352941513061523,
+        "mean_visible_rgb_delta_libwebp": 0.7278309464454651
+      },
+      {
+        "path": "images/products/0076/01-display-v2-420w.webp",
+        "previous_min_bytes": 21528,
+        "bytes": 9990,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 8.505882263183594,
+        "mean_visible_rgb_delta_libwebp": 0.7492928504943848
+      },
+      {
+        "path": "images/products/0067/01-display-v2-420w.webp",
+        "previous_min_bytes": 12152,
+        "bytes": 7370,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 7.058823585510254,
+        "mean_visible_rgb_delta_libwebp": 0.8040260076522827
+      },
+      {
+        "path": "images/products/0021/01-display-v2-420w.webp",
+        "previous_min_bytes": 40922,
+        "bytes": 40922,
+        "smaller": false,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 0.0,
+        "mean_visible_rgb_delta_libwebp": 0.0
+      },
+      {
+        "path": "images/products/0030/01-display-v2-420w.webp",
+        "previous_min_bytes": 40340,
+        "bytes": 15382,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 10.682353019714355,
+        "mean_visible_rgb_delta_libwebp": 0.6916303634643555
+      },
+      {
+        "path": "images/products/0023/01-display-v2-420w.webp",
+        "previous_min_bytes": 32746,
+        "bytes": 13686,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 7.129411697387695,
+        "mean_visible_rgb_delta_libwebp": 0.6899840831756592
+      },
+      {
+        "path": "images/products/0091/01-display-v2-420w.webp",
+        "previous_min_bytes": 69994,
+        "bytes": 69994,
+        "smaller": false,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 0.0,
+        "mean_visible_rgb_delta_libwebp": 0.0
+      },
+      {
+        "path": "images/products/0047/01-display-v2-420w.webp",
+        "previous_min_bytes": 18290,
+        "bytes": 9090,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 7.678431510925293,
+        "mean_visible_rgb_delta_libwebp": 0.7628301978111267
+      },
+      {
+        "path": "images/products/0017/01-display-v2-420w.webp",
+        "previous_min_bytes": 55954,
+        "bytes": 24440,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 9.576470375061035,
+        "mean_visible_rgb_delta_libwebp": 0.7316601276397705
+      },
+      {
+        "path": "images/products/0058/01-display-v2-420w.webp",
+        "previous_min_bytes": 36532,
+        "bytes": 15536,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 6.203921794891357,
+        "mean_visible_rgb_delta_libwebp": 0.6252912878990173
+      },
+      {
+        "path": "images/products/0018/01-display-v2-420w.webp",
+        "previous_min_bytes": 34780,
+        "bytes": 16736,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 9.921568870544434,
+        "mean_visible_rgb_delta_libwebp": 0.7565838098526001
+      },
+      {
+        "path": "images/products/0042/01-display-v2-420w.webp",
+        "previous_min_bytes": 50616,
+        "bytes": 50616,
+        "smaller": false,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 0.0,
+        "mean_visible_rgb_delta_libwebp": 0.0
+      },
+      {
+        "path": "images/products/0085/01-display-v2-420w.webp",
+        "previous_min_bytes": 28106,
+        "bytes": 11908,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 9.254901885986328,
+        "mean_visible_rgb_delta_libwebp": 0.6688950657844543
+      },
+      {
+        "path": "images/products/0078/01-display-v2-420w.webp",
+        "previous_min_bytes": 39938,
+        "bytes": 13878,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 9.44705867767334,
+        "mean_visible_rgb_delta_libwebp": 0.6606165766716003
+      },
+      {
+        "path": "images/products/0081/01-display-v2-420w.webp",
+        "previous_min_bytes": 41248,
+        "bytes": 17186,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 7.0,
+        "mean_visible_rgb_delta_libwebp": 0.7661166191101074
+      },
+      {
+        "path": "images/products/0066/01-display-v2-420w.webp",
+        "previous_min_bytes": 17920,
+        "bytes": 8756,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 6.0,
+        "mean_visible_rgb_delta_libwebp": 0.6810165047645569
+      },
+      {
+        "path": "images/products/0069/01-display-v2-420w.webp",
+        "previous_min_bytes": 14588,
+        "bytes": 8154,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 5.0,
+        "mean_visible_rgb_delta_libwebp": 0.6770339608192444
+      },
+      {
+        "path": "images/products/0060/01-display-v2-420w.webp",
+        "previous_min_bytes": 58602,
+        "bytes": 58602,
+        "smaller": false,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 0.0,
+        "mean_visible_rgb_delta_libwebp": 0.0
+      },
+      {
+        "path": "images/products/0065/01-display-v2-420w.webp",
+        "previous_min_bytes": 41100,
+        "bytes": 15266,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 7.2941179275512695,
+        "mean_visible_rgb_delta_libwebp": 0.6126142740249634
+      },
+      {
+        "path": "images/products/0036/01-display-v2-420w.webp",
+        "previous_min_bytes": 48552,
+        "bytes": 22134,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 10.760784149169922,
+        "mean_visible_rgb_delta_libwebp": 0.7145647406578064
+      },
+      {
+        "path": "images/products/0015/01-display-v2-420w.webp",
+        "previous_min_bytes": 51874,
+        "bytes": 21624,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 11.113725662231445,
+        "mean_visible_rgb_delta_libwebp": 0.7176526188850403
+      },
+      {
+        "path": "images/products/0053/01-display-v2-420w.webp",
+        "previous_min_bytes": 78302,
+        "bytes": 27998,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 8.86274528503418,
+        "mean_visible_rgb_delta_libwebp": 0.6788948178291321
+      },
+      {
+        "path": "images/products/0049/01-display-v2-420w.webp",
+        "previous_min_bytes": 61850,
+        "bytes": 61850,
+        "smaller": false,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 0.0,
+        "mean_visible_rgb_delta_libwebp": 0.0
+      },
+      {
+        "path": "images/products/0070/01-display-v2-420w.webp",
+        "previous_min_bytes": 20128,
+        "bytes": 11166,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 13.0,
+        "mean_visible_rgb_delta_libwebp": 0.8066014051437378
+      },
+      {
+        "path": "images/products/0055/01-display-v2-420w.webp",
+        "previous_min_bytes": 40470,
+        "bytes": 15866,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 8.27450942993164,
+        "mean_visible_rgb_delta_libwebp": 0.6915267705917358
+      },
+      {
+        "path": "images/products/0014/01-display-v2-420w.webp",
+        "previous_min_bytes": 54416,
+        "bytes": 22940,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 13.615686416625977,
+        "mean_visible_rgb_delta_libwebp": 0.7559726238250732
+      },
+      {
+        "path": "images/products/0096/01-display-v2-420w.webp",
+        "previous_min_bytes": 75768,
+        "bytes": 75768,
+        "smaller": false,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 0.0,
+        "mean_visible_rgb_delta_libwebp": 0.0
+      },
+      {
+        "path": "images/products/0083/01-display-v2-420w.webp",
+        "previous_min_bytes": 28748,
+        "bytes": 11894,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 9.0,
+        "mean_visible_rgb_delta_libwebp": 0.6858004927635193
+      },
+      {
+        "path": "images/products/0011/01-display-v2-420w.webp",
+        "previous_min_bytes": 60076,
+        "bytes": 20076,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 12.058823585510254,
+        "mean_visible_rgb_delta_libwebp": 0.7757088541984558
+      },
+      {
+        "path": "images/products/0033/01-display-v2-420w.webp",
+        "previous_min_bytes": 54982,
+        "bytes": 17326,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 9.443137168884277,
+        "mean_visible_rgb_delta_libwebp": 0.5377128720283508
+      },
+      {
+        "path": "images/products/0040/01-display-v2-420w.webp",
+        "previous_min_bytes": 40582,
+        "bytes": 23318,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 11.0,
+        "mean_visible_rgb_delta_libwebp": 0.9385778903961182
+      },
+      {
+        "path": "images/products/0013/01-display-v2-420w.webp",
+        "previous_min_bytes": 39604,
+        "bytes": 39604,
+        "smaller": false,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 0.0,
+        "mean_visible_rgb_delta_libwebp": 0.0
+      },
+      {
+        "path": "images/products/0020/01-display-v2-420w.webp",
+        "previous_min_bytes": 41356,
+        "bytes": 18202,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 11.0,
+        "mean_visible_rgb_delta_libwebp": 0.7909011840820312
+      },
+      {
+        "path": "images/products/0057/01-display-v2-420w.webp",
+        "previous_min_bytes": 36762,
+        "bytes": 15734,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 10.56862735748291,
+        "mean_visible_rgb_delta_libwebp": 0.7265537977218628
+      },
+      {
+        "path": "images/products/0016/01-display-v2-420w.webp",
+        "previous_min_bytes": 55954,
+        "bytes": 24440,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 9.576470375061035,
+        "mean_visible_rgb_delta_libwebp": 0.7316601276397705
+      },
+      {
+        "path": "images/products/0039/01-display-v2-420w.webp",
+        "previous_min_bytes": 77160,
+        "bytes": 77160,
+        "smaller": false,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 0.0,
+        "mean_visible_rgb_delta_libwebp": 0.0
+      },
+      {
+        "path": "images/products/0087/01-display-v2-420w.webp",
+        "previous_min_bytes": 22614,
+        "bytes": 9212,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 9.254901885986328,
+        "mean_visible_rgb_delta_libwebp": 0.6195888519287109
+      },
+      {
+        "path": "images/products/0090/01-display-v2-420w.webp",
+        "previous_min_bytes": 49258,
+        "bytes": 22004,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 9.0,
+        "mean_visible_rgb_delta_libwebp": 0.8994174599647522
+      },
+      {
+        "path": "images/products/0097/01-display-v2-420w.webp",
+        "previous_min_bytes": 60588,
+        "bytes": 60588,
+        "smaller": false,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 0.0,
+        "mean_visible_rgb_delta_libwebp": 0.0
+      },
+      {
+        "path": "images/products/0041/01-display-v2-420w.webp",
+        "previous_min_bytes": 64364,
+        "bytes": 23846,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 10.29411792755127,
+        "mean_visible_rgb_delta_libwebp": 0.68267822265625
+      },
+      {
+        "path": "images/products/0084/01-display-v2-420w.webp",
+        "previous_min_bytes": 31140,
+        "bytes": 10672,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 7.592156887054443,
+        "mean_visible_rgb_delta_libwebp": 0.6891872882843018
+      },
+      {
+        "path": "images/products/0056/01-display-v2-420w.webp",
+        "previous_min_bytes": 50362,
+        "bytes": 21884,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 11.317646980285645,
+        "mean_visible_rgb_delta_libwebp": 0.71051025390625
+      },
+      {
+        "path": "images/products/0088/01-display-v2-420w.webp",
+        "previous_min_bytes": 42366,
+        "bytes": 14784,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 9.0,
+        "mean_visible_rgb_delta_libwebp": 0.6663092970848083
+      },
+      {
+        "path": "images/products/0009/01-display-v2-420w.webp",
+        "previous_min_bytes": 34800,
+        "bytes": 14028,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 10.956862449645996,
+        "mean_visible_rgb_delta_libwebp": 0.7213982343673706
+      },
+      {
+        "path": "images/products/0038/01-display-v2-420w.webp",
+        "previous_min_bytes": 81800,
+        "bytes": 81800,
+        "smaller": false,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 0.0,
+        "mean_visible_rgb_delta_libwebp": 0.0
+      },
+      {
+        "path": "images/products/0051/01-display-v2-420w.webp",
+        "previous_min_bytes": 68402,
+        "bytes": 68402,
+        "smaller": false,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 0.0,
+        "mean_visible_rgb_delta_libwebp": 0.0
+      },
+      {
+        "path": "images/products/0019/01-display-v2-420w.webp",
+        "previous_min_bytes": 37258,
+        "bytes": 16962,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 10.784314155578613,
+        "mean_visible_rgb_delta_libwebp": 0.7472400665283203
+      },
+      {
+        "path": "images/products/0012/01-display-v2-420w.webp",
+        "previous_min_bytes": 46836,
+        "bytes": 19252,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 12.360784530639648,
+        "mean_visible_rgb_delta_libwebp": 0.7166139483451843
+      },
+      {
+        "path": "images/products/0032/01-display-v2-420w.webp",
+        "previous_min_bytes": 57268,
+        "bytes": 22416,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 7.0,
+        "mean_visible_rgb_delta_libwebp": 0.743915319442749
+      },
+      {
+        "path": "images/products/0031/01-display-v2-420w.webp",
+        "previous_min_bytes": 67202,
+        "bytes": 20136,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 10.180392265319824,
+        "mean_visible_rgb_delta_libwebp": 0.5357039570808411
+      },
+      {
+        "path": "images/products/0034/01-display-v2-420w.webp",
+        "previous_min_bytes": 61208,
+        "bytes": 18502,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 8.470588684082031,
+        "mean_visible_rgb_delta_libwebp": 0.5352233052253723
+      },
+      {
+        "path": "images/products/0104/01-display-v2-420w.webp",
+        "previous_min_bytes": 46316,
+        "bytes": 14856,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 10.0,
+        "mean_visible_rgb_delta_libwebp": 0.6433466672897339
+      },
+      {
+        "path": "images/products/0052/01-display-v2-420w.webp",
+        "previous_min_bytes": 66110,
+        "bytes": 25682,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 7.12156867980957,
+        "mean_visible_rgb_delta_libwebp": 0.6762617826461792
+      },
+      {
+        "path": "images/products/0089/01-display-v2-420w.webp",
+        "previous_min_bytes": 26046,
+        "bytes": 11374,
+        "smaller": true,
+        "alpha_equal": true,
+        "max_visible_rgb_delta_libwebp": 8.86274528503418,
+        "mean_visible_rgb_delta_libwebp": 0.809427797794342
+      }
+    ]
+  },
+  "model": {
+    "ttfb_ms": 647,
+    "rtt_ms": 215,
+    "new_resource_tcp_setup_ms": 215,
+    "initial_body_window_bytes": 14600,
+    "growth": "doubles every RTT, per response; illustrative, not full TCP congestion/packet-loss modelling",
+    "lighthouse": "12.6.1 desktop, throttling-method=provided, local Chromium154, actual current hardware",
+    "css": "complete initial home CSS retained; no media-delay workaround",
+    "source": "scripts/local-origin-profile.cjs"
+  },
+  "runs": [
+    {
+      "variant": "control-final",
+      "run": 1,
+      "performance": 84.0,
+      "ttfb": 654,
+      "metrics": {
+        "first-contentful-paint": 1470.208,
+        "largest-contentful-paint": 1728.684,
+        "speed-index": 2139,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0.0009629918136634729,
+        "total-byte-weight": 846159
+      },
+      "observedLoad": 1750,
+      "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+    },
+    {
+      "variant": "final",
+      "run": 1,
+      "performance": 89.0,
+      "ttfb": 658,
+      "metrics": {
+        "first-contentful-paint": 1188.351,
+        "largest-contentful-paint": 1471.774,
+        "speed-index": 1916,
+        "total-blocking-time": 46.82999999999993,
+        "cumulative-layout-shift": 0.0009930486910785376,
+        "total-byte-weight": 741349
+      },
+      "observedLoad": 1748,
+      "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+    },
+    {
+      "variant": "control-final",
+      "run": 2,
+      "performance": 84.0,
+      "ttfb": 652,
+      "metrics": {
+        "first-contentful-paint": 1489.504,
+        "largest-contentful-paint": 1708.52,
+        "speed-index": 2154,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0.0009629918136634729,
+        "total-byte-weight": 846159
+      },
+      "observedLoad": 1971,
+      "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+    },
+    {
+      "variant": "final",
+      "run": 2,
+      "performance": 89.0,
+      "ttfb": 659,
+      "metrics": {
+        "first-contentful-paint": 1191.05,
+        "largest-contentful-paint": 1482.82,
+        "speed-index": 1929,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0.001315025829087057,
+        "total-byte-weight": 741349
+      },
+      "observedLoad": 1590,
+      "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+    },
+    {
+      "variant": "control-final",
+      "run": 3,
+      "performance": 84.0,
+      "ttfb": 652,
+      "metrics": {
+        "first-contentful-paint": 1477.276,
+        "largest-contentful-paint": 1735.164,
+        "speed-index": 2152,
+        "total-blocking-time": 1.747000000000071,
+        "cumulative-layout-shift": 0.0009630992576515789,
+        "total-byte-weight": 846159
+      },
+      "observedLoad": 1747,
+      "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+    },
+    {
+      "variant": "final",
+      "run": 3,
+      "performance": 89.0,
+      "ttfb": 656,
+      "metrics": {
+        "first-contentful-paint": 1204.318,
+        "largest-contentful-paint": 1485.217,
+        "speed-index": 1948,
+        "total-blocking-time": 39.9670000000001,
+        "cumulative-layout-shift": 0.0009930486910785376,
+        "total-byte-weight": 741349
+      },
+      "observedLoad": 1601,
+      "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+    }
+  ],
+  "summary": {
+    "control-final": {
+      "performance_runs": [
+        84.0,
+        84.0,
+        84.0
+      ],
+      "median_performance": 84.0,
+      "median_metrics": {
+        "first-contentful-paint": 1477.276,
+        "largest-contentful-paint": 1728.684,
+        "speed-index": 2152,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0.0009629918136634729,
+        "total-byte-weight": 846159
+      }
+    },
+    "final": {
+      "performance_runs": [
+        89.0,
+        89.0,
+        89.0
+      ],
+      "median_performance": 89.0,
+      "median_metrics": {
+        "first-contentful-paint": 1191.05,
+        "largest-contentful-paint": 1482.82,
+        "speed-index": 1929,
+        "total-blocking-time": 39.9670000000001,
+        "cumulative-layout-shift": 0.0009930486910785376,
+        "total-byte-weight": 741349
+      }
+    }
+  },
+  "intermediate_trial": {
+    "runs": [
+      {
+        "variant": "baseline",
+        "run": 1,
+        "performance": 84.0,
+        "ttfb": 655,
+        "metrics": {
+          "first-contentful-paint": 1477.04,
+          "largest-contentful-paint": 1745.463,
+          "speed-index": 2154,
+          "total-blocking-time": 0.049999999999954525,
+          "cumulative-layout-shift": 0.0009630992576515789,
+          "total-byte-weight": 846159
+        },
+        "observedLoad": 1972,
+        "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+      },
+      {
+        "variant": "release",
+        "run": 1,
+        "performance": 89.0,
+        "ttfb": 659,
+        "metrics": {
+          "first-contentful-paint": 1204.783,
+          "largest-contentful-paint": 1491.124,
+          "speed-index": 1893,
+          "total-blocking-time": 42.875,
+          "cumulative-layout-shift": 0.01781382668143126,
+          "total-byte-weight": 741355
+        },
+        "observedLoad": 1550,
+        "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+      },
+      {
+        "variant": "baseline",
+        "run": 2,
+        "performance": 85.0,
+        "ttfb": 655,
+        "metrics": {
+          "first-contentful-paint": 1451.785,
+          "largest-contentful-paint": 1694.501,
+          "speed-index": 2124,
+          "total-blocking-time": 4.288000000000011,
+          "cumulative-layout-shift": 0.0009630992576515789,
+          "total-byte-weight": 846159
+        },
+        "observedLoad": 1967,
+        "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+      },
+      {
+        "variant": "release",
+        "run": 2,
+        "performance": 89.0,
+        "ttfb": 657,
+        "metrics": {
+          "first-contentful-paint": 1186.649,
+          "largest-contentful-paint": 1485.261,
+          "speed-index": 1910,
+          "total-blocking-time": 27.190000000000055,
+          "cumulative-layout-shift": 0.018055336395934676,
+          "total-byte-weight": 741355
+        },
+        "observedLoad": 1587,
+        "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+      },
+      {
+        "variant": "baseline",
+        "run": 3,
+        "performance": 85.0,
+        "ttfb": 653,
+        "metrics": {
+          "first-contentful-paint": 1492.048,
+          "largest-contentful-paint": 1626.132,
+          "speed-index": 2154,
+          "total-blocking-time": 6.830999984741311,
+          "cumulative-layout-shift": 0.0009630992576515789,
+          "total-byte-weight": 846159
+        },
+        "observedLoad": 2191,
+        "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+      },
+      {
+        "variant": "release",
+        "run": 3,
+        "performance": 89.0,
+        "ttfb": 655,
+        "metrics": {
+          "first-contentful-paint": 1196.689,
+          "largest-contentful-paint": 1523.255,
+          "speed-index": 1896,
+          "total-blocking-time": 50.641999999999825,
+          "cumulative-layout-shift": 0.01797481525043552,
+          "total-byte-weight": 741355
+        },
+        "observedLoad": 1539,
+        "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+      }
+    ],
+    "finding": "Earlier painting exposed a 0.018 CLS in percent-positioned hero lights while the trust row entered the streamed document. Final markup establishes flow before those layers; the same base gradient keeps initial background correct. No decoration or animation removed."
+  },
+  "rejected_trials": [
+    "Partial inline CSS with an immediate external stylesheet changed geometry on delayed CSS; reverted.",
+    "Lower image qualities exceeding the same visual-error limits were not shipped.",
+    "An overlapping benchmark preflight was stopped; only the complete isolated runs above are used.",
+    "Header-first inline split improved model FCP to 898ms, but introduced CLS0.042 and TBT107ms. Reverted header split, early-intent bootstrap and extra stylesheets; complete initial CSS retained.",
+    "Offscreen content-visibility candidate was not selected; no new hidden/deferred-rendered sections are shipped."
+  ],
+  "requests": {
+    "control-final": [
+      {
+        "url": "http://127.0.0.1:8169/",
+        "type": "Document",
+        "bytes": 101378,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8169/images/products/0056/01-packed-v1-420w.webp?v=Y20L_HZr4673BamBkB-nJNwQSaQJIG4cxAPeeBucWHw",
+        "type": "Image",
+        "bytes": 50679,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8169/fonts/Vazirmatn-storefront.woff2?v=Anbe1StQyyiq8nepAFQ11wcJgH5wSmCOCafejd8rxXc",
+        "type": "Font",
+        "bytes": 86030,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8169/js/stories.js?v=_7iMNCSf0-VGn1_UoyyuzYP2AgzpSAAD_qrCo56ZhQI",
+        "type": "Script",
+        "bytes": 3200,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8169/js/home.js?v=axd2Ojd4qPc6ClWFyDwKQYR77Wwn_l53lTb78-SUvEw",
+        "type": "Script",
+        "bytes": 3340,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8169/js/product-card-dual.js?v=v3L6LF3ht6nzn_Xn_YIFSTJYyRL-Xtn751g9f-zcpao",
+        "type": "Script",
+        "bytes": 1787,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8169/images/brand/originallogo-160w.webp?v=tSmZFS7ViE6ZJfQZNVn3F0xWhf05MRAO1wabVV8eZB0",
+        "type": "Image",
+        "bytes": 13321,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8169/images/products/0017/01-packed-v1-420w.webp?v=1zPt_rO76yHK7DfP6zjg8Vh2uzGw49cqx6IIE839A9M",
+        "type": "Image",
+        "bytes": 56271,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8169/images/products/0086/01.webp?v=xpdJXrKX2gqSnOyXyrrjZZOmrMOPKuGFodDOezSjCnU",
+        "type": "Image",
+        "bytes": 27097,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8169/js/auth.js?v=-s8RQ9tLdyBlrXoPKRBq_C2-knAv5r4s-iE8oaioJ1g",
+        "type": "Script",
+        "bytes": 6273,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8169/js/site.js?v=fTPZtIcTEn7f76YE8_B-3Lq_yod_0F5ILhlB2qLHVXE",
+        "type": "Script",
+        "bytes": 9117,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8169/js/scroll-reveal.js?v=IHdV1G837535xOh7YE2cw1-Y9TX-DLSRd0sU6JJXoa0",
+        "type": "Script",
+        "bytes": 1398,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8169/images/icons/phone-fluency-64w.webp?v=qKjuaYP08aKnrwUoItdwpyQ6hrrGLjeUNztjLX2dnFQ",
+        "type": "Image",
+        "bytes": 5124,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8169/images/products/0086/01-160w.webp?v=2i2ewDPbPb9dMFGWi0pJ_-rk-13dZSzW2KPK-2U1Yok",
+        "type": "Image",
+        "bytes": 8778,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8169/images/products/0079/01-160w.webp?v=gEJwOQr2NU6fNu2lXqGnBjG8dX75VVppB7c1guUzaXk",
+        "type": "Image",
+        "bytes": 14713,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8169/images/products/0079/01-hero-photo-v1-272w.webp?v=Sviq3LHjX_bvlEGcEG2dIB1rKeAGltE8vCmbfPBMCSs",
+        "type": "Image",
+        "bytes": 33895,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8169/images/products/0094/01-160w.webp?v=ntfwU90EA4DYjG2EBbZAu9L62XZMpQW5rs5CqaduH6M",
+        "type": "Image",
+        "bytes": 10525,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8169/images/products/0080/01-160w.webp?v=T06dgoMCAwhVj7SQplbGWX31dhAy5uf2_mC-WlytCg0",
+        "type": "Image",
+        "bytes": 10329,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8169/images/products/0080/01-hero-photo-v1-272w.webp?v=ULgPOftlmFXqR4DzWVJSJbVgixoZt-d_GyO2wXsIyHY",
+        "type": "Image",
+        "bytes": 32899,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8169/images/products/0075/01-160w.webp?v=xm08IuwCAyy22mCekdBF4JcZ8t23vyCXdiK4tyR50mM",
+        "type": "Image",
+        "bytes": 12933,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8169/images/products/0071/01-160w.webp?v=4mCsRRMTsvhpLlP4UmirhygGfrhpJ_6UojTJJv0E6NA",
+        "type": "Image",
+        "bytes": 10439,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8169/images/products/0060/01-160w.webp?v=cGaZ9AwKC6H9bNq1lqypxrVp3LE1-5IXAgvtbsSU-Tg",
+        "type": "Image",
+        "bytes": 11673,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8169/images/products/0050/01-160w.webp?v=W1-_eCrToMQwp0IkVOKaWDsv4B3pFq1pL-UNAuUmtZA",
+        "type": "Image",
+        "bytes": 13767,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8169/images/products/0003/01-160w.webp?v=Szi1Jv58hrlfMiHbzDCaANAd4tZGqjQU4X6CCrP26YA",
+        "type": "Image",
+        "bytes": 11425,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8169/images/products/0056/01-160w.webp?v=VMjRgQor3hKw4Kpt5hPAqFKeoCuAi78wUZRSqNMEcrE",
+        "type": "Image",
+        "bytes": 10429,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8169/images/products/0056/01-hero-photo-v1-272w.webp?v=dcyrZBuCKZZC7s5apkiCxF8c3zucFRY6RRKca_BoS6U",
+        "type": "Image",
+        "bytes": 36823,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8169/images/products/0017/01-160w.webp?v=_obYxKF5uKC28HR64y4RDDus-njQac9MjRo-OOB9obA",
+        "type": "Image",
+        "bytes": 10899,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8169/images/products/0017/01-hero-photo-v1-272w.webp?v=v-jeMcCOqd9bGxwsEYPqtORiRB1rQXGhJDanQxfx_Oc",
+        "type": "Image",
+        "bytes": 38017,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8169/images/products/0086/01-hero-photo-v1-272w.webp?v=UYo16H6a5lsqmTNskjsUThvFid4jKFYXnc_BcMcEMms",
+        "type": "Image",
+        "bytes": 32227,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8169/images/products/0065/01-160w.webp?v=1nTk0e_PX1rKN-5SrGCx0mL80Ze8I6eRIUtm4CZAbQs",
+        "type": "Image",
+        "bytes": 9268,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8169/images/products/0065/01-hero-photo-v1-272w.webp?v=NlEM9ER45g3iUFrhvHQ3uBf6DCIhKoJFqT0f70i6GBY",
+        "type": "Image",
+        "bytes": 33957,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8169/images/products/0062/01-160w.webp?v=H39axFp-pqHXXDiqx_lgNxZe4m0TYweJNBbpN9CnQ_0",
+        "type": "Image",
+        "bytes": 7922,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8169/images/products/0062/01-hero-photo-v1-272w.webp?v=k7VjHy5RoR5tOnSAzD1Sw0ZehlMZDNZeePx8W78tLQY",
+        "type": "Image",
+        "bytes": 36073,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8169/images/products/0059/01-160w.webp?v=7eweVHCX3aIHcdyWLxAALxr88QoepB1zetAEY4K3-4Q",
+        "type": "Image",
+        "bytes": 9000,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8169/images/products/0032/01-160w.webp?v=dq_zDE3DSx-DfqK01SPp6m_kC67HERnFcu9OPIwAacA",
+        "type": "Image",
+        "bytes": 11409,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8169/images/products/0031/01-160w.webp?v=L3XJ_ELmPiHLWcv6-PBkh1MOwwuQG4NG4Qqy3Hohi0w",
+        "type": "Image",
+        "bytes": 13937,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8169/images/products/0031/01-hero-photo-v1-272w.webp?v=OoG-9zhW0mf82nGWeTOCvA1dLYdm5c4FpZfr6eBFwek",
+        "type": "Image",
+        "bytes": 32545,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8169/images/brand/originallogo.webp?v=GozN8rzIrwNspsseVTERlUoJGbgnyNy7crwsANGzzes",
+        "type": "Other",
+        "bytes": 26505,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8169/api/analytics/visitor",
+        "type": "Fetch",
+        "bytes": 757,
+        "protocol": "http/1.1"
+      }
+    ],
+    "final": [
+      {
+        "url": "http://127.0.0.1:8168/",
+        "type": "Document",
+        "bytes": 73110,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8168/images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw",
+        "type": "Image",
+        "bytes": 22201,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8168/fonts/Vazirmatn-storefront.woff2?v=Anbe1StQyyiq8nepAFQ11wcJgH5wSmCOCafejd8rxXc",
+        "type": "Font",
+        "bytes": 86030,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8168/js/stories.js?v=_7iMNCSf0-VGn1_UoyyuzYP2AgzpSAAD_qrCo56ZhQI",
+        "type": "Script",
+        "bytes": 2920,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8168/js/home.js?v=axd2Ojd4qPc6ClWFyDwKQYR77Wwn_l53lTb78-SUvEw",
+        "type": "Script",
+        "bytes": 3123,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8168/js/product-card-dual.js?v=v3L6LF3ht6nzn_Xn_YIFSTJYyRL-Xtn751g9f-zcpao",
+        "type": "Script",
+        "bytes": 1696,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8168/images/brand/originallogo-160w.webp?v=tSmZFS7ViE6ZJfQZNVn3F0xWhf05MRAO1wabVV8eZB0",
+        "type": "Image",
+        "bytes": 13321,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8168/images/products/0017/01-display-v2-420w.webp?v=RZNNF6xznzKfbOmfgguR1ujpxflbWRSR0FKfWcDFeyM",
+        "type": "Image",
+        "bytes": 24757,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8168/images/icons/phone-fluency-64w.webp?v=qKjuaYP08aKnrwUoItdwpyQ6hrrGLjeUNztjLX2dnFQ",
+        "type": "Image",
+        "bytes": 5124,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8168/images/products/0086/01-display-v2-420w.webp?v=eOlwVrOoW_aIDdWySaVfcIlh3tKg20Sn0DM6qMKyfP0",
+        "type": "Image",
+        "bytes": 13097,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8168/js/auth.js?v=-s8RQ9tLdyBlrXoPKRBq_C2-knAv5r4s-iE8oaioJ1g",
+        "type": "Script",
+        "bytes": 5590,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8168/js/site.js?v=fTPZtIcTEn7f76YE8_B-3Lq_yod_0F5ILhlB2qLHVXE",
+        "type": "Script",
+        "bytes": 7917,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8168/js/scroll-reveal.js?v=IHdV1G837535xOh7YE2cw1-Y9TX-DLSRd0sU6JJXoa0",
+        "type": "Script",
+        "bytes": 1319,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8168/images/products/0079/01-160w.webp?v=gEJwOQr2NU6fNu2lXqGnBjG8dX75VVppB7c1guUzaXk",
+        "type": "Image",
+        "bytes": 14713,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8168/images/products/0079/01-hero-photo-v1-272w.webp?v=Sviq3LHjX_bvlEGcEG2dIB1rKeAGltE8vCmbfPBMCSs",
+        "type": "Image",
+        "bytes": 33895,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8168/images/products/0094/01-160w.webp?v=ntfwU90EA4DYjG2EBbZAu9L62XZMpQW5rs5CqaduH6M",
+        "type": "Image",
+        "bytes": 10525,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8168/images/products/0080/01-160w.webp?v=T06dgoMCAwhVj7SQplbGWX31dhAy5uf2_mC-WlytCg0",
+        "type": "Image",
+        "bytes": 10329,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8168/images/products/0080/01-hero-photo-v1-272w.webp?v=ULgPOftlmFXqR4DzWVJSJbVgixoZt-d_GyO2wXsIyHY",
+        "type": "Image",
+        "bytes": 32899,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8168/images/products/0075/01-160w.webp?v=xm08IuwCAyy22mCekdBF4JcZ8t23vyCXdiK4tyR50mM",
+        "type": "Image",
+        "bytes": 12933,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8168/images/products/0071/01-160w.webp?v=4mCsRRMTsvhpLlP4UmirhygGfrhpJ_6UojTJJv0E6NA",
+        "type": "Image",
+        "bytes": 10439,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8168/images/products/0060/01-160w.webp?v=cGaZ9AwKC6H9bNq1lqypxrVp3LE1-5IXAgvtbsSU-Tg",
+        "type": "Image",
+        "bytes": 11673,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8168/images/products/0050/01-160w.webp?v=W1-_eCrToMQwp0IkVOKaWDsv4B3pFq1pL-UNAuUmtZA",
+        "type": "Image",
+        "bytes": 13767,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8168/images/products/0003/01-160w.webp?v=Szi1Jv58hrlfMiHbzDCaANAd4tZGqjQU4X6CCrP26YA",
+        "type": "Image",
+        "bytes": 11425,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8168/images/products/0056/01-160w.webp?v=VMjRgQor3hKw4Kpt5hPAqFKeoCuAi78wUZRSqNMEcrE",
+        "type": "Image",
+        "bytes": 10429,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8168/images/products/0056/01-hero-photo-v1-272w.webp?v=dcyrZBuCKZZC7s5apkiCxF8c3zucFRY6RRKca_BoS6U",
+        "type": "Image",
+        "bytes": 36823,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8168/images/products/0017/01-160w.webp?v=_obYxKF5uKC28HR64y4RDDus-njQac9MjRo-OOB9obA",
+        "type": "Image",
+        "bytes": 10899,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8168/images/products/0017/01-hero-photo-v1-272w.webp?v=v-jeMcCOqd9bGxwsEYPqtORiRB1rQXGhJDanQxfx_Oc",
+        "type": "Image",
+        "bytes": 38017,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8168/images/products/0086/01-160w.webp?v=2i2ewDPbPb9dMFGWi0pJ_-rk-13dZSzW2KPK-2U1Yok",
+        "type": "Image",
+        "bytes": 8778,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8168/images/products/0086/01-hero-photo-v1-272w.webp?v=UYo16H6a5lsqmTNskjsUThvFid4jKFYXnc_BcMcEMms",
+        "type": "Image",
+        "bytes": 32227,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8168/images/products/0065/01-160w.webp?v=1nTk0e_PX1rKN-5SrGCx0mL80Ze8I6eRIUtm4CZAbQs",
+        "type": "Image",
+        "bytes": 9268,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8168/images/products/0065/01-hero-photo-v1-272w.webp?v=NlEM9ER45g3iUFrhvHQ3uBf6DCIhKoJFqT0f70i6GBY",
+        "type": "Image",
+        "bytes": 33957,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8168/images/products/0062/01-160w.webp?v=H39axFp-pqHXXDiqx_lgNxZe4m0TYweJNBbpN9CnQ_0",
+        "type": "Image",
+        "bytes": 7922,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8168/images/products/0062/01-hero-photo-v1-272w.webp?v=k7VjHy5RoR5tOnSAzD1Sw0ZehlMZDNZeePx8W78tLQY",
+        "type": "Image",
+        "bytes": 36073,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8168/images/products/0059/01-160w.webp?v=7eweVHCX3aIHcdyWLxAALxr88QoepB1zetAEY4K3-4Q",
+        "type": "Image",
+        "bytes": 9000,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8168/images/products/0032/01-160w.webp?v=dq_zDE3DSx-DfqK01SPp6m_kC67HERnFcu9OPIwAacA",
+        "type": "Image",
+        "bytes": 11409,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8168/images/products/0031/01-160w.webp?v=L3XJ_ELmPiHLWcv6-PBkh1MOwwuQG4NG4Qqy3Hohi0w",
+        "type": "Image",
+        "bytes": 13937,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8168/images/products/0031/01-hero-photo-v1-272w.webp?v=OoG-9zhW0mf82nGWeTOCvA1dLYdm5c4FpZfr6eBFwek",
+        "type": "Image",
+        "bytes": 32545,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8168/images/brand/originallogo.webp?v=GozN8rzIrwNspsseVTERlUoJGbgnyNy7crwsANGzzes",
+        "type": "Other",
+        "bytes": 26505,
+        "protocol": "http/1.1"
+      },
+      {
+        "url": "http://127.0.0.1:8168/api/analytics/visitor",
+        "type": "Fetch",
+        "bytes": 757,
+        "protocol": "http/1.1"
+      }
+    ]
+  },
+  "visual_comparison": [
+    {
+      "device": "mobile",
+      "version": "baseline",
+      "width": 390,
+      "height": 844,
+      "geometry": {
+        ".ms-promo-bar": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 42.65625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgba(255, 255, 255, 0.92)"
+        },
+        ".ms-top": {
+          "x": 0,
+          "y": 42.65625,
+          "width": 390,
+          "height": 145.140625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-logo": {
+          "x": 142.3125,
+          "y": 61.234375,
+          "width": 141.390625,
+          "height": 52,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-stories": {
+          "x": 0,
+          "y": 187.796875,
+          "width": 390,
+          "height": 110.5,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-hero": {
+          "x": 0,
+          "y": 298.296875,
+          "width": 390,
+          "height": 311.609375,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-hero-title": {
+          "x": 166.828125,
+          "y": 376.5625,
+          "width": 203.578125,
+          "height": 23.3125,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "19.11px",
+          "color": "rgb(255, 255, 255)"
+        },
+        ".ms-hero-product img": {
+          "x": 19.59375,
+          "y": 376.546875,
+          "width": 135.71875,
+          "height": 96,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(255, 255, 255)"
+        },
+        ".ms-features": {
+          "x": 0,
+          "y": 609.90625,
+          "width": 390,
+          "height": 266.515625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-offers": {
+          "x": 0,
+          "y": 916.421875,
+          "width": 390,
+          "height": 533.9375,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-featured-section": {
+          "x": 0,
+          "y": 1730.71875,
+          "width": 390,
+          "height": 1295.75,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-segments": {
+          "x": 0,
+          "y": 3096.46875,
+          "width": 390,
+          "height": 428.515625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-footer": {
+          "x": 0,
+          "y": 6574.84375,
+          "width": 390,
+          "height": 390,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "13.12px",
+          "color": "rgba(255, 255, 255, 0.82)"
+        }
+      },
+      "totalHeight": 7061,
+      "featured": 8,
+      "offers": 8
+    },
+    {
+      "device": "mobile",
+      "version": "current",
+      "width": 390,
+      "height": 844,
+      "geometry": {
+        ".ms-promo-bar": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 42.65625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgba(255, 255, 255, 0.92)"
+        },
+        ".ms-top": {
+          "x": 0,
+          "y": 42.65625,
+          "width": 390,
+          "height": 145.140625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-logo": {
+          "x": 142.3125,
+          "y": 61.234375,
+          "width": 141.390625,
+          "height": 52,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-stories": {
+          "x": 0,
+          "y": 187.796875,
+          "width": 390,
+          "height": 110.5,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-hero": {
+          "x": 0,
+          "y": 298.296875,
+          "width": 390,
+          "height": 311.609375,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-hero-title": {
+          "x": 166.828125,
+          "y": 376.5625,
+          "width": 203.578125,
+          "height": 23.3125,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "19.11px",
+          "color": "rgb(255, 255, 255)"
+        },
+        ".ms-hero-product img": {
+          "x": 19.59375,
+          "y": 376.546875,
+          "width": 135.71875,
+          "height": 96,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(255, 255, 255)"
+        },
+        ".ms-features": {
+          "x": 0,
+          "y": 609.90625,
+          "width": 390,
+          "height": 266.515625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-offers": {
+          "x": 0,
+          "y": 916.421875,
+          "width": 390,
+          "height": 533.9375,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-featured-section": {
+          "x": 0,
+          "y": 1730.71875,
+          "width": 390,
+          "height": 1295.75,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-segments": {
+          "x": 0,
+          "y": 3096.46875,
+          "width": 390,
+          "height": 428.515625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-footer": {
+          "x": 0,
+          "y": 6574.84375,
+          "width": 390,
+          "height": 390,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "13.12px",
+          "color": "rgba(255, 255, 255, 0.82)"
+        }
+      },
+      "totalHeight": 7061,
+      "featured": 8,
+      "offers": 8
+    },
+    {
+      "device": "tablet",
+      "version": "baseline",
+      "width": 768,
+      "height": 1024,
+      "geometry": {
+        ".ms-promo-bar": {
+          "x": 0,
+          "y": 0,
+          "width": 768,
+          "height": 53.390625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgba(255, 255, 255, 0.92)"
+        },
+        ".ms-top": {
+          "x": 30.734375,
+          "y": 53.390625,
+          "width": 706.546875,
+          "height": 197.5,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-logo": {
+          "x": 573.296875,
+          "y": 91.859375,
+          "width": 141.390625,
+          "height": 52,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-stories": {
+          "x": 0,
+          "y": 250.890625,
+          "width": 768,
+          "height": 252.65625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-hero": {
+          "x": 0,
+          "y": 503.546875,
+          "width": 768,
+          "height": 538.203125,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-hero-title": {
+          "x": 347.828125,
+          "y": 671.765625,
+          "width": 365.125,
+          "height": 36.28125,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "33.6px",
+          "color": "rgb(255, 255, 255)"
+        },
+        ".ms-hero-product img": {
+          "x": 55.046875,
+          "y": 603.15625,
+          "width": 260.78125,
+          "height": 260.78125,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(255, 255, 255)"
+        },
+        ".ms-features": {
+          "x": 0,
+          "y": 1041.75,
+          "width": 768,
+          "height": 322.390625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-offers": {
+          "x": 0,
+          "y": 1408.140625,
+          "width": 768,
+          "height": 834.84375,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-featured-section": {
+          "x": 0,
+          "y": 2612.234375,
+          "width": 768,
+          "height": 760.59375,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-segments": {
+          "x": 0,
+          "y": 3458.828125,
+          "width": 768,
+          "height": 374.453125,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-footer": {
+          "x": 0,
+          "y": 7381.90625,
+          "width": 768,
+          "height": 344,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "13.12px",
+          "color": "rgba(255, 255, 255, 0.82)"
+        }
+      },
+      "totalHeight": 7726,
+      "featured": 8,
+      "offers": 8
+    },
+    {
+      "device": "tablet",
+      "version": "current",
+      "width": 768,
+      "height": 1024,
+      "geometry": {
+        ".ms-promo-bar": {
+          "x": 0,
+          "y": 0,
+          "width": 768,
+          "height": 53.390625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgba(255, 255, 255, 0.92)"
+        },
+        ".ms-top": {
+          "x": 30.734375,
+          "y": 53.390625,
+          "width": 706.546875,
+          "height": 197.5,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-logo": {
+          "x": 573.296875,
+          "y": 91.859375,
+          "width": 141.390625,
+          "height": 52,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-stories": {
+          "x": 0,
+          "y": 250.890625,
+          "width": 768,
+          "height": 252.65625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-hero": {
+          "x": 0,
+          "y": 503.546875,
+          "width": 768,
+          "height": 538.203125,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-hero-title": {
+          "x": 347.828125,
+          "y": 671.765625,
+          "width": 365.125,
+          "height": 36.28125,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "33.6px",
+          "color": "rgb(255, 255, 255)"
+        },
+        ".ms-hero-product img": {
+          "x": 55.046875,
+          "y": 603.15625,
+          "width": 260.78125,
+          "height": 260.78125,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(255, 255, 255)"
+        },
+        ".ms-features": {
+          "x": 0,
+          "y": 1041.75,
+          "width": 768,
+          "height": 322.390625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-offers": {
+          "x": 0,
+          "y": 1408.140625,
+          "width": 768,
+          "height": 834.84375,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-featured-section": {
+          "x": 0,
+          "y": 2612.234375,
+          "width": 768,
+          "height": 760.59375,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-segments": {
+          "x": 0,
+          "y": 3458.828125,
+          "width": 768,
+          "height": 374.453125,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-footer": {
+          "x": 0,
+          "y": 7381.90625,
+          "width": 768,
+          "height": 344,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "13.12px",
+          "color": "rgba(255, 255, 255, 0.82)"
+        }
+      },
+      "totalHeight": 7726,
+      "featured": 8,
+      "offers": 8
+    },
+    {
+      "device": "desktop",
+      "version": "baseline",
+      "width": 1366,
+      "height": 768,
+      "geometry": {
+        ".ms-promo-bar": {
+          "x": 0,
+          "y": 0,
+          "width": 1366,
+          "height": 53.390625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgba(255, 255, 255, 0.92)"
+        },
+        ".ms-top": {
+          "x": 68.3125,
+          "y": 53.390625,
+          "width": 1229.390625,
+          "height": 176.890625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-logo": {
+          "x": 1133.71875,
+          "y": 81.5625,
+          "width": 141.390625,
+          "height": 52,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-stories": {
+          "x": 0,
+          "y": 230.28125,
+          "width": 1366,
+          "height": 251.8125,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-hero": {
+          "x": 0,
+          "y": 482.09375,
+          "width": 1366,
+          "height": 598.203125,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-hero-title": {
+          "x": 618.859375,
+          "y": 670.21875,
+          "width": 640.125,
+          "height": 60.46875,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "56px",
+          "color": "rgb(255, 255, 255)"
+        },
+        ".ms-hero-product img": {
+          "x": 125.625,
+          "y": 582.8125,
+          "width": 420,
+          "height": 322.546875,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(255, 255, 255)"
+        },
+        ".ms-features": {
+          "x": 0,
+          "y": 1080.296875,
+          "width": 1366,
+          "height": 322.390625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-offers": {
+          "x": 0,
+          "y": 1446.6875,
+          "width": 1366,
+          "height": 1096.265625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-featured-section": {
+          "x": 0,
+          "y": 2922.203125,
+          "width": 1366,
+          "height": 998.9375,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-segments": {
+          "x": 0,
+          "y": 4007.140625,
+          "width": 1366,
+          "height": 359.3125,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-footer": {
+          "x": 0,
+          "y": 7123.046875,
+          "width": 1366,
+          "height": 344,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "13.12px",
+          "color": "rgba(255, 255, 255, 0.82)"
+        }
+      },
+      "totalHeight": 7467,
+      "featured": 8,
+      "offers": 8
+    },
+    {
+      "device": "desktop",
+      "version": "current",
+      "width": 1366,
+      "height": 768,
+      "geometry": {
+        ".ms-promo-bar": {
+          "x": 0,
+          "y": 0,
+          "width": 1366,
+          "height": 53.390625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgba(255, 255, 255, 0.92)"
+        },
+        ".ms-top": {
+          "x": 68.3125,
+          "y": 53.390625,
+          "width": 1229.390625,
+          "height": 176.890625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-logo": {
+          "x": 1133.71875,
+          "y": 81.5625,
+          "width": 141.390625,
+          "height": 52,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-stories": {
+          "x": 0,
+          "y": 230.28125,
+          "width": 1366,
+          "height": 251.8125,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-hero": {
+          "x": 0,
+          "y": 482.09375,
+          "width": 1366,
+          "height": 598.203125,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-hero-title": {
+          "x": 618.859375,
+          "y": 670.21875,
+          "width": 640.125,
+          "height": 60.46875,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "56px",
+          "color": "rgb(255, 255, 255)"
+        },
+        ".ms-hero-product img": {
+          "x": 125.625,
+          "y": 582.8125,
+          "width": 420,
+          "height": 322.546875,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(255, 255, 255)"
+        },
+        ".ms-features": {
+          "x": 0,
+          "y": 1080.296875,
+          "width": 1366,
+          "height": 322.390625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-offers": {
+          "x": 0,
+          "y": 1446.6875,
+          "width": 1366,
+          "height": 1096.265625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-featured-section": {
+          "x": 0,
+          "y": 2922.203125,
+          "width": 1366,
+          "height": 998.9375,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-segments": {
+          "x": 0,
+          "y": 4007.140625,
+          "width": 1366,
+          "height": 359.3125,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-footer": {
+          "x": 0,
+          "y": 7123.046875,
+          "width": 1366,
+          "height": 344,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "13.12px",
+          "color": "rgba(255, 255, 255, 0.82)"
+        }
+      },
+      "totalHeight": 7467,
+      "featured": 8,
+      "offers": 8
+    }
+  ],
+  "source_sha256": {
+    "deploy/linux/nginx-movasseghi.conf": "fa448d4a62d6bd922f4ce9a4c9eed2f5809ad596ef9ceeb1b5e36f29f574edc5",
+    "deploy/linux/verify-home.py": "3bd894df35315b55ab3f38793ac1bae0925a0546fa474852d8fd9164a45f4fbc",
+    "scripts/verify-proxy-cache.py": "7fbe88afd1643cb866f1284e66f51100444552d2cc71b671fd21b7e86072afb0",
+    "scripts/local-origin-profile.cjs": "d225a7fcee046e56bbd071b183c85a4adf694975e5385114dfc88f2f49e82e78",
+    "src/MovasseghiShop.Web/Services/ImageOptimizerService.cs": "60e8aa88ba9a49d3639f773acae639d79d739b3eb64a02251791efc58dd139bd",
+    "src/MovasseghiShop.Web/Services/ResponsiveImageService.cs": "ea83e764b7fd6d26f109dcb677f832eb9eab39517e53ef557e6d6968e11ab754",
+    "src/MovasseghiShop.Web/Views/Home/Index.cshtml": "db555670df903eed70fbfa540adc7f9183b5a430ec9a5d98b80638695ae7580a",
+    "src/MovasseghiShop.Web/wwwroot/css/site.css": "5104298581a38e2335eb8cf1381e8ae9ef0a3f0949911779246a6508d2fafd9b",
+    "src/MovasseghiShop.Web/wwwroot/css/critical-home.css": "1d67befb2935d5bd9df630e4fd1ae96e27972e278939491f001f5dd8946509b4",
+    "src/MovasseghiShop.Web/wwwroot/css/storefront-home.bundle.css": "e8a3c66567fccb3c4d6ed527aa25a96997aa9e43b543f3ad62406629ebdf3a09",
+    "src/MovasseghiShop.Web/wwwroot/css/storefront.bundle.css": "088a8ae7d3d936d988a32d2ee45eec0d0183e9459a626dbb186f2ec63f14c10f"
+  },
+  "remaining": [
+    "Actual Grade A/Performance>95 not measured or achieved here; selected local model median89.",
+    "Production HTTP/2, CDN and exact two307 redirect headers remain unavailable.",
+    "Runtime egress is restricted with no allowed user hosts; saved environment draft contains the IP and gtmetrix.com but is not applied.",
+    "No claim that optimizing HTML/image payload alone can guarantee a remote lab score."
+  ],
+  "header_split_rejected_runs": [
+    {
+      "variant": "control-header3",
+      "run": 1,
+      "performance": 84.0,
+      "ttfb": 655,
+      "metrics": {
+        "first-contentful-paint": 1490.668,
+        "largest-contentful-paint": 1731.571,
+        "speed-index": 2165,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0.0009629918136634729,
+        "total-byte-weight": 846159
+      },
+      "observedLoad": 1975,
+      "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+    },
+    {
+      "variant": "header3",
+      "run": 1,
+      "performance": 89.0,
+      "ttfb": 668,
+      "metrics": {
+        "first-contentful-paint": 897.787,
+        "largest-contentful-paint": 1582.513,
+        "speed-index": 1843,
+        "total-blocking-time": 106.85799999999995,
+        "cumulative-layout-shift": 0.04198305087875751,
+        "total-byte-weight": 744838
+      },
+      "observedLoad": 1628,
+      "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+    }
+  ],
+  "latest_runtime_access_check": {
+    "at": "2026-10-31T08:53:48Z",
+    "site": "HTTP403 from environment envoy",
+    "gtmetrix": "CONNECT403 from environment envoy",
+    "meaning": "No live origin headers or fresh GT score were obtained."
+  }
+}

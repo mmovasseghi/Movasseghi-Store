@@ -220,7 +220,7 @@ body.ms-drawer-open,body.ms-modal-open,body.ms-sheet-open{overflow:hidden}
 /* Hero — content-driven height (no fixed tall box) */
 .ms-hero{padding:.5rem 0 1rem;width:100%;max-width:100%}
 .ms-hero-wrap{width:100%;margin:0 auto;max-width:none;box-sizing:border-box;padding-inline:0}
-.ms-hero-stage{position:relative;width:100%;border-radius:var(--r-xl);overflow:hidden;isolation:isolate;box-shadow:var(--shadow-lg);display:flex;flex-direction:column}
+.ms-hero-stage{position:relative;width:100%;background:linear-gradient(135deg,var(--c-primary-dark) 0%,var(--c-primary) 45%,var(--c-accent) 100%);border-radius:var(--r-xl);overflow:hidden;isolation:isolate;box-shadow:var(--shadow-lg);display:flex;flex-direction:column}
 .ms-hero-floats,.ms-hero-float{display:none!important}
 .ms-hero-aurora{position:absolute;inset:0;background:linear-gradient(135deg,var(--c-primary-dark) 0%,var(--c-primary) 45%,var(--c-accent) 100%);z-index:0}
 .ms-hero-aurora-2{opacity:.55;background:linear-gradient(225deg,transparent 30%,rgba(201,168,76,.25) 70%,var(--c-accent-light) 100%)}

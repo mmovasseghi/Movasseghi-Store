@@ -1,0 +1,363 @@
+{
+  "id": "f2uWzHy9",
+  "url": "https://gtmetrix.com/reports/185.93.88.81/f2uWzHy9/",
+  "source": "Ali-supplied complete text transcript and four screenshots; not independently retrieved",
+  "tested_url": "http://185.93.88.81/",
+  "generated": "2026-10-30T23:11:00-07:00",
+  "location": "Seattle, WA, USA",
+  "browser": "Chrome 154.0.0.0",
+  "lighthouse": "12.6.1",
+  "connection_type": null,
+  "deployed_commit": null,
+  "grade": "B",
+  "performance": 79,
+  "structure": 95,
+  "metrics": {
+    "fcp_ms": 1900,
+    "speed_index_ms": 2200,
+    "lcp_summary_ms": 2100,
+    "lcp_element_audit_ms": 2050,
+    "tti_ms": 1900,
+    "tbt_ms": 0,
+    "cls": 0
+  },
+  "browser_timings_ms": {
+    "redirect": 215,
+    "connection": 217,
+    "backend": 215,
+    "ttfb": 647,
+    "dom_interactive": 1700,
+    "dom_content_loaded": 1700,
+    "first_paint": 1900,
+    "onload": 2000,
+    "fully_loaded": 2300
+  },
+  "page": {
+    "compressed_kb": 466,
+    "uncompressed_kb": 752,
+    "requests": 23,
+    "images_kb": 259,
+    "html_kb": 99,
+    "font_kb": 84
+  },
+  "audits": [
+    {
+      "row": "S1",
+      "id": "gt-cdn",
+      "name": "Use a Content Delivery Network (CDN)",
+      "impact": "Medium-Low",
+      "summary": "17 resources",
+      "action_and_limit": "OPEN: infrastructure not changed; local Lighthouse does not implement GT CDN scoring."
+    },
+    {
+      "row": "S2",
+      "id": "dom-size",
+      "name": "Avoid an excessive DOM size",
+      "impact": "Low",
+      "summary": "1403 elements; alternate 1413",
+      "action_and_limit": "OPEN: preserve all 8+8 products, icons and the repaired continuous marquee; no DOM hiding."
+    },
+    {
+      "row": "S3",
+      "id": "uses-http2",
+      "name": "Use HTTP/2 for all resources",
+      "impact": "Low",
+      "summary": "430 ms estimated savings",
+      "action_and_limit": "OPEN: production remains HTTP on IP; proxy_http_version 1.1 does not enable browser HTTP/2."
+    },
+    {
+      "row": "S4",
+      "id": "redirects",
+      "name": "Avoid multiple page redirects",
+      "impact": "Low",
+      "summary": "216 ms estimated savings",
+      "action_and_limit": "OPEN: two 307s; Location/Non-Authoritative-Reason not captured; no speculative redirect change."
+    },
+    {
+      "row": "S5",
+      "id": "critical-request-chains",
+      "name": "Avoid chaining critical requests",
+      "impact": "Low",
+      "summary": "1 chain",
+      "action_and_limit": "Early matching LCP/font preloads retained; reduce the real image payload. Expanded actual chain unavailable."
+    },
+    {
+      "row": "S6",
+      "id": "long-tasks",
+      "name": "Avoid long main-thread tasks",
+      "impact": "Low",
+      "summary": "4 tasks",
+      "action_and_limit": "No new JS introduced; preserve animation and interactions. Keep measured local TBT separate from real GT TBT=0."
+    },
+    {
+      "row": "S7",
+      "id": "uses-passive-event-listeners",
+      "name": "Use passive listeners to improve scrolling performance",
+      "impact": "Low",
+      "summary": "1 event listener",
+      "action_and_limit": "OPEN details: current home touchstart/touchend and intent warm-up listeners are explicitly passive; offending report URL/handler absent."
+    },
+    {
+      "row": "S8",
+      "id": "server-response-time",
+      "name": "Reduce initial server response time",
+      "impact": "Low",
+      "summary": "215 ms",
+      "action_and_limit": "Guest cache safety preserved. Measured local compression CPU/TTFB is not a claim about Seattle origin latency."
+    },
+    {
+      "row": "S9",
+      "id": "total-byte-weight",
+      "name": "Avoid enormous network payloads",
+      "impact": "Low",
+      "summary": "466 KB",
+      "action_and_limit": "Smaller quality-gated 420px product derivatives and single gzip at nginx; all original uploads preserved."
+    },
+    {
+      "row": "S10",
+      "id": "unused-css-rules",
+      "name": "Reduce unused CSS",
+      "impact": "Low",
+      "summary": "21.7 KB estimated savings",
+      "action_and_limit": "OPEN: partial-CSS trial rejected after delayed-load geometry differences. Full initial styling retained."
+    },
+    {
+      "row": "S11",
+      "id": "bootup-time",
+      "name": "Reduce JavaScript execution time",
+      "impact": "Informational",
+      "summary": "17 ms",
+      "action_and_limit": "Preserve current lightweight initialization; no claimed extra JS win."
+    },
+    {
+      "row": "S12",
+      "id": "largest-contentful-paint-element",
+      "name": "Largest Contentful Paint element",
+      "impact": "Informational",
+      "summary": "2050 ms",
+      "action_and_limit": "Preload and selected responsive resource validated; new derivative is quality 100, not lossless."
+    },
+    {
+      "row": "S13",
+      "id": "layout-shifts",
+      "name": "Avoid large layout shifts",
+      "impact": "Informational",
+      "summary": "1 shift; overall CLS=0",
+      "action_and_limit": "Repair streamed hero percentage-layer shift exposed by earlier paint; preserve decorations and animations."
+    },
+    {
+      "row": "S14",
+      "id": "mainthread-work-breakdown",
+      "name": "Minimize main-thread work",
+      "impact": "Informational",
+      "summary": "1.6 s",
+      "action_and_limit": "Keep animations and all content; selected patch changes codec/transport and safe SSR layer order."
+    },
+    {
+      "row": "S15",
+      "id": "third-party-summary",
+      "name": "Reduce impact of third-party code",
+      "impact": "Informational",
+      "summary": "181 B",
+      "action_and_limit": "No new third-party code."
+    },
+    {
+      "row": "S16",
+      "id": "legacy-javascript",
+      "name": "Avoid legacy JavaScript",
+      "impact": "Informational",
+      "summary": "No numeric summary",
+      "action_and_limit": "No new runtime dependency."
+    },
+    {
+      "row": "S17",
+      "id": "render-blocking-resources",
+      "name": "Eliminate render-blocking resources",
+      "impact": "Informational",
+      "summary": "0 ms estimated savings",
+      "action_and_limit": "Keep complete inline home styling; no artificial CSS delay."
+    },
+    {
+      "row": "S18",
+      "id": "user-timings",
+      "name": "User Timing marks and measures",
+      "impact": "Informational",
+      "summary": "No numeric summary",
+      "action_and_limit": "Do not substitute custom timing marks for browser metrics."
+    }
+  ],
+  "waterfall": [
+    {
+      "row": 1,
+      "name": "/",
+      "status": 307,
+      "size_kb_approx": 0,
+      "duration_ms_approx": 0
+    },
+    {
+      "row": 2,
+      "name": "/",
+      "status": 307,
+      "size_kb_approx": 0,
+      "duration_ms_approx": 0
+    },
+    {
+      "row": 3,
+      "name": "/",
+      "status": 200,
+      "size_kb_approx": 99,
+      "duration_ms_approx": 1100
+    },
+    {
+      "row": 4,
+      "name": "01-packed-v1-420w.webp?v=...",
+      "status": 200,
+      "size_kb_approx": 49.5,
+      "duration_ms_approx": 846
+    },
+    {
+      "row": 5,
+      "name": "Vazirmatn-storefront.woff2?v=...",
+      "status": 200,
+      "size_kb_approx": 84,
+      "duration_ms_approx": 862
+    },
+    {
+      "row": 6,
+      "name": "stories.js?v=...",
+      "status": 200,
+      "size_kb_approx": 3.13,
+      "duration_ms_approx": 433
+    },
+    {
+      "row": 7,
+      "name": "home.js?v=...",
+      "status": 200,
+      "size_kb_approx": 2.65,
+      "duration_ms_approx": 434
+    },
+    {
+      "row": 8,
+      "name": "product-card-dual.js?v=...",
+      "status": 200,
+      "size_kb_approx": 1.75,
+      "duration_ms_approx": 444
+    },
+    {
+      "row": 9,
+      "name": "originallogo.webp?v=...",
+      "status": 200,
+      "size_kb_approx": 10.3,
+      "duration_ms_approx": 219
+    },
+    {
+      "row": 10,
+      "name": "01-packed-v1-420w.webp?v=...",
+      "status": 200,
+      "size_kb_approx": 54.9,
+      "duration_ms_approx": 659
+    },
+    {
+      "row": 11,
+      "name": "01.webp?v=...",
+      "status": 200,
+      "size_kb_approx": 26.4,
+      "duration_ms_approx": 455
+    },
+    {
+      "row": 12,
+      "name": "phone-fluency-64w.webp?v=...",
+      "status": 200,
+      "size_kb_approx": 4.99,
+      "duration_ms_approx": 219
+    },
+    {
+      "row": 13,
+      "name": "01-160w.webp?v=...",
+      "status": 200,
+      "size_kb_approx": 14.4,
+      "duration_ms_approx": 216
+    },
+    {
+      "row": 14,
+      "name": "01-hero-photo-v1-272w.webp?v=...",
+      "status": 200,
+      "size_kb_approx": 33.1,
+      "duration_ms_approx": 430
+    },
+    {
+      "row": 15,
+      "name": "01-160w.webp?v=...",
+      "status": 200,
+      "size_kb_approx": 10.3,
+      "duration_ms_approx": 219
+    },
+    {
+      "row": 16,
+      "name": "01-160w.webp?v=...",
+      "status": 200,
+      "size_kb_approx": 10.1,
+      "duration_ms_approx": 228
+    },
+    {
+      "row": 17,
+      "name": "01-hero-photo-v1-272w.webp?v=...",
+      "status": 200,
+      "size_kb_approx": 32.1,
+      "duration_ms_approx": 427
+    },
+    {
+      "row": 18,
+      "name": "01-160w.webp?v=...",
+      "status": 200,
+      "size_kb_approx": 12.6,
+      "duration_ms_approx": 431
+    },
+    {
+      "row": 19,
+      "name": "auth.js?v=...",
+      "status": 200,
+      "size_kb_approx": 6.13,
+      "duration_ms_approx": 317
+    },
+    {
+      "row": 20,
+      "name": "site.js?v=...",
+      "status": 200,
+      "size_kb_approx": 8.91,
+      "duration_ms_approx": 317
+    },
+    {
+      "row": 21,
+      "name": "scroll-reveal.js?v=...",
+      "status": 200,
+      "size_kb_approx": 1.37,
+      "duration_ms_approx": 330
+    },
+    {
+      "row": 22,
+      "name": "originallogo.webp?v=...",
+      "status": "canceled",
+      "size_kb_approx": 0,
+      "duration_ms_approx": 3
+    },
+    {
+      "row": 23,
+      "name": "visitor",
+      "status": 200,
+      "size_kb_approx": 0,
+      "duration_ms_approx": 227
+    }
+  ],
+  "crux": "No data; no actual INP value available",
+  "video": "Available in UI; full playback restricted",
+  "history": "Supplied series E/28/84 -> B/80/94 -> B/79/95; latest fully loaded 2.3s and TBT0 improved, FCP/LCP worsened",
+  "alerts": "No Alerts set; owner-only details",
+  "limitations": [
+    "Most expanded audit file/element details and HAR unavailable.",
+    "No-impact names not captured.",
+    "Repeated waterfall basenames are not unique full URLs; do not infer their product IDs.",
+    "Exact viewport/connection setting and deployed commit not supplied.",
+    "No fresh actual GT retest performed by this environment."
+  ]
+}

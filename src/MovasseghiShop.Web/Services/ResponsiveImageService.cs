@@ -13,6 +13,9 @@ public sealed class ResponsiveImageService(IWebHostEnvironment env, IFileVersion
     public const string HeroSizes = "(min-width: 768px) 420px, (max-width: 480px) 35vw, 240px";
     public const int PackedWidth = 420;
     public static string PackedVariant(string path) => VariantStem(path) + $"-packed-v1-{PackedWidth}w.webp";
+    public static string StudioVariant(string path) => VariantStem(path) + $"-display-v2-{PackedWidth}w.webp";
+    public static bool IsStudioProduct(string path) => !IsPhotographic(path)
+        && path.Replace('\\', '/').Contains("/images/products/", StringComparison.OrdinalIgnoreCase);
     public static readonly int[] Widths = [64, 128, 160, 192, 256, 272, 320, 384, 420, 480, 560, 640, 960, 1400];
     // Separate names make existing lossless derivatives safe to keep while
     // deploying the photographic encoding policy. Originals are never replaced.
@@ -77,7 +80,9 @@ public sealed class ResponsiveImageService(IWebHostEnvironment env, IFileVersion
             if (width >= size.Width) continue;
             var normal = $"{stem}-{width}w.webp";
             var paths = width == PackedWidth && !IsPhotographic(clean)
-                ? new[] { normal, PackedVariant(clean) } : new[] { normal };
+                ? IsStudioProduct(clean) ? new[] { normal, PackedVariant(clean), StudioVariant(clean) }
+                    : new[] { normal, PackedVariant(clean) }
+                : new[] { normal };
             string? best = null;
             var bestLength = info.Length;
             foreach (var candidate in paths)

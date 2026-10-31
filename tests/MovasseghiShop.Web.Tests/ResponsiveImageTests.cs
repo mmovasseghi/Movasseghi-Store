@@ -249,6 +249,10 @@ public sealed class ResponsiveImageTests : IDisposable
             var pixelsB = new Rgba32[pixelsA.Length];
             a.CopyPixelDataTo(pixelsA); b.CopyPixelDataTo(pixelsB);
             Assert.Equal(pixelsA, pixelsB); // Includes RGB under transparent pixels.
+            using var rejectedDisplay = await Image.LoadAsync<Rgba32>(Path.Combine(Folder, "plate-display-v2-420w.webp"));
+            var fallback = new Rgba32[pixelsA.Length];
+            rejectedDisplay.CopyPixelDataTo(fallback);
+            Assert.Equal(pixelsA, fallback); // Noisy lossy output must fall back to exact lossless pixels.
         }
         var service = new ResponsiveImageService(Environment, new Versions());
         var context = new DefaultHttpContext();
@@ -263,6 +267,50 @@ public sealed class ResponsiveImageTests : IDisposable
         var stamp = File.GetLastWriteTimeUtc(packed);
         Assert.Equal(0, (await Optimizer.OptimizeAllAsync()).Rewritten);
         Assert.Equal(stamp, File.GetLastWriteTimeUtc(packed));
+    }
+
+    [Fact]
+    public async Task Studio_display_preserves_alpha_and_bounds_visible_error_without_replacing_originals()
+    {
+        Directory.CreateDirectory(Folder);
+        var path = Path.Combine(Folder, "studio.webp");
+        using (var source = new Image<Rgba32>(800, 800))
+        {
+            var random = new Random(17);
+            for (var y = 0; y < 800; y++) for (var x = 0; x < 800; x++)
+            {
+                var radius = Math.Sqrt(Math.Pow((x - 400) / 330d, 2) + Math.Pow((y - 400) / 280d, 2));
+                var alpha = (byte)Math.Clamp((1.01 - radius) * 25500, 0, 255);
+                var gray = (byte)(220 + x / 40 + random.Next(12));
+                source[x, y] = new Rgba32(gray, gray, gray, alpha);
+            }
+            await source.SaveAsWebpAsync(path, new WebpEncoder { FileFormat = WebpFileFormatType.Lossless, TransparentColorMode = WebpTransparentColorMode.Preserve });
+        }
+        var original = await File.ReadAllBytesAsync(path);
+        Assert.Equal(0, (await Optimizer.OptimizeAllAsync()).Failed);
+        Assert.Equal(original, await File.ReadAllBytesAsync(path));
+        var packed = Path.Combine(Folder, "studio-packed-v1-420w.webp");
+        var display = Path.Combine(Folder, "studio-display-v2-420w.webp");
+        Assert.True(new FileInfo(display).Length < new FileInfo(packed).Length);
+        using var reference = await Image.LoadAsync<Rgba32>(packed);
+        using var actual = await Image.LoadAsync<Rgba32>(display);
+        Assert.Equal(reference.Size, actual.Size);
+        long error = 0, opacity = 0;
+        for (var y = 0; y < reference.Height; y++) for (var x = 0; x < reference.Width; x++)
+        {
+            var a = reference[x, y]; var b = actual[x, y];
+            Assert.Equal(a.A, b.A);
+            foreach (var difference in new[] { Math.Abs(a.R - b.R), Math.Abs(a.G - b.G), Math.Abs(a.B - b.B) })
+            {
+                Assert.True(difference * a.A <= 16 * 255);
+                error += difference * a.A;
+            }
+            opacity += a.A;
+        }
+        Assert.True(error > 0); // A real quality-100 display derivative, not the fallback.
+        Assert.True(error <= opacity * 3);
+        var selected = new ResponsiveImageService(Environment, new Versions()).Get("/images/products/test/studio.webp", new DefaultHttpContext())!;
+        Assert.Contains("studio-display-v2-420w.webp?v=test 420w", selected.SrcSet);
     }
 
     public void Dispose() { if (Directory.Exists(root)) Directory.Delete(root, true); }

@@ -2,6 +2,7 @@
 """Exercise the production nginx rules against an isolated local upstream."""
 import http.server
 import http.client
+import gzip
 import os
 from pathlib import Path
 import shutil
@@ -21,15 +22,21 @@ if not NGINX:
 
 class Upstream(http.server.BaseHTTPRequestHandler):
     def do_GET(self):
+        self.server.encodings.append((self.path, self.headers.get("Accept-Encoding", "")))
         self.send_response(404 if "missing" in self.path else 200)
         if "set_cookie" in self.path:
             self.send_header("Set-Cookie", "test-session=unique; HttpOnly")
         self.send_header("Cache-Control", "private, no-store" if "private" in self.path else "public, max-age=60")
+        if "compression-probe" in self.path:
+            self.send_header("Content-Type", "text/html")
         self.end_headers()
-        self.wfile.write(b"local upstream response")
+        self.wfile.write(COMPRESSION_BODY if "compression-probe" in self.path else b"local upstream response")
 
     def log_message(self, *args):
         pass
+
+
+COMPRESSION_BODY = ("<p>فروشگاه موثقی — compressed once at nginx</p>" * 600).encode()
 
 
 def free_port():
@@ -41,6 +48,7 @@ def free_port():
 with tempfile.TemporaryDirectory(prefix="movasseghi-nginx-") as temporary:
     directory = Path(temporary)
     upstream = http.server.ThreadingHTTPServer(("127.0.0.1", 0), Upstream)
+    upstream.encodings = []
     threading.Thread(target=upstream.serve_forever, daemon=True).start()
     port = free_port()
     site = (ROOT / "deploy/linux/nginx-movasseghi.conf").read_text()
@@ -124,7 +132,21 @@ http {{
         for query, expected in [("", "max-age=3600"), ("?v=contenthash", "max-age=31536000, immutable")]:
             status, headers = request("/css/critical-home.css" + query)
             assert status == 200 and expected in headers["Cache-Control"]
-        print("nginx syntax, public cache HIT, analytics cookie, session/cart bypass, private paths, Set-Cookie, private headers, errors and asset versioning: PASS")
+        for encoding in ["gzip", "identity"]:
+            for cache in ["MISS", "HIT"]:
+                req = urllib.request.Request(f"http://127.0.0.1:{port}/Home?compression-probe=1", headers={"Accept-Encoding": encoding})
+                with urllib.request.urlopen(req, timeout=5) as response:
+                    body = response.read()
+                    assert response.headers["X-Cache"] == cache
+                    if encoding == "gzip":
+                        assert response.headers["Content-Encoding"] == "gzip"
+                        assert gzip.decompress(body) == COMPRESSION_BODY
+                        assert len(body) < len(COMPRESSION_BODY) // 4
+                    else:
+                        assert response.headers.get("Content-Encoding") is None
+                        assert body == COMPRESSION_BODY
+        assert all(not encoding for path, encoding in upstream.encodings if "compression-probe" in path)
+        print("nginx syntax, guest/private cache safety, asset versioning, single gzip compression and identity responses: PASS")
     finally:
         process.terminate()
         process.wait(timeout=10)

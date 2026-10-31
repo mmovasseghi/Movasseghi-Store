@@ -6,6 +6,7 @@ from pathlib import Path
 import threading
 import unittest
 from urllib.parse import urlsplit
+from urllib.error import HTTPError
 
 ROOT = Path(__file__).resolve().parents[2]
 spec = importlib.util.spec_from_file_location('release_smoke', ROOT / 'deploy/linux/verify-home.py')
@@ -22,6 +23,8 @@ NGINX_HTML = (HTML.replace('/images/hero-lcp.webp', '/images/hero-lcp.webp?v=tes
               + '<link rel="preload" as="font" href="/fonts/test.woff2?v=test">'
               + '<template><link rel="stylesheet" href="/css/storefront-cart.bundle.css?v=test"></template>')
 
+RESPONSIVE_HTML = HTML.replace('as="image"', 'as="image" imagesrcset="/images/hero-display-v2-420w.webp?v=test 420w" imagesizes="420px"').replace('fetchpriority="high"', 'fetchpriority="high" srcset="/images/hero-display-v2-420w.webp?v=test 420w" sizes="420px"')
+
 class Handler(http.server.BaseHTTPRequestHandler):
     def do_GET(self):
         mode = self.server.mode
@@ -31,14 +34,19 @@ class Handler(http.server.BaseHTTPRequestHandler):
         if path == '/':
             body = (NGINX_HTML if mode.startswith("nginx-") else HTML).encode()
             if mode == "nginx-no-version": body = NGINX_HTML.replace("?v=test", "").encode()
+            if mode.startswith('responsive-'):
+                body = RESPONSIVE_HTML.encode()
+                if mode == 'responsive-mismatch': body = RESPONSIVE_HTML.replace('imagesizes="420px"', 'imagesizes="600px"').encode()
             if mode == 'counts': body = HTML.replace('<a class="ms-feat-card"></a>', '', 1).encode()
             if mode == 'home-error': status = 500
             if mode == 'redirect':
                 self.send_response(302); self.send_header('Location', '/elsewhere'); self.end_headers(); return
-        elif path == '/images/hero-lcp.webp':
+        elif path in ['/images/hero-lcp.webp', '/images/hero-display-v2-420w.webp']:
             mime, body = 'image/webp', b'RIFF\x04\0\0\0WEBP'
             if mode == 'image-error': status = 404
             if mode == 'invalid-image': body = b'<html>not an image</html>'
+            if path.endswith('display-v2-420w.webp') and mode == 'responsive-missing': status = 404
+            if path.endswith('display-v2-420w.webp') and mode == 'responsive-wrong-type': mime = 'text/html'
         elif path == '/Home/Stories.json':
             mime, body = 'application/json', b'[{}]' if mode != 'stories' else b'[]'
         elif path.endswith('.css'):
@@ -111,6 +119,18 @@ class SmokeTests(unittest.TestCase):
         with contextlib.redirect_stdout(io.StringIO()): smoke.verify(url)
         with self.assertRaises(RuntimeError): smoke.verify(url, check_nginx=True)
         with contextlib.redirect_stdout(io.StringIO()): smoke.verify(url, host='shop.test', check_nginx=True)
+
+    def test_responsive_lcp_candidates_are_fetched_and_validated(self):
+        self.server.mode = 'responsive-good'
+        with contextlib.redirect_stdout(io.StringIO()):
+            smoke.verify(f'http://127.0.0.1:{self.server.server_port}')
+
+    def test_responsive_lcp_mismatch_and_broken_candidate_fail_release(self):
+        for mode in ['responsive-mismatch', 'responsive-missing', 'responsive-wrong-type']:
+            with self.subTest(mode=mode):
+                self.server.mode = mode
+                with self.assertRaises((RuntimeError, HTTPError)):
+                    smoke.verify(f'http://127.0.0.1:{self.server.server_port}')
 
     def test_invalid_host_is_rejected_before_sending_headers(self):
         for host in ['user:password@shop.test', '@shop.test', 'shop.test?', 'shop.test/path', 'shop.test\r\nX-Test: injected']:

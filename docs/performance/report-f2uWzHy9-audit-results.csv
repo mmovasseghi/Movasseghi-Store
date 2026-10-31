@@ -1,0 +1,19 @@
+row,id,impact,reported_summary,action_and_limit
+S1,gt-cdn,Medium-Low,17 resources,OPEN: infrastructure not changed; local Lighthouse does not implement GT CDN scoring.
+S2,dom-size,Low,1403 elements; alternate 1413,"OPEN: preserve all 8+8 products, icons and the repaired continuous marquee; no DOM hiding."
+S3,uses-http2,Low,430 ms estimated savings,OPEN: production remains HTTP on IP; proxy_http_version 1.1 does not enable browser HTTP/2.
+S4,redirects,Low,216 ms estimated savings,OPEN: two 307s; Location/Non-Authoritative-Reason not captured; no speculative redirect change.
+S5,critical-request-chains,Low,1 chain,Early matching LCP/font preloads retained; reduce the real image payload. Expanded actual chain unavailable.
+S6,long-tasks,Low,4 tasks,No new JS introduced; preserve animation and interactions. Keep measured local TBT separate from real GT TBT=0.
+S7,uses-passive-event-listeners,Low,1 event listener,OPEN details: current home touchstart/touchend and intent warm-up listeners are explicitly passive; offending report URL/handler absent.
+S8,server-response-time,Low,215 ms,Guest cache safety preserved. Measured local compression CPU/TTFB is not a claim about Seattle origin latency.
+S9,total-byte-weight,Low,466 KB,Smaller quality-gated 420px product derivatives and single gzip at nginx; all original uploads preserved.
+S10,unused-css-rules,Low,21.7 KB estimated savings,OPEN: partial-CSS trial rejected after delayed-load geometry differences. Full initial styling retained.
+S11,bootup-time,Informational,17 ms,Preserve current lightweight initialization; no claimed extra JS win.
+S12,largest-contentful-paint-element,Informational,2050 ms,"Preload and selected responsive resource validated; new derivative is quality 100, not lossless."
+S13,layout-shifts,Informational,1 shift; overall CLS=0,Repair streamed hero percentage-layer shift exposed by earlier paint; preserve decorations and animations.
+S14,mainthread-work-breakdown,Informational,1.6 s,Keep animations and all content; selected patch changes codec/transport and safe SSR layer order.
+S15,third-party-summary,Informational,181 B,No new third-party code.
+S16,legacy-javascript,Informational,No numeric summary,No new runtime dependency.
+S17,render-blocking-resources,Informational,0 ms estimated savings,Keep complete inline home styling; no artificial CSS delay.
+S18,user-timings,Informational,No numeric summary,Do not substitute custom timing marks for browser metrics.

@@ -1,6 +1,7 @@
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Webp;
 using SixLabors.ImageSharp.Processing;
+using SixLabors.ImageSharp.PixelFormats;
 
 namespace MovasseghiShop.Web.Services;
 
@@ -83,7 +84,11 @@ public class ImageOptimizerService(IWebHostEnvironment env, ILogger<ImageOptimiz
                     // A separate name permits safe incremental upgrades without
                     // replacing the ordinary variant or an uploaded original.
                     if (!photographic && width == ResponsiveImageService.PackedWidth)
+                    {
                         written |= await WriteVariantAsync(source, display, ResponsiveImageService.PackedVariant(display), width, height, ct, packed: true);
+                        if (ResponsiveImageService.IsStudioProduct(display))
+                            written |= await WriteVariantAsync(source, display, ResponsiveImageService.StudioVariant(display), width, height, ct, studioDisplay: true);
+                    }
                 }
                 if (file.Contains($"{Path.DirectorySeparatorChar}products{Path.DirectorySeparatorChar}", StringComparison.OrdinalIgnoreCase))
                 {
@@ -102,7 +107,7 @@ public class ImageOptimizerService(IWebHostEnvironment env, ILogger<ImageOptimiz
 
     static WebpEncoder Lossless(bool packed = false) => new() { FileFormat = WebpFileFormatType.Lossless, TransparentColorMode = WebpTransparentColorMode.Preserve, Method = packed ? WebpEncodingMethod.Level6 : WebpEncodingMethod.Level1 };
 
-    static async Task<bool> WriteVariantAsync(Image source, string original, string target, int width, int height, CancellationToken ct, bool allowLarger = false, bool photographic = false, bool packed = false)
+    static async Task<bool> WriteVariantAsync(Image source, string original, string target, int width, int height, CancellationToken ct, bool allowLarger = false, bool photographic = false, bool packed = false, bool studioDisplay = false)
     {
         if (File.Exists(target) && File.GetLastWriteTimeUtc(target) >= File.GetLastWriteTimeUtc(original))
         {
@@ -111,15 +116,58 @@ public class ImageOptimizerService(IWebHostEnvironment env, ILogger<ImageOptimiz
         }
         using var output = source.Clone(x => x.Resize(width, height));
         using var buffer = new MemoryStream();
-        // Transparent studio shots and branding remain lossless. JPEG photographs
-        // get a high-quality display derivative; the full JPEG remains untouched.
-        var encoder = photographic
+        // Original uploads, branding and ordinary studio variants stay untouched.
+        // Only the 420px product display gets quality-100 WebP, with a decoded
+        // alpha/error check and a lossless fallback. This is not pixel-identical.
+        var encoder = studioDisplay
+            ? new WebpEncoder { FileFormat = WebpFileFormatType.Lossy, Quality = 100, Method = WebpEncodingMethod.Level6, UseAlphaCompression = true }
+            : photographic
             ? new WebpEncoder { FileFormat = WebpFileFormatType.Lossy, Quality = PhotoQuality, Method = WebpEncodingMethod.Level4 }
             : Lossless(packed);
         await output.SaveAsWebpAsync(buffer, encoder, ct);
+        if (studioDisplay && !StudioDisplayQualityAcceptable(output, buffer.ToArray()))
+        {
+            buffer.SetLength(0);
+            await output.SaveAsWebpAsync(buffer, Lossless(packed: true), ct);
+        }
         if (!allowLarger && buffer.Length >= new FileInfo(original).Length) return false;
         await AtomicWriteAsync(target, buffer.ToArray(), ct);
         return true;
+    }
+
+    static bool StudioDisplayQualityAcceptable(Image reference, byte[] encoded)
+    {
+        using var expected = reference.CloneAs<Rgba32>();
+        using var actual = Image.Load<Rgba32>(encoded);
+        if (expected.Size != actual.Size) return false;
+        long error = 0, opacity = 0;
+        var valid = true;
+        expected.ProcessPixelRows(actual, (a, b) =>
+        {
+            for (var y = 0; y < a.Height; y++)
+            {
+                var rowA = a.GetRowSpan(y);
+                var rowB = b.GetRowSpan(y);
+                for (var x = 0; x < rowA.Length; x++)
+                {
+                    var p = rowA[x]; var q = rowB[x];
+                    var r = Math.Abs(p.R - q.R) * p.A;
+                    var g = Math.Abs(p.G - q.G) * p.A;
+                    var blue = Math.Abs(p.B - q.B) * p.A;
+                    // Same alpha makes these visible-channel bounds independent
+                    // of the page background. Reject a visible delta over 16/255.
+                    if (p.A != q.A || Math.Max(r, Math.Max(g, blue)) > 16 * 255)
+                    {
+                        valid = false;
+                        return;
+                    }
+                    error += r + g + blue;
+                    opacity += p.A;
+                }
+            }
+        });
+        // At most one level of mean RGB error over the visible image area.
+        return valid && (opacity == 0 || error <= opacity * 3);
     }
 
     static async Task AtomicWriteAsync(string path, byte[] bytes, CancellationToken ct)

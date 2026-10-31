@@ -23,6 +23,8 @@ class Home(HTMLParser):
         self.heroes = []
         self.story_src = None
         self.cache_assets = []
+        self.hero_responsive = []
+        self.preload_responsive = []
 
     def handle_starttag(self, tag, attributes):
         a = dict(attributes)
@@ -32,10 +34,12 @@ class Home(HTMLParser):
         self.stories += tag == "button" and "data-story-id" in a
         if tag == "link" and a.get("rel") == "preload" and a.get("as") == "image":
             self.preloads.append(a.get("href"))
+            self.preload_responsive.append((a.get("imagesrcset", ""), a.get("imagesizes", "")))
         if tag == "link" and (a.get("rel") == "stylesheet" or (a.get("rel") == "preload" and a.get("as") == "font")):
             self.cache_assets.append((a.get("href"), a.get("as") == "font"))
         if tag == "img" and a.get("fetchpriority") == "high":
             self.heroes.append(a.get("src"))
+            self.hero_responsive.append((a.get("srcset", ""), a.get("sizes", "")))
         if a.get("id") == "msStoriesData":
             self.story_src = a.get("data-stories-src")
 
@@ -90,6 +94,26 @@ def verify(base, *, host=None, check_nginx=False):
     image, mime, image_headers = get(hero)
     if mime != "image/webp" or image[:4] != b"RIFF" or image[8:12] != b"WEBP":
         raise RuntimeError("The selected hero did not return a WebP image")
+    responsive_resources = []
+    responsive = home.hero_responsive[0]
+    preload = home.preload_responsive[home.preloads.index(hero)]
+    if responsive != preload:
+        raise RuntimeError("Hero and preload responsive candidates/sizes must match")
+    if responsive[0]:
+        widths = set()
+        for candidate in responsive[0].split(','):
+            match = re.fullmatch(r'\s*(\S+)\s+([1-9][0-9]*)w\s*', candidate)
+            if not match or match[2] in widths:
+                raise RuntimeError("Invalid or duplicated responsive hero candidate")
+            widths.add(match[2])
+            asset = match[1]
+            data, mime, headers = get(asset)
+            valid = ((mime == "image/webp" and data[:4] == b"RIFF" and data[8:12] == b"WEBP")
+                     or (mime == "image/png" and data.startswith(b"\x89PNG\r\n\x1a\n"))
+                     or (mime == "image/jpeg" and data.startswith(b"\xff\xd8\xff")))
+            if not valid:
+                raise RuntimeError(f"Responsive hero returned invalid image data: {urlsplit(asset).path}")
+            responsive_resources.append((asset, headers))
     if not home.story_src:
         raise RuntimeError("Missing stories payload URL")
     stories = json.loads(get(home.story_src)[0])
@@ -112,7 +136,7 @@ def verify(base, *, host=None, check_nginx=False):
                 raise RuntimeError("Public host must return a public guest cache HIT, including with the analytics cookie")
         if not any(font for _, font in home.cache_assets) or not any(not font for _, font in home.cache_assets):
             raise RuntimeError("Missing versioned font or stylesheet cache probe")
-        resources = [(hero, image_headers)]
+        resources = [(hero, image_headers)] + responsive_resources
         for asset, font in home.cache_assets:
             _, mime, headers = get(asset)
             if mime != ('font/woff2' if font else 'text/css'):
