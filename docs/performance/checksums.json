@@ -1,5 +1,7 @@
 {
-  "README.fa.md": "afcabb674e176da70ee7a48f14593a4318bfb3e8d450010d9ef32888ecac74fe",
+  "README.fa.md": "e772dedf1cbeab3511e108ad2245e6a3e8ad4464f4bcc0d2ee438eacd99c118c",
+  "local-audit-checklist.csv": "bf9d888bba75eca8e3a6b01eb03beca556080cb68cedc309a7f5363296cc9689",
+  "optimization-audit-results.csv": "d583de6658af690e29a8c0b4372a6c6c56c85039de65404f271c061ffe1b6e3b",
   "project-checklist.csv": "f87d466f09291ea1321c3d32201e99aa83231422013d4d085d2e0bfbbd05c4a4",
   "project-source-index.json": "bb6420da9cdc7e9393fd09e00c66b501c7030bb532d97bae3db7bab36f52b3e1",
   "reference/GTmetrix-Deep-Details-fa.md": "c7e190dd1a8c5fd3ffb9530b6da078794086e2f8249ea9f76279f26edbf8c22f",
@@ -21,5 +23,6 @@
   "release-validation.json": "52c3c2280d6df602b2dbd0c0d35b20f09fc005f92bf858c7889a6d04eb30eb5e",
   "report-JjzgQGnk.json": "8cdac338e88b5e9afcdb81c4b69f10b19d67a800fe26bc76dd65207e43b82229",
   "report-audits.csv": "c865c621330a324141be6835ba67700ed75bc38e820b3ff37f58034100f1e8b3",
+  "responsive-validation.json": "2d985cf17109a2cce3e18bc6f5f9abda040afb832e62f726b984005810345dd5",
   "validation.json": "144c66b1c1c1cb823a433884ae91fe4be6b34986fe1b1c9580219932e7581511"
 }

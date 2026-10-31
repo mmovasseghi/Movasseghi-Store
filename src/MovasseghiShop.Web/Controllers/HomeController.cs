@@ -17,7 +17,8 @@ public class HomeController(
     IHomeStoryService homeStories,
     IConfiguration config,
     IWebHostEnvironment env,
-    IFileVersionProvider fileVersions) : Controller
+    IFileVersionProvider fileVersions,
+    ResponsiveImageService responsiveImages) : Controller
 {
     [OutputCache(PolicyName = "HomePage")]
     public async Task<IActionResult> Index()
@@ -89,7 +90,11 @@ public class HomeController(
             {
                 var lcpUrl = fileVersions.AddFileVersionToPath(Request.PathBase, AppPath.H(lcpPath, HttpContext));
                 ViewData["LcpPreload"] = lcpUrl;
-                Response.Headers.Append("Link", $"<{lcpUrl}>; rel=preload; as=image; fetchpriority=high");
+                var sources = responsiveImages.Get(lcpPath, HttpContext);
+                ViewData["LcpSrcSet"] = sources?.SrcSet;
+                // Link response headers cannot reliably choose a responsive image.
+                // The early HTML preload and img share srcset/sizes instead.
+                if (sources is null) Response.Headers.Append("Link", $"<{lcpUrl}>; rel=preload; as=image; fetchpriority=high");
             }
         }
 

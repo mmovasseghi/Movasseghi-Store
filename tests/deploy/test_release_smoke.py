@@ -33,6 +33,13 @@ class Handler(http.server.BaseHTTPRequestHandler):
             if mode == 'invalid-image': body = b'<html>not an image</html>'
         elif self.path == '/Home/Stories.json':
             mime, body = 'application/json', b'[{}]' if mode != 'stories' else b'[]'
+        elif self.path.endswith('.css'):
+            mime, body = 'text/css', b'body{}'
+            if self.path == '/css/storefront-home.bundle.css':
+                if mode == 'missing-style': status = 404
+                if mode == 'css-html': mime = 'text/html'
+        elif self.path.endswith('.js'):
+            mime, body = 'application/javascript', b'console.log(1)'
         self.send_response(status); self.send_header('Content-Type', mime); self.end_headers(); self.wfile.write(body)
 
     def log_message(self, *args): pass
@@ -53,7 +60,7 @@ class SmokeTests(unittest.TestCase):
         with contextlib.redirect_stdout(io.StringIO()): smoke.verify(f'http://127.0.0.1:{self.server.server_port}')
 
     def test_errors_missing_lcp_invalid_images_missing_products_empty_stories_and_redirects_fail(self):
-        for mode in ['home-error', 'image-error', 'invalid-image', 'counts', 'stories', 'redirect']:
+        for mode in ['home-error', 'image-error', 'invalid-image', 'counts', 'stories', 'redirect', 'missing-style', 'css-html']:
             with self.subTest(mode=mode):
                 self.server.mode = mode
                 with self.assertRaises(Exception): smoke.verify(f'http://127.0.0.1:{self.server.server_port}')

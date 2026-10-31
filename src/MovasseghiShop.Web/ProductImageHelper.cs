@@ -70,17 +70,11 @@ public static class ProductImageHelper
             var lcpUrl = ToLcpVariantUrl(url);
             if (lcpUrl != url)
             {
-                if (LcpCache.TryGetValue(lcpUrl, out var hasLcp))
-                {
-                    if (hasLcp) return lcpUrl;
-                }
-                else
-                {
-                    var relative = lcpUrl.TrimStart('/').Replace('/', Path.DirectorySeparatorChar);
-                    var exists = File.Exists(Path.Combine(webRoot, relative));
-                    LcpCache[lcpUrl] = exists;
-                    if (exists) return lcpUrl;
-                }
+                var relative = lcpUrl.TrimStart('/').Replace('/', Path.DirectorySeparatorChar);
+                var candidate = new FileInfo(Path.Combine(webRoot, relative));
+                var source = new FileInfo(Path.Combine(webRoot, url.TrimStart('/').Replace('/', Path.DirectorySeparatorChar)));
+                if (candidate.Exists && (!source.Exists || candidate.LastWriteTimeUtc >= source.LastWriteTimeUtc))
+                    return lcpUrl;
             }
         }
 
@@ -93,8 +87,6 @@ public static class ProductImageHelper
         if (dot <= 0) return displayUrl;
         return displayUrl[..dot] + "-lcp.webp";
     }
-
-    static readonly System.Collections.Concurrent.ConcurrentDictionary<string, bool> LcpCache = new();
 
     /// <summary>
     /// مسیر ذخیره‌شده در دیتابیس معمولاً به PNG اصلی اشاره می‌کند، در حالی که

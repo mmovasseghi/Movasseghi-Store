@@ -91,6 +91,7 @@
     function resetProgress() {
       if (!progressBar) return;
       progressAnimation?.cancel();
+      if (reduced) { progressBar.style.transform = 'scaleX(1)'; return; }
       progressAnimation = progressBar.animate(
         [{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }],
         { duration: SLIDE_MS, easing: 'linear', fill: 'forwards' }

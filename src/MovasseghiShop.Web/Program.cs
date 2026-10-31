@@ -83,6 +83,7 @@ builder.Services.AddSession(options =>
 
 builder.Services.AddScoped<IProductVariantAdminService, ProductVariantAdminService>();
 builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddSingleton<ResponsiveImageService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IOtpService, MockOtpService>();
 builder.Services.AddScoped<ICheckoutHumanVerificationService, CheckoutHumanVerificationService>();
@@ -568,6 +569,9 @@ if (args.Contains("--bulk-seo-fix", StringComparer.OrdinalIgnoreCase))
 }
 
 await DbInitializer.InitializeAsync(app.Services);
+
+// nginx terminates TLS; apply trusted proxy scheme before HTTPS redirection.
+app.UseForwardedHeaders(MovasseghiShop.Web.Infrastructure.TrustedProxyForwarding.CreateOptions());
 
 var configuredPathBase = app.Configuration["PathBase"]?.Trim();
 if (!string.IsNullOrEmpty(configuredPathBase))

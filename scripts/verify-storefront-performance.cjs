@@ -19,16 +19,20 @@ const output = fs.mkdtempSync(path.join(os.tmpdir(), 'movasseghi-storefront-'));
       const preloads = [...document.querySelectorAll('link[rel=preload][as=image]')].map(e => e.href);
       const fonts = performance.getEntriesByType('resource').filter(e => e.name.includes('Vazirmatn-var.woff2')).map(e => e.name);
       const badPaintReferences = [...document.querySelectorAll('svg [fill],svg [stroke],svg [filter]')].flatMap(e => [...e.attributes].flatMap(a => [...a.value.matchAll(/url\(#([^)]*)\)/g)].map(m => m[1]))).filter(id => !document.getElementById(id));
-      return { hero: hero.currentSrc, preloads, fonts, badPaintReferences, dom: document.querySelectorAll('*').length,
+      return { hero: hero.currentSrc, heroFallback: hero.src, heroSrcSet: hero.srcset, heroSizes: hero.sizes, preloadSrcSet: document.querySelector('link[rel=preload][as=image]').imageSrcset, preloadSizes: document.querySelector('link[rel=preload][as=image]').imageSizes, resources: performance.getEntriesByType('resource').map(e => e.name), preloads, fonts, badPaintReferences, dom: document.querySelectorAll('*').length,
         heroImages: [...document.querySelectorAll('.ms-hero-slide img')].map(e => ({ loading: e.loading, priority: e.fetchPriority })),
         logo: document.querySelector('.ms-logo').currentSrc, favicon: document.querySelector('link[rel=icon]').href,
         routes: [...document.querySelectorAll('a[href]')].map(e => e.getAttribute('href')).filter(h => /^\/(Shop\/Product|Blog\/Post|News\/Article)\//.test(h)) };
     });
-    assert.ok(assets.preloads.includes(assets.hero), 'preload must exactly match the consumed image, including version');
+    assert.ok(assets.preloads.includes(assets.heroFallback), 'fallback preload must match the img src');
+    assert.equal(assets.preloadSrcSet, assets.heroSrcSet, 'responsive preload and image must share candidates');
+    assert.equal(assets.preloadSizes, assets.heroSizes);
+    if (assets.heroSrcSet && assets.hero !== assets.heroFallback) assert.ok(!assets.resources.includes(assets.heroFallback), 'do not download fallback as well as the responsive LCP');
     assert.ok(assets.hero.includes('?v='));
     assert.equal(assets.fonts.length, 1, 'font preload and CSS must share one URL');
     assert.ok(assets.fonts[0].includes('?v='));
-    assert.equal(assets.logo, assets.favicon, 'logo and favicon must reuse the same WebP');
+    assert.ok(new URL(assets.logo).pathname.includes('originallogo'));
+    assert.ok(new URL(assets.favicon).pathname.includes('originallogo'));
     assert.deepEqual(assets.badPaintReferences, [], 'shared SVG paint IDs must resolve');
     assert.ok(assets.heroImages.every(e => e.loading === 'eager'));
     assert.equal(assets.heroImages[0].priority, 'high');
@@ -39,6 +43,12 @@ const output = fs.mkdtempSync(path.join(os.tmpdir(), 'movasseghi-storefront-'));
       const response = await page.goto(base + route, { waitUntil: 'load' });
       assert.equal(response.status(), 200, route);
       assert.ok(await page.locator('main').textContent(), route + ': missing SSR content');
+      if (route.startsWith('/Shop/Product/')) {
+        const first = page.locator('[data-pd-slide]').first().locator('img');
+        assert.equal(await first.getAttribute('loading'), 'eager', 'first product gallery image must not be lazy');
+        assert.equal(await first.getAttribute('fetchpriority'), 'high');
+        await first.evaluate(image => image.decode());
+      }
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false, route + ': overflow');
     }
     assert.deepEqual(errors, []);

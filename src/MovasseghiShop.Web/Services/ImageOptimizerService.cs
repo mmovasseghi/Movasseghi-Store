@@ -21,204 +21,104 @@ public interface IImageOptimizerService
     Task<ImageOptimizationResult> OptimizeAllAsync(bool dryRun = false, CancellationToken ct = default);
 }
 
-/// <summary>
-/// تصاویر محصولات مستقیم از منبع دانلود می‌شدند و بدون تغییر ابعاد به WebP تبدیل
-/// می‌شدند. نتیجه: عکس‌های ۲۱ مگاپیکسلی (چند مگابایت) برای کارتی که ۲۲۰ پیکسل
-/// نمایش داده می‌شود. این سرویس هر تصویر بزرگ‌تر از سقف را دوباره با ابعاد
-/// منطقی رمزگذاری می‌کند — بزرگ‌ترین عامل کندی LCP در سایت.
-/// </summary>
+/// <summary>Builds display derivatives without overwriting or deleting uploaded originals.</summary>
 public class ImageOptimizerService(IWebHostEnvironment env, ILogger<ImageOptimizerService> logger)
     : IImageOptimizerService
 {
-    /// <summary>بزرگ‌ترین ضلع مجاز. صفحه محصول حداکثر ~۷۰۰ پیکسل نشان می‌دهد؛ ۱۴۰۰ برای نمایشگر Retina و زوم کافی است.</summary>
     public const int MaxEdge = 1400;
-
-    /// <summary>هیرو صفحهٔ اول ~۲۴۰px CSS — نسخهٔ LCP (~۲۵۶px) جدا ذخیره می‌شود.</summary>
     public const int LcpMaxEdge = 256;
-
-    public const int WebpQuality = 82;
-
-    /// <summary>زیر این حجم، سود بازفشرده‌سازی ناچیز است و ارزش ریسک افت کیفیت را ندارد.</summary>
-    private const long MinBytesToBother = 120 * 1024;
-
-    private static readonly string[] Extensions = [".png", ".jpg", ".jpeg", ".webp"];
+    public const int WebpQuality = 82; // retained for callers; generated files use lossless WebP.
+    static readonly string[] Extensions = [".png", ".jpg", ".jpeg", ".webp"];
 
     public async Task<ImageOptimizationResult> OptimizeAllAsync(bool dryRun = false, CancellationToken ct = default)
     {
-        var webRoot = ResolveWebRoot();
-        if (string.IsNullOrEmpty(webRoot))
-        {
-            logger.LogWarning("WebRootPath خالی است؛ بهینه‌سازی تصویر رد شد.");
-            return new ImageOptimizationResult(0, 0, 0, 0, 0, 0);
-        }
-
+        var webRoot = !string.IsNullOrEmpty(env.WebRootPath) ? env.WebRootPath : Path.Combine(env.ContentRootPath, "wwwroot");
         var root = Path.Combine(webRoot, "images");
-        if (!Directory.Exists(root))
-            return new ImageOptimizationResult(0, 0, 0, 0, 0, 0);
-
-        int scanned = 0, rewritten = 0, skipped = 0, failed = 0;
-        long before = 0, after = 0;
-
-        var files = Directory
-            .EnumerateFiles(root, "*.*", SearchOption.AllDirectories)
+        if (!Directory.Exists(root)) return new(0, 0, 0, 0, 0, 0);
+        var files = Directory.EnumerateFiles(root, "*.*", SearchOption.AllDirectories)
             .Where(f => Extensions.Contains(Path.GetExtension(f), StringComparer.OrdinalIgnoreCase))
-            .Where(f => !Path.GetFileNameWithoutExtension(f).EndsWith("-lcp", StringComparison.OrdinalIgnoreCase))
-            .Where(f => !IsProductImagePath(f)
-                || Path.GetExtension(f).Equals(".webp", StringComparison.OrdinalIgnoreCase)
-                || !File.Exists(Path.ChangeExtension(f, ".webp")))
+            .Where(f => !System.Text.RegularExpressions.Regex.IsMatch(Path.GetFileNameWithoutExtension(f), @"(?:-lcp|-\d+w)$", System.Text.RegularExpressions.RegexOptions.IgnoreCase))
+            .Where(f => f.EndsWith(".webp", StringComparison.OrdinalIgnoreCase) || !File.Exists(Path.ChangeExtension(f, ".webp")))
+            .Where(f => !Path.GetFileNameWithoutExtension(f).EndsWith("-original", StringComparison.OrdinalIgnoreCase)
+                || !File.Exists(Path.Combine(Path.GetDirectoryName(f)!, Path.GetFileNameWithoutExtension(f)[..^"-original".Length] + ".webp")))
             .ToArray();
-
+        int changed = 0, skipped = 0, failed = 0;
+        long before = 0, after = 0;
         foreach (var file in files)
         {
             ct.ThrowIfCancellationRequested();
-            scanned++;
-
-            var info = new FileInfo(file);
             try
             {
-                if (info.Length < MinBytesToBother)
+                using var source = await Image.LoadAsync(file, ct);
+                // Never flatten an animated upload into a static thumbnail.
+                if (source.Frames.Count > 1) { skipped++; continue; }
+                source.Mutate(x => x.AutoOrient());
+                if (dryRun) { skipped++; continue; }
+                var written = false;
+                var display = file;
+                if (!file.EndsWith(".webp", StringComparison.OrdinalIgnoreCase))
                 {
-                    // Transfer size does not determine displayed dimensions.
-                    // A small, compressible source can still need a hero variant.
-                    if (!dryRun && IsProductImagePath(file))
+                    var converted = Path.ChangeExtension(file, ".webp");
+                    using var buffer = new MemoryStream();
+                    await source.SaveAsWebpAsync(buffer, Lossless(), ct);
+                    // A new lossless format is useful only if it is smaller.
+                    // Existing files are never overwritten by format conversion.
+                    if (!File.Exists(converted) && buffer.Length < new FileInfo(file).Length)
                     {
-                        using var small = await Image.LoadAsync(file, ct);
-                        await TryWriteLcpVariantAsync(small, file, dryRun, ct);
+                        await AtomicWriteAsync(converted, buffer.ToArray(), ct);
+                        before += new FileInfo(file).Length;
+                        after += buffer.Length;
+                        written = true;
+                        display = converted;
                     }
-                    skipped++;
-                    continue;
                 }
-
-                using var image = await Image.LoadAsync(file, ct);
-                var longest = Math.Max(image.Width, image.Height);
-                var oversized = longest > MaxEdge;
-
-                // فایل کوچک‌مقیاس ولی حجیم هم ارزش بازفشرده‌سازی دارد (مثلاً PNG بدون فشرده‌سازی)
-                if (!oversized && info.Length < 250 * 1024)
+                var stem = Path.Combine(Path.GetDirectoryName(display)!, Path.GetFileNameWithoutExtension(display));
+                foreach (var width in ResponsiveImageService.Widths)
                 {
-                    if (!dryRun
-                        && file.EndsWith(".webp", StringComparison.OrdinalIgnoreCase)
-                        && IsProductImagePath(file)
-                        && !Path.GetFileName(file).Contains("-lcp", StringComparison.OrdinalIgnoreCase))
-                    {
-                        await TryWriteLcpVariantAsync(image, file, dryRun, ct);
-                    }
-                    skipped++;
-                    continue;
+                    if (width >= source.Width) continue;
+                    var height = Math.Max(1, (int)Math.Round((double)source.Height * width / source.Width));
+                    written |= await WriteVariantAsync(source, display, $"{stem}-{width}w.webp", width, height, ct);
                 }
-
-                if (oversized)
+                if (file.Contains($"{Path.DirectorySeparatorChar}products{Path.DirectorySeparatorChar}", StringComparison.OrdinalIgnoreCase))
                 {
-                    var scale = (double)MaxEdge / longest;
-                    image.Mutate(x => x.Resize(
-                        (int)Math.Round(image.Width * scale),
-                        (int)Math.Round(image.Height * scale)));
+                    var scale = Math.Min(1, (double)LcpMaxEdge / Math.Max(source.Width, source.Height));
+                    written |= await WriteVariantAsync(source, display, stem + "-lcp.webp",
+                        Math.Max(1, (int)Math.Round(source.Width * scale)), Math.Max(1, (int)Math.Round(source.Height * scale)), ct, allowLarger: true);
                 }
-
-                // متادیتای دوربین (EXIF/ICC) گاهی ده‌ها کیلوبایت است و در وب مصرفی ندارد
-                image.Metadata.ExifProfile = null;
-                image.Metadata.IptcProfile = null;
-                image.Metadata.XmpProfile = null;
-
-                var target = Path.ChangeExtension(file, ".webp");
-
-                using var buffer = new MemoryStream();
-                await image.SaveAsWebpAsync(buffer, new WebpEncoder { Quality = WebpQuality }, ct);
-
-                var existingTargetLength = File.Exists(target) ? new FileInfo(target).Length : long.MaxValue;
-
-                // اگر خروجی جدید از فایل موجود بزرگ‌تر شد، دست نزن
-                if (buffer.Length >= existingTargetLength && File.Exists(target))
-                {
-                    if (!dryRun && IsProductImagePath(target))
-                    {
-                        using var existing = await Image.LoadAsync(target, ct);
-                        await TryWriteLcpVariantAsync(existing, target, dryRun, ct);
-                    }
-                    skipped++;
-                    continue;
-                }
-
-                before += info.Length;
-                after += buffer.Length;
-                rewritten++;
-
-                // فایل اصلی عمداً حذف نمی‌شود: آدرس ذخیره‌شده در دیتابیس هنوز به آن
-                // اشاره می‌کند و PreferWebp فقط هنگام نمایش، مسیر را به WebP برمی‌گرداند.
-                // حذف اصل یعنی اگر جایی از این مسیر رد شود، تصویر ۴۰۴ می‌دهد.
-                if (!dryRun)
-                {
-                    await File.WriteAllBytesAsync(target, buffer.ToArray(), ct);
-                    await TryWriteLcpVariantAsync(image, target, dryRun, ct);
-                }
+                if (written) changed++; else skipped++;
             }
-            catch (Exception ex)
-            {
-                failed++;
-                logger.LogWarning(ex, "بهینه‌سازی «{File}» شکست خورد.", info.Name);
-            }
+            catch (OperationCanceledException) when (ct.IsCancellationRequested) { throw; }
+            catch (Exception error) { failed++; logger.LogWarning(error, "Image derivatives failed for {File}", Path.GetFileName(file)); }
         }
-
-        var result = new ImageOptimizationResult(scanned, rewritten, skipped, failed, before, after);
-        logger.LogInformation(
-            "بهینه‌سازی تصاویر: {Scanned} فایل بررسی شد، {Rewritten} بازنویسی، {Saved} کیلوبایت صرفه‌جویی ({Percent}٪).",
-            result.Scanned, result.Rewritten, result.BytesSaved / 1024, result.PercentSaved);
-
-        return result;
+        logger.LogInformation("Image derivatives: {Scanned} sources, {Changed} updated, {Failed} failed; original files preserved", files.Length, changed, failed);
+        return new(files.Length, changed, skipped, failed, before, after);
     }
 
-    string? ResolveWebRoot()
+    static WebpEncoder Lossless() => new() { FileFormat = WebpFileFormatType.Lossless, TransparentColorMode = WebpTransparentColorMode.Preserve, Method = WebpEncodingMethod.Level1 };
+
+    static async Task<bool> WriteVariantAsync(Image source, string original, string target, int width, int height, CancellationToken ct, bool allowLarger = false)
     {
-        if (!string.IsNullOrEmpty(env.WebRootPath))
-            return env.WebRootPath;
-
-        foreach (var basePath in new[] { env.ContentRootPath, AppContext.BaseDirectory, Directory.GetCurrentDirectory() })
+        if (File.Exists(target) && File.GetLastWriteTimeUtc(target) >= File.GetLastWriteTimeUtc(original))
         {
-            if (string.IsNullOrWhiteSpace(basePath))
-                continue;
-            var candidate = Path.Combine(basePath.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar), "wwwroot");
-            if (Directory.Exists(candidate))
-                return candidate;
+            var old = Image.Identify(target);
+            if (old.Width == width && old.Height == height) return false;
         }
-
-        return null;
+        using var output = source.Clone(x => x.Resize(width, height));
+        using var buffer = new MemoryStream();
+        await output.SaveAsWebpAsync(buffer, Lossless(), ct);
+        if (!allowLarger && buffer.Length >= new FileInfo(original).Length) return false;
+        await AtomicWriteAsync(target, buffer.ToArray(), ct);
+        return true;
     }
 
-    static bool IsProductImagePath(string path)
-        => path.Contains($"{Path.DirectorySeparatorChar}products{Path.DirectorySeparatorChar}", StringComparison.OrdinalIgnoreCase);
-
-    async Task TryWriteLcpVariantAsync(Image source, string savedWebpPath, bool dryRun, CancellationToken ct)
+    static async Task AtomicWriteAsync(string path, byte[] bytes, CancellationToken ct)
     {
-        if (dryRun || !IsProductImagePath(savedWebpPath))
-            return;
-
-        var lcpPath = Path.Combine(
-            Path.GetDirectoryName(savedWebpPath)!,
-            Path.GetFileNameWithoutExtension(savedWebpPath) + "-lcp.webp");
-
-        if (File.Exists(lcpPath)
-            && File.GetLastWriteTimeUtc(lcpPath) >= File.GetLastWriteTimeUtc(savedWebpPath))
-            return;
-
-        using var lcp = source.Clone(ctx =>
+        var temporary = path + "." + Guid.NewGuid().ToString("N") + ".tmp";
+        try
         {
-            var longest = Math.Max(source.Width, source.Height);
-            if (longest > LcpMaxEdge)
-            {
-                var scale = (double)LcpMaxEdge / longest;
-                ctx.Resize(
-                    (int)Math.Round(source.Width * scale),
-                    (int)Math.Round(source.Height * scale));
-            }
-        });
-
-        lcp.Metadata.ExifProfile = null;
-        lcp.Metadata.IptcProfile = null;
-        lcp.Metadata.XmpProfile = null;
-
-        using var lcpBuffer = new MemoryStream();
-        await lcp.SaveAsWebpAsync(lcpBuffer, new WebpEncoder { Quality = WebpQuality }, ct);
-
-        await File.WriteAllBytesAsync(lcpPath, lcpBuffer.ToArray(), ct);
+            await File.WriteAllBytesAsync(temporary, bytes, ct);
+            File.Move(temporary, path, overwrite: true);
+        }
+        finally { if (File.Exists(temporary)) File.Delete(temporary); }
     }
 }

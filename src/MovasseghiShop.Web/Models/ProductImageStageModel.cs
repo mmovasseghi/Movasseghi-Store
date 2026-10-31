@@ -11,6 +11,7 @@ public sealed class ProductImageStageModel
     public int Height { get; init; } = 220;
     public string Loading { get; init; } = "lazy";
     public bool FetchPriority { get; init; }
+    public string Sizes { get; init; } = "(min-width: 768px) 240px, 45vw";
     /// <summary>Three-layer sage/mint frame for studio product shots.</summary>
     public bool Framed { get; init; } = true;
     public string? ExtraClass { get; init; }

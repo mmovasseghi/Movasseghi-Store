@@ -118,7 +118,7 @@
                                     var img = ProductImageHelper.GetLcpDisplayUrl(ProductImageHelper.GetPrimary(hp.Images), Env);
                                     <div class="ms-hero-product">
                                         <span class="ms-hero-ring" aria-hidden="true"></span>
-                                        <img asp-append-version="true" src="@AppPath.H(img, Context)" alt="@hp.Name" width="240" height="240" sizes="(max-width: 767px) 55vw, 420px" decoding="async" loading="eager" fetchpriority="@(si == 0 ? "high" : "low")" />
+                                        <img ms-responsive="true" asp-append-version="true" src="@AppPath.H(img, Context)" alt="@hp.Name" width="240" height="240" sizes="@ResponsiveImageService.HeroSizes" decoding="async" loading="eager" fetchpriority="@(si == 0 ? "high" : "low")" />
                                     </div>
                                 }
                             </div>
@@ -143,7 +143,7 @@
                                 var img1 = ProductImageHelper.GetLcpDisplayUrl(ProductImageHelper.GetPrimary(hp1.Images), Env);
                                 <div class="ms-hero-product">
                                     <span class="ms-hero-ring" aria-hidden="true"></span>
-                                    <img asp-append-version="true" src="@AppPath.H(img1, Context)" alt="@hp1.Name" width="240" height="240" fetchpriority="high" decoding="async" loading="eager" sizes="(max-width: 767px) 55vw, 240px" />
+                                    <img ms-responsive="true" asp-append-version="true" src="@AppPath.H(img1, Context)" alt="@hp1.Name" width="240" height="240" fetchpriority="high" decoding="async" loading="eager" sizes="@ResponsiveImageService.HeroSizes" />
                                 </div>
                             }
                         </div>

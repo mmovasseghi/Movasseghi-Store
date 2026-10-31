@@ -22,7 +22,7 @@ for(const [name,selector,state] of [['menu','[data-menu-toggle]','#mobileNav'],[
 for(const [name,width,height] of [['mobile',390,844],['desktop',1366,768]]){
  const page=await browser.newPage({viewport:{width,height}});
  await page.addInitScript(()=>{window.__shifts=[];new PerformanceObserver(l=>{for(const e of l.getEntries())if(!e.hadRecentInput)window.__shifts.push(e.value)}).observe({type:'layout-shift',buffered:true})});
- await page.route('**/css/storefront.bundle.css*',async route=>{await new Promise(r=>setTimeout(r,1500));await route.continue();});
+ await page.route('**/css/storefront*.bundle.css*',async route=>{await new Promise(r=>setTimeout(r,1500));await route.continue();});
  await page.goto(base + '/',{waitUntil:'domcontentloaded'});
  const read=()=>page.evaluate(()=>{const b=s=>{const e=document.querySelector(s);if(!e)return null;const r=e.getBoundingClientRect();return{x:r.x,y:r.y,width:r.width,height:r.height}};return{hero:b('.ms-hero'),story:b('.ms-stories'),heading:b('h1'),header:b('.ms-top'),menuHidden:document.querySelector('#mobileNav').hidden,modalHidden:document.querySelector('#appModal').hidden,horizontalOverflow:document.documentElement.scrollWidth>innerWidth}});
  const initial=await read();await page.screenshot({path:path.join(output, `${name}-critical.png`)});

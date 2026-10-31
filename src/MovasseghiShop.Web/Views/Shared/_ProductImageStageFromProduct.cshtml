@@ -17,5 +17,12 @@
     Variant = variant,
     Width = width,
     Height = height,
-    FetchPriority = fetchPriority
+    FetchPriority = fetchPriority,
+    Sizes = variant switch
+    {
+        "offer" => "(min-width: 768px) 160px, 112px",
+        "featured" => "(min-width: 768px) 160px, 34vw",
+        "search" => "40px",
+        _ => "(min-width: 1024px) 240px, 45vw"
+    }
 })

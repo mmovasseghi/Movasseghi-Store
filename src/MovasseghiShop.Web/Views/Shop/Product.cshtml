@@ -89,13 +89,13 @@
                             <figure class="pd-gallery-slide @(slide.IsScene ? "pd-gallery-slide--scene" : "pd-gallery-slide--product") @(i == 0 ? "is-active" : "")" data-pd-slide data-index="@i">
                                 @if (slide.IsScene)
                                 {
-                                    <img class="pd-main-img pd-main-img--scene" src="@AppPath.H(slide.Url, Context)" alt="@slide.Alt" width="480" height="480" @(i == 0 ? "fetchpriority=\"high\" itemprop=\"image\"" : "loading=\"lazy\"") />
+                                    <img ms-responsive="true" sizes="(min-width: 1024px) 700px, 90vw" asp-append-version="true" class="pd-main-img pd-main-img--scene" src="@AppPath.H(slide.Url, Context)" alt="@slide.Alt" width="480" height="480" fetchpriority="@(i == 0 ? "high" : "auto")" itemprop="@(i == 0 ? "image" : null)" loading="@(i == 0 ? "eager" : "lazy")" />
                                 }
                                 else
                                 {
                                     <div class="ms-product-shot pd-product-shot">
                                         <div class="ms-product-stage pd-product-stage">
-                                            <img class="pd-main-img ms-product-img-el" src="@AppPath.H(slide.Url, Context)" alt="@slide.Alt" width="480" height="480" loading="lazy" />
+                                            <img ms-responsive="true" sizes="(min-width: 1024px) 700px, 90vw" asp-append-version="true" class="pd-main-img ms-product-img-el" src="@AppPath.H(slide.Url, Context)" alt="@slide.Alt" width="480" height="480" fetchpriority="@(i == 0 ? "high" : "auto")" itemprop="@(i == 0 ? "image" : null)" loading="@(i == 0 ? "eager" : "lazy")" />
                                         </div>
                                     </div>
                                 }
@@ -125,7 +125,7 @@
                                         data-pd-thumb data-pd-index="@i"
                                         aria-label="نمایش تصویر @(i + 1)" aria-selected="@(i == 0 ? "true" : "false")">
                                     <span class="pd-thumb__frame">
-                                        <img src="@AppPath.H(slide.Url, Context)" alt="@slide.Alt" width="72" height="72" loading="lazy" />
+                                        <img ms-responsive="true" sizes="72px" asp-append-version="true" src="@AppPath.H(slide.Url, Context)" alt="@slide.Alt" width="72" height="72" loading="lazy" />
                                     </span>
                                 </button>
                             }

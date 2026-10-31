@@ -7,12 +7,12 @@
     <div class="ms-product-dual__slide ms-product-dual__slide--studio" data-ms-dual-slide="studio">
         <div class="ms-product-shot">
             <div class="ms-product-stage">
-                <img asp-append-version="true" class="ms-product-img-el" src="@U(Model.ImageUrl)" alt="@Model.Alt" width="@Model.Width" height="@Model.Height" loading="@Model.Loading" decoding="async" fetchpriority="@(Model.FetchPriority ? "high" : null)" data-ms-lazy="@(Model.Loading == "lazy" ? "true" : null)" />
+                <img ms-responsive="true" sizes="@Model.Sizes" asp-append-version="true" class="ms-product-img-el" src="@U(Model.ImageUrl)" alt="@Model.Alt" width="@Model.Width" height="@Model.Height" loading="@Model.Loading" decoding="async" fetchpriority="@(Model.FetchPriority ? "high" : null)" data-ms-lazy="@(Model.Loading == "lazy" ? "true" : null)" />
             </div>
         </div>
     </div>
     <div class="ms-product-dual__slide ms-product-dual__slide--scene" data-ms-dual-slide="scene">
-        <img asp-append-version="true" class="ms-product-img-el ms-product-img-el--scene ms-product-dual__scene-img" src="@U(Model.AlternateImageUrl)" alt="@Model.AlternateAlt" width="@Model.Width" height="@Model.Height" loading="lazy" />
+        <img ms-responsive="true" sizes="(min-width: 1024px) 384px, 50vw" asp-append-version="true" class="ms-product-img-el ms-product-img-el--scene ms-product-dual__scene-img" src="@U(Model.AlternateImageUrl)" alt="@Model.AlternateAlt" width="@Model.Width" height="@Model.Height" loading="lazy" />
     </div>
 </div>
 <div class="ms-product-dual__chrome" aria-hidden="true">

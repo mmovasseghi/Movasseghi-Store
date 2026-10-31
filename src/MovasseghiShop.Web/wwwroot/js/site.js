@@ -32,31 +32,28 @@
   }
 
   const isHomePage = document.body.classList.contains('ms-page-home');
-  function wirePanelPrefetch() {
-    const warm = () => {
-      prefetchCartPanel();
-      prefetchAuthModal();
-    };
-    document.querySelectorAll('[data-open-cart]').forEach(el => {
-      el.addEventListener('touchstart', warm, { passive: true });
-      el.addEventListener('mouseenter', warm, { passive: true });
+  let cartStyles;
+  function ensureCartStyles() {
+    const template = document.getElementById('msCartCss');
+    if (!template) return Promise.resolve(); // Full stylesheet on other pages.
+    if (cartStyles) return cartStyles;
+    cartStyles = new Promise((resolve, reject) => {
+      const link = template.content.querySelector('link').cloneNode();
+      link.onload = resolve;
+      link.onerror = () => { link.remove(); cartStyles = null; reject(new Error('Cart styles unavailable')); };
+      document.head.appendChild(link);
     });
-    document.querySelectorAll('[data-open-auth]').forEach(el => {
-      el.addEventListener('touchstart', warm, { passive: true });
-      el.addEventListener('mouseenter', warm, { passive: true });
-    });
-    if (isHomePage) warm();
-    else if ('requestIdleCallback' in window) requestIdleCallback(warm, { timeout: 2500 });
-    else setTimeout(warm, 1800);
+    return cartStyles;
   }
-  wirePanelPrefetch();
-  if (!isHomePage) {
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => { prefetchCartPanel(); prefetchAuthModal(); });
-    } else {
-      prefetchCartPanel();
-      prefetchAuthModal();
-    }
+  // Warm on actual pointer, touch or keyboard intent. Merely reading a page
+  // must not create private cart/auth sessions or download modal-only styles.
+  for (const [selector, warm] of [
+    ['[data-open-cart]', () => { prefetchCartPanel(); ensureCartStyles().catch(() => {}); }],
+    ['[data-open-auth]', prefetchAuthModal]
+  ]) {
+    document.querySelectorAll(selector).forEach(el => {
+      for (const event of ['pointerenter', 'touchstart', 'focusin']) el.addEventListener(event, warm, { passive: true });
+    });
   }
 
   function readAuthTemplateHtml() {
@@ -402,6 +399,12 @@
 
   async function openCartModal() {
     closeDrawer();
+    prefetchCartPanel();
+    try { await ensureCartStyles(); }
+    catch {
+      openModal('<div class="ms-modal-busy"><p>بارگذاری سبد کامل نشد. دوباره تلاش کنید.</p><button type="button" data-modal-close>بستن</button></div>');
+      return;
+    }
     if (cartPanelHtml) {
       openModal(cartPanelHtml, { cart: true });
       bindCartActions();
@@ -488,7 +491,11 @@
     updateBadge: updateCartBadge,
     refreshBadge: refreshCartBadge,
     openDrawer: openCartModal,
-    showAddConfirm(html) {
+    async showAddConfirm(html) {
+      try { await ensureCartStyles(); } catch {
+        openModal('<div class="ms-modal-busy"><p>محصول به سبد افزوده شد؛ برای مشاهدهٔ سبد دوباره تلاش کنید.</p><button type="button" data-modal-close>بستن</button></div>');
+        return;
+      }
       closeDrawer();
       openModal(html, { add: true });
       bindModalClose();

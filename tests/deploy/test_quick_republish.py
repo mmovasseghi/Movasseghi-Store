@@ -100,6 +100,13 @@ elif name=='nginx':
                 self.assertFalse((app / '.deploying').exists(), result.stderr)
                 self.assert_persistent(app)
 
+    def test_image_generation_failure_does_not_stop_the_live_service(self):
+        app, _, result = self.run_deploy('optimizer-failure')
+        self.assertNotEqual(result.returncode, 0)
+        self.assertNotIn('systemctl stop', (app / 'calls').read_text())
+        self.assertFalse((app / '.deploying').exists())
+        self.assert_persistent(app)
+
     def test_preexisting_maintenance_is_not_removed(self):
         app, _, result = self.run_deploy('existing-maintenance')
         self.assertNotEqual(result.returncode, 0)

@@ -1,0 +1,80 @@
+id,fa,local_score,local_display_mode,local_summary,error,scope
+bf-cache,موانع استفاده از کش بازگشت/جلو رفتن مرورگر؛ bfcache,1,binary,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+bootup-time,زمان parse/compile/اجرای JavaScript,1,metricSavings,0.0 s,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+cache-insight,سیاست کش مؤثر، عمر منابع و فرصت صرفه‌جویی در بازدیدهای بعدی,,notApplicable,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+cls-culprits-insight,عوامل ایجاد CLS؛ تغییر ابعاد، جابه‌جایی محتوا و تغییرات چیدمان,1,numeric,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+critical-request-chains,زنجیره‌های وابستگی درخواست‌های بحرانی,,notApplicable,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+cumulative-layout-shift,جابه‌جایی غیرمنتظرهٔ چیدمان؛ CLS,1,numeric,0,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+diagnostics,داده‌های تشخیصی داخلی,1,informative,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+document-latency-insight,تأخیر سند اصلی؛ ریدایرکت، پاسخ سرور و انتقال/فشرده‌سازی سند,1,metricSavings,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+dom-size,تعداد، عمق و تراکم عناصر DOM,0,metricSavings,"1,305 elements",,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+dom-size-insight,اندازه و پیچیدگی DOM و اثر آن بر محاسبهٔ استایل و layout,0,numeric,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+duplicated-javascript,ماژول‌های JavaScript تکراری در باندل‌ها,1,metricSavings,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+duplicated-javascript-insight,ماژول‌ها و کد JavaScript تکراری,,notApplicable,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+efficient-animated-content,جایگزینی محتوای متحرک سنگین مانند GIF با ویدئوی مناسب,1,metricSavings,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+final-screenshot,تصویر نهایی صفحه,1,informative,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+first-contentful-paint,زمان اولین نمایش محتوایی؛ FCP,1,numeric,0.3 s,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+first-meaningful-paint,اولین نمایش معنادار؛ معیار قدیمی/داخلی بدون وزن Performance,,notApplicable,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+font-display,قابل‌مشاهده‌بودن متن هنگام دریافت فونت,1,metricSavings,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+font-display-insight,نمایش فونت و اثر بارگیری آن بر نمایش متن و جابه‌جایی,,notApplicable,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+forced-reflow-insight,اجرای layout هم‌زمان اجباری بر اثر خواندن هندسه پس از تغییر DOM/style,1,numeric,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+gt-cdn,بررسی CDN اختصاصی گزارش GT,,NOT_PRESENT,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+image-delivery-insight,حجم و شیوهٔ ارسال تصاویر؛ ابعاد، فرمت و فشرده‌سازی,0,metricSavings,Est savings of 199 KiB,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+inp-breakdown-insight,تفکیک تأخیر تعامل به input delay، processing و presentation در دادهٔ تعامل موجود,,NOT_PRESENT,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+interaction-to-next-paint,تأخیر پاسخ بصری به تعامل؛ INP، فقط Timespan در این نسخه و بدون وزن Performance,,NOT_PRESENT,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+interaction-to-next-paint-insight,تفکیک تأخیر تعامل؛ نام در نسخهٔ 12.6.1,,notApplicable,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+interactive,زمان تعاملی‌شدن؛ TTI، معیار قدیمی بدون وزن Performance,1,numeric,0.7 s,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+largest-contentful-paint,زمان نمایش بزرگ‌ترین عنصر محتوایی؛ LCP,0.99,numeric,0.7 s,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+largest-contentful-paint-element,شناسایی عنصر واقعی LCP,1,informative,680 ms,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+layout-shifts,عناصر و رخدادهای مؤثر در جابه‌جایی چیدمان,,notApplicable,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+lcp-breakdown-insight,چهار سهم LCP: TTFB، تأخیر شروع دریافت، مدت دریافت و تأخیر نمایش,,NOT_PRESENT,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+lcp-discovery-insight,کشف زودهنگام منبع LCP؛ HTML/preload، اولویت دریافت و lazy نبودن,1,numeric,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+lcp-lazy-loaded,بررسی lazy نبودن تصویر LCP,1,metricSavings,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+lcp-phases-insight,چهار جزء LCP؛ نام در نسخهٔ 12.6.1,1,informative,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+legacy-javascript,JavaScript قدیمی، polyfill و تبدیل‌های غیرضروری برای مرورگر جدید,1,metricSavings,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+legacy-javascript-insight,کد قدیمی، polyfill و transpilation غیرضروری,,notApplicable,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+long-tasks,کارهای طولانی روی نخ اصلی,1,informative,3 long tasks found,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+main-thread-tasks,فهرست وظایف نخ اصلی,1,informative,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+mainthread-work-breakdown,تفکیک کار نخ اصلی؛ اسکریپت، استایل، layout و دیگر فعالیت‌ها,1,metricSavings,1.4 s,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+max-potential-fid,برآورد بیشترین تأخیر بالقوهٔ ورودی اول؛ بدون وزن Performance,0.98,numeric,90 ms,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+metrics,مجموعهٔ دادهٔ معیارها,1,informative,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+modern-http-insight,پروتکل‌های HTTP قدیمی و فرصت استفاده از اتصال مدرن,,notApplicable,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+modern-image-formats,فرمت‌های تصویری جدید و کم‌حجم,1,metricSavings,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+network-dependency-tree-insight,درخت وابستگی درخواست‌ها و زنجیره‌های بحرانی شبکه,1,numeric,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+network-requests,دادهٔ درخواست‌های شبکه,1,informative,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+network-rtt,برآورد زمان رفت‌وبرگشت شبکه؛ RTT,1,informative,0 ms,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+network-server-latency,برآورد latency بخش سرور,1,informative,0 ms,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+no-document-write,استفاده از document.write(),1,metricSavings,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+non-composited-animations,انیمیشن‌هایی که فقط با compositing اجرا نمی‌شوند,,notApplicable,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+offscreen-images,بارگیری زودهنگام تصاویر خارج viewport,0,metricSavings,Est savings of 21 KiB,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+prioritize-lcp-image,اولویت و preload تصویر LCP,1,metricSavings,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+redirects,ریدایرکت‌های متعدد صفحه,1,metricSavings,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+render-blocking-insight,درخواست‌های مسدودکنندهٔ رندر,,notApplicable,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+render-blocking-resources,منابع مسدودکنندهٔ رندر اولیه,1,metricSavings,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+resource-summary,خلاصهٔ تعداد و حجم منابع به تفکیک نوع,1,informative,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+screenshot-thumbnails,فریم‌های کوچک بارگیری صفحه؛ filmstrip,1,informative,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+script-treemap-data,دادهٔ نمودار اندازه و اجزای باندل‌های اسکریپت,1,informative,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+server-response-time,زمان پاسخ اولیهٔ سرور,1,metricSavings,Root document took 0 ms,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+speed-index,سرعت کامل‌شدن بصری صفحه؛ Speed Index,1,numeric,0.5 s,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+third-parties-insight,سهم منابع شخص ثالث در انتقال و اجرای صفحه,,notApplicable,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+third-party-facades,جایگزین سبک برای بارگیری تنبل embedهای شخص ثالث,,notApplicable,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+third-party-summary,هزینهٔ منابع و اجرای سرویس‌های شخص ثالث,,notApplicable,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+total-blocking-time,زمان مسدودشدن نخ اصلی بر اثر بخشِ بیش از ۵۰ms کارهای طولانی؛ TBT,1,numeric,40 ms,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+total-byte-weight,حجم کل منابع شبکه,1,metricSavings,Total size was 584 KiB,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+unminified-css,CSS کوچک‌سازی‌نشده,1,metricSavings,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+unminified-javascript,JavaScript کوچک‌سازی‌نشده,1,metricSavings,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+unsized-images,داشتن width/height صریح و امکان رزرو فضای تصاویر,1,metricSavings,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+unused-css-rules,CSS استفاده‌نشده,0,metricSavings,Est savings of 24 KiB,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+unused-javascript,JavaScript استفاده‌نشده,1,metricSavings,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+user-timings,علامت‌ها و اندازه‌گیری‌های Performance API؛ User Timing,,notApplicable,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+uses-http2,استفاده از HTTP/2 برای منابع,1,metricSavings,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+uses-long-cache-ttl,عمر کش منابع استاتیک,1,metricSavings,0 resources found,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+uses-optimized-images,فشرده‌سازی و رمزگذاری ناکارآمد تصاویر,1,metricSavings,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+uses-passive-event-listeners,listenerهای passive برای رویدادهای پیمایش/لمس,1,metricSavings,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+uses-rel-preconnect,اتصال زودهنگام به originهای لازم؛ preconnect,1,metricSavings,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+uses-responsive-images,تناسب ابعاد فایل تصویر با اندازهٔ نمایش,1,metricSavings,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+uses-responsive-images-snapshot,تناسب ابعاد تصویر در حالت Snapshot؛ بررسی جدا از navigation,,NOT_PRESENT,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+uses-text-compression,فشرده‌سازی منابع متنی، مانند gzip/Brotli,1,metricSavings,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+viewport,وجود meta viewport مناسب,1,metricSavings,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+viewport-insight,تنظیم viewport و اثر آن بر نمایش و تعامل,1,numeric,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data
+work-during-interaction,هزینهٔ کار هنگام تعامل در حالت Timespan,,NOT_PRESENT,,,LOCAL Lighthouse 12.6.1 navigation; not GT Structure or field data

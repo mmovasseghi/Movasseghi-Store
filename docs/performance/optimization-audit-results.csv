@@ -1,0 +1,22 @@
+report_id,id,original_summary,local_score,local_display_mode,local_summary,action_and_limit
+S1,layout-shifts,3 layout shifts,,notApplicable,,critical CSS expanded; stable geometry and delayed stylesheet checks passed; exact old production shift nodes unavailable
+S2,lcp-lazy-loaded,LCP was lazy loaded,1,metricSavings,,"all hero images eager, first high priority; responsive preload candidates match; 13.5-second observation on preceding candidate set passed"
+S3,uses-http2,Potential savings 4.9 s,1,metricSavings,,infrastructure not applied under current scope; local HTTP/1.1 does not prove production HTTP/2; localhost can be exempted by Lighthouse; actual test protocol is HTTP/1.1
+S4,gt-cdn,16 resources,,NOT_PRESENT,Not available in local Lighthouse,infrastructure not applied under current scope; GT-only audit not provided by local Lighthouse
+S5,dom-size,1596 elements,0,metricSavings,"1,305 elements",1305 elements; content retained; finding remains
+S6,uses-long-cache-ttl,13.8 KB potential savings; 8 images at 30 days,1,metricSavings,0 resources found,versioned URLs; unchanged upload URLs revalidate; safe personalized-page bypass tested
+S7,redirects,224 ms; two leading 307,1,metricSavings,,local home no redirects; trusted forwarded scheme fixed; original two 307 Location headers unavailable
+S8,long-tasks,9 long tasks,1,informative,3 long tasks found,"3 local long tasks, TBT about 40ms; original production task attribution unavailable"
+S9,unused-css-rules,24.3 KB savings,0,metricSavings,Est savings of 24 KiB,home/cart split; about 24KiB remains in initial coverage; below-fold and interactive states retained
+S10,uses-responsive-images,49.7 KB savings,1,metricSavings,,"pass; prebuilt smaller candidates, original quality fallback, desktop/mobile DPR 1 and 2 checked"
+S11,critical-request-chains,1 chain,,notApplicable,,matching responsive image and font preloads; no duplicate fallback download
+S12,non-composited-animations,47 animated elements,,notApplicable,,no findings/notApplicable in this run; effects retained with transform; reduced-motion preference verified
+S13,server-response-time,215 ms root document,1,metricSavings,Root document took 0 ms,safe public cache verified locally; production RTT/backend not remeasured
+S14,total-byte-weight,411 KB,1,metricSavings,Total size was 584 KiB,584KiB local workload; not directly comparable to supplied production workload
+S15,bootup-time,82 ms,1,metricSavings,0.0 s,local measurement; total main-thread work and TBT are different measures
+S16,largest-contentful-paint-element,8230 ms,1,informative,680 ms,first visible hero image; exact phase details included; not a production trace
+S17,mainthread-work-breakdown,2.1 s busy,1,metricSavings,1.4 s,local measurement; no claim of zero style/layout cost
+S18,third-party-summary,181 B,,notApplicable,,local measurement; production third-party execution not remeasured
+S19,legacy-javascript,No numeric summary,1,metricSavings,,local applicability preserved; no speculative rewriting of all JS
+S20,render-blocking-resources,0 ms savings,1,metricSavings,,"critical inline plus immediate async stylesheet, no timed style activation"
+S21,user-timings,No numeric summary,,notApplicable,,informational; no invented scoring weight

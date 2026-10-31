@@ -69,8 +69,12 @@ def verify(base):
     stories = json.loads(get(home.story_src)[0])
     if not isinstance(stories, list) or not stories:
         raise RuntimeError("Empty stories payload")
-    for asset in ["/css/storefront.bundle.css", "/js/site.js", "/js/home.js", "/js/stories.js"]:
-        get(asset)
+    for asset in ["/css/storefront.bundle.css", "/css/storefront-home.bundle.css", "/css/storefront-cart.bundle.css", "/css/critical-home.css", "/js/site.js", "/js/home.js", "/js/stories.js"]:
+        _, mime = get(asset)
+        if asset.endswith('.css') and mime != 'text/css':
+            raise RuntimeError(f"Stylesheet returned the wrong content type: {asset}")
+        if asset.endswith('.js') and mime not in ('text/javascript', 'application/javascript'):
+            raise RuntimeError(f"Script returned the wrong content type: {asset}")
     print(f"home:200 featured:8 offers:8 stories:{home.stories} lcp:200:{urlsplit(hero).path}")
 
 

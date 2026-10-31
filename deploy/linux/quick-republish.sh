@@ -66,7 +66,8 @@ finish() {
   fi
   if [[ "$assets_built" == 1 ]]; then
     git -C "$INSTALL_DIR/src" restore -- src/MovasseghiShop.Web/wwwroot/js/rich-text-editor.bundle.js \
-      src/MovasseghiShop.Web/wwwroot/css/storefront.bundle.css src/MovasseghiShop.Web/wwwroot/css/critical-home.css
+      src/MovasseghiShop.Web/wwwroot/css/storefront.bundle.css src/MovasseghiShop.Web/wwwroot/css/storefront-home.bundle.css \
+      src/MovasseghiShop.Web/wwwroot/css/storefront-cart.bundle.css src/MovasseghiShop.Web/wwwroot/css/critical-home.css
   fi
   [[ -z "$STAGING" || ! -d "$STAGING" ]] || rm -rf "$STAGING"
   exit "$code"
@@ -105,6 +106,16 @@ npm run build
 dotnet publish src/MovasseghiShop.Web/MovasseghiShop.Web.csproj \
   -c Release -r linux-x64 --self-contained true -o "$STAGING"
 printf '%s\n' "$SHA" > "$STAGING/RELEASE_COMMIT"
+
+# Prepare expensive image derivatives while the existing storefront stays online.
+# The final copy/optimizer pass after stopping the service catches newer uploads.
+mkdir -p "$STAGING/wwwroot/images"
+if [[ -d "$INSTALL_DIR/publish/wwwroot/images" ]]; then
+  cp -a "$INSTALL_DIR/publish/wwwroot/images/." "$STAGING/wwwroot/images/"
+fi
+if [[ "${RUN_OPTIMIZE_IMAGES:-1}" == 1 ]]; then
+  (cd "$STAGING" && ASPNETCORE_ENVIRONMENT=Production ./MovasseghiShop.Web --optimize-images)
+fi
 
 # Validate maintenance-capable nginx rules before stopping the old app.
 mkdir -p "$BACKUP/nginx" "$CACHE_DIR"

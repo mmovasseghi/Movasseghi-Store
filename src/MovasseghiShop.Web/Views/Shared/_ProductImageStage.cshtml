@@ -36,7 +36,7 @@ else if (Model.Variant == "featured")
         {
             <div class="ms-product-shot">
                 <div class="ms-product-stage">
-                    <img asp-append-version="true" class="ms-product-img-el" src="@U(Model.ImageUrl)" alt="@Model.Alt" width="@Model.Width" height="@Model.Height" loading="@Model.Loading" decoding="async" data-ms-lazy="@(Model.Loading == "lazy" ? "true" : null)" fetchpriority="@(Model.FetchPriority ? "high" : null)" />
+                    <img ms-responsive="true" sizes="@Model.Sizes" asp-append-version="true" class="ms-product-img-el" src="@U(Model.ImageUrl)" alt="@Model.Alt" width="@Model.Width" height="@Model.Height" loading="@Model.Loading" decoding="async" data-ms-lazy="@(Model.Loading == "lazy" ? "true" : null)" fetchpriority="@(Model.FetchPriority ? "high" : null)" />
                 </div>
             </div>
         }
@@ -56,13 +56,13 @@ else
             {
                 <div class="ms-product-shot">
                     <div class="ms-product-stage">
-                        <img asp-append-version="true" class="ms-product-img-el" src="@U(Model.ImageUrl)" alt="@Model.Alt" width="@Model.Width" height="@Model.Height" loading="@Model.Loading" decoding="async" data-ms-lazy="@(Model.Loading == "lazy" ? "true" : null)" fetchpriority="@(Model.FetchPriority ? "high" : null)" />
+                        <img ms-responsive="true" sizes="@Model.Sizes" asp-append-version="true" class="ms-product-img-el" src="@U(Model.ImageUrl)" alt="@Model.Alt" width="@Model.Width" height="@Model.Height" loading="@Model.Loading" decoding="async" data-ms-lazy="@(Model.Loading == "lazy" ? "true" : null)" fetchpriority="@(Model.FetchPriority ? "high" : null)" />
                     </div>
                 </div>
             }
             else
             {
-                <img asp-append-version="true" class="ms-product-img-el ms-product-img-el--scene" src="@U(Model.ImageUrl)" alt="@Model.Alt" width="@Model.Width" height="@Model.Height" loading="@Model.Loading" decoding="async" data-ms-lazy="@(Model.Loading == "lazy" ? "true" : null)" fetchpriority="@(Model.FetchPriority ? "high" : null)" />
+                <img ms-responsive="true" sizes="@Model.Sizes" asp-append-version="true" class="ms-product-img-el ms-product-img-el--scene" src="@U(Model.ImageUrl)" alt="@Model.Alt" width="@Model.Width" height="@Model.Height" loading="@Model.Loading" decoding="async" data-ms-lazy="@(Model.Loading == "lazy" ? "true" : null)" fetchpriority="@(Model.FetchPriority ? "high" : null)" />
             }
         }
         else

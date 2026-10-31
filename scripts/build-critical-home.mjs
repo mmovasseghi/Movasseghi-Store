@@ -5,7 +5,7 @@ import { transformSync } from 'esbuild';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const cssDir = path.join(root, 'src/MovasseghiShop.Web/wwwroot/css');
-const criticalClass = /\.ms-(?:promo|top|logo|icon|burger|cart-badge|search|stories|story|hero|features|feature|tab|fab|wrap|body|main|app|page-home|skip|sr-only|ai-brief)(?:[-\s.:#>+~\[,{]|$)/;
+const criticalClass = /\.ms-(?:promo|top|logo|icon|burger|cart-badge|search|stories|story|hero|features|feature|feat-card|offer-card|seg-tile|news-card|closing-card|footer|tab|fab|wrap|body|main|app|page-home|skip|sr-only|ai-brief)(?:[-\s.:#>+~\[,{]|$)/;
 
 // Retain the original cascade, selector groups and responsive conditions.
 // Scan braces lexically so comments and quoted CSS values cannot split rules.
@@ -56,7 +56,7 @@ function rules(css) {
   return result.join('\n');
 }
 
-const bundle = fs.readFileSync(path.join(cssDir, 'storefront.bundle.css'), 'utf8');
+const bundle = fs.readFileSync(path.join(cssDir, 'storefront-home.bundle.css'), 'utf8');
 const selected = rules(bundle).replaceAll('../fonts/', '/fonts/');
 const { code, warnings } = transformSync(selected, { loader: 'css', minify: true });
 if (warnings.length) throw new Error(warnings.map(w => w.text).join('\n'));
