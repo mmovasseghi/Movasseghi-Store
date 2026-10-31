@@ -84,12 +84,8 @@
         }
     }
     <link rel="preload" href="~/fonts/Vazirmatn-storefront.woff2" asp-append-version="true" as="font" type="font/woff2" crossorigin />
-    @if (isHome && !isLocalTunnel)
-    {
-        <link rel="preload" as="script" href="~/js/stories.js" asp-append-version="true" />
-        <link rel="preload" as="script" href="~/js/home.js" asp-append-version="true" />
-        <link rel="preload" as="script" href="~/js/product-card-dual.js" asp-append-version="true" />
-    }
+    @* Home scripts stay defer-only: early script preloads competed with the LCP
+       image on slow Seattle links and inflated Load Time / Render Delay. *@
     @if (isLocalTunnel)
     {
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" media="not all" />
@@ -543,10 +539,7 @@ else
     {
         <script defer src="~/js/stories.js" asp-append-version="true"></script>
         <script defer src="~/js/home.js" asp-append-version="true"></script>
-        @* site.js (~28KB) فقط بعد از تعامل یا تأخیر — TBT GTmetrix *@
-        <link rel="preload" as="script" href="~/js/auth.js" asp-append-version="true" fetchpriority="low" />
-        <link rel="preload" as="script" href="~/js/site.js" asp-append-version="true" fetchpriority="low" />
-        <link rel="preload" as="script" href="~/js/scroll-reveal.js" asp-append-version="true" fetchpriority="low" />
+        @* site/auth after interaction or idle — avoid competing with LCP bandwidth *@
         <script type="text/plain" data-ms-idle src="~/js/auth.js" asp-append-version="true"></script>
         <script type="text/plain" data-ms-idle src="~/js/site.js" asp-append-version="true"></script>
         <script defer src="~/js/product-card-dual.js" asp-append-version="true"></script>

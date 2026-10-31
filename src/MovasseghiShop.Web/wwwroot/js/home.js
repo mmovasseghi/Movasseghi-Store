@@ -5,7 +5,21 @@
   const isMobile = () => mobileMq.matches;
   const faDigits = n => String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
 
-  /* Countdown */
+  function yieldToMain(timeout) {
+    if (typeof scheduler !== 'undefined' && typeof scheduler.yield === 'function') {
+      return scheduler.yield();
+    }
+    if ('requestIdleCallback' in window) {
+      return new Promise((resolve) => requestIdleCallback(() => resolve(), { timeout: timeout || 1200 }));
+    }
+    return new Promise((resolve) => setTimeout(resolve, 0));
+  }
+
+  function afterPaint(fn) {
+    requestAnimationFrame(() => requestAnimationFrame(fn));
+  }
+
+  /* Countdown — tiny text updates only; keep immediate. */
   const cd = document.querySelector('[data-countdown]');
   if (cd) {
     const end = new Date();
@@ -27,27 +41,25 @@
     setInterval(tick, 1000);
   }
 
-  /* Features — marquee speed on mobile */
-  const featTrack = document.querySelector('[data-features-track]');
-  if (featTrack && !reduced && !isMobile()) {
+  document.querySelectorAll('[data-hero-count]').forEach(el => {
+    const target = parseInt(el.dataset.heroCount, 10);
+    if (!isNaN(target)) el.textContent = faDigits(target) + '+';
+  });
+
+  /* Features marquee speed — geometry read deferred past first paint. */
+  function initFeaturesMarquee() {
+    const featTrack = document.querySelector('[data-features-track]');
+    if (!featTrack || reduced || isMobile()) return;
     const cards = featTrack.querySelectorAll('.ms-feature-card:not(.ms-feature-card--dup)');
-    if (cards.length) {
-      const setSpeed = width => {
-        featTrack.style.animationDuration = Math.max(16, Math.min(30, Math.round(width) / 2 / 35)) + 's';
-      };
-      // ResizeObserver supplies an already-laid-out width. Reading scrollWidth
-      // here used to synchronously lay out the entire just-parsed homepage.
-      if ('ResizeObserver' in window) {
-        new ResizeObserver(entries => setSpeed(entries[0].contentRect.width)).observe(featTrack);
-      } else {
-        requestAnimationFrame(() => setSpeed(featTrack.scrollWidth));
-      }
+    if (cards.length && getComputedStyle(featTrack).animationName !== 'none') {
+      const half = featTrack.scrollWidth / 2;
+      featTrack.style.animationDuration = Math.max(16, Math.min(30, half / 35)) + 's';
     }
   }
 
-  /* Two equal, viewport-filling halves keep the trust strip seamless, even
-     when the configured labels are shorter than the desktop viewport. */
-  (function initHeroTrustMarquee() {
+  /* Two equal, viewport-filling halves keep the trust strip seamless.
+     Clone/measure work forced layout under CPU throttle; run after paint + idle. */
+  function initHeroTrustMarquee() {
     const viewport = document.querySelector('.ms-hero-trust-track');
     const track = viewport?.querySelector('.ms-hero-trust-marquee');
     const groups = track?.querySelectorAll(':scope > .ms-hero-trust-set');
@@ -57,15 +69,14 @@
     const motion = matchMedia('(prefers-reduced-motion: reduce)');
     let copies = 1;
     let frame = 0;
-    function fill(measured) {
+    function fill() {
       frame = 0;
       const style = getComputedStyle(groups[0]);
       const gap = parseFloat(style.columnGap) || 0;
       const padding = (parseFloat(style.paddingLeft) || 0) + (parseFloat(style.paddingRight) || 0);
-      const unit = originals.reduce((sum, item) => sum + (measured ? measured.widths.get(item) : item.getBoundingClientRect().width) + gap, 0);
+      const unit = originals.reduce((sum, item) => sum + item.getBoundingClientRect().width + gap, 0);
       if (!unit) return;
-      const viewportWidth = measured ? measured.viewportWidth : viewport.clientWidth;
-      const required = motion.matches ? 1 : Math.max(1, Math.ceil((viewportWidth - padding + gap + 1) / unit));
+      const required = motion.matches ? 1 : Math.max(1, Math.ceil((viewport.clientWidth - padding + gap + 1) / unit));
       if (required === copies) return;
       const first = [...originals];
       for (let i = 1; i < required; i++) first.push(...originals.map(item => item.cloneNode(true)));
@@ -75,35 +86,14 @@
       copies = required;
     }
     function schedule() {
-      if (!frame) frame = requestAnimationFrame(() => fill());
+      if (!frame) frame = requestAnimationFrame(fill);
     }
-    if ('ResizeObserver' in window) {
-      const measured = { widths: new Map(), viewportWidth: 0 };
-      const update = () => {
-        if (measured.viewportWidth && measured.widths.size === originals.length) fill(measured);
-      };
-      const observer = new ResizeObserver(entries => {
-        for (const entry of entries) {
-          if (entry.target === viewport) measured.viewportWidth = entry.contentRect.width;
-          else {
-            const box = entry.borderBoxSize;
-            const size = Array.isArray(box) ? box[0] : box;
-            measured.widths.set(entry.target, size?.inlineSize ?? entry.target.getBoundingClientRect().width);
-          }
-        }
-        update();
-      });
-      observer.observe(viewport);
-      originals.forEach(item => observer.observe(item));
-      // Font changes resize the original labels and are observed automatically.
-      motion.addEventListener('change', update);
-    } else {
-      schedule();
-      window.addEventListener('resize', schedule, { passive: true });
-      document.fonts?.ready.then(schedule);
-      motion.addEventListener('change', schedule);
-    }
-  })();
+    fill();
+    if ('ResizeObserver' in window) new ResizeObserver(schedule).observe(viewport);
+    else window.addEventListener('resize', schedule, { passive: true });
+    document.fonts?.ready.then(schedule);
+    motion.addEventListener('change', schedule);
+  }
 
   function scheduleHeroParticles() {
     const particleWrap = document.querySelector('[data-hero-particles]');
@@ -120,10 +110,10 @@
     if ('requestIdleCallback' in window) requestIdleCallback(add, { timeout: 2500 });
     else setTimeout(add, 800);
   }
-  scheduleHeroParticles();
 
-  /* Hero slider — vanilla (بدون GSAP) تا TBT/LCP برای GTmetrix پایین بماند */
-  (function initVanillaHeroSlider() {
+  /* Hero slider — delay autoplay/FLIP until after first paint so LCP/TBT
+     under Lighthouse CPU throttle are not blocked by WAAPI + layout reads. */
+  function initVanillaHeroSlider() {
     const slides = document.querySelectorAll('.ms-hero-slide[data-slide]');
     const dotsWrap = document.querySelector('[data-hero-dots]');
     const progressBar = document.querySelector('[data-hero-progress] span');
@@ -157,8 +147,6 @@
       idx = (n + slides.length) % slides.length;
       dots[idx]?.classList.add('is-active');
       if (dotRects) {
-        // FLIP keeps the original changing pill widths and neighbour movement,
-        // while only transform/opacity animate between the two layouts.
         const after = [...dots].map(dot => dot.getBoundingClientRect());
         dotAnimations = [...dots].map((dot, i) => dot.animate([
           { transform: `translateX(${dotRects[i].left - after[i].left}px) scaleX(${dotRects[i].width / after[i].width})` },
@@ -187,17 +175,7 @@
       timer = setInterval(() => { if (!animating) go(idx + 1); }, SLIDE_MS);
     }
 
-    // Creating a native animation can also flush layout. Start it after the
-    // first observed layout, rather than while the new dots dirty the document.
-    if (progressBar && 'ResizeObserver' in window) {
-      const firstLayout = new ResizeObserver(() => {
-        firstLayout.disconnect();
-        autoplay();
-      });
-      firstLayout.observe(progressBar);
-    } else {
-      autoplay();
-    }
+    autoplay();
     dotsWrap.addEventListener('click', autoplay);
 
     const viewport = document.querySelector('.ms-hero-viewport');
@@ -209,10 +187,23 @@
         if (Math.abs(dx) > 45) { go(dx > 0 ? idx - 1 : idx + 1); autoplay(); }
       }, { passive: true });
     }
-  })();
+  }
 
-  document.querySelectorAll('[data-hero-count]').forEach(el => {
-    const target = parseInt(el.dataset.heroCount, 10);
-    if (!isNaN(target)) el.textContent = faDigits(target) + '+';
-  });
+  async function bootEnhanced() {
+    await yieldToMain(800);
+    afterPaint(() => {
+      initVanillaHeroSlider();
+    });
+    await yieldToMain(1200);
+    initFeaturesMarquee();
+    await yieldToMain(1200);
+    initHeroTrustMarquee();
+    scheduleHeroParticles();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => { bootEnhanced(); }, { once: true });
+  } else {
+    bootEnhanced();
+  }
 })();
