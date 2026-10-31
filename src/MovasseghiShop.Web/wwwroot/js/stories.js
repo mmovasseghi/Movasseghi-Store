@@ -276,9 +276,31 @@
     if (e.key === 'ArrowLeft') goPrev();
   });
 
+  function consumeEarlyStoryIntent() {
+    if (window.__msEarlyStoryCapture) {
+      window.removeEventListener('click', window.__msEarlyStoryCapture, true);
+      delete window.__msEarlyStoryCapture;
+    }
+    const intent = window.__msEarlyStoryIntent
+      || (window.__msEarlyIntent instanceof Element
+        ? window.__msEarlyIntent.closest('.ms-story[data-story-id]')
+        : null);
+    if (window.__msEarlyIntent instanceof Element
+      && window.__msEarlyIntent.closest('.ms-story[data-story-id]')) {
+      delete window.__msEarlyIntent;
+    }
+    delete window.__msEarlyStoryIntent;
+    if (!(intent instanceof Element) || !intent.isConnected) return;
+    const id = intent.dataset.storyId;
+    intent.removeAttribute('aria-busy');
+    if (!id) return;
+    ensureStoriesLoaded().then(() => open(id));
+  }
+
   function boot() {
     wireStoryButtons();
     ensureStoriesLoaded().catch(() => {});
+    consumeEarlyStoryIntent();
   }
 
   function ensureStoriesLoaded() {
