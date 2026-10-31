@@ -44,6 +44,9 @@
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
+        // Opt in after intersection is known. A late-loading script must not
+        // hide a section the reader has already scrolled into.
+        if (isHome) entry.target.classList.add('ms-home-reveal');
         if (!entry.isIntersecting) return;
         show(entry.target);
         observer.unobserve(entry.target);
@@ -55,20 +58,25 @@
   function observe() {
     if (isHome) showHomeAboveFold();
 
+    const elements = Array.from(document.querySelectorAll('.ms-reveal:not(.is-visible)'));
+    if (isHome) {
+      // IO already reports viewport intersection after layout. Interleaving
+      // geometry reads with show() class writes forced repeated full layouts.
+      elements.forEach(el => observer.observe(el));
+      return;
+    }
     const vh = window.innerHeight || document.documentElement.clientHeight;
-    document.querySelectorAll('.ms-reveal:not(.is-visible)').forEach((el) => {
-      const rect = el.getBoundingClientRect();
-      if (rect.top < vh * 0.92 && rect.bottom > 0) {
-        show(el);
-        return;
-      }
-      observer.observe(el);
+    const positions = elements.map(el => ({ el, rect: el.getBoundingClientRect() }));
+    positions.forEach(({ el, rect }) => {
+      if (rect.top < vh * 0.92 && rect.bottom > 0) show(el);
+      else observer.observe(el);
     });
   }
 
   function observeImages() {
     document.querySelectorAll('img[data-ms-lazy]:not([data-ms-lazy-done])').forEach((img) => {
       img.dataset.msLazyDone = '1';
+      if (isHome) img.classList.add('ms-home-lazy-ready');
       if (img.complete) {
         img.classList.add('is-loaded');
         return;
@@ -79,7 +87,9 @@
   }
 
   function start() {
-    root.classList.add('js', 'ms-motion');
+    // Home opts individual sections into motion. A root-class toggle used to
+    // invalidate styles for every product, SVG and heading in one idle task.
+    if (!isHome) root.classList.add('js', 'ms-motion');
     observe();
     observeImages();
   }

@@ -31,9 +31,17 @@
   const featTrack = document.querySelector('[data-features-track]');
   if (featTrack && !reduced && !isMobile()) {
     const cards = featTrack.querySelectorAll('.ms-feature-card:not(.ms-feature-card--dup)');
-    if (cards.length && getComputedStyle(featTrack).animationName !== 'none') {
-      const half = featTrack.scrollWidth / 2;
-      featTrack.style.animationDuration = Math.max(16, Math.min(30, half / 35)) + 's';
+    if (cards.length) {
+      const setSpeed = width => {
+        featTrack.style.animationDuration = Math.max(16, Math.min(30, Math.round(width) / 2 / 35)) + 's';
+      };
+      // ResizeObserver supplies an already-laid-out width. Reading scrollWidth
+      // here used to synchronously lay out the entire just-parsed homepage.
+      if ('ResizeObserver' in window) {
+        new ResizeObserver(entries => setSpeed(entries[0].contentRect.width)).observe(featTrack);
+      } else {
+        requestAnimationFrame(() => setSpeed(featTrack.scrollWidth));
+      }
     }
   }
 
@@ -49,14 +57,15 @@
     const motion = matchMedia('(prefers-reduced-motion: reduce)');
     let copies = 1;
     let frame = 0;
-    function fill() {
+    function fill(measured) {
       frame = 0;
       const style = getComputedStyle(groups[0]);
       const gap = parseFloat(style.columnGap) || 0;
       const padding = (parseFloat(style.paddingLeft) || 0) + (parseFloat(style.paddingRight) || 0);
-      const unit = originals.reduce((sum, item) => sum + item.getBoundingClientRect().width + gap, 0);
+      const unit = originals.reduce((sum, item) => sum + (measured ? measured.widths.get(item) : item.getBoundingClientRect().width) + gap, 0);
       if (!unit) return;
-      const required = motion.matches ? 1 : Math.max(1, Math.ceil((viewport.clientWidth - padding + gap + 1) / unit));
+      const viewportWidth = measured ? measured.viewportWidth : viewport.clientWidth;
+      const required = motion.matches ? 1 : Math.max(1, Math.ceil((viewportWidth - padding + gap + 1) / unit));
       if (required === copies) return;
       const first = [...originals];
       for (let i = 1; i < required; i++) first.push(...originals.map(item => item.cloneNode(true)));
@@ -66,13 +75,34 @@
       copies = required;
     }
     function schedule() {
-      if (!frame) frame = requestAnimationFrame(fill);
+      if (!frame) frame = requestAnimationFrame(() => fill());
     }
-    fill();
-    if ('ResizeObserver' in window) new ResizeObserver(schedule).observe(viewport);
-    else window.addEventListener('resize', schedule, { passive: true });
-    document.fonts?.ready.then(schedule);
-    motion.addEventListener('change', schedule);
+    if ('ResizeObserver' in window) {
+      const measured = { widths: new Map(), viewportWidth: 0 };
+      const update = () => {
+        if (measured.viewportWidth && measured.widths.size === originals.length) fill(measured);
+      };
+      const observer = new ResizeObserver(entries => {
+        for (const entry of entries) {
+          if (entry.target === viewport) measured.viewportWidth = entry.contentRect.width;
+          else {
+            const box = entry.borderBoxSize;
+            const size = Array.isArray(box) ? box[0] : box;
+            measured.widths.set(entry.target, size?.inlineSize ?? entry.target.getBoundingClientRect().width);
+          }
+        }
+        update();
+      });
+      observer.observe(viewport);
+      originals.forEach(item => observer.observe(item));
+      // Font changes resize the original labels and are observed automatically.
+      motion.addEventListener('change', update);
+    } else {
+      schedule();
+      window.addEventListener('resize', schedule, { passive: true });
+      document.fonts?.ready.then(schedule);
+      motion.addEventListener('change', schedule);
+    }
   })();
 
   function scheduleHeroParticles() {
@@ -157,7 +187,17 @@
       timer = setInterval(() => { if (!animating) go(idx + 1); }, SLIDE_MS);
     }
 
-    autoplay();
+    // Creating a native animation can also flush layout. Start it after the
+    // first observed layout, rather than while the new dots dirty the document.
+    if (progressBar && 'ResizeObserver' in window) {
+      const firstLayout = new ResizeObserver(() => {
+        firstLayout.disconnect();
+        autoplay();
+      });
+      firstLayout.observe(progressBar);
+    } else {
+      autoplay();
+    }
     dotsWrap.addEventListener('click', autoplay);
 
     const viewport = document.querySelector('.ms-hero-viewport');

@@ -1,4 +1,4 @@
-// Hold main HTML/CSS after the header. This tests real first-click intent while
+// Hold remaining HTML after the header; all home CSS must already be in head. This tests real first-click intent while
 // the document is still arriving, with classic scrollbars.
 const http = require('node:http');
 const { once } = require('node:events');
@@ -30,8 +30,9 @@ const server = http.createServer((request,response) => {
       await page.goto(`http://127.0.0.1:${server.address().port}`,{waitUntil:'commit'});
       const selector={menu:'[data-menu-toggle]',cart:'[data-open-cart]',auth:'[data-open-auth]'}[control];
       await page.locator(selector).first().waitFor({state:'visible'});await page.evaluate(()=>document.fonts.ready);
-      assert.equal(await page.locator('#msHomeShellStyles').count(),1);
-      assert.equal(await page.locator('#msHomeInlineStyles').count(),0);
+      assert.equal(await page.locator('#msHomeShellStyles').count(),0);
+      assert.equal(await page.locator('#msHomeInlineStyles').count(),1);
+      assert.equal(await page.locator('#msHomeInlineStyles').evaluate(e=>e.parentElement.tagName),'HEAD');
       const snapshot=()=>page.locator('.ms-top,.ms-promo-bar,.ms-logo').evaluateAll(es=>es.map(e=>{
         const r=e.getBoundingClientRect(),c=getComputedStyle(e);
         return {x:r.x,y:r.y,width:r.width,height:r.height,color:c.color,background:c.backgroundColor,font:c.fontFamily};

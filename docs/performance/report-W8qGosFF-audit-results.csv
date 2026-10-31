@@ -1,0 +1,18 @@
+id,audit,reported,status,action_and_limit
+S1,Use a Content Delivery Network (CDN),17resources,OPEN,CDN requires live infrastructure; not deployed or fabricated.
+S2,Avoid an excessive DOM size,1429elements,OPEN,"1429 DOM elements retained; no products, stories or decorations removed to lower the count."
+S3,Use HTTP/2 for all resources,1100ms potential savings,OPEN,Browser HTTP2 requires real TLS/ALPN endpoint; proxy_http_version does not enable it.
+S4,Avoid multiple page redirects,219ms potential savings,OPEN,Two307 headers/initiators not supplied; do not guess HTTPS redirects.
+S5,Avoid long main-thread tasks,5tasks,PARTIAL,"Expanded tasks supplied: document1100ms/319ms and1600ms/181ms contribute approx400ms TBT; home1500ms/91ms+stories1400ms/61ms contribute approx52ms. Document788ms/200ms ends before rounded FCP1000ms. Roll back two-stage CSS, remove eager geometry reads and simplify image layout; no fresh GT validation yet."
+S6,Avoid chaining critical requests,1chain,OPEN,Expanded chain absent; matching LCP preload retained.
+S7,Reduce initial server response time,217ms root document,OPEN,217ms remote backend timing not equivalent to measured server CPU; no live access.
+S8,Avoid enormous network payloads,368KB audit /367KB page details,INFO,"367KB user report; prior image reductions retained, no new image/font encoding change."
+S9,Reduce unused CSS,15.4KB potential savings,OPEN,15.4KB unused CSS includes interface states; ordinary-rule cascade preserved by generated CSS contract test.
+S10,Reduce JavaScript execution time,90ms,PARTIAL,"90ms JS execution does not explain453ms TBT; removed measured forced layout from initializers, no feature disabled."
+S11,Largest Contentful Paint element,1920ms,OPEN,1920ms in real report; local LCP is not a replacement.
+S12,Avoid large layout shifts,"1shift, total CLS0",PRESERVE,ActualCLS0; mobile/desktop browser regression requires CLS<.01 and preserves design.
+S13,Minimize main-thread work,1800ms,PARTIAL,Restore one complete initial stylesheet; use observed geometry for hero/footer/FAB; scope reveal activation to sections and never hide already-visible content; replace nested image Grid layouts with pixel-matched Flex/absolute overlap. No new content-visibility or animation suppression.
+S14,Reduce the impact of third-party code,181B,INFO,"181B; analytics retained, no GT-specific code path."
+S15,Avoid serving legacy JavaScript to modern browsers,No numeric summary captured,INFO,No quantified legacy-JS finding in supplied transcript.
+S16,Eliminate render-blocking resources,0ms potential savings,PRESERVE,"Complete home styles inline once in HEAD, including font/keyframe definitions once; no stylesheet activation delay or second body stylesheet."
+S17,User Timing marks and measures,No numeric summary captured,INFO,No numeric finding captured; no production timing values forged.

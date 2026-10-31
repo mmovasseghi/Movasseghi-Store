@@ -17,16 +17,10 @@
     var isLoggedIn = User.Identity?.IsAuthenticated == true;
     var cartItemCount = CartService.GetBadgeCount(Context);
     var cartAriaLabel = cartItemCount > 0 ? $"سبد خرید ({cartItemCount} قلم)" : "سبد خرید";
-    var homeWebRoot = string.IsNullOrEmpty(HostEnv.WebRootPath)
-        ? global::System.IO.Path.Combine(HostEnv.ContentRootPath, "wwwroot") : HostEnv.WebRootPath;
-    var homeFullStyles = global::System.IO.Path.Combine(homeWebRoot, "css", "critical-home.css");
-    var homeShellStyles = global::System.IO.Path.Combine(homeWebRoot, "css", "critical-shell.css");
-    var streamHomeStyles = isHome && !isLocalTunnel
-        && global::System.IO.File.Exists(homeFullStyles) && global::System.IO.File.Exists(homeShellStyles);
     var logoUrl = ProductImageHelper.PreferWebp("/images/brand/originallogo.png", HostEnv)!;
 }
 <!DOCTYPE html>
-<html lang="fa" dir="rtl" class="js@(streamHomeStyles ? " ms-home" : "")">
+<html lang="fa" dir="rtl" class="js@(isHome ? " ms-home" : "")">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
@@ -116,9 +110,14 @@
             ? global::System.IO.Path.Combine(HostEnv.ContentRootPath, "wwwroot")
             : HostEnv.WebRootPath;
         var criticalPath = global::System.IO.Path.Combine(webRoot, "css", "critical-home.css");
-        if (streamHomeStyles)
+        if (global::System.IO.File.Exists(criticalPath))
         {
-            <style id="msHomeShellStyles">@Html.Raw(global::System.IO.File.ReadAllText(homeShellStyles))</style>
+            <style id="msHomeInlineStyles">@Html.Raw(global::System.IO.File.ReadAllText(criticalPath))</style>
+        }
+        else
+        {
+            <link id="msHomeStyles" rel="stylesheet" href="~/css/storefront-home.bundle.css" asp-append-version="true" onload="this.media='all'" onerror="this.dataset.msFailed='1'" />
+        }
             <script>
             // Preserve the latest intent until the complete document loader exists.
             window.__msEarlyCapture = function (e) {
@@ -131,15 +130,6 @@
             };
             window.addEventListener('click', window.__msEarlyCapture, true);
             </script>
-        }
-        else if (global::System.IO.File.Exists(criticalPath))
-        {
-            <style id="msHomeInlineStyles">@Html.Raw(global::System.IO.File.ReadAllText(criticalPath))</style>
-        }
-        else
-        {
-            <link id="msHomeStyles" rel="stylesheet" href="~/css/storefront-home.bundle.css" asp-append-version="true" onload="this.media='all'" onerror="this.dataset.msFailed='1'" />
-        }
         <template id="msCartCss"><link rel="stylesheet" href="~/css/storefront-cart.bundle.css" asp-append-version="true" /></template>
     }
     else
@@ -193,6 +183,19 @@
     }
 </head>
 <body class="ms-body@(isHome ? " ms-page-home" : "")">
+@if (isHome)
+{
+    <script>
+    (function () {
+      // Explicit root scrolling must respect every existing overlay body lock.
+      function sync() {
+        document.documentElement.classList.toggle('ms-scroll-locked', document.body.matches('.ms-drawer-open,.ms-modal-open,.ms-sheet-open,.ms-story-open'));
+      }
+      new MutationObserver(sync).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+      sync();
+    })();
+    </script>
+}
 <a href="#main-content" class="ms-skip-link">Skip to main content</a>
 <div class="ms-app">
     <div class="ms-promo-bar" data-promo-bar>
@@ -263,10 +266,6 @@
             </form>
         </div>
     </header>
-    @if (streamHomeStyles)
-    {
-        <style id="msHomeInlineStyles">@Html.Raw(global::System.IO.File.ReadAllText(homeFullStyles))</style>
-    }
 
     <div class="ms-drawer" id="mobileNav" hidden aria-hidden="true">
         <div class="ms-drawer-bg" data-menu-close tabindex="-1"></div>
@@ -551,7 +550,7 @@ else
         <script type="text/plain" data-ms-idle src="~/js/auth.js" asp-append-version="true"></script>
         <script type="text/plain" data-ms-idle src="~/js/site.js" asp-append-version="true"></script>
         <script defer src="~/js/product-card-dual.js" asp-append-version="true"></script>
-        <script type="text/plain" data-ms-idle src="~/js/scroll-reveal.js" asp-append-version="true"></script>
+        <script defer src="~/js/scroll-reveal.js" asp-append-version="true"></script>
         <script>
         (function () {
           var loading;

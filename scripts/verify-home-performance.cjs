@@ -16,6 +16,14 @@ for(const [name,selector,state] of [['menu','[data-menu-toggle]','#mobileNav'],[
  await page.goto(base + '/',{waitUntil:'domcontentloaded'});
  await page.locator(selector).first().click();
  const opened=await page.locator(state).waitFor({state:'visible',timeout:2000}).then(()=>true,()=>false);
+ if (opened) {
+  const originalY=await page.evaluate(()=>scrollY);
+  await page.mouse.move(195,420);await page.mouse.wheel(0,500);
+  await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));
+  assert.equal(await page.evaluate(()=>scrollY),originalY,name+': overlay must lock background scrolling');
+  await page.keyboard.press('Escape');await page.locator(state).waitFor({state:'hidden',timeout:2000});
+  await page.mouse.wheel(0,500);await page.waitForFunction(y=>scrollY>y,originalY,{timeout:2000});
+ }
  results.push({name,firstClickOpened:opened,errors});
  await page.close();
 }

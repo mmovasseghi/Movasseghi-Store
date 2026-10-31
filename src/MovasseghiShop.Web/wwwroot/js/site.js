@@ -628,7 +628,19 @@
   if (footerTrust && !reduced) {
     const rows = footerTrust.querySelectorAll('.ms-footer-trust-row');
     if (rows.length === 2) {
-      footerTrust.style.animationDuration = Math.max(18, Math.min(40, rows[0].scrollWidth / 30)) + 's';
+      const setSpeed = width => {
+        if (width > 0) footerTrust.style.animationDuration = Math.max(18, Math.min(40, Math.round(width) / 30)) + 's';
+      };
+      // Reading scrollWidth here forces the intentionally skipped, offscreen
+      // footer to render. Observe its laid-out width when the browser needs it.
+      if ('ResizeObserver' in window && 'ResizeObserverEntry' in window && 'borderBoxSize' in ResizeObserverEntry.prototype) {
+        new ResizeObserver(entries => {
+          const box = entries[0].borderBoxSize;
+          setSpeed((Array.isArray(box) ? box[0] : box)?.inlineSize ?? entries[0].contentRect.width);
+        }).observe(rows[0], { box: 'border-box' });
+      } else {
+        requestAnimationFrame(() => setSpeed(rows[0].scrollWidth));
+      }
     }
   }
 
@@ -645,11 +657,29 @@
     const extra = filterVisible ? filterBar.offsetHeight + 8 : 0;
     fabCall.style.bottom = `${tabbar.offsetHeight + extra + 14}px`;
   }
-  syncFabPosition();
-  window.addEventListener('resize', syncFabPosition);
-  window.addEventListener('orientationchange', syncFabPosition);
-  if (document.fonts?.ready) document.fonts.ready.then(syncFabPosition);
-  setTimeout(syncFabPosition, 150);
+  if (fabCall && tabbar && 'ResizeObserver' in window && 'ResizeObserverEntry' in window && 'borderBoxSize' in ResizeObserverEntry.prototype) {
+    const filterBar = document.querySelector('.mobile-filter-bar');
+    let barHeight = 0, filterHeight = 0;
+    const positions = new ResizeObserver(entries => {
+      for (const entry of entries) {
+        const box = entry.borderBoxSize;
+        const height = Math.round((Array.isArray(box) ? box[0] : box)?.blockSize ?? entry.contentRect.height);
+        if (entry.target === tabbar) barHeight = height;
+        else filterHeight = height;
+      }
+      fabCall.style.bottom = barHeight
+        ? `${barHeight + (filterHeight ? filterHeight + 8 : 0) + 14}px`
+        : 'calc(1.25rem + var(--safe-b))';
+    });
+    positions.observe(tabbar, { box: 'border-box' });
+    if (filterBar) positions.observe(filterBar, { box: 'border-box' });
+  } else {
+    syncFabPosition();
+    window.addEventListener('resize', syncFabPosition);
+    window.addEventListener('orientationchange', syncFabPosition);
+    if (document.fonts?.ready) document.fonts.ready.then(syncFabPosition);
+    setTimeout(syncFabPosition, 150);
+  }
 
   if (fabCall && hasGsap && !snappyUi()) {
     gsap.from(fabCall, { scale: 0, opacity: 0, duration: 0.6, ease: 'back.out(2)', delay: 0.8 });

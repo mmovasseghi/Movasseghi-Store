@@ -1,0 +1,400 @@
+{
+  "id": "W8qGosFF",
+  "url": "https://gtmetrix.com/reports/185.93.88.81/W8qGosFF/",
+  "source": "User-supplied transcript; summary header authoritative; alternate progressive UI values rejected. Not fetched live.",
+  "generated": "2026-10-31T03:58:00-07:00",
+  "tested_url": "http://185.93.88.81/",
+  "location": "Seattle, WA, USA",
+  "browser": "Chrome154.0.0.0",
+  "lighthouse": "12.6.1",
+  "grade": "C",
+  "performance": 67,
+  "structure": 94,
+  "metrics": {
+    "FCP_ms": 1000,
+    "SI_ms": 1800,
+    "LCP_ms": 1900,
+    "LCP_element_ms": 1920,
+    "TTI_ms": 1800,
+    "TBT_ms": 453,
+    "CLS": 0
+  },
+  "browser_timings_ms": {
+    "redirect": 219,
+    "connect": 212,
+    "backend": 218,
+    "TTFB": 649,
+    "first_paint": 1000,
+    "DOM_interactive": 1100,
+    "DCL": 1500,
+    "onload": 1600,
+    "fully_loaded": 2400
+  },
+  "transfer": {
+    "compressed_KB": 367,
+    "uncompressed_KB": 702,
+    "requests": 23,
+    "images_KB": 186,
+    "font_KB": 84,
+    "HTML_KB": 74.6
+  },
+  "audits": [
+    {
+      "id": "S1",
+      "name": "Use a Content Delivery Network (CDN)",
+      "summary": "17resources",
+      "impact": "Med-Low"
+    },
+    {
+      "id": "S2",
+      "name": "Avoid an excessive DOM size",
+      "summary": "1429elements",
+      "impact": "Med-Low"
+    },
+    {
+      "id": "S3",
+      "name": "Use HTTP/2 for all resources",
+      "summary": "1100ms potential savings",
+      "impact": "Med-Low"
+    },
+    {
+      "id": "S4",
+      "name": "Avoid multiple page redirects",
+      "summary": "219ms potential savings",
+      "impact": "Low"
+    },
+    {
+      "id": "S5",
+      "name": "Avoid long main-thread tasks",
+      "summary": "5tasks",
+      "impact": "Low"
+    },
+    {
+      "id": "S6",
+      "name": "Avoid chaining critical requests",
+      "summary": "1chain",
+      "impact": "Low"
+    },
+    {
+      "id": "S7",
+      "name": "Reduce initial server response time",
+      "summary": "217ms root document",
+      "impact": "Low"
+    },
+    {
+      "id": "S8",
+      "name": "Avoid enormous network payloads",
+      "summary": "368KB audit /367KB page details",
+      "impact": "Low"
+    },
+    {
+      "id": "S9",
+      "name": "Reduce unused CSS",
+      "summary": "15.4KB potential savings",
+      "impact": "Low"
+    },
+    {
+      "id": "S10",
+      "name": "Reduce JavaScript execution time",
+      "summary": "90ms",
+      "impact": "Info"
+    },
+    {
+      "id": "S11",
+      "name": "Largest Contentful Paint element",
+      "summary": "1920ms",
+      "impact": "Info"
+    },
+    {
+      "id": "S12",
+      "name": "Avoid large layout shifts",
+      "summary": "1shift, total CLS0",
+      "impact": "Info"
+    },
+    {
+      "id": "S13",
+      "name": "Minimize main-thread work",
+      "summary": "1800ms",
+      "impact": "Info"
+    },
+    {
+      "id": "S14",
+      "name": "Reduce the impact of third-party code",
+      "summary": "181B",
+      "impact": "Info"
+    },
+    {
+      "id": "S15",
+      "name": "Avoid serving legacy JavaScript to modern browsers",
+      "summary": "No numeric summary captured",
+      "impact": "Info"
+    },
+    {
+      "id": "S16",
+      "name": "Eliminate render-blocking resources",
+      "summary": "0ms potential savings",
+      "impact": "Info"
+    },
+    {
+      "id": "S17",
+      "name": "User Timing marks and measures",
+      "summary": "No numeric summary captured",
+      "impact": "Info"
+    }
+  ],
+  "waterfall": [
+    {
+      "number": 1,
+      "path_or_basename": "/",
+      "status": 307,
+      "transfer_KB": 0,
+      "duration_ms_approx": 0
+    },
+    {
+      "number": 2,
+      "path_or_basename": "/",
+      "status": 307,
+      "transfer_KB": 0,
+      "duration_ms_approx": 0
+    },
+    {
+      "number": 3,
+      "path_or_basename": "/",
+      "status": 200,
+      "transfer_KB": 74.6,
+      "duration_ms_approx": 849
+    },
+    {
+      "number": 4,
+      "path_or_basename": "01-display-v2-420w.webp?v=...",
+      "status": 200,
+      "transfer_KB": 21.7,
+      "duration_ms_approx": 637
+    },
+    {
+      "number": 5,
+      "path_or_basename": "Vazirmatn-storefront.woff2?v=...",
+      "status": 200,
+      "transfer_KB": 84,
+      "duration_ms_approx": 859
+    },
+    {
+      "number": 6,
+      "path_or_basename": "stories.js?v=...",
+      "status": 200,
+      "transfer_KB": 2.86,
+      "duration_ms_approx": 435
+    },
+    {
+      "number": 7,
+      "path_or_basename": "home.js?v=...",
+      "status": 200,
+      "transfer_KB": 3.05,
+      "duration_ms_approx": 447
+    },
+    {
+      "number": 8,
+      "path_or_basename": "product-card-dual.js?v=...",
+      "status": 200,
+      "transfer_KB": 1.66,
+      "duration_ms_approx": 473
+    },
+    {
+      "number": 9,
+      "path_or_basename": "originallogo.webp?v=...",
+      "status": 200,
+      "transfer_KB": 10.3,
+      "duration_ms_approx": 651
+    },
+    {
+      "number": 10,
+      "path_or_basename": "phone-fluency-64w.webp?v=...",
+      "status": 200,
+      "transfer_KB": 4.99,
+      "duration_ms_approx": 293
+    },
+    {
+      "number": 11,
+      "path_or_basename": "01-display-v2-420w.webp?v=...",
+      "status": 200,
+      "transfer_KB": 24.2,
+      "duration_ms_approx": 532
+    },
+    {
+      "number": 12,
+      "path_or_basename": "01-display-v2-420w.webp?v=...",
+      "status": 200,
+      "transfer_KB": 12.8,
+      "duration_ms_approx": 327
+    },
+    {
+      "number": 13,
+      "path_or_basename": "auth.js?v=...",
+      "status": 200,
+      "transfer_KB": 5.46,
+      "duration_ms_approx": 427
+    },
+    {
+      "number": 14,
+      "path_or_basename": "site.js?v=...",
+      "status": 200,
+      "transfer_KB": 7.74,
+      "duration_ms_approx": 452
+    },
+    {
+      "number": 15,
+      "path_or_basename": "scroll-reveal.js?v=...",
+      "status": 200,
+      "transfer_KB": 1.29,
+      "duration_ms_approx": 531
+    },
+    {
+      "number": 16,
+      "path_or_basename": "01-160w.webp?v=...",
+      "status": 200,
+      "transfer_KB": 14.4,
+      "duration_ms_approx": 281
+    },
+    {
+      "number": 17,
+      "path_or_basename": "01-hero-photo-v1-272w.webp?v=...",
+      "status": 200,
+      "transfer_KB": 33.1,
+      "duration_ms_approx": 292
+    },
+    {
+      "number": 18,
+      "path_or_basename": "01-160w.webp?v=...",
+      "status": 200,
+      "transfer_KB": 10.3,
+      "duration_ms_approx": 317
+    },
+    {
+      "number": 19,
+      "path_or_basename": "01-160w.webp?v=...",
+      "status": 200,
+      "transfer_KB": 10.1,
+      "duration_ms_approx": 380
+    },
+    {
+      "number": 20,
+      "path_or_basename": "01-hero-photo-v1-272w.webp?v=...",
+      "status": 200,
+      "transfer_KB": 32.1,
+      "duration_ms_approx": 620
+    },
+    {
+      "number": 21,
+      "path_or_basename": "01-160w.webp?v=...",
+      "status": 200,
+      "transfer_KB": 12.6,
+      "duration_ms_approx": 408
+    },
+    {
+      "number": 22,
+      "path_or_basename": "originallogo.webp?v=...",
+      "status": 200,
+      "transfer_KB": 0,
+      "duration_ms_approx": 2
+    },
+    {
+      "number": 23,
+      "path_or_basename": "visitor",
+      "status": "canceled",
+      "transfer_KB": 0,
+      "duration_ms_approx": 223
+    }
+  ],
+  "comparison_f2uWzHy9": {
+    "performance": [
+      79,
+      67
+    ],
+    "structure": [
+      95,
+      94
+    ],
+    "FCP_ms": [
+      1900,
+      1000
+    ],
+    "LCP_ms": [
+      2100,
+      1900
+    ],
+    "TBT_ms": [
+      0,
+      453
+    ],
+    "CLS": [
+      0,
+      0
+    ],
+    "fully_loaded_ms": [
+      2300,
+      2400
+    ],
+    "compressed_KB": [
+      466,
+      367
+    ]
+  },
+  "CrUX": "No data; TBT is not measured field INP.",
+  "video": "Restricted playback; frames not supplied.",
+  "alerts": "No Alerts set, owner-only log details unavailable.",
+  "unknown": [
+    "Deployed commit",
+    "Connection type not supplied",
+    "Full repeated-image paths/version hashes",
+    "Passed/no-impact audit names",
+    "Exact viewport",
+    "Headers of two307s and exact redirect origin",
+    "CPU trace sub-events inside three document tasks; task URL expansion alone does not identify each layout/paint cause."
+  ],
+  "acceptance": "Actual Grade A and both scores>95 remain OPEN.",
+  "expanded_long_tasks": [
+    {
+      "url": "http://185.93.88.81/",
+      "start_ms_approx": 1100,
+      "duration_ms_rounded": 319,
+      "TBT_contribution_ms_approx": 269
+    },
+    {
+      "url": "http://185.93.88.81/",
+      "start_ms_approx": 788,
+      "duration_ms_rounded": 200,
+      "TBT_contribution_ms_approx": 0
+    },
+    {
+      "url": "http://185.93.88.81/",
+      "start_ms_approx": 1600,
+      "duration_ms_rounded": 181,
+      "TBT_contribution_ms_approx": 131
+    },
+    {
+      "url": "http://185.93.88.81/js/home.js?v=axd2Ojd4qPc6ClWFyDwKQYR77Wwn_l53lTb78-SUvEw",
+      "start_ms_approx": 1500,
+      "duration_ms_rounded": 91,
+      "TBT_contribution_ms_approx": 41
+    },
+    {
+      "url": "http://185.93.88.81/js/stories.js?v=_7iMNCSf0-VGn1_UoyyuzYP2AgzpSAAD_qrCo56ZhQI",
+      "start_ms_approx": 1400,
+      "duration_ms_rounded": 61,
+      "TBT_contribution_ms_approx": 11
+    }
+  ],
+  "expanded_long_tasks_source": "Additional user-supplied GT expansion; durations/start times rounded. Approx269+131+41+11=452ms vs actual453ms; the788ms task ends before FCP and contributes0.",
+  "verified_asset_hash_matches": {
+    "home.js": {
+      "reported": "axd2Ojd4qPc6ClWFyDwKQYR77Wwn_l53lTb78-SUvEw",
+      "repo_ea2ca6b": "axd2Ojd4qPc6ClWFyDwKQYR77Wwn_l53lTb78-SUvEw",
+      "matches": true
+    },
+    "stories.js": {
+      "reported": "_7iMNCSf0-VGn1_UoyyuzYP2AgzpSAAD_qrCo56ZhQI",
+      "repo_ea2ca6b": "_7iMNCSf0-VGn1_UoyyuzYP2AgzpSAAD_qrCo56ZhQI",
+      "matches": true
+    }
+  }
+}

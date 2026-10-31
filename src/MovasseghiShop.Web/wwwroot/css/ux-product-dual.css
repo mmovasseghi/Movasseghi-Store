@@ -248,3 +248,15 @@
     transition: none !important;
   }
 }
+
+/* The image boxes have definite aspect-ratio sizes. Flex centring and absolute
+   slide overlap preserve the pixels without repeated nested Grid sizing. */
+.ms-page-home .ms-product-shot,
+.ms-page-home .ms-product-stage,
+.ms-page-home .ms-product-dual__slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ms-page-home .ms-product-dual__slides { display: block; }
+.ms-page-home .ms-product-dual__slide { position: absolute; inset: 0; grid-area: auto; }

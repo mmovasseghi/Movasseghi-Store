@@ -56,6 +56,9 @@
 
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:auto;-webkit-tap-highlight-color:transparent;overflow-x:hidden;max-width:100%}
+html.ms-home{overflow-y:scroll}
+html.ms-home.ms-scroll-locked{overflow:hidden}
+@media print{html.ms-home{overflow-y:visible}}
 body{margin:0;font-family:var(--font);background:var(--c-bg);color:var(--c-text);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%}
 img{max-width:100%;height:auto;display:block}
 

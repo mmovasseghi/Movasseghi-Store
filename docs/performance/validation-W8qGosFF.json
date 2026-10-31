@@ -1,0 +1,4509 @@
+{
+  "at": "2026-10-31T13:19:34.170501+00:00",
+  "base_commit": "ea2ca6b9648f359887ae69b3fc1fdb37af13c1e5",
+  "latest_actual_GT": "W8qGosFF: C / Performance67 / Structure94 / TBT453ms; user transcript plus expanded task table. NO FRESH GT RETEST, NO VPS DEPLOYMENT.",
+  "goal_A_and_both_over95": "OPEN",
+  "selected_changes": [
+    "Revert ea2ca6b stylesheet split: one COMPLETE home stylesheet inline in head; font/keyframe definitions once; early first-click capture retained.",
+    "Feature/trust/hero progress initialization uses observed sizes/after-layout native animation, not eager full-document geometry reads.",
+    "Home reveal opts sections/images in locally and never hides already-onscreen content when initialization is delayed; other pages batch reads before writes.",
+    "Footer marquee no longer reads scrollWidth in its skipped offscreen subtree; floating-call clearance tracks actual nav/filter size with ResizeObserver.",
+    "Home product stage centres with Flex and absolute overlap rather than repeated nested Grid sizing; every gradient/shadow/blur/cycle retained.",
+    "Preserve root background scroll lock for menu/cart/auth/story, and border padding/legacy ResizeObserver support for floating-call clearance."
+  ],
+  "model": {
+    "source": "scripts/local-origin-profile.cjs",
+    "document_TTFB_ms": 647,
+    "RTT_ms": 215,
+    "new_resource_TCP_ms": 215,
+    "initial_response_window_bytes": 14600,
+    "window_growth": "doubles each RTT; illustrative, not full TCP/packet-loss model",
+    "lighthouse": "12.6.1 desktop provided timings, Chromium154, local hardware",
+    "scope": "Same cloned fixture DB, Production Release, repository nginx; no live origin access. Not a replay of unknown exact production viewport or GPU.",
+    "isolation": "Only before/after app servers retained; no parallel browser/build/test work during the six final scored runs.",
+    "warning": "Local scores are NOT GTmetrix. FCP/SpeedIndex regress locally while TBT improves. Median Performance remains below95; a one-point change does not establish the actual GT goal."
+  },
+  "runs": [
+    {
+      "variant": "checked-before",
+      "run": 1,
+      "performance": 88.0,
+      "ttfb": 665,
+      "metrics": {
+        "first-contentful-paint": 940.677,
+        "largest-contentful-paint": 1520.365,
+        "speed-index": 1890,
+        "total-blocking-time": 145.95900000000006,
+        "cumulative-layout-shift": 0.003555917227688435,
+        "total-byte-weight": 739141
+      },
+      "observedLoad": 1563,
+      "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+    },
+    {
+      "variant": "checked-after",
+      "run": 1,
+      "performance": 89.0,
+      "ttfb": 658,
+      "metrics": {
+        "first-contentful-paint": 1195.497,
+        "largest-contentful-paint": 1496.735,
+        "speed-index": 1930,
+        "total-blocking-time": 44.194999999999936,
+        "cumulative-layout-shift": 0.001986675154741727,
+        "total-byte-weight": 737734
+      },
+      "observedLoad": 2848,
+      "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+    },
+    {
+      "variant": "checked-before",
+      "run": 2,
+      "performance": 89.0,
+      "ttfb": 657,
+      "metrics": {
+        "first-contentful-paint": 906.925,
+        "largest-contentful-paint": 1513.251,
+        "speed-index": 1874,
+        "total-blocking-time": 124.86899999999991,
+        "cumulative-layout-shift": 0.001787958282185518,
+        "total-byte-weight": 739140
+      },
+      "observedLoad": 1551,
+      "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+    },
+    {
+      "variant": "checked-after",
+      "run": 2,
+      "performance": 89.0,
+      "ttfb": 657,
+      "metrics": {
+        "first-contentful-paint": 1192.284,
+        "largest-contentful-paint": 1485.163,
+        "speed-index": 1889,
+        "total-blocking-time": 36.40599999999972,
+        "cumulative-layout-shift": 0.001986675154741727,
+        "total-byte-weight": 737734
+      },
+      "observedLoad": 2842,
+      "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+    },
+    {
+      "variant": "checked-before",
+      "run": 3,
+      "performance": 88.0,
+      "ttfb": 657,
+      "metrics": {
+        "first-contentful-paint": 910.265,
+        "largest-contentful-paint": 1503.502,
+        "speed-index": 1864,
+        "total-blocking-time": 146.46799999999996,
+        "cumulative-layout-shift": 0.0009582857669844324,
+        "total-byte-weight": 739140
+      },
+      "observedLoad": 1635,
+      "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+    },
+    {
+      "variant": "checked-after",
+      "run": 3,
+      "performance": 90.0,
+      "ttfb": 656,
+      "metrics": {
+        "first-contentful-paint": 1182.316,
+        "largest-contentful-paint": 1414.778,
+        "speed-index": 1927,
+        "total-blocking-time": 46.843000000000075,
+        "cumulative-layout-shift": 0.00463557536106403,
+        "total-byte-weight": 737734
+      },
+      "observedLoad": 1612,
+      "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+    }
+  ],
+  "summary": {
+    "checked-before": {
+      "performance_runs": [
+        88.0,
+        89.0,
+        88.0
+      ],
+      "median_performance": 88.0,
+      "median_metrics": {
+        "first-contentful-paint": 910.265,
+        "largest-contentful-paint": 1513.251,
+        "speed-index": 1874,
+        "total-blocking-time": 145.95900000000006,
+        "cumulative-layout-shift": 0.001787958282185518,
+        "total-byte-weight": 739140
+      }
+    },
+    "checked-after": {
+      "performance_runs": [
+        89.0,
+        89.0,
+        90.0
+      ],
+      "median_performance": 89.0,
+      "median_metrics": {
+        "first-contentful-paint": 1192.284,
+        "largest-contentful-paint": 1485.163,
+        "speed-index": 1927,
+        "total-blocking-time": 44.194999999999936,
+        "cumulative-layout-shift": 0.001986675154741727,
+        "total-byte-weight": 737734
+      }
+    }
+  },
+  "mainthread_work": {
+    "checked-before": {
+      "median_total_ms": 2630.6569999998574,
+      "median_groups_ms": {
+        "other": 1397.3929999999684,
+        "styleLayout": 657.8439999999998,
+        "paintCompositeRender": 510.47099999988916,
+        "garbageCollection": 4.057999999999992,
+        "scriptEvaluation": 48.67799999999995,
+        "parseHTML": 21.647999999999996,
+        "scriptParseCompile": 3.2029999999999994
+      }
+    },
+    "checked-after": {
+      "median_total_ms": 1078.2040000000054,
+      "median_groups_ms": {
+        "other": 509.621999999999,
+        "styleLayout": 356.44200000000006,
+        "paintCompositeRender": 149.46200000000664,
+        "scriptEvaluation": 36.000000000000014,
+        "parseHTML": 20.069,
+        "scriptParseCompile": 2.772999999999999,
+        "garbageCollection": 0.683
+      }
+    }
+  },
+  "production_task_accounting": [
+    {
+      "url": "http://185.93.88.81/",
+      "start_ms_approx": 1100,
+      "duration_ms_rounded": 319,
+      "TBT_contribution_ms_approx": 269
+    },
+    {
+      "url": "http://185.93.88.81/",
+      "start_ms_approx": 788,
+      "duration_ms_rounded": 200,
+      "TBT_contribution_ms_approx": 0
+    },
+    {
+      "url": "http://185.93.88.81/",
+      "start_ms_approx": 1600,
+      "duration_ms_rounded": 181,
+      "TBT_contribution_ms_approx": 131
+    },
+    {
+      "url": "http://185.93.88.81/js/home.js?v=axd2Ojd4qPc6ClWFyDwKQYR77Wwn_l53lTb78-SUvEw",
+      "start_ms_approx": 1500,
+      "duration_ms_rounded": 91,
+      "TBT_contribution_ms_approx": 41
+    },
+    {
+      "url": "http://185.93.88.81/js/stories.js?v=_7iMNCSf0-VGn1_UoyyuzYP2AgzpSAAD_qrCo56ZhQI",
+      "start_ms_approx": 1400,
+      "duration_ms_rounded": 61,
+      "TBT_contribution_ms_approx": 11
+    }
+  ],
+  "checks": {
+    "release_publish": "PASS",
+    "frontend_mirror": "PASS; generated full/home bundles byte-identical",
+    "CSS_parser": 7,
+    "browser_JS_syntax": 33,
+    "deployment_tests": 13,
+    "startup_layout_trace": {
+      "fontFaces": 2,
+      "cpuSlowdown": 4,
+      "forcedLayoutsDuringStartup": [],
+      "initializerTimes": [
+        {
+          "url": "http://127.0.0.1:8232/js/home.js?v=l49bxJHw0cPLLJHzBXwZ-3C-ItY9IfxDlGrYzlAy0Vc",
+          "ms": 5.453
+        },
+        {
+          "url": "http://127.0.0.1:8232/js/scroll-reveal.js?v=1AI5jFxSAVMEATs08GdR5pry2-prwJtw2BkqbCqUcGg",
+          "ms": 1.15
+        },
+        {
+          "url": "http://127.0.0.1:8232/js/site.js?v=7AIW3EKMxSnt57OpRmnBkJgl2GyTRr2ygz3Gge8ZEos",
+          "ms": 5.912
+        }
+      ],
+      "errors": []
+    },
+    "complete_initial_styles": "Single full inline head sheet, font faces2, no external home bundle, delayed remaining document and five first-click intents PASS",
+    "onscreen_content_on_late_reveal": "PASS; block reveal script, scroll into offers before initialization, opacity remains1; offscreen featured retains fade",
+    "home": "mobile/desktop first-click menu/cart/auth/story, root background scroll lock/unlock,8+8 products,12stories,CLS<.01 PASS",
+    "real_product_media": "12 viewport/DPR cases, actual scene cycle, blur6px,hero dots,full font fallback and blocked story storage PASS",
+    "marquee": "56 phase/width checks, motion and resize/reduced-motion PASS",
+    "floating_call_and_footer": "8 homepage/Catalog viewport cases, border padding changes and legacy borderBox fallback PASS",
+    "strict_nginx": "PASS; public guest/analytics cookie HIT, fingerprint/MIME/cache TTL and every responsive LCP source with matching preload",
+    "visual_geometry": [
+      {
+        "device": "mobile",
+        "version": "baseline",
+        "width": 390,
+        "height": 844,
+        "geometry": {
+          ".ms-promo-bar": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 42.65625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgba(255, 255, 255, 0.92)"
+          },
+          ".ms-top": {
+            "x": 0,
+            "y": 42.65625,
+            "width": 390,
+            "height": 145.140625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-logo": {
+            "x": 142.3125,
+            "y": 61.234375,
+            "width": 141.390625,
+            "height": 52,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-stories": {
+            "x": 0,
+            "y": 187.796875,
+            "width": 390,
+            "height": 110.5,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-hero": {
+            "x": 0,
+            "y": 298.296875,
+            "width": 390,
+            "height": 311.609375,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-hero-title": {
+            "x": 166.828125,
+            "y": 376.5625,
+            "width": 203.578125,
+            "height": 23.3125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "19.11px",
+            "color": "rgb(255, 255, 255)"
+          },
+          ".ms-hero-product img": {
+            "x": 19.59375,
+            "y": 376.546875,
+            "width": 135.71875,
+            "height": 96,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(255, 255, 255)"
+          },
+          ".ms-features": {
+            "x": 0,
+            "y": 609.90625,
+            "width": 390,
+            "height": 266.515625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-offers": {
+            "x": 0,
+            "y": 916.421875,
+            "width": 390,
+            "height": 533.9375,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-featured-section": {
+            "x": 0,
+            "y": 1730.71875,
+            "width": 390,
+            "height": 1295.75,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-segments": {
+            "x": 0,
+            "y": 3096.46875,
+            "width": 390,
+            "height": 428.515625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-footer": {
+            "x": 0,
+            "y": 6574.84375,
+            "width": 390,
+            "height": 390,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "13.12px",
+            "color": "rgba(255, 255, 255, 0.82)"
+          }
+        },
+        "totalHeight": 7061,
+        "featured": 8,
+        "offers": 8
+      },
+      {
+        "device": "mobile",
+        "version": "current",
+        "width": 390,
+        "height": 844,
+        "geometry": {
+          ".ms-promo-bar": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 42.65625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgba(255, 255, 255, 0.92)"
+          },
+          ".ms-top": {
+            "x": 0,
+            "y": 42.65625,
+            "width": 390,
+            "height": 145.140625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-logo": {
+            "x": 142.3125,
+            "y": 61.234375,
+            "width": 141.390625,
+            "height": 52,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-stories": {
+            "x": 0,
+            "y": 187.796875,
+            "width": 390,
+            "height": 110.5,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-hero": {
+            "x": 0,
+            "y": 298.296875,
+            "width": 390,
+            "height": 311.609375,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-hero-title": {
+            "x": 166.828125,
+            "y": 376.5625,
+            "width": 203.578125,
+            "height": 23.3125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "19.11px",
+            "color": "rgb(255, 255, 255)"
+          },
+          ".ms-hero-product img": {
+            "x": 19.59375,
+            "y": 376.546875,
+            "width": 135.71875,
+            "height": 96,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(255, 255, 255)"
+          },
+          ".ms-features": {
+            "x": 0,
+            "y": 609.90625,
+            "width": 390,
+            "height": 266.515625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-offers": {
+            "x": 0,
+            "y": 916.421875,
+            "width": 390,
+            "height": 533.9375,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-featured-section": {
+            "x": 0,
+            "y": 1730.71875,
+            "width": 390,
+            "height": 1295.75,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-segments": {
+            "x": 0,
+            "y": 3096.46875,
+            "width": 390,
+            "height": 428.515625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-footer": {
+            "x": 0,
+            "y": 6574.84375,
+            "width": 390,
+            "height": 390,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "13.12px",
+            "color": "rgba(255, 255, 255, 0.82)"
+          }
+        },
+        "totalHeight": 7061,
+        "featured": 8,
+        "offers": 8
+      },
+      {
+        "device": "tablet",
+        "version": "baseline",
+        "width": 768,
+        "height": 1024,
+        "geometry": {
+          ".ms-promo-bar": {
+            "x": 0,
+            "y": 0,
+            "width": 768,
+            "height": 53.390625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgba(255, 255, 255, 0.92)"
+          },
+          ".ms-top": {
+            "x": 30.734375,
+            "y": 53.390625,
+            "width": 706.546875,
+            "height": 197.5,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-logo": {
+            "x": 573.296875,
+            "y": 91.859375,
+            "width": 141.390625,
+            "height": 52,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-stories": {
+            "x": 0,
+            "y": 250.890625,
+            "width": 768,
+            "height": 252.65625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-hero": {
+            "x": 0,
+            "y": 503.546875,
+            "width": 768,
+            "height": 538.203125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-hero-title": {
+            "x": 347.828125,
+            "y": 671.765625,
+            "width": 365.125,
+            "height": 36.28125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "33.6px",
+            "color": "rgb(255, 255, 255)"
+          },
+          ".ms-hero-product img": {
+            "x": 55.046875,
+            "y": 603.15625,
+            "width": 260.78125,
+            "height": 260.78125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(255, 255, 255)"
+          },
+          ".ms-features": {
+            "x": 0,
+            "y": 1041.75,
+            "width": 768,
+            "height": 322.390625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-offers": {
+            "x": 0,
+            "y": 1408.140625,
+            "width": 768,
+            "height": 834.84375,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-featured-section": {
+            "x": 0,
+            "y": 2612.234375,
+            "width": 768,
+            "height": 760.59375,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-segments": {
+            "x": 0,
+            "y": 3458.828125,
+            "width": 768,
+            "height": 374.453125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-footer": {
+            "x": 0,
+            "y": 7381.90625,
+            "width": 768,
+            "height": 344,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "13.12px",
+            "color": "rgba(255, 255, 255, 0.82)"
+          }
+        },
+        "totalHeight": 7726,
+        "featured": 8,
+        "offers": 8
+      },
+      {
+        "device": "tablet",
+        "version": "current",
+        "width": 768,
+        "height": 1024,
+        "geometry": {
+          ".ms-promo-bar": {
+            "x": 0,
+            "y": 0,
+            "width": 768,
+            "height": 53.390625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgba(255, 255, 255, 0.92)"
+          },
+          ".ms-top": {
+            "x": 30.734375,
+            "y": 53.390625,
+            "width": 706.546875,
+            "height": 197.5,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-logo": {
+            "x": 573.296875,
+            "y": 91.859375,
+            "width": 141.390625,
+            "height": 52,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-stories": {
+            "x": 0,
+            "y": 250.890625,
+            "width": 768,
+            "height": 252.65625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-hero": {
+            "x": 0,
+            "y": 503.546875,
+            "width": 768,
+            "height": 538.203125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-hero-title": {
+            "x": 347.828125,
+            "y": 671.765625,
+            "width": 365.125,
+            "height": 36.28125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "33.6px",
+            "color": "rgb(255, 255, 255)"
+          },
+          ".ms-hero-product img": {
+            "x": 55.046875,
+            "y": 603.15625,
+            "width": 260.78125,
+            "height": 260.78125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(255, 255, 255)"
+          },
+          ".ms-features": {
+            "x": 0,
+            "y": 1041.75,
+            "width": 768,
+            "height": 322.390625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-offers": {
+            "x": 0,
+            "y": 1408.140625,
+            "width": 768,
+            "height": 834.84375,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-featured-section": {
+            "x": 0,
+            "y": 2612.234375,
+            "width": 768,
+            "height": 760.59375,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-segments": {
+            "x": 0,
+            "y": 3458.828125,
+            "width": 768,
+            "height": 374.453125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-footer": {
+            "x": 0,
+            "y": 7381.90625,
+            "width": 768,
+            "height": 344,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "13.12px",
+            "color": "rgba(255, 255, 255, 0.82)"
+          }
+        },
+        "totalHeight": 7726,
+        "featured": 8,
+        "offers": 8
+      },
+      {
+        "device": "desktop",
+        "version": "baseline",
+        "width": 1366,
+        "height": 768,
+        "geometry": {
+          ".ms-promo-bar": {
+            "x": 0,
+            "y": 0,
+            "width": 1366,
+            "height": 53.390625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgba(255, 255, 255, 0.92)"
+          },
+          ".ms-top": {
+            "x": 68.3125,
+            "y": 53.390625,
+            "width": 1229.390625,
+            "height": 176.890625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-logo": {
+            "x": 1133.71875,
+            "y": 81.5625,
+            "width": 141.390625,
+            "height": 52,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-stories": {
+            "x": 0,
+            "y": 230.28125,
+            "width": 1366,
+            "height": 251.8125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-hero": {
+            "x": 0,
+            "y": 482.09375,
+            "width": 1366,
+            "height": 598.203125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-hero-title": {
+            "x": 618.859375,
+            "y": 670.21875,
+            "width": 640.125,
+            "height": 60.46875,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "56px",
+            "color": "rgb(255, 255, 255)"
+          },
+          ".ms-hero-product img": {
+            "x": 125.625,
+            "y": 582.8125,
+            "width": 420,
+            "height": 322.546875,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(255, 255, 255)"
+          },
+          ".ms-features": {
+            "x": 0,
+            "y": 1080.296875,
+            "width": 1366,
+            "height": 322.390625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-offers": {
+            "x": 0,
+            "y": 1446.6875,
+            "width": 1366,
+            "height": 1096.265625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-featured-section": {
+            "x": 0,
+            "y": 2922.203125,
+            "width": 1366,
+            "height": 998.9375,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-segments": {
+            "x": 0,
+            "y": 4007.140625,
+            "width": 1366,
+            "height": 359.3125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-footer": {
+            "x": 0,
+            "y": 7123.046875,
+            "width": 1366,
+            "height": 344,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "13.12px",
+            "color": "rgba(255, 255, 255, 0.82)"
+          }
+        },
+        "totalHeight": 7467,
+        "featured": 8,
+        "offers": 8
+      },
+      {
+        "device": "desktop",
+        "version": "current",
+        "width": 1366,
+        "height": 768,
+        "geometry": {
+          ".ms-promo-bar": {
+            "x": 0,
+            "y": 0,
+            "width": 1366,
+            "height": 53.390625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgba(255, 255, 255, 0.92)"
+          },
+          ".ms-top": {
+            "x": 68.3125,
+            "y": 53.390625,
+            "width": 1229.390625,
+            "height": 176.890625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-logo": {
+            "x": 1133.71875,
+            "y": 81.5625,
+            "width": 141.390625,
+            "height": 52,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-stories": {
+            "x": 0,
+            "y": 230.28125,
+            "width": 1366,
+            "height": 251.8125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-hero": {
+            "x": 0,
+            "y": 482.09375,
+            "width": 1366,
+            "height": 598.203125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-hero-title": {
+            "x": 618.859375,
+            "y": 670.21875,
+            "width": 640.125,
+            "height": 60.46875,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "56px",
+            "color": "rgb(255, 255, 255)"
+          },
+          ".ms-hero-product img": {
+            "x": 125.625,
+            "y": 582.8125,
+            "width": 420,
+            "height": 322.546875,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(255, 255, 255)"
+          },
+          ".ms-features": {
+            "x": 0,
+            "y": 1080.296875,
+            "width": 1366,
+            "height": 322.390625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-offers": {
+            "x": 0,
+            "y": 1446.6875,
+            "width": 1366,
+            "height": 1096.265625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-featured-section": {
+            "x": 0,
+            "y": 2922.203125,
+            "width": 1366,
+            "height": 998.9375,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-segments": {
+            "x": 0,
+            "y": 4007.140625,
+            "width": 1366,
+            "height": 359.3125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-footer": {
+            "x": 0,
+            "y": 7123.046875,
+            "width": 1366,
+            "height": 344,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "13.12px",
+            "color": "rgba(255, 255, 255, 0.82)"
+          }
+        },
+        "totalHeight": 7467,
+        "featured": 8,
+        "offers": 8
+      }
+    ],
+    "all_product_frames": [
+      {
+        "width": 390,
+        "cards": [
+          {
+            "card": {
+              "w": 240,
+              "h": 345.0625
+            },
+            ".ms-product-media--dual": {
+              "x": 12,
+              "y": 12,
+              "w": 216,
+              "h": 216,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(152deg, rgb(158, 176, 163), rgb(143, 161, 146) 38%, rgb(125, 145, 132)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "16px"
+            },
+            ".ms-product-dual__slides": {
+              "x": 24,
+              "y": 24,
+              "w": 192,
+              "h": 192,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--studio": {
+              "x": 24,
+              "y": 24,
+              "w": 192,
+              "h": 192,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "blur(0px) brightness(1) saturate(1)",
+              "radius": "0px"
+            },
+            ".ms-product-shot": {
+              "x": 43.203125,
+              "y": 43.203125,
+              "w": 153.59375,
+              "h": 153.59375,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage": {
+              "x": 48.796875,
+              "y": 48.796875,
+              "w": 142.40625,
+              "h": 142.40625,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 67.3125,
+              "y": 67.3125,
+              "w": 105.375,
+              "h": 105.375,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--scene img": {
+              "x": 19.20001220703125,
+              "y": 19.20001220703125,
+              "w": 201.5999755859375,
+              "h": 201.5999755859375,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 240,
+              "h": 345.0625
+            },
+            ".ms-product-shot": {
+              "x": 43.203125,
+              "y": 43.203125,
+              "w": 153.59375,
+              "h": 153.59375,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage": {
+              "x": 48.796875,
+              "y": 48.796875,
+              "w": 142.40625,
+              "h": 142.40625,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 67.3125,
+              "y": 67.3125,
+              "w": 105.375,
+              "h": 105.375,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 240,
+              "h": 345.0625
+            },
+            ".ms-product-media--dual": {
+              "x": 12,
+              "y": 12,
+              "w": 216,
+              "h": 216,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(152deg, rgb(158, 176, 163), rgb(143, 161, 146) 38%, rgb(125, 145, 132)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "16px"
+            },
+            ".ms-product-dual__slides": {
+              "x": 24,
+              "y": 24,
+              "w": 192,
+              "h": 192,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--studio": {
+              "x": 24,
+              "y": 24,
+              "w": 192,
+              "h": 192,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "blur(0px) brightness(1) saturate(1)",
+              "radius": "0px"
+            },
+            ".ms-product-shot": {
+              "x": 43.203125,
+              "y": 43.203125,
+              "w": 153.59375,
+              "h": 153.59375,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage": {
+              "x": 48.796875,
+              "y": 48.796875,
+              "w": 142.40625,
+              "h": 142.40625,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 67.3125,
+              "y": 67.3125,
+              "w": 105.375,
+              "h": 105.375,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--scene img": {
+              "x": 19.20001220703125,
+              "y": 19.20001220703125,
+              "w": 201.5999755859375,
+              "h": 201.5999755859375,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 240,
+              "h": 345.0625
+            },
+            ".ms-product-shot": {
+              "x": 43.203125,
+              "y": 43.203125,
+              "w": 153.59375,
+              "h": 153.59375,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage": {
+              "x": 48.796875,
+              "y": 48.796875,
+              "w": 142.40625,
+              "h": 142.40625,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 67.3125,
+              "y": 67.3125,
+              "w": 105.375,
+              "h": 105.375,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 240,
+              "h": 345.0625
+            },
+            ".ms-product-shot": {
+              "x": 43.203125,
+              "y": 43.203125,
+              "w": 153.59375,
+              "h": 153.59375,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage": {
+              "x": 48.796875,
+              "y": 48.796875,
+              "w": 142.40625,
+              "h": 142.40625,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 67.3125,
+              "y": 67.3125,
+              "w": 105.375,
+              "h": 105.375,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 240,
+              "h": 345.0625
+            },
+            ".ms-product-shot": {
+              "x": 43.203125,
+              "y": 43.203125,
+              "w": 153.59375,
+              "h": 153.59375,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage": {
+              "x": 48.796875,
+              "y": 48.796875,
+              "w": 142.40625,
+              "h": 142.40625,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 67.3125,
+              "y": 67.3125,
+              "w": 105.375,
+              "h": 105.375,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 240,
+              "h": 345.0625
+            },
+            ".ms-product-shot": {
+              "x": 43.203125,
+              "y": 43.203125,
+              "w": 153.59375,
+              "h": 153.59375,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage": {
+              "x": 48.796875,
+              "y": 48.796875,
+              "w": 142.40625,
+              "h": 142.40625,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 67.3125,
+              "y": 67.3125,
+              "w": 105.375,
+              "h": 105.375,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 240,
+              "h": 345.0625
+            },
+            ".ms-product-shot": {
+              "x": 43.203125,
+              "y": 43.203125,
+              "w": 153.59375,
+              "h": 153.59375,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage": {
+              "x": 48.796875,
+              "y": 48.796875,
+              "w": 142.40625,
+              "h": 142.40625,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 67.3125,
+              "y": 67.3125,
+              "w": 105.375,
+              "h": 105.375,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 177.234375,
+              "h": 280.921875
+            },
+            ".ms-product-media--dual": {
+              "x": 1,
+              "y": 1,
+              "w": 175.234375,
+              "h": 175.234375,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(152deg, rgb(158, 176, 163), rgb(143, 161, 146) 38%, rgb(125, 145, 132)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slides": {
+              "x": 11.390625,
+              "y": 13,
+              "w": 154.453125,
+              "h": 154.4375,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--studio": {
+              "x": 11.390625,
+              "y": 13,
+              "w": 154.453125,
+              "h": 154.4375,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "blur(0px) brightness(1) saturate(1)",
+              "radius": "0px"
+            },
+            ".ms-product-shot": {
+              "x": 26.84375,
+              "y": 28.4375,
+              "w": 123.5625,
+              "h": 123.5625,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "16px"
+            },
+            ".ms-product-stage": {
+              "x": 33.234375,
+              "y": 34.828125,
+              "w": 110.78125,
+              "h": 110.78125,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 47.640625,
+              "y": 49.234375,
+              "w": 81.96875,
+              "h": 81.96875,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--scene img": {
+              "x": 7.529296875,
+              "y": 9.139068603515625,
+              "w": 162.17578125,
+              "h": 162.15936279296875,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 177.25,
+              "h": 280.921875
+            },
+            ".ms-product-media--dual": {
+              "x": 1,
+              "y": 1,
+              "w": 175.25,
+              "h": 175.25,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(152deg, rgb(158, 176, 163), rgb(143, 161, 146) 38%, rgb(125, 145, 132)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slides": {
+              "x": 11.390625,
+              "y": 13,
+              "w": 154.46875,
+              "h": 154.453125,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--studio": {
+              "x": 11.390625,
+              "y": 13,
+              "w": 154.46875,
+              "h": 154.453125,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "blur(0px) brightness(1) saturate(1)",
+              "radius": "0px"
+            },
+            ".ms-product-shot": {
+              "x": 26.84375,
+              "y": 28.4375,
+              "w": 123.5625,
+              "h": 123.5625,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "16px"
+            },
+            ".ms-product-stage": {
+              "x": 33.234375,
+              "y": 34.828125,
+              "w": 110.78125,
+              "h": 110.78125,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 47.640625,
+              "y": 49.234375,
+              "w": 81.96875,
+              "h": 81.96875,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--scene img": {
+              "x": 7.528907775878906,
+              "y": 9.138671875,
+              "w": 162.19216918945312,
+              "h": 162.17578125,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 177.234375,
+              "h": 280.921875
+            },
+            ".ms-product-media--dual": {
+              "x": 1,
+              "y": 1,
+              "w": 175.234375,
+              "h": 175.234375,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(152deg, rgb(158, 176, 163), rgb(143, 161, 146) 38%, rgb(125, 145, 132)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slides": {
+              "x": 11.390625,
+              "y": 13,
+              "w": 154.453125,
+              "h": 154.4375,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--studio": {
+              "x": 11.390625,
+              "y": 13,
+              "w": 154.453125,
+              "h": 154.4375,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "blur(0px) brightness(1) saturate(1)",
+              "radius": "0px"
+            },
+            ".ms-product-shot": {
+              "x": 26.84375,
+              "y": 28.4375,
+              "w": 123.5625,
+              "h": 123.5625,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "16px"
+            },
+            ".ms-product-stage": {
+              "x": 33.234375,
+              "y": 34.828125,
+              "w": 110.78125,
+              "h": 110.78125,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 47.640625,
+              "y": 49.234375,
+              "w": 81.96875,
+              "h": 81.96875,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--scene img": {
+              "x": 7.529296875,
+              "y": 9.1390380859375,
+              "w": 162.17578125,
+              "h": 162.159423828125,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 177.25,
+              "h": 280.921875
+            },
+            ".ms-product-media--dual": {
+              "x": 1,
+              "y": 1,
+              "w": 175.25,
+              "h": 175.25,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(152deg, rgb(158, 176, 163), rgb(143, 161, 146) 38%, rgb(125, 145, 132)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slides": {
+              "x": 11.390625,
+              "y": 13,
+              "w": 154.46875,
+              "h": 154.453125,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--studio": {
+              "x": 11.390625,
+              "y": 13,
+              "w": 154.46875,
+              "h": 154.453125,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "blur(0px) brightness(1) saturate(1)",
+              "radius": "0px"
+            },
+            ".ms-product-shot": {
+              "x": 26.84375,
+              "y": 28.4375,
+              "w": 123.5625,
+              "h": 123.5625,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "16px"
+            },
+            ".ms-product-stage": {
+              "x": 33.234375,
+              "y": 34.828125,
+              "w": 110.78125,
+              "h": 110.78125,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 47.640625,
+              "y": 49.234375,
+              "w": 81.96875,
+              "h": 81.96875,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--scene img": {
+              "x": 7.528907775878906,
+              "y": 9.138671875,
+              "w": 162.19216918945312,
+              "h": 162.17578125,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 177.234375,
+              "h": 270.578125
+            },
+            ".ms-product-media--dual": {
+              "x": 1,
+              "y": 1,
+              "w": 175.234375,
+              "h": 175.234375,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(152deg, rgb(158, 176, 163), rgb(143, 161, 146) 38%, rgb(125, 145, 132)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slides": {
+              "x": 11.390625,
+              "y": 13,
+              "w": 154.453125,
+              "h": 154.4375,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--studio": {
+              "x": 11.390625,
+              "y": 13,
+              "w": 154.453125,
+              "h": 154.4375,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "blur(0px) brightness(1) saturate(1)",
+              "radius": "0px"
+            },
+            ".ms-product-shot": {
+              "x": 26.84375,
+              "y": 28.4375,
+              "w": 123.5625,
+              "h": 123.5625,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "16px"
+            },
+            ".ms-product-stage": {
+              "x": 33.234375,
+              "y": 34.828125,
+              "w": 110.78125,
+              "h": 110.78125,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 47.640625,
+              "y": 49.234375,
+              "w": 81.96875,
+              "h": 81.96875,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--scene img": {
+              "x": 7.529296875,
+              "y": 9.139068603515625,
+              "w": 162.17578125,
+              "h": 162.15936279296875,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 177.25,
+              "h": 270.578125
+            },
+            ".ms-product-shot": {
+              "x": 26.84375,
+              "y": 28.4375,
+              "w": 123.5625,
+              "h": 123.5625,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "16px"
+            },
+            ".ms-product-stage": {
+              "x": 33.234375,
+              "y": 34.828125,
+              "w": 110.78125,
+              "h": 110.78125,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 47.640625,
+              "y": 49.234375,
+              "w": 81.96875,
+              "h": 81.96875,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 177.234375,
+              "h": 280.90625
+            },
+            ".ms-product-shot": {
+              "x": 26.84375,
+              "y": 28.4375,
+              "w": 123.5625,
+              "h": 123.5625,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "16px"
+            },
+            ".ms-product-stage": {
+              "x": 33.234375,
+              "y": 34.828125,
+              "w": 110.78125,
+              "h": 110.78125,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 47.640625,
+              "y": 49.234375,
+              "w": 81.96875,
+              "h": 81.96875,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 177.25,
+              "h": 280.90625
+            },
+            ".ms-product-media--dual": {
+              "x": 1,
+              "y": 1,
+              "w": 175.25,
+              "h": 175.25,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(152deg, rgb(158, 176, 163), rgb(143, 161, 146) 38%, rgb(125, 145, 132)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slides": {
+              "x": 11.390625,
+              "y": 13,
+              "w": 154.46875,
+              "h": 154.453125,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--studio": {
+              "x": 11.390625,
+              "y": 13,
+              "w": 154.46875,
+              "h": 154.453125,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "blur(0px) brightness(1) saturate(1)",
+              "radius": "0px"
+            },
+            ".ms-product-shot": {
+              "x": 26.84375,
+              "y": 28.4375,
+              "w": 123.5625,
+              "h": 123.5625,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "16px"
+            },
+            ".ms-product-stage": {
+              "x": 33.234375,
+              "y": 34.828125,
+              "w": 110.78125,
+              "h": 110.78125,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 47.640625,
+              "y": 49.234375,
+              "w": 81.96875,
+              "h": 81.96875,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--scene img": {
+              "x": 7.528907775878906,
+              "y": 9.138671875,
+              "w": 162.19216918945312,
+              "h": 162.17578125,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            }
+          }
+        ]
+      },
+      {
+        "width": 768,
+        "cards": [
+          {
+            "card": {
+              "w": 162.84375,
+              "h": 270.828125
+            },
+            ".ms-product-media--dual": {
+              "x": 0,
+              "y": 0,
+              "w": 162.84375,
+              "h": 162.84375,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(152deg, rgb(158, 176, 163), rgb(143, 161, 146) 38%, rgb(125, 145, 132)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slides": {
+              "x": 16,
+              "y": 16,
+              "w": 130.84375,
+              "h": 130.84375,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--studio": {
+              "x": 16,
+              "y": 16,
+              "w": 130.84375,
+              "h": 130.84375,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "blur(0px) brightness(1) saturate(1)",
+              "radius": "0px"
+            },
+            ".ms-product-shot": {
+              "x": 29.09375,
+              "y": 29.078125,
+              "w": 104.671875,
+              "h": 104.671875,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage": {
+              "x": 34.6875,
+              "y": 34.671875,
+              "w": 93.484375,
+              "h": 93.484375,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 46.84375,
+              "y": 46.828125,
+              "w": 69.171875,
+              "h": 69.171875,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--scene img": {
+              "x": 12.7288818359375,
+              "y": 12.728912353515625,
+              "w": 137.385986328125,
+              "h": 137.38592529296875,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 162.84375,
+              "h": 270.828125
+            },
+            ".ms-product-shot": {
+              "x": 29.09375,
+              "y": 29.078125,
+              "w": 104.671875,
+              "h": 104.671875,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage": {
+              "x": 34.6875,
+              "y": 34.671875,
+              "w": 93.484375,
+              "h": 93.484375,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 46.84375,
+              "y": 46.828125,
+              "w": 69.171875,
+              "h": 69.171875,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 162.84375,
+              "h": 270.828125
+            },
+            ".ms-product-media--dual": {
+              "x": 0,
+              "y": 0,
+              "w": 162.84375,
+              "h": 162.84375,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(152deg, rgb(158, 176, 163), rgb(143, 161, 146) 38%, rgb(125, 145, 132)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slides": {
+              "x": 16,
+              "y": 16,
+              "w": 130.84375,
+              "h": 130.84375,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--studio": {
+              "x": 16,
+              "y": 16,
+              "w": 130.84375,
+              "h": 130.84375,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "blur(0px) brightness(1) saturate(1)",
+              "radius": "0px"
+            },
+            ".ms-product-shot": {
+              "x": 29.09375,
+              "y": 29.078125,
+              "w": 104.671875,
+              "h": 104.671875,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage": {
+              "x": 34.6875,
+              "y": 34.671875,
+              "w": 93.484375,
+              "h": 93.484375,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 46.84375,
+              "y": 46.828125,
+              "w": 69.171875,
+              "h": 69.171875,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--scene img": {
+              "x": 12.728912353515625,
+              "y": 12.728912353515625,
+              "w": 137.38592529296875,
+              "h": 137.38592529296875,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 162.84375,
+              "h": 270.828125
+            },
+            ".ms-product-shot": {
+              "x": 29.09375,
+              "y": 29.078125,
+              "w": 104.671875,
+              "h": 104.671875,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage": {
+              "x": 34.6875,
+              "y": 34.671875,
+              "w": 93.484375,
+              "h": 93.484375,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 46.84375,
+              "y": 46.828125,
+              "w": 69.171875,
+              "h": 69.171875,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 162.84375,
+              "h": 270.828125
+            },
+            ".ms-product-shot": {
+              "x": 29.09375,
+              "y": 29.078125,
+              "w": 104.671875,
+              "h": 104.671875,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage": {
+              "x": 34.6875,
+              "y": 34.671875,
+              "w": 93.484375,
+              "h": 93.484375,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 46.84375,
+              "y": 46.828125,
+              "w": 69.171875,
+              "h": 69.171875,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 162.84375,
+              "h": 270.828125
+            },
+            ".ms-product-shot": {
+              "x": 29.09375,
+              "y": 29.078125,
+              "w": 104.671875,
+              "h": 104.671875,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage": {
+              "x": 34.6875,
+              "y": 34.671875,
+              "w": 93.484375,
+              "h": 93.484375,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 46.84375,
+              "y": 46.828125,
+              "w": 69.171875,
+              "h": 69.171875,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 162.84375,
+              "h": 270.828125
+            },
+            ".ms-product-shot": {
+              "x": 29.09375,
+              "y": 29.078125,
+              "w": 104.671875,
+              "h": 104.671875,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage": {
+              "x": 34.6875,
+              "y": 34.671875,
+              "w": 93.484375,
+              "h": 93.484375,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 46.84375,
+              "y": 46.828125,
+              "w": 69.171875,
+              "h": 69.171875,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 162.84375,
+              "h": 270.828125
+            },
+            ".ms-product-shot": {
+              "x": 29.09375,
+              "y": 29.078125,
+              "w": 104.671875,
+              "h": 104.671875,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage": {
+              "x": 34.6875,
+              "y": 34.671875,
+              "w": 93.484375,
+              "h": 93.484375,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 46.84375,
+              "y": 46.828125,
+              "w": 69.171875,
+              "h": 69.171875,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 161.625,
+              "h": 270.671875
+            },
+            ".ms-product-media--dual": {
+              "x": 1,
+              "y": 1,
+              "w": 159.625,
+              "h": 159.625,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(152deg, rgb(158, 176, 163), rgb(143, 161, 146) 38%, rgb(125, 145, 132)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slides": {
+              "x": 11.390625,
+              "y": 13,
+              "w": 138.84375,
+              "h": 138.828125,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--studio": {
+              "x": 11.390625,
+              "y": 13,
+              "w": 138.84375,
+              "h": 138.828125,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "blur(0px) brightness(1) saturate(1)",
+              "radius": "0px"
+            },
+            ".ms-product-shot": {
+              "x": 25.28125,
+              "y": 26.875,
+              "w": 111.0625,
+              "h": 111.0625,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "16px"
+            },
+            ".ms-product-stage": {
+              "x": 31.671875,
+              "y": 33.265625,
+              "w": 98.28125,
+              "h": 98.28125,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 44.453125,
+              "y": 46.046875,
+              "w": 72.71875,
+              "h": 72.71875,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--scene img": {
+              "x": 7.9195556640625,
+              "y": 9.529296875,
+              "w": 145.785888671875,
+              "h": 145.76953125,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 161.640625,
+              "h": 270.671875
+            },
+            ".ms-product-media--dual": {
+              "x": 1,
+              "y": 1,
+              "w": 159.640625,
+              "h": 159.640625,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(152deg, rgb(158, 176, 163), rgb(143, 161, 146) 38%, rgb(125, 145, 132)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slides": {
+              "x": 11.390625,
+              "y": 13,
+              "w": 138.859375,
+              "h": 138.84375,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--studio": {
+              "x": 11.390625,
+              "y": 13,
+              "w": 138.859375,
+              "h": 138.84375,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "blur(0px) brightness(1) saturate(1)",
+              "radius": "0px"
+            },
+            ".ms-product-shot": {
+              "x": 25.28125,
+              "y": 26.875,
+              "w": 111.078125,
+              "h": 111.078125,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "16px"
+            },
+            ".ms-product-stage": {
+              "x": 31.671875,
+              "y": 33.265625,
+              "w": 98.296875,
+              "h": 98.296875,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 44.453125,
+              "y": 46.046875,
+              "w": 72.734375,
+              "h": 72.734375,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--scene img": {
+              "x": 7.91912841796875,
+              "y": 9.528900146484375,
+              "w": 145.8023681640625,
+              "h": 145.78594970703125,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 161.640625,
+              "h": 270.671875
+            },
+            ".ms-product-media--dual": {
+              "x": 1,
+              "y": 1,
+              "w": 159.640625,
+              "h": 159.640625,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(152deg, rgb(158, 176, 163), rgb(143, 161, 146) 38%, rgb(125, 145, 132)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slides": {
+              "x": 11.390625,
+              "y": 13,
+              "w": 138.859375,
+              "h": 138.84375,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--studio": {
+              "x": 11.390625,
+              "y": 13,
+              "w": 138.859375,
+              "h": 138.84375,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "blur(0px) brightness(1) saturate(1)",
+              "radius": "0px"
+            },
+            ".ms-product-shot": {
+              "x": 25.28125,
+              "y": 26.875,
+              "w": 111.078125,
+              "h": 111.078125,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "16px"
+            },
+            ".ms-product-stage": {
+              "x": 31.671875,
+              "y": 33.265625,
+              "w": 98.296875,
+              "h": 98.296875,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 44.453125,
+              "y": 46.046875,
+              "w": 72.734375,
+              "h": 72.734375,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--scene img": {
+              "x": 7.9191436767578125,
+              "y": 9.528900146484375,
+              "w": 145.8023223876953,
+              "h": 145.78594970703125,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 161.640625,
+              "h": 270.671875
+            },
+            ".ms-product-media--dual": {
+              "x": 1,
+              "y": 1,
+              "w": 159.640625,
+              "h": 159.640625,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(152deg, rgb(158, 176, 163), rgb(143, 161, 146) 38%, rgb(125, 145, 132)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slides": {
+              "x": 11.390625,
+              "y": 13,
+              "w": 138.859375,
+              "h": 138.84375,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--studio": {
+              "x": 11.390625,
+              "y": 13,
+              "w": 138.859375,
+              "h": 138.84375,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "blur(0px) brightness(1) saturate(1)",
+              "radius": "0px"
+            },
+            ".ms-product-shot": {
+              "x": 25.28125,
+              "y": 26.875,
+              "w": 111.078125,
+              "h": 111.078125,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "16px"
+            },
+            ".ms-product-stage": {
+              "x": 31.671875,
+              "y": 33.265625,
+              "w": 98.296875,
+              "h": 98.296875,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 44.453125,
+              "y": 46.046875,
+              "w": 72.734375,
+              "h": 72.734375,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--scene img": {
+              "x": 7.9191436767578125,
+              "y": 9.528900146484375,
+              "w": 145.80233764648438,
+              "h": 145.78594970703125,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 161.625,
+              "h": 270.671875
+            },
+            ".ms-product-media--dual": {
+              "x": 1,
+              "y": 1,
+              "w": 159.625,
+              "h": 159.625,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(152deg, rgb(158, 176, 163), rgb(143, 161, 146) 38%, rgb(125, 145, 132)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slides": {
+              "x": 11.390625,
+              "y": 13,
+              "w": 138.84375,
+              "h": 138.828125,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--studio": {
+              "x": 11.390625,
+              "y": 13,
+              "w": 138.84375,
+              "h": 138.828125,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "blur(0px) brightness(1) saturate(1)",
+              "radius": "0px"
+            },
+            ".ms-product-shot": {
+              "x": 25.28125,
+              "y": 26.875,
+              "w": 111.0625,
+              "h": 111.0625,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "16px"
+            },
+            ".ms-product-stage": {
+              "x": 31.671875,
+              "y": 33.265625,
+              "w": 98.28125,
+              "h": 98.28125,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 44.453125,
+              "y": 46.046875,
+              "w": 72.71875,
+              "h": 72.71875,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--scene img": {
+              "x": 7.9195556640625,
+              "y": 9.529296875,
+              "w": 145.785888671875,
+              "h": 145.76953125,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 161.640625,
+              "h": 270.671875
+            },
+            ".ms-product-shot": {
+              "x": 25.28125,
+              "y": 26.875,
+              "w": 111.078125,
+              "h": 111.078125,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "16px"
+            },
+            ".ms-product-stage": {
+              "x": 31.671875,
+              "y": 33.265625,
+              "w": 98.296875,
+              "h": 98.296875,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 44.453125,
+              "y": 46.046875,
+              "w": 72.734375,
+              "h": 72.734375,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 161.640625,
+              "h": 270.671875
+            },
+            ".ms-product-shot": {
+              "x": 25.28125,
+              "y": 26.875,
+              "w": 111.078125,
+              "h": 111.078125,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "16px"
+            },
+            ".ms-product-stage": {
+              "x": 31.671875,
+              "y": 33.265625,
+              "w": 98.296875,
+              "h": 98.296875,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 44.453125,
+              "y": 46.046875,
+              "w": 72.734375,
+              "h": 72.734375,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 161.640625,
+              "h": 270.671875
+            },
+            ".ms-product-media--dual": {
+              "x": 1,
+              "y": 1,
+              "w": 159.640625,
+              "h": 159.640625,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(152deg, rgb(158, 176, 163), rgb(143, 161, 146) 38%, rgb(125, 145, 132)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slides": {
+              "x": 11.390625,
+              "y": 13,
+              "w": 138.859375,
+              "h": 138.84375,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--studio": {
+              "x": 11.390625,
+              "y": 13,
+              "w": 138.859375,
+              "h": 138.84375,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "blur(0px) brightness(1) saturate(1)",
+              "radius": "0px"
+            },
+            ".ms-product-shot": {
+              "x": 25.28125,
+              "y": 26.875,
+              "w": 111.078125,
+              "h": 111.078125,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "16px"
+            },
+            ".ms-product-stage": {
+              "x": 31.671875,
+              "y": 33.265625,
+              "w": 98.296875,
+              "h": 98.296875,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 44.453125,
+              "y": 46.046875,
+              "w": 72.734375,
+              "h": 72.734375,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--scene img": {
+              "x": 7.9191436767578125,
+              "y": 9.5289306640625,
+              "w": 145.80233764648438,
+              "h": 145.785888671875,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            }
+          }
+        ]
+      },
+      {
+        "width": 1366,
+        "cards": [
+          {
+            "card": {
+              "w": 293.546875,
+              "h": 401.546875
+            },
+            ".ms-product-media--dual": {
+              "x": 0,
+              "y": 0,
+              "w": 293.546875,
+              "h": 293.546875,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(152deg, rgb(158, 176, 163), rgb(143, 161, 146) 38%, rgb(125, 145, 132)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slides": {
+              "x": 16,
+              "y": 16,
+              "w": 261.546875,
+              "h": 261.546875,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--studio": {
+              "x": 16,
+              "y": 16,
+              "w": 261.546875,
+              "h": 261.546875,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "blur(0px) brightness(1) saturate(1)",
+              "radius": "0px"
+            },
+            ".ms-product-shot": {
+              "x": 42.15625,
+              "y": 42.15625,
+              "w": 209.234375,
+              "h": 209.234375,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage": {
+              "x": 47.75,
+              "y": 47.75,
+              "w": 198.046875,
+              "h": 198.046875,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 73.5,
+              "y": 73.5,
+              "w": 146.546875,
+              "h": 146.546875,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--scene img": {
+              "x": 9.4613037109375,
+              "y": 9.461334228515625,
+              "w": 274.624267578125,
+              "h": 274.62420654296875,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 293.5625,
+              "h": 401.546875
+            },
+            ".ms-product-shot": {
+              "x": 42.15625,
+              "y": 42.15625,
+              "w": 209.25,
+              "h": 209.25,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage": {
+              "x": 47.75,
+              "y": 47.75,
+              "w": 198.0625,
+              "h": 198.0625,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 73.5,
+              "y": 73.5,
+              "w": 146.5625,
+              "h": 146.5625,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 293.546875,
+              "h": 401.546875
+            },
+            ".ms-product-media--dual": {
+              "x": 0,
+              "y": 0,
+              "w": 293.546875,
+              "h": 293.546875,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(152deg, rgb(158, 176, 163), rgb(143, 161, 146) 38%, rgb(125, 145, 132)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slides": {
+              "x": 16,
+              "y": 16,
+              "w": 261.546875,
+              "h": 261.546875,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--studio": {
+              "x": 16,
+              "y": 16,
+              "w": 261.546875,
+              "h": 261.546875,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "blur(0px) brightness(1) saturate(1)",
+              "radius": "0px"
+            },
+            ".ms-product-shot": {
+              "x": 42.15625,
+              "y": 42.15625,
+              "w": 209.234375,
+              "h": 209.234375,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage": {
+              "x": 47.75,
+              "y": 47.75,
+              "w": 198.046875,
+              "h": 198.046875,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 73.5,
+              "y": 73.5,
+              "w": 146.546875,
+              "h": 146.546875,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--scene img": {
+              "x": 9.461334228515625,
+              "y": 9.461334228515625,
+              "w": 274.6241760253906,
+              "h": 274.62420654296875,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 293.5625,
+              "h": 401.546875
+            },
+            ".ms-product-shot": {
+              "x": 42.15625,
+              "y": 42.15625,
+              "w": 209.25,
+              "h": 209.25,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage": {
+              "x": 47.75,
+              "y": 47.75,
+              "w": 198.0625,
+              "h": 198.0625,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 73.5,
+              "y": 73.5,
+              "w": 146.5625,
+              "h": 146.5625,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 293.546875,
+              "h": 401.53125
+            },
+            ".ms-product-shot": {
+              "x": 42.15625,
+              "y": 42.15625,
+              "w": 209.234375,
+              "h": 209.234375,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage": {
+              "x": 47.75,
+              "y": 47.75,
+              "w": 198.046875,
+              "h": 198.046875,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 73.5,
+              "y": 73.5,
+              "w": 146.546875,
+              "h": 146.546875,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 293.5625,
+              "h": 401.53125
+            },
+            ".ms-product-shot": {
+              "x": 42.15625,
+              "y": 42.15625,
+              "w": 209.25,
+              "h": 209.25,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage": {
+              "x": 47.75,
+              "y": 47.75,
+              "w": 198.0625,
+              "h": 198.0625,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 73.5,
+              "y": 73.5,
+              "w": 146.5625,
+              "h": 146.5625,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 293.546875,
+              "h": 401.53125
+            },
+            ".ms-product-shot": {
+              "x": 42.15625,
+              "y": 42.15625,
+              "w": 209.234375,
+              "h": 209.234375,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage": {
+              "x": 47.75,
+              "y": 47.75,
+              "w": 198.046875,
+              "h": 198.046875,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 73.5,
+              "y": 73.5,
+              "w": 146.546875,
+              "h": 146.546875,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 293.5625,
+              "h": 401.53125
+            },
+            ".ms-product-shot": {
+              "x": 42.15625,
+              "y": 42.15625,
+              "w": 209.25,
+              "h": 209.25,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage": {
+              "x": 47.75,
+              "y": 47.75,
+              "w": 198.0625,
+              "h": 198.0625,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 73.5,
+              "y": 73.5,
+              "w": 146.5625,
+              "h": 146.5625,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 289.34375,
+              "h": 387.84375
+            },
+            ".ms-product-media--dual": {
+              "x": 1,
+              "y": 1,
+              "w": 287.34375,
+              "h": 287.34375,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(152deg, rgb(158, 176, 163), rgb(143, 161, 146) 38%, rgb(125, 145, 132)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slides": {
+              "x": 11.390625,
+              "y": 13,
+              "w": 266.5625,
+              "h": 266.546875,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--studio": {
+              "x": 11.390625,
+              "y": 13,
+              "w": 266.5625,
+              "h": 266.546875,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "blur(0px) brightness(1) saturate(1)",
+              "radius": "0px"
+            },
+            ".ms-product-shot": {
+              "x": 38.046875,
+              "y": 39.640625,
+              "w": 213.25,
+              "h": 213.25,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "16px"
+            },
+            ".ms-product-stage": {
+              "x": 44.4375,
+              "y": 46.03125,
+              "w": 200.46875,
+              "h": 200.46875,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 70.5,
+              "y": 72.09375,
+              "w": 148.34375,
+              "h": 148.34375,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--scene img": {
+              "x": 4.7265625,
+              "y": 6.336334228515625,
+              "w": 279.890625,
+              "h": 279.8741760253906,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 289.34375,
+              "h": 387.84375
+            },
+            ".ms-product-media--dual": {
+              "x": 1,
+              "y": 1,
+              "w": 287.34375,
+              "h": 287.34375,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(152deg, rgb(158, 176, 163), rgb(143, 161, 146) 38%, rgb(125, 145, 132)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slides": {
+              "x": 11.390625,
+              "y": 13,
+              "w": 266.5625,
+              "h": 266.546875,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--studio": {
+              "x": 11.390625,
+              "y": 13,
+              "w": 266.5625,
+              "h": 266.546875,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "blur(0px) brightness(1) saturate(1)",
+              "radius": "0px"
+            },
+            ".ms-product-shot": {
+              "x": 38.046875,
+              "y": 39.640625,
+              "w": 213.25,
+              "h": 213.25,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "16px"
+            },
+            ".ms-product-stage": {
+              "x": 44.4375,
+              "y": 46.03125,
+              "w": 200.46875,
+              "h": 200.46875,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 70.5,
+              "y": 72.09375,
+              "w": 148.34375,
+              "h": 148.34375,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--scene img": {
+              "x": 4.7265625,
+              "y": 6.336334228515625,
+              "w": 279.890625,
+              "h": 279.8741760253906,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 289.34375,
+              "h": 387.84375
+            },
+            ".ms-product-media--dual": {
+              "x": 1,
+              "y": 1,
+              "w": 287.34375,
+              "h": 287.34375,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(152deg, rgb(158, 176, 163), rgb(143, 161, 146) 38%, rgb(125, 145, 132)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slides": {
+              "x": 11.390625,
+              "y": 13,
+              "w": 266.5625,
+              "h": 266.546875,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--studio": {
+              "x": 11.390625,
+              "y": 13,
+              "w": 266.5625,
+              "h": 266.546875,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "blur(0px) brightness(1) saturate(1)",
+              "radius": "0px"
+            },
+            ".ms-product-shot": {
+              "x": 38.046875,
+              "y": 39.640625,
+              "w": 213.25,
+              "h": 213.25,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "16px"
+            },
+            ".ms-product-stage": {
+              "x": 44.4375,
+              "y": 46.03125,
+              "w": 200.46875,
+              "h": 200.46875,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 70.5,
+              "y": 72.09375,
+              "w": 148.34375,
+              "h": 148.34375,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--scene img": {
+              "x": 4.7265625,
+              "y": 6.336334228515625,
+              "w": 279.890625,
+              "h": 279.8741760253906,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 289.359375,
+              "h": 387.84375
+            },
+            ".ms-product-media--dual": {
+              "x": 1,
+              "y": 1,
+              "w": 287.359375,
+              "h": 287.359375,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(152deg, rgb(158, 176, 163), rgb(143, 161, 146) 38%, rgb(125, 145, 132)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slides": {
+              "x": 11.390625,
+              "y": 13,
+              "w": 266.578125,
+              "h": 266.5625,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--studio": {
+              "x": 11.390625,
+              "y": 13,
+              "w": 266.578125,
+              "h": 266.5625,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "blur(0px) brightness(1) saturate(1)",
+              "radius": "0px"
+            },
+            ".ms-product-shot": {
+              "x": 38.0625,
+              "y": 39.65625,
+              "w": 213.25,
+              "h": 213.25,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "16px"
+            },
+            ".ms-product-stage": {
+              "x": 44.453125,
+              "y": 46.046875,
+              "w": 200.46875,
+              "h": 200.46875,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 70.515625,
+              "y": 72.109375,
+              "w": 148.34375,
+              "h": 148.34375,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--scene img": {
+              "x": 4.7261810302734375,
+              "y": 6.3359375,
+              "w": 279.90704345703125,
+              "h": 279.890625,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 289.34375,
+              "h": 387.84375
+            },
+            ".ms-product-media--dual": {
+              "x": 1,
+              "y": 1,
+              "w": 287.34375,
+              "h": 287.34375,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(152deg, rgb(158, 176, 163), rgb(143, 161, 146) 38%, rgb(125, 145, 132)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slides": {
+              "x": 11.390625,
+              "y": 13,
+              "w": 266.5625,
+              "h": 266.546875,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--studio": {
+              "x": 11.390625,
+              "y": 13,
+              "w": 266.5625,
+              "h": 266.546875,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "blur(0px) brightness(1) saturate(1)",
+              "radius": "0px"
+            },
+            ".ms-product-shot": {
+              "x": 38.046875,
+              "y": 39.640625,
+              "w": 213.25,
+              "h": 213.25,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "16px"
+            },
+            ".ms-product-stage": {
+              "x": 44.4375,
+              "y": 46.03125,
+              "w": 200.46875,
+              "h": 200.46875,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 70.5,
+              "y": 72.09375,
+              "w": 148.34375,
+              "h": 148.34375,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--scene img": {
+              "x": 4.7265625,
+              "y": 6.336334228515625,
+              "w": 279.890625,
+              "h": 279.8741760253906,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 289.34375,
+              "h": 387.84375
+            },
+            ".ms-product-shot": {
+              "x": 38.046875,
+              "y": 39.640625,
+              "w": 213.25,
+              "h": 213.25,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "16px"
+            },
+            ".ms-product-stage": {
+              "x": 44.4375,
+              "y": 46.03125,
+              "w": 200.46875,
+              "h": 200.46875,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 70.5,
+              "y": 72.09375,
+              "w": 148.34375,
+              "h": 148.34375,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 289.34375,
+              "h": 387.84375
+            },
+            ".ms-product-shot": {
+              "x": 38.046875,
+              "y": 39.640625,
+              "w": 213.25,
+              "h": 213.25,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "16px"
+            },
+            ".ms-product-stage": {
+              "x": 44.4375,
+              "y": 46.03125,
+              "w": 200.46875,
+              "h": 200.46875,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 70.5,
+              "y": 72.09375,
+              "w": 148.34375,
+              "h": 148.34375,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            }
+          },
+          {
+            "card": {
+              "w": 289.359375,
+              "h": 387.84375
+            },
+            ".ms-product-media--dual": {
+              "x": 1,
+              "y": 1,
+              "w": 287.359375,
+              "h": 287.359375,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(152deg, rgb(158, 176, 163), rgb(143, 161, 146) 38%, rgb(125, 145, 132)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slides": {
+              "x": 11.390625,
+              "y": 13,
+              "w": 266.578125,
+              "h": 266.5625,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--studio": {
+              "x": 11.390625,
+              "y": 13,
+              "w": 266.578125,
+              "h": 266.5625,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "blur(0px) brightness(1) saturate(1)",
+              "radius": "0px"
+            },
+            ".ms-product-shot": {
+              "x": 38.0625,
+              "y": 39.65625,
+              "w": 213.25,
+              "h": 213.25,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(150, 168, 153), rgb(132, 152, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "rgba(26, 31, 38, 0.12) 0px 8px 22px 0px",
+              "filter": "none",
+              "radius": "16px"
+            },
+            ".ms-product-stage": {
+              "x": 44.453125,
+              "y": 46.046875,
+              "w": 200.46875,
+              "h": 200.46875,
+              "bg": "rgba(0, 0, 0, 0) linear-gradient(rgb(243, 247, 244), rgb(232, 239, 233) 52%, rgb(223, 232, 225)) repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "14px"
+            },
+            ".ms-product-stage img": {
+              "x": 70.515625,
+              "y": 72.109375,
+              "w": 148.34375,
+              "h": 148.34375,
+              "bg": "rgb(238, 242, 239) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "drop-shadow(rgba(26, 31, 38, 0.3) 0px 14px 24px) drop-shadow(rgba(26, 31, 38, 0.16) 0px 5px 10px)",
+              "radius": "0px"
+            },
+            ".ms-product-dual__slide--scene img": {
+              "x": 4.7261810302734375,
+              "y": 6.3359375,
+              "w": 279.90704345703125,
+              "h": 279.890625,
+              "bg": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+              "color": "rgb(26, 31, 38)",
+              "shadow": "none",
+              "filter": "none",
+              "radius": "0px"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "assembly_sha256": "43957d6bae6dae222b341822b68ba9d88ceccbc976df12908ba269c20dcc959e",
+  "source_sha256": {
+    "scripts/build-critical-home.mjs": "6193f7450190191d4a307bf228c3837884adff5410cdb406eb2207df3c4ff13e",
+    "scripts/verify-home-layout.cjs": "1de53a6c2ea9c28b34f86cbbe95ba3cb5caf5a7787f32afa40e844f85a1af5a5",
+    "scripts/verify-home-performance.cjs": "c52fc77084fa29dded1c667b239e48d5fe58d7096976dacad38823ba52623292",
+    "scripts/verify-observed-layout.cjs": "6220e860c5d82ab8c835234ba17f4ff2e933596f555abf2a9043780265d559b9",
+    "scripts/verify-product-frame-layout.cjs": "23211add6a7bc6381b903231b1ac9a8cc20fc0574a461a9c3730e920a8279476",
+    "scripts/verify-reveal-startup.cjs": "0e58e486009573261d42aa89868031ad38623f47b722809cbbfff418e0f3cafb",
+    "scripts/verify-streamed-header.cjs": "ac7d5d5dc40fd59f5c5cbf3d17af2ebda2c34a2873b8cc415e413c2a0026f010",
+    "src/MovasseghiShop.Web/Views/Shared/_Layout.cshtml": "adde8b3cc34fcc3b38ef7794d166b8242aead297c7b23c6375d6c47cd0e02452",
+    "src/MovasseghiShop.Web/wwwroot/css/critical-home.css": "f643e00f9682cd5e2b29a72cf1bdd276607bc674864121750134a9ce693c2c89",
+    "src/MovasseghiShop.Web/wwwroot/css/site.css": "d69afd86daef51525f8ffdeb05bb2462dbce013407db550115ae4727dbb43eb1",
+    "src/MovasseghiShop.Web/wwwroot/css/storefront-home.bundle.css": "43d1582c380de381a1dea64cb4d7ab0f29ec16395213cff37d224d16bbc93fed",
+    "src/MovasseghiShop.Web/wwwroot/css/storefront.bundle.css": "696893357e63b0b0f459a564ffd47162149e289aac67f55a2d4be8db3c472403",
+    "src/MovasseghiShop.Web/wwwroot/css/ux-product-dual.css": "ddd042910d0c34c59a079781dc99656bfc4102f8501dd11b91856039ead1f313",
+    "src/MovasseghiShop.Web/wwwroot/css/ux-scroll-reveal.css": "888d8e0dfdc08046245c22174bbe1cf6f57e5a616608aabf6da547e167126234",
+    "src/MovasseghiShop.Web/wwwroot/js/home.js": "978f5bc491f0d1c3cb2c91f3057c19fb70be22d63d21fc43946ad8ce5032d157",
+    "src/MovasseghiShop.Web/wwwroot/js/scroll-reveal.js": "d402398c5c52015304013b34f06751e69af2dbea6bc09b70d8192a6c2a947068",
+    "src/MovasseghiShop.Web/wwwroot/js/site.js": "ec0216dc428cc529ede7b3a94669c1909825d86c9346bdb2833dc681ef19128b"
+  },
+  "deleted_generated_assets": [
+    "src/MovasseghiShop.Web/wwwroot/css/critical-shell.css"
+  ],
+  "original_images_and_fonts": "No repository image/font file changed. Prior display-v2/photographic derivatives retained; no new codec or quality reduction.",
+  "intermediate_trials": [
+    {
+      "file": "cpu4-results.json",
+      "decision": "REJECTED early root-motion variant: CLS0.218 under4x CPU; not selected. This stress setting is not GT hardware.",
+      "runs": [
+        {
+          "variant": "before",
+          "run": 1,
+          "performance": 54.0,
+          "ttfb": 662,
+          "metrics": {
+            "first-contentful-paint": 1123.394,
+            "largest-contentful-paint": 2097.096,
+            "speed-index": 2191,
+            "total-blocking-time": 1123.8749999847423,
+            "cumulative-layout-shift": 0.005651457634387807,
+            "total-byte-weight": 709035
+          },
+          "observedLoad": 2538,
+          "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+        },
+        {
+          "variant": "after",
+          "run": 1,
+          "performance": 46.0,
+          "ttfb": 669,
+          "metrics": {
+            "first-contentful-paint": 1091.523,
+            "largest-contentful-paint": 1826.052,
+            "speed-index": 2228,
+            "total-blocking-time": 1003.4599999999996,
+            "cumulative-layout-shift": 0.2181376984244234,
+            "total-byte-weight": 720592
+          },
+          "observedLoad": 3363,
+          "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+        }
+      ]
+    },
+    {
+      "file": "native-results.json",
+      "decision": "Intermediate script/reveal fixes did not establish a score improvement.",
+      "runs": [
+        {
+          "variant": "native-before",
+          "run": 1,
+          "performance": 91.0,
+          "ttfb": 657,
+          "metrics": {
+            "first-contentful-paint": 889.253,
+            "largest-contentful-paint": 1477.546,
+            "speed-index": 1833,
+            "total-blocking-time": 79.59799999999984,
+            "cumulative-layout-shift": 0.001307291876518206,
+            "total-byte-weight": 739132
+          },
+          "observedLoad": 1620,
+          "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+        },
+        {
+          "variant": "native-after",
+          "run": 1,
+          "performance": 90.0,
+          "ttfb": 660,
+          "metrics": {
+            "first-contentful-paint": 896.348,
+            "largest-contentful-paint": 1510.955,
+            "speed-index": 1837,
+            "total-blocking-time": 118.79900000000009,
+            "cumulative-layout-shift": 0.002831613716553209,
+            "total-byte-weight": 739973
+          },
+          "observedLoad": 1637,
+          "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+        }
+      ]
+    },
+    {
+      "file": "selected-results.json",
+      "decision": "Intermediate split CSS/shared definitions: median90->90; not selected.",
+      "runs": [
+        {
+          "variant": "selected-before",
+          "run": 1,
+          "performance": 91.0,
+          "ttfb": 657,
+          "metrics": {
+            "first-contentful-paint": 908.439,
+            "largest-contentful-paint": 1425.419,
+            "speed-index": 1811,
+            "total-blocking-time": 101.59400000000005,
+            "cumulative-layout-shift": 0.001324450103161151,
+            "total-byte-weight": 739132
+          },
+          "observedLoad": 1620,
+          "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+        },
+        {
+          "variant": "selected-after",
+          "run": 1,
+          "performance": 90.0,
+          "ttfb": 658,
+          "metrics": {
+            "first-contentful-paint": 912.335,
+            "largest-contentful-paint": 1484.409,
+            "speed-index": 1830,
+            "total-blocking-time": 114.03999999999974,
+            "cumulative-layout-shift": 0.002429849633630923,
+            "total-byte-weight": 739988
+          },
+          "observedLoad": 1644,
+          "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+        },
+        {
+          "variant": "selected-before",
+          "run": 2,
+          "performance": 89.0,
+          "ttfb": 666,
+          "metrics": {
+            "first-contentful-paint": 916.428,
+            "largest-contentful-paint": 1506.607,
+            "speed-index": 1831,
+            "total-blocking-time": 116.673,
+            "cumulative-layout-shift": 0.0009583932109725384,
+            "total-byte-weight": 739132
+          },
+          "observedLoad": 1628,
+          "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+        },
+        {
+          "variant": "selected-after",
+          "run": 2,
+          "performance": 90.0,
+          "ttfb": 668,
+          "metrics": {
+            "first-contentful-paint": 923.021,
+            "largest-contentful-paint": 1473.205,
+            "speed-index": 1841,
+            "total-blocking-time": 113.21100000000001,
+            "cumulative-layout-shift": 0.002349550539040519,
+            "total-byte-weight": 739988
+          },
+          "observedLoad": 1637,
+          "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+        },
+        {
+          "variant": "selected-before",
+          "run": 3,
+          "performance": 90.0,
+          "ttfb": 656,
+          "metrics": {
+            "first-contentful-paint": 888.086,
+            "largest-contentful-paint": 1469.13,
+            "speed-index": 1849,
+            "total-blocking-time": 104.75,
+            "cumulative-layout-shift": 0.001948323676058764,
+            "total-byte-weight": 739132
+          },
+          "observedLoad": 1555,
+          "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+        },
+        {
+          "variant": "selected-after",
+          "run": 3,
+          "performance": 90.0,
+          "ttfb": 657,
+          "metrics": {
+            "first-contentful-paint": 892.47,
+            "largest-contentful-paint": 1482.481,
+            "speed-index": 1850,
+            "total-blocking-time": 104.91999999999985,
+            "cumulative-layout-shift": 0.002349550539040519,
+            "total-byte-weight": 739988
+          },
+          "observedLoad": 1634,
+          "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+        }
+      ]
+    },
+    {
+      "file": "full-results.json",
+      "decision": "Intermediate full-head fallback; one screening pair, not final evidence.",
+      "runs": [
+        {
+          "variant": "full-before",
+          "run": 1,
+          "performance": 88.0,
+          "ttfb": 692,
+          "metrics": {
+            "first-contentful-paint": 980.889,
+            "largest-contentful-paint": 1549.147,
+            "speed-index": 1911,
+            "total-blocking-time": 137.26699999999983,
+            "cumulative-layout-shift": 0.001707802446245922,
+            "total-byte-weight": 739136
+          },
+          "observedLoad": 1645,
+          "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+        },
+        {
+          "variant": "full-after",
+          "run": 1,
+          "performance": 89.0,
+          "ttfb": 659,
+          "metrics": {
+            "first-contentful-paint": 1198.154,
+            "largest-contentful-paint": 1481.152,
+            "speed-index": 1947,
+            "total-blocking-time": 65.0809999999999,
+            "cumulative-layout-shift": 0.001798528756040367,
+            "total-byte-weight": 742273
+          },
+          "observedLoad": 1645,
+          "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+        }
+      ]
+    },
+    {
+      "file": "flex-results.json",
+      "decision": "Intermediate nested-Grid replacement; 48-case geometry contract passed, single score pair not accepted as the result.",
+      "runs": [
+        {
+          "variant": "flex-before",
+          "run": 1,
+          "performance": 89.0,
+          "ttfb": 658,
+          "metrics": {
+            "first-contentful-paint": 909.603,
+            "largest-contentful-paint": 1449.143,
+            "speed-index": 1866,
+            "total-blocking-time": 131.72400000000016,
+            "cumulative-layout-shift": 0.0009582857669844324,
+            "total-byte-weight": 739132
+          },
+          "observedLoad": 1617,
+          "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+        },
+        {
+          "variant": "flex-after",
+          "run": 1,
+          "performance": 91.0,
+          "ttfb": 658,
+          "metrics": {
+            "first-contentful-paint": 886.081,
+            "largest-contentful-paint": 1451.749,
+            "speed-index": 1832,
+            "total-blocking-time": 95.17399999999998,
+            "cumulative-layout-shift": 0.003314321557994535,
+            "total-byte-weight": 740034
+          },
+          "observedLoad": 1608,
+          "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+        }
+      ]
+    },
+    {
+      "file": "release-results.json",
+      "decision": "Intermediate split-CSS with footer/FAB changes; not final strategy.",
+      "runs": [
+        {
+          "variant": "release-before",
+          "run": 1,
+          "performance": 87.0,
+          "ttfb": 658,
+          "metrics": {
+            "first-contentful-paint": 958.14,
+            "largest-contentful-paint": 1546.085,
+            "speed-index": 1917,
+            "total-blocking-time": 148.94600000000014,
+            "cumulative-layout-shift": 0.002912020255131719,
+            "total-byte-weight": 739132
+          },
+          "observedLoad": 1576,
+          "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+        },
+        {
+          "variant": "release-after",
+          "run": 1,
+          "performance": 88.0,
+          "ttfb": 659,
+          "metrics": {
+            "first-contentful-paint": 916.264,
+            "largest-contentful-paint": 1487.629,
+            "speed-index": 1868,
+            "total-blocking-time": 141.50699999999995,
+            "cumulative-layout-shift": 0.00395893482380529,
+            "total-byte-weight": 740417
+          },
+          "observedLoad": 1637,
+          "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+        },
+        {
+          "variant": "release-before",
+          "run": 2,
+          "performance": 89.0,
+          "ttfb": 662,
+          "metrics": {
+            "first-contentful-paint": 917.756,
+            "largest-contentful-paint": 1500.543,
+            "speed-index": 1886,
+            "total-blocking-time": 130.63099999999986,
+            "cumulative-layout-shift": 0.002349550539040519,
+            "total-byte-weight": 739132
+          },
+          "observedLoad": 1551,
+          "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+        },
+        {
+          "variant": "release-after",
+          "run": 2,
+          "performance": 90.0,
+          "ttfb": 661,
+          "metrics": {
+            "first-contentful-paint": 907.603,
+            "largest-contentful-paint": 1478.18,
+            "speed-index": 1855,
+            "total-blocking-time": 105.14699999999982,
+            "cumulative-layout-shift": 0.002648900206322303,
+            "total-byte-weight": 740417
+          },
+          "observedLoad": 1619,
+          "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+        },
+        {
+          "variant": "release-before",
+          "run": 3,
+          "performance": 90.0,
+          "ttfb": 657,
+          "metrics": {
+            "first-contentful-paint": 916.826,
+            "largest-contentful-paint": 1541.376,
+            "speed-index": 1848,
+            "total-blocking-time": 100.58199999999988,
+            "cumulative-layout-shift": 0.003314321557994535,
+            "total-byte-weight": 739132
+          },
+          "observedLoad": 1559,
+          "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+        },
+        {
+          "variant": "release-after",
+          "run": 3,
+          "performance": 90.0,
+          "ttfb": 659,
+          "metrics": {
+            "first-contentful-paint": 905.711,
+            "largest-contentful-paint": 1479.342,
+            "speed-index": 1874,
+            "total-blocking-time": 112.06900000000007,
+            "cumulative-layout-shift": 0.004304462835273742,
+            "total-byte-weight": 740417
+          },
+          "observedLoad": 1626,
+          "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+        }
+      ]
+    },
+    {
+      "file": "stable-results.json",
+      "decision": "Before a late-reveal visibility guard; superseded.",
+      "runs": [
+        {
+          "variant": "stable-before",
+          "run": 1,
+          "performance": 90.0,
+          "ttfb": 658,
+          "metrics": {
+            "first-contentful-paint": 910.498,
+            "largest-contentful-paint": 1502.579,
+            "speed-index": 1871,
+            "total-blocking-time": 92.21199999999999,
+            "cumulative-layout-shift": 0.002831613716553209,
+            "total-byte-weight": 739132
+          },
+          "observedLoad": 1645,
+          "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+        },
+        {
+          "variant": "stable-after",
+          "run": 1,
+          "performance": 89.0,
+          "ttfb": 661,
+          "metrics": {
+            "first-contentful-paint": 1219.341,
+            "largest-contentful-paint": 1499.596,
+            "speed-index": 1924,
+            "total-blocking-time": 59.10100000000011,
+            "cumulative-layout-shift": 0.001948323676058764,
+            "total-byte-weight": 737418
+          },
+          "observedLoad": 2874,
+          "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+        },
+        {
+          "variant": "stable-before",
+          "run": 2,
+          "performance": 89.0,
+          "ttfb": 658,
+          "metrics": {
+            "first-contentful-paint": 901.143,
+            "largest-contentful-paint": 1483.679,
+            "speed-index": 1875,
+            "total-blocking-time": 132.9860000000001,
+            "cumulative-layout-shift": 0.002429849633630923,
+            "total-byte-weight": 739132
+          },
+          "observedLoad": 1553,
+          "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+        },
+        {
+          "variant": "stable-after",
+          "run": 2,
+          "performance": 89.0,
+          "ttfb": 659,
+          "metrics": {
+            "first-contentful-paint": 1199.536,
+            "largest-contentful-paint": 1464.8,
+            "speed-index": 1907,
+            "total-blocking-time": 61.42699999999991,
+            "cumulative-layout-shift": 0.001986675154741727,
+            "total-byte-weight": 737418
+          },
+          "observedLoad": 2846,
+          "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+        },
+        {
+          "variant": "stable-before",
+          "run": 3,
+          "performance": 90.0,
+          "ttfb": 655,
+          "metrics": {
+            "first-contentful-paint": 889.984,
+            "largest-contentful-paint": 1462.431,
+            "speed-index": 1858,
+            "total-blocking-time": 108.93299999999999,
+            "cumulative-layout-shift": 0.002269269351781466,
+            "total-byte-weight": 739132
+          },
+          "observedLoad": 1542,
+          "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+        },
+        {
+          "variant": "stable-after",
+          "run": 3,
+          "performance": 90.0,
+          "ttfb": 656,
+          "metrics": {
+            "first-contentful-paint": 1163.961,
+            "largest-contentful-paint": 1473.226,
+            "speed-index": 1885,
+            "total-blocking-time": 50.10900000000015,
+            "cumulative-layout-shift": 0.002317787680532015,
+            "total-byte-weight": 737418
+          },
+          "observedLoad": 1632,
+          "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+        }
+      ]
+    },
+    {
+      "file": "final-results.json",
+      "decision": "Before legacy borderBox and overlay scroll-lock hardening; superseded by current-source checked runs.",
+      "runs": [
+        {
+          "variant": "final-before",
+          "run": 1,
+          "performance": 87.0,
+          "ttfb": 678,
+          "metrics": {
+            "first-contentful-paint": 986.75,
+            "largest-contentful-paint": 1538.944,
+            "speed-index": 1894,
+            "total-blocking-time": 146.8520000000001,
+            "cumulative-layout-shift": 0.001307291876518206,
+            "total-byte-weight": 739141
+          },
+          "observedLoad": 1701,
+          "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+        },
+        {
+          "variant": "final-after",
+          "run": 1,
+          "performance": 89.0,
+          "ttfb": 662,
+          "metrics": {
+            "first-contentful-paint": 1180.475,
+            "largest-contentful-paint": 1509.622,
+            "speed-index": 1927,
+            "total-blocking-time": 50.173,
+            "cumulative-layout-shift": 0.002317787680532015,
+            "total-byte-weight": 737476
+          },
+          "observedLoad": 1632,
+          "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+        },
+        {
+          "variant": "final-before",
+          "run": 2,
+          "performance": 89.0,
+          "ttfb": 658,
+          "metrics": {
+            "first-contentful-paint": 906.89,
+            "largest-contentful-paint": 1484.037,
+            "speed-index": 1829,
+            "total-blocking-time": 124.5440000000001,
+            "cumulative-layout-shift": 0.001868132025456465,
+            "total-byte-weight": 739140
+          },
+          "observedLoad": 1969,
+          "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+        },
+        {
+          "variant": "final-after",
+          "run": 2,
+          "performance": 89.0,
+          "ttfb": 657,
+          "metrics": {
+            "first-contentful-paint": 1234.206,
+            "largest-contentful-paint": 1515.946,
+            "speed-index": 1951,
+            "total-blocking-time": 50.56000000000017,
+            "cumulative-layout-shift": 0.002317787680532015,
+            "total-byte-weight": 737476
+          },
+          "observedLoad": 2847,
+          "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+        },
+        {
+          "variant": "final-before",
+          "run": 3,
+          "performance": 89.0,
+          "ttfb": 655,
+          "metrics": {
+            "first-contentful-paint": 888.36,
+            "largest-contentful-paint": 1508.33,
+            "speed-index": 1857,
+            "total-blocking-time": 135.76499999999987,
+            "cumulative-layout-shift": 0.003314321557994535,
+            "total-byte-weight": 739140
+          },
+          "observedLoad": 1633,
+          "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+        },
+        {
+          "variant": "final-after",
+          "run": 3,
+          "performance": 89.0,
+          "ttfb": 655,
+          "metrics": {
+            "first-contentful-paint": 1177.913,
+            "largest-contentful-paint": 1489.133,
+            "speed-index": 1924,
+            "total-blocking-time": 44.82699998474118,
+            "cumulative-layout-shift": 0.001986675154741727,
+            "total-byte-weight": 737476
+          },
+          "observedLoad": 1628,
+          "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+        }
+      ]
+    }
+  ],
+  "not_shipped": [
+    "Early root ms-motion caused stress CLS regression.",
+    "New content-visibility on product images: image readiness on entry was not verified; no new content-visibility or skipped section shipped. Existing footer auto rendering is respected instead of forced.",
+    "Additional font subsets: not selected; original and existing storefront font untouched."
+  ],
+  "limits": [
+    "Actual Grade A/Performance>95 remain unachieved/unverified. Current real result is C67/94.",
+    "Exact document rendering trace from production unavailable; task URL alone does not prove a specific CSS selector caused all453ms.",
+    "HTTP2/CDN/redirect219ms remain unresolved; proxy_http_version cannot enable browser HTTP2.",
+    "Runtime HTTP policy enforced with empty allowed_hosts; saved draft IP/GT entries not yet applied.",
+    "No server mutation per user scope; final actual metrics require deployment and a new GT result, not this model."
+  ]
+}
