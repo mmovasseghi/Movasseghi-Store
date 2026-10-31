@@ -63,8 +63,9 @@ Mobile CLS improved vs prior ~0.14 lab; desktop SI ~2.8s remains a local signal,
 | Report | Location | Browser | Grade | Perf | Struct | LCP | TBT | CLS |
 |--------|----------|---------|-------|------|--------|-----|-----|-----|
 | [POzYv29X](https://gtmetrix.com/reports/185.93.88.81/POzYv29X/) | Seattle, WA, USA | Chrome 154 / LH 12.6.1 | **B** | **79** | **98** | **2.1s** | 40ms | 0 |
+| [zLI2yUty](https://gtmetrix.com/reports/185.93.88.81/zLI2yUty/) | Seattle, WA, USA | Chrome 154 / LH 12.6.1 | **B** | **80** | **98** | **2.1s** | 58ms | 0 |
 
-Detail tabs (FCP/SI/waterfall phases) still login-gated for anonymous view. Header vitals only.
+Both comparison runs reported (not only the best). Detail tabs (FCP/SI/waterfall phases) still login-gated for anonymous view. Header vitals only.
 
 ## Remaining (next measured cycle — no guesswork)
 - Seattle Performance still **79** (target A then >95). Primary public gap vs target is still **LCP 2.1s** on Seattle path (improved from 2.4–2.5s, not enough).
