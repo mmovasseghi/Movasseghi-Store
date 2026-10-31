@@ -37,6 +37,44 @@
     }
   }
 
+  /* Two equal, viewport-filling halves keep the trust strip seamless, even
+     when the configured labels are shorter than the desktop viewport. */
+  (function initHeroTrustMarquee() {
+    const viewport = document.querySelector('.ms-hero-trust-track');
+    const track = viewport?.querySelector('.ms-hero-trust-marquee');
+    const groups = track?.querySelectorAll(':scope > .ms-hero-trust-set');
+    if (!groups || groups.length !== 2) return;
+    const originals = [...groups[0].children];
+    if (!originals.length) return;
+    const motion = matchMedia('(prefers-reduced-motion: reduce)');
+    let copies = 1;
+    let frame = 0;
+    function fill() {
+      frame = 0;
+      const style = getComputedStyle(groups[0]);
+      const gap = parseFloat(style.columnGap) || 0;
+      const padding = (parseFloat(style.paddingLeft) || 0) + (parseFloat(style.paddingRight) || 0);
+      const unit = originals.reduce((sum, item) => sum + item.getBoundingClientRect().width + gap, 0);
+      if (!unit) return;
+      const required = motion.matches ? 1 : Math.max(1, Math.ceil((viewport.clientWidth - padding + gap + 1) / unit));
+      if (required === copies) return;
+      const first = [...originals];
+      for (let i = 1; i < required; i++) first.push(...originals.map(item => item.cloneNode(true)));
+      const second = first.map(item => item.cloneNode(true));
+      groups[0].replaceChildren(...first);
+      groups[1].replaceChildren(...second);
+      copies = required;
+    }
+    function schedule() {
+      if (!frame) frame = requestAnimationFrame(fill);
+    }
+    fill();
+    if ('ResizeObserver' in window) new ResizeObserver(schedule).observe(viewport);
+    else window.addEventListener('resize', schedule, { passive: true });
+    document.fonts?.ready.then(schedule);
+    motion.addEventListener('change', schedule);
+  })();
+
   function scheduleHeroParticles() {
     const particleWrap = document.querySelector('[data-hero-particles]');
     if (!particleWrap || reduced) return;
