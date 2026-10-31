@@ -584,11 +584,15 @@ if (!string.IsNullOrEmpty(configuredPathBase))
 
 var publicBaseUrl = app.Configuration["SiteSettings:PublicBaseUrl"]?.Trim() ?? "";
 var siteUsesHttps = publicBaseUrl.StartsWith("https://", StringComparison.OrdinalIgnoreCase);
+// Short-lived Let's Encrypt IP certificates renew every ~6 days. Do not pin HSTS
+// to an IP origin: a missed renew would lock browsers onto a broken HTTPS endpoint.
+var publicHostIsIp = Uri.TryCreate(publicBaseUrl, UriKind.Absolute, out var publicUri)
+    && System.Net.IPAddress.TryParse(publicUri.IdnHost, out _);
 
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    if (siteUsesHttps)
+    if (siteUsesHttps && !publicHostIsIp)
         app.UseHsts();
 }
 
