@@ -10,9 +10,24 @@ from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 
 class NoRedirect(HTTPRedirectHandler):
+    """Block open redirects; allow one same-host HTTP→HTTPS upgrade (edge canonical)."""
+
     def redirect_request(self, request, response, code, message, headers, new_url):
+        source = urlsplit(request.full_url)
         target = urlsplit(new_url)
-        raise RuntimeError(f"Unexpected redirect during health check: HTTP {code} to {target.scheme}://{target.hostname}{target.path}")
+        http_to_https = (
+            code in (301, 302, 307, 308)
+            and source.scheme == "http"
+            and target.scheme == "https"
+            and source.hostname == target.hostname
+            and (source.path or "/") == (target.path or "/")
+            and source.query == target.query
+        )
+        if http_to_https:
+            return Request(new_url, headers=request.headers, method=request.get_method())
+        raise RuntimeError(
+            f"Unexpected redirect during health check: HTTP {code} to {target.scheme}://{target.hostname}{target.path}"
+        )
 
 
 class Home(HTMLParser):
