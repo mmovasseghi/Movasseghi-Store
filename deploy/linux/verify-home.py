@@ -5,8 +5,9 @@ from html.parser import HTMLParser
 import json
 import re
 import sys
+import ssl
 from urllib.parse import parse_qs, quote, urljoin, urlsplit
-from urllib.request import HTTPRedirectHandler, Request, build_opener
+from urllib.request import HTTPRedirectHandler, HTTPSHandler, Request, build_opener
 
 
 class NoRedirect(HTTPRedirectHandler):
@@ -68,9 +69,16 @@ def cache_ttls(headers):
             if (match := re.fullmatch(r'max-age\s*=\s*(?:([0-9]+)|"([0-9]+)")', part))]
 
 
-def verify(base, *, host=None, check_nginx=False):
+def verify(base, *, host=None, check_nginx=False, insecure=False):
     origin = urlsplit(base)
-    opener = build_opener(NoRedirect)
+    handlers = [NoRedirect]
+    if insecure and origin.scheme == "https":
+        # Loopback HTTPS smoke against an IP certificate (SNI/Host = public IP).
+        ctx = ssl.create_default_context()
+        ctx.check_hostname = False
+        ctx.verify_mode = ssl.CERT_NONE
+        handlers.append(HTTPSHandler(context=ctx))
+    opener = build_opener(*handlers)
 
     if host:
         authority = urlsplit("http://" + host)
@@ -176,9 +184,10 @@ if __name__ == "__main__":
     parser.add_argument("url", nargs="?", default="http://127.0.0.1:5080")
     parser.add_argument("--host", help="Public Host header while connecting through loopback")
     parser.add_argument("--nginx", action="store_true", help="Verify guest and fingerprinted static cache headers")
+    parser.add_argument("--insecure", action="store_true", help="Skip TLS verify (loopback HTTPS vs IP cert)")
     arguments = parser.parse_args()
     try:
-        verify(arguments.url, host=arguments.host, check_nginx=arguments.nginx)
+        verify(arguments.url, host=arguments.host, check_nginx=arguments.nginx, insecure=arguments.insecure)
     except Exception as error:
         print(f"Release smoke FAILED: {error}", file=sys.stderr)
         raise SystemExit(1)

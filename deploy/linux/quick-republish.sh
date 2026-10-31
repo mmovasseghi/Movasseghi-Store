@@ -173,9 +173,9 @@ done
 [[ "$ready" == 1 ]] || { echo "Kestrel readiness failed" >&2; exit 1; }
 python3 deploy/linux/verify-home.py http://127.0.0.1:5080
 find "$CACHE_DIR" -type f -delete
-# Public edge is HTTPS (Let's Encrypt IP cert). Smoke the canonical origin,
-# not plain :80 which only redirects.
-python3 deploy/linux/verify-home.py "https://${MS_SMOKE_HOST}" --nginx
+# Public edge is HTTPS. Smoke through loopback so the .deploying maintenance
+# bypass ($ms_local_probe) still applies, with Host = public IP / vhost.
+python3 deploy/linux/verify-home.py https://127.0.0.1 --host "$MS_SMOKE_HOST" --nginx --insecure
 [[ "$(cat "$INSTALL_DIR/publish/RELEASE_COMMIT")" == "$SHA" ]]
 systemctl is-active --quiet "$SERVICE"
 rm -f "$MARKER"
