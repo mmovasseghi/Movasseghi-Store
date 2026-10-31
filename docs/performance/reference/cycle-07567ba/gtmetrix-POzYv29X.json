@@ -1,0 +1,12 @@
+{
+  "url": "https://gtmetrix.com/reports/185.93.88.81/POzYv29X/",
+  "grades": [],
+  "performance": "79",
+  "structure": "98",
+  "LCP": "2.1s",
+  "TBT": "40ms",
+  "CLS": "0",
+  "location": "Seattle, WA, USA",
+  "using": "Chrome 154.0.0.0, Lighthouse 12.6.1",
+  "generated": "Sat, Oct 31, 2026 9:31 AM -0700"
+}

@@ -1,0 +1,363 @@
+{
+  "at": "2026-10-31T16:30:32.704Z",
+  "probes": [
+    {
+      "label": "mobile-412-2.625",
+      "viewport": {
+        "width": 412,
+        "height": 915,
+        "deviceScaleFactor": 2.625,
+        "isMobile": true,
+        "hasTouch": true
+      },
+      "preload": [
+        {
+          "href": "/images/products/0056/01-lcp.webp?v=kF7UGc6DaLkFai8Uf4ookTKepqHpEdSfHXmpdS_apsk",
+          "imagesrcset": "/images/products/0056/01-64w.webp?v=GDz7K1GyyEnC8Pd0FLGcvY7AB-3Sow9xj2c3GmfcAug 64w, /images/products/0056/01-128w.webp?v=IRgY9lbm-cXJsL7mehJtp5PeT8mp4k7nhMGxsGCb1hk 128w, /images/products/0056/01-160w.webp?v=VMjRgQor3hKw4Kpt5hPAqFKeoCuAi78wUZRSqNMEcrE 160w, /images/products/0056/01-192w.webp?v=Qg1wpoKBdAVkprgOmB0Wah3fYxT8YzJKlyqPdfG-tGI 192w, /images/products/0056/01-256w.webp?v=0KA_Baxh7GQovxzXaVvztx4goZdfOd9c4iwvjZNjnd8 256w, /images/products/0056/01-272w.webp?v=pBI9cAWFubxvjHfE1q0v3UR4WyzwLn5tWMusTDWjLAI 272w, /images/products/0056/01-320w.webp?v=xrvARwCQ94e4CmeU8SCHlu5nBW2C1R4qY4wPgzp2EwM 320w, /images/products/0056/01-384w.webp?v=d39epxCL95WAJnUv7APWEmYV2pJAEq1NKa38QbE3ipo 384w, /images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw 420w, /images/products/0056/01-480w.webp?v=eKaKYulZOLFZbJa4bgWRUEKevroFcJWJq6SRObwpd8U 480w, /images/products/0056/01-560w.webp?v=fxw0kXLjinNaynzhAnPsNikdF3joFq7FOAjXFUpLdJU 560w, /images/products/0056/01-640w.webp?v=OeCObcshZezb2YrTaiyv0stgGqrtEfs8zdEW7uyfNq8 640w, /images/products/0056/01.webp?v=t6MyRW4MTCMticNObYQ3MQL9FC06PcUNgGetjiTKnaU 800w",
+          "imagesizes": "(min-width: 768px) 420px, (max-width: 480px) 35vw, 240px",
+          "fetchpriority": "high"
+        }
+      ],
+      "img": {
+        "src": "/images/products/0056/01-lcp.webp?v=kF7UGc6DaLkFai8Uf4ookTKepqHpEdSfHXmpdS_apsk",
+        "srcset": "/images/products/0056/01-64w.webp?v=GDz7K1GyyEnC8Pd0FLGcvY7AB-3Sow9xj2c3GmfcAug 64w, /images/products/0056/01-128w.webp?v=IRgY9lbm-cXJsL7mehJtp5PeT8mp4k7nhMGxsGCb1hk 128w, /images/products/0056/01-160w.webp?v=VMjRgQor3hKw4Kpt5hPAqFKeoCuAi78wUZRSqNMEcrE 160w, /images/products/0056/01-192w.webp?v=Qg1wpoKBdAVkprgOmB0Wah3fYxT8YzJKlyqPdfG-tGI 192w, /images/products/0056/01-256w.webp?v=0KA_Baxh7GQovxzXaVvztx4goZdfOd9c4iwvjZNjnd8 256w, /images/products/0056/01-272w.webp?v=pBI9cAWFubxvjHfE1q0v3UR4WyzwLn5tWMusTDWjLAI 272w, /images/products/0056/01-320w.webp?v=xrvARwCQ94e4CmeU8SCHlu5nBW2C1R4qY4wPgzp2EwM 320w, /images/products/0056/01-384w.webp?v=d39epxCL95WAJnUv7APWEmYV2pJAEq1NKa38QbE3ipo 384w, /images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw 420w, /images/products/0056/01-480w.webp?v=eKaKYulZOLFZbJa4bgWRUEKevroFcJWJq6SRObwpd8U 480w, /images/products/0056/01-560w.webp?v=fxw0kXLjinNaynzhAnPsNikdF3joFq7FOAjXFUpLdJU 560w, /images/products/0056/01-640w.webp?v=OeCObcshZezb2YrTaiyv0stgGqrtEfs8zdEW7uyfNq8 640w, /images/products/0056/01.webp?v=t6MyRW4MTCMticNObYQ3MQL9FC06PcUNgGetjiTKnaU 800w",
+        "sizes": "(min-width: 768px) 420px, (max-width: 480px) 35vw, 240px",
+        "currentSrc": "https://185.93.88.81/images/products/0056/01-384w.webp?v=d39epxCL95WAJnUv7APWEmYV2pJAEq1NKa38QbE3ipo",
+        "complete": true,
+        "w": 144,
+        "h": 144,
+        "clientW": 145
+      },
+      "dpr": 2.625,
+      "vw": 412,
+      "lcp": {
+        "time": 1396,
+        "size": 53156,
+        "url": "https://185.93.88.81/images/products/0056/01-384w.webp?v=d39epxCL95WAJnUv7APWEmYV2pJAEq1NKa38QbE3ipo",
+        "element": "IMG."
+      },
+      "imageResponses": [
+        {
+          "url": "/images/products/0056/01-384w.webp?v=d39epxCL95WAJnUv7APWEmYV2pJAEq1NKa38QbE3ipo",
+          "status": 200,
+          "fromCache": false,
+          "timing": {
+            "requestTime": 29732.35462,
+            "proxyStart": -1,
+            "proxyEnd": -1,
+            "dnsStart": -1,
+            "dnsEnd": -1,
+            "connectStart": -1,
+            "connectEnd": -1,
+            "sslStart": -1,
+            "sslEnd": -1,
+            "workerStart": -1,
+            "workerReady": -1,
+            "workerFetchStart": -1,
+            "workerRespondWithSettled": -1,
+            "sendStart": 0.402,
+            "sendEnd": 0.576,
+            "pushStart": 0,
+            "pushEnd": 0,
+            "receiveHeadersStart": 225.069,
+            "receiveHeadersEnd": 225.14
+          }
+        },
+        {
+          "url": "/images/products/0056/01-256w.webp?v=0KA_Baxh7GQovxzXaVvztx4goZdfOd9c4iwvjZNjnd8",
+          "status": 200,
+          "fromCache": false,
+          "timing": {
+            "requestTime": 29732.787417,
+            "proxyStart": -1,
+            "proxyEnd": -1,
+            "dnsStart": -1,
+            "dnsEnd": -1,
+            "connectStart": -1,
+            "connectEnd": -1,
+            "sslStart": -1,
+            "sslEnd": -1,
+            "workerStart": -1,
+            "workerReady": -1,
+            "workerFetchStart": -1,
+            "workerRespondWithSettled": -1,
+            "sendStart": 1.767,
+            "sendEnd": 2.274,
+            "pushStart": 0,
+            "pushEnd": 0,
+            "receiveHeadersStart": 458.262,
+            "receiveHeadersEnd": 458.333
+          }
+        },
+        {
+          "url": "/images/products/0056/01-hero-photo-v1-480w.webp?v=UU0qXZwgL82vJYQ6meU725L0ezMzP9GlFnKYumI23rw",
+          "status": 200,
+          "fromCache": false,
+          "timing": {
+            "requestTime": 29732.787574,
+            "proxyStart": -1,
+            "proxyEnd": -1,
+            "dnsStart": -1,
+            "dnsEnd": -1,
+            "connectStart": -1,
+            "connectEnd": -1,
+            "sslStart": -1,
+            "sslEnd": -1,
+            "workerStart": -1,
+            "workerReady": -1,
+            "workerFetchStart": -1,
+            "workerRespondWithSettled": -1,
+            "sendStart": 1.638,
+            "sendEnd": 2.118,
+            "pushStart": 0,
+            "pushEnd": 0,
+            "receiveHeadersStart": 458.927,
+            "receiveHeadersEnd": 458.979
+          }
+        }
+      ]
+    },
+    {
+      "label": "mobile-390-3",
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "deviceScaleFactor": 3,
+        "isMobile": true,
+        "hasTouch": true
+      },
+      "preload": [
+        {
+          "href": "/images/products/0056/01-lcp.webp?v=kF7UGc6DaLkFai8Uf4ookTKepqHpEdSfHXmpdS_apsk",
+          "imagesrcset": "/images/products/0056/01-64w.webp?v=GDz7K1GyyEnC8Pd0FLGcvY7AB-3Sow9xj2c3GmfcAug 64w, /images/products/0056/01-128w.webp?v=IRgY9lbm-cXJsL7mehJtp5PeT8mp4k7nhMGxsGCb1hk 128w, /images/products/0056/01-160w.webp?v=VMjRgQor3hKw4Kpt5hPAqFKeoCuAi78wUZRSqNMEcrE 160w, /images/products/0056/01-192w.webp?v=Qg1wpoKBdAVkprgOmB0Wah3fYxT8YzJKlyqPdfG-tGI 192w, /images/products/0056/01-256w.webp?v=0KA_Baxh7GQovxzXaVvztx4goZdfOd9c4iwvjZNjnd8 256w, /images/products/0056/01-272w.webp?v=pBI9cAWFubxvjHfE1q0v3UR4WyzwLn5tWMusTDWjLAI 272w, /images/products/0056/01-320w.webp?v=xrvARwCQ94e4CmeU8SCHlu5nBW2C1R4qY4wPgzp2EwM 320w, /images/products/0056/01-384w.webp?v=d39epxCL95WAJnUv7APWEmYV2pJAEq1NKa38QbE3ipo 384w, /images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw 420w, /images/products/0056/01-480w.webp?v=eKaKYulZOLFZbJa4bgWRUEKevroFcJWJq6SRObwpd8U 480w, /images/products/0056/01-560w.webp?v=fxw0kXLjinNaynzhAnPsNikdF3joFq7FOAjXFUpLdJU 560w, /images/products/0056/01-640w.webp?v=OeCObcshZezb2YrTaiyv0stgGqrtEfs8zdEW7uyfNq8 640w, /images/products/0056/01.webp?v=t6MyRW4MTCMticNObYQ3MQL9FC06PcUNgGetjiTKnaU 800w",
+          "imagesizes": "(min-width: 768px) 420px, (max-width: 480px) 35vw, 240px",
+          "fetchpriority": "high"
+        }
+      ],
+      "img": {
+        "src": "/images/products/0056/01-lcp.webp?v=kF7UGc6DaLkFai8Uf4ookTKepqHpEdSfHXmpdS_apsk",
+        "srcset": "/images/products/0056/01-64w.webp?v=GDz7K1GyyEnC8Pd0FLGcvY7AB-3Sow9xj2c3GmfcAug 64w, /images/products/0056/01-128w.webp?v=IRgY9lbm-cXJsL7mehJtp5PeT8mp4k7nhMGxsGCb1hk 128w, /images/products/0056/01-160w.webp?v=VMjRgQor3hKw4Kpt5hPAqFKeoCuAi78wUZRSqNMEcrE 160w, /images/products/0056/01-192w.webp?v=Qg1wpoKBdAVkprgOmB0Wah3fYxT8YzJKlyqPdfG-tGI 192w, /images/products/0056/01-256w.webp?v=0KA_Baxh7GQovxzXaVvztx4goZdfOd9c4iwvjZNjnd8 256w, /images/products/0056/01-272w.webp?v=pBI9cAWFubxvjHfE1q0v3UR4WyzwLn5tWMusTDWjLAI 272w, /images/products/0056/01-320w.webp?v=xrvARwCQ94e4CmeU8SCHlu5nBW2C1R4qY4wPgzp2EwM 320w, /images/products/0056/01-384w.webp?v=d39epxCL95WAJnUv7APWEmYV2pJAEq1NKa38QbE3ipo 384w, /images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw 420w, /images/products/0056/01-480w.webp?v=eKaKYulZOLFZbJa4bgWRUEKevroFcJWJq6SRObwpd8U 480w, /images/products/0056/01-560w.webp?v=fxw0kXLjinNaynzhAnPsNikdF3joFq7FOAjXFUpLdJU 560w, /images/products/0056/01-640w.webp?v=OeCObcshZezb2YrTaiyv0stgGqrtEfs8zdEW7uyfNq8 640w, /images/products/0056/01.webp?v=t6MyRW4MTCMticNObYQ3MQL9FC06PcUNgGetjiTKnaU 800w",
+        "sizes": "(min-width: 768px) 420px, (max-width: 480px) 35vw, 240px",
+        "currentSrc": "https://185.93.88.81/images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw",
+        "complete": true,
+        "w": 136,
+        "h": 136,
+        "clientW": 136
+      },
+      "dpr": 3,
+      "vw": 390,
+      "lcp": {
+        "time": 540,
+        "size": 51358,
+        "url": "https://185.93.88.81/images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw",
+        "element": "IMG."
+      },
+      "imageResponses": [
+        {
+          "url": "/images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw",
+          "status": 200,
+          "fromCache": false,
+          "timing": {
+            "requestTime": 29735.316167,
+            "proxyStart": -1,
+            "proxyEnd": -1,
+            "dnsStart": -1,
+            "dnsEnd": -1,
+            "connectStart": -1,
+            "connectEnd": -1,
+            "sslStart": -1,
+            "sslEnd": -1,
+            "workerStart": -1,
+            "workerReady": -1,
+            "workerFetchStart": -1,
+            "workerRespondWithSettled": -1,
+            "sendStart": 0.666,
+            "sendEnd": 0.797,
+            "pushStart": 0,
+            "pushEnd": 0,
+            "receiveHeadersStart": 224.071,
+            "receiveHeadersEnd": 224.151
+          }
+        },
+        {
+          "url": "/images/products/0056/01-256w.webp?v=0KA_Baxh7GQovxzXaVvztx4goZdfOd9c4iwvjZNjnd8",
+          "status": 200,
+          "fromCache": false,
+          "timing": {
+            "requestTime": 29735.766016,
+            "proxyStart": -1,
+            "proxyEnd": -1,
+            "dnsStart": -1,
+            "dnsEnd": -1,
+            "connectStart": -1,
+            "connectEnd": -1,
+            "sslStart": -1,
+            "sslEnd": -1,
+            "workerStart": -1,
+            "workerReady": -1,
+            "workerFetchStart": -1,
+            "workerRespondWithSettled": -1,
+            "sendStart": 0.324,
+            "sendEnd": 0.459,
+            "pushStart": 0,
+            "pushEnd": 0,
+            "receiveHeadersStart": 225.081,
+            "receiveHeadersEnd": 225.13
+          }
+        },
+        {
+          "url": "/images/products/0056/01-hero-photo-v1-480w.webp?v=UU0qXZwgL82vJYQ6meU725L0ezMzP9GlFnKYumI23rw",
+          "status": 200,
+          "fromCache": false,
+          "timing": {
+            "requestTime": 29735.770287,
+            "proxyStart": -1,
+            "proxyEnd": -1,
+            "dnsStart": -1,
+            "dnsEnd": -1,
+            "connectStart": -1,
+            "connectEnd": -1,
+            "sslStart": -1,
+            "sslEnd": -1,
+            "workerStart": -1,
+            "workerReady": -1,
+            "workerFetchStart": -1,
+            "workerRespondWithSettled": -1,
+            "sendStart": 0.134,
+            "sendEnd": 0.214,
+            "pushStart": 0,
+            "pushEnd": 0,
+            "receiveHeadersStart": 222.89,
+            "receiveHeadersEnd": 222.944
+          }
+        }
+      ]
+    },
+    {
+      "label": "desktop-1280-1",
+      "viewport": {
+        "width": 1280,
+        "height": 800,
+        "deviceScaleFactor": 1,
+        "isMobile": false
+      },
+      "preload": [
+        {
+          "href": "/images/products/0056/01-lcp.webp?v=kF7UGc6DaLkFai8Uf4ookTKepqHpEdSfHXmpdS_apsk",
+          "imagesrcset": "/images/products/0056/01-64w.webp?v=GDz7K1GyyEnC8Pd0FLGcvY7AB-3Sow9xj2c3GmfcAug 64w, /images/products/0056/01-128w.webp?v=IRgY9lbm-cXJsL7mehJtp5PeT8mp4k7nhMGxsGCb1hk 128w, /images/products/0056/01-160w.webp?v=VMjRgQor3hKw4Kpt5hPAqFKeoCuAi78wUZRSqNMEcrE 160w, /images/products/0056/01-192w.webp?v=Qg1wpoKBdAVkprgOmB0Wah3fYxT8YzJKlyqPdfG-tGI 192w, /images/products/0056/01-256w.webp?v=0KA_Baxh7GQovxzXaVvztx4goZdfOd9c4iwvjZNjnd8 256w, /images/products/0056/01-272w.webp?v=pBI9cAWFubxvjHfE1q0v3UR4WyzwLn5tWMusTDWjLAI 272w, /images/products/0056/01-320w.webp?v=xrvARwCQ94e4CmeU8SCHlu5nBW2C1R4qY4wPgzp2EwM 320w, /images/products/0056/01-384w.webp?v=d39epxCL95WAJnUv7APWEmYV2pJAEq1NKa38QbE3ipo 384w, /images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw 420w, /images/products/0056/01-480w.webp?v=eKaKYulZOLFZbJa4bgWRUEKevroFcJWJq6SRObwpd8U 480w, /images/products/0056/01-560w.webp?v=fxw0kXLjinNaynzhAnPsNikdF3joFq7FOAjXFUpLdJU 560w, /images/products/0056/01-640w.webp?v=OeCObcshZezb2YrTaiyv0stgGqrtEfs8zdEW7uyfNq8 640w, /images/products/0056/01.webp?v=t6MyRW4MTCMticNObYQ3MQL9FC06PcUNgGetjiTKnaU 800w",
+          "imagesizes": "(min-width: 768px) 420px, (max-width: 480px) 35vw, 240px",
+          "fetchpriority": "high"
+        }
+      ],
+      "img": {
+        "src": "/images/products/0056/01-lcp.webp?v=kF7UGc6DaLkFai8Uf4ookTKepqHpEdSfHXmpdS_apsk",
+        "srcset": "/images/products/0056/01-64w.webp?v=GDz7K1GyyEnC8Pd0FLGcvY7AB-3Sow9xj2c3GmfcAug 64w, /images/products/0056/01-128w.webp?v=IRgY9lbm-cXJsL7mehJtp5PeT8mp4k7nhMGxsGCb1hk 128w, /images/products/0056/01-160w.webp?v=VMjRgQor3hKw4Kpt5hPAqFKeoCuAi78wUZRSqNMEcrE 160w, /images/products/0056/01-192w.webp?v=Qg1wpoKBdAVkprgOmB0Wah3fYxT8YzJKlyqPdfG-tGI 192w, /images/products/0056/01-256w.webp?v=0KA_Baxh7GQovxzXaVvztx4goZdfOd9c4iwvjZNjnd8 256w, /images/products/0056/01-272w.webp?v=pBI9cAWFubxvjHfE1q0v3UR4WyzwLn5tWMusTDWjLAI 272w, /images/products/0056/01-320w.webp?v=xrvARwCQ94e4CmeU8SCHlu5nBW2C1R4qY4wPgzp2EwM 320w, /images/products/0056/01-384w.webp?v=d39epxCL95WAJnUv7APWEmYV2pJAEq1NKa38QbE3ipo 384w, /images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw 420w, /images/products/0056/01-480w.webp?v=eKaKYulZOLFZbJa4bgWRUEKevroFcJWJq6SRObwpd8U 480w, /images/products/0056/01-560w.webp?v=fxw0kXLjinNaynzhAnPsNikdF3joFq7FOAjXFUpLdJU 560w, /images/products/0056/01-640w.webp?v=OeCObcshZezb2YrTaiyv0stgGqrtEfs8zdEW7uyfNq8 640w, /images/products/0056/01.webp?v=t6MyRW4MTCMticNObYQ3MQL9FC06PcUNgGetjiTKnaU 800w",
+        "sizes": "(min-width: 768px) 420px, (max-width: 480px) 35vw, 240px",
+        "currentSrc": "https://185.93.88.81/images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw",
+        "complete": true,
+        "w": 420,
+        "h": 420,
+        "clientW": 420
+      },
+      "dpr": 1,
+      "vw": 1280,
+      "lcp": {
+        "time": 564,
+        "size": 178002,
+        "url": "https://185.93.88.81/images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw",
+        "element": "IMG."
+      },
+      "imageResponses": [
+        {
+          "url": "/images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw",
+          "status": 200,
+          "fromCache": false,
+          "timing": {
+            "requestTime": 29738.483676,
+            "proxyStart": -1,
+            "proxyEnd": -1,
+            "dnsStart": -1,
+            "dnsEnd": -1,
+            "connectStart": -1,
+            "connectEnd": -1,
+            "sslStart": -1,
+            "sslEnd": -1,
+            "workerStart": -1,
+            "workerReady": -1,
+            "workerFetchStart": -1,
+            "workerRespondWithSettled": -1,
+            "sendStart": 0.317,
+            "sendEnd": 0.461,
+            "pushStart": 0,
+            "pushEnd": 0,
+            "receiveHeadersStart": 223.617,
+            "receiveHeadersEnd": 223.741
+          }
+        }
+      ]
+    },
+    {
+      "label": "desktop-1920-1",
+      "viewport": {
+        "width": 1920,
+        "height": 1080,
+        "deviceScaleFactor": 1,
+        "isMobile": false
+      },
+      "preload": [
+        {
+          "href": "/images/products/0056/01-lcp.webp?v=kF7UGc6DaLkFai8Uf4ookTKepqHpEdSfHXmpdS_apsk",
+          "imagesrcset": "/images/products/0056/01-64w.webp?v=GDz7K1GyyEnC8Pd0FLGcvY7AB-3Sow9xj2c3GmfcAug 64w, /images/products/0056/01-128w.webp?v=IRgY9lbm-cXJsL7mehJtp5PeT8mp4k7nhMGxsGCb1hk 128w, /images/products/0056/01-160w.webp?v=VMjRgQor3hKw4Kpt5hPAqFKeoCuAi78wUZRSqNMEcrE 160w, /images/products/0056/01-192w.webp?v=Qg1wpoKBdAVkprgOmB0Wah3fYxT8YzJKlyqPdfG-tGI 192w, /images/products/0056/01-256w.webp?v=0KA_Baxh7GQovxzXaVvztx4goZdfOd9c4iwvjZNjnd8 256w, /images/products/0056/01-272w.webp?v=pBI9cAWFubxvjHfE1q0v3UR4WyzwLn5tWMusTDWjLAI 272w, /images/products/0056/01-320w.webp?v=xrvARwCQ94e4CmeU8SCHlu5nBW2C1R4qY4wPgzp2EwM 320w, /images/products/0056/01-384w.webp?v=d39epxCL95WAJnUv7APWEmYV2pJAEq1NKa38QbE3ipo 384w, /images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw 420w, /images/products/0056/01-480w.webp?v=eKaKYulZOLFZbJa4bgWRUEKevroFcJWJq6SRObwpd8U 480w, /images/products/0056/01-560w.webp?v=fxw0kXLjinNaynzhAnPsNikdF3joFq7FOAjXFUpLdJU 560w, /images/products/0056/01-640w.webp?v=OeCObcshZezb2YrTaiyv0stgGqrtEfs8zdEW7uyfNq8 640w, /images/products/0056/01.webp?v=t6MyRW4MTCMticNObYQ3MQL9FC06PcUNgGetjiTKnaU 800w",
+          "imagesizes": "(min-width: 768px) 420px, (max-width: 480px) 35vw, 240px",
+          "fetchpriority": "high"
+        }
+      ],
+      "img": {
+        "src": "/images/products/0056/01-lcp.webp?v=kF7UGc6DaLkFai8Uf4ookTKepqHpEdSfHXmpdS_apsk",
+        "srcset": "/images/products/0056/01-64w.webp?v=GDz7K1GyyEnC8Pd0FLGcvY7AB-3Sow9xj2c3GmfcAug 64w, /images/products/0056/01-128w.webp?v=IRgY9lbm-cXJsL7mehJtp5PeT8mp4k7nhMGxsGCb1hk 128w, /images/products/0056/01-160w.webp?v=VMjRgQor3hKw4Kpt5hPAqFKeoCuAi78wUZRSqNMEcrE 160w, /images/products/0056/01-192w.webp?v=Qg1wpoKBdAVkprgOmB0Wah3fYxT8YzJKlyqPdfG-tGI 192w, /images/products/0056/01-256w.webp?v=0KA_Baxh7GQovxzXaVvztx4goZdfOd9c4iwvjZNjnd8 256w, /images/products/0056/01-272w.webp?v=pBI9cAWFubxvjHfE1q0v3UR4WyzwLn5tWMusTDWjLAI 272w, /images/products/0056/01-320w.webp?v=xrvARwCQ94e4CmeU8SCHlu5nBW2C1R4qY4wPgzp2EwM 320w, /images/products/0056/01-384w.webp?v=d39epxCL95WAJnUv7APWEmYV2pJAEq1NKa38QbE3ipo 384w, /images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw 420w, /images/products/0056/01-480w.webp?v=eKaKYulZOLFZbJa4bgWRUEKevroFcJWJq6SRObwpd8U 480w, /images/products/0056/01-560w.webp?v=fxw0kXLjinNaynzhAnPsNikdF3joFq7FOAjXFUpLdJU 560w, /images/products/0056/01-640w.webp?v=OeCObcshZezb2YrTaiyv0stgGqrtEfs8zdEW7uyfNq8 640w, /images/products/0056/01.webp?v=t6MyRW4MTCMticNObYQ3MQL9FC06PcUNgGetjiTKnaU 800w",
+        "sizes": "(min-width: 768px) 420px, (max-width: 480px) 35vw, 240px",
+        "currentSrc": "https://185.93.88.81/images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw",
+        "complete": true,
+        "w": 420,
+        "h": 420,
+        "clientW": 420
+      },
+      "dpr": 1,
+      "vw": 1920,
+      "lcp": {
+        "time": 724,
+        "size": 336005,
+        "url": "https://185.93.88.81/images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw",
+        "element": "IMG."
+      },
+      "imageResponses": [
+        {
+          "url": "/images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw",
+          "status": 200,
+          "fromCache": false,
+          "timing": {
+            "requestTime": 29741.213886,
+            "proxyStart": -1,
+            "proxyEnd": -1,
+            "dnsStart": -1,
+            "dnsEnd": -1,
+            "connectStart": -1,
+            "connectEnd": -1,
+            "sslStart": -1,
+            "sslEnd": -1,
+            "workerStart": -1,
+            "workerReady": -1,
+            "workerFetchStart": -1,
+            "workerRespondWithSettled": -1,
+            "sendStart": 0.314,
+            "sendEnd": 0.448,
+            "pushStart": 0,
+            "pushEnd": 0,
+            "receiveHeadersStart": 223.559,
+            "receiveHeadersEnd": 223.66
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,468 @@
+{
+  "at": "2026-10-31T16:26:47.023Z",
+  "release": "07567ba",
+  "runs": [
+    {
+      "label": "after-mobile-early",
+      "early": {
+        "t": 1131.699999999255,
+        "readyState": "loading",
+        "earlyCapture": "function",
+        "storyCapture": "function",
+        "earlyStoryIntent": true,
+        "ariaBusy": "true",
+        "bodyOpen": false,
+        "modalHidden": null
+      },
+      "after": {
+        "bodyOpen": true,
+        "modalClass": "ms-story-modal is-open",
+        "modalHidden": false,
+        "hasImg": true,
+        "storyCaptureGone": true,
+        "earlyStoryIntent": false,
+        "fontsAt": 1596,
+        "shiftSum": 0.002642873315596746,
+        "shiftsCount": 2,
+        "topShifts": [
+          {
+            "value": 0.0024413986682194156,
+            "startTime": 1832.5999999977648,
+            "sources": [
+              {
+                "node": "ms-features",
+                "prev": {
+                  "y": 585.1,
+                  "h": 266.5
+                },
+                "curr": {
+                  "y": 592.1,
+                  "h": 266.5
+                }
+              },
+              {
+                "node": "ms-features-band",
+                "prev": {
+                  "y": 566.7,
+                  "h": 145.7
+                },
+                "curr": {
+                  "y": 573.7,
+                  "h": 145.7
+                }
+              }
+            ]
+          },
+          {
+            "value": 0.00020147464737733036,
+            "startTime": 2276.699999999255,
+            "sources": [
+              {
+                "node": "ms-fab-call",
+                "prev": {
+                  "y": 771,
+                  "h": 56
+                },
+                "curr": {
+                  "y": 754,
+                  "h": 56
+                }
+              }
+            ]
+          }
+        ],
+        "desc": {
+          "h": 41.5,
+          "clamp": "2",
+          "minH": "41.472px",
+          "maxH": "41.472px"
+        }
+      },
+      "afterLoad": null
+    },
+    {
+      "label": "after-desktop-early",
+      "early": {
+        "t": 699.8000000007451,
+        "readyState": "interactive",
+        "earlyCapture": "undefined",
+        "storyCapture": "function",
+        "earlyStoryIntent": true,
+        "ariaBusy": "true",
+        "bodyOpen": false,
+        "modalHidden": true
+      },
+      "after": {
+        "bodyOpen": true,
+        "modalClass": "ms-story-modal is-open",
+        "modalHidden": false,
+        "hasImg": true,
+        "storyCaptureGone": true,
+        "earlyStoryIntent": false,
+        "fontsAt": 953.3999999985099,
+        "shiftSum": 0.002026608884334564,
+        "shiftsCount": 1,
+        "topShifts": [
+          {
+            "value": 0.002026608884334564,
+            "startTime": 955.5,
+            "sources": [
+              {
+                "node": "#text",
+                "prev": {
+                  "y": 668.2,
+                  "h": 87
+                },
+                "curr": {
+                  "y": 656.2,
+                  "h": 87
+                }
+              },
+              {
+                "node": "#text",
+                "prev": {
+                  "y": 742.7,
+                  "h": 53.7
+                },
+                "curr": {
+                  "y": 738.7,
+                  "h": 53.7
+                }
+              },
+              {
+                "node": "is-active",
+                "prev": {
+                  "y": 68,
+                  "h": 79.2
+                },
+                "curr": {
+                  "y": 68,
+                  "h": 79.2
+                }
+              },
+              {
+                "node": "ms-promo-cta",
+                "prev": {
+                  "y": 0,
+                  "h": 52.4
+                },
+                "curr": {
+                  "y": 0,
+                  "h": 52.4
+                }
+              },
+              {
+                "node": "#text",
+                "prev": {
+                  "y": 18.3,
+                  "h": 20
+                },
+                "curr": {
+                  "y": 15.3,
+                  "h": 20
+                }
+              }
+            ]
+          }
+        ],
+        "desc": {
+          "h": 55.4,
+          "clamp": "none",
+          "minH": "0px",
+          "maxH": "none"
+        }
+      },
+      "afterLoad": null
+    },
+    {
+      "label": "after-mobile-cls-throttled",
+      "early": null,
+      "after": {
+        "bodyOpen": false,
+        "modalClass": "ms-story-modal",
+        "modalHidden": true,
+        "hasImg": false,
+        "storyCaptureGone": true,
+        "earlyStoryIntent": false,
+        "fontsAt": 2595.2999999970198,
+        "shiftSum": 0.06203082478611294,
+        "shiftsCount": 5,
+        "topShifts": [
+          {
+            "value": 0.037866773816761165,
+            "startTime": 2607.89999999851,
+            "sources": [
+              {
+                "node": "P",
+                "prev": {
+                  "y": 606.7,
+                  "h": 49.7
+                },
+                "curr": {
+                  "y": 606.7,
+                  "h": 49.7
+                }
+              },
+              {
+                "node": "#text",
+                "prev": {
+                  "y": 431,
+                  "h": 18.8
+                },
+                "curr": {
+                  "y": 408.3,
+                  "h": 40.7
+                }
+              },
+              {
+                "node": "#text",
+                "prev": {
+                  "y": 378.1,
+                  "h": 32
+                },
+                "curr": {
+                  "y": 374.1,
+                  "h": 32
+                }
+              },
+              {
+                "node": null,
+                "prev": {
+                  "y": 148.3,
+                  "h": 16
+                },
+                "curr": {
+                  "y": 145.3,
+                  "h": 22
+                }
+              },
+              {
+                "node": "#text",
+                "prev": {
+                  "y": 757.3,
+                  "h": 21
+                },
+                "curr": {
+                  "y": 754.3,
+                  "h": 21
+                }
+              }
+            ]
+          },
+          {
+            "value": 0.019125723647266297,
+            "startTime": 6149.89999999851,
+            "sources": [
+              {
+                "node": "ms-features-band-inner",
+                "prev": {
+                  "y": 613.7,
+                  "h": 49.7
+                },
+                "curr": {
+                  "y": 613.7,
+                  "h": 49.7
+                }
+              }
+            ]
+          },
+          {
+            "value": 0.002742393024575234,
+            "startTime": 4173.39999999851,
+            "sources": [
+              {
+                "node": "ms-features",
+                "prev": {
+                  "y": 585.1,
+                  "h": 266.5
+                },
+                "curr": {
+                  "y": 592.1,
+                  "h": 266.5
+                }
+              },
+              {
+                "node": "ms-features-band",
+                "prev": {
+                  "y": 566.7,
+                  "h": 145.7
+                },
+                "curr": {
+                  "y": 573.7,
+                  "h": 145.7
+                }
+              },
+              {
+                "node": "ms-offers",
+                "prev": {
+                  "y": 879.6,
+                  "h": 35.4
+                },
+                "curr": {
+                  "y": 886.6,
+                  "h": 28.4
+                }
+              },
+              {
+                "node": "ms-offers-wave",
+                "prev": {
+                  "y": 878.6,
+                  "h": 28
+                },
+                "curr": {
+                  "y": 885.6,
+                  "h": 28
+                }
+              },
+              {
+                "node": "ms-wrap ms-offers-inner",
+                "prev": {
+                  "y": 909.2,
+                  "h": 5.8
+                },
+                "curr": {
+                  "y": 0,
+                  "h": 0
+                }
+              }
+            ]
+          },
+          {
+            "value": 0.0020944596501329084,
+            "startTime": 2646.199999999255,
+            "sources": [
+              {
+                "node": "ms-features-band-inner",
+                "prev": {
+                  "y": 606.7,
+                  "h": 49.7
+                },
+                "curr": {
+                  "y": 606.7,
+                  "h": 49.7
+                }
+              }
+            ]
+          },
+          {
+            "value": 0.00020147464737733036,
+            "startTime": 4997.39999999851,
+            "sources": [
+              {
+                "node": "ms-fab-call",
+                "prev": {
+                  "y": 771,
+                  "h": 56
+                },
+                "curr": {
+                  "y": 754,
+                  "h": 56
+                }
+              }
+            ]
+          }
+        ],
+        "desc": {
+          "h": 41.5,
+          "clamp": "2",
+          "minH": "41.472px",
+          "maxH": "41.472px"
+        }
+      },
+      "afterLoad": {
+        "bodyOpen": true,
+        "modalClass": "ms-story-modal is-open",
+        "hasImg": true
+      }
+    },
+    {
+      "label": "after-desktop-cls",
+      "early": null,
+      "after": {
+        "bodyOpen": false,
+        "modalClass": "ms-story-modal",
+        "modalHidden": true,
+        "hasImg": false,
+        "storyCaptureGone": true,
+        "earlyStoryIntent": false,
+        "fontsAt": 939.1000000014901,
+        "shiftSum": 0.0020273682475090023,
+        "shiftsCount": 1,
+        "topShifts": [
+          {
+            "value": 0.0020273682475090023,
+            "startTime": 941.6999999992549,
+            "sources": [
+              {
+                "node": "#text",
+                "prev": {
+                  "y": 668.2,
+                  "h": 87
+                },
+                "curr": {
+                  "y": 656.2,
+                  "h": 87
+                }
+              },
+              {
+                "node": "#text",
+                "prev": {
+                  "y": 742.7,
+                  "h": 53.7
+                },
+                "curr": {
+                  "y": 738.7,
+                  "h": 53.7
+                }
+              },
+              {
+                "node": "is-active",
+                "prev": {
+                  "y": 68,
+                  "h": 79.2
+                },
+                "curr": {
+                  "y": 68,
+                  "h": 79.2
+                }
+              },
+              {
+                "node": "ms-promo-cta",
+                "prev": {
+                  "y": 0,
+                  "h": 52.4
+                },
+                "curr": {
+                  "y": 0,
+                  "h": 52.4
+                }
+              },
+              {
+                "node": "#text",
+                "prev": {
+                  "y": 18.3,
+                  "h": 20
+                },
+                "curr": {
+                  "y": 15.3,
+                  "h": 20
+                }
+              }
+            ]
+          }
+        ],
+        "desc": {
+          "h": 55.4,
+          "clamp": "none",
+          "minH": "0px",
+          "maxH": "none"
+        }
+      },
+      "afterLoad": {
+        "bodyOpen": true,
+        "modalClass": "ms-story-modal is-open",
+        "hasImg": true
+      }
+    }
+  ]
+}
