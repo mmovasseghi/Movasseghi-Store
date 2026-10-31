@@ -244,7 +244,7 @@
                     var price = ProductStorefrontResolver.GetMinPrice(p.Variants);
                     var offerFrom = offerSellable.Count > 0 && ProductStorefrontResolver.UseFromPricePrefix(offerSellable);
                     <a href="@AppPath.H($"/Shop/Product/{p.Slug}", Context)" class="ms-offer-card">
-                        @{ ViewData["StageVariant"] = "offer"; ViewData["StageWidth"] = 140; ViewData["StageHeight"] = 140; ViewData["StageDualCycle"] = false; }
+                        @{ ViewData["StageVariant"] = "offer"; ViewData["StageWidth"] = 140; ViewData["StageHeight"] = 140; ViewData["StageDualCycle"] = true; }
                         <partial name="_ProductImageStageFromProduct" model="p" />
                         <div class="ms-offer-body">
                             <h3>@p.Name</h3>
@@ -316,7 +316,7 @@
                     var fPrice = ProductStorefrontResolver.GetMinPrice(p.Variants);
                     var featFrom = featSellable.Count > 0 && ProductStorefrontResolver.UseFromPricePrefix(featSellable);
                     <a href="@AppPath.H($"/Shop/Product/{p.Slug}", Context)" class="ms-feat-card">
-                        @{ ViewData["StageVariant"] = "featured"; ViewData["StageWidth"] = 180; ViewData["StageHeight"] = 180; ViewData["StageDualCycle"] = false; }
+                        @{ ViewData["StageVariant"] = "featured"; ViewData["StageWidth"] = 180; ViewData["StageHeight"] = 180; ViewData["StageDualCycle"] = true; }
                         <partial name="_ProductImageStageFromProduct" model="p" />
                         <span class="ms-feat-card-body">
                             @if (!string.IsNullOrEmpty(p.ProductCode))

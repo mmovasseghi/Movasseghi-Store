@@ -510,10 +510,11 @@ else
     {
         <script defer src="~/js/stories.js" asp-append-version="true"></script>
         <script defer src="~/js/home.js" asp-append-version="true"></script>
+        @* Dual Studio↔Scene + progress bar (~2KB): defer so the cycle starts with the page. *@
+        <script defer src="~/js/product-card-dual.js" asp-append-version="true"></script>
         @* site.js (~28KB) فقط بعد از تعامل یا تأخیر — TBT GTmetrix *@
         <script type="text/plain" data-ms-idle src="~/js/auth.js" asp-append-version="true"></script>
         <script type="text/plain" data-ms-idle src="~/js/site.js" asp-append-version="true"></script>
-        <script type="text/plain" data-ms-idle src="~/js/product-card-dual.js" asp-append-version="true"></script>
         <script type="text/plain" data-ms-idle src="~/js/scroll-reveal.js" asp-append-version="true"></script>
         <script>
         (function () {
@@ -595,10 +596,8 @@ else
     {
         <script defer src="~/js/auth.js" asp-append-version="true"></script>
         <script defer src="~/js/site.js" asp-append-version="true"></script>
-        @if (isCatalog)
-        {
-            <script defer src="~/js/product-card-dual.js" asp-append-version="true"></script>
-        }
+        @* Dual no-ops when no [data-ms-product-dual] cards are on the page. *@
+        <script defer src="~/js/product-card-dual.js" asp-append-version="true"></script>
         @await RenderSectionAsync("Scripts", required: false)
     }
 }
