@@ -11,6 +11,8 @@ public sealed record ResponsiveImageData(string SrcSet, int Width, int Height);
 public sealed class ResponsiveImageService(IWebHostEnvironment env, IFileVersionProvider versions)
 {
     public const string HeroSizes = "(min-width: 768px) 420px, (max-width: 480px) 35vw, 240px";
+    public const int PackedWidth = 420;
+    public static string PackedVariant(string path) => VariantStem(path) + $"-packed-v1-{PackedWidth}w.webp";
     public static readonly int[] Widths = [64, 128, 160, 192, 256, 272, 320, 384, 420, 480, 560, 640, 960, 1400];
     // Separate names make existing lossless derivatives safe to keep while
     // deploying the photographic encoding policy. Originals are never replaced.
@@ -73,11 +75,26 @@ public sealed class ResponsiveImageService(IWebHostEnvironment env, IFileVersion
         foreach (var width in Widths)
         {
             if (width >= size.Width) continue;
-            var candidate = $"{stem}-{width}w.webp";
-            var candidateFile = new FileInfo(Physical(candidate));
-            // Stale derivatives must not replace a newly uploaded picture.
-            if (candidateFile.Exists && candidateFile.Length < info.Length && candidateFile.LastWriteTimeUtc.Ticks >= stamp)
-                candidates.Add($"{Version(candidate)} {width}w");
+            var normal = $"{stem}-{width}w.webp";
+            var paths = width == PackedWidth && !IsPhotographic(clean)
+                ? new[] { normal, PackedVariant(clean) } : new[] { normal };
+            string? best = null;
+            var bestLength = info.Length;
+            foreach (var candidate in paths)
+            {
+                try
+                {
+                    var candidateFile = new FileInfo(Physical(candidate));
+                    // Keep the ordinary URL on ties, and reject stale files.
+                    if (candidateFile.Exists && candidateFile.Length < bestLength && candidateFile.LastWriteTimeUtc.Ticks >= stamp)
+                    {
+                        best = candidate;
+                        bestLength = candidateFile.Length;
+                    }
+                }
+                catch (IOException) { /* An upload/cleanup raced with this render. */ }
+            }
+            if (best is not null) candidates.Add($"{Version(best)} {width}w");
         }
         if (!candidates.Any() && !legacyHero) return null;
         candidates.Add($"{Version(clean)} {size.Width}w");

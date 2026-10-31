@@ -80,6 +80,10 @@ public class ImageOptimizerService(IWebHostEnvironment env, ILogger<ImageOptimiz
                     if (width >= source.Width) continue;
                     var height = Math.Max(1, (int)Math.Round((double)source.Height * width / source.Width));
                     written |= await WriteVariantAsync(source, display, $"{stem}-{width}w.webp", width, height, ct, photographic: photographic);
+                    // A separate name permits safe incremental upgrades without
+                    // replacing the ordinary variant or an uploaded original.
+                    if (!photographic && width == ResponsiveImageService.PackedWidth)
+                        written |= await WriteVariantAsync(source, display, ResponsiveImageService.PackedVariant(display), width, height, ct, packed: true);
                 }
                 if (file.Contains($"{Path.DirectorySeparatorChar}products{Path.DirectorySeparatorChar}", StringComparison.OrdinalIgnoreCase))
                 {
@@ -96,9 +100,9 @@ public class ImageOptimizerService(IWebHostEnvironment env, ILogger<ImageOptimiz
         return new(files.Length, changed, skipped, failed, before, after);
     }
 
-    static WebpEncoder Lossless() => new() { FileFormat = WebpFileFormatType.Lossless, TransparentColorMode = WebpTransparentColorMode.Preserve, Method = WebpEncodingMethod.Level1 };
+    static WebpEncoder Lossless(bool packed = false) => new() { FileFormat = WebpFileFormatType.Lossless, TransparentColorMode = WebpTransparentColorMode.Preserve, Method = packed ? WebpEncodingMethod.Level6 : WebpEncodingMethod.Level1 };
 
-    static async Task<bool> WriteVariantAsync(Image source, string original, string target, int width, int height, CancellationToken ct, bool allowLarger = false, bool photographic = false)
+    static async Task<bool> WriteVariantAsync(Image source, string original, string target, int width, int height, CancellationToken ct, bool allowLarger = false, bool photographic = false, bool packed = false)
     {
         if (File.Exists(target) && File.GetLastWriteTimeUtc(target) >= File.GetLastWriteTimeUtc(original))
         {
@@ -111,7 +115,7 @@ public class ImageOptimizerService(IWebHostEnvironment env, ILogger<ImageOptimiz
         // get a high-quality display derivative; the full JPEG remains untouched.
         var encoder = photographic
             ? new WebpEncoder { FileFormat = WebpFileFormatType.Lossy, Quality = PhotoQuality, Method = WebpEncodingMethod.Level4 }
-            : Lossless();
+            : Lossless(packed);
         await output.SaveAsWebpAsync(buffer, encoder, ct);
         if (!allowLarger && buffer.Length >= new FileInfo(original).Length) return false;
         await AtomicWriteAsync(target, buffer.ToArray(), ct);

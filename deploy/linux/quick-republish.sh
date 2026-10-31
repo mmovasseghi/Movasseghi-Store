@@ -5,6 +5,8 @@ umask 077
 export PATH="/usr/share/dotnet:/usr/local/bin:/usr/bin:/bin:$PATH"
 INSTALL_DIR="/MOVASSEGHISTORE"
 SERVICE="movasseghi-shop"
+# Route the loopback probe through the same virtual host as production.
+MS_SMOKE_HOST="${MS_SMOKE_HOST:-185.93.88.81}"
 SITE="/etc/nginx/sites-available/movasseghi-shop"
 LINK="/etc/nginx/sites-enabled/movasseghi-shop"
 CACHE_CONF="/etc/nginx/conf.d/ms-cache.conf"
@@ -171,7 +173,7 @@ done
 [[ "$ready" == 1 ]] || { echo "Kestrel readiness failed" >&2; exit 1; }
 python3 deploy/linux/verify-home.py http://127.0.0.1:5080
 find "$CACHE_DIR" -type f -delete
-python3 deploy/linux/verify-home.py http://127.0.0.1
+python3 deploy/linux/verify-home.py http://127.0.0.1 --host "$MS_SMOKE_HOST" --nginx
 [[ "$(cat "$INSTALL_DIR/publish/RELEASE_COMMIT")" == "$SHA" ]]
 systemctl is-active --quiet "$SERVICE"
 rm -f "$MARKER"

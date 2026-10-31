@@ -12,13 +12,16 @@
     end.setDate(end.getDate() + ((7 - end.getDay()) || 7));
     end.setHours(23, 59, 59, 0);
     const els = { d: cd.querySelector('[data-cd-d]'), h: cd.querySelector('[data-cd-h]'), m: cd.querySelector('[data-cd-m]'), s: cd.querySelector('[data-cd-s]') };
+    function setCountdownText(el, text) {
+      if (el && el.textContent !== text) el.textContent = text;
+    }
     function tick() {
       const diff = Math.max(0, end - Date.now());
       const pad = v => faDigits(String(v).padStart(2, '0'));
-      if (els.d) els.d.textContent = pad(Math.floor(diff / 86400000));
-      if (els.h) els.h.textContent = pad(Math.floor((diff % 86400000) / 3600000));
-      if (els.m) els.m.textContent = pad(Math.floor((diff % 3600000) / 60000));
-      if (els.s) els.s.textContent = pad(Math.floor((diff % 60000) / 1000));
+      setCountdownText(els.d, pad(Math.floor(diff / 86400000)));
+      setCountdownText(els.h, pad(Math.floor((diff % 86400000) / 3600000)));
+      setCountdownText(els.m, pad(Math.floor((diff % 3600000) / 60000)));
+      setCountdownText(els.s, pad(Math.floor((diff % 60000) / 1000)));
     }
     tick();
     setInterval(tick, 1000);

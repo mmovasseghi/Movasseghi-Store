@@ -8,7 +8,7 @@
     "build:storefront-css": "node scripts/build-storefront-css.mjs",
     "build:critical-home": "node scripts/build-critical-home.mjs",
     "build": "npm run build:rte && npm run build:storefront-css && npm run build:critical-home",
-    "test": "node scripts/check-storefront-js.cjs"
+    "test": "node scripts/check-storefront-js.cjs && node --test scripts/home-css-rules.test.mjs"
   },
   "devDependencies": {
     "esbuild": "^0.25.0"

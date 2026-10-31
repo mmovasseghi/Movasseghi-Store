@@ -1,0 +1,1315 @@
+{
+  "at": "2026-10-31T05:19:18.211207+00:00",
+  "base_commit": "1f01bc1140e67241d9b331cb33ea136103be7a6d",
+  "scope": "ISOLATED LOCAL RELEASE; NOT GTMETRIX, NOT SEATTLE, NO VPS DEPLOYMENT. Latest actual supplied GT remains B / Performance 80 / Structure 94.",
+  "target_A_and_both_over_95": "OPEN; no fresh actual GT report",
+  "build": {
+    "configuration": "Release linux-x64 self-contained Production",
+    "assembly_sha256": "dcb4c053f8eb0cfe100fd63463f324fa78893edaaa9d4075c0516d135b57161b"
+  },
+  "tests": {
+    "dotnet": 73,
+    "deployment": 11,
+    "css_parser": 6,
+    "javascript_syntax": 33,
+    "browser_suite_exit": 0,
+    "nginx_strict_smoke": "public Host, 8+8, 12 stories, LCP, guest HIT including analytics cookie, versioned immutable and mutable image TTL PASS",
+    "responsive_cases": 24,
+    "public_routes": 10,
+    "countdown_mutations_per_tick": {
+      "days": 0,
+      "hours": 0,
+      "minutes": 0,
+      "seconds": 1
+    },
+    "visual_comparison": "geometry, typography, colours and 8+8 match baseline at 390/768/1366; frame geometry and page heights match at 320/390/768/1024/1350/1366/1920"
+  },
+  "css": [
+    {
+      "file": "critical-home.css",
+      "before": 152026,
+      "after": 148740,
+      "gzip_before": 40119,
+      "gzip_after": 39499,
+      "unchanged": false
+    },
+    {
+      "file": "storefront-home.bundle.css",
+      "before": 152024,
+      "after": 148738,
+      "gzip_before": 40113,
+      "gzip_after": 39493,
+      "unchanged": false
+    },
+    {
+      "file": "storefront.bundle.css",
+      "before": 200103,
+      "after": 200103,
+      "gzip_before": 51798,
+      "gzip_after": 51798,
+      "unchanged": true
+    },
+    {
+      "file": "storefront-cart.bundle.css",
+      "before": 37508,
+      "after": 37508,
+      "gzip_before": 9660,
+      "gzip_after": 9660,
+      "unchanged": true
+    }
+  ],
+  "images": {
+    "original_files_unchanged": 242,
+    "packed_count": 63,
+    "all_resized_source_rgba_identical": true,
+    "pairs_with_ordinary_variant": 61,
+    "paired_normal_bytes": 3131670,
+    "paired_packed_bytes": 2973110,
+    "variants": [
+      {
+        "path": "logo-packed-v1-420w.webp",
+        "normal_bytes": 45470,
+        "packed_bytes": 42930,
+        "identical_rgba": true
+      },
+      {
+        "path": "brand/movasseghi-logo-packed-v1-420w.webp",
+        "normal_bytes": 45470,
+        "packed_bytes": 42930,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0010/01-packed-v1-420w.webp",
+        "normal_bytes": 44284,
+        "packed_bytes": 41088,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0082/01-packed-v1-420w.webp",
+        "normal_bytes": 63030,
+        "packed_bytes": 58974,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0059/01-packed-v1-420w.webp",
+        "normal_bytes": 41128,
+        "packed_bytes": 38332,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0077/01-packed-v1-420w.webp",
+        "normal_bytes": 45028,
+        "packed_bytes": 42736,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0043/01-packed-v1-420w.webp",
+        "normal_bytes": 43360,
+        "packed_bytes": 40580,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0029/01-packed-v1-420w.webp",
+        "normal_bytes": 59572,
+        "packed_bytes": 56724,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0035/01-packed-v1-420w.webp",
+        "normal_bytes": 60732,
+        "packed_bytes": 58666,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0024/01-packed-v1-420w.webp",
+        "normal_bytes": 40650,
+        "packed_bytes": 38968,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0037/01-packed-v1-420w.webp",
+        "normal_bytes": 77964,
+        "packed_bytes": 75768,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0062/01-packed-v1-420w.webp",
+        "normal_bytes": 40886,
+        "packed_bytes": 40118,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0054/01-packed-v1-420w.webp",
+        "normal_bytes": 87408,
+        "packed_bytes": 80674,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0068/01-packed-v1-420w.webp",
+        "normal_bytes": 18426,
+        "packed_bytes": 17920,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0063/01-packed-v1-420w.webp",
+        "normal_bytes": 38088,
+        "packed_bytes": 35692,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0063/02-studio-packed-v1-420w.webp",
+        "normal_bytes": 38088,
+        "packed_bytes": 35692,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0093/01-packed-v1-420w.webp",
+        "normal_bytes": 47206,
+        "packed_bytes": 44642,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0050/01-packed-v1-420w.webp",
+        "normal_bytes": 66160,
+        "packed_bytes": 62746,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0001/01-packed-v1-420w.webp",
+        "normal_bytes": 34512,
+        "packed_bytes": 31950,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0067/01-packed-v1-420w.webp",
+        "normal_bytes": 12162,
+        "packed_bytes": 12152,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0021/01-packed-v1-420w.webp",
+        "normal_bytes": 43888,
+        "packed_bytes": 40922,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0030/01-packed-v1-420w.webp",
+        "normal_bytes": 43612,
+        "packed_bytes": 40340,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0023/01-packed-v1-420w.webp",
+        "normal_bytes": 32746,
+        "packed_bytes": 40440,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0091/01-packed-v1-420w.webp",
+        "normal_bytes": 72328,
+        "packed_bytes": 69994,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0047/01-packed-v1-420w.webp",
+        "normal_bytes": 18800,
+        "packed_bytes": 18290,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0017/01-packed-v1-420w.webp",
+        "normal_bytes": 59474,
+        "packed_bytes": 55954,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0058/01-packed-v1-420w.webp",
+        "normal_bytes": 39490,
+        "packed_bytes": 36532,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0042/01-packed-v1-420w.webp",
+        "normal_bytes": 53900,
+        "packed_bytes": 50616,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0078/01-packed-v1-420w.webp",
+        "normal_bytes": 41276,
+        "packed_bytes": 39938,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0081/01-packed-v1-420w.webp",
+        "normal_bytes": 44224,
+        "packed_bytes": 41248,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0066/01-packed-v1-420w.webp",
+        "normal_bytes": 18426,
+        "packed_bytes": 17920,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0069/01-packed-v1-420w.webp",
+        "normal_bytes": 14904,
+        "packed_bytes": 14588,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0060/01-packed-v1-420w.webp",
+        "normal_bytes": 61768,
+        "packed_bytes": 58602,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0065/01-packed-v1-420w.webp",
+        "normal_bytes": 43798,
+        "packed_bytes": 41100,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0036/01-packed-v1-420w.webp",
+        "normal_bytes": 51432,
+        "packed_bytes": 48552,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0015/01-packed-v1-420w.webp",
+        "normal_bytes": 55054,
+        "packed_bytes": 51874,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0053/01-packed-v1-420w.webp",
+        "normal_bytes": 84016,
+        "packed_bytes": 78302,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0049/01-packed-v1-420w.webp",
+        "normal_bytes": 64854,
+        "packed_bytes": 61850,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0070/01-packed-v1-420w.webp",
+        "normal_bytes": 20128,
+        "packed_bytes": 20210,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0055/01-packed-v1-420w.webp",
+        "normal_bytes": 43316,
+        "packed_bytes": 40470,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0014/01-packed-v1-420w.webp",
+        "normal_bytes": 57668,
+        "packed_bytes": 54416,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0096/01-packed-v1-420w.webp",
+        "normal_bytes": 77964,
+        "packed_bytes": 75768,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0011/01-packed-v1-420w.webp",
+        "normal_bytes": 63366,
+        "packed_bytes": 60076,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0033/01-packed-v1-420w.webp",
+        "normal_bytes": 56986,
+        "packed_bytes": 54982,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0013/01-packed-v1-420w.webp",
+        "normal_bytes": 42802,
+        "packed_bytes": 39604,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0020/01-packed-v1-420w.webp",
+        "normal_bytes": null,
+        "packed_bytes": 41356,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0016/01-packed-v1-420w.webp",
+        "normal_bytes": 59474,
+        "packed_bytes": 55954,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0039/01-packed-v1-420w.webp",
+        "normal_bytes": 82752,
+        "packed_bytes": 77160,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0090/01-packed-v1-420w.webp",
+        "normal_bytes": 52864,
+        "packed_bytes": 49258,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0097/01-packed-v1-420w.webp",
+        "normal_bytes": 63886,
+        "packed_bytes": 60588,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0041/01-packed-v1-420w.webp",
+        "normal_bytes": 69332,
+        "packed_bytes": 64364,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0084/01-packed-v1-420w.webp",
+        "normal_bytes": null,
+        "packed_bytes": 31140,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0056/01-packed-v1-420w.webp",
+        "normal_bytes": 53222,
+        "packed_bytes": 50362,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0088/01-packed-v1-420w.webp",
+        "normal_bytes": 44802,
+        "packed_bytes": 42366,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0038/01-packed-v1-420w.webp",
+        "normal_bytes": 86176,
+        "packed_bytes": 81800,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0051/01-packed-v1-420w.webp",
+        "normal_bytes": 72496,
+        "packed_bytes": 68402,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0012/01-packed-v1-420w.webp",
+        "normal_bytes": 50194,
+        "packed_bytes": 46836,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0032/01-packed-v1-420w.webp",
+        "normal_bytes": 59880,
+        "packed_bytes": 57268,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0031/01-packed-v1-420w.webp",
+        "normal_bytes": 69006,
+        "packed_bytes": 67202,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0034/01-packed-v1-420w.webp",
+        "normal_bytes": 63546,
+        "packed_bytes": 61208,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0104/01-packed-v1-420w.webp",
+        "normal_bytes": 48304,
+        "packed_bytes": 46316,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0052/01-packed-v1-420w.webp",
+        "normal_bytes": 71364,
+        "packed_bytes": 66110,
+        "identical_rgba": true
+      },
+      {
+        "path": "products/0089/01-packed-v1-420w.webp",
+        "normal_bytes": 28528,
+        "packed_bytes": 26046,
+        "identical_rgba": true
+      }
+    ]
+  },
+  "selected_hero": {
+    "src": "http://127.0.0.1:8144/images/products/0056/01-packed-v1-420w.webp?v=Y20L_HZr4673BamBkB-nJNwQSaQJIG4cxAPeeBucWHw",
+    "width": 420,
+    "srcset": "/images/products/0056/01-64w.webp?v=GDz7K1GyyEnC8Pd0FLGcvY7AB-3Sow9xj2c3GmfcAug 64w, /images/products/0056/01-128w.webp?v=IRgY9lbm-cXJsL7mehJtp5PeT8mp4k7nhMGxsGCb1hk 128w, /images/products/0056/01-160w.webp?v=VMjRgQor3hKw4Kpt5hPAqFKeoCuAi78wUZRSqNMEcrE 160w, /images/products/0056/01-192w.webp?v=Qg1wpoKBdAVkprgOmB0Wah3fYxT8YzJKlyqPdfG-tGI 192w, /images/products/0056/01-256w.webp?v=0KA_Baxh7GQovxzXaVvztx4goZdfOd9c4iwvjZNjnd8 256w, /images/products/0056/01-272w.webp?v=pBI9cAWFubxvjHfE1q0v3UR4WyzwLn5tWMusTDWjLAI 272w, /images/products/0056/01-320w.webp?v=xrvARwCQ94e4CmeU8SCHlu5nBW2C1R4qY4wPgzp2EwM 320w, /images/products/0056/01-384w.webp?v=d39epxCL95WAJnUv7APWEmYV2pJAEq1NKa38QbE3ipo 384w, /images/products/0056/01-packed-v1-420w.webp?v=Y20L_HZr4673BamBkB-nJNwQSaQJIG4cxAPeeBucWHw 420w, /images/products/0056/01-480w.webp?v=eKaKYulZOLFZbJa4bgWRUEKevroFcJWJq6SRObwpd8U 480w, /images/products/0056/01-560w.webp?v=fxw0kXLjinNaynzhAnPsNikdF3joFq7FOAjXFUpLdJU 560w, /images/products/0056/01-640w.webp?v=OeCObcshZezb2YrTaiyv0stgGqrtEfs8zdEW7uyfNq8 640w, /images/products/0056/01.webp?v=t6MyRW4MTCMticNObYQ3MQL9FC06PcUNgGetjiTKnaU 800w"
+  },
+  "network_profile": {
+    "document_delay_ms": 684,
+    "resource_latency_ms": 230,
+    "throughput_kbps": 100000,
+    "cpu_multiplier": 1,
+    "protocol": "HTTP/1.1",
+    "lighthouse": "12.6.1",
+    "browser": "local Chromium154",
+    "runs_per_variant": 3,
+    "note": "All paired runs retained. Local fluctuation does not prove Seattle improvement or GT Grade A. Style-layout containment trials were rejected; final source retains baseline containment only."
+  },
+  "network_runs": [
+    {
+      "variant": "control-release",
+      "run": 1,
+      "performance": 92.0,
+      "ttfb": 691,
+      "metrics": {
+        "first-contentful-paint": 1146.132,
+        "largest-contentful-paint": 1279.548,
+        "speed-index": 1692,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0.0009488521848287298
+      },
+      "layout": 524.1289999999993,
+      "payload_bytes": 561038,
+      "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+    },
+    {
+      "variant": "release",
+      "run": 1,
+      "performance": 92.0,
+      "ttfb": 691,
+      "metrics": {
+        "first-contentful-paint": 1130.7,
+        "largest-contentful-paint": 1281.814,
+        "speed-index": 1682,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0.0009488521848287298
+      },
+      "layout": 546.0740000000002,
+      "payload_bytes": 553817,
+      "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+    },
+    {
+      "variant": "control-release",
+      "run": 2,
+      "performance": 93.0,
+      "ttfb": 689,
+      "metrics": {
+        "first-contentful-paint": 1114.066,
+        "largest-contentful-paint": 1251.711,
+        "speed-index": 1667,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0.0009488521848287298
+      },
+      "layout": 539.7280000000005,
+      "payload_bytes": 561036,
+      "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+    },
+    {
+      "variant": "release",
+      "run": 2,
+      "performance": 92.0,
+      "ttfb": 690,
+      "metrics": {
+        "first-contentful-paint": 1163.867,
+        "largest-contentful-paint": 1267.997,
+        "speed-index": 1718,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0.0009488521848287298
+      },
+      "layout": 517.4920000000004,
+      "payload_bytes": 553819,
+      "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+    },
+    {
+      "variant": "control-release",
+      "run": 3,
+      "performance": 92.0,
+      "ttfb": 689,
+      "metrics": {
+        "first-contentful-paint": 1145.785,
+        "largest-contentful-paint": 1269.979,
+        "speed-index": 1697,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0.0009488521848287298
+      },
+      "layout": 525.8050000000001,
+      "payload_bytes": 561038,
+      "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+    },
+    {
+      "variant": "release",
+      "run": 3,
+      "performance": 92.0,
+      "ttfb": 690,
+      "metrics": {
+        "first-contentful-paint": 1149.186,
+        "largest-contentful-paint": 1302.039,
+        "speed-index": 1706,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0.0009488521848287298
+      },
+      "layout": 522.7849999999999,
+      "payload_bytes": 553819,
+      "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+    }
+  ],
+  "network_summary": {
+    "control-release": {
+      "median_performance": 92.0,
+      "median_metrics": {
+        "first-contentful-paint": 1145.785,
+        "largest-contentful-paint": 1269.979,
+        "speed-index": 1692,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0.0009488521848287298
+      },
+      "median_payload_bytes": 561038
+    },
+    "release": {
+      "median_performance": 92.0,
+      "median_metrics": {
+        "first-contentful-paint": 1149.186,
+        "largest-contentful-paint": 1281.814,
+        "speed-index": 1706,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0.0009488521848287298
+      },
+      "median_payload_bytes": 553819
+    }
+  },
+  "design_comparison": [
+    {
+      "device": "mobile",
+      "version": "baseline",
+      "width": 390,
+      "height": 844,
+      "geometry": {
+        ".ms-promo-bar": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 42.65625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgba(255, 255, 255, 0.92)"
+        },
+        ".ms-top": {
+          "x": 0,
+          "y": 42.65625,
+          "width": 390,
+          "height": 145.140625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-logo": {
+          "x": 142.3125,
+          "y": 61.234375,
+          "width": 141.390625,
+          "height": 52,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-stories": {
+          "x": 0,
+          "y": 187.796875,
+          "width": 390,
+          "height": 110.5,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-hero": {
+          "x": 0,
+          "y": 298.296875,
+          "width": 390,
+          "height": 311.609375,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-hero-title": {
+          "x": 166.828125,
+          "y": 376.5625,
+          "width": 203.578125,
+          "height": 23.3125,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "19.11px",
+          "color": "rgb(255, 255, 255)"
+        },
+        ".ms-hero-product img": {
+          "x": 19.59375,
+          "y": 376.546875,
+          "width": 135.71875,
+          "height": 96,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(255, 255, 255)"
+        },
+        ".ms-features": {
+          "x": 0,
+          "y": 712.28125,
+          "width": 390,
+          "height": 266.515625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-offers": {
+          "x": 0,
+          "y": 1018.796875,
+          "width": 390,
+          "height": 525.9375,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-featured-section": {
+          "x": 0,
+          "y": 1825.09375,
+          "width": 390,
+          "height": 1295.75,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-segments": {
+          "x": 0,
+          "y": 3190.84375,
+          "width": 390,
+          "height": 428.515625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-footer": {
+          "x": 0,
+          "y": 6669.21875,
+          "width": 390,
+          "height": 390,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "13.12px",
+          "color": "rgba(255, 255, 255, 0.82)"
+        }
+      },
+      "totalHeight": 7155,
+      "featured": 8,
+      "offers": 8
+    },
+    {
+      "device": "mobile",
+      "version": "current",
+      "width": 390,
+      "height": 844,
+      "geometry": {
+        ".ms-promo-bar": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 42.65625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgba(255, 255, 255, 0.92)"
+        },
+        ".ms-top": {
+          "x": 0,
+          "y": 42.65625,
+          "width": 390,
+          "height": 145.140625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-logo": {
+          "x": 142.3125,
+          "y": 61.234375,
+          "width": 141.390625,
+          "height": 52,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-stories": {
+          "x": 0,
+          "y": 187.796875,
+          "width": 390,
+          "height": 110.5,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-hero": {
+          "x": 0,
+          "y": 298.296875,
+          "width": 390,
+          "height": 311.609375,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-hero-title": {
+          "x": 166.828125,
+          "y": 376.5625,
+          "width": 203.578125,
+          "height": 23.3125,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "19.11px",
+          "color": "rgb(255, 255, 255)"
+        },
+        ".ms-hero-product img": {
+          "x": 19.59375,
+          "y": 376.546875,
+          "width": 135.71875,
+          "height": 96,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(255, 255, 255)"
+        },
+        ".ms-features": {
+          "x": 0,
+          "y": 712.28125,
+          "width": 390,
+          "height": 266.515625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-offers": {
+          "x": 0,
+          "y": 1018.796875,
+          "width": 390,
+          "height": 525.9375,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-featured-section": {
+          "x": 0,
+          "y": 1825.09375,
+          "width": 390,
+          "height": 1295.75,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-segments": {
+          "x": 0,
+          "y": 3190.84375,
+          "width": 390,
+          "height": 428.515625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-footer": {
+          "x": 0,
+          "y": 6669.21875,
+          "width": 390,
+          "height": 390,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "13.12px",
+          "color": "rgba(255, 255, 255, 0.82)"
+        }
+      },
+      "totalHeight": 7155,
+      "featured": 8,
+      "offers": 8
+    },
+    {
+      "device": "tablet",
+      "version": "baseline",
+      "width": 768,
+      "height": 1024,
+      "geometry": {
+        ".ms-promo-bar": {
+          "x": 0,
+          "y": 0,
+          "width": 768,
+          "height": 53.390625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgba(255, 255, 255, 0.92)"
+        },
+        ".ms-top": {
+          "x": 30.734375,
+          "y": 53.390625,
+          "width": 706.546875,
+          "height": 197.5,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-logo": {
+          "x": 573.296875,
+          "y": 91.859375,
+          "width": 141.390625,
+          "height": 52,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-stories": {
+          "x": 0,
+          "y": 250.890625,
+          "width": 768,
+          "height": 252.65625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-hero": {
+          "x": 0,
+          "y": 503.546875,
+          "width": 768,
+          "height": 538.203125,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-hero-title": {
+          "x": 347.828125,
+          "y": 671.765625,
+          "width": 365.125,
+          "height": 36.28125,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "33.6px",
+          "color": "rgb(255, 255, 255)"
+        },
+        ".ms-hero-product img": {
+          "x": 55.046875,
+          "y": 603.15625,
+          "width": 260.78125,
+          "height": 260.78125,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(255, 255, 255)"
+        },
+        ".ms-features": {
+          "x": 0,
+          "y": 1092.9375,
+          "width": 768,
+          "height": 322.390625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-offers": {
+          "x": 0,
+          "y": 1459.328125,
+          "width": 768,
+          "height": 834.84375,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-featured-section": {
+          "x": 0,
+          "y": 2663.421875,
+          "width": 768,
+          "height": 760.59375,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-segments": {
+          "x": 0,
+          "y": 3510.015625,
+          "width": 768,
+          "height": 374.453125,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-footer": {
+          "x": 0,
+          "y": 7433.09375,
+          "width": 768,
+          "height": 344,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "13.12px",
+          "color": "rgba(255, 255, 255, 0.82)"
+        }
+      },
+      "totalHeight": 7777,
+      "featured": 8,
+      "offers": 8
+    },
+    {
+      "device": "tablet",
+      "version": "current",
+      "width": 768,
+      "height": 1024,
+      "geometry": {
+        ".ms-promo-bar": {
+          "x": 0,
+          "y": 0,
+          "width": 768,
+          "height": 53.390625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgba(255, 255, 255, 0.92)"
+        },
+        ".ms-top": {
+          "x": 30.734375,
+          "y": 53.390625,
+          "width": 706.546875,
+          "height": 197.5,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-logo": {
+          "x": 573.296875,
+          "y": 91.859375,
+          "width": 141.390625,
+          "height": 52,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-stories": {
+          "x": 0,
+          "y": 250.890625,
+          "width": 768,
+          "height": 252.65625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-hero": {
+          "x": 0,
+          "y": 503.546875,
+          "width": 768,
+          "height": 538.203125,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-hero-title": {
+          "x": 347.828125,
+          "y": 671.765625,
+          "width": 365.125,
+          "height": 36.28125,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "33.6px",
+          "color": "rgb(255, 255, 255)"
+        },
+        ".ms-hero-product img": {
+          "x": 55.046875,
+          "y": 603.15625,
+          "width": 260.78125,
+          "height": 260.78125,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(255, 255, 255)"
+        },
+        ".ms-features": {
+          "x": 0,
+          "y": 1092.9375,
+          "width": 768,
+          "height": 322.390625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-offers": {
+          "x": 0,
+          "y": 1459.328125,
+          "width": 768,
+          "height": 834.84375,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-featured-section": {
+          "x": 0,
+          "y": 2663.421875,
+          "width": 768,
+          "height": 760.59375,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-segments": {
+          "x": 0,
+          "y": 3510.015625,
+          "width": 768,
+          "height": 374.453125,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-footer": {
+          "x": 0,
+          "y": 7433.09375,
+          "width": 768,
+          "height": 344,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "13.12px",
+          "color": "rgba(255, 255, 255, 0.82)"
+        }
+      },
+      "totalHeight": 7777,
+      "featured": 8,
+      "offers": 8
+    },
+    {
+      "device": "desktop",
+      "version": "baseline",
+      "width": 1366,
+      "height": 768,
+      "geometry": {
+        ".ms-promo-bar": {
+          "x": 0,
+          "y": 0,
+          "width": 1366,
+          "height": 53.390625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgba(255, 255, 255, 0.92)"
+        },
+        ".ms-top": {
+          "x": 68.3125,
+          "y": 53.390625,
+          "width": 1229.390625,
+          "height": 176.890625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-logo": {
+          "x": 1133.71875,
+          "y": 81.5625,
+          "width": 141.390625,
+          "height": 52,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-stories": {
+          "x": 0,
+          "y": 230.28125,
+          "width": 1366,
+          "height": 251.8125,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-hero": {
+          "x": 0,
+          "y": 482.09375,
+          "width": 1366,
+          "height": 598.203125,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-hero-title": {
+          "x": 618.859375,
+          "y": 670.21875,
+          "width": 640.125,
+          "height": 60.46875,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "56px",
+          "color": "rgb(255, 255, 255)"
+        },
+        ".ms-hero-product img": {
+          "x": 125.625,
+          "y": 582.8125,
+          "width": 420,
+          "height": 322.546875,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(255, 255, 255)"
+        },
+        ".ms-features": {
+          "x": 0,
+          "y": 1131.484375,
+          "width": 1366,
+          "height": 322.390625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-offers": {
+          "x": 0,
+          "y": 1497.875,
+          "width": 1366,
+          "height": 1096.265625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-featured-section": {
+          "x": 0,
+          "y": 2973.390625,
+          "width": 1366,
+          "height": 998.9375,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-segments": {
+          "x": 0,
+          "y": 4058.328125,
+          "width": 1366,
+          "height": 359.3125,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-footer": {
+          "x": 0,
+          "y": 7174.234375,
+          "width": 1366,
+          "height": 344,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "13.12px",
+          "color": "rgba(255, 255, 255, 0.82)"
+        }
+      },
+      "totalHeight": 7518,
+      "featured": 8,
+      "offers": 8
+    },
+    {
+      "device": "desktop",
+      "version": "current",
+      "width": 1366,
+      "height": 768,
+      "geometry": {
+        ".ms-promo-bar": {
+          "x": 0,
+          "y": 0,
+          "width": 1366,
+          "height": 53.390625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgba(255, 255, 255, 0.92)"
+        },
+        ".ms-top": {
+          "x": 68.3125,
+          "y": 53.390625,
+          "width": 1229.390625,
+          "height": 176.890625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-logo": {
+          "x": 1133.71875,
+          "y": 81.5625,
+          "width": 141.390625,
+          "height": 52,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-stories": {
+          "x": 0,
+          "y": 230.28125,
+          "width": 1366,
+          "height": 251.8125,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-hero": {
+          "x": 0,
+          "y": 482.09375,
+          "width": 1366,
+          "height": 598.203125,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-hero-title": {
+          "x": 618.859375,
+          "y": 670.21875,
+          "width": 640.125,
+          "height": 60.46875,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "56px",
+          "color": "rgb(255, 255, 255)"
+        },
+        ".ms-hero-product img": {
+          "x": 125.625,
+          "y": 582.8125,
+          "width": 420,
+          "height": 322.546875,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(255, 255, 255)"
+        },
+        ".ms-features": {
+          "x": 0,
+          "y": 1131.484375,
+          "width": 1366,
+          "height": 322.390625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-offers": {
+          "x": 0,
+          "y": 1497.875,
+          "width": 1366,
+          "height": 1096.265625,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-featured-section": {
+          "x": 0,
+          "y": 2973.390625,
+          "width": 1366,
+          "height": 998.9375,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-segments": {
+          "x": 0,
+          "y": 4058.328125,
+          "width": 1366,
+          "height": 359.3125,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "16px",
+          "color": "rgb(26, 31, 38)"
+        },
+        ".ms-footer": {
+          "x": 0,
+          "y": 7174.234375,
+          "width": 1366,
+          "height": 344,
+          "font": "Vazirmatn, Tahoma, sans-serif",
+          "fontSize": "13.12px",
+          "color": "rgba(255, 255, 255, 0.82)"
+        }
+      },
+      "totalHeight": 7518,
+      "featured": 8,
+      "offers": 8
+    }
+  ],
+  "source_sha256": {
+    "deploy/linux/quick-republish.sh": "3365eba4b7e4e15a07be391187b5e40e0bfd8ffac0c39e03c8a8bba798d1cd1d",
+    "deploy/linux/verify-home.py": "f152a2256d735c809337c4e16fc78b74ca8696d01da9a4296444509b51873a88",
+    "scripts/home-css-rules.mjs": "2306707ad44784c0b807cc1b0fa3346a92583653da424eec3cc98ce6501cd9c4",
+    "scripts/home-css-rules.test.mjs": "4ee699dafaf0ed2809d8b8a45057480f45d63adb72a67c247e66b6ad60f3b81c",
+    "scripts/verify-countdown.cjs": "c7e8271e667cdf3702b6375c9e3db95705602a6387659af6213d175bb6f05d6c",
+    "src/MovasseghiShop.Web/Services/ImageOptimizerService.cs": "ad159cc8ad5e335b94f8c6c90ec197c9366da19dfd795beb1296a85b1a018c91",
+    "src/MovasseghiShop.Web/Services/ResponsiveImageService.cs": "1c246af8e164288b0da4eb738693e1b9f8bf74e9253a5311e2b1a39718be6d47",
+    "src/MovasseghiShop.Web/wwwroot/css/critical-home.css": "1115e12273bd3dd97b9e2d4064e89c7381515b8f364d99b377ebde776c520e96",
+    "src/MovasseghiShop.Web/wwwroot/css/storefront-home.bundle.css": "34fcbe8e428b3c7219ad489d9b5e183d33b90ddce51dd6785465c9f4fdf67e1e",
+    "src/MovasseghiShop.Web/wwwroot/js/home.js": "956bbb4357d0f2c0e313eaadf65155da083511eb87389e199574eb169002080d"
+  }
+}

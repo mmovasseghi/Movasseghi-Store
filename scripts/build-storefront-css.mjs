@@ -3,6 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { transformSync } from 'esbuild';
 import { createHash } from 'node:crypto';
+import { homeRules } from './home-css-rules.mjs';
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const cssDir = path.join(root, 'src/MovasseghiShop.Web/wwwroot/css');
@@ -15,14 +16,6 @@ const parts = [
   'ux-scroll-reveal.css',
 ];
 
-// Only whole, self-contained rules whose every selector is exclusive to a
-// separate page. Shared/interactive selectors and complex rules stay intact.
-function homeRules(css) {
-  return css.split('\n').filter(line => {
-    const rule = line.match(/^\s*([^{}]+)\{[^{}]*\}\s*$/);
-    return !rule || !rule[1].split(',').every(selector => /^\.(?:ms-account-|ms-addr-|ms-order-|catalog-|pd-)/.test(selector.trim()));
-  }).join('\n');
-}
 let out = '';
 let home = '';
 let cart = '';

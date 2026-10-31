@@ -224,6 +224,47 @@ public sealed class ResponsiveImageTests : IDisposable
         Assert.Equal(url, ProductImageHelper.PreferWebp(url, Environment));
     }
 
+    [Fact]
+    public async Task Packed_variant_preserves_every_pixel_and_chooses_the_smallest_fresh_file()
+    {
+        Directory.CreateDirectory(Folder);
+        var path = Path.Combine(Folder, "plate.webp");
+        using (var image = new Image<Rgba32>(800, 600))
+        {
+            var random = new Random(23);
+            for (var y = 0; y < image.Height; y++) for (var x = 0; x < image.Width; x++)
+                image[x, y] = new Rgba32((byte)random.Next(256), (byte)random.Next(256), (byte)random.Next(256), (byte)random.Next(256));
+            await image.SaveAsWebpAsync(path, new WebpEncoder { FileFormat = WebpFileFormatType.Lossless, TransparentColorMode = WebpTransparentColorMode.Preserve });
+        }
+        var original = await File.ReadAllBytesAsync(path);
+        Assert.Equal(0, (await Optimizer.OptimizeAllAsync()).Failed);
+        Assert.Equal(original, await File.ReadAllBytesAsync(path));
+        var normal = Path.Combine(Folder, "plate-420w.webp");
+        var packed = Path.Combine(Folder, "plate-packed-v1-420w.webp");
+        using (var a = await Image.LoadAsync<Rgba32>(normal))
+        using (var b = await Image.LoadAsync<Rgba32>(packed))
+        {
+            Assert.Equal(a.Size, b.Size);
+            var pixelsA = new Rgba32[a.Width * a.Height];
+            var pixelsB = new Rgba32[pixelsA.Length];
+            a.CopyPixelDataTo(pixelsA); b.CopyPixelDataTo(pixelsB);
+            Assert.Equal(pixelsA, pixelsB); // Includes RGB under transparent pixels.
+        }
+        var service = new ResponsiveImageService(Environment, new Versions());
+        var context = new DefaultHttpContext();
+        var smaller = new FileInfo(packed).Length < new FileInfo(normal).Length ? "plate-packed-v1-420w.webp" : "plate-420w.webp";
+        var data = service.Get("/images/products/test/plate.webp", context)!;
+        Assert.Contains(smaller + "?v=test 420w", data.SrcSet);
+        Assert.Single(data.SrcSet.Split(", ").Where(item => item.EndsWith(" 420w")));
+        File.Delete(packed);
+        Assert.Contains("plate-420w.webp?v=test 420w", service.Get("/images/products/test/plate.webp", context)!.SrcSet);
+        var repeat = await Optimizer.OptimizeAllAsync();
+        Assert.Equal(0, repeat.Failed);
+        var stamp = File.GetLastWriteTimeUtc(packed);
+        Assert.Equal(0, (await Optimizer.OptimizeAllAsync()).Rewritten);
+        Assert.Equal(stamp, File.GetLastWriteTimeUtc(packed));
+    }
+
     public void Dispose() { if (Directory.Exists(root)) Directory.Delete(root, true); }
     sealed class Versions : IFileVersionProvider { public string AddFileVersionToPath(PathString pathBase, string path) => path + "?v=test"; }
     sealed class TestEnvironment : IWebHostEnvironment
