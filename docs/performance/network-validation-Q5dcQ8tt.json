@@ -1,0 +1,3312 @@
+{
+  "at": "2026-10-31T02:15:59.512675+00:00",
+  "scope": "Local isolated self-contained Linux Release, Production, cloned sample DB, repository nginx rules with loopback paths/ports. NO VPS DEPLOYMENT; NOT A GT GRADE OR STRUCTURE SCORE.",
+  "base_commit": "15003ab945ccdcc0d59a0ac0b0a15b0bb19f3482",
+  "source_state": "The commit containing this evidence",
+  "supplied_report": {
+    "id": "Q5dcQ8tt",
+    "performance": 80,
+    "structure": 94,
+    "grade": "B"
+  },
+  "method": {
+    "lighthouse": "12.6.1",
+    "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "config": {
+      "output": [
+        "json"
+      ],
+      "maxWaitForFcp": 30000,
+      "maxWaitForLoad": 45000,
+      "pauseAfterFcpMs": 5250,
+      "pauseAfterLoadMs": 5250,
+      "networkQuietThresholdMs": 5250,
+      "cpuQuietThresholdMs": 5250,
+      "formFactor": "desktop",
+      "throttling": {
+        "rttMs": 40,
+        "throughputKbps": 10240,
+        "requestLatencyMs": 230,
+        "downloadThroughputKbps": 100000,
+        "uploadThroughputKbps": 100000,
+        "cpuSlowdownMultiplier": 1
+      },
+      "throttlingMethod": "devtools",
+      "screenEmulation": {
+        "mobile": false,
+        "width": 1350,
+        "height": 940,
+        "deviceScaleFactor": 1,
+        "disabled": false
+      },
+      "emulatedUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+      "auditMode": false,
+      "gatherMode": false,
+      "clearStorageTypes": [
+        "file_systems",
+        "shader_cache",
+        "service_workers",
+        "cache_storage"
+      ],
+      "disableStorageReset": false,
+      "debugNavigation": false,
+      "channel": "cli",
+      "usePassiveGathering": false,
+      "disableFullPageScreenshot": false,
+      "skipAboutBlank": false,
+      "blankPage": "about:blank",
+      "ignoreStatusCode": false,
+      "locale": "en-US",
+      "blockedUrlPatterns": null,
+      "additionalTraceCategories": null,
+      "extraHeaders": null,
+      "precomputedLanternData": null,
+      "onlyAudits": null,
+      "onlyCategories": [
+        "performance"
+      ],
+      "skipAudits": null
+    },
+    "document_proxy_delay_ms": [
+      684,
+      461
+    ],
+    "resource_latency_ms": 230,
+    "download_and_upload_cap_Kbps": 100000,
+    "cpu_multiplier": 1,
+    "scenarios": "Both local HTTP/1.1. 461ms changes only document delay by -223ms; does not simulate TLS handshake, CDN or a verified redirect fix.",
+    "baseline": "Same local data, old code with dual galleries enabled to match the reported feature; prior home StageDualCycle=false was an inadequate fixture."
+  },
+  "current_latency": {
+    "performance_median": 93.0,
+    "performance_range": [
+      93.0,
+      93.0
+    ],
+    "metrics_median": {
+      "first-contentful-paint": 1116.865,
+      "largest-contentful-paint": 1244.568,
+      "total-blocking-time": 0,
+      "cumulative-layout-shift": 0.0009488521848287298,
+      "speed-index": 1662,
+      "total-byte-weight": 561036
+    },
+    "ttfb_median_ms": 689,
+    "onload_median_ms": 1193
+  },
+  "hypothetical_lower_document_delay": {
+    "performance_median": 96.0,
+    "performance_range": [
+      96.0,
+      96.0
+    ],
+    "metrics_median": {
+      "first-contentful-paint": 915.474,
+      "largest-contentful-paint": 1040.521,
+      "total-blocking-time": 0,
+      "cumulative-layout-shift": 0.0009488521848287298,
+      "speed-index": 1464,
+      "total-byte-weight": 561036
+    },
+    "ttfb_median_ms": 467,
+    "onload_median_ms": 965
+  },
+  "before_local": {
+    "performance_median": 94.0,
+    "performance_range": [
+      91.0,
+      94.0
+    ],
+    "metrics_median": {
+      "first-contentful-paint": 1086.568,
+      "largest-contentful-paint": 1131.31,
+      "total-blocking-time": 26.823000000000093,
+      "cumulative-layout-shift": 0.000962776925687261,
+      "speed-index": 1673,
+      "total-byte-weight": 896463
+    },
+    "ttfb_median_ms": 691,
+    "onload_median_ms": null
+  },
+  "raw_runs": [
+    {
+      "scenario": "current-latency",
+      "run": 1,
+      "performance": 93.0,
+      "metrics": {
+        "first-contentful-paint": 1116.865,
+        "largest-contentful-paint": 1264.334,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0.0009488521848287298,
+        "speed-index": 1660,
+        "total-byte-weight": 561036
+      },
+      "ttfb": 690,
+      "browser_onload_ms": 1193
+    },
+    {
+      "scenario": "without-redirect-delay",
+      "run": 1,
+      "performance": 96.0,
+      "metrics": {
+        "first-contentful-paint": 915.594,
+        "largest-contentful-paint": 1042.481,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0.0009488521848287298,
+        "speed-index": 1578,
+        "total-byte-weight": 561036
+      },
+      "ttfb": 470,
+      "browser_onload_ms": 965
+    },
+    {
+      "scenario": "current-latency",
+      "run": 2,
+      "performance": 93.0,
+      "metrics": {
+        "first-contentful-paint": 1148.457,
+        "largest-contentful-paint": 1227.115,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0.0009488521848287298,
+        "speed-index": 1696,
+        "total-byte-weight": 561036
+      },
+      "ttfb": 688,
+      "browser_onload_ms": 1199
+    },
+    {
+      "scenario": "without-redirect-delay",
+      "run": 2,
+      "performance": 96.0,
+      "metrics": {
+        "first-contentful-paint": 913.239,
+        "largest-contentful-paint": 1040.521,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0.0009488521848287298,
+        "speed-index": 1464,
+        "total-byte-weight": 561036
+      },
+      "ttfb": 467,
+      "browser_onload_ms": 973
+    },
+    {
+      "scenario": "current-latency",
+      "run": 3,
+      "performance": 93.0,
+      "metrics": {
+        "first-contentful-paint": 1114.474,
+        "largest-contentful-paint": 1244.568,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0.0009488521848287298,
+        "speed-index": 1662,
+        "total-byte-weight": 561036
+      },
+      "ttfb": 689,
+      "browser_onload_ms": 1189
+    },
+    {
+      "scenario": "without-redirect-delay",
+      "run": 3,
+      "performance": 96.0,
+      "metrics": {
+        "first-contentful-paint": 915.474,
+        "largest-contentful-paint": 1003.372,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0.0009488521848287298,
+        "speed-index": 1455,
+        "total-byte-weight": 561038
+      },
+      "ttfb": 465,
+      "browser_onload_ms": 964
+    }
+  ],
+  "before_raw_runs": [
+    {
+      "variant": "baseline",
+      "run": 1,
+      "performance": 91.0,
+      "metrics": {
+        "first-contentful-paint": 1199.774,
+        "largest-contentful-paint": 1286.082,
+        "total-blocking-time": 26.823000000000093,
+        "cumulative-layout-shift": 0.000962776925687261,
+        "speed-index": 1795,
+        "total-byte-weight": 896466
+      },
+      "ttfb": 750
+    },
+    {
+      "variant": "baseline",
+      "run": 2,
+      "performance": 94.0,
+      "metrics": {
+        "first-contentful-paint": 1070.693,
+        "largest-contentful-paint": 1107.1,
+        "total-blocking-time": 6.842000000000098,
+        "cumulative-layout-shift": 0.000962776925687261,
+        "speed-index": 1664,
+        "total-byte-weight": 896463
+      },
+      "ttfb": 688
+    },
+    {
+      "variant": "baseline",
+      "run": 3,
+      "performance": 94.0,
+      "metrics": {
+        "first-contentful-paint": 1086.568,
+        "largest-contentful-paint": 1131.31,
+        "total-blocking-time": 28.410000000000082,
+        "cumulative-layout-shift": 0.000962776925687261,
+        "speed-index": 1673,
+        "total-byte-weight": 896463
+      },
+      "ttfb": 691
+    }
+  ],
+  "score_caution": "Current-latency median 93 does not establish the target >95. Compared with the local control median 94, the overall score has not improved in this profile. Definite gains here are image payload, image/offscreen/animation audits, and UX fixes.",
+  "representative_audits": {
+    "server-response-time": {
+      "id": "server-response-time",
+      "title": "Reduce initial server response time",
+      "description": "Keep the server response time for the main document short because all other requests depend on it. [Learn more about the Time to First Byte metric](https://developer.chrome.com/docs/lighthouse/performance/time-to-first-byte/).",
+      "score": 0,
+      "scoreDisplayMode": "metricSavings",
+      "numericValue": 685.574,
+      "numericUnit": "millisecond",
+      "displayValue": "Root document took 690 ms",
+      "metricSavings": {
+        "FCP": 600,
+        "LCP": 600
+      },
+      "details": {
+        "type": "opportunity",
+        "headings": [
+          {
+            "key": "url",
+            "valueType": "url",
+            "label": "URL"
+          },
+          {
+            "key": "responseTime",
+            "valueType": "timespanMs",
+            "label": "Time Spent"
+          }
+        ],
+        "items": [
+          {
+            "url": "http://127.0.0.1:8130/",
+            "responseTime": 685.574
+          }
+        ],
+        "overallSavingsMs": 585.574
+      },
+      "guidanceLevel": 1
+    },
+    "user-timings": {
+      "id": "user-timings",
+      "title": "User Timing marks and measures",
+      "description": "Consider instrumenting your app with the User Timing API to measure your app's real-world performance during key user experiences. [Learn more about User Timing marks](https://developer.chrome.com/docs/lighthouse/performance/user-timings/).",
+      "score": null,
+      "scoreDisplayMode": "notApplicable",
+      "details": {
+        "type": "table",
+        "headings": [],
+        "items": []
+      },
+      "guidanceLevel": 2
+    },
+    "critical-request-chains": {
+      "id": "critical-request-chains",
+      "title": "Avoid chaining critical requests",
+      "description": "The Critical Request Chains below show you what resources are loaded with a high priority. Consider reducing the length of chains, reducing the download size of resources, or deferring the download of unnecessary resources to improve page load. [Learn how to avoid chaining critical requests](https://developer.chrome.com/docs/lighthouse/performance/critical-request-chains/).",
+      "score": null,
+      "scoreDisplayMode": "notApplicable",
+      "displayValue": "",
+      "details": {
+        "type": "criticalrequestchain",
+        "chains": {
+          "D43157F5D4C3AC8E8A0F21351FCC6A02": {
+            "request": {
+              "url": "http://127.0.0.1:8130/",
+              "startTime": 49877.506429,
+              "endTime": 49878.208101,
+              "responseReceivedTime": 49878.19276,
+              "transferSize": 102270
+            }
+          }
+        },
+        "longestChain": {
+          "duration": 701.6719999983907,
+          "length": 1,
+          "transferSize": 102270
+        }
+      },
+      "guidanceLevel": 1
+    },
+    "redirects": {
+      "id": "redirects",
+      "title": "Avoid multiple page redirects",
+      "description": "Redirects introduce additional delays before the page can be loaded. [Learn how to avoid page redirects](https://developer.chrome.com/docs/lighthouse/performance/redirects/).",
+      "score": 1,
+      "scoreDisplayMode": "metricSavings",
+      "numericValue": 0,
+      "numericUnit": "millisecond",
+      "displayValue": "",
+      "metricSavings": {
+        "LCP": 0,
+        "FCP": 0
+      },
+      "details": {
+        "type": "opportunity",
+        "headings": [],
+        "items": [],
+        "overallSavingsMs": 0
+      },
+      "guidanceLevel": 2
+    },
+    "mainthread-work-breakdown": {
+      "id": "mainthread-work-breakdown",
+      "title": "Minimize main-thread work",
+      "description": "Consider reducing the time spent parsing, compiling and executing JS. You may find delivering smaller JS payloads helps with this. [Learn how to minimize main-thread work](https://developer.chrome.com/docs/lighthouse/performance/mainthread-work-breakdown/)",
+      "score": 0.5,
+      "scoreDisplayMode": "metricSavings",
+      "numericValue": 2140.2369999999223,
+      "numericUnit": "millisecond",
+      "displayValue": "2.1 s",
+      "metricSavings": {
+        "TBT": 0
+      },
+      "details": {
+        "type": "table",
+        "headings": [
+          {
+            "key": "groupLabel",
+            "valueType": "text",
+            "label": "Category"
+          },
+          {
+            "key": "duration",
+            "valueType": "ms",
+            "granularity": 1,
+            "label": "Time Spent"
+          }
+        ],
+        "items": [
+          {
+            "group": "other",
+            "groupLabel": "Other",
+            "duration": 1143.6579999999824
+          },
+          {
+            "group": "styleLayout",
+            "groupLabel": "Style & Layout",
+            "duration": 532.5660000000005
+          },
+          {
+            "group": "paintCompositeRender",
+            "groupLabel": "Rendering",
+            "duration": 422.08399999993935
+          },
+          {
+            "group": "scriptEvaluation",
+            "groupLabel": "Script Evaluation",
+            "duration": 23.71200000000001
+          },
+          {
+            "group": "parseHTML",
+            "groupLabel": "Parse HTML & CSS",
+            "duration": 13.059000000000001
+          },
+          {
+            "group": "scriptParseCompile",
+            "groupLabel": "Script Parsing & Compilation",
+            "duration": 2.588999999999999
+          },
+          {
+            "group": "garbageCollection",
+            "groupLabel": "Garbage Collection",
+            "duration": 2.568999999999998
+          }
+        ],
+        "sortedBy": [
+          "duration"
+        ]
+      },
+      "guidanceLevel": 1
+    },
+    "bootup-time": {
+      "id": "bootup-time",
+      "title": "JavaScript execution time",
+      "description": "Consider reducing the time spent parsing, compiling, and executing JS. You may find delivering smaller JS payloads helps with this. [Learn how to reduce Javascript execution time](https://developer.chrome.com/docs/lighthouse/performance/bootup-time/).",
+      "score": 1,
+      "scoreDisplayMode": "metricSavings",
+      "numericValue": 7.337999999999997,
+      "numericUnit": "millisecond",
+      "displayValue": "0.0 s",
+      "metricSavings": {
+        "TBT": 0
+      },
+      "details": {
+        "type": "table",
+        "headings": [
+          {
+            "key": "url",
+            "valueType": "url",
+            "label": "URL"
+          },
+          {
+            "key": "total",
+            "granularity": 1,
+            "valueType": "ms",
+            "label": "Total CPU Time"
+          },
+          {
+            "key": "scripting",
+            "granularity": 1,
+            "valueType": "ms",
+            "label": "Script Evaluation"
+          },
+          {
+            "key": "scriptParseCompile",
+            "granularity": 1,
+            "valueType": "ms",
+            "label": "Script Parse"
+          }
+        ],
+        "items": [
+          {
+            "url": "http://127.0.0.1:8130/",
+            "total": 2003.747999999937,
+            "scripting": 5.395999999999998,
+            "scriptParseCompile": 0.627
+          },
+          {
+            "url": "Unattributable",
+            "total": 88.05200000000048,
+            "scripting": 1.3149999999999997,
+            "scriptParseCompile": 0
+          }
+        ],
+        "summary": {
+          "wastedMs": 7.337999999999997
+        },
+        "sortedBy": [
+          "total"
+        ]
+      },
+      "guidanceLevel": 1
+    },
+    "third-party-summary": {
+      "id": "third-party-summary",
+      "title": "Minimize third-party usage",
+      "description": "Third-party code can significantly impact load performance. Limit the number of redundant third-party providers and try to load third-party code after your page has primarily finished loading. [Learn how to minimize third-party impact](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/loading-third-party-javascript/).",
+      "score": null,
+      "scoreDisplayMode": "notApplicable",
+      "metricSavings": {
+        "TBT": 0
+      },
+      "guidanceLevel": 1
+    },
+    "largest-contentful-paint-element": {
+      "id": "largest-contentful-paint-element",
+      "title": "Largest Contentful Paint element",
+      "description": "This is the largest contentful element painted within the viewport. [Learn more about the Largest Contentful Paint element](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/)",
+      "score": 0,
+      "scoreDisplayMode": "metricSavings",
+      "displayValue": "1,230 ms",
+      "metricSavings": {
+        "LCP": 50
+      },
+      "details": {
+        "type": "list",
+        "items": [
+          {
+            "type": "table",
+            "headings": [
+              {
+                "key": "node",
+                "valueType": "node",
+                "label": "Element"
+              }
+            ],
+            "items": [
+              {
+                "node": {
+                  "type": "node",
+                  "lhId": "page-0-IMG",
+                  "path": "1,HTML,1,BODY,1,DIV,3,MAIN,5,SECTION,0,DIV,0,DIV,12,DIV,0,ARTICLE,0,DIV,1,DIV,1,IMG",
+                  "selector": "article.ms-hero-slide > div.ms-hero-grid > div.ms-hero-product > img",
+                  "boundingRect": {
+                    "top": 558,
+                    "bottom": 938,
+                    "left": 113,
+                    "right": 533,
+                    "width": 420,
+                    "height": 380
+                  },
+                  "snippet": "<img src=\"http://127.0.0.1:8130/images/products/0056/01-420w.webp?v=0il3hnigksXlFt5M…\" alt=\"ظرف چهارخانه کبابی فانتزی یکبار مصرف گیاهی\" width=\"240\" height=\"240\" decoding=\"async\" loading=\"eager\" fetchpriority=\"high\" srcset=\"/images/products/0056/01-64w.webp?v=GDz7K1GyyEnC8Pd0FLGcvY7AB-3Sow9xj2c3Gm…\" sizes=\"(min-width: 768px) 420px, (max-width: 480px) 35vw, 240px\" style=\";aspect-ratio:800/800\">",
+                  "nodeLabel": "ظرف چهارخانه کبابی فانتزی یکبار مصرف گیاهی"
+                }
+              }
+            ]
+          },
+          {
+            "type": "table",
+            "headings": [
+              {
+                "key": "phase",
+                "valueType": "text",
+                "label": "Phase"
+              },
+              {
+                "key": "percent",
+                "valueType": "text",
+                "label": "% of LCP"
+              },
+              {
+                "key": "timing",
+                "valueType": "ms",
+                "label": "Timing"
+              }
+            ],
+            "items": [
+              {
+                "phase": "TTFB",
+                "timing": 687.873,
+                "percent": "56%"
+              },
+              {
+                "phase": "Load Delay",
+                "timing": 10.014999996542883,
+                "percent": "1%"
+              },
+              {
+                "phase": "Load Time",
+                "timing": 246.94200000166893,
+                "percent": "20%"
+              },
+              {
+                "phase": "Render Delay",
+                "timing": 282.28500000178815,
+                "percent": "23%"
+              }
+            ]
+          }
+        ]
+      },
+      "guidanceLevel": 1
+    },
+    "layout-shifts": {
+      "id": "layout-shifts",
+      "title": "Avoid large layout shifts",
+      "description": "These are the largest layout shifts observed on the page. Each table item represents a single layout shift, and shows the element that shifted the most. Below each item are possible root causes that led to the layout shift. Some of these layout shifts may not be included in the CLS metric value due to [windowing](https://web.dev/articles/cls#what_is_cls). [Learn how to improve CLS](https://web.dev/articles/optimize-cls)",
+      "score": 1,
+      "scoreDisplayMode": "informative",
+      "displayValue": "1 layout shift found",
+      "metricSavings": {
+        "CLS": 0.001
+      },
+      "details": {
+        "type": "table",
+        "headings": [
+          {
+            "key": "node",
+            "valueType": "node",
+            "subItemsHeading": {
+              "key": "extra"
+            },
+            "label": "Element"
+          },
+          {
+            "key": "score",
+            "valueType": "numeric",
+            "subItemsHeading": {
+              "key": "cause",
+              "valueType": "text"
+            },
+            "granularity": 0.001,
+            "label": "Layout shift score"
+          }
+        ],
+        "items": [
+          {
+            "node": {
+              "type": "node",
+              "lhId": "page-1-EM",
+              "path": "1,HTML,1,BODY,1,DIV,3,MAIN,5,SECTION,0,DIV,0,DIV,12,DIV,0,ARTICLE,0,DIV,0,DIV,1,H1,1,EM",
+              "selector": "div.ms-hero-grid > div.ms-hero-copy > h1.ms-hero-title > em",
+              "boundingRect": {
+                "top": 660,
+                "bottom": 747,
+                "left": 895,
+                "right": 1034,
+                "width": 139,
+                "height": 87
+              },
+              "snippet": "<em>",
+              "nodeLabel": "div.ms-hero-grid > div.ms-hero-copy > h1.ms-hero-title > em"
+            },
+            "score": 0.0009488521848287298,
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "extra": {
+                    "type": "url",
+                    "value": "http://127.0.0.1:8130/fonts/Vazirmatn-storefront.woff2?v=Anbe1StQyyiq8nepAFQ11wcJgH5wSmCOCafejd8rxXc"
+                  },
+                  "cause": "Web font loaded"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "guidanceLevel": 2
+    },
+    "long-tasks": {
+      "id": "long-tasks",
+      "title": "Avoid long main-thread tasks",
+      "description": "Lists the longest tasks on the main thread, useful for identifying worst contributors to input delay. [Learn how to avoid long main-thread tasks](https://web.dev/articles/optimize-long-tasks)",
+      "score": 1,
+      "scoreDisplayMode": "informative",
+      "displayValue": "1 long task found",
+      "metricSavings": {
+        "TBT": 0
+      },
+      "details": {
+        "type": "table",
+        "headings": [
+          {
+            "key": "url",
+            "valueType": "url",
+            "label": "URL"
+          },
+          {
+            "key": "startTime",
+            "valueType": "ms",
+            "granularity": 1,
+            "label": "Start Time"
+          },
+          {
+            "key": "duration",
+            "valueType": "ms",
+            "granularity": 1,
+            "label": "Duration"
+          }
+        ],
+        "items": [
+          {
+            "url": "http://127.0.0.1:8130/",
+            "duration": 238.736,
+            "startTime": 809.392
+          }
+        ],
+        "sortedBy": [
+          "duration"
+        ],
+        "skipSumming": [
+          "startTime"
+        ],
+        "debugData": {
+          "type": "debugdata",
+          "urls": [
+            "http://127.0.0.1:8130/"
+          ],
+          "tasks": [
+            {
+              "urlIndex": 0,
+              "startTime": 809.4,
+              "duration": 238.7,
+              "other": 14.4,
+              "paintCompositeRender": 12.1,
+              "scriptEvaluation": 1.2,
+              "styleLayout": 211
+            }
+          ]
+        }
+      },
+      "guidanceLevel": 1
+    },
+    "non-composited-animations": {
+      "id": "non-composited-animations",
+      "title": "Avoid non-composited animations",
+      "description": "Animations which are not composited can be janky and increase CLS. [Learn how to avoid non-composited animations](https://developer.chrome.com/docs/lighthouse/performance/non-composited-animations/)",
+      "score": null,
+      "scoreDisplayMode": "notApplicable",
+      "metricSavings": {
+        "CLS": 0
+      },
+      "details": {
+        "type": "table",
+        "headings": [],
+        "items": []
+      },
+      "guidanceLevel": 2
+    },
+    "uses-long-cache-ttl": {
+      "id": "uses-long-cache-ttl",
+      "title": "Uses efficient cache policy on static assets",
+      "description": "A long cache lifetime can speed up repeat visits to your page. [Learn more about efficient cache policies](https://developer.chrome.com/docs/lighthouse/performance/uses-long-cache-ttl/).",
+      "score": 1,
+      "scoreDisplayMode": "metricSavings",
+      "numericValue": 0,
+      "numericUnit": "byte",
+      "displayValue": "0 resources found",
+      "details": {
+        "type": "table",
+        "headings": [],
+        "items": []
+      },
+      "guidanceLevel": 3
+    },
+    "total-byte-weight": {
+      "id": "total-byte-weight",
+      "title": "Avoids enormous network payloads",
+      "description": "Large network payloads cost users real money and are highly correlated with long load times. [Learn how to reduce payload sizes](https://developer.chrome.com/docs/lighthouse/performance/total-byte-weight/).",
+      "score": 1,
+      "scoreDisplayMode": "metricSavings",
+      "numericValue": 561036,
+      "numericUnit": "byte",
+      "displayValue": "Total size was 548 KiB",
+      "details": {
+        "type": "table",
+        "headings": [
+          {
+            "key": "url",
+            "valueType": "url",
+            "label": "URL"
+          },
+          {
+            "key": "totalBytes",
+            "valueType": "bytes",
+            "label": "Transfer Size"
+          }
+        ],
+        "items": [
+          {
+            "url": "http://127.0.0.1:8130/",
+            "totalBytes": 102270
+          },
+          {
+            "url": "http://127.0.0.1:8130/fonts/Vazirmatn-storefront.woff2?v=Anbe1StQyyiq8nepAFQ11wcJgH5wSmCOCafejd8rxXc",
+            "totalBytes": 86007
+          },
+          {
+            "url": "http://127.0.0.1:8130/images/products/0017/01-420w.webp?v=OPq362qtMRwS4KgMKaxbeokpH1kOecGwPxR-DQM4SLA",
+            "totalBytes": 59768
+          },
+          {
+            "url": "http://127.0.0.1:8130/images/products/0056/01-420w.webp?v=0il3hnigksXlFt5ML_LWRnsGWwaunqgmriJLZKIPU5w",
+            "totalBytes": 53516
+          },
+          {
+            "url": "http://127.0.0.1:8130/images/products/0079/01-hero-photo-v1-272w.webp?v=Sviq3LHjX_bvlEGcEG2dIB1rKeAGltE8vCmbfPBMCSs",
+            "totalBytes": 33872
+          },
+          {
+            "url": "http://127.0.0.1:8130/images/products/0080/01-hero-photo-v1-272w.webp?v=ULgPOftlmFXqR4DzWVJSJbVgixoZt-d_GyO2wXsIyHY",
+            "totalBytes": 32876
+          },
+          {
+            "url": "http://127.0.0.1:8130/images/products/0086/01.webp?v=xpdJXrKX2gqSnOyXyrrjZZOmrMOPKuGFodDOezSjCnU",
+            "totalBytes": 27074
+          },
+          {
+            "url": "http://127.0.0.1:8130/images/brand/originallogo.webp?v=GozN8rzIrwNspsseVTERlUoJGbgnyNy7crwsANGzzes",
+            "totalBytes": 26482
+          },
+          {
+            "url": "http://127.0.0.1:8130/images/products/0079/01-160w.webp?v=gEJwOQr2NU6fNu2lXqGnBjG8dX75VVppB7c1guUzaXk",
+            "totalBytes": 14690
+          },
+          {
+            "url": "http://127.0.0.1:8130/images/products/0050/01-160w.webp?v=W1-_eCrToMQwp0IkVOKaWDsv4B3pFq1pL-UNAuUmtZA",
+            "totalBytes": 13744
+          }
+        ],
+        "sortedBy": [
+          "totalBytes"
+        ]
+      },
+      "guidanceLevel": 1
+    },
+    "offscreen-images": {
+      "id": "offscreen-images",
+      "title": "Defer offscreen images",
+      "description": "Consider lazy-loading offscreen and hidden images after all critical resources have finished loading to lower time to interactive. [Learn how to defer offscreen images](https://developer.chrome.com/docs/lighthouse/performance/offscreen-images/).",
+      "score": 1,
+      "scoreDisplayMode": "metricSavings",
+      "numericValue": 0,
+      "numericUnit": "millisecond",
+      "displayValue": "",
+      "warnings": [],
+      "metricSavings": {
+        "FCP": 0,
+        "LCP": 0
+      },
+      "details": {
+        "type": "opportunity",
+        "headings": [],
+        "items": [],
+        "overallSavingsMs": 0,
+        "overallSavingsBytes": 0,
+        "sortedBy": [
+          "wastedBytes"
+        ],
+        "debugData": {
+          "type": "debugdata",
+          "metricSavings": {
+            "FCP": 0,
+            "LCP": 0
+          }
+        }
+      },
+      "guidanceLevel": 2
+    },
+    "render-blocking-resources": {
+      "id": "render-blocking-resources",
+      "title": "Eliminate render-blocking resources",
+      "description": "Resources are blocking the first paint of your page. Consider delivering critical JS/CSS inline and deferring all non-critical JS/styles. [Learn how to eliminate render-blocking resources](https://developer.chrome.com/docs/lighthouse/performance/render-blocking-resources/).",
+      "score": 1,
+      "scoreDisplayMode": "metricSavings",
+      "numericValue": 0,
+      "numericUnit": "millisecond",
+      "metricSavings": {
+        "FCP": 0,
+        "LCP": 0
+      },
+      "details": {
+        "type": "opportunity",
+        "headings": [],
+        "items": [],
+        "overallSavingsMs": 0
+      },
+      "guidanceLevel": 2
+    },
+    "unused-css-rules": {
+      "id": "unused-css-rules",
+      "title": "Reduce unused CSS",
+      "description": "Reduce unused rules from stylesheets and defer CSS not used for above-the-fold content to decrease bytes consumed by network activity. [Learn how to reduce unused CSS](https://developer.chrome.com/docs/lighthouse/performance/unused-css-rules/).",
+      "score": 0.5,
+      "scoreDisplayMode": "metricSavings",
+      "numericValue": 0,
+      "numericUnit": "millisecond",
+      "displayValue": "Est savings of 23 KiB",
+      "metricSavings": {
+        "FCP": 0,
+        "LCP": 0
+      },
+      "details": {
+        "type": "opportunity",
+        "headings": [
+          {
+            "key": "url",
+            "valueType": "url",
+            "label": "URL"
+          },
+          {
+            "key": "totalBytes",
+            "valueType": "bytes",
+            "label": "Transfer Size"
+          },
+          {
+            "key": "wastedBytes",
+            "valueType": "bytes",
+            "label": "Est Savings"
+          }
+        ],
+        "items": [
+          {
+            "url": "/* Generated by npm run build:critical-home; complete home styles. */\n@font-face{font-family:Vazirm…",
+            "wastedBytes": 23120,
+            "wastedPercent": 52.05820057095497,
+            "totalBytes": 44412
+          }
+        ],
+        "overallSavingsMs": 0,
+        "overallSavingsBytes": 23120,
+        "sortedBy": [
+          "wastedBytes"
+        ],
+        "debugData": {
+          "type": "debugdata",
+          "metricSavings": {
+            "FCP": 0,
+            "LCP": 0
+          }
+        }
+      },
+      "guidanceLevel": 1
+    },
+    "modern-image-formats": {
+      "id": "modern-image-formats",
+      "title": "Serve images in next-gen formats",
+      "description": "Image formats like WebP and AVIF often provide better compression than PNG or JPEG, which means faster downloads and less data consumption. [Learn more about modern image formats](https://developer.chrome.com/docs/lighthouse/performance/uses-webp-images/).",
+      "score": 1,
+      "scoreDisplayMode": "metricSavings",
+      "numericValue": 0,
+      "numericUnit": "millisecond",
+      "displayValue": "",
+      "warnings": [],
+      "metricSavings": {
+        "FCP": 0,
+        "LCP": 0
+      },
+      "details": {
+        "type": "opportunity",
+        "headings": [],
+        "items": [],
+        "overallSavingsMs": 0,
+        "overallSavingsBytes": 0,
+        "sortedBy": [
+          "wastedBytes"
+        ],
+        "debugData": {
+          "type": "debugdata",
+          "metricSavings": {
+            "FCP": 0,
+            "LCP": 0
+          }
+        }
+      },
+      "guidanceLevel": 3
+    },
+    "uses-responsive-images": {
+      "id": "uses-responsive-images",
+      "title": "Properly size images",
+      "description": "Serve images that are appropriately-sized to save cellular data and improve load time. [Learn how to size images](https://developer.chrome.com/docs/lighthouse/performance/uses-responsive-images/).",
+      "score": 1,
+      "scoreDisplayMode": "metricSavings",
+      "numericValue": 0,
+      "numericUnit": "millisecond",
+      "displayValue": "",
+      "metricSavings": {
+        "FCP": 0,
+        "LCP": 0
+      },
+      "details": {
+        "type": "opportunity",
+        "headings": [],
+        "items": [],
+        "overallSavingsMs": 0,
+        "overallSavingsBytes": 0,
+        "sortedBy": [
+          "wastedBytes"
+        ],
+        "debugData": {
+          "type": "debugdata",
+          "metricSavings": {
+            "FCP": 0,
+            "LCP": 0
+          }
+        }
+      },
+      "guidanceLevel": 2
+    },
+    "legacy-javascript": {
+      "id": "legacy-javascript",
+      "title": "Avoid serving legacy JavaScript to modern browsers",
+      "description": "Polyfills and transforms enable legacy browsers to use new JavaScript features. However, many aren't necessary for modern browsers. Consider modifying your JavaScript build process to not transpile [Baseline](https://web.dev/baseline) features, unless you know you must support legacy browsers. [Learn why most sites can deploy ES6+ code without transpiling](https://philipwalton.com/articles/the-state-of-es5-on-the-web/)",
+      "score": 1,
+      "scoreDisplayMode": "metricSavings",
+      "numericValue": 0,
+      "numericUnit": "millisecond",
+      "displayValue": "",
+      "warnings": [],
+      "metricSavings": {
+        "FCP": 0,
+        "LCP": 0
+      },
+      "details": {
+        "type": "opportunity",
+        "headings": [],
+        "items": [],
+        "overallSavingsMs": 0,
+        "overallSavingsBytes": 0,
+        "sortedBy": [
+          "wastedBytes"
+        ],
+        "debugData": {
+          "type": "debugdata",
+          "metricSavings": {
+            "FCP": 0,
+            "LCP": 0
+          }
+        }
+      },
+      "guidanceLevel": 2
+    },
+    "dom-size": {
+      "id": "dom-size",
+      "title": "Avoid an excessive DOM size",
+      "description": "A large DOM will increase memory usage, cause longer [style calculations](https://developers.google.com/web/fundamentals/performance/rendering/reduce-the-scope-and-complexity-of-style-calculations), and produce costly [layout reflows](https://developers.google.com/speed/articles/reflow). [Learn how to avoid an excessive DOM size](https://developer.chrome.com/docs/lighthouse/performance/dom-size/).",
+      "score": 0.5,
+      "scoreDisplayMode": "metricSavings",
+      "numericValue": 1403,
+      "numericUnit": "element",
+      "displayValue": "1,403 elements",
+      "metricSavings": {
+        "TBT": 0
+      },
+      "details": {
+        "type": "table",
+        "headings": [
+          {
+            "key": "statistic",
+            "valueType": "text",
+            "label": "Statistic"
+          },
+          {
+            "key": "node",
+            "valueType": "node",
+            "label": "Element"
+          },
+          {
+            "key": "value",
+            "valueType": "numeric",
+            "label": "Value"
+          }
+        ],
+        "items": [
+          {
+            "statistic": "Total DOM Elements",
+            "value": {
+              "type": "numeric",
+              "granularity": 1,
+              "value": 1403
+            }
+          },
+          {
+            "node": {
+              "type": "node",
+              "lhId": "1-0-IMG",
+              "path": "1,HTML,1,BODY,1,DIV,3,MAIN,10,SECTION,1,DIV,2,DIV,0,A,0,DIV,1,DIV,0,DIV,0,DIV,0,DIV,0,IMG",
+              "selector": "div.ms-product-dual__slide > div.ms-product-shot > div.ms-product-stage > img.ms-product-img-el",
+              "boundingRect": {
+                "top": 1805,
+                "bottom": 1950,
+                "left": 1058,
+                "right": 1202,
+                "width": 144,
+                "height": 144
+              },
+              "snippet": "<img class=\"ms-product-img-el is-loaded\" src=\"http://127.0.0.1:8130/images/products/0079/01-160w.webp?v=gEJwOQr2NU6fNu2l…\" alt=\"بشقاب یکبار مصرف گیاهی آملون نشاسته 47*208*208 میلیم روی پس‌زمینه سفید\" width=\"140\" height=\"140\" loading=\"lazy\" decoding=\"async\" data-ms-lazy=\"true\" srcset=\"/images/products/0079/01-64w.webp?v=fTrJk2CTuX8O5D871zneGil9UgG3W7g7WtLpb7…\" sizes=\"auto, (min-width: 768px) 160px, 112px\" style=\";aspect-ratio:700/700\" data-ms-lazy-done=\"1\">",
+              "nodeLabel": "بشقاب یکبار مصرف گیاهی آملون نشاسته 47*208*208 میلیم روی پس‌زمینه سفید"
+            },
+            "statistic": "Maximum DOM Depth",
+            "value": {
+              "type": "numeric",
+              "granularity": 1,
+              "value": 13
+            }
+          },
+          {
+            "node": {
+              "type": "node",
+              "lhId": "1-1-BODY",
+              "path": "1,HTML,1,BODY",
+              "selector": "body.ms-body",
+              "boundingRect": {
+                "top": 0,
+                "bottom": 7518,
+                "left": 0,
+                "right": 1335,
+                "width": 1335,
+                "height": 7518
+              },
+              "snippet": "<body class=\"ms-body ms-page-home\">",
+              "nodeLabel": "body.ms-body"
+            },
+            "statistic": "Maximum Child Elements",
+            "value": {
+              "type": "numeric",
+              "granularity": 1,
+              "value": 20
+            }
+          }
+        ]
+      },
+      "guidanceLevel": 1
+    },
+    "uses-http2": {
+      "id": "uses-http2",
+      "title": "Use HTTP/2",
+      "description": "HTTP/2 offers many benefits over HTTP/1.1, including binary headers and multiplexing. [Learn more about HTTP/2](https://developer.chrome.com/docs/lighthouse/best-practices/uses-http2/).",
+      "score": 1,
+      "scoreDisplayMode": "metricSavings",
+      "numericValue": 0,
+      "numericUnit": "millisecond",
+      "metricSavings": {
+        "LCP": 0,
+        "FCP": 0
+      },
+      "details": {
+        "type": "opportunity",
+        "headings": [],
+        "items": [],
+        "overallSavingsMs": 0
+      },
+      "guidanceLevel": 3
+    }
+  },
+  "tests": {
+    "dotnet_passed": 72,
+    "deploy_passed": 7,
+    "javascript_syntax_passed": 33,
+    "public_routes": 10,
+    "browser": {
+      "movasseghi-responsive-f58W6e": [
+        {
+          "width": 390,
+          "dpr": 1,
+          "selector": ".ms-hero-slide.is-active img",
+          "maxWidth": 800,
+          "url": "http://127.0.0.1:8120/images/products/0017/01-160w.webp?v=_obYxKF5uKC28HR64y4RDDus-njQac9MjRo-OOB9obA",
+          "sourceWidth": 160,
+          "displayWidth": 135.71875,
+          "srcset": "/images/products/0017/01-64w.webp?v=Q0UPFwHDhHYKlLJfeycYGTMuqqcNFvsPyX3030hwZXk 64w, /images/products/0017/01-128w.webp?v=OXbzxLE5qkwZAxTG40Zq5JB4zVd1ojiKm_QRU0hZmlE 128w, /images/products/0017/01-160w.webp?v=_obYxKF5uKC28HR64y4RDDus-njQac9MjRo-OOB9obA 160w, /images/products/0017/01-192w.webp?v=AOdtdd4QsVX_PN_4CLo-9Qio0KwUW8-7Q-zfUCLnKuk 192w, /images/products/0017/01-256w.webp?v=xQvDbJbzUQ-q7QW92lSBgIQoJcyl92iS4JqU7wxfiew 256w, /images/products/0017/01-272w.webp?v=Vv3JbkJQDImKcgqpiuqTXHlahWjTjLY2e7dDuRbh38g 272w, /images/products/0017/01-320w.webp?v=xm53XD-MMa0q3ALWgqJ6ArAIwTlnQy94wGEkNVWUCBQ 320w, /images/products/0017/01-384w.webp?v=4gRbUBY2fF2Ed7o8Dys0hMJdIEUWibOMjUvWEX_A2oE 384w, /images/products/0017/01-420w.webp?v=OPq362qtMRwS4KgMKaxbeokpH1kOecGwPxR-DQM4SLA 420w, /images/products/0017/01-480w.webp?v=ktZE2SeeyzOpTymOUctrAnKy9iamgB9lHeXzmWkRCU0 480w, /images/products/0017/01-560w.webp?v=EjZ55M6rVmIfdS9lj52eONnI4hd1_7-6JlDcBzAfRLM 560w, /images/products/0017/01.webp?v=ylQtnVqts_g3EabUMgUuUzP4tmWQMnS6XXL9TV_3_IE 800w"
+        },
+        {
+          "width": 390,
+          "dpr": 1,
+          "selector": ".ms-feat-card .ms-product-img-el",
+          "maxWidth": 800,
+          "url": "http://127.0.0.1:8120/images/products/0056/01-160w.webp?v=VMjRgQor3hKw4Kpt5hPAqFKeoCuAi78wUZRSqNMEcrE",
+          "sourceWidth": 160,
+          "displayWidth": 81.96875,
+          "srcset": "/images/products/0056/01-64w.webp?v=GDz7K1GyyEnC8Pd0FLGcvY7AB-3Sow9xj2c3GmfcAug 64w, /images/products/0056/01-128w.webp?v=IRgY9lbm-cXJsL7mehJtp5PeT8mp4k7nhMGxsGCb1hk 128w, /images/products/0056/01-160w.webp?v=VMjRgQor3hKw4Kpt5hPAqFKeoCuAi78wUZRSqNMEcrE 160w, /images/products/0056/01-192w.webp?v=Qg1wpoKBdAVkprgOmB0Wah3fYxT8YzJKlyqPdfG-tGI 192w, /images/products/0056/01-256w.webp?v=0KA_Baxh7GQovxzXaVvztx4goZdfOd9c4iwvjZNjnd8 256w, /images/products/0056/01-272w.webp?v=pBI9cAWFubxvjHfE1q0v3UR4WyzwLn5tWMusTDWjLAI 272w, /images/products/0056/01-320w.webp?v=xrvARwCQ94e4CmeU8SCHlu5nBW2C1R4qY4wPgzp2EwM 320w, /images/products/0056/01-384w.webp?v=d39epxCL95WAJnUv7APWEmYV2pJAEq1NKa38QbE3ipo 384w, /images/products/0056/01-420w.webp?v=0il3hnigksXlFt5ML_LWRnsGWwaunqgmriJLZKIPU5w 420w, /images/products/0056/01-480w.webp?v=eKaKYulZOLFZbJa4bgWRUEKevroFcJWJq6SRObwpd8U 480w, /images/products/0056/01-560w.webp?v=fxw0kXLjinNaynzhAnPsNikdF3joFq7FOAjXFUpLdJU 560w, /images/products/0056/01-640w.webp?v=OeCObcshZezb2YrTaiyv0stgGqrtEfs8zdEW7uyfNq8 640w, /images/products/0056/01.webp?v=t6MyRW4MTCMticNObYQ3MQL9FC06PcUNgGetjiTKnaU 800w"
+        },
+        {
+          "width": 390,
+          "dpr": 1,
+          "selector": ".ms-offer-card .ms-product-img-el",
+          "maxWidth": 700,
+          "url": "http://127.0.0.1:8120/images/products/0079/01-128w.webp?v=MPw0qVM-UOsJgxCQISAVZY2XHL4wHljaCmq2sdM49so",
+          "sourceWidth": 128,
+          "displayWidth": 105.375,
+          "srcset": "/images/products/0079/01-64w.webp?v=fTrJk2CTuX8O5D871zneGil9UgG3W7g7WtLpb7mlFgg 64w, /images/products/0079/01-128w.webp?v=MPw0qVM-UOsJgxCQISAVZY2XHL4wHljaCmq2sdM49so 128w, /images/products/0079/01-160w.webp?v=gEJwOQr2NU6fNu2lXqGnBjG8dX75VVppB7c1guUzaXk 160w, /images/products/0079/01-192w.webp?v=8UXFNvuaORBwtbetRKSAnUQRerb8cM-NVVpYl_cua5g 192w, /images/products/0079/01-256w.webp?v=UvEdzJMgIrs4ID_20vBimklQp6w1GteU4rIdOITzD2A 256w, /images/products/0079/01-272w.webp?v=LZ5FyU7802IdpgW1JL9Egdri0S4Flrd0gMeqHvA3cVo 272w, /images/products/0079/01-320w.webp?v=-Vfx4JCe51qau72FAcgBQ2CJ5uUD3G99El_-wagfrF0 320w, /images/products/0079/01.webp?v=LvzvoBeHO6QWsS2YZM8YRI-yHq66R02FKn3yHLO6YKE 700w"
+        },
+        {
+          "width": 390,
+          "dpr": 2,
+          "selector": ".ms-hero-slide.is-active img",
+          "maxWidth": 800,
+          "url": "http://127.0.0.1:8120/images/products/0017/01-320w.webp?v=xm53XD-MMa0q3ALWgqJ6ArAIwTlnQy94wGEkNVWUCBQ",
+          "sourceWidth": 320,
+          "displayWidth": 135.71875,
+          "srcset": "/images/products/0017/01-64w.webp?v=Q0UPFwHDhHYKlLJfeycYGTMuqqcNFvsPyX3030hwZXk 64w, /images/products/0017/01-128w.webp?v=OXbzxLE5qkwZAxTG40Zq5JB4zVd1ojiKm_QRU0hZmlE 128w, /images/products/0017/01-160w.webp?v=_obYxKF5uKC28HR64y4RDDus-njQac9MjRo-OOB9obA 160w, /images/products/0017/01-192w.webp?v=AOdtdd4QsVX_PN_4CLo-9Qio0KwUW8-7Q-zfUCLnKuk 192w, /images/products/0017/01-256w.webp?v=xQvDbJbzUQ-q7QW92lSBgIQoJcyl92iS4JqU7wxfiew 256w, /images/products/0017/01-272w.webp?v=Vv3JbkJQDImKcgqpiuqTXHlahWjTjLY2e7dDuRbh38g 272w, /images/products/0017/01-320w.webp?v=xm53XD-MMa0q3ALWgqJ6ArAIwTlnQy94wGEkNVWUCBQ 320w, /images/products/0017/01-384w.webp?v=4gRbUBY2fF2Ed7o8Dys0hMJdIEUWibOMjUvWEX_A2oE 384w, /images/products/0017/01-420w.webp?v=OPq362qtMRwS4KgMKaxbeokpH1kOecGwPxR-DQM4SLA 420w, /images/products/0017/01-480w.webp?v=ktZE2SeeyzOpTymOUctrAnKy9iamgB9lHeXzmWkRCU0 480w, /images/products/0017/01-560w.webp?v=EjZ55M6rVmIfdS9lj52eONnI4hd1_7-6JlDcBzAfRLM 560w, /images/products/0017/01.webp?v=ylQtnVqts_g3EabUMgUuUzP4tmWQMnS6XXL9TV_3_IE 800w"
+        },
+        {
+          "width": 390,
+          "dpr": 2,
+          "selector": ".ms-feat-card .ms-product-img-el",
+          "maxWidth": 800,
+          "url": "http://127.0.0.1:8120/images/products/0056/01-320w.webp?v=xrvARwCQ94e4CmeU8SCHlu5nBW2C1R4qY4wPgzp2EwM",
+          "sourceWidth": 320,
+          "displayWidth": 81.96875,
+          "srcset": "/images/products/0056/01-64w.webp?v=GDz7K1GyyEnC8Pd0FLGcvY7AB-3Sow9xj2c3GmfcAug 64w, /images/products/0056/01-128w.webp?v=IRgY9lbm-cXJsL7mehJtp5PeT8mp4k7nhMGxsGCb1hk 128w, /images/products/0056/01-160w.webp?v=VMjRgQor3hKw4Kpt5hPAqFKeoCuAi78wUZRSqNMEcrE 160w, /images/products/0056/01-192w.webp?v=Qg1wpoKBdAVkprgOmB0Wah3fYxT8YzJKlyqPdfG-tGI 192w, /images/products/0056/01-256w.webp?v=0KA_Baxh7GQovxzXaVvztx4goZdfOd9c4iwvjZNjnd8 256w, /images/products/0056/01-272w.webp?v=pBI9cAWFubxvjHfE1q0v3UR4WyzwLn5tWMusTDWjLAI 272w, /images/products/0056/01-320w.webp?v=xrvARwCQ94e4CmeU8SCHlu5nBW2C1R4qY4wPgzp2EwM 320w, /images/products/0056/01-384w.webp?v=d39epxCL95WAJnUv7APWEmYV2pJAEq1NKa38QbE3ipo 384w, /images/products/0056/01-420w.webp?v=0il3hnigksXlFt5ML_LWRnsGWwaunqgmriJLZKIPU5w 420w, /images/products/0056/01-480w.webp?v=eKaKYulZOLFZbJa4bgWRUEKevroFcJWJq6SRObwpd8U 480w, /images/products/0056/01-560w.webp?v=fxw0kXLjinNaynzhAnPsNikdF3joFq7FOAjXFUpLdJU 560w, /images/products/0056/01-640w.webp?v=OeCObcshZezb2YrTaiyv0stgGqrtEfs8zdEW7uyfNq8 640w, /images/products/0056/01.webp?v=t6MyRW4MTCMticNObYQ3MQL9FC06PcUNgGetjiTKnaU 800w"
+        },
+        {
+          "width": 390,
+          "dpr": 2,
+          "selector": ".ms-offer-card .ms-product-img-el",
+          "maxWidth": 700,
+          "url": "http://127.0.0.1:8120/images/products/0079/01-256w.webp?v=UvEdzJMgIrs4ID_20vBimklQp6w1GteU4rIdOITzD2A",
+          "sourceWidth": 256,
+          "displayWidth": 105.375,
+          "srcset": "/images/products/0079/01-64w.webp?v=fTrJk2CTuX8O5D871zneGil9UgG3W7g7WtLpb7mlFgg 64w, /images/products/0079/01-128w.webp?v=MPw0qVM-UOsJgxCQISAVZY2XHL4wHljaCmq2sdM49so 128w, /images/products/0079/01-160w.webp?v=gEJwOQr2NU6fNu2lXqGnBjG8dX75VVppB7c1guUzaXk 160w, /images/products/0079/01-192w.webp?v=8UXFNvuaORBwtbetRKSAnUQRerb8cM-NVVpYl_cua5g 192w, /images/products/0079/01-256w.webp?v=UvEdzJMgIrs4ID_20vBimklQp6w1GteU4rIdOITzD2A 256w, /images/products/0079/01-272w.webp?v=LZ5FyU7802IdpgW1JL9Egdri0S4Flrd0gMeqHvA3cVo 272w, /images/products/0079/01-320w.webp?v=-Vfx4JCe51qau72FAcgBQ2CJ5uUD3G99El_-wagfrF0 320w, /images/products/0079/01.webp?v=LvzvoBeHO6QWsS2YZM8YRI-yHq66R02FKn3yHLO6YKE 700w"
+        },
+        {
+          "width": 1366,
+          "dpr": 1,
+          "selector": ".ms-hero-slide.is-active img",
+          "maxWidth": 800,
+          "url": "http://127.0.0.1:8120/images/products/0017/01-420w.webp?v=OPq362qtMRwS4KgMKaxbeokpH1kOecGwPxR-DQM4SLA",
+          "sourceWidth": 420,
+          "displayWidth": 420,
+          "srcset": "/images/products/0017/01-64w.webp?v=Q0UPFwHDhHYKlLJfeycYGTMuqqcNFvsPyX3030hwZXk 64w, /images/products/0017/01-128w.webp?v=OXbzxLE5qkwZAxTG40Zq5JB4zVd1ojiKm_QRU0hZmlE 128w, /images/products/0017/01-160w.webp?v=_obYxKF5uKC28HR64y4RDDus-njQac9MjRo-OOB9obA 160w, /images/products/0017/01-192w.webp?v=AOdtdd4QsVX_PN_4CLo-9Qio0KwUW8-7Q-zfUCLnKuk 192w, /images/products/0017/01-256w.webp?v=xQvDbJbzUQ-q7QW92lSBgIQoJcyl92iS4JqU7wxfiew 256w, /images/products/0017/01-272w.webp?v=Vv3JbkJQDImKcgqpiuqTXHlahWjTjLY2e7dDuRbh38g 272w, /images/products/0017/01-320w.webp?v=xm53XD-MMa0q3ALWgqJ6ArAIwTlnQy94wGEkNVWUCBQ 320w, /images/products/0017/01-384w.webp?v=4gRbUBY2fF2Ed7o8Dys0hMJdIEUWibOMjUvWEX_A2oE 384w, /images/products/0017/01-420w.webp?v=OPq362qtMRwS4KgMKaxbeokpH1kOecGwPxR-DQM4SLA 420w, /images/products/0017/01-480w.webp?v=ktZE2SeeyzOpTymOUctrAnKy9iamgB9lHeXzmWkRCU0 480w, /images/products/0017/01-560w.webp?v=EjZ55M6rVmIfdS9lj52eONnI4hd1_7-6JlDcBzAfRLM 560w, /images/products/0017/01.webp?v=ylQtnVqts_g3EabUMgUuUzP4tmWQMnS6XXL9TV_3_IE 800w"
+        },
+        {
+          "width": 1366,
+          "dpr": 1,
+          "selector": ".ms-feat-card .ms-product-img-el",
+          "maxWidth": 800,
+          "url": "http://127.0.0.1:8120/images/products/0056/01-420w.webp?v=0il3hnigksXlFt5ML_LWRnsGWwaunqgmriJLZKIPU5w",
+          "sourceWidth": 420,
+          "displayWidth": 148.34375,
+          "srcset": "/images/products/0056/01-64w.webp?v=GDz7K1GyyEnC8Pd0FLGcvY7AB-3Sow9xj2c3GmfcAug 64w, /images/products/0056/01-128w.webp?v=IRgY9lbm-cXJsL7mehJtp5PeT8mp4k7nhMGxsGCb1hk 128w, /images/products/0056/01-160w.webp?v=VMjRgQor3hKw4Kpt5hPAqFKeoCuAi78wUZRSqNMEcrE 160w, /images/products/0056/01-192w.webp?v=Qg1wpoKBdAVkprgOmB0Wah3fYxT8YzJKlyqPdfG-tGI 192w, /images/products/0056/01-256w.webp?v=0KA_Baxh7GQovxzXaVvztx4goZdfOd9c4iwvjZNjnd8 256w, /images/products/0056/01-272w.webp?v=pBI9cAWFubxvjHfE1q0v3UR4WyzwLn5tWMusTDWjLAI 272w, /images/products/0056/01-320w.webp?v=xrvARwCQ94e4CmeU8SCHlu5nBW2C1R4qY4wPgzp2EwM 320w, /images/products/0056/01-384w.webp?v=d39epxCL95WAJnUv7APWEmYV2pJAEq1NKa38QbE3ipo 384w, /images/products/0056/01-420w.webp?v=0il3hnigksXlFt5ML_LWRnsGWwaunqgmriJLZKIPU5w 420w, /images/products/0056/01-480w.webp?v=eKaKYulZOLFZbJa4bgWRUEKevroFcJWJq6SRObwpd8U 480w, /images/products/0056/01-560w.webp?v=fxw0kXLjinNaynzhAnPsNikdF3joFq7FOAjXFUpLdJU 560w, /images/products/0056/01-640w.webp?v=OeCObcshZezb2YrTaiyv0stgGqrtEfs8zdEW7uyfNq8 640w, /images/products/0056/01.webp?v=t6MyRW4MTCMticNObYQ3MQL9FC06PcUNgGetjiTKnaU 800w"
+        },
+        {
+          "width": 1366,
+          "dpr": 1,
+          "selector": ".ms-offer-card .ms-product-img-el",
+          "maxWidth": 700,
+          "url": "http://127.0.0.1:8120/images/products/0079/01-160w.webp?v=gEJwOQr2NU6fNu2lXqGnBjG8dX75VVppB7c1guUzaXk",
+          "sourceWidth": 160,
+          "displayWidth": 146.546875,
+          "srcset": "/images/products/0079/01-64w.webp?v=fTrJk2CTuX8O5D871zneGil9UgG3W7g7WtLpb7mlFgg 64w, /images/products/0079/01-128w.webp?v=MPw0qVM-UOsJgxCQISAVZY2XHL4wHljaCmq2sdM49so 128w, /images/products/0079/01-160w.webp?v=gEJwOQr2NU6fNu2lXqGnBjG8dX75VVppB7c1guUzaXk 160w, /images/products/0079/01-192w.webp?v=8UXFNvuaORBwtbetRKSAnUQRerb8cM-NVVpYl_cua5g 192w, /images/products/0079/01-256w.webp?v=UvEdzJMgIrs4ID_20vBimklQp6w1GteU4rIdOITzD2A 256w, /images/products/0079/01-272w.webp?v=LZ5FyU7802IdpgW1JL9Egdri0S4Flrd0gMeqHvA3cVo 272w, /images/products/0079/01-320w.webp?v=-Vfx4JCe51qau72FAcgBQ2CJ5uUD3G99El_-wagfrF0 320w, /images/products/0079/01.webp?v=LvzvoBeHO6QWsS2YZM8YRI-yHq66R02FKn3yHLO6YKE 700w"
+        },
+        {
+          "width": 1366,
+          "dpr": 2,
+          "selector": ".ms-hero-slide.is-active img",
+          "maxWidth": 800,
+          "url": "http://127.0.0.1:8120/images/products/0017/01.webp?v=ylQtnVqts_g3EabUMgUuUzP4tmWQMnS6XXL9TV_3_IE",
+          "sourceWidth": 800,
+          "displayWidth": 420,
+          "srcset": "/images/products/0017/01-64w.webp?v=Q0UPFwHDhHYKlLJfeycYGTMuqqcNFvsPyX3030hwZXk 64w, /images/products/0017/01-128w.webp?v=OXbzxLE5qkwZAxTG40Zq5JB4zVd1ojiKm_QRU0hZmlE 128w, /images/products/0017/01-160w.webp?v=_obYxKF5uKC28HR64y4RDDus-njQac9MjRo-OOB9obA 160w, /images/products/0017/01-192w.webp?v=AOdtdd4QsVX_PN_4CLo-9Qio0KwUW8-7Q-zfUCLnKuk 192w, /images/products/0017/01-256w.webp?v=xQvDbJbzUQ-q7QW92lSBgIQoJcyl92iS4JqU7wxfiew 256w, /images/products/0017/01-272w.webp?v=Vv3JbkJQDImKcgqpiuqTXHlahWjTjLY2e7dDuRbh38g 272w, /images/products/0017/01-320w.webp?v=xm53XD-MMa0q3ALWgqJ6ArAIwTlnQy94wGEkNVWUCBQ 320w, /images/products/0017/01-384w.webp?v=4gRbUBY2fF2Ed7o8Dys0hMJdIEUWibOMjUvWEX_A2oE 384w, /images/products/0017/01-420w.webp?v=OPq362qtMRwS4KgMKaxbeokpH1kOecGwPxR-DQM4SLA 420w, /images/products/0017/01-480w.webp?v=ktZE2SeeyzOpTymOUctrAnKy9iamgB9lHeXzmWkRCU0 480w, /images/products/0017/01-560w.webp?v=EjZ55M6rVmIfdS9lj52eONnI4hd1_7-6JlDcBzAfRLM 560w, /images/products/0017/01.webp?v=ylQtnVqts_g3EabUMgUuUzP4tmWQMnS6XXL9TV_3_IE 800w"
+        },
+        {
+          "width": 1366,
+          "dpr": 2,
+          "selector": ".ms-feat-card .ms-product-img-el",
+          "maxWidth": 800,
+          "url": "http://127.0.0.1:8120/images/products/0056/01.webp?v=t6MyRW4MTCMticNObYQ3MQL9FC06PcUNgGetjiTKnaU",
+          "sourceWidth": 800,
+          "displayWidth": 148.34375,
+          "srcset": "/images/products/0056/01-64w.webp?v=GDz7K1GyyEnC8Pd0FLGcvY7AB-3Sow9xj2c3GmfcAug 64w, /images/products/0056/01-128w.webp?v=IRgY9lbm-cXJsL7mehJtp5PeT8mp4k7nhMGxsGCb1hk 128w, /images/products/0056/01-160w.webp?v=VMjRgQor3hKw4Kpt5hPAqFKeoCuAi78wUZRSqNMEcrE 160w, /images/products/0056/01-192w.webp?v=Qg1wpoKBdAVkprgOmB0Wah3fYxT8YzJKlyqPdfG-tGI 192w, /images/products/0056/01-256w.webp?v=0KA_Baxh7GQovxzXaVvztx4goZdfOd9c4iwvjZNjnd8 256w, /images/products/0056/01-272w.webp?v=pBI9cAWFubxvjHfE1q0v3UR4WyzwLn5tWMusTDWjLAI 272w, /images/products/0056/01-320w.webp?v=xrvARwCQ94e4CmeU8SCHlu5nBW2C1R4qY4wPgzp2EwM 320w, /images/products/0056/01-384w.webp?v=d39epxCL95WAJnUv7APWEmYV2pJAEq1NKa38QbE3ipo 384w, /images/products/0056/01-420w.webp?v=0il3hnigksXlFt5ML_LWRnsGWwaunqgmriJLZKIPU5w 420w, /images/products/0056/01-480w.webp?v=eKaKYulZOLFZbJa4bgWRUEKevroFcJWJq6SRObwpd8U 480w, /images/products/0056/01-560w.webp?v=fxw0kXLjinNaynzhAnPsNikdF3joFq7FOAjXFUpLdJU 560w, /images/products/0056/01-640w.webp?v=OeCObcshZezb2YrTaiyv0stgGqrtEfs8zdEW7uyfNq8 640w, /images/products/0056/01.webp?v=t6MyRW4MTCMticNObYQ3MQL9FC06PcUNgGetjiTKnaU 800w"
+        },
+        {
+          "width": 1366,
+          "dpr": 2,
+          "selector": ".ms-offer-card .ms-product-img-el",
+          "maxWidth": 700,
+          "url": "http://127.0.0.1:8120/images/products/0079/01-320w.webp?v=-Vfx4JCe51qau72FAcgBQ2CJ5uUD3G99El_-wagfrF0",
+          "sourceWidth": 320,
+          "displayWidth": 146.546875,
+          "srcset": "/images/products/0079/01-64w.webp?v=fTrJk2CTuX8O5D871zneGil9UgG3W7g7WtLpb7mlFgg 64w, /images/products/0079/01-128w.webp?v=MPw0qVM-UOsJgxCQISAVZY2XHL4wHljaCmq2sdM49so 128w, /images/products/0079/01-160w.webp?v=gEJwOQr2NU6fNu2lXqGnBjG8dX75VVppB7c1guUzaXk 160w, /images/products/0079/01-192w.webp?v=8UXFNvuaORBwtbetRKSAnUQRerb8cM-NVVpYl_cua5g 192w, /images/products/0079/01-256w.webp?v=UvEdzJMgIrs4ID_20vBimklQp6w1GteU4rIdOITzD2A 256w, /images/products/0079/01-272w.webp?v=LZ5FyU7802IdpgW1JL9Egdri0S4Flrd0gMeqHvA3cVo 272w, /images/products/0079/01-320w.webp?v=-Vfx4JCe51qau72FAcgBQ2CJ5uUD3G99El_-wagfrF0 320w, /images/products/0079/01.webp?v=LvzvoBeHO6QWsS2YZM8YRI-yHq66R02FKn3yHLO6YKE 700w"
+        },
+        {
+          "cartStyles": "first click, delayed CSS without unstyled modal, and reuse passed"
+        }
+      ],
+      "movasseghi-real-media-dUwzop": [
+        {
+          "width": 390,
+          "dpr": 1,
+          "selector": ".ms-offer-card [data-ms-product-dual]",
+          "url": "http://127.0.0.1:8120/images/products/0079/01-hero-photo-v1-192w.webp?v=8jvk0GVW6mylUZIx2cLG13NR6N6SLQuWTdIEg4jZipQ",
+          "chosenWidth": 192,
+          "displayWidth": 201.5999755859375,
+          "layoutWidth": 192,
+          "sizes": "auto, (min-width: 768px) 160px, 112px"
+        },
+        {
+          "width": 390,
+          "dpr": 1,
+          "selector": ".ms-feat-card [data-ms-product-dual]",
+          "url": "http://127.0.0.1:8120/images/products/0056/01-hero-photo-v1-160w.webp?v=S4AjeidlcmM_B0w2Gm3nsN-qBSxeS9dlnovfRYd3Sss",
+          "chosenWidth": 160,
+          "displayWidth": 162.17578125,
+          "layoutWidth": 154,
+          "sizes": "auto, (min-width: 768px) 280px, 45vw"
+        },
+        {
+          "width": 390,
+          "dpr": 2,
+          "selector": ".ms-offer-card [data-ms-product-dual]",
+          "url": "http://127.0.0.1:8120/images/products/0079/01-hero-photo-v1-384w.webp?v=t3OnbwW-8gAUleQ0JtHssG8nBSCWUVSxs1m7vo72W9I",
+          "chosenWidth": 384,
+          "displayWidth": 201.5999755859375,
+          "layoutWidth": 192,
+          "sizes": "auto, (min-width: 768px) 160px, 112px"
+        },
+        {
+          "width": 390,
+          "dpr": 2,
+          "selector": ".ms-feat-card [data-ms-product-dual]",
+          "url": "http://127.0.0.1:8120/images/products/0056/01-hero-photo-v1-320w.webp?v=jYxUe2QG6gO1H_CQvoxTf6H_6t2Hrk5W6ZoutL-YJic",
+          "chosenWidth": 320,
+          "displayWidth": 162.17578125,
+          "layoutWidth": 154,
+          "sizes": "auto, (min-width: 768px) 280px, 45vw"
+        },
+        {
+          "width": 768,
+          "dpr": 1,
+          "selector": ".ms-offer-card [data-ms-product-dual]",
+          "url": "http://127.0.0.1:8120/images/products/0079/01-hero-photo-v1-160w.webp?v=dBI8JAy3etXH-V8qiCzwsTRTRNg52s8ZDNTvaWPcF68",
+          "chosenWidth": 160,
+          "displayWidth": 137.385986328125,
+          "layoutWidth": 131,
+          "sizes": "auto, (min-width: 768px) 160px, 112px"
+        },
+        {
+          "width": 768,
+          "dpr": 1,
+          "selector": ".ms-feat-card [data-ms-product-dual]",
+          "url": "http://127.0.0.1:8120/images/products/0056/01-hero-photo-v1-160w.webp?v=S4AjeidlcmM_B0w2Gm3nsN-qBSxeS9dlnovfRYd3Sss",
+          "chosenWidth": 160,
+          "displayWidth": 145.785888671875,
+          "layoutWidth": 139,
+          "sizes": "auto, (min-width: 768px) 280px, 45vw"
+        },
+        {
+          "width": 768,
+          "dpr": 2,
+          "selector": ".ms-offer-card [data-ms-product-dual]",
+          "url": "http://127.0.0.1:8120/images/products/0079/01-hero-photo-v1-272w.webp?v=Sviq3LHjX_bvlEGcEG2dIB1rKeAGltE8vCmbfPBMCSs",
+          "chosenWidth": 272,
+          "displayWidth": 137.385986328125,
+          "layoutWidth": 131,
+          "sizes": "auto, (min-width: 768px) 160px, 112px"
+        },
+        {
+          "width": 768,
+          "dpr": 2,
+          "selector": ".ms-feat-card [data-ms-product-dual]",
+          "url": "http://127.0.0.1:8120/images/products/0056/01-hero-photo-v1-320w.webp?v=jYxUe2QG6gO1H_CQvoxTf6H_6t2Hrk5W6ZoutL-YJic",
+          "chosenWidth": 320,
+          "displayWidth": 145.785888671875,
+          "layoutWidth": 139,
+          "sizes": "auto, (min-width: 768px) 280px, 45vw"
+        },
+        {
+          "width": 1366,
+          "dpr": 1,
+          "selector": ".ms-offer-card [data-ms-product-dual]",
+          "url": "http://127.0.0.1:8120/images/products/0079/01-hero-photo-v1-272w.webp?v=Sviq3LHjX_bvlEGcEG2dIB1rKeAGltE8vCmbfPBMCSs",
+          "chosenWidth": 272,
+          "displayWidth": 274.624267578125,
+          "layoutWidth": 262,
+          "sizes": "auto, (min-width: 768px) 160px, 112px"
+        },
+        {
+          "width": 1366,
+          "dpr": 1,
+          "selector": ".ms-feat-card [data-ms-product-dual]",
+          "url": "http://127.0.0.1:8120/images/products/0056/01-hero-photo-v1-272w.webp?v=dcyrZBuCKZZC7s5apkiCxF8c3zucFRY6RRKca_BoS6U",
+          "chosenWidth": 272,
+          "displayWidth": 279.890625,
+          "layoutWidth": 267,
+          "sizes": "auto, (min-width: 768px) 280px, 45vw"
+        },
+        {
+          "width": 1366,
+          "dpr": 2,
+          "selector": ".ms-offer-card [data-ms-product-dual]",
+          "url": "http://127.0.0.1:8120/images/products/0079/01-hero-photo-v1-560w.webp?v=wfy5s5wkUTCf-Id9dG6JBFaQEtglnvKY-s2d6nmTDGY",
+          "chosenWidth": 560,
+          "displayWidth": 274.624267578125,
+          "layoutWidth": 262,
+          "sizes": "auto, (min-width: 768px) 160px, 112px"
+        },
+        {
+          "width": 1366,
+          "dpr": 2,
+          "selector": ".ms-feat-card [data-ms-product-dual]",
+          "url": "http://127.0.0.1:8120/images/products/0056/01-hero-photo-v1-560w.webp?v=_Y7uN6_lA9j90_DEa1vWpH_h8cNBS83qfH-TkbdkvVk",
+          "chosenWidth": 560,
+          "displayWidth": 279.890625,
+          "layoutWidth": 267,
+          "sizes": "auto, (min-width: 768px) 280px, 45vw"
+        },
+        {
+          "realCycle": "PASS",
+          "blurEffect": {
+            "blur": "blur(6px) brightness(0.88) saturate(0.9)",
+            "transition": "opacity, transform, filter"
+          },
+          "dots": "PASS",
+          "fullFontFallback": "PASS"
+        },
+        {
+          "storyStorageUnavailable": "PASS",
+          "inlineStoryPayload": "PASS"
+        }
+      ],
+      "movasseghi-storefront-1ux1d6": [
+        {
+          "homeAssets": {
+            "hero": "http://127.0.0.1:8120/images/products/0056/01-420w.webp?v=0il3hnigksXlFt5ML_LWRnsGWwaunqgmriJLZKIPU5w",
+            "heroFallback": "http://127.0.0.1:8120/images/products/0056/01-lcp.webp?v=0KA_Baxh7GQovxzXaVvztx4goZdfOd9c4iwvjZNjnd8",
+            "heroSrcSet": "/images/products/0056/01-64w.webp?v=GDz7K1GyyEnC8Pd0FLGcvY7AB-3Sow9xj2c3GmfcAug 64w, /images/products/0056/01-128w.webp?v=IRgY9lbm-cXJsL7mehJtp5PeT8mp4k7nhMGxsGCb1hk 128w, /images/products/0056/01-160w.webp?v=VMjRgQor3hKw4Kpt5hPAqFKeoCuAi78wUZRSqNMEcrE 160w, /images/products/0056/01-192w.webp?v=Qg1wpoKBdAVkprgOmB0Wah3fYxT8YzJKlyqPdfG-tGI 192w, /images/products/0056/01-256w.webp?v=0KA_Baxh7GQovxzXaVvztx4goZdfOd9c4iwvjZNjnd8 256w, /images/products/0056/01-272w.webp?v=pBI9cAWFubxvjHfE1q0v3UR4WyzwLn5tWMusTDWjLAI 272w, /images/products/0056/01-320w.webp?v=xrvARwCQ94e4CmeU8SCHlu5nBW2C1R4qY4wPgzp2EwM 320w, /images/products/0056/01-384w.webp?v=d39epxCL95WAJnUv7APWEmYV2pJAEq1NKa38QbE3ipo 384w, /images/products/0056/01-420w.webp?v=0il3hnigksXlFt5ML_LWRnsGWwaunqgmriJLZKIPU5w 420w, /images/products/0056/01-480w.webp?v=eKaKYulZOLFZbJa4bgWRUEKevroFcJWJq6SRObwpd8U 480w, /images/products/0056/01-560w.webp?v=fxw0kXLjinNaynzhAnPsNikdF3joFq7FOAjXFUpLdJU 560w, /images/products/0056/01-640w.webp?v=OeCObcshZezb2YrTaiyv0stgGqrtEfs8zdEW7uyfNq8 640w, /images/products/0056/01.webp?v=t6MyRW4MTCMticNObYQ3MQL9FC06PcUNgGetjiTKnaU 800w",
+            "heroSizes": "(min-width: 768px) 420px, (max-width: 480px) 35vw, 240px",
+            "preloadSrcSet": "/images/products/0056/01-64w.webp?v=GDz7K1GyyEnC8Pd0FLGcvY7AB-3Sow9xj2c3GmfcAug 64w, /images/products/0056/01-128w.webp?v=IRgY9lbm-cXJsL7mehJtp5PeT8mp4k7nhMGxsGCb1hk 128w, /images/products/0056/01-160w.webp?v=VMjRgQor3hKw4Kpt5hPAqFKeoCuAi78wUZRSqNMEcrE 160w, /images/products/0056/01-192w.webp?v=Qg1wpoKBdAVkprgOmB0Wah3fYxT8YzJKlyqPdfG-tGI 192w, /images/products/0056/01-256w.webp?v=0KA_Baxh7GQovxzXaVvztx4goZdfOd9c4iwvjZNjnd8 256w, /images/products/0056/01-272w.webp?v=pBI9cAWFubxvjHfE1q0v3UR4WyzwLn5tWMusTDWjLAI 272w, /images/products/0056/01-320w.webp?v=xrvARwCQ94e4CmeU8SCHlu5nBW2C1R4qY4wPgzp2EwM 320w, /images/products/0056/01-384w.webp?v=d39epxCL95WAJnUv7APWEmYV2pJAEq1NKa38QbE3ipo 384w, /images/products/0056/01-420w.webp?v=0il3hnigksXlFt5ML_LWRnsGWwaunqgmriJLZKIPU5w 420w, /images/products/0056/01-480w.webp?v=eKaKYulZOLFZbJa4bgWRUEKevroFcJWJq6SRObwpd8U 480w, /images/products/0056/01-560w.webp?v=fxw0kXLjinNaynzhAnPsNikdF3joFq7FOAjXFUpLdJU 560w, /images/products/0056/01-640w.webp?v=OeCObcshZezb2YrTaiyv0stgGqrtEfs8zdEW7uyfNq8 640w, /images/products/0056/01.webp?v=t6MyRW4MTCMticNObYQ3MQL9FC06PcUNgGetjiTKnaU 800w",
+            "preloadSizes": "(min-width: 768px) 420px, (max-width: 480px) 35vw, 240px",
+            "resources": [
+              "http://127.0.0.1:8120/images/products/0056/01-420w.webp?v=0il3hnigksXlFt5ML_LWRnsGWwaunqgmriJLZKIPU5w",
+              "http://127.0.0.1:8120/fonts/Vazirmatn-storefront.woff2?v=Anbe1StQyyiq8nepAFQ11wcJgH5wSmCOCafejd8rxXc",
+              "http://127.0.0.1:8120/js/stories.js?v=_7iMNCSf0-VGn1_UoyyuzYP2AgzpSAAD_qrCo56ZhQI",
+              "http://127.0.0.1:8120/js/home.js?v=E4qDbplaMjgP2QNYX_pTLjsZwSE4TMmRUYYNw5OwuTU",
+              "http://127.0.0.1:8120/js/product-card-dual.js?v=v3L6LF3ht6nzn_Xn_YIFSTJYyRL-Xtn751g9f-zcpao",
+              "http://127.0.0.1:8120/images/brand/originallogo-160w.webp?v=tSmZFS7ViE6ZJfQZNVn3F0xWhf05MRAO1wabVV8eZB0",
+              "http://127.0.0.1:8120/images/products/0017/01-420w.webp?v=OPq362qtMRwS4KgMKaxbeokpH1kOecGwPxR-DQM4SLA",
+              "http://127.0.0.1:8120/images/products/0086/01.webp?v=xpdJXrKX2gqSnOyXyrrjZZOmrMOPKuGFodDOezSjCnU",
+              "http://127.0.0.1:8120/js/site.js?v=fTPZtIcTEn7f76YE8_B-3Lq_yod_0F5ILhlB2qLHVXE",
+              "http://127.0.0.1:8120/js/auth.js?v=-s8RQ9tLdyBlrXoPKRBq_C2-knAv5r4s-iE8oaioJ1g",
+              "http://127.0.0.1:8120/js/scroll-reveal.js?v=IHdV1G837535xOh7YE2cw1-Y9TX-DLSRd0sU6JJXoa0",
+              "http://127.0.0.1:8120/images/icons/phone-fluency-64w.webp?v=qKjuaYP08aKnrwUoItdwpyQ6hrrGLjeUNztjLX2dnFQ",
+              "http://127.0.0.1:8120/images/products/0079/01-160w.webp?v=gEJwOQr2NU6fNu2lXqGnBjG8dX75VVppB7c1guUzaXk",
+              "http://127.0.0.1:8120/images/products/0079/01-hero-photo-v1-272w.webp?v=Sviq3LHjX_bvlEGcEG2dIB1rKeAGltE8vCmbfPBMCSs",
+              "http://127.0.0.1:8120/images/products/0094/01-160w.webp?v=ntfwU90EA4DYjG2EBbZAu9L62XZMpQW5rs5CqaduH6M",
+              "http://127.0.0.1:8120/images/products/0080/01-160w.webp?v=T06dgoMCAwhVj7SQplbGWX31dhAy5uf2_mC-WlytCg0",
+              "http://127.0.0.1:8120/images/products/0080/01-hero-photo-v1-272w.webp?v=ULgPOftlmFXqR4DzWVJSJbVgixoZt-d_GyO2wXsIyHY",
+              "http://127.0.0.1:8120/images/products/0075/01-160w.webp?v=xm08IuwCAyy22mCekdBF4JcZ8t23vyCXdiK4tyR50mM",
+              "http://127.0.0.1:8120/images/brand/originallogo.webp?v=GozN8rzIrwNspsseVTERlUoJGbgnyNy7crwsANGzzes"
+            ],
+            "preloads": [
+              "http://127.0.0.1:8120/images/products/0056/01-lcp.webp?v=0KA_Baxh7GQovxzXaVvztx4goZdfOd9c4iwvjZNjnd8"
+            ],
+            "fonts": [
+              "http://127.0.0.1:8120/fonts/Vazirmatn-storefront.woff2?v=Anbe1StQyyiq8nepAFQ11wcJgH5wSmCOCafejd8rxXc"
+            ],
+            "badPaintReferences": [],
+            "dom": 1435,
+            "heroImages": [
+              {
+                "loading": "eager",
+                "priority": "high"
+              },
+              {
+                "loading": "eager",
+                "priority": "low"
+              },
+              {
+                "loading": "eager",
+                "priority": "low"
+              }
+            ],
+            "logo": "http://127.0.0.1:8120/images/brand/originallogo-160w.webp?v=tSmZFS7ViE6ZJfQZNVn3F0xWhf05MRAO1wabVV8eZB0",
+            "favicon": "http://127.0.0.1:8120/images/brand/originallogo.webp?v=GozN8rzIrwNspsseVTERlUoJGbgnyNy7crwsANGzzes",
+            "routes": [
+              "/Shop/Product/بشقاب-یکبار-مصرف-گیاهی-بسته-12-عدد",
+              "/Shop/Product/لیوان-یکبار-مصرف-گیاهی-250-سی-سی-12-تایی",
+              "/Shop/Product/کیک-خوری-2",
+              "/Shop/Product/کاسه-صدفی-1000-سیسی-یکبار-مصرف-گیاهی-بست",
+              "/Shop/Product/کاسه-صدفی-یکبار-مصرف-گیاهی-300-سی-سی",
+              "/Shop/Product/دیس-بزرگ-2",
+              "/Shop/Product/ظرف-سه-خانه-بسته-بندی",
+              "/Shop/Product/کارد-12-تایی",
+              "/Shop/Product/ظرف-چهارخانه-فانتزی",
+              "/Shop/Product/چهارخانه-مرغی",
+              "/Shop/Product/پایه-فنجان-یکبار-مصرف-گیاهی",
+              "/Shop/Product/بشقاب-بزرگ",
+              "/Shop/Product/کیک-خوری",
+              "/Shop/Product/ظرف-بستهبندی-سهخانه-یکبار-مصرف-گیا",
+              "/Shop/Product/سطل-1000سی-سی-متوسط",
+              "/Shop/Product/درب-195",
+              "/News/Article/new-amelon-stock-arrival",
+              "/News/Article/fall-wholesale-discount",
+              "/News/Article/online-price-inquiry-launch",
+              "/News/Article/official-amelon-dealership-tehran",
+              "/Blog/Post/کاربرد-قیمت-ظروف-یکبار-مصرف-آملون-در-رستوران،-کیترینگ-و-فستفود",
+              "/Blog/Post/سوالات-پرتکرار-درباره-خرید-عمده-ظروف-یکبار-مصرف-آملون",
+              "/Blog/Post/مقایسه-ظروف-فست-فود-یکبار-مصرف-با-ظروف-پلاستیکی-راهنمای-خریدار-عمده",
+              "/Blog/Post/مقایسه-ظروف-یکبار-مصرف-گیاهی-آملون-با-ظروف-پلاستیکی-راهنمای-خریدار-عمده"
+            ]
+          }
+        },
+        {
+          "publicPages": 10,
+          "errors": []
+        },
+        {
+          "scriptFailureRecovered": true,
+          "attempts": 2
+        },
+        {
+          "dualCycle": "phase, partial visibility, pause and resume passed"
+        }
+      ],
+      "movasseghi-inline-css-pSK48P": [
+        {
+          "width": 390,
+          "externalHomeCssBlocked": "PASS",
+          "auth": "PASS"
+        },
+        {
+          "width": 1366,
+          "externalHomeCssBlocked": "PASS",
+          "auth": "PASS"
+        },
+        {
+          "cartCssFailureRetry": "PASS"
+        },
+        {
+          "withoutJavascript": "SSR, design and 8+8 PASS"
+        }
+      ],
+      "strict_home": [
+        {
+          "name": "menu",
+          "firstClickOpened": true,
+          "errors": []
+        },
+        {
+          "name": "cart",
+          "firstClickOpened": true,
+          "errors": []
+        },
+        {
+          "name": "auth",
+          "firstClickOpened": true,
+          "errors": []
+        },
+        {
+          "name": "story",
+          "firstClickOpened": true,
+          "errors": []
+        },
+        {
+          "name": "mobile",
+          "initial": {
+            "hero": {
+              "x": 0,
+              "y": 298.296875,
+              "width": 390,
+              "height": 311.609375
+            },
+            "story": {
+              "x": 0,
+              "y": 187.796875,
+              "width": 390,
+              "height": 110.5
+            },
+            "heading": {
+              "x": 166.828125,
+              "y": 376.5625,
+              "width": 203.578125,
+              "height": 23.3125
+            },
+            "header": {
+              "x": 0,
+              "y": 42.65625,
+              "width": 390,
+              "height": 145.140625
+            },
+            "menuHidden": true,
+            "modalHidden": true,
+            "horizontalOverflow": false
+          },
+          "loaded": {
+            "hero": {
+              "x": 0,
+              "y": 298.296875,
+              "width": 390,
+              "height": 311.609375
+            },
+            "story": {
+              "x": 0,
+              "y": 187.796875,
+              "width": 390,
+              "height": 110.5
+            },
+            "heading": {
+              "x": 166.828125,
+              "y": 376.5625,
+              "width": 203.578125,
+              "height": 23.3125
+            },
+            "header": {
+              "x": 0,
+              "y": 42.65625,
+              "width": 390,
+              "height": 145.140625
+            },
+            "menuHidden": true,
+            "modalHidden": true,
+            "horizontalOverflow": false
+          },
+          "featured": 8,
+          "offers": 8,
+          "stories": 12,
+          "cls": 0.0002501556453624017
+        },
+        {
+          "name": "desktop",
+          "initial": {
+            "hero": {
+              "x": 0,
+              "y": 482.09375,
+              "width": 1366,
+              "height": 598.203125
+            },
+            "story": {
+              "x": 0,
+              "y": 230.28125,
+              "width": 1366,
+              "height": 251.8125
+            },
+            "heading": {
+              "x": 618.859375,
+              "y": 670.21875,
+              "width": 640.125,
+              "height": 60.46875
+            },
+            "header": {
+              "x": 68.3125,
+              "y": 53.390625,
+              "width": 1229.390625,
+              "height": 176.890625
+            },
+            "menuHidden": true,
+            "modalHidden": true,
+            "horizontalOverflow": false
+          },
+          "loaded": {
+            "hero": {
+              "x": 0,
+              "y": 482.09375,
+              "width": 1366,
+              "height": 598.203125
+            },
+            "story": {
+              "x": 0,
+              "y": 230.28125,
+              "width": 1366,
+              "height": 251.8125
+            },
+            "heading": {
+              "x": 618.859375,
+              "y": 670.21875,
+              "width": 640.125,
+              "height": 60.46875
+            },
+            "header": {
+              "x": 68.3125,
+              "y": 53.390625,
+              "width": 1229.390625,
+              "height": 176.890625
+            },
+            "menuHidden": true,
+            "modalHidden": true,
+            "horizontalOverflow": false
+          },
+          "featured": 8,
+          "offers": 8,
+          "stories": 12,
+          "cls": 0
+        }
+      ],
+      "final_inline_and_reduced_motion": [
+        {
+          "width": 390,
+          "externalHomeCssBlocked": "PASS",
+          "auth": "PASS"
+        },
+        {
+          "width": 1366,
+          "externalHomeCssBlocked": "PASS",
+          "auth": "PASS"
+        },
+        {
+          "cartCssFailureRetry": "PASS"
+        },
+        {
+          "withoutJavascript": "SSR, design and 8+8 PASS"
+        },
+        {
+          "reducedMotion": "PASS"
+        }
+      ]
+    },
+    "proxy_cache": "Repository nginx cache integration PASS; no live production header claim",
+    "design": [
+      {
+        "device": "mobile",
+        "version": "baseline",
+        "width": 390,
+        "height": 844,
+        "geometry": {
+          ".ms-promo-bar": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 42.65625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgba(255, 255, 255, 0.92)"
+          },
+          ".ms-top": {
+            "x": 0,
+            "y": 42.65625,
+            "width": 390,
+            "height": 145.140625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-logo": {
+            "x": 142.3125,
+            "y": 61.234375,
+            "width": 141.390625,
+            "height": 52,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-stories": {
+            "x": 0,
+            "y": 187.796875,
+            "width": 390,
+            "height": 110.5,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-hero": {
+            "x": 0,
+            "y": 298.296875,
+            "width": 390,
+            "height": 311.609375,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-hero-title": {
+            "x": 166.828125,
+            "y": 376.5625,
+            "width": 203.578125,
+            "height": 23.3125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "19.11px",
+            "color": "rgb(255, 255, 255)"
+          },
+          ".ms-hero-product img": {
+            "x": 19.59375,
+            "y": 376.546875,
+            "width": 135.71875,
+            "height": 96,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(255, 255, 255)"
+          },
+          ".ms-features": {
+            "x": 0,
+            "y": 712.28125,
+            "width": 390,
+            "height": 266.515625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-offers": {
+            "x": 0,
+            "y": 1018.796875,
+            "width": 390,
+            "height": 525.9375,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-featured-section": {
+            "x": 0,
+            "y": 1825.09375,
+            "width": 390,
+            "height": 1295.75,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-segments": {
+            "x": 0,
+            "y": 3190.84375,
+            "width": 390,
+            "height": 428.515625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-footer": {
+            "x": 0,
+            "y": 6669.21875,
+            "width": 390,
+            "height": 390,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "13.12px",
+            "color": "rgba(255, 255, 255, 0.82)"
+          }
+        },
+        "totalHeight": 7155,
+        "featured": 8,
+        "offers": 8
+      },
+      {
+        "device": "mobile",
+        "version": "current",
+        "width": 390,
+        "height": 844,
+        "geometry": {
+          ".ms-promo-bar": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 42.65625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgba(255, 255, 255, 0.92)"
+          },
+          ".ms-top": {
+            "x": 0,
+            "y": 42.65625,
+            "width": 390,
+            "height": 145.140625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-logo": {
+            "x": 142.3125,
+            "y": 61.234375,
+            "width": 141.390625,
+            "height": 52,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-stories": {
+            "x": 0,
+            "y": 187.796875,
+            "width": 390,
+            "height": 110.5,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-hero": {
+            "x": 0,
+            "y": 298.296875,
+            "width": 390,
+            "height": 311.609375,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-hero-title": {
+            "x": 166.828125,
+            "y": 376.5625,
+            "width": 203.578125,
+            "height": 23.3125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "19.11px",
+            "color": "rgb(255, 255, 255)"
+          },
+          ".ms-hero-product img": {
+            "x": 19.59375,
+            "y": 376.546875,
+            "width": 135.71875,
+            "height": 96,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(255, 255, 255)"
+          },
+          ".ms-features": {
+            "x": 0,
+            "y": 712.28125,
+            "width": 390,
+            "height": 266.515625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-offers": {
+            "x": 0,
+            "y": 1018.796875,
+            "width": 390,
+            "height": 525.9375,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-featured-section": {
+            "x": 0,
+            "y": 1825.09375,
+            "width": 390,
+            "height": 1295.75,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-segments": {
+            "x": 0,
+            "y": 3190.84375,
+            "width": 390,
+            "height": 428.515625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-footer": {
+            "x": 0,
+            "y": 6669.21875,
+            "width": 390,
+            "height": 390,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "13.12px",
+            "color": "rgba(255, 255, 255, 0.82)"
+          }
+        },
+        "totalHeight": 7155,
+        "featured": 8,
+        "offers": 8
+      },
+      {
+        "device": "tablet",
+        "version": "baseline",
+        "width": 768,
+        "height": 1024,
+        "geometry": {
+          ".ms-promo-bar": {
+            "x": 0,
+            "y": 0,
+            "width": 768,
+            "height": 53.390625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgba(255, 255, 255, 0.92)"
+          },
+          ".ms-top": {
+            "x": 30.734375,
+            "y": 53.390625,
+            "width": 706.546875,
+            "height": 197.5,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-logo": {
+            "x": 573.296875,
+            "y": 91.859375,
+            "width": 141.390625,
+            "height": 52,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-stories": {
+            "x": 0,
+            "y": 250.890625,
+            "width": 768,
+            "height": 252.65625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-hero": {
+            "x": 0,
+            "y": 503.546875,
+            "width": 768,
+            "height": 538.203125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-hero-title": {
+            "x": 347.828125,
+            "y": 671.765625,
+            "width": 365.125,
+            "height": 36.28125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "33.6px",
+            "color": "rgb(255, 255, 255)"
+          },
+          ".ms-hero-product img": {
+            "x": 55.046875,
+            "y": 603.15625,
+            "width": 260.78125,
+            "height": 260.78125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(255, 255, 255)"
+          },
+          ".ms-features": {
+            "x": 0,
+            "y": 1092.9375,
+            "width": 768,
+            "height": 322.390625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-offers": {
+            "x": 0,
+            "y": 1459.328125,
+            "width": 768,
+            "height": 834.84375,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-featured-section": {
+            "x": 0,
+            "y": 2663.421875,
+            "width": 768,
+            "height": 760.59375,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-segments": {
+            "x": 0,
+            "y": 3510.015625,
+            "width": 768,
+            "height": 374.453125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-footer": {
+            "x": 0,
+            "y": 7433.09375,
+            "width": 768,
+            "height": 344,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "13.12px",
+            "color": "rgba(255, 255, 255, 0.82)"
+          }
+        },
+        "totalHeight": 7777,
+        "featured": 8,
+        "offers": 8
+      },
+      {
+        "device": "tablet",
+        "version": "current",
+        "width": 768,
+        "height": 1024,
+        "geometry": {
+          ".ms-promo-bar": {
+            "x": 0,
+            "y": 0,
+            "width": 768,
+            "height": 53.390625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgba(255, 255, 255, 0.92)"
+          },
+          ".ms-top": {
+            "x": 30.734375,
+            "y": 53.390625,
+            "width": 706.546875,
+            "height": 197.5,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-logo": {
+            "x": 573.296875,
+            "y": 91.859375,
+            "width": 141.390625,
+            "height": 52,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-stories": {
+            "x": 0,
+            "y": 250.890625,
+            "width": 768,
+            "height": 252.65625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-hero": {
+            "x": 0,
+            "y": 503.546875,
+            "width": 768,
+            "height": 538.203125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-hero-title": {
+            "x": 347.828125,
+            "y": 671.765625,
+            "width": 365.125,
+            "height": 36.28125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "33.6px",
+            "color": "rgb(255, 255, 255)"
+          },
+          ".ms-hero-product img": {
+            "x": 55.046875,
+            "y": 603.15625,
+            "width": 260.78125,
+            "height": 260.78125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(255, 255, 255)"
+          },
+          ".ms-features": {
+            "x": 0,
+            "y": 1092.9375,
+            "width": 768,
+            "height": 322.390625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-offers": {
+            "x": 0,
+            "y": 1459.328125,
+            "width": 768,
+            "height": 834.84375,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-featured-section": {
+            "x": 0,
+            "y": 2663.421875,
+            "width": 768,
+            "height": 760.59375,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-segments": {
+            "x": 0,
+            "y": 3510.015625,
+            "width": 768,
+            "height": 374.453125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-footer": {
+            "x": 0,
+            "y": 7433.09375,
+            "width": 768,
+            "height": 344,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "13.12px",
+            "color": "rgba(255, 255, 255, 0.82)"
+          }
+        },
+        "totalHeight": 7777,
+        "featured": 8,
+        "offers": 8
+      },
+      {
+        "device": "desktop",
+        "version": "baseline",
+        "width": 1366,
+        "height": 768,
+        "geometry": {
+          ".ms-promo-bar": {
+            "x": 0,
+            "y": 0,
+            "width": 1366,
+            "height": 53.390625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgba(255, 255, 255, 0.92)"
+          },
+          ".ms-top": {
+            "x": 68.3125,
+            "y": 53.390625,
+            "width": 1229.390625,
+            "height": 176.890625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-logo": {
+            "x": 1133.71875,
+            "y": 81.5625,
+            "width": 141.390625,
+            "height": 52,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-stories": {
+            "x": 0,
+            "y": 230.28125,
+            "width": 1366,
+            "height": 251.8125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-hero": {
+            "x": 0,
+            "y": 482.09375,
+            "width": 1366,
+            "height": 598.203125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-hero-title": {
+            "x": 618.859375,
+            "y": 670.21875,
+            "width": 640.125,
+            "height": 60.46875,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "56px",
+            "color": "rgb(255, 255, 255)"
+          },
+          ".ms-hero-product img": {
+            "x": 125.625,
+            "y": 582.8125,
+            "width": 420,
+            "height": 322.546875,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(255, 255, 255)"
+          },
+          ".ms-features": {
+            "x": 0,
+            "y": 1131.484375,
+            "width": 1366,
+            "height": 322.390625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-offers": {
+            "x": 0,
+            "y": 1497.875,
+            "width": 1366,
+            "height": 1096.265625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-featured-section": {
+            "x": 0,
+            "y": 2973.390625,
+            "width": 1366,
+            "height": 998.9375,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-segments": {
+            "x": 0,
+            "y": 4058.328125,
+            "width": 1366,
+            "height": 359.3125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-footer": {
+            "x": 0,
+            "y": 7174.234375,
+            "width": 1366,
+            "height": 344,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "13.12px",
+            "color": "rgba(255, 255, 255, 0.82)"
+          }
+        },
+        "totalHeight": 7518,
+        "featured": 8,
+        "offers": 8
+      },
+      {
+        "device": "desktop",
+        "version": "current",
+        "width": 1366,
+        "height": 768,
+        "geometry": {
+          ".ms-promo-bar": {
+            "x": 0,
+            "y": 0,
+            "width": 1366,
+            "height": 53.390625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgba(255, 255, 255, 0.92)"
+          },
+          ".ms-top": {
+            "x": 68.3125,
+            "y": 53.390625,
+            "width": 1229.390625,
+            "height": 176.890625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-logo": {
+            "x": 1133.71875,
+            "y": 81.5625,
+            "width": 141.390625,
+            "height": 52,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-stories": {
+            "x": 0,
+            "y": 230.28125,
+            "width": 1366,
+            "height": 251.8125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-hero": {
+            "x": 0,
+            "y": 482.09375,
+            "width": 1366,
+            "height": 598.203125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-hero-title": {
+            "x": 618.859375,
+            "y": 670.21875,
+            "width": 640.125,
+            "height": 60.46875,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "56px",
+            "color": "rgb(255, 255, 255)"
+          },
+          ".ms-hero-product img": {
+            "x": 125.625,
+            "y": 582.8125,
+            "width": 420,
+            "height": 322.546875,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(255, 255, 255)"
+          },
+          ".ms-features": {
+            "x": 0,
+            "y": 1131.484375,
+            "width": 1366,
+            "height": 322.390625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-offers": {
+            "x": 0,
+            "y": 1497.875,
+            "width": 1366,
+            "height": 1096.265625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-featured-section": {
+            "x": 0,
+            "y": 2973.390625,
+            "width": 1366,
+            "height": 998.9375,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-segments": {
+            "x": 0,
+            "y": 4058.328125,
+            "width": 1366,
+            "height": 359.3125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-footer": {
+            "x": 0,
+            "y": 7174.234375,
+            "width": 1366,
+            "height": 344,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "13.12px",
+            "color": "rgba(255, 255, 255, 0.82)"
+          }
+        },
+        "totalHeight": 7518,
+        "featured": 8,
+        "offers": 8
+      }
+    ],
+    "long_active_observation": [
+      {
+        "name": "desktop",
+        "lcp": [
+          {
+            "time": 384,
+            "size": 161403,
+            "url": "http://127.0.0.1:8120/images/products/0056/01-420w.webp?v=0il3hnigksXlFt5ML_LWRnsGWwaunqgmriJLZKIPU5w",
+            "tag": "<img src=\"/images/products/0056/01-lcp.webp?v=0KA_Baxh7GQovxzXaVvztx4goZdfOd9c4iwvjZNjnd8\" alt=\"ظرف چهارخانه کبابی فانتزی یکبار مصرف گیاهی\" width=\"240\" height=\"240\" decoding=\"async\" loading=\"eager\" fetchpriority=\"high\" srcset=\"/images/products/0056/01-64w.webp?v=GDz7K1GyyEnC8Pd0FLGcvY7AB-3Sow9xj2c3GmfcAug 64w, /images/products/0056/01-128w.webp?v=IRgY9lbm-cXJsL7mehJtp5PeT8mp4k7nhMGxsGCb1hk 128w, /images/products/0056/01-160w.webp?v=VMjRgQor3hKw4Kpt5hPAqFKeoCuAi78wUZRSqNMEcrE 160w, /images/produc"
+          }
+        ],
+        "shifts": [],
+        "long": [],
+        "dom": 1435,
+        "hero": [
+          {
+            "src": "http://127.0.0.1:8120/images/products/0056/01-420w.webp?v=0il3hnigksXlFt5ML_LWRnsGWwaunqgmriJLZKIPU5w",
+            "loading": "eager",
+            "width": 420,
+            "height": 323,
+            "complete": true
+          },
+          {
+            "src": "http://127.0.0.1:8120/images/products/0017/01-420w.webp?v=OPq362qtMRwS4KgMKaxbeokpH1kOecGwPxR-DQM4SLA",
+            "loading": "eager",
+            "width": 420,
+            "height": 323,
+            "complete": true
+          },
+          {
+            "src": "http://127.0.0.1:8120/images/products/0086/01.webp?v=xpdJXrKX2gqSnOyXyrrjZZOmrMOPKuGFodDOezSjCnU",
+            "loading": "eager",
+            "width": 420,
+            "height": 323,
+            "complete": true
+          }
+        ],
+        "animations": [
+          {
+            "target": "ms-promo-bar",
+            "name": "msPromoBg",
+            "playState": "running"
+          },
+          {
+            "target": "ms-promo-shimmer",
+            "name": "msPromoShimmer",
+            "playState": "running"
+          },
+          {
+            "target": "ms-drawer-shimmer",
+            "name": "msDrawerShimmer",
+            "playState": "running"
+          },
+          {
+            "target": "ms-drawer-cta-shine",
+            "name": "msDrawerShine",
+            "playState": "running"
+          },
+          {
+            "target": "ms-hero-ring",
+            "name": "msHeroRingSpin",
+            "playState": "running"
+          },
+          {
+            "target": "ms-hero-ring",
+            "name": "msHeroRingSpin",
+            "playState": "running"
+          },
+          {
+            "target": "ms-hero-ring",
+            "name": "msHeroRingSpin",
+            "playState": "running"
+          },
+          {
+            "target": "",
+            "name": "msHeroFloat",
+            "playState": "running"
+          },
+          {
+            "target": "ms-hero-trust-marquee",
+            "name": "msHeroTrustMarquee",
+            "playState": "running"
+          },
+          {
+            "target": "ms-features-band-bg",
+            "name": "msFeatBand",
+            "playState": "running"
+          },
+          {
+            "target": "ms-features-band-shine",
+            "name": "msFeatShine",
+            "playState": "running"
+          },
+          {
+            "target": "ms-features-band-spark",
+            "name": "msFeatSpark",
+            "playState": "running"
+          },
+          {
+            "target": "ms-features-band-spark",
+            "name": "msFeatSpark",
+            "playState": "running"
+          },
+          {
+            "target": "ms-spark-divider-bg",
+            "name": "msSparkBg",
+            "playState": "running"
+          },
+          {
+            "target": "ms-spark-divider-shine",
+            "name": "msSparkShine",
+            "playState": "running"
+          },
+          {
+            "target": "ms-spark-orb ms-spark-orb-a",
+            "name": "msSparkOrb",
+            "playState": "running"
+          },
+          {
+            "target": "ms-spark-orb ms-spark-orb-b",
+            "name": "msSparkOrb",
+            "playState": "running"
+          },
+          {
+            "target": "ms-spark-orb ms-spark-orb-c",
+            "name": "msSparkOrb",
+            "playState": "running"
+          },
+          {
+            "target": "ms-spark-particle",
+            "name": "msSparkParticle",
+            "playState": "running"
+          },
+          {
+            "target": "ms-spark-particle",
+            "name": "msSparkParticle",
+            "playState": "running"
+          },
+          {
+            "target": "ms-spark-particle",
+            "name": "msSparkParticle",
+            "playState": "running"
+          },
+          {
+            "target": "ms-spark-particle",
+            "name": "msSparkParticle",
+            "playState": "running"
+          },
+          {
+            "target": "ms-spark-particle",
+            "name": "msSparkParticle",
+            "playState": "running"
+          },
+          {
+            "target": "ms-spark-particle",
+            "name": "msSparkParticle",
+            "playState": "running"
+          },
+          {
+            "target": "ms-spark-particle",
+            "name": "msSparkParticle",
+            "playState": "running"
+          },
+          {
+            "target": "ms-spark-particle",
+            "name": "msSparkParticle",
+            "playState": "running"
+          },
+          {
+            "target": "ms-spark-label",
+            "name": "msSparkLabel",
+            "playState": "running"
+          },
+          {
+            "target": "ms-spark-line",
+            "name": "msSparkLine",
+            "playState": "running"
+          },
+          {
+            "target": "ms-spark-gem",
+            "name": "msSparkRing",
+            "playState": "running"
+          },
+          {
+            "target": "ms-spark-gem-core",
+            "name": "msSparkGem",
+            "playState": "running"
+          },
+          {
+            "target": "ms-spark-line",
+            "name": "msSparkLine",
+            "playState": "running"
+          },
+          {
+            "target": "ms-spark-label ms-spark-label--accent",
+            "name": "msSparkLabel",
+            "playState": "running"
+          },
+          {
+            "target": "ms-news-card",
+            "name": "msNewsCardIn",
+            "playState": "finished"
+          },
+          {
+            "target": "ms-news-card",
+            "name": "msNewsCardIn",
+            "playState": "finished"
+          },
+          {
+            "target": "ms-news-card",
+            "name": "msNewsCardIn",
+            "playState": "finished"
+          },
+          {
+            "target": "ms-news-card",
+            "name": "msNewsCardIn",
+            "playState": "finished"
+          },
+          {
+            "target": "ms-news-card",
+            "name": "msNewsCardIn",
+            "playState": "finished"
+          },
+          {
+            "target": "ms-news-card",
+            "name": "msNewsCardIn",
+            "playState": "finished"
+          },
+          {
+            "target": "ms-news-card",
+            "name": "msNewsCardIn",
+            "playState": "finished"
+          },
+          {
+            "target": "ms-news-card",
+            "name": "msNewsCardIn",
+            "playState": "finished"
+          },
+          {
+            "target": "ms-footer-orb ms-footer-orb-a",
+            "name": "msFooterOrb",
+            "playState": "running"
+          },
+          {
+            "target": "ms-footer-orb ms-footer-orb-b",
+            "name": "msFooterOrb",
+            "playState": "running"
+          },
+          {
+            "target": "ms-footer-trust-marquee",
+            "name": "ms-footer-trust-scroll",
+            "playState": "running"
+          },
+          {
+            "target": "",
+            "playState": "running"
+          }
+        ],
+        "slides": 3,
+        "requests": [
+          {
+            "url": "http://127.0.0.1:8120/",
+            "type": "document"
+          },
+          {
+            "url": "http://127.0.0.1:8120/images/products/0056/01-420w.webp?v=0il3hnigksXlFt5ML_LWRnsGWwaunqgmriJLZKIPU5w",
+            "type": "image"
+          },
+          {
+            "url": "http://127.0.0.1:8120/fonts/Vazirmatn-storefront.woff2?v=Anbe1StQyyiq8nepAFQ11wcJgH5wSmCOCafejd8rxXc",
+            "type": "font"
+          },
+          {
+            "url": "http://127.0.0.1:8120/js/stories.js?v=_7iMNCSf0-VGn1_UoyyuzYP2AgzpSAAD_qrCo56ZhQI",
+            "type": "script"
+          },
+          {
+            "url": "http://127.0.0.1:8120/js/home.js?v=E4qDbplaMjgP2QNYX_pTLjsZwSE4TMmRUYYNw5OwuTU",
+            "type": "script"
+          },
+          {
+            "url": "http://127.0.0.1:8120/js/product-card-dual.js?v=v3L6LF3ht6nzn_Xn_YIFSTJYyRL-Xtn751g9f-zcpao",
+            "type": "script"
+          },
+          {
+            "url": "http://127.0.0.1:8120/images/brand/originallogo-160w.webp?v=tSmZFS7ViE6ZJfQZNVn3F0xWhf05MRAO1wabVV8eZB0",
+            "type": "image"
+          },
+          {
+            "url": "http://127.0.0.1:8120/images/products/0017/01-420w.webp?v=OPq362qtMRwS4KgMKaxbeokpH1kOecGwPxR-DQM4SLA",
+            "type": "image"
+          },
+          {
+            "url": "http://127.0.0.1:8120/images/products/0086/01.webp?v=xpdJXrKX2gqSnOyXyrrjZZOmrMOPKuGFodDOezSjCnU",
+            "type": "image"
+          },
+          {
+            "url": "http://127.0.0.1:8120/js/auth.js?v=-s8RQ9tLdyBlrXoPKRBq_C2-knAv5r4s-iE8oaioJ1g",
+            "type": "script"
+          },
+          {
+            "url": "http://127.0.0.1:8120/js/site.js?v=fTPZtIcTEn7f76YE8_B-3Lq_yod_0F5ILhlB2qLHVXE",
+            "type": "script"
+          },
+          {
+            "url": "http://127.0.0.1:8120/js/scroll-reveal.js?v=IHdV1G837535xOh7YE2cw1-Y9TX-DLSRd0sU6JJXoa0",
+            "type": "script"
+          },
+          {
+            "url": "http://127.0.0.1:8120/images/icons/phone-fluency-64w.webp?v=qKjuaYP08aKnrwUoItdwpyQ6hrrGLjeUNztjLX2dnFQ",
+            "type": "image"
+          },
+          {
+            "url": "http://127.0.0.1:8120/images/products/0079/01-160w.webp?v=gEJwOQr2NU6fNu2lXqGnBjG8dX75VVppB7c1guUzaXk",
+            "type": "image"
+          },
+          {
+            "url": "http://127.0.0.1:8120/images/products/0079/01-hero-photo-v1-272w.webp?v=Sviq3LHjX_bvlEGcEG2dIB1rKeAGltE8vCmbfPBMCSs",
+            "type": "image"
+          },
+          {
+            "url": "http://127.0.0.1:8120/images/products/0094/01-160w.webp?v=ntfwU90EA4DYjG2EBbZAu9L62XZMpQW5rs5CqaduH6M",
+            "type": "image"
+          },
+          {
+            "url": "http://127.0.0.1:8120/images/products/0080/01-160w.webp?v=T06dgoMCAwhVj7SQplbGWX31dhAy5uf2_mC-WlytCg0",
+            "type": "image"
+          },
+          {
+            "url": "http://127.0.0.1:8120/images/products/0080/01-hero-photo-v1-272w.webp?v=ULgPOftlmFXqR4DzWVJSJbVgixoZt-d_GyO2wXsIyHY",
+            "type": "image"
+          },
+          {
+            "url": "http://127.0.0.1:8120/images/products/0075/01-160w.webp?v=xm08IuwCAyy22mCekdBF4JcZ8t23vyCXdiK4tyR50mM",
+            "type": "image"
+          },
+          {
+            "url": "http://127.0.0.1:8120/images/brand/originallogo.webp?v=GozN8rzIrwNspsseVTERlUoJGbgnyNy7crwsANGzzes",
+            "type": "other"
+          },
+          {
+            "url": "http://127.0.0.1:8120/api/analytics/visitor",
+            "type": "fetch"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "name": "mobile",
+        "lcp": [
+          {
+            "time": 320,
+            "size": 52164,
+            "url": "http://127.0.0.1:8120/images/products/0056/01-160w.webp?v=VMjRgQor3hKw4Kpt5hPAqFKeoCuAi78wUZRSqNMEcrE",
+            "tag": "<img src=\"/images/products/0056/01-lcp.webp?v=0KA_Baxh7GQovxzXaVvztx4goZdfOd9c4iwvjZNjnd8\" alt=\"ظرف چهارخانه کبابی فانتزی یکبار مصرف گیاهی\" width=\"240\" height=\"240\" decoding=\"async\" loading=\"eager\" fetchpriority=\"high\" srcset=\"/images/products/0056/01-64w.webp?v=GDz7K1GyyEnC8Pd0FLGcvY7AB-3Sow9xj2c3GmfcAug 64w, /images/products/0056/01-128w.webp?v=IRgY9lbm-cXJsL7mehJtp5PeT8mp4k7nhMGxsGCb1hk 128w, /images/products/0056/01-160w.webp?v=VMjRgQor3hKw4Kpt5hPAqFKeoCuAi78wUZRSqNMEcrE 160w, /images/produc"
+          }
+        ],
+        "shifts": [
+          {
+            "time": 349.6000000014901,
+            "value": 0.0002501556453624017,
+            "sources": [
+              "<span b-rxkczuzrl2=\"\" class=\"ms-fab-call-rings\" aria-hidden=\"true\">\n        <span b-rxkczuzrl2=\"\" class=\"ms-fab-call-ring\"></span>\n        <span b-rxkczuzrl2=\"\" class=\"ms-fab-call-ring\"></span>\n      "
+            ]
+          },
+          {
+            "time": 2042.2999999970198,
+            "value": 0.00046110478546856887,
+            "sources": [
+              "<div class=\"ms-features-band-inner\">\n                <span class=\"ms-features-band-spark\">✦</span>\n                <p>چرا <strong>فروشگاه موثقی</strong>؟</p>\n                <span class=\"ms-features-b"
+            ]
+          },
+          {
+            "time": 5542.29999999702,
+            "value": 0.00046110478546856887,
+            "sources": [
+              "<div class=\"ms-features-band-inner\">\n                <span class=\"ms-features-band-spark\">✦</span>\n                <p>چرا <strong>فروشگاه موثقی</strong>؟</p>\n                <span class=\"ms-features-b"
+            ]
+          },
+          {
+            "time": 9041.60000000149,
+            "value": 0.00046110478546856887,
+            "sources": [
+              "<div class=\"ms-features-band-inner\">\n                <span class=\"ms-features-band-spark\">✦</span>\n                <p>چرا <strong>فروشگاه موثقی</strong>؟</p>\n                <span class=\"ms-features-b"
+            ]
+          },
+          {
+            "time": 12541.39999999851,
+            "value": 0.00046110478546856887,
+            "sources": [
+              "<div class=\"ms-features-band-inner\">\n                <span class=\"ms-features-band-spark\">✦</span>\n                <p>چرا <strong>فروشگاه موثقی</strong>؟</p>\n                <span class=\"ms-features-b"
+            ]
+          }
+        ],
+        "long": [
+          {
+            "start": 62.899999998509884,
+            "duration": 168
+          }
+        ],
+        "dom": 1429,
+        "hero": [
+          {
+            "src": "http://127.0.0.1:8120/images/products/0056/01-160w.webp?v=VMjRgQor3hKw4Kpt5hPAqFKeoCuAi78wUZRSqNMEcrE",
+            "loading": "eager",
+            "width": 136,
+            "height": 96,
+            "complete": true
+          },
+          {
+            "src": "http://127.0.0.1:8120/images/products/0017/01-160w.webp?v=_obYxKF5uKC28HR64y4RDDus-njQac9MjRo-OOB9obA",
+            "loading": "eager",
+            "width": 136,
+            "height": 96,
+            "complete": true
+          },
+          {
+            "src": "http://127.0.0.1:8120/images/products/0086/01-160w.webp?v=2i2ewDPbPb9dMFGWi0pJ_-rk-13dZSzW2KPK-2U1Yok",
+            "loading": "eager",
+            "width": 136,
+            "height": 96,
+            "complete": true
+          }
+        ],
+        "animations": [
+          {
+            "target": "ms-promo-bar",
+            "name": "msPromoBg",
+            "playState": "running"
+          },
+          {
+            "target": "ms-promo-shimmer",
+            "name": "msPromoShimmer",
+            "playState": "running"
+          },
+          {
+            "target": "ms-drawer-shimmer",
+            "name": "msDrawerShimmer",
+            "playState": "running"
+          },
+          {
+            "target": "ms-drawer-cta-shine",
+            "name": "msDrawerShine",
+            "playState": "running"
+          },
+          {
+            "target": "ms-hero-ring",
+            "name": "msHeroRingSpin",
+            "playState": "running"
+          },
+          {
+            "target": "ms-hero-ring",
+            "name": "msHeroRingSpin",
+            "playState": "running"
+          },
+          {
+            "target": "ms-hero-ring",
+            "name": "msHeroRingSpin",
+            "playState": "running"
+          },
+          {
+            "target": "",
+            "name": "msHeroFloat",
+            "playState": "running"
+          },
+          {
+            "target": "ms-hero-trust-marquee",
+            "name": "msHeroTrustMarquee",
+            "playState": "running"
+          },
+          {
+            "target": "ms-features-band-bg",
+            "name": "msFeatBand",
+            "playState": "running"
+          },
+          {
+            "target": "ms-features-band-shine",
+            "name": "msFeatShine",
+            "playState": "running"
+          },
+          {
+            "target": "ms-features-band-spark",
+            "name": "msFeatSpark",
+            "playState": "running"
+          },
+          {
+            "target": "ms-features-band-spark",
+            "name": "msFeatSpark",
+            "playState": "running"
+          },
+          {
+            "target": "ms-feature-card",
+            "name": "msFeatCardPulse",
+            "playState": "running"
+          },
+          {
+            "target": "ms-feature-card",
+            "name": "msFeatCardPulse",
+            "playState": "running"
+          },
+          {
+            "target": "ms-feature-card",
+            "name": "msFeatCardPulse",
+            "playState": "running"
+          },
+          {
+            "target": "ms-feature-card",
+            "name": "msFeatCardPulse",
+            "playState": "running"
+          },
+          {
+            "target": "ms-spark-divider-bg",
+            "name": "msSparkBg",
+            "playState": "running"
+          },
+          {
+            "target": "ms-spark-divider-shine",
+            "name": "msSparkShine",
+            "playState": "running"
+          },
+          {
+            "target": "ms-spark-orb ms-spark-orb-a",
+            "name": "msSparkOrb",
+            "playState": "running"
+          },
+          {
+            "target": "ms-spark-orb ms-spark-orb-b",
+            "name": "msSparkOrb",
+            "playState": "running"
+          },
+          {
+            "target": "ms-spark-orb ms-spark-orb-c",
+            "name": "msSparkOrb",
+            "playState": "running"
+          },
+          {
+            "target": "ms-spark-particle",
+            "name": "msSparkParticle",
+            "playState": "running"
+          },
+          {
+            "target": "ms-spark-particle",
+            "name": "msSparkParticle",
+            "playState": "running"
+          },
+          {
+            "target": "ms-spark-particle",
+            "name": "msSparkParticle",
+            "playState": "running"
+          },
+          {
+            "target": "ms-spark-particle",
+            "name": "msSparkParticle",
+            "playState": "running"
+          },
+          {
+            "target": "ms-spark-particle",
+            "name": "msSparkParticle",
+            "playState": "running"
+          },
+          {
+            "target": "ms-spark-particle",
+            "name": "msSparkParticle",
+            "playState": "running"
+          },
+          {
+            "target": "ms-spark-particle",
+            "name": "msSparkParticle",
+            "playState": "running"
+          },
+          {
+            "target": "ms-spark-particle",
+            "name": "msSparkParticle",
+            "playState": "running"
+          },
+          {
+            "target": "ms-spark-label",
+            "name": "msSparkLabel",
+            "playState": "running"
+          },
+          {
+            "target": "ms-spark-line",
+            "name": "msSparkLine",
+            "playState": "running"
+          },
+          {
+            "target": "ms-spark-gem",
+            "name": "msSparkRing",
+            "playState": "running"
+          },
+          {
+            "target": "ms-spark-gem-core",
+            "name": "msSparkGem",
+            "playState": "running"
+          },
+          {
+            "target": "ms-spark-line",
+            "name": "msSparkLine",
+            "playState": "running"
+          },
+          {
+            "target": "ms-spark-label ms-spark-label--accent",
+            "name": "msSparkLabel",
+            "playState": "running"
+          },
+          {
+            "target": "ms-news-card",
+            "name": "msNewsCardIn",
+            "playState": "finished"
+          },
+          {
+            "target": "ms-news-card",
+            "name": "msNewsCardIn",
+            "playState": "finished"
+          },
+          {
+            "target": "ms-news-card",
+            "name": "msNewsCardIn",
+            "playState": "finished"
+          },
+          {
+            "target": "ms-news-card",
+            "name": "msNewsCardIn",
+            "playState": "finished"
+          },
+          {
+            "target": "ms-news-card",
+            "name": "msNewsCardIn",
+            "playState": "finished"
+          },
+          {
+            "target": "ms-news-card",
+            "name": "msNewsCardIn",
+            "playState": "finished"
+          },
+          {
+            "target": "ms-news-card",
+            "name": "msNewsCardIn",
+            "playState": "finished"
+          },
+          {
+            "target": "ms-news-card",
+            "name": "msNewsCardIn",
+            "playState": "finished"
+          },
+          {
+            "target": "ms-footer-orb ms-footer-orb-a",
+            "name": "msFooterOrb",
+            "playState": "running"
+          },
+          {
+            "target": "ms-footer-orb ms-footer-orb-b",
+            "name": "msFooterOrb",
+            "playState": "running"
+          },
+          {
+            "target": "ms-footer-trust-marquee",
+            "name": "ms-footer-trust-scroll",
+            "playState": "running"
+          },
+          {
+            "target": "ms-fab-call-glow",
+            "name": "msFabGlow",
+            "playState": "running"
+          },
+          {
+            "target": "ms-fab-call-ring",
+            "name": "msFabRipple",
+            "playState": "running"
+          },
+          {
+            "target": "ms-fab-call-ring",
+            "name": "msFabRipple",
+            "playState": "running"
+          },
+          {
+            "target": "ms-fab-call-ring",
+            "name": "msFabRipple",
+            "playState": "running"
+          },
+          {
+            "target": "ms-fab-call-core",
+            "name": "msFabBorderSpin",
+            "playState": "running"
+          },
+          {
+            "target": "",
+            "playState": "running"
+          }
+        ],
+        "slides": 3,
+        "requests": [
+          {
+            "url": "http://127.0.0.1:8120/",
+            "type": "document"
+          },
+          {
+            "url": "http://127.0.0.1:8120/images/products/0056/01-160w.webp?v=VMjRgQor3hKw4Kpt5hPAqFKeoCuAi78wUZRSqNMEcrE",
+            "type": "image"
+          },
+          {
+            "url": "http://127.0.0.1:8120/fonts/Vazirmatn-storefront.woff2?v=Anbe1StQyyiq8nepAFQ11wcJgH5wSmCOCafejd8rxXc",
+            "type": "font"
+          },
+          {
+            "url": "http://127.0.0.1:8120/js/stories.js?v=_7iMNCSf0-VGn1_UoyyuzYP2AgzpSAAD_qrCo56ZhQI",
+            "type": "script"
+          },
+          {
+            "url": "http://127.0.0.1:8120/js/home.js?v=E4qDbplaMjgP2QNYX_pTLjsZwSE4TMmRUYYNw5OwuTU",
+            "type": "script"
+          },
+          {
+            "url": "http://127.0.0.1:8120/js/product-card-dual.js?v=v3L6LF3ht6nzn_Xn_YIFSTJYyRL-Xtn751g9f-zcpao",
+            "type": "script"
+          },
+          {
+            "url": "http://127.0.0.1:8120/images/brand/originallogo.webp?v=GozN8rzIrwNspsseVTERlUoJGbgnyNy7crwsANGzzes",
+            "type": "image"
+          },
+          {
+            "url": "http://127.0.0.1:8120/images/products/0017/01-160w.webp?v=_obYxKF5uKC28HR64y4RDDus-njQac9MjRo-OOB9obA",
+            "type": "image"
+          },
+          {
+            "url": "http://127.0.0.1:8120/images/products/0086/01-160w.webp?v=2i2ewDPbPb9dMFGWi0pJ_-rk-13dZSzW2KPK-2U1Yok",
+            "type": "image"
+          },
+          {
+            "url": "http://127.0.0.1:8120/js/auth.js?v=-s8RQ9tLdyBlrXoPKRBq_C2-knAv5r4s-iE8oaioJ1g",
+            "type": "script"
+          },
+          {
+            "url": "http://127.0.0.1:8120/js/site.js?v=fTPZtIcTEn7f76YE8_B-3Lq_yod_0F5ILhlB2qLHVXE",
+            "type": "script"
+          },
+          {
+            "url": "http://127.0.0.1:8120/js/scroll-reveal.js?v=IHdV1G837535xOh7YE2cw1-Y9TX-DLSRd0sU6JJXoa0",
+            "type": "script"
+          },
+          {
+            "url": "http://127.0.0.1:8120/images/icons/phone-fluency-64w.webp?v=qKjuaYP08aKnrwUoItdwpyQ6hrrGLjeUNztjLX2dnFQ",
+            "type": "image"
+          },
+          {
+            "url": "http://127.0.0.1:8120/images/products/0079/01-128w.webp?v=MPw0qVM-UOsJgxCQISAVZY2XHL4wHljaCmq2sdM49so",
+            "type": "image"
+          },
+          {
+            "url": "http://127.0.0.1:8120/images/products/0079/01-hero-photo-v1-192w.webp?v=8jvk0GVW6mylUZIx2cLG13NR6N6SLQuWTdIEg4jZipQ",
+            "type": "image"
+          },
+          {
+            "url": "http://127.0.0.1:8120/images/products/0094/01-128w.webp?v=NCP-YN14b40aQAkkNfHD-bGxcjweuaDGwhVjab2Yq7k",
+            "type": "image"
+          },
+          {
+            "url": "http://127.0.0.1:8120/images/products/0056/01-hero-photo-v1-160w.webp?v=S4AjeidlcmM_B0w2Gm3nsN-qBSxeS9dlnovfRYd3Sss",
+            "type": "image"
+          },
+          {
+            "url": "http://127.0.0.1:8120/images/products/0017/01-hero-photo-v1-160w.webp?v=IBhBcfmyeBePTrAnJO8HENOv1PzZuXT7X3Dqj6Qe068",
+            "type": "image"
+          },
+          {
+            "url": "http://127.0.0.1:8120/images/brand/originallogo.webp?v=GozN8rzIrwNspsseVTERlUoJGbgnyNy7crwsANGzzes",
+            "type": "other"
+          },
+          {
+            "url": "http://127.0.0.1:8120/api/analytics/visitor",
+            "type": "fetch"
+          }
+        ],
+        "errors": []
+      }
+    ]
+  },
+  "images": {
+    "originals_checked": 242,
+    "changed_or_deleted": [],
+    "photo_quality": 94,
+    "photo_encoding": "lossy high-quality WebP display derivatives; original JPEG unchanged",
+    "studio_and_brand_derivatives": "lossless WebP",
+    "sample_quality": [
+      {
+        "image": "0056-256-q94.webp",
+        "bytes": 33620,
+        "ssim": 0.98828,
+        "psnr": 36.88
+      },
+      {
+        "image": "0079-420-q94.webp",
+        "bytes": 64394,
+        "ssim": 0.98917,
+        "psnr": 41.18
+      },
+      {
+        "image": "0056-160-q94.webp",
+        "bytes": 16474,
+        "ssim": 0.98467,
+        "psnr": 34.48
+      },
+      {
+        "image": "0056-420-q94.webp",
+        "bytes": 70696,
+        "ssim": 0.98928,
+        "psnr": 39.62
+      },
+      {
+        "image": "0056-640-q94.webp",
+        "bytes": 134530,
+        "ssim": 0.98985,
+        "psnr": 41.78
+      },
+      {
+        "image": "0056-384-q94.webp",
+        "bytes": 61926,
+        "ssim": 0.98933,
+        "psnr": 39.18
+      },
+      {
+        "image": "0079-640-q94.webp",
+        "bytes": 123232,
+        "ssim": 0.98953,
+        "psnr": 42.77
+      },
+      {
+        "image": "0079-384-q94.webp",
+        "bytes": 56270,
+        "ssim": 0.98911,
+        "psnr": 40.84
+      },
+      {
+        "image": "0079-256-q94.webp",
+        "bytes": 30732,
+        "ssim": 0.98759,
+        "psnr": 38.87
+      },
+      {
+        "image": "0079-160-q94.webp",
+        "bytes": 15840,
+        "ssim": 0.98667,
+        "psnr": 37.15
+      }
+    ],
+    "resolution_tests": "12 hero/studio and 12 real scene combinations at mobile/tablet/desktop and DPR 1/2"
+  },
+  "font": {
+    "source_bytes": 111152,
+    "subset_bytes": 85712,
+    "source_sha256": "4e3fa217d38fdafc1fea4414ceb58ca5e662cf0ab5fa735a8c8c20e8b42cad92",
+    "subset_sha256": "0276ded52b50cb28aaf277a9005435d70709807e704a608e09a7de8ddf2bc577",
+    "variable_metrics": [
+      {
+        "weight": 100,
+        "characters": 614,
+        "all_advance_widths_equal": true
+      },
+      {
+        "weight": 400,
+        "characters": 614,
+        "all_advance_widths_equal": true
+      },
+      {
+        "weight": 700,
+        "characters": 614,
+        "all_advance_widths_equal": true
+      },
+      {
+        "weight": 900,
+        "characters": 614,
+        "all_advance_widths_equal": true
+      }
+    ],
+    "fallback": "Full original font retained with disjoint actual cmap coverage; Latin Extended fallback browser-tested"
+  },
+  "css_tradeoff": "Complete route CSS is inline to remove a network dependency and duplicate style/layout pass; cart-only CSS remains intent-loaded. The HTML carries CSS bytes on later document downloads; other pages keep separately cached stylesheets.",
+  "remaining": [
+    "Actual fresh GT Grade A and Performance/Structure >95 not verified",
+    "Need original two 307 URL/Location/Non-Authoritative-Reason headers; request sent to user",
+    "Production HTTP/2, CDN, actual TTLs and network/backend split not verified or changed",
+    "DOM and initial unused CSS remain findings; no features removed",
+    "Existing package audit warnings remain; no security certification claimed"
+  ],
+  "source_parity": {
+    "fresh_rebuild_matches_tested_release_dll": true,
+    "sha256": "40ef02536f4fbc6c7772876c86fd71220b5cd844db04740a45d7114a390913eb",
+    "note": "Final source restored after experiments; fresh rebuild exactly matches the Release used for the recorded tests."
+  }
+}

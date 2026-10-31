@@ -92,7 +92,7 @@ public static class ProductImageHelper
     /// مسیر ذخیره‌شده در دیتابیس معمولاً به PNG اصلی اشاره می‌کند، در حالی که
     /// نسخه WebP هم کنارش روی دیسک هست. تا امروز همان PNG سنگین سرو می‌شد؛
     /// این متد اگر معادل WebP وجود داشته باشد آن را برمی‌گرداند.
-    /// نتیجه بررسی دیسک کش می‌شود تا برای هر درخواست I/O انجام نشود.
+    /// وجود فایل در هر بار انتخاب کنترل می‌شود؛ فایل تازه پشت کش منفی نمی‌ماند.
     /// </summary>
     public static string? PreferWebp(string? url, IWebHostEnvironment? env)
     {
@@ -100,16 +100,13 @@ public static class ProductImageHelper
         if (url.EndsWith(".webp", StringComparison.OrdinalIgnoreCase)) return url;
         if (!url.StartsWith('/')) return url;
 
-        return WebpCache.GetOrAdd(url, static (key, environment) =>
+        foreach (var candidate in WebpCandidates(url))
         {
-            foreach (var candidate in WebpCandidates(key))
-            {
-                var relative = candidate.TrimStart('/').Replace('/', Path.DirectorySeparatorChar);
-                var absolute = Path.Combine(environment.WebRootPath, relative);
-                if (File.Exists(absolute)) return candidate;
-            }
-            return key;
-        }, env);
+            var absolute = Path.Combine(env.WebRootPath, candidate.TrimStart('/').Replace('/', Path.DirectorySeparatorChar));
+            if (File.Exists(absolute))
+                return candidate;
+        }
+        return url;
     }
 
     /// <summary>نام‌گذاری روی دیسک یکدست نیست: هم «01-original.png → 01.webp» داریم هم «01-hero.png → 01-hero.webp».</summary>
@@ -125,7 +122,6 @@ public static class ProductImageHelper
         yield return withoutExt + ".webp";
     }
 
-    static readonly System.Collections.Concurrent.ConcurrentDictionary<string, string> WebpCache = new();
 
     /// <summary>Two-slide gallery: scene (index 0) + studio (index 1). Falls back to one URL for both until scene is uploaded.</summary>
     /// <summary>استودیو + صحنه برای کارت محصول — چرخه فقط وقتی هر دو URL متفاوت باشند.</summary>
@@ -174,7 +170,7 @@ public static class ProductImageHelper
         if (UrlIsScene(raw) && !raw.EndsWith(".webp", StringComparison.OrdinalIgnoreCase))
         {
             var heroWebp = PreferWebp(raw, env);
-            if (!string.IsNullOrEmpty(heroWebp) && !string.Equals(heroWebp, preferred, StringComparison.OrdinalIgnoreCase))
+            if (!string.IsNullOrEmpty(heroWebp) && !string.Equals(heroWebp, raw, StringComparison.OrdinalIgnoreCase))
                 return heroWebp;
             if (File.Exists(Path.Combine(env.WebRootPath, raw.TrimStart('/').Replace('/', Path.DirectorySeparatorChar))))
                 return raw;

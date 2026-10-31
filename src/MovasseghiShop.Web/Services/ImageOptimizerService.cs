@@ -27,7 +27,8 @@ public class ImageOptimizerService(IWebHostEnvironment env, ILogger<ImageOptimiz
 {
     public const int MaxEdge = 1400;
     public const int LcpMaxEdge = 256;
-    public const int WebpQuality = 82; // retained for callers; generated files use lossless WebP.
+    public const int WebpQuality = 82; // retained for existing callers
+    public const int PhotoQuality = 94;
     static readonly string[] Extensions = [".png", ".jpg", ".jpeg", ".webp"];
 
     public async Task<ImageOptimizationResult> OptimizeAllAsync(bool dryRun = false, CancellationToken ct = default)
@@ -72,17 +73,18 @@ public class ImageOptimizerService(IWebHostEnvironment env, ILogger<ImageOptimiz
                         display = converted;
                     }
                 }
-                var stem = Path.Combine(Path.GetDirectoryName(display)!, Path.GetFileNameWithoutExtension(display));
+                var stem = ResponsiveImageService.VariantStem(display);
+                var photographic = ResponsiveImageService.IsPhotographic(file);
                 foreach (var width in ResponsiveImageService.Widths)
                 {
                     if (width >= source.Width) continue;
                     var height = Math.Max(1, (int)Math.Round((double)source.Height * width / source.Width));
-                    written |= await WriteVariantAsync(source, display, $"{stem}-{width}w.webp", width, height, ct);
+                    written |= await WriteVariantAsync(source, display, $"{stem}-{width}w.webp", width, height, ct, photographic: photographic);
                 }
                 if (file.Contains($"{Path.DirectorySeparatorChar}products{Path.DirectorySeparatorChar}", StringComparison.OrdinalIgnoreCase))
                 {
                     var scale = Math.Min(1, (double)LcpMaxEdge / Math.Max(source.Width, source.Height));
-                    written |= await WriteVariantAsync(source, display, stem + "-lcp.webp",
+                    written |= await WriteVariantAsync(source, display, Path.Combine(Path.GetDirectoryName(display)!, Path.GetFileNameWithoutExtension(display)) + "-lcp.webp",
                         Math.Max(1, (int)Math.Round(source.Width * scale)), Math.Max(1, (int)Math.Round(source.Height * scale)), ct, allowLarger: true);
                 }
                 if (written) changed++; else skipped++;
@@ -96,7 +98,7 @@ public class ImageOptimizerService(IWebHostEnvironment env, ILogger<ImageOptimiz
 
     static WebpEncoder Lossless() => new() { FileFormat = WebpFileFormatType.Lossless, TransparentColorMode = WebpTransparentColorMode.Preserve, Method = WebpEncodingMethod.Level1 };
 
-    static async Task<bool> WriteVariantAsync(Image source, string original, string target, int width, int height, CancellationToken ct, bool allowLarger = false)
+    static async Task<bool> WriteVariantAsync(Image source, string original, string target, int width, int height, CancellationToken ct, bool allowLarger = false, bool photographic = false)
     {
         if (File.Exists(target) && File.GetLastWriteTimeUtc(target) >= File.GetLastWriteTimeUtc(original))
         {
@@ -105,7 +107,12 @@ public class ImageOptimizerService(IWebHostEnvironment env, ILogger<ImageOptimiz
         }
         using var output = source.Clone(x => x.Resize(width, height));
         using var buffer = new MemoryStream();
-        await output.SaveAsWebpAsync(buffer, Lossless(), ct);
+        // Transparent studio shots and branding remain lossless. JPEG photographs
+        // get a high-quality display derivative; the full JPEG remains untouched.
+        var encoder = photographic
+            ? new WebpEncoder { FileFormat = WebpFileFormatType.Lossy, Quality = PhotoQuality, Method = WebpEncodingMethod.Level4 }
+            : Lossless();
+        await output.SaveAsWebpAsync(buffer, encoder, ct);
         if (!allowLarger && buffer.Length >= new FileInfo(original).Length) return false;
         await AtomicWriteAsync(target, buffer.ToArray(), ct);
         return true;

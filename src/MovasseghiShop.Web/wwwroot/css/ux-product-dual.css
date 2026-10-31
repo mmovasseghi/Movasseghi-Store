@@ -1,5 +1,6 @@
 /* Synchronized Studio ↔ Scene cycle on product cards */
 .ms-product-media--dual {
+  contain: layout style;
   position: relative;
   overflow: hidden;
 }
@@ -74,7 +75,7 @@
     filter 1.1s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
   backface-visibility: hidden;
-  will-change: opacity, transform, filter;
+  will-change: auto;
 }
 
 .ms-product-media--dual[data-ms-dual-phase="studio"] .ms-product-dual__slide--studio,
@@ -87,6 +88,7 @@
 }
 
 .ms-product-media--dual.ms-product-dual--flip .ms-product-dual__slide {
+  will-change: opacity, transform, filter;
   transition-duration: 1.35s, 1.5s, 1.2s;
 }
 

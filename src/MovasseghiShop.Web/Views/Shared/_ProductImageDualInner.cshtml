@@ -12,7 +12,7 @@
         </div>
     </div>
     <div class="ms-product-dual__slide ms-product-dual__slide--scene" data-ms-dual-slide="scene">
-        <img ms-responsive="true" sizes="(min-width: 1024px) 384px, 50vw" asp-append-version="true" class="ms-product-img-el ms-product-img-el--scene ms-product-dual__scene-img" src="@U(Model.AlternateImageUrl)" alt="@Model.AlternateAlt" width="@Model.Width" height="@Model.Height" loading="lazy" />
+        <img ms-responsive="true" sizes="@(Model.Variant == "offer" ? Model.Sizes : "(min-width: 768px) 280px, 45vw")" asp-append-version="true" class="ms-product-img-el ms-product-img-el--scene ms-product-dual__scene-img" src="@U(Model.AlternateImageUrl)" alt="@Model.AlternateAlt" width="@Model.Width" height="@Model.Height" loading="lazy" />
     </div>
 </div>
 <div class="ms-product-dual__chrome" aria-hidden="true">

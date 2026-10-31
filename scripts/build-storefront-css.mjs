@@ -15,6 +15,14 @@ const parts = [
   'ux-scroll-reveal.css',
 ];
 
+// Only whole, self-contained rules whose every selector is exclusive to a
+// separate page. Shared/interactive selectors and complex rules stay intact.
+function homeRules(css) {
+  return css.split('\n').filter(line => {
+    const rule = line.match(/^\s*([^{}]+)\{[^{}]*\}\s*$/);
+    return !rule || !rule[1].split(',').every(selector => /^\.(?:ms-account-|ms-addr-|ms-order-|catalog-|pd-)/.test(selector.trim()));
+  }).join('\n');
+}
 let out = '';
 let home = '';
 let cart = '';
@@ -29,15 +37,14 @@ for (const file of parts) {
     const end = css.indexOf('/* ── Add-to-cart', begin);
     if (begin < 0 || end < 0) throw new Error('Shared modal CSS markers missing');
     home += css.slice(begin, end);
-  } else home += css + '\n';
+  } else home += homeRules(css) + '\n';
 }
 
 // Match ASP.NET's asp-append-version hash, so CSS and the font preload reuse
 // one request and a replaced font can safely have a year-long cache lifetime.
-const fontName = 'Vazirmatn-var.woff2';
-const fontVersion = createHash('sha256').update(fs.readFileSync(path.join(cssDir, '..', 'fonts', fontName))).digest('base64url');
+const fontVersions = ['Vazirmatn-var.woff2', 'Vazirmatn-storefront.woff2'].map(name => [name, createHash('sha256').update(fs.readFileSync(path.join(cssDir, '..', 'fonts', name))).digest('base64url')]);
 function write(name, css) {
-  css = css.replaceAll(`../fonts/${fontName}`, `../fonts/${fontName}?v=${fontVersion}`);
+  for (const [name, version] of fontVersions) css = css.replaceAll(`../fonts/${name}`, `../fonts/${name}?v=${version}`);
   const { code, warnings } = transformSync(css, { loader: 'css', minify: true });
   if (warnings.length) throw new Error(warnings.map(w => w.text).join('\n'));
   const filename = path.join(cssDir, name);

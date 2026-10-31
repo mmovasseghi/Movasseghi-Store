@@ -17,7 +17,7 @@ const output = fs.mkdtempSync(path.join(os.tmpdir(), 'movasseghi-storefront-'));
     const assets = await page.evaluate(() => {
       const hero = document.querySelector('.ms-hero-slide img');
       const preloads = [...document.querySelectorAll('link[rel=preload][as=image]')].map(e => e.href);
-      const fonts = performance.getEntriesByType('resource').filter(e => e.name.includes('Vazirmatn-var.woff2')).map(e => e.name);
+      const fonts = performance.getEntriesByType('resource').filter(e => e.name.includes('/fonts/Vazirmatn-')).map(e => e.name);
       const badPaintReferences = [...document.querySelectorAll('svg [fill],svg [stroke],svg [filter]')].flatMap(e => [...e.attributes].flatMap(a => [...a.value.matchAll(/url\(#([^)]*)\)/g)].map(m => m[1]))).filter(id => !document.getElementById(id));
       return { hero: hero.currentSrc, heroFallback: hero.src, heroSrcSet: hero.srcset, heroSizes: hero.sizes, preloadSrcSet: document.querySelector('link[rel=preload][as=image]').imageSrcset, preloadSizes: document.querySelector('link[rel=preload][as=image]').imageSizes, resources: performance.getEntriesByType('resource').map(e => e.name), preloads, fonts, badPaintReferences, dom: document.querySelectorAll('*').length,
         heroImages: [...document.querySelectorAll('.ms-hero-slide img')].map(e => ({ loading: e.loading, priority: e.fetchPriority })),

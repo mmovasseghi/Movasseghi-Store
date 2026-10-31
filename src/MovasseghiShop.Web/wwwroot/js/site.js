@@ -67,10 +67,9 @@
   const MODAL_BUSY_AUTH = '<div class="ms-modal-busy" aria-busy="true"><span class="ms-modal-busy__spin" aria-hidden="true"></span><span>ورود / ثبت‌نام</span></div>';
   if (hasGsap) gsap.registerPlugin(ScrollTrigger);
 
-  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-  if (!location.hash) window.scrollTo(0, 0);
-  window.addEventListener('pageshow', e => {
-    if (!location.hash) window.scrollTo(0, 0);
+  // Preserve a user's scroll made before this deferred script initializes,
+  // and let the browser restore Back/Forward navigation normally.
+  window.addEventListener('pageshow', () => {
     if (hasGsap && typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh(true);
   });
 

@@ -21,7 +21,11 @@
   const tapNext = modal.querySelector('[data-story-next]');
 
   let stories = [];
-  let viewed = new Set(JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'));
+  let viewed = new Set();
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    if (Array.isArray(saved)) viewed = new Set(saved.filter(id => typeof id === 'string'));
+  } catch { /* Private browsing, corrupt data or storage restrictions: keep stories usable. */ }
   let storyIdx = 0;
   let slideIdx = 0;
   let paused = false;
@@ -73,7 +77,7 @@
 
   function markViewed(id) {
     viewed.add(id);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify([...viewed]));
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify([...viewed])); } catch { /* Memory state still works. */ }
     document.querySelector(`.ms-story[data-story-id="${CSS.escape(id)}"]`)?.classList.add('is-viewed');
   }
 

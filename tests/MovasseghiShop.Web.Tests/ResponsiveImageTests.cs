@@ -180,6 +180,50 @@ public sealed class ResponsiveImageTests : IDisposable
         Assert.Equal(1, Image.Identify(Path.Combine(Folder, "01-lcp.webp")).Height);
     }
 
+    [Fact]
+    public async Task Photograph_candidates_are_smaller_modern_files_without_replacing_the_jpeg()
+    {
+        Directory.CreateDirectory(Folder);
+        var path = Path.Combine(Folder, "01-hero.jpg");
+        using (var image = new Image<Rgba32>(800, 600))
+        {
+            var random = new Random(17);
+            for (var y = 0; y < image.Height; y++) for (var x = 0; x < image.Width; x++)
+                image[x, y] = new Rgba32((byte)random.Next(256), (byte)random.Next(256), (byte)random.Next(256));
+            await image.SaveAsJpegAsync(path);
+        }
+        var original = await File.ReadAllBytesAsync(path);
+        Assert.Equal(0, (await Optimizer.OptimizeAllAsync()).Failed);
+        Assert.Equal(original, await File.ReadAllBytesAsync(path));
+        var candidate = Path.Combine(Folder, "01-hero-photo-v1-256w.webp");
+        Assert.True(new FileInfo(candidate).Length < original.Length);
+        Assert.Equal(256, Image.Identify(candidate).Width);
+        var data = new ResponsiveImageService(Environment, new Versions()).Get("/images/products/test/01-hero.jpg", new DefaultHttpContext())!;
+        Assert.Contains("01-hero-photo-v1-256w.webp", data.SrcSet);
+        Assert.Contains("01-hero.jpg?v=test 800w", data.SrcSet);
+    }
+
+    [Fact]
+    public async Task Scene_keeps_its_own_format_alias_and_sees_new_files_after_a_negative_lookup()
+    {
+        await Source();
+        var path = Path.Combine(Folder, "01-hero.png");
+        using (var image = new Image<Rgba32>(128, 128, Color.Blue)) await image.SaveAsPngAsync(path);
+        var url = "/images/products/test/01-hero.png";
+        Assert.Equal(url, ProductImageHelper.PreferWebp(url, Environment));
+        var alias = Path.ChangeExtension(path, ".webp");
+        using (var image = new Image<Rgba32>(128, 128, Color.Blue)) await image.SaveAsWebpAsync(alias);
+        Assert.Equal("/images/products/test/01-hero.webp", ProductImageHelper.PreferWebp(url, Environment));
+        var slides = ProductImageHelper.ResolveDualCardSlides(new[] {
+            new ProductImage { Id = 1, Url = "/images/products/test/01.webp", IsPrimary = true, Role = MovasseghiShop.Web.Models.Enums.ProductImageRole.Studio },
+            new ProductImage { Id = 2, Url = url, Role = MovasseghiShop.Web.Models.Enums.ProductImageRole.Scene }
+        }, Environment, "محصول");
+        Assert.True(slides.CanCycle);
+        Assert.Equal("/images/products/test/01-hero.webp", slides.SceneUrl);
+        File.Delete(alias);
+        Assert.Equal(url, ProductImageHelper.PreferWebp(url, Environment));
+    }
+
     public void Dispose() { if (Directory.Exists(root)) Directory.Delete(root, true); }
     sealed class Versions : IFileVersionProvider { public string AddFileVersionToPath(PathString pathBase, string path) => path + "?v=test"; }
     sealed class TestEnvironment : IWebHostEnvironment

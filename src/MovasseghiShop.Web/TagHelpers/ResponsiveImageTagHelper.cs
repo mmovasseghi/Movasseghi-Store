@@ -17,7 +17,12 @@ public sealed class ResponsiveImageTagHelper(ResponsiveImageService images) : Ta
         output.Attributes.RemoveAll("ms-responsive");
         if (!Responsive || images.Get(Src, ViewContext.HttpContext) is not { } image) return;
         output.Attributes.SetAttribute("srcset", image.SrcSet);
-        output.Attributes.SetAttribute("sizes", Sizes ?? "(min-width: 768px) 220px, 45vw");
+        var sizes = Sizes ?? "(min-width: 768px) 220px, 45vw";
+        // Native lazy images know their rendered size before choosing a source.
+        // Keep explicit fallback sizes for browsers without auto-sizes support.
+        if (output.Attributes["loading"]?.Value?.ToString() == "lazy" && !sizes.StartsWith("auto"))
+            sizes = "auto, " + sizes;
+        output.Attributes.SetAttribute("sizes", sizes);
         // Preserve the original aspect ratio even when a selected derivative's
         // integer dimensions have rounded by a fraction of a pixel.
         var style = output.Attributes["style"]?.Value?.ToString() ?? "";

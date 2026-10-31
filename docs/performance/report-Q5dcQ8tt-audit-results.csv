@@ -1,0 +1,24 @@
+row,id,original_impact,original_summary,local_score,local_mode,local_summary,action_and_limit
+S1,gt-cdn,Medium-Low,21 resources,,NOT_PRESENT,,OPEN infrastructure: no CDN applied; local Lighthouse does not implement GT CDN scoring.
+S2,dom-size,Medium-Low,1400 elements,0.5,metricSavings,"1,403 elements",OPEN finding: all 8+8 products and real dual galleries retained; no content removed to hide DOM size.
+S3,uses-http2,Low,450 ms estimated savings,1,metricSavings,,OPEN infrastructure: real browser protocol here is HTTP/1.1. Localhost exemption is not evidence of production HTTP/2.
+S4,layout-shifts,Low,3 elements; CLS metric is 0,1,informative,1 layout shift found,Preserve stable sizing and initial CSS; supplied report already rounded CLS to zero. Local values and long observation included.
+S5,critical-request-chains,Low,33 chains,,notApplicable,,Inline complete route CSS and story payload; preload core scripts and the matching responsive LCP; no duplicate stylesheet fetch.
+S6,long-tasks,Low,11 tasks; Top Issues says 7,1,informative,1 long task found,"Remove desktop marquee layout read when its animation is inactive, animate dots with FLIP, update only visible dual cards; actual task counts retained."
+S7,uses-long-cache-ttl,Low,15 resources,1,metricSavings,0 resources found,Fingerprint additional covers/news/closing-logo URLs; repository nginx config passes cache integration tests. The 15 production resource TTLs still need live headers.
+S8,redirects,Low,223 ms estimated savings,1,metricSavings,,"OPEN: original Request URL, Location and Non-Authoritative-Reason unavailable. Only HTTPS-redirection middleware found in source; it is conditional on configured HTTPS base."
+S9,modern-image-formats,Low,141 KB estimated savings,1,metricSavings,,PASS locally: appropriate high-quality photographic WebP derivatives; full JPEG originals retained.
+S10,non-composited-animations,Low,18 elements,,notApplicable,,No findings in initial local navigation. Original blur transitions remain when cards are visible; offscreen phase updates and permanent layer hints removed. Dot width effect uses transforms.
+S11,offscreen-images,Low,11.7 KB estimated savings,1,metricSavings,,PASS locally: footer logo lazy; all visible hero images remain eager. No content is hidden or removed.
+S12,server-response-time,Low,229 ms,0,metricSavings,Root document took 690 ms,"Guest caches remain safe; source PHP/DB/RTT not conflated. Synthetic document delay is a declared test condition, not a production measurement."
+S13,total-byte-weight,Low,813 KB,1,metricSavings,Total size was 548 KiB,Matched local baseline about 875KiB to about 548KiB; supplied GT production 813KB is a separate workload.
+S14,unused-css-rules,Low,23 KB estimated savings,0.5,metricSavings,Est savings of 23 KiB,OPEN coverage finding: prune only whole rules scoped exclusively to account/address/order/catalog/product pages. Shared modal and below-fold states retained.
+S15,uses-responsive-images,Low,327 KB estimated savings,1,metricSavings,,"PASS locally: lazy auto sizes, correct scene fallback sizes, initial row layout, extra 272px/560px candidates and real scene DPR tests."
+S16,bootup-time,Informational,56 ms,1,metricSavings,0.0 s,Informational; source JS 56ms is not the full 2s main-thread cost. Keep actual local audit measurement.
+S17,largest-contentful-paint-element,Informational,1720 ms,0,metricSavings,"1,230 ms",First hero remains eager/high with matching responsive preload; original production LCP 1720ms is not replaced with a local score.
+S18,layout-shifts,Informational,1 shift; distinct informational row,1,informative,1 layout shift found,Preserve stable sizing and initial CSS; supplied report already rounded CLS to zero. Local values and long observation included.
+S19,mainthread-work-breakdown,Informational,2.0 s,0.5,metricSavings,2.1 s,Informational; layout/render/other costs retained. TBT is not total CPU busy time.
+S20,third-party-summary,Informational,181 B,,notApplicable,,"Informational; analytics retained, no benchmark-specific suppression."
+S21,legacy-javascript,Informational,No numeric summary,1,metricSavings,,Informational/applicability from exact Lighthouse version; no invented scoring weight.
+S22,render-blocking-resources,Informational,0 ms savings,1,metricSavings,,Complete generated home CSS inline once; blocking external fallback only if the inline file is missing. Cart styles are ready before modal display.
+S23,user-timings,Informational,No numeric summary,,notApplicable,,Informational; no invented scoring weight.

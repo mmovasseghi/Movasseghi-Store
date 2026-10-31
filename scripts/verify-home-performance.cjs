@@ -39,7 +39,7 @@ for (const r of results) {
   assert.equal(r.featured, 8, r.name + ': featured count'); assert.equal(r.offers, 8, r.name + ': offer count'); assert.ok(r.stories > 0);
   assert.equal(r.initial.horizontalOverflow, false); assert.equal(r.loaded.horizontalOverflow, false);
   for (const area of ['hero', 'story', 'heading', 'header']) for (const key of ['x','y','width','height']) assert.ok(Math.abs(r.initial[area][key]-r.loaded[area][key]) < 2, `${r.name}: ${area} ${key} changed when CSS arrived`);
-  assert.ok(r.cls < .05, r.name + ': delayed-CSS CLS regression: ' + r.cls);
+  assert.ok(r.cls < .01, r.name + ': delayed-CSS CLS regression: ' + r.cls);
  }
 }
 console.log(JSON.stringify(results.map(r => ({name:r.name, firstClickOpened:r.firstClickOpened, featured:r.featured, offers:r.offers, stories:r.stories, cls:r.cls})),null,2));

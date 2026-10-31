@@ -11,7 +11,13 @@ public sealed record ResponsiveImageData(string SrcSet, int Width, int Height);
 public sealed class ResponsiveImageService(IWebHostEnvironment env, IFileVersionProvider versions)
 {
     public const string HeroSizes = "(min-width: 768px) 420px, (max-width: 480px) 35vw, 240px";
-    public static readonly int[] Widths = [64, 128, 160, 192, 256, 320, 384, 420, 480, 640, 960, 1400];
+    public static readonly int[] Widths = [64, 128, 160, 192, 256, 272, 320, 384, 420, 480, 560, 640, 960, 1400];
+    // Separate names make existing lossless derivatives safe to keep while
+    // deploying the photographic encoding policy. Originals are never replaced.
+    public static bool IsPhotographic(string path) => Path.GetExtension(path).Equals(".jpg", StringComparison.OrdinalIgnoreCase)
+        || Path.GetExtension(path).Equals(".jpeg", StringComparison.OrdinalIgnoreCase);
+    public static string VariantStem(string path) => path[..path.LastIndexOf('.')]
+        + (IsPhotographic(path) ? "-photo-v1" : "");
     readonly ConcurrentDictionary<string, (long Stamp, long Length, int Width, int Height)> dimensions = new();
 
     public ResponsiveImageData? Get(string? url, HttpContext context)
@@ -54,7 +60,7 @@ public sealed class ResponsiveImageService(IWebHostEnvironment env, IFileVersion
         }
         var dot = clean.LastIndexOf('.');
         if (dot < clean.LastIndexOf('/')) return null;
-        var stem = clean[..dot];
+        var stem = VariantStem(clean);
         var candidates = new List<string>();
         string Version(string path)
         {

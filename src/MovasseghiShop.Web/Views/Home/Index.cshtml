@@ -42,7 +42,7 @@
                     <span class="ms-story-icon-wrap">
                         @if (!string.IsNullOrWhiteSpace(story.CoverImageUrl))
                         {
-                            <img src="@AppPath.H(story.CoverImageUrl, Context)" alt="" class="ms-story-cover" width="76" height="76" loading="lazy" fetchpriority="low" decoding="async" />
+                            <img ms-responsive="true" sizes="76px" asp-append-version="true" src="@AppPath.H(ProductImageHelper.PreferWebp(story.CoverImageUrl, Env), Context)" alt="" class="ms-story-cover" width="76" height="76" loading="lazy" fetchpriority="low" decoding="async" />
                         }
                         else
                         {
@@ -56,7 +56,7 @@
     </div>
     </div>
 </section>
-<div id="msStoriesData" hidden data-stories-src="@AppPath.H("/Home/Stories.json", Context)"></div>
+<script id="msStoriesData" type="application/json" data-stories-src="@AppPath.H("/Home/Stories.json", Context)">@Html.Raw(System.Text.Json.JsonSerializer.Serialize(storyItems))</script>
 
 <!-- هیرو — LCP تصویر محصول -->
 <section class="ms-hero" id="ms-hero" data-hero-slider>
@@ -244,7 +244,7 @@
                     var price = ProductStorefrontResolver.GetMinPrice(p.Variants);
                     var offerFrom = offerSellable.Count > 0 && ProductStorefrontResolver.UseFromPricePrefix(offerSellable);
                     <a href="@AppPath.H($"/Shop/Product/{p.Slug}", Context)" class="ms-offer-card">
-                        @{ ViewData["StageVariant"] = "offer"; ViewData["StageWidth"] = 140; ViewData["StageHeight"] = 140; ViewData["StageDualCycle"] = false; }
+                        @{ ViewData["StageVariant"] = "offer"; ViewData["StageWidth"] = 140; ViewData["StageHeight"] = 140; ViewData["StageDualCycle"] = true; }
                         <partial name="_ProductImageStageFromProduct" model="p" />
                         <div class="ms-offer-body">
                             <h3>@p.Name</h3>
@@ -316,7 +316,7 @@
                     var fPrice = ProductStorefrontResolver.GetMinPrice(p.Variants);
                     var featFrom = featSellable.Count > 0 && ProductStorefrontResolver.UseFromPricePrefix(featSellable);
                     <a href="@AppPath.H($"/Shop/Product/{p.Slug}", Context)" class="ms-feat-card">
-                        @{ ViewData["StageVariant"] = "featured"; ViewData["StageWidth"] = 180; ViewData["StageHeight"] = 180; ViewData["StageDualCycle"] = false; }
+                        @{ ViewData["StageVariant"] = "featured"; ViewData["StageWidth"] = 180; ViewData["StageHeight"] = 180; ViewData["StageDualCycle"] = true; }
                         <partial name="_ProductImageStageFromProduct" model="p" />
                         <span class="ms-feat-card-body">
                             @if (!string.IsNullOrEmpty(p.ProductCode))
@@ -407,7 +407,7 @@
         <div class="ms-closing-card">
             <div class="ms-closing-visual" aria-hidden="true">
                 <div class="ms-closing-logo-ring">
-                    <img src="~/images/brand/originallogo.png" alt="فروشگاه موثقی" width="160" height="52" loading="lazy" decoding="async" />
+                    <img ms-responsive="true" sizes="160px" asp-append-version="true" src="@AppPath.H(ProductImageHelper.PreferWebp("/images/brand/originallogo.png", Env), Context)" alt="فروشگاه موثقی" width="160" height="52" loading="lazy" decoding="async" />
                 </div>
                 <span class="ms-closing-seal">رسمی</span>
             </div>
@@ -454,7 +454,7 @@
                         <span class="ms-news-card-visual" aria-hidden="true">
                             @if (!string.IsNullOrEmpty(item.FeaturedImageUrl))
                             {
-                                <img src="@AppPath.H(item.FeaturedImageUrl, Context)" alt="" loading="lazy" width="320" height="180" />
+                                <img ms-responsive="true" sizes="(min-width: 1024px) 380px, 90vw" asp-append-version="true" src="@AppPath.H(ProductImageHelper.PreferWebp(item.FeaturedImageUrl, Env), Context)" alt="" loading="lazy" width="320" height="180" />
                             }
                             else
                             {
@@ -506,7 +506,7 @@
                         <span class="ms-news-card-visual" aria-hidden="true">
                             @if (!string.IsNullOrEmpty(post.FeaturedImageUrl))
                             {
-                                <img src="@AppPath.H(post.FeaturedImageUrl, Context)" alt="" loading="lazy" width="320" height="180" />
+                                <img ms-responsive="true" sizes="(min-width: 1024px) 380px, 90vw" asp-append-version="true" src="@AppPath.H(ProductImageHelper.PreferWebp(post.FeaturedImageUrl, Env), Context)" alt="" loading="lazy" width="320" height="180" />
                             }
                             else
                             {

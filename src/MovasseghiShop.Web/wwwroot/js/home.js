@@ -28,7 +28,7 @@
   const featTrack = document.querySelector('[data-features-track]');
   if (featTrack && !reduced && !isMobile()) {
     const cards = featTrack.querySelectorAll('.ms-feature-card:not(.ms-feature-card--dup)');
-    if (cards.length) {
+    if (cards.length && getComputedStyle(featTrack).animationName !== 'none') {
       const half = featTrack.scrollWidth / 2;
       featTrack.style.animationDuration = Math.max(16, Math.min(30, half / 35)) + 's';
     }
@@ -61,6 +61,7 @@
     let idx = 0;
     let timer;
     let progressAnimation;
+    let dotAnimations = [];
     let animating = false;
 
     slides.forEach((slide, i) => {
@@ -77,11 +78,22 @@
     function go(n) {
       if (animating || n === idx) return;
       animating = true;
+      const dotRects = !reduced ? [...dots].map(dot => dot.getBoundingClientRect()) : null;
+      dotAnimations.forEach(animation => animation.cancel());
       const prev = slides[idx];
       const next = slides[(n + slides.length) % slides.length];
       dots[idx]?.classList.remove('is-active');
       idx = (n + slides.length) % slides.length;
       dots[idx]?.classList.add('is-active');
+      if (dotRects) {
+        // FLIP keeps the original changing pill widths and neighbour movement,
+        // while only transform/opacity animate between the two layouts.
+        const after = [...dots].map(dot => dot.getBoundingClientRect());
+        dotAnimations = [...dots].map((dot, i) => dot.animate([
+          { transform: `translateX(${dotRects[i].left - after[i].left}px) scaleX(${dotRects[i].width / after[i].width})` },
+          { transform: 'translateX(0) scaleX(1)' }
+        ], { duration: 350, easing: 'cubic-bezier(.22,1,.36,1)' }));
+      }
       prev.classList.remove('is-active');
       next.classList.add('is-active');
       resetProgress();

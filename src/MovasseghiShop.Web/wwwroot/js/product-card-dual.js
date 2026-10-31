@@ -14,7 +14,6 @@
     let startedAt = null;
     let timer;
     let flipTimer;
-    let lastPhase = 'studio';
 
     function currentTime() {
       return elapsed + (startedAt === null ? 0 : performance.now() - startedAt);
@@ -42,14 +41,14 @@
       clearTimeout(timer);
       const time = currentTime();
       const phase = Math.floor(time / PHASE_MS) % 2 === 0 ? 'studio' : 'scene';
-      if (phase !== lastPhase) {
-        cards.forEach(card => {
+      const changing = [...visible].filter(card => card.dataset.msDualPhase !== phase);
+      if (changing.length) {
+        changing.forEach(card => {
           card.dataset.msDualPhase = phase;
           card.classList.add('ms-product-dual--flip');
         });
         clearTimeout(flipTimer);
         flipTimer = setTimeout(() => cards.forEach(card => card.classList.remove('ms-product-dual--flip')), 1300);
-        lastPhase = phase;
       }
       // Native transform animations keep the bar and glow synchronized without
       // a root CSS-variable write, layout read, or JS callback on every frame.

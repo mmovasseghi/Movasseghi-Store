@@ -1,0 +1,408 @@
+{
+  "id": "Q5dcQ8tt",
+  "url": "https://gtmetrix.com/reports/185.93.88.81/Q5dcQ8tt/",
+  "source": "User transcript and four supplied screenshots; not independently fetched",
+  "tested_url": "http://185.93.88.81/",
+  "generated": "2026-10-30T17:44:00-07:00",
+  "location": "Seattle",
+  "browser": "Chrome 154.0.0.0",
+  "lighthouse": "12.6.1",
+  "connection": "Unthrottled Connection",
+  "grade": "B",
+  "performance": 80,
+  "structure": 94,
+  "metrics": {
+    "FCP_ms": 1400,
+    "LCP_ms": 1720,
+    "TBT_ms": 204,
+    "CLS": 0,
+    "SI_ms": 1900,
+    "TTI_ms": 3100,
+    "FullyLoaded_ms": 3700,
+    "Onload_ms": 2900,
+    "DOMContentLoaded_ms": 2200,
+    "DOMInteractive_ms": 1300,
+    "TTFB_ms": 684,
+    "Redirect_ms": 222,
+    "Connect_ms": 232,
+    "Backend_ms": 230
+  },
+  "page": {
+    "compressed_KB": 813,
+    "uncompressed_MB": 1.12,
+    "requests": 28,
+    "image_KB": 570,
+    "font_KB": 109,
+    "html_KB": 64.2
+  },
+  "audits": [
+    {
+      "row": "S1",
+      "id": "gt-cdn",
+      "title": "Use a Content Delivery Network (CDN)",
+      "impact": "Medium-Low",
+      "summary": "21 resources"
+    },
+    {
+      "row": "S2",
+      "id": "dom-size",
+      "title": "Avoid an excessive DOM size",
+      "impact": "Medium-Low",
+      "summary": "1400 elements"
+    },
+    {
+      "row": "S3",
+      "id": "uses-http2",
+      "title": "Use HTTP/2 for all resources",
+      "impact": "Low",
+      "summary": "450 ms estimated savings"
+    },
+    {
+      "row": "S4",
+      "id": "layout-shifts",
+      "title": "Avoid large layout shifts",
+      "impact": "Low",
+      "summary": "3 elements; CLS metric is 0"
+    },
+    {
+      "row": "S5",
+      "id": "critical-request-chains",
+      "title": "Avoid chaining critical requests",
+      "impact": "Low",
+      "summary": "33 chains"
+    },
+    {
+      "row": "S6",
+      "id": "long-tasks",
+      "title": "Avoid long main-thread tasks",
+      "impact": "Low",
+      "summary": "11 tasks; Top Issues says 7"
+    },
+    {
+      "row": "S7",
+      "id": "uses-long-cache-ttl",
+      "title": "Serve static assets with an efficient cache policy",
+      "impact": "Low",
+      "summary": "15 resources"
+    },
+    {
+      "row": "S8",
+      "id": "redirects",
+      "title": "Avoid multiple page redirects",
+      "impact": "Low",
+      "summary": "223 ms estimated savings"
+    },
+    {
+      "row": "S9",
+      "id": "modern-image-formats",
+      "title": "Serve images in next-gen formats",
+      "impact": "Low",
+      "summary": "141 KB estimated savings"
+    },
+    {
+      "row": "S10",
+      "id": "non-composited-animations",
+      "title": "Avoid non-composited animations",
+      "impact": "Low",
+      "summary": "18 elements"
+    },
+    {
+      "row": "S11",
+      "id": "offscreen-images",
+      "title": "Defer offscreen images",
+      "impact": "Low",
+      "summary": "11.7 KB estimated savings"
+    },
+    {
+      "row": "S12",
+      "id": "server-response-time",
+      "title": "Reduce initial server response time",
+      "impact": "Low",
+      "summary": "229 ms"
+    },
+    {
+      "row": "S13",
+      "id": "total-byte-weight",
+      "title": "Avoid enormous network payloads",
+      "impact": "Low",
+      "summary": "813 KB"
+    },
+    {
+      "row": "S14",
+      "id": "unused-css-rules",
+      "title": "Reduce unused CSS",
+      "impact": "Low",
+      "summary": "23 KB estimated savings"
+    },
+    {
+      "row": "S15",
+      "id": "uses-responsive-images",
+      "title": "Properly size images",
+      "impact": "Low",
+      "summary": "327 KB estimated savings"
+    },
+    {
+      "row": "S16",
+      "id": "bootup-time",
+      "title": "Reduce JavaScript execution time",
+      "impact": "Informational",
+      "summary": "56 ms"
+    },
+    {
+      "row": "S17",
+      "id": "largest-contentful-paint-element",
+      "title": "Largest Contentful Paint element",
+      "impact": "Informational",
+      "summary": "1720 ms"
+    },
+    {
+      "row": "S18",
+      "id": "layout-shifts",
+      "title": "Avoid large layout shifts",
+      "impact": "Informational",
+      "summary": "1 shift; distinct informational row"
+    },
+    {
+      "row": "S19",
+      "id": "mainthread-work-breakdown",
+      "title": "Minimize main-thread work",
+      "impact": "Informational",
+      "summary": "2.0 s"
+    },
+    {
+      "row": "S20",
+      "id": "third-party-summary",
+      "title": "Reduce the impact of third-party code",
+      "impact": "Informational",
+      "summary": "181 B"
+    },
+    {
+      "row": "S21",
+      "id": "legacy-javascript",
+      "title": "Avoid serving legacy JavaScript to modern browsers",
+      "impact": "Informational",
+      "summary": "No numeric summary"
+    },
+    {
+      "row": "S22",
+      "id": "render-blocking-resources",
+      "title": "Eliminate render-blocking resources",
+      "impact": "Informational",
+      "summary": "0 ms savings"
+    },
+    {
+      "row": "S23",
+      "id": "user-timings",
+      "title": "User Timing marks and measures",
+      "impact": "Informational",
+      "summary": "No numeric summary"
+    }
+  ],
+  "waterfall": [
+    {
+      "number": 1,
+      "name": "/",
+      "status": 307,
+      "approx_KB": 0,
+      "approx_ms": 0
+    },
+    {
+      "number": 2,
+      "name": "/",
+      "status": 307,
+      "approx_KB": 0,
+      "approx_ms": 0
+    },
+    {
+      "number": 3,
+      "name": "/",
+      "status": 200,
+      "approx_KB": 64.2,
+      "approx_ms": 920
+    },
+    {
+      "number": 4,
+      "name": "01-420w.webp?v=...",
+      "status": 200,
+      "approx_KB": 52.3,
+      "approx_ms": 866
+    },
+    {
+      "number": 5,
+      "name": "Vazirmatn-var.woff2?v=...",
+      "status": 200,
+      "approx_KB": 109,
+      "approx_ms": 1100
+    },
+    {
+      "number": 6,
+      "name": "storefront-home.bundle.css?v=...",
+      "status": 200,
+      "approx_KB": 42,
+      "approx_ms": 937
+    },
+    {
+      "number": 7,
+      "name": "originallogo.webp?v=...",
+      "status": 200,
+      "approx_KB": 10.3,
+      "approx_ms": 430
+    },
+    {
+      "number": 8,
+      "name": "01-420w.webp?v=...",
+      "status": 200,
+      "approx_KB": 58.4,
+      "approx_ms": 867
+    },
+    {
+      "number": 9,
+      "name": "01.webp?v=...",
+      "status": 200,
+      "approx_KB": 26.4,
+      "approx_ms": 454
+    },
+    {
+      "number": 10,
+      "name": "phone-fluency-64w.webp?v=...",
+      "status": 200,
+      "approx_KB": 4.99,
+      "approx_ms": 288
+    },
+    {
+      "number": 11,
+      "name": "01-160w.webp?v=...",
+      "status": 200,
+      "approx_KB": 14.4,
+      "approx_ms": 326
+    },
+    {
+      "number": 12,
+      "name": "01-hero.jpg?v=...",
+      "status": 200,
+      "approx_KB": 167,
+      "approx_ms": 952
+    },
+    {
+      "number": 13,
+      "name": "01-160w.webp?v=...",
+      "status": 200,
+      "approx_KB": 10.3,
+      "approx_ms": 504
+    },
+    {
+      "number": 14,
+      "name": "01-160w.webp?v=...",
+      "status": 200,
+      "approx_KB": 10.1,
+      "approx_ms": 560
+    },
+    {
+      "number": 15,
+      "name": "blackandwhitelogo.webp?v=...",
+      "status": 200,
+      "approx_KB": 12,
+      "approx_ms": 730
+    },
+    {
+      "number": 16,
+      "name": "stories.js?v=...",
+      "status": 200,
+      "approx_KB": 3,
+      "approx_ms": 726
+    },
+    {
+      "number": 17,
+      "name": "home.js?v=...",
+      "status": 200,
+      "approx_KB": 2.28,
+      "approx_ms": 734
+    },
+    {
+      "number": 18,
+      "name": "product-card-dual.js?v=...",
+      "status": 200,
+      "approx_KB": 1.73,
+      "approx_ms": 781
+    },
+    {
+      "number": 19,
+      "name": "01-hero.jpg?v=...",
+      "status": 200,
+      "approx_KB": 170,
+      "approx_ms": 1400
+    },
+    {
+      "number": 20,
+      "name": "01-160w.webp?v=...",
+      "status": 200,
+      "approx_KB": 12.6,
+      "approx_ms": 803
+    },
+    {
+      "number": 21,
+      "name": "01-160w.webp?v=...",
+      "status": 200,
+      "approx_KB": 10.2,
+      "approx_ms": 808
+    },
+    {
+      "number": 22,
+      "name": "01-160w.webp?v=...",
+      "status": 200,
+      "approx_KB": 11.4,
+      "approx_ms": 817
+    },
+    {
+      "number": 23,
+      "name": "Stories.json",
+      "status": 200,
+      "approx_KB": 3.9,
+      "approx_ms": 257
+    },
+    {
+      "number": 24,
+      "name": "originallogo.webp?v=...",
+      "status": 200,
+      "approx_KB": 0,
+      "approx_ms": 56
+    },
+    {
+      "number": 25,
+      "name": "auth.js?v=...",
+      "status": 200,
+      "approx_KB": 6.13,
+      "approx_ms": 236
+    },
+    {
+      "number": 26,
+      "name": "site.js?v=...",
+      "status": 200,
+      "approx_KB": 8.86,
+      "approx_ms": 233
+    },
+    {
+      "number": 27,
+      "name": "scroll-reveal.js?v=...",
+      "status": 200,
+      "approx_KB": 1.37,
+      "approx_ms": 224
+    },
+    {
+      "number": 28,
+      "name": "visitor",
+      "status": "canceled",
+      "approx_KB": 0,
+      "approx_ms": 238
+    }
+  ],
+  "limitations": [
+    "Expanded file/element details, no-impact list and original HAR/trace missing",
+    "Basenames do not identify every product path; do not invent those paths",
+    "Top Issues long tasks 7 vs Structure 11 retained",
+    "CrUX unavailable; CrUX tab lab TTFB says 658ms vs Browser Timings 684ms; both supplied values retained",
+    "Three shift-related elements and one informational shift row coexist with CLS rounded to 0",
+    "Video login required; alerts owner-only, no alerts set",
+    "Report does not establish the exact deployed Git SHA"
+  ]
+}
