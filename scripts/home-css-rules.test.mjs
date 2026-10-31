@@ -27,3 +27,11 @@ test('unquoted data URLs can contain braces and semicolons',()=>{
  const css='.ms-auth-panel{--template:url(data:text/plain,{);color:red}.pd-page{color:blue}';
  assert.equal(minify(homeRules(css)),minify('.ms-auth-panel{--template:url(data:text/plain,{);color:red}'));
 });
+
+test('header mapping preserves nested cascade and filters only selected keyframes', async () => {
+  const { mapStyleRules } = await import('./home-css-rules.mjs');
+  const input = '@font-face{font-family:x;src:url(x)}@media(min-width:1px){.header,.shared{color:red}.main{color:blue}}@keyframes used{to{opacity:1}}@keyframes unused{to{opacity:0}}';
+  const result = mapStyleRules(input, (h,b,original) => h.includes('.header') ? original+'{'+b+'}' : '',
+    (h,b,original) => h.includes('unused') ? '' : original+'{'+b+'}');
+  assert.equal(result, '@font-face{font-family:x;src:url(x)}@media(min-width:1px){.header,.shared{color:red}}@keyframes used{to{opacity:1}}');
+});

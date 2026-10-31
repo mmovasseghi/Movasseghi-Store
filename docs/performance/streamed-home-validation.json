@@ -1,0 +1,892 @@
+{
+  "at": "2026-10-31T10:13:09.655893+00:00",
+  "base_commit": "07f92ba606db0b465fd8271de6286a44a4b447e8",
+  "latest_actual_gtmetrix": "f2uWzHy9: B/79/95; no new report or VPS deployment",
+  "goal_A_and_both_over_95": "OPEN",
+  "method": "Same scripts/local-origin-profile.cjs: HTTP1 model, document647ms, RTT215ms, new-resource TCP215ms, initial14600B window doubling per RTT. LH12.6.1 desktop provided timings, Chromium154, local hardware; NOT Seattle or a GT score. No concurrent browser/build work during six final scored runs.",
+  "runs": [
+    {
+      "variant": "control-final",
+      "run": 1,
+      "performance": 90.0,
+      "ttfb": 658,
+      "metrics": {
+        "first-contentful-paint": 1158.602,
+        "largest-contentful-paint": 1474.563,
+        "speed-index": 1902,
+        "total-blocking-time": 53.835999999999785,
+        "cumulative-layout-shift": 0.0009635290336040027,
+        "total-byte-weight": 741357
+      },
+      "observedLoad": 1609,
+      "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+    },
+    {
+      "variant": "streamed-final",
+      "run": 1,
+      "performance": 91.0,
+      "ttfb": 657,
+      "metrics": {
+        "first-contentful-paint": 887.424,
+        "largest-contentful-paint": 1526.134,
+        "speed-index": 1842,
+        "total-blocking-time": 82.09500000000003,
+        "cumulative-layout-shift": 0.001948323676058764,
+        "total-byte-weight": 739132
+      },
+      "observedLoad": 1542,
+      "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+    },
+    {
+      "variant": "control-final",
+      "run": 2,
+      "performance": 90.0,
+      "ttfb": 656,
+      "metrics": {
+        "first-contentful-paint": 1155.005,
+        "largest-contentful-paint": 1397.436,
+        "speed-index": 1898,
+        "total-blocking-time": 29.958999999999833,
+        "cumulative-layout-shift": 0.001073516114583641,
+        "total-byte-weight": 741357
+      },
+      "observedLoad": 1536,
+      "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+    },
+    {
+      "variant": "streamed-final",
+      "run": 2,
+      "performance": 91.0,
+      "ttfb": 657,
+      "metrics": {
+        "first-contentful-paint": 894.403,
+        "largest-contentful-paint": 1476.887,
+        "speed-index": 1856,
+        "total-blocking-time": 85.71799998474103,
+        "cumulative-layout-shift": 0.0009583932109725384,
+        "total-byte-weight": 739132
+      },
+      "observedLoad": 1617,
+      "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+    },
+    {
+      "variant": "control-final",
+      "run": 3,
+      "performance": 89.0,
+      "ttfb": 659,
+      "metrics": {
+        "first-contentful-paint": 1209.166,
+        "largest-contentful-paint": 1500.105,
+        "speed-index": 1956,
+        "total-blocking-time": 13.001999999999953,
+        "cumulative-layout-shift": 0.001234504683587901,
+        "total-byte-weight": 741357
+      },
+      "observedLoad": 1550,
+      "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+    },
+    {
+      "variant": "streamed-final",
+      "run": 3,
+      "performance": 89.0,
+      "ttfb": 656,
+      "metrics": {
+        "first-contentful-paint": 893.318,
+        "largest-contentful-paint": 1497.265,
+        "speed-index": 1824,
+        "total-blocking-time": 123.29300000000012,
+        "cumulative-layout-shift": 0.002108760699257413,
+        "total-byte-weight": 739132
+      },
+      "observedLoad": 1627,
+      "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+    }
+  ],
+  "summary": {
+    "control-final": {
+      "scores": [
+        90.0,
+        90.0,
+        89.0
+      ],
+      "median_performance": 90.0,
+      "median_metrics": {
+        "first-contentful-paint": 1158.602,
+        "largest-contentful-paint": 1474.563,
+        "speed-index": 1902,
+        "total-blocking-time": 29.958999999999833,
+        "cumulative-layout-shift": 0.001073516114583641,
+        "total-byte-weight": 741357
+      }
+    },
+    "streamed-final": {
+      "scores": [
+        91.0,
+        91.0,
+        89.0
+      ],
+      "median_performance": 91.0,
+      "median_metrics": {
+        "first-contentful-paint": 893.318,
+        "largest-contentful-paint": 1497.265,
+        "speed-index": 1842,
+        "total-blocking-time": 85.71799998474103,
+        "cumulative-layout-shift": 0.001948323676058764,
+        "total-byte-weight": 739132
+      }
+    }
+  },
+  "tests": {
+    "css_parser": 7,
+    "js_syntax": 33,
+    "release_publish": "PASS",
+    "frontend_mirror_build": "PASS; Views now included",
+    "streamed_header": "5 real first-click intents while main document held; classic scrollbar geometry stable; PASS",
+    "inline_css": "external stylesheet blocked, auth/cart retry, JavaScript disabled, reduced motion PASS",
+    "home_ux": "menu/cart/auth/story; 8+8/12 stories; mobile+desktop CLS<.01 PASS",
+    "real_media": "12 viewport/DPR scene cases, original blur/dual cycle/font fallback PASS",
+    "design_comparison": [
+      {
+        "device": "mobile",
+        "version": "baseline",
+        "width": 390,
+        "height": 844,
+        "geometry": {
+          ".ms-promo-bar": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 42.65625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgba(255, 255, 255, 0.92)"
+          },
+          ".ms-top": {
+            "x": 0,
+            "y": 42.65625,
+            "width": 390,
+            "height": 145.140625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-logo": {
+            "x": 142.3125,
+            "y": 61.234375,
+            "width": 141.390625,
+            "height": 52,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-stories": {
+            "x": 0,
+            "y": 187.796875,
+            "width": 390,
+            "height": 110.5,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-hero": {
+            "x": 0,
+            "y": 298.296875,
+            "width": 390,
+            "height": 311.609375,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-hero-title": {
+            "x": 166.828125,
+            "y": 376.5625,
+            "width": 203.578125,
+            "height": 23.3125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "19.11px",
+            "color": "rgb(255, 255, 255)"
+          },
+          ".ms-hero-product img": {
+            "x": 19.59375,
+            "y": 376.546875,
+            "width": 135.71875,
+            "height": 96,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(255, 255, 255)"
+          },
+          ".ms-features": {
+            "x": 0,
+            "y": 609.90625,
+            "width": 390,
+            "height": 266.515625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-offers": {
+            "x": 0,
+            "y": 916.421875,
+            "width": 390,
+            "height": 533.9375,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-featured-section": {
+            "x": 0,
+            "y": 1730.71875,
+            "width": 390,
+            "height": 1295.75,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-segments": {
+            "x": 0,
+            "y": 3096.46875,
+            "width": 390,
+            "height": 428.515625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-footer": {
+            "x": 0,
+            "y": 6574.84375,
+            "width": 390,
+            "height": 390,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "13.12px",
+            "color": "rgba(255, 255, 255, 0.82)"
+          }
+        },
+        "totalHeight": 7061,
+        "featured": 8,
+        "offers": 8
+      },
+      {
+        "device": "mobile",
+        "version": "current",
+        "width": 390,
+        "height": 844,
+        "geometry": {
+          ".ms-promo-bar": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 42.65625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgba(255, 255, 255, 0.92)"
+          },
+          ".ms-top": {
+            "x": 0,
+            "y": 42.65625,
+            "width": 390,
+            "height": 145.140625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-logo": {
+            "x": 142.3125,
+            "y": 61.234375,
+            "width": 141.390625,
+            "height": 52,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-stories": {
+            "x": 0,
+            "y": 187.796875,
+            "width": 390,
+            "height": 110.5,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-hero": {
+            "x": 0,
+            "y": 298.296875,
+            "width": 390,
+            "height": 311.609375,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-hero-title": {
+            "x": 166.828125,
+            "y": 376.5625,
+            "width": 203.578125,
+            "height": 23.3125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "19.11px",
+            "color": "rgb(255, 255, 255)"
+          },
+          ".ms-hero-product img": {
+            "x": 19.59375,
+            "y": 376.546875,
+            "width": 135.71875,
+            "height": 96,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(255, 255, 255)"
+          },
+          ".ms-features": {
+            "x": 0,
+            "y": 609.90625,
+            "width": 390,
+            "height": 266.515625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-offers": {
+            "x": 0,
+            "y": 916.421875,
+            "width": 390,
+            "height": 533.9375,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-featured-section": {
+            "x": 0,
+            "y": 1730.71875,
+            "width": 390,
+            "height": 1295.75,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-segments": {
+            "x": 0,
+            "y": 3096.46875,
+            "width": 390,
+            "height": 428.515625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-footer": {
+            "x": 0,
+            "y": 6574.84375,
+            "width": 390,
+            "height": 390,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "13.12px",
+            "color": "rgba(255, 255, 255, 0.82)"
+          }
+        },
+        "totalHeight": 7061,
+        "featured": 8,
+        "offers": 8
+      },
+      {
+        "device": "tablet",
+        "version": "baseline",
+        "width": 768,
+        "height": 1024,
+        "geometry": {
+          ".ms-promo-bar": {
+            "x": 0,
+            "y": 0,
+            "width": 768,
+            "height": 53.390625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgba(255, 255, 255, 0.92)"
+          },
+          ".ms-top": {
+            "x": 30.734375,
+            "y": 53.390625,
+            "width": 706.546875,
+            "height": 197.5,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-logo": {
+            "x": 573.296875,
+            "y": 91.859375,
+            "width": 141.390625,
+            "height": 52,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-stories": {
+            "x": 0,
+            "y": 250.890625,
+            "width": 768,
+            "height": 252.65625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-hero": {
+            "x": 0,
+            "y": 503.546875,
+            "width": 768,
+            "height": 538.203125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-hero-title": {
+            "x": 347.828125,
+            "y": 671.765625,
+            "width": 365.125,
+            "height": 36.28125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "33.6px",
+            "color": "rgb(255, 255, 255)"
+          },
+          ".ms-hero-product img": {
+            "x": 55.046875,
+            "y": 603.15625,
+            "width": 260.78125,
+            "height": 260.78125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(255, 255, 255)"
+          },
+          ".ms-features": {
+            "x": 0,
+            "y": 1041.75,
+            "width": 768,
+            "height": 322.390625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-offers": {
+            "x": 0,
+            "y": 1408.140625,
+            "width": 768,
+            "height": 834.84375,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-featured-section": {
+            "x": 0,
+            "y": 2612.234375,
+            "width": 768,
+            "height": 760.59375,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-segments": {
+            "x": 0,
+            "y": 3458.828125,
+            "width": 768,
+            "height": 374.453125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-footer": {
+            "x": 0,
+            "y": 7381.90625,
+            "width": 768,
+            "height": 344,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "13.12px",
+            "color": "rgba(255, 255, 255, 0.82)"
+          }
+        },
+        "totalHeight": 7726,
+        "featured": 8,
+        "offers": 8
+      },
+      {
+        "device": "tablet",
+        "version": "current",
+        "width": 768,
+        "height": 1024,
+        "geometry": {
+          ".ms-promo-bar": {
+            "x": 0,
+            "y": 0,
+            "width": 768,
+            "height": 53.390625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgba(255, 255, 255, 0.92)"
+          },
+          ".ms-top": {
+            "x": 30.734375,
+            "y": 53.390625,
+            "width": 706.546875,
+            "height": 197.5,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-logo": {
+            "x": 573.296875,
+            "y": 91.859375,
+            "width": 141.390625,
+            "height": 52,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-stories": {
+            "x": 0,
+            "y": 250.890625,
+            "width": 768,
+            "height": 252.65625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-hero": {
+            "x": 0,
+            "y": 503.546875,
+            "width": 768,
+            "height": 538.203125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-hero-title": {
+            "x": 347.828125,
+            "y": 671.765625,
+            "width": 365.125,
+            "height": 36.28125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "33.6px",
+            "color": "rgb(255, 255, 255)"
+          },
+          ".ms-hero-product img": {
+            "x": 55.046875,
+            "y": 603.15625,
+            "width": 260.78125,
+            "height": 260.78125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(255, 255, 255)"
+          },
+          ".ms-features": {
+            "x": 0,
+            "y": 1041.75,
+            "width": 768,
+            "height": 322.390625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-offers": {
+            "x": 0,
+            "y": 1408.140625,
+            "width": 768,
+            "height": 834.84375,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-featured-section": {
+            "x": 0,
+            "y": 2612.234375,
+            "width": 768,
+            "height": 760.59375,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-segments": {
+            "x": 0,
+            "y": 3458.828125,
+            "width": 768,
+            "height": 374.453125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-footer": {
+            "x": 0,
+            "y": 7381.90625,
+            "width": 768,
+            "height": 344,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "13.12px",
+            "color": "rgba(255, 255, 255, 0.82)"
+          }
+        },
+        "totalHeight": 7726,
+        "featured": 8,
+        "offers": 8
+      },
+      {
+        "device": "desktop",
+        "version": "baseline",
+        "width": 1366,
+        "height": 768,
+        "geometry": {
+          ".ms-promo-bar": {
+            "x": 0,
+            "y": 0,
+            "width": 1366,
+            "height": 53.390625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgba(255, 255, 255, 0.92)"
+          },
+          ".ms-top": {
+            "x": 68.3125,
+            "y": 53.390625,
+            "width": 1229.390625,
+            "height": 176.890625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-logo": {
+            "x": 1133.71875,
+            "y": 81.5625,
+            "width": 141.390625,
+            "height": 52,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-stories": {
+            "x": 0,
+            "y": 230.28125,
+            "width": 1366,
+            "height": 251.8125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-hero": {
+            "x": 0,
+            "y": 482.09375,
+            "width": 1366,
+            "height": 598.203125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-hero-title": {
+            "x": 618.859375,
+            "y": 670.21875,
+            "width": 640.125,
+            "height": 60.46875,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "56px",
+            "color": "rgb(255, 255, 255)"
+          },
+          ".ms-hero-product img": {
+            "x": 125.625,
+            "y": 582.8125,
+            "width": 420,
+            "height": 322.546875,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(255, 255, 255)"
+          },
+          ".ms-features": {
+            "x": 0,
+            "y": 1080.296875,
+            "width": 1366,
+            "height": 322.390625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-offers": {
+            "x": 0,
+            "y": 1446.6875,
+            "width": 1366,
+            "height": 1096.265625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-featured-section": {
+            "x": 0,
+            "y": 2922.203125,
+            "width": 1366,
+            "height": 998.9375,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-segments": {
+            "x": 0,
+            "y": 4007.140625,
+            "width": 1366,
+            "height": 359.3125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-footer": {
+            "x": 0,
+            "y": 7123.046875,
+            "width": 1366,
+            "height": 344,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "13.12px",
+            "color": "rgba(255, 255, 255, 0.82)"
+          }
+        },
+        "totalHeight": 7467,
+        "featured": 8,
+        "offers": 8
+      },
+      {
+        "device": "desktop",
+        "version": "current",
+        "width": 1366,
+        "height": 768,
+        "geometry": {
+          ".ms-promo-bar": {
+            "x": 0,
+            "y": 0,
+            "width": 1366,
+            "height": 53.390625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgba(255, 255, 255, 0.92)"
+          },
+          ".ms-top": {
+            "x": 68.3125,
+            "y": 53.390625,
+            "width": 1229.390625,
+            "height": 176.890625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-logo": {
+            "x": 1133.71875,
+            "y": 81.5625,
+            "width": 141.390625,
+            "height": 52,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-stories": {
+            "x": 0,
+            "y": 230.28125,
+            "width": 1366,
+            "height": 251.8125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-hero": {
+            "x": 0,
+            "y": 482.09375,
+            "width": 1366,
+            "height": 598.203125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-hero-title": {
+            "x": 618.859375,
+            "y": 670.21875,
+            "width": 640.125,
+            "height": 60.46875,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "56px",
+            "color": "rgb(255, 255, 255)"
+          },
+          ".ms-hero-product img": {
+            "x": 125.625,
+            "y": 582.8125,
+            "width": 420,
+            "height": 322.546875,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(255, 255, 255)"
+          },
+          ".ms-features": {
+            "x": 0,
+            "y": 1080.296875,
+            "width": 1366,
+            "height": 322.390625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-offers": {
+            "x": 0,
+            "y": 1446.6875,
+            "width": 1366,
+            "height": 1096.265625,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-featured-section": {
+            "x": 0,
+            "y": 2922.203125,
+            "width": 1366,
+            "height": 998.9375,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-segments": {
+            "x": 0,
+            "y": 4007.140625,
+            "width": 1366,
+            "height": 359.3125,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "16px",
+            "color": "rgb(26, 31, 38)"
+          },
+          ".ms-footer": {
+            "x": 0,
+            "y": 7123.046875,
+            "width": 1366,
+            "height": 344,
+            "font": "Vazirmatn, Tahoma, sans-serif",
+            "fontSize": "13.12px",
+            "color": "rgba(255, 255, 255, 0.82)"
+          }
+        },
+        "totalHeight": 7467,
+        "featured": 8,
+        "offers": 8
+      }
+    ],
+    "strict_nginx_smoke": "PASS: 8+8,12stories,all LCP responsive candidates, matching preload, guest cache and static TTL",
+    "missing_generated_shell": "PASS: full inline fallback, no shell or early bootstrap"
+  },
+  "source_sha256": {
+    "scripts/build-critical-home.mjs": "b6e989b7c1f038244560e5c43ad6f0f4d4b8f0f47d5c4837c68b84b597255c84",
+    "scripts/home-css-rules.mjs": "49717a699bb3ecb6c0fe499fdbb4d1bc9e23d6a9e54058dace7993d97da340f6",
+    "scripts/home-css-rules.test.mjs": "b59ffde94c691988fb6927b11ab88b707a0d9b9cc059096a61327e233b28b4ce",
+    "scripts/verify-streamed-header.cjs": "046548fe74af34d12b1048df053e74b6067a384294b65d47d2e0d72384b9bbc1",
+    "src/MovasseghiShop.Web/Views/Shared/_Layout.cshtml": "e479c5ef49e9daee4620fb8717a1e766aeb8cac51e54bc2710e733f7f55e24c2",
+    "src/MovasseghiShop.Web/wwwroot/css/critical-home.css": "1d67befb2935d5bd9df630e4fd1ae96e27972e278939491f001f5dd8946509b4",
+    "src/MovasseghiShop.Web/wwwroot/css/critical-shell.css": "f91a98fe63ffa1ffd9dd6e18737d2f6307d8cd88821268852d4d8a29a67d9ca9"
+  },
+  "assembly_sha256": "38d5520fed54c4ba0951bc01fddcb5d1d4b3da172c940c992bf016e444d1eb4c",
+  "tradeoffs": [
+    "Header rules are repeated in the full main stylesheet to preserve original source-order cascade. CSS size has not been reduced.",
+    "FCP improves. LCP does not improve consistently; measured TBT rises because the earlier FCP includes more initial work in its measurement window. No claim that this solves every load metric.",
+    "HTML/body inline CSS remains independent of JavaScript. No new content-visibility, hidden sections, disabled animations, interaction-delay timers or external async CSS."
+  ],
+  "rejected": [
+    "Unconditional scrollbar-gutter narrowed hidden-scrollbar viewport by15px; replaced with home-only overflow-y:scroll (print visible).",
+    "An overlapping final benchmark preflight was stopped; its partial output is not included."
+  ],
+  "remaining": [
+    "Actual Grade A and both scores>95 are not proven.",
+    "Runtime HTTP policy enforced with empty allowed_hosts; IP/GT access remains unavailable; saved draft must be reviewed/saved and environment published to apply.",
+    "Whether previous commit07f92ba was deployed with nginx/image generation remains unconfirmed; asked user.",
+    "No new deployment per user instruction."
+  ]
+}

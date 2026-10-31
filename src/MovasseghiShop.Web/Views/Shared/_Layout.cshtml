@@ -17,10 +17,16 @@
     var isLoggedIn = User.Identity?.IsAuthenticated == true;
     var cartItemCount = CartService.GetBadgeCount(Context);
     var cartAriaLabel = cartItemCount > 0 ? $"سبد خرید ({cartItemCount} قلم)" : "سبد خرید";
+    var homeWebRoot = string.IsNullOrEmpty(HostEnv.WebRootPath)
+        ? global::System.IO.Path.Combine(HostEnv.ContentRootPath, "wwwroot") : HostEnv.WebRootPath;
+    var homeFullStyles = global::System.IO.Path.Combine(homeWebRoot, "css", "critical-home.css");
+    var homeShellStyles = global::System.IO.Path.Combine(homeWebRoot, "css", "critical-shell.css");
+    var streamHomeStyles = isHome && !isLocalTunnel
+        && global::System.IO.File.Exists(homeFullStyles) && global::System.IO.File.Exists(homeShellStyles);
     var logoUrl = ProductImageHelper.PreferWebp("/images/brand/originallogo.png", HostEnv)!;
 }
 <!DOCTYPE html>
-<html lang="fa" dir="rtl" class="js">
+<html lang="fa" dir="rtl" class="js@(streamHomeStyles ? " ms-home" : "")">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
@@ -110,7 +116,23 @@
             ? global::System.IO.Path.Combine(HostEnv.ContentRootPath, "wwwroot")
             : HostEnv.WebRootPath;
         var criticalPath = global::System.IO.Path.Combine(webRoot, "css", "critical-home.css");
-        if (global::System.IO.File.Exists(criticalPath))
+        if (streamHomeStyles)
+        {
+            <style id="msHomeShellStyles">@Html.Raw(global::System.IO.File.ReadAllText(homeShellStyles))</style>
+            <script>
+            // Preserve the latest intent until the complete document loader exists.
+            window.__msEarlyCapture = function (e) {
+                var target = e.target instanceof Element && e.target.closest('[data-open-cart],[data-open-auth],[data-menu-toggle],.ms-drawer-quick-btn');
+                if (!target) return;
+                e.preventDefault(); e.stopImmediatePropagation();
+                if (window.__msEarlyIntent) window.__msEarlyIntent.removeAttribute('aria-busy');
+                window.__msEarlyIntent = target;
+                target.setAttribute('aria-busy', 'true');
+            };
+            window.addEventListener('click', window.__msEarlyCapture, true);
+            </script>
+        }
+        else if (global::System.IO.File.Exists(criticalPath))
         {
             <style id="msHomeInlineStyles">@Html.Raw(global::System.IO.File.ReadAllText(criticalPath))</style>
         }
@@ -241,6 +263,10 @@
             </form>
         </div>
     </header>
+    @if (streamHomeStyles)
+    {
+        <style id="msHomeInlineStyles">@Html.Raw(global::System.IO.File.ReadAllText(homeFullStyles))</style>
+    }
 
     <div class="ms-drawer" id="mobileNav" hidden aria-hidden="true">
         <div class="ms-drawer-bg" data-menu-close tabindex="-1"></div>
@@ -594,6 +620,17 @@ else
               console.error(error);
             }).finally(function () { target.removeAttribute('aria-busy'); });
           }, true);
+          if (window.__msEarlyCapture) {
+            window.removeEventListener('click', window.__msEarlyCapture, true);
+            delete window.__msEarlyCapture;
+          }
+          var earlyIntent = window.__msEarlyIntent;
+          delete window.__msEarlyIntent;
+          if (earlyIntent) {
+            bootHeavy().then(function () { if (earlyIntent.isConnected) earlyIntent.click(); })
+              .catch(function (error) { console.error(error); })
+              .finally(function () { earlyIntent.removeAttribute('aria-busy'); });
+          }
           document.addEventListener('focusin', function () { bootHeavy().catch(function () {}); }, { once: true });
           window.addEventListener('load', function () {
             if ('requestIdleCallback' in window) requestIdleCallback(function () { bootHeavy().catch(function () {}); }, { timeout: 2000 });

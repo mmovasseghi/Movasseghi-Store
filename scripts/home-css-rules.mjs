@@ -1,7 +1,7 @@
 // Drop only rules whose every selector starts in a separate page's namespace.
 // Mixed selector groups, keyframes, shared modal styles and unknown at-rules stay.
 const exclusive = /^\.(?:ms-account-|ms-addr-|ms-order-|catalog-|pd-)/;
-export function homeRules(css) {
+export function mapStyleRules(css, mapRule, mapAtRule) {
   let result = '', start = 0, opening = -1, depth = 0, parentheses = 0, quote = '';
   for (let i = 0; i < css.length; i++) {
     const c = css[i];
@@ -24,10 +24,12 @@ export function homeRules(css) {
       const header = originalHeader.replace(/\/\*[\s\S]*?\*\//g, '').trim();
       const body = css.slice(opening + 1, i);
       if (/^@(media|supports|layer|container)\b/i.test(header)) {
-        const kept = homeRules(body);
+        const kept = mapStyleRules(body, mapRule, mapAtRule);
         if (kept.trim()) result += originalHeader + '{' + kept + '}';
-      } else if (header.startsWith('@') || !header.split(',').every(s => exclusive.test(s.trim()))) {
-        result += css.slice(start, i + 1);
+      } else if (header.startsWith('@')) {
+        result += mapAtRule ? mapAtRule(header, body, originalHeader) : css.slice(start, i + 1);
+      } else {
+        result += mapRule(header, body, originalHeader);
       }
       start = i + 1;
     } else if (c === ';' && depth === 0) {
@@ -36,4 +38,9 @@ export function homeRules(css) {
   }
   if (depth !== 0 || parentheses !== 0 || quote) throw new Error('Unbalanced CSS');
   return result + css.slice(start);
+}
+
+export function homeRules(css) {
+  return mapStyleRules(css, (header, body, original) =>
+    header.split(',').every(s => exclusive.test(s.trim())) ? '' : original + '{' + body + '}');
 }
