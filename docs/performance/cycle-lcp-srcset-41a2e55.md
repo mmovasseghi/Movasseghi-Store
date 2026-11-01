@@ -85,3 +85,11 @@ HTML gzip download measured **63616** bytes (was ~68717 at level 4).
 | [Q8T2c8aj](https://gtmetrix.com/reports/185.93.88.81/Q8T2c8aj/) | **82** | **98** | **1.8 s** | 0 ms | 0.002 | **1.8 s** | **2.1 s** |
 
 Still **Grade B** — not A / not >95. Best Seattle HTTPS Perf this cycle: **82**.
+
+## Fresh user-requested retest
+
+| Report | Perf | Struct | LCP | TBT | CLS | FCP | SI |
+|--------|------|--------|-----|-----|-----|-----|-----|
+| [u7ZOUnNi](https://gtmetrix.com/reports/185.93.88.81/u7ZOUnNi/) | **82** | **98** | **1.8s** | ~40ms | 0 | **1.8s** | **2.1s** |
+
+Still Grade B; not A.
