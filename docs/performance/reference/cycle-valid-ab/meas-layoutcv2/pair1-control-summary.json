@@ -1,0 +1,92 @@
+{
+  "settings": {
+    "url": "http://185.93.88.81:9051/",
+    "label": "pair1-control",
+    "runs": 1,
+    "viewport": "desktop",
+    "vp": {
+      "width": 1366,
+      "height": 768,
+      "deviceScaleFactor": 1
+    },
+    "chrome": "/usr/local/bin/google-chrome",
+    "throttle": null,
+    "method": "puppeteer.page.goto cold navigation; Network.clearBrowserCache + setCacheDisabled; no setContent; optional CDP Network.emulateNetworkConditions",
+    "createdAt": "2026-11-01T17:40:12.674Z"
+  },
+  "rows": [
+    {
+      "label": "pair1-control-1",
+      "wallMs": 3963,
+      "httpStatus": 200,
+      "navigationTTFB_ms": 456.29999999701977,
+      "serverWaiting_ms": 229.69299999999998,
+      "headerReceiveEnd_relRequest_ms": 454.313,
+      "htmlResponseEnd_ms": 909.5,
+      "htmlTransfer": 63895,
+      "htmlDecoded": 325303,
+      "FCP": 924,
+      "FP": 924,
+      "LCP": 1080,
+      "lcpUrl": "http://185.93.88.81:9051/images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw",
+      "CLS": 0.0045122481202399855,
+      "TBT_approx": 0,
+      "longTasksBeforeFcp": [],
+      "longTasksAfterFcp": [],
+      "styleLayoutBeforeFcp": {
+        "Layout": 88.32100000000003,
+        "UpdateLayoutTree": 19.580000000000002,
+        "ParseAuthorStyleSheet": 1.288
+      },
+      "styleLayoutAfterFcp": {
+        "Layout": 2.8810000000000002,
+        "UpdateLayoutTree": 11.177999999999999,
+        "ParseAuthorStyleSheet": 0
+      },
+      "topLayout": {
+        "dur": 50.912,
+        "start": 341.021,
+        "dirty": 654,
+        "total": 654,
+        "partial": false,
+        "root": "#document"
+      },
+      "inlineCssBytes": 150237,
+      "remainderLink": null,
+      "currentSrc": "http://185.93.88.81:9051/images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw",
+      "cssResources": [],
+      "fontResources": [
+        {
+          "name": "81:9051/fonts/Vazirmatn-storefront.woff2",
+          "start": 461.29999999701977,
+          "responseEnd": 1377.6000000014901,
+          "transfer": 86012
+        }
+      ],
+      "lcpResource": {
+        "name": "http://185.93.88.81:9051/images/products/0056/01-display-v2-420w.webp",
+        "initiator": "link",
+        "start": 461.20000000298023,
+        "responseStart": 807.6000000014901,
+        "responseEnd": 1034.1000000014901,
+        "transfer": 22184,
+        "encoded": 21884,
+        "decoded": 21884
+      },
+      "docFromCache": {
+        "fromDiskCache": false,
+        "status": 200,
+        "encoded": 63883
+      }
+    }
+  ],
+  "medians": {
+    "navigationTTFB_ms": 456.29999999701977,
+    "htmlResponseEnd_ms": 909.5,
+    "htmlTransfer": 63895,
+    "FCP": 924,
+    "LCP": 1080,
+    "CLS": 0.0045122481202399855,
+    "TBT_approx": 0
+  }
+}

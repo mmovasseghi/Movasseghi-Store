@@ -62,6 +62,11 @@ html.js .ms-page-home img.ms-home-lazy-ready.is-loaded {
 /* Skip below-fold Style/Layout before first paint.
    Intrinsic sizes are measured from live mobile/desktop so scroll/CLS stay stable
    (previous bare `auto` without size caused pop-in). */
+/* Features sits under stories+hero on desktop/mobile first paint. */
+.ms-page-home #ms-features {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 220px;
+}
 .ms-page-home .ms-offers {
   content-visibility: auto;
   contain-intrinsic-size: auto 560px;
