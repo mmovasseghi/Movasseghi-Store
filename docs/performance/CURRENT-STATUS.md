@@ -54,11 +54,15 @@
 
 سهمیهٔ تست guest GTmetrix اجازهٔ اجرای دوم Seattle را نداد. برای ادامهٔ حلقه با تأیید Grade واقعی: حساب/سهمیه GTmetrix یا صبر تا رفع محدودیت guest لازم است.
 
-## TLS دامنه (همین نوبت)
+## TLS دامنه (همین نوبت) — **دیپلوی‌شده روی سرور**
 
 - گواهی LE دامنه روی origin نصب شد؛ chain/key match؛ SNI جدا از گواهی IP.
 - تأیید: `openssl` روی `185.93.88.81` با SNI IP → SAN IP؛ با SNI دامنه → `CN=movasseghistore.com`؛ `https://movasseghistore.com/` از CDN → **200**.
+- `verify-home.py --insecure --nginx` روی IP و دامنه (لوکال Host) → **EXIT 0** (۸ featured / ۸ offers / ۱۲ stories / LCP webp / cache HIT).
+- stamp: `/MOVASSEGHISTORE/ops/nginx-domain-ssl-20261101/` · conf md5 `821aa8bce64a64e96d343588e7e6941e`
+- هندآف کامل Codex: `docs/performance/CODEX-HANDOFF-cycle-domain-ssl-dual-vhost-COMPLETE.md`
 - **هشدار امنیتی:** `privkey.pem` در چت عمومی paste شده؛ چرخش/باطل‌سازی و صدور مجدد توصیه می‌شود.
+- PR: https://github.com/mmovasseghi/Movasseghi-Store/pull/9
 
 ## اقدام بعدی
 
