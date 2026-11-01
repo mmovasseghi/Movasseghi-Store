@@ -21,6 +21,7 @@
   const tapNext = modal.querySelector('[data-story-next]');
 
   let stories = [];
+  let storiesLoadPromise = null;
   let viewed = new Set();
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
@@ -53,7 +54,7 @@
     if (viewed.has(btn.dataset.storyId)) btn.classList.add('is-viewed');
     btn.addEventListener('click', e => {
       e.preventDefault();
-      ensureStoriesLoaded().then(() => open(btn.dataset.storyId));
+      ensureStoriesLoaded().then(() => open(btn.dataset.storyId)).catch(() => {});
     });
   });
   }
@@ -70,9 +71,11 @@
     const src = dataEl.getAttribute('data-stories-src');
     if (!src) return Promise.resolve([]);
     return fetch(src, { credentials: 'same-origin' })
-      .then(r => (r.ok ? r.json() : []))
-      .then(raw => (Array.isArray(raw) ? raw : []).map(normalizeStory))
-      .catch(() => []);
+      .then(r => {
+        if (!r.ok) throw new Error(`Stories fetch failed: ${r.status}`);
+        return r.json();
+      })
+      .then(raw => (Array.isArray(raw) ? raw : []).map(normalizeStory));
   }
 
   function markViewed(id) {
@@ -121,7 +124,8 @@
     const slide = story.slides[slideIdx];
     if (slide && slidesEl) {
       const imgSrc = (window.appUrl || (u => u))(slide.image);
-      slidesEl.innerHTML = `<div class="ms-story-slide"><img src="${escapeAttr(imgSrc)}" alt="${escapeAttr(slide.title)}" loading="lazy" decoding="async" /></div>`;
+      // Eager: modal is user-opened; lazy can leave a blank slide until scroll.
+      slidesEl.innerHTML = `<div class="ms-story-slide"><img src="${escapeAttr(imgSrc)}" alt="${escapeAttr(slide.title)}" loading="eager" decoding="async" fetchpriority="high" /></div>`;
     }
     if (ctaEl && slide) {
       ctaEl.href = slide.link || '#';
@@ -276,17 +280,47 @@
     if (e.key === 'ArrowLeft') goPrev();
   });
 
+  function consumeEarlyStoryIntent() {
+    if (window.__msEarlyStoryCapture) {
+      window.removeEventListener('click', window.__msEarlyStoryCapture, true);
+      delete window.__msEarlyStoryCapture;
+    }
+    const intent = window.__msEarlyStoryIntent
+      || (window.__msEarlyIntent instanceof Element
+        ? window.__msEarlyIntent.closest('.ms-story[data-story-id]')
+        : null);
+    if (window.__msEarlyIntent instanceof Element
+      && window.__msEarlyIntent.closest('.ms-story[data-story-id]')) {
+      delete window.__msEarlyIntent;
+    }
+    delete window.__msEarlyStoryIntent;
+    if (!(intent instanceof Element) || !intent.isConnected) return;
+    const id = intent.dataset.storyId;
+    intent.removeAttribute('aria-busy');
+    if (!id) return;
+    ensureStoriesLoaded().then(() => open(id)).catch(() => {});
+  }
+
   function boot() {
     wireStoryButtons();
     ensureStoriesLoaded().catch(() => {});
+    consumeEarlyStoryIntent();
   }
 
   function ensureStoriesLoaded() {
     if (stories.length) return Promise.resolve(stories);
-    return loadStoriesPayload().then((list) => {
-      stories = list;
-      return stories;
-    });
+    if (storiesLoadPromise) return storiesLoadPromise;
+    storiesLoadPromise = loadStoriesPayload()
+      .then((list) => {
+        stories = list;
+        return stories;
+      })
+      .catch((err) => {
+        // Allow a later boot/click/early-intent to retry after a failed fetch.
+        storiesLoadPromise = null;
+        throw err;
+      });
+    return storiesLoadPromise;
   }
 
   boot();

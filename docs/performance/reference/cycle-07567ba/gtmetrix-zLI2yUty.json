@@ -1,0 +1,12 @@
+{
+  "url": "https://gtmetrix.com/reports/185.93.88.81/zLI2yUty/",
+  "performance": "80",
+  "structure": "98",
+  "LCP": "2.1s",
+  "TBT": "58ms",
+  "CLS": "0",
+  "location": "Seattle, WA, USA",
+  "using": "Chrome 154.0.0.0, Lighthouse 12.6.1",
+  "generated": "Sat, Oct 31, 2026 9:46 AM -0700",
+  "slice": "GTmetrix Grade \nPerformance \n80%\nStructure \n98%\nWeb Vitals \nLCP\n \n2.1s\nTBT\n \n58ms\nCLS\n \n0\nSummary\nPerformance\nStructure\nCrUX\nWaterfall\nVideo\nHistory\nAlerts\nLog in or Sign up to see the rest of the Report\n\nTry out GTmetrix for FREE and get full report details, more tests, monitoring, locations, and more!\n\nLog in o"
+}

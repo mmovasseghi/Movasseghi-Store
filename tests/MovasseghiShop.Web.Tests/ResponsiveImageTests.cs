@@ -99,6 +99,23 @@ public sealed class ResponsiveImageTests : IDisposable
     }
 
     [Fact]
+    public async Task Srcset_drops_heavier_narrower_candidates_dominated_by_a_lighter_wider_file()
+    {
+        await Source();
+        await Optimizer.OptimizeAllAsync();
+        // Inflate 384w above the 420w file so a mobile DPR slot would otherwise prefer it.
+        var fat = Path.Combine(Folder, "01-384w.webp");
+        var slim = Path.Combine(Folder, "01-420w.webp");
+        Assert.True(File.Exists(fat) && File.Exists(slim));
+        await File.WriteAllBytesAsync(fat, Enumerable.Repeat((byte)7, (int)new FileInfo(slim).Length + 20_000).ToArray());
+        File.SetLastWriteTimeUtc(fat, File.GetLastWriteTimeUtc(slim));
+        var service = new ResponsiveImageService(Environment, new Versions());
+        var srcset = service.Get("/images/products/test/01.webp", new DefaultHttpContext())!.SrcSet;
+        Assert.DoesNotContain("384w", srcset);
+        Assert.Contains("420w", srcset);
+    }
+
+    [Fact]
     public async Task Hero_notices_new_derivatives_and_never_reuses_them_after_an_upload()
     {
         var path = await Source();

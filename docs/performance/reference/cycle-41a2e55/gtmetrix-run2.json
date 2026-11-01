@@ -1,0 +1,35 @@
+{
+  "reportUrl": "https://gtmetrix.com/reports/185.93.88.81/5c8n84AR/",
+  "data": {
+    "title": "Latest Performance Report for: https://185.93.88.81/ | GTmetrix",
+    "href": "https://gtmetrix.com/reports/185.93.88.81/5c8n84AR/",
+    "testedUrl": "https://185.93.88.81/",
+    "generated": "Sat, Oct 31, 2026 8:51 PM -0700",
+    "location": "Seattle, WA, USA",
+    "using": "Chrome 154.0.0.0, Lighthouse 12.6.1",
+    "grade": null,
+    "performance": "78",
+    "structure": "98",
+    "lcp": "2.1s",
+    "tbt": "0ms",
+    "cls": "0",
+    "fcp": null,
+    "si": null,
+    "ttfb": null,
+    "head": "We use essential cookies to make our site work. With your consent, we may also use non-essential cookies to improve user experience and analyze website traffic. By clicking “Accept,” you agree to our website's cookie use as described in our Cookie Policy and Privacy Policy. You can change your cookie settings at any time by clicking “Preferences.”\nPreferences\nDecline\nAccept\nWhy GTmetrix\nExplore PRO\nAI-Built Sites\nPricing\nResources\nLog In\nTry for FREE\nRe-Test\n \nCompare\nPage Settings\n \nMonitor\n \nSet Up Alerts\n \nTags\n \nShare\nUncover full report details with a FREE GTmetrix account\n\nGet full report details and more testing capacity with a FREE GTmetrix account.\n\nLog in Create a FREE account\n\t\nLatest Performance Report for:\nhttps://185.93.88.81/\nReport generated:\nSat, Oct 31, 2026 8:51 PM -0700\nTest Server Location:\nSeattle, WA, USA\nUsing:\nChrome 154.0.0.0, Lighthouse 12.6.1\nGTmetrix Grade \nPerformance \n78%\nStructure \n98%\nWeb Vitals \nLCP\n \n2.1s\nTBT\n \n0ms\nCLS\n \n0\nSummary\nPerformance\nStructure\nCrUX\nWaterfall\nVideo\nHistory\nAlerts\nLog in or Sign up to see the rest of the Report\n\nTry out GTmetrix for FREE and get full report details, more tests, monitoring, locations, and more!\n\nLog in or Create a FREE account\n\nMore from GTmetrix\n\nAdditional tips and suggestions based on your page analysis.\n\nNeed optimization guides and advice?\n\nCheck out the GTmetrix blog for tips and how-tos!Read the guide\n\nNeed help with optimization?\n\nFind a developer with our partner Fiverr to optimize your performance\n\nTips and Tricks for using GTmetrix\n\nShortcuts, guides and pointers for making the most out of GTmetrix\n\nUnderstand your GTmetrix Report\n\nLearn everything you need to know about GTmetrix Reports\n\nUnderstand and assess Waterfall Charts\n\nLearn to identify and point out potential issues in your page load\n\nTest your page in multiple locations\n\nAnalyze your page globally with a free GTmetrix account\n\nRead our blog for more performance tips and advice.\n\nCompare with another URL\n\nAnalyze the following URL and compare it to the current report. \n\n\t\nOptions: Seattle, WA, USA using Chrome.\nChange Options\nCompare\nExport History\n\nGet report history for this page in CSV format based on selected settings.\n\nSelect Format \nDownload CSV file\nLink to CSV file (requires API key)\nSelect time range\nLast 5 Reports\nLast 10 Reports\nLast 25 Reports\nLast 50 Reports\nLast 100 Reports (PRO Only)\nLast 250 Reports (PRO Only)\nLast 500 Reports (PRO Only)\nAll available reports (PRO Only)\nSelect columns\nSelect colu",
+    "gradeFromDom": "\n          \n        "
+  },
+  "log": [
+    "run2 filled {\"ok\":true,\"value\":\"https://185.93.88.81/\"} title=GTmetrix - Test, Monitor, and Optimize Web Performance - GTmetrix",
+    "run2 options {\"seattle\":true,\"chrome\":true,\"optionsSlice\":\"Analysis Options:\\n\\nSeattle, WA, USA\\n\\nChrome\\n\\nUnthrottled Connection\\n\\nChange Options\\nDeep Insights to Understand and Optimize Performance\\n\\nGo beyond simple performance scores with detailed analysis and a breakdown of y\"}",
+    "run2 tick 0 https://gtmetrix.com/",
+    "run2 tick 1 https://gtmetrix.com/analyze.html",
+    "run2 tick 2 https://gtmetrix.com/analyze.html",
+    "run2 tick 3 https://gtmetrix.com/analyze.html",
+    "run2 tick 4 https://gtmetrix.com/analyze.html",
+    "run2 tick 5 https://gtmetrix.com/analyze.html",
+    "run2 tick 6 https://gtmetrix.com/analyze.html",
+    "run2 tick 7 https://gtmetrix.com/analyze.html",
+    "run2 tick 8 https://gtmetrix.com/reports/185.93.88.81/5c8n84AR/"
+  ]
+}

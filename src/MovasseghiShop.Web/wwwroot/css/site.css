@@ -970,7 +970,17 @@ body.ms-drawer-open,body.ms-modal-open,body.ms-sheet-open{overflow:hidden}
   .ms-page-home .ms-hero-orb{filter:blur(28px);opacity:.85}
   .ms-page-home .ms-hero-particles{opacity:.22}
   .ms-page-home .ms-hero-title{font-size:clamp(1.05rem,4.9vw,1.36rem);line-height:1.22;text-shadow:0 1px 18px rgba(0,0,0,.12)}
-  .ms-page-home .ms-hero-desc{-webkit-line-clamp:3;line-clamp:3;min-height:0}
+  /* Reserve 3-line fallback (Tahoma) space so full hero copy stays visible.
+     Do not clamp/hide text for score; stable min-height avoids CLS when Vazirmatn swaps. */
+  .ms-page-home .ms-hero-desc{
+    display:block;
+    -webkit-line-clamp:unset;
+    line-clamp:unset;
+    -webkit-box-orient:unset;
+    min-height:calc(3 * 1.62em);
+    max-height:none;
+    overflow:visible;
+  }
   .ms-page-home .ms-hero-cta{padding:.56rem .82rem;font-size:clamp(.72rem,2.4vw,.78rem);min-height:40px;align-items:center}
   .ms-page-home .ms-hero-cta-outline{padding:.5rem .65rem;border-width:1.5px}
   .ms-page-home .ms-hero-stat{background:rgba(255,255,255,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:.34rem .52rem;min-width:58px;box-shadow:0 6px 20px rgba(0,0,0,.12)}
@@ -980,7 +990,7 @@ body.ms-drawer-open,body.ms-modal-open,body.ms-sheet-open{overflow:hidden}
   .ms-hero-title{font-size:clamp(.95rem,4.6vw,1.28rem);line-height:1.2;letter-spacing:-.015em;margin-bottom:.35rem}
   .ms-hero-title em{display:inline}
   .ms-hero-kicker{font-size:clamp(.7rem,2.6vw,.8rem);padding:.32rem .65rem;margin-bottom:.36rem;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .ms-hero-desc{font-size:clamp(.8rem,2.8vw,.9rem);line-height:1.62;margin-bottom:.8rem;max-width:none;min-height:calc(2 * 1.62em);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .ms-hero-desc{font-size:clamp(.8rem,2.8vw,.9rem);line-height:1.62;margin-bottom:.8rem;max-width:none;min-height:calc(3 * 1.62em);display:block;-webkit-line-clamp:unset;line-clamp:unset;overflow:visible}
   .ms-hero-cta{padding:.52rem .75rem;font-size:clamp(.68rem,2.2vw,.74rem)}
   .ms-hero-actions{gap:.4rem;flex-wrap:nowrap}
   .ms-promo-bar{padding:.46rem .5rem;gap:.35rem}

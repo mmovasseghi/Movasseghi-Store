@@ -56,7 +56,9 @@
     </div>
     </div>
 </section>
-<script id="msStoriesData" type="application/json" data-stories-src="@AppPath.H("/Home/Stories.json", Context)">@Html.Raw(System.Text.Json.JsonSerializer.Serialize(storyItems))</script>
+@* Payload lives at Stories.json — inlining ~17KB into HTML delayed LCP/FCP on high-RTT paths.
+   stories.js already fetches data-stories-src when the script body is empty. *@
+<script id="msStoriesData" type="application/json" data-stories-src="@AppPath.H("/Home/Stories.json", Context)"></script>
 
 <!-- هیرو — LCP تصویر محصول -->
 <section class="ms-hero" id="ms-hero" data-hero-slider>

@@ -116,15 +116,33 @@
         }
             <script>
             // Preserve the latest intent until the complete document loader exists.
+            // Stories keep a dedicated capture until stories.js boots (defer), because
+            // the cart/auth loader removes __msEarlyCapture before deferred scripts run.
             window.__msEarlyCapture = function (e) {
-                var target = e.target instanceof Element && e.target.closest('[data-open-cart],[data-open-auth],[data-menu-toggle],.ms-drawer-quick-btn');
+                var target = e.target instanceof Element && e.target.closest('[data-open-cart],[data-open-auth],[data-menu-toggle],.ms-drawer-quick-btn,.ms-story[data-story-id]');
                 if (!target) return;
                 e.preventDefault(); e.stopImmediatePropagation();
+                if (target.closest('.ms-story[data-story-id]')) {
+                    var story = target.closest('.ms-story[data-story-id]');
+                    if (window.__msEarlyStoryIntent) window.__msEarlyStoryIntent.removeAttribute('aria-busy');
+                    window.__msEarlyStoryIntent = story;
+                    story.setAttribute('aria-busy', 'true');
+                    return;
+                }
                 if (window.__msEarlyIntent) window.__msEarlyIntent.removeAttribute('aria-busy');
                 window.__msEarlyIntent = target;
                 target.setAttribute('aria-busy', 'true');
             };
+            window.__msEarlyStoryCapture = function (e) {
+                var story = e.target instanceof Element && e.target.closest('.ms-story[data-story-id]');
+                if (!story) return;
+                e.preventDefault(); e.stopImmediatePropagation();
+                if (window.__msEarlyStoryIntent) window.__msEarlyStoryIntent.removeAttribute('aria-busy');
+                window.__msEarlyStoryIntent = story;
+                story.setAttribute('aria-busy', 'true');
+            };
             window.addEventListener('click', window.__msEarlyCapture, true);
+            window.addEventListener('click', window.__msEarlyStoryCapture, true);
             </script>
         <template id="msCartCss"><link rel="stylesheet" href="~/css/storefront-cart.bundle.css" asp-append-version="true" /></template>
     }
@@ -616,9 +634,10 @@ else
             window.removeEventListener('click', window.__msEarlyCapture, true);
             delete window.__msEarlyCapture;
           }
+          // Leave __msEarlyStoryCapture until stories.js consumes it.
           var earlyIntent = window.__msEarlyIntent;
           delete window.__msEarlyIntent;
-          if (earlyIntent) {
+          if (earlyIntent && !(earlyIntent.closest && earlyIntent.closest('.ms-story[data-story-id]'))) {
             bootHeavy().then(function () { if (earlyIntent.isConnected) earlyIntent.click(); })
               .catch(function (error) { console.error(error); })
               .finally(function () { earlyIntent.removeAttribute('aria-busy'); });

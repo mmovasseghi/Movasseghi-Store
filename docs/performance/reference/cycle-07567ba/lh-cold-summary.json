@@ -1,0 +1,84 @@
+{
+  "at": "2026-10-31T16:28:48.278Z",
+  "url": "https://185.93.88.81/",
+  "runs": [
+    {
+      "label": "desktop-cold-1",
+      "formFactor": "desktop",
+      "ms": 13931,
+      "performance": 0.86,
+      "FCP": 1326,
+      "SI": 2824.6906647143182,
+      "LCP": 1326,
+      "TBT": 87.5,
+      "CLS": 0.001972465877434252,
+      "TTFB": 223.993,
+      "lcpElement": "1,330 ms"
+    },
+    {
+      "label": "desktop-cold-2",
+      "formFactor": "desktop",
+      "ms": 13753,
+      "performance": 0.86,
+      "FCP": 1313,
+      "SI": 2776.531739897479,
+      "LCP": 1313,
+      "TBT": 82,
+      "CLS": 0.001951816844425386,
+      "TTFB": 223.93699999999995,
+      "lcpElement": "1,310 ms"
+    },
+    {
+      "label": "desktop-cold-3",
+      "formFactor": "desktop",
+      "ms": 13896,
+      "performance": 0.85,
+      "FCP": 1326,
+      "SI": 2821.853297260057,
+      "LCP": 1326,
+      "TBT": 114.5,
+      "CLS": 0.001951816844425386,
+      "TTFB": 223.70900000000006,
+      "lcpElement": "1,330 ms"
+    },
+    {
+      "label": "mobile-cold-1",
+      "formFactor": "mobile",
+      "ms": 14430,
+      "performance": 0.99,
+      "FCP": 1278.3545,
+      "SI": 2766.1664532660207,
+      "LCP": 1278.3545,
+      "TBT": 5.5,
+      "CLS": 0.04257845429062286,
+      "TTFB": 224.676,
+      "lcpElement": "1,280 ms"
+    },
+    {
+      "label": "mobile-cold-2",
+      "formFactor": "mobile",
+      "ms": 14030,
+      "performance": 0.97,
+      "FCP": 1978.0025,
+      "SI": 3154.6105764894196,
+      "LCP": 1978.0025,
+      "TBT": 3.5,
+      "CLS": 0.04526623439979113,
+      "TTFB": 237.41600000000005,
+      "lcpElement": "1,980 ms"
+    },
+    {
+      "label": "mobile-cold-3",
+      "formFactor": "mobile",
+      "ms": 13839,
+      "performance": 0.99,
+      "FCP": 1299,
+      "SI": 2864.6447667374878,
+      "LCP": 1299,
+      "TBT": 1,
+      "CLS": 0.04209423683719697,
+      "TTFB": 223.781,
+      "lcpElement": "1,300 ms"
+    }
+  ]
+}
