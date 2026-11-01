@@ -1,0 +1,167 @@
+{
+  "url": "https://185.93.88.81/",
+  "atTop": [
+    {
+      "sel": ".ms-offers",
+      "contentVisibility": "auto",
+      "containIntrinsicSize": "auto 560px",
+      "top": 1447,
+      "height": 1096,
+      "inViewport": false,
+      "nearViewport": false,
+      "checkVisibility": false
+    },
+    {
+      "sel": ".ms-cat-section",
+      "contentVisibility": "auto",
+      "containIntrinsicSize": "auto 280px",
+      "top": 2602,
+      "height": 360,
+      "inViewport": false,
+      "nearViewport": false,
+      "checkVisibility": false
+    },
+    {
+      "sel": "#ms-featured",
+      "contentVisibility": "auto",
+      "containIntrinsicSize": "auto 1300px",
+      "top": 2962,
+      "height": 1388,
+      "inViewport": false,
+      "nearViewport": false,
+      "checkVisibility": false
+    },
+    {
+      "sel": "#ms-segments",
+      "contentVisibility": "auto",
+      "containIntrinsicSize": "auto 480px",
+      "top": 4436,
+      "height": 568,
+      "inViewport": false,
+      "nearViewport": false,
+      "checkVisibility": false
+    },
+    {
+      "sel": ".ms-closing",
+      "contentVisibility": "auto",
+      "containIntrinsicSize": "auto 560px",
+      "top": 5937,
+      "height": 664,
+      "inViewport": false,
+      "nearViewport": false,
+      "checkVisibility": false
+    },
+    {
+      "sel": ".ms-news",
+      "contentVisibility": "auto",
+      "containIntrinsicSize": "auto 580px",
+      "top": 6601,
+      "height": 668,
+      "inViewport": false,
+      "nearViewport": false,
+      "checkVisibility": false
+    },
+    {
+      "sel": ".ms-home-faq",
+      "contentVisibility": "auto",
+      "containIntrinsicSize": "auto 360px",
+      "top": 7965,
+      "height": 360,
+      "inViewport": false,
+      "nearViewport": false,
+      "checkVisibility": true
+    },
+    {
+      "sel": "footer.ms-footer",
+      "contentVisibility": "auto",
+      "containIntrinsicSize": "auto 400px",
+      "top": 8373,
+      "height": 424,
+      "inViewport": false,
+      "nearViewport": false,
+      "checkVisibility": true
+    },
+    {
+      "sel": "#ms-features",
+      "contentVisibility": "visible",
+      "containIntrinsicSize": "none",
+      "top": 1080,
+      "height": 322,
+      "inViewport": false,
+      "nearViewport": false,
+      "checkVisibility": true
+    },
+    {
+      "sel": "#ms-hero",
+      "contentVisibility": "visible",
+      "containIntrinsicSize": "none",
+      "top": 482,
+      "height": 598,
+      "inViewport": true,
+      "nearViewport": true,
+      "checkVisibility": true
+    }
+  ],
+  "scrollProbe": [
+    {
+      "at": "featured",
+      "scrollY": 2923,
+      "featuredTop": -7.369140625,
+      "cv": "auto"
+    },
+    {
+      "at": "footer",
+      "scrollY": 6782,
+      "footerTop": 341.046875,
+      "cv": "auto"
+    },
+    {
+      "at": "top",
+      "scrollY": 6535,
+      "heroTop": -6052.90625
+    },
+    {
+      "at": "hash-featured",
+      "scrollY": 3884,
+      "featuredTop": -973.796875
+    }
+  ],
+  "imgProbe": [
+    {
+      "src": "9/01-160w.webp?v=gEJwOQr2NU6fNu2lXqGnBjG8dX75VVppB7c1guUzaXk",
+      "complete": true,
+      "w": 147,
+      "loading": "lazy"
+    },
+    {
+      "src": "o-v1-272w.webp?v=Sviq3LHjX_bvlEGcEG2dIB1rKeAGltE8vCmbfPBMCSs",
+      "complete": true,
+      "w": 262,
+      "loading": "lazy"
+    },
+    {
+      "src": "4/01-160w.webp?v=ntfwU90EA4DYjG2EBbZAu9L62XZMpQW5rs5CqaduH6M",
+      "complete": true,
+      "w": 147,
+      "loading": "lazy"
+    },
+    {
+      "src": "0/01-160w.webp?v=T06dgoMCAwhVj7SQplbGWX31dhAy5uf2_mC-WlytCg0",
+      "complete": true,
+      "w": 147,
+      "loading": "lazy"
+    },
+    {
+      "src": "o-v1-272w.webp?v=ULgPOftlmFXqR4DzWVJSJbVgixoZt-d_GyO2wXsIyHY",
+      "complete": true,
+      "w": 262,
+      "loading": "lazy"
+    },
+    {
+      "src": "5/01-160w.webp?v=xm08IuwCAyy22mCekdBF4JcZ8t23vyCXdiK4tyR50mM",
+      "complete": true,
+      "w": 147,
+      "loading": "lazy"
+    }
+  ]
+}

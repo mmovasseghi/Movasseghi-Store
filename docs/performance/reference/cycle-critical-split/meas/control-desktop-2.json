@@ -1,0 +1,64 @@
+{
+  "label": "control-desktop-2",
+  "wallMs": 7332,
+  "httpStatus": 200,
+  "navigationTTFB_ms": 1796.2000000029802,
+  "serverWaiting_ms": 1794.788,
+  "headerReceiveEnd_relRequest_ms": 1795.098,
+  "htmlResponseEnd_ms": 1797.3000000044703,
+  "htmlTransfer": 325675,
+  "htmlDecoded": 325375,
+  "FCP": 1988,
+  "FP": 1988,
+  "LCP": 2776,
+  "lcpUrl": "http://127.0.0.1:9051/images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw",
+  "CLS": 0.013317622895706956,
+  "TBT_approx": 0,
+  "longTasksBeforeFcp": [],
+  "longTasksAfterFcp": [],
+  "styleLayoutBeforeFcp": {
+    "Layout": 98.34799999999998,
+    "UpdateLayoutTree": 21.257999999999992,
+    "ParseAuthorStyleSheet": 1.194
+  },
+  "styleLayoutAfterFcp": {
+    "Layout": 1.8599999999999999,
+    "UpdateLayoutTree": 7.43,
+    "ParseAuthorStyleSheet": 0
+  },
+  "topLayout": {
+    "dur": 68.872,
+    "start": 31.845,
+    "dirty": 815,
+    "total": 815,
+    "partial": false,
+    "root": "#document"
+  },
+  "inlineCssBytes": 150310,
+  "remainderLink": null,
+  "currentSrc": "http://127.0.0.1:9051/images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw",
+  "cssResources": [],
+  "fontResources": [
+    {
+      "name": ".1:9051/fonts/Vazirmatn-storefront.woff2",
+      "start": 1807.9000000059605,
+      "responseEnd": 2928.60000000149,
+      "transfer": 86012
+    }
+  ],
+  "lcpResource": {
+    "name": "http://127.0.0.1:9051/images/products/0056/01-display-v2-420w.webp",
+    "initiator": "link",
+    "start": 1807.5,
+    "responseStart": 2707.4000000059605,
+    "responseEnd": 2707.9000000059605,
+    "transfer": 22184,
+    "encoded": 21884,
+    "decoded": 21884
+  },
+  "docFromCache": {
+    "fromDiskCache": false,
+    "status": 200,
+    "encoded": 326088
+  }
+}

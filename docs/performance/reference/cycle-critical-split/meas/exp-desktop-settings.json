@@ -1,0 +1,14 @@
+{
+  "url": "http://127.0.0.1:9052/",
+  "label": "exp-desktop",
+  "runs": 3,
+  "viewport": "desktop",
+  "vp": {
+    "width": 1366,
+    "height": 768,
+    "deviceScaleFactor": 1
+  },
+  "chrome": "/usr/local/bin/google-chrome",
+  "method": "puppeteer.page.goto cold navigation; Network.clearBrowserCache + setCacheDisabled; no setContent",
+  "createdAt": "2026-11-01T06:15:08.252Z"
+}

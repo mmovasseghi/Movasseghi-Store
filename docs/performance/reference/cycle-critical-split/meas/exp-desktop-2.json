@@ -1,0 +1,79 @@
+{
+  "label": "exp-desktop-2",
+  "wallMs": 7617,
+  "httpStatus": 200,
+  "navigationTTFB_ms": 1786.8999999985099,
+  "serverWaiting_ms": 1785.4769999999999,
+  "headerReceiveEnd_relRequest_ms": 1785.917,
+  "htmlResponseEnd_ms": 1787.6999999955297,
+  "htmlTransfer": 279389,
+  "htmlDecoded": 279089,
+  "FCP": 1980,
+  "FP": 1980,
+  "LCP": 2752,
+  "lcpUrl": "http://127.0.0.1:9052/images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw",
+  "CLS": 0.008536952554170231,
+  "TBT_approx": 0,
+  "longTasksBeforeFcp": [],
+  "longTasksAfterFcp": [],
+  "styleLayoutBeforeFcp": {
+    "Layout": 108.32,
+    "UpdateLayoutTree": 46.017,
+    "ParseAuthorStyleSheet": 2.0580000000000003
+  },
+  "styleLayoutAfterFcp": {
+    "Layout": 2.356,
+    "UpdateLayoutTree": 17.989000000000004,
+    "ParseAuthorStyleSheet": 0
+  },
+  "topLayout": {
+    "dur": 73.272,
+    "start": 41.756,
+    "dirty": 2394,
+    "total": 2394,
+    "partial": false,
+    "root": "#document"
+  },
+  "inlineCssBytes": 103753,
+  "remainderLink": {
+    "href": "http://127.0.0.1:9052/__ab/storefront-home-remainder.css",
+    "media": "all",
+    "failed": null
+  },
+  "currentSrc": "http://127.0.0.1:9052/images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw",
+  "cssResources": [
+    {
+      "name": "http://127.0.0.1:9052/__ab/storefront-home-remainder.css",
+      "initiator": "link",
+      "start": 1802.8999999985099,
+      "responseStart": 3157.89999999851,
+      "responseEnd": 3158.39999999851,
+      "transfer": 47206,
+      "encoded": 46906,
+      "decoded": 46906
+    }
+  ],
+  "fontResources": [
+    {
+      "name": ".1:9052/fonts/Vazirmatn-storefront.woff2",
+      "start": 1795.0999999940395,
+      "responseEnd": 2914.0999999940395,
+      "transfer": 86012
+    }
+  ],
+  "lcpResource": {
+    "name": "http://127.0.0.1:9052/images/products/0056/01-display-v2-420w.webp",
+    "initiator": "link",
+    "start": 1794.8999999985099,
+    "responseStart": 2691.2999999970198,
+    "responseEnd": 2691.6999999955297,
+    "transfer": 22184,
+    "encoded": 21884,
+    "decoded": 21884
+  },
+  "docFromCache": {
+    "fromDiskCache": false,
+    "status": 200,
+    "encoded": 279802
+  }
+}
