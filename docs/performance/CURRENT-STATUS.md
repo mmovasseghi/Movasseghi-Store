@@ -6,13 +6,13 @@
 
 | مورد | مقدار |
 |------|--------|
-| **RELEASE اپ** | **`c53290e0a8d554df0311075be7802204b5dfe773`** (تا قبل از republish بعدی) |
-| **main** | شامل dual-vhost + fix نصب `proxy.inc` (`5eb62a5`+) |
+| **RELEASE اپ+config** | **`a14f43c79ee03c5a1f39b2dd0e923e01d6455e89`** (quick-republish رسمی EXIT:0) |
 | URL دامنه | `https://movasseghistore.com/` (NS: viracdn.ir → Vira) |
 | URL IP | `https://185.93.88.81/` (کنترل ثانویه؛ **نتیجهٔ دامنه نیست**) |
-| TLS origin | dual-vhost؛ `fullchain` دامنه = leaf+cross-sign (۴ PEM) |
-| nginx conf md5 | ببین stamp/VPS پس از republish |
-| `PublicBaseUrl` | `https://movasseghistore.com` |
+| TLS origin | dual-vhost؛ `fullchain` دامنه = leaf+cross-sign (**۴** PEM) |
+| nginx conf / inc md5 | `821aa8bce64a64e96d343588e7e6941e` / `60fcc2eea841c52be339c6749a55abdd` |
+| `PublicBaseUrl` | `https://movasseghistore.com` (حفظ در publish) |
+| stamp | `/MOVASSEGHISTORE/ops/nginx-domain-ssl-20261101/DEPLOYED.txt` |
 
 ## اثبات کندی دامنه (اندازه‌گیری‌شده)
 
