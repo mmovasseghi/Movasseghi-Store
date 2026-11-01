@@ -5,10 +5,11 @@
 URL زنده: `https://185.93.88.81/`  
 PR: https://github.com/mmovasseghi/Movasseghi-Store/pull/7  
 شاخه: `cursor/story-cls-lcp-e83d`  
-docs tip شاخه (آخرین commit docs): `a075119`  
-**SHA منتشرشده روی سرور (RELEASE_COMMIT):** `07567ba61a59b846ce2845555f6c4cf1d427193c`  
+docs tip شاخه (آخرین commit docs روی feature): `428ce87`  
+**SHA منتشرشده روی سرور (RELEASE_COMMIT / runtime):** `07567ba61a59b846ce2845555f6c4cf1d427193c`  
 docs tip گزارش‌شدهٔ قبلی روی main قبل از این چرخه: `d4ad797`  
-release قبلی زنده: `31f01753449ab39d138cabbf197d56b915c9b4f8`
+release قبلی زنده: `31f01753449ab39d138cabbf197d56b915c9b4f8`  
+نکته: commitهای docs بعد از `07567ba` فقط مستندات‌اند؛ برای runtime لازم به redeploy نیستند مگر docs روی سرور هم بخواهی.
 
 این سند **دو گزارش را یک‌جا** دارد:
 1) گزارش کامل کار این ایجنت (تشخیص، اصلاح، تست، انتشار، محدودیت‌ها)  
