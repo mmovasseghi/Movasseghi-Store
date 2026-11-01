@@ -75,6 +75,26 @@ public sealed class ResponsiveImageService(IWebHostEnvironment env, IFileVersion
             // srcset uses whitespace and commas as separators, unlike img src.
             return string.Join("/", resource.Split('/').Select(Uri.EscapeDataString)) + (query < 0 ? "" : versioned[query..]);
         }
+        // Prefer the lightest packed/studio 420w file when deciding whether a
+        // mid-width (e.g. 384w @ 45KB) deserves a srcset slot. High-DPR phones
+        // otherwise pick the fat 384w over display-v2-420w (~22KB) for LCP.
+        long? packedCeiling = null;
+        if (!IsPhotographic(clean))
+        {
+            foreach (var packedPath in IsStudioProduct(clean)
+                ? new[] { StudioVariant(clean), PackedVariant(clean), $"{stem}-{PackedWidth}w.webp" }
+                : new[] { PackedVariant(clean), $"{stem}-{PackedWidth}w.webp" })
+            {
+                try
+                {
+                    var packedFile = new FileInfo(Physical(packedPath));
+                    if (packedFile.Exists && packedFile.LastWriteTimeUtc.Ticks >= stamp
+                        && (packedCeiling is null || packedFile.Length < packedCeiling))
+                        packedCeiling = packedFile.Length;
+                }
+                catch (IOException) { /* Upload/cleanup race. */ }
+            }
+        }
         foreach (var width in Widths)
         {
             if (width >= size.Width) continue;
@@ -99,7 +119,11 @@ public sealed class ResponsiveImageService(IWebHostEnvironment env, IFileVersion
                 }
                 catch (IOException) { /* An upload/cleanup raced with this render. */ }
             }
-            if (best is not null) candidates.Add($"{Version(best)} {width}w");
+            if (best is null) continue;
+            // Skip narrower widths that are heavier than the packed 420w option.
+            if (width < PackedWidth && packedCeiling is long ceiling && bestLength >= ceiling)
+                continue;
+            candidates.Add($"{Version(best)} {width}w");
         }
         if (!candidates.Any() && !legacyHero) return null;
         candidates.Add($"{Version(clean)} {size.Width}w");
