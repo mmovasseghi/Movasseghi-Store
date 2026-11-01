@@ -1,73 +1,63 @@
 # وضعیت جاری Performance — Movasseghi-Store
 
-آخرین به‌روزرسانی: 2026-11-01 (پس از نصب TLS دامنه + dual-vhost)
+آخرین به‌روزرسانی: 2026-11-01 (چرخه دامنه: deploy include + اندازه‌گیری A/B/C)
 
 ## نسخهٔ زنده
 
 | مورد | مقدار |
 |------|--------|
-| **RELEASE** | **`c53290e0a8d554df0311075be7802204b5dfe773`** |
-| URL دامنه | `https://movasseghistore.com/` (Vira CDN → origin) |
-| URL IP | `https://185.93.88.81/` (گواهی کوتاه‌عمر LE با SAN IP) |
-| TLS origin | دو `server` جدا: IP default + SNI `movasseghistore.com` در `/etc/ssl/movasseghistore.com/` |
-| nginx | dual-vhost + `snippets/movasseghi-shop-proxy.inc` · gzip **6** |
+| **RELEASE اپ** | **`c53290e0a8d554df0311075be7802204b5dfe773`** (تا قبل از republish بعدی) |
+| **main** | شامل dual-vhost + fix نصب `proxy.inc` (`5eb62a5`+) |
+| URL دامنه | `https://movasseghistore.com/` (NS: viracdn.ir → Vira) |
+| URL IP | `https://185.93.88.81/` (کنترل ثانویه؛ **نتیجهٔ دامنه نیست**) |
+| TLS origin | dual-vhost؛ `fullchain` دامنه = leaf+cross-sign (۴ PEM) |
+| nginx conf md5 | ببین stamp/VPS پس از republish |
 | `PublicBaseUrl` | `https://movasseghistore.com` |
-| شاخه | تغییرات روی `main` (فیچر `cursor/valid-ab-html-gzip-e83d` ادغام شد) |
 
-## اصلاح منتشرشده این چرخه
+## اثبات کندی دامنه (اندازه‌گیری‌شده)
 
-1. `content-visibility:hidden` روی اسلاید هیرو غیرفعال
-2. `content-visibility:auto` روی `#ms-features`
-3. `content-visibility:hidden` روی `.ms-drawer[hidden]` (قبلاً با `display:block!important` Layout کامل می‌شد)
-4. harness معتبر A/B: `prepare-ab-variants` + `ab-prebuilt-server` (gzip6 ازپیش‌ساخته؛ پروکسی معیوب منسوخ)
+شواهد: `docs/performance/reference/domain-path-compare/`
 
-## A/B معتبر (قبل از publish)
+| مسیر | معنی | یافته |
+|------|------|--------|
+| **A** | DNS عمومی Vira | `vira-cache-status: MISS` پایدار روی HTML و static؛ TTFB مرورگر ~0.95s از این محیط |
+| **B** | همان hostname/SNI/URL → TCP به origin | TLS verify پس از تعمیر fullchain OK؛ TTFB ~0.69s؛ FCP/LCP ~1.43s |
+| **C** | IP مستقیم | نزدیک به B |
 
-| آزمایش | نتیجه |
-|--------|--------|
-| critical-split gzip6 ازپیش‌ساخته | رد — FCP میانه برابر 944 |
-| layout-CV + drawer | پذیرفته — dirty 654→371، Layout 88→61، FCP 924→904، CLS بهتر، TBT≈0 |
+HTML A و B **md5 یکسان**. تفاوت Seattle دامنه ([72oFmIEc](https://gtmetrix.com/reports/movasseghistore.com/72oFmIEc/) Perf58/LCP4.7s/TTFB2.5s/Conn1.9s) با IP ([xfrCIxd1](https://gtmetrix.com/reports/185.93.88.81/xfrCIxd1/) 76/LCP2.1s) با **مسیر client→لبه ایران Vira (+ miss به origin)** سازگار است، نه با Structure اپ (۹۶).
 
-## اندازه‌گیری زنده پس از publish (لوکال cold×3)
+`vira-cache-status: MISS` + `Cache-Control` قابل‌کش → کش لبه **عملاً خاموش/bypass**؛ بدون دسترسی پنل Vira قابل روشن‌کردن از اینجا نیست.
 
-| | TTFB | htmlEnd | FCP | LCP | Layout قبل FCP | dirty | CLS |
-|--|------|---------|-----|-----|----------------|-------|-----|
-| میانه `c53290e` | 685 | 1145 | **1392** | **1392** | **~84** | **535** | 0.0011 |
-| مرجع قبلی `4934300` (همین مسیر) | 685 | 1152 | 1416 | 1416 | ~100 | 818 | 0.0017 |
+## GTmetrix دامنه
 
-## GTmetrix Seattle
+| لینک | Perf | Struct | LCP | TBT | CLS | Conn | TTFB |
+|------|------|--------|-----|-----|-----|------|------|
+| [72oFmIEc](https://gtmetrix.com/reports/movasseghistore.com/72oFmIEc/) | **58** | **96** | **4.7s** | 65ms | 0 | 1.9s | 2.5s |
 
-| # | لینک | URL | Perf | Struct | LCP | TBT | CLS | یادداشت |
-|---|------|-----|------|--------|-----|-----|-----|---------|
-| 1 | https://gtmetrix.com/reports/185.93.88.81/xfrCIxd1/ | IP | **76** | **98** | **2.1s** | **0ms** | 0 | پس از publish `c53290e` |
-| 2 | Retest IP | IP | — | — | — | — | — | قبلاً سهمیه guest مسدود |
-| 3 | https://gtmetrix.com/reports/movasseghistore.com/72oFmIEc/ | **دامنه+CDN** | **58** | **96** | **4.7s** | **65ms** | 0 | 2026-11-01 Seattle · TTFB **2.5s** · Conn **1.9s** · Fully **10.2s** · 22 req |
+**Grade A اعلام نمی‌شود.**
 
-جزئیات FCP/SI/TTI روی تب‌های لاگین‌دار عمومی دیده نشد؛ اعداد بالا از خلاصهٔ عمومی گزارش دامنه خوانده شد.
-**Grade A اعلام نمی‌شود.** مسیر دامنه از Seattle به‌خاطر TTFB/Connection کندتر از IP مستقیم است (Structure همچنان بالا ≈۹۶).
+## اصلاحات انجام‌شده این دور
 
-## فرضیه‌های ردشده
+1. `quick-republish` / remote-install / setup: نصب+بکاپ+rollback برای `snippets/movasseghi-shop-proxy.inc` هماهنگ با site
+2. Merge به **main**
+3. تعمیر `fullchain.pem` origin (cross-sign) تا B با verify فعال کار کند
+4. کلید جدید ECDSA روی سرور در `…/rotate/` آماده؛ **نصب نشده** (ACME از CDN = 404)
+5. اسکریپت `scripts/measure-domain-paths.mjs` + گزارش مسیرها
 
-- critical-split با روش معتبر (این چرخه)
-- critical-split با پروکسی معیوب (چرخه قبل)
+## موانع واقعی (پنهان نشده)
 
-## مانع بیرونی
+1. **پنل/API Vira در دسترس این عامل نیست** → نمی‌توان کش لبه یا passthrough ACME را روشن کرد
+2. **چرخش گواهی دامنه** تا ACME/DNS-01 ممکن نیست (CDN ACME را می‌بلعد)
+3. **GTmetrix Seattle تازه** از این محیط: guest/quota و computerUse مدل محدود؛ گزارش مبنا همان 72oFmIEc تا تست تازه موفق
 
-سهمیهٔ تست guest GTmetrix اجازهٔ اجرای دوم Seattle را نداد. برای ادامهٔ حلقه با تأیید Grade واقعی: حساب/سهمیه GTmetrix یا صبر تا رفع محدودیت guest لازم است.
+## اقدام بعدی (ادامهٔ خودکار وقتی دسترسی باشد)
 
-## TLS دامنه (همین نوبت) — **دیپلوی‌شده روی سرور**
+1. در پنل Vira: فعال‌سازی کش لبه برای HTML عمومی + static؛ ACME `/.well-known/acme-challenge/*` → origin بدون intercept
+2. اتمام چرخش کلید با certbot پس از passthrough؛ revoke قبلی
+3. `quick-republish` از main پس از هر تغییر پذیرفته
+4. دو GTmetrix Seattle همسان روی دامنه پس از HIT شدن کش لبه
+5. فقط بعد از افت TTFB دامنه: ادامهٔ Style/Layout اپ (بدون تکرار critical-split)
 
-- گواهی LE دامنه روی origin نصب شد؛ chain/key match؛ SNI جدا از گواهی IP.
-- تأیید: `openssl` روی `185.93.88.81` با SNI IP → SAN IP؛ با SNI دامنه → `CN=movasseghistore.com`؛ `https://movasseghistore.com/` از CDN → **200**.
-- `verify-home.py --insecure --nginx` روی IP و دامنه (لوکال Host) → **EXIT 0** (۸ featured / ۸ offers / ۱۲ stories / LCP webp / cache HIT).
-- stamp: `/MOVASSEGHISTORE/ops/nginx-domain-ssl-20261101/` · conf md5 `821aa8bce64a64e96d343588e7e6941e`
-- هندآف کامل Codex: `docs/performance/CODEX-HANDOFF-cycle-domain-ssl-dual-vhost-COMPLETE.md`
-- **هشدار امنیتی:** `privkey.pem` در چت عمومی paste شده؛ چرخش/باطل‌سازی و صدور مجدد توصیه می‌شود.
-- PR: https://github.com/mmovasseghi/Movasseghi-Store/pull/9
+## UX
 
-## اقدام بعدی
-
-1. چرخش کلید خصوصی دامنه (به خاطر افشا در چت).
-2. تشخیص TTFB/Connection دامنه از Seattle (CDN Vira / مسیر شبکه) در برابر origin IP — Structure خوب است؛ Perf دامنه با LCP 4.7s و TTFB 2.5s عقب است.
-3. تکرار Seattle کنترل‌شده: دامنه در برابر IP روی همان روز، بدون ادعای Grade A.
-4. روی origin IP گلوگاه قبلی: LCP≈2.1s (TBT≈0).
+هیرو/۸+۸/۱۲ استوری از verify-home روی origin تأیید شده‌اند؛ مسیر CDN همان HTML را می‌دهد.

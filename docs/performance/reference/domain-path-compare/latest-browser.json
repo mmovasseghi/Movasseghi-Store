@@ -1,0 +1,185 @@
+{
+  "generated": "2026-11-01T20:03:02.339Z",
+  "results": [
+    {
+      "label": "A_cdn",
+      "url": "https://movasseghistore.com/",
+      "rules": null,
+      "status": 200,
+      "security": {
+        "subject": "movasseghistore.com",
+        "issuer": "YR2"
+      },
+      "metrics": {
+        "ttfb": 1327.5,
+        "responseEnd": 1767.1000000014901,
+        "fp": 1906.5,
+        "fcp": 1906.5,
+        "lcp": null,
+        "lcpUrl": null,
+        "transferSize": 64024,
+        "encodedBodySize": 63724
+      }
+    },
+    {
+      "label": "B_origin",
+      "url": "https://movasseghistore.com/",
+      "rules": "MAP movasseghistore.com 185.93.88.81",
+      "status": 200,
+      "security": {
+        "subject": "movasseghistore.com",
+        "issuer": "YE1"
+      },
+      "metrics": {
+        "ttfb": 1040.8999999985099,
+        "responseEnd": 1305,
+        "fp": 1524.6999999955297,
+        "fcp": 1524.6999999955297,
+        "lcp": null,
+        "lcpUrl": null,
+        "transferSize": 64024,
+        "encodedBodySize": 63724
+      }
+    },
+    {
+      "label": "C_ip",
+      "url": "https://185.93.88.81/",
+      "rules": null,
+      "status": 200,
+      "security": {
+        "subject": "",
+        "issuer": "YE2"
+      },
+      "metrics": {
+        "ttfb": 986.1999999955297,
+        "responseEnd": 1249,
+        "fp": 1457,
+        "fcp": 1457,
+        "lcp": null,
+        "lcpUrl": null,
+        "transferSize": 64041,
+        "encodedBodySize": 63741
+      }
+    },
+    {
+      "label": "A_cdn",
+      "url": "https://movasseghistore.com/",
+      "rules": null,
+      "status": 200,
+      "security": {
+        "subject": "movasseghistore.com",
+        "issuer": "YR2"
+      },
+      "metrics": {
+        "ttfb": 1430.7999999970198,
+        "responseEnd": 1880.5,
+        "fp": 1974.6000000014901,
+        "fcp": 1974.6000000014901,
+        "lcp": null,
+        "lcpUrl": null,
+        "transferSize": 64024,
+        "encodedBodySize": 63724
+      }
+    },
+    {
+      "label": "B_origin",
+      "url": "https://movasseghistore.com/",
+      "rules": "MAP movasseghistore.com 185.93.88.81",
+      "status": 200,
+      "security": {
+        "subject": "movasseghistore.com",
+        "issuer": "YE1"
+      },
+      "metrics": {
+        "ttfb": 711.8999999985099,
+        "responseEnd": 1201.8000000044703,
+        "fp": 1409.3000000044703,
+        "fcp": 1409.3000000044703,
+        "lcp": null,
+        "lcpUrl": null,
+        "transferSize": 64024,
+        "encodedBodySize": 63724
+      }
+    },
+    {
+      "label": "C_ip",
+      "url": "https://185.93.88.81/",
+      "rules": null,
+      "status": 200,
+      "security": {
+        "subject": "",
+        "issuer": "YE2"
+      },
+      "metrics": {
+        "ttfb": 703,
+        "responseEnd": 1168.5,
+        "fp": 1406.5999999940395,
+        "fcp": 1406.5999999940395,
+        "lcp": null,
+        "lcpUrl": null,
+        "transferSize": 64041,
+        "encodedBodySize": 63741
+      }
+    },
+    {
+      "label": "A_cdn",
+      "url": "https://movasseghistore.com/",
+      "rules": null,
+      "status": 200,
+      "security": {
+        "subject": "movasseghistore.com",
+        "issuer": "YR2"
+      },
+      "metrics": {
+        "ttfb": 1083.5,
+        "responseEnd": 1537.1999999955297,
+        "fp": 1643.3999999985099,
+        "fcp": 1643.3999999985099,
+        "lcp": null,
+        "lcpUrl": null,
+        "transferSize": 64024,
+        "encodedBodySize": 63724
+      }
+    },
+    {
+      "label": "B_origin",
+      "url": "https://movasseghistore.com/",
+      "rules": "MAP movasseghistore.com 185.93.88.81",
+      "status": 200,
+      "security": {
+        "subject": "movasseghistore.com",
+        "issuer": "YE1"
+      },
+      "metrics": {
+        "ttfb": 712.2999999970198,
+        "responseEnd": 1189.8999999985099,
+        "fp": 1414.6000000014901,
+        "fcp": 1414.6000000014901,
+        "lcp": null,
+        "lcpUrl": null,
+        "transferSize": 64024,
+        "encodedBodySize": 63724
+      }
+    },
+    {
+      "label": "C_ip",
+      "url": "https://185.93.88.81/",
+      "rules": null,
+      "status": 200,
+      "security": {
+        "subject": "",
+        "issuer": "YE2"
+      },
+      "metrics": {
+        "ttfb": 692.7000000029802,
+        "responseEnd": 1159.5,
+        "fp": 1380.2000000029802,
+        "fcp": 1380.2000000029802,
+        "lcp": null,
+        "lcpUrl": null,
+        "transferSize": 64041,
+        "encodedBodySize": 63741
+      }
+    }
+  ]
+}

@@ -1,0 +1,413 @@
+{
+  "generated_utc": "2026-11-01T20:01:33Z",
+  "paths": {
+    "A_cdn": {
+      "resolve": null,
+      "cold": [
+        {
+          "dns": 0.01476,
+          "connect": 0.015154,
+          "appconnect": 0.477947,
+          "ttfb": 0.735307,
+          "total": 1.188077,
+          "code": "200",
+          "ip": "92.114.24.238",
+          "ssl": "0",
+          "size": "63724",
+          "redir": "0",
+          "tcp": 0.00039400000000000025,
+          "tls": 0.462793,
+          "ttfb_after_tls": 0.25736000000000003,
+          "html": 0.45277
+        },
+        {
+          "dns": 0.668338,
+          "connect": 0.668904,
+          "appconnect": 1.127657,
+          "ttfb": 1.372078,
+          "total": 1.827573,
+          "code": "200",
+          "ip": "92.114.24.238",
+          "ssl": "0",
+          "size": "63724",
+          "redir": "0",
+          "tcp": 0.0005660000000000664,
+          "tls": 0.45875299999999986,
+          "ttfb_after_tls": 0.244421,
+          "html": 0.455495
+        },
+        {
+          "dns": 0.066842,
+          "connect": 0.067543,
+          "appconnect": 0.528182,
+          "ttfb": 0.795011,
+          "total": 1.24281,
+          "code": "200",
+          "ip": "92.114.24.241",
+          "ssl": "0",
+          "size": "63724",
+          "redir": "0",
+          "tcp": 0.0007010000000000072,
+          "tls": 0.460639,
+          "ttfb_after_tls": 0.266829,
+          "html": 0.44779899999999995
+        }
+      ],
+      "warm": [
+        {
+          "dns": 0.386534,
+          "connect": 0.387245,
+          "appconnect": 0.875753,
+          "ttfb": 1.118132,
+          "total": 2.302958,
+          "code": "200",
+          "ip": "185.93.88.81",
+          "ssl": "0",
+          "size": "325803",
+          "redir": "0",
+          "tcp": 0.0007110000000000172,
+          "tls": 0.488508,
+          "ttfb_after_tls": 0.2423789999999999,
+          "html": 1.184826
+        },
+        {
+          "dns": 0.292262,
+          "connect": 0.292916,
+          "appconnect": 0.763842,
+          "ttfb": 1.018261,
+          "total": 1.491895,
+          "code": "200",
+          "ip": "92.114.24.238",
+          "ssl": "0",
+          "size": "63724",
+          "redir": "0",
+          "tcp": 0.0006539999999999879,
+          "tls": 0.470926,
+          "ttfb_after_tls": 0.25441900000000006,
+          "html": 0.4736339999999999
+        },
+        {
+          "dns": 0.672895,
+          "connect": 0.67342,
+          "appconnect": 1.152543,
+          "ttfb": 1.415289,
+          "total": 1.87848,
+          "code": "200",
+          "ip": "92.114.24.238",
+          "ssl": "0",
+          "size": "63724",
+          "redir": "0",
+          "tcp": 0.0005249999999999977,
+          "tls": 0.4791230000000001,
+          "ttfb_after_tls": 0.2627459999999999,
+          "html": 0.4631909999999999
+        }
+      ],
+      "med_cold": {
+        "dns": 0.0668,
+        "tcp": 0.0006,
+        "tls": 0.4606,
+        "ttfb_after_tls": 0.2574,
+        "ttfb": 0.795,
+        "html": 0.4528,
+        "total": 1.2428
+      },
+      "med_warm": {
+        "dns": 0.3865,
+        "tcp": 0.0007,
+        "tls": 0.4791,
+        "ttfb_after_tls": 0.2544,
+        "ttfb": 1.1181,
+        "html": 0.4736,
+        "total": 1.8785
+      },
+      "headers": "HTTP/2 200 \nage: 100\ncache-control: public, max-age=900, s-maxage=900\ncontent-encoding: gzip\ncontent-security-policy: default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'\ncontent-type: text/html; charset=utf-8\ndate: Sun, 01 Nov 2026 20:01:44 GMT\npermissions-policy: geolocation=(), microphone=(), camera=()\nreferrer-policy: strict-origin-when-cross-origin\nserver: vira-cdn\nstrict-transport-security: max-age=31536000; includeSubDomains\nvary: Accept-Encoding\nvira-cache-status: MISS\nvira-ray: 21a135f3c8a71890\nx-cache: HIT\nx-content-type-options: nosniff\nx-frame-options: SAMEORIGIN\n\n",
+      "remote": "92.114.24.238",
+      "ssl": "0",
+      "size": "63724"
+    },
+    "B_origin_sni": {
+      "resolve": "movasseghistore.com:443:185.93.88.81",
+      "cold": [
+        {
+          "dns": 1.6e-05,
+          "connect": 0.000611,
+          "appconnect": 0.492223,
+          "ttfb": 0.727702,
+          "total": 1.9143,
+          "code": "200",
+          "ip": "185.93.88.81",
+          "ssl": "0",
+          "size": "325803",
+          "redir": "0",
+          "tcp": 0.000595,
+          "tls": 0.49161200000000005,
+          "ttfb_after_tls": 0.23547899999999994,
+          "html": 1.186598
+        },
+        {
+          "dns": 1.4e-05,
+          "connect": 0.00047,
+          "appconnect": 0.482138,
+          "ttfb": 0.717938,
+          "total": 1.688065,
+          "code": "200",
+          "ip": "185.93.88.81",
+          "ssl": "0",
+          "size": "325803",
+          "redir": "0",
+          "tcp": 0.00045599999999999997,
+          "tls": 0.481668,
+          "ttfb_after_tls": 0.23579999999999995,
+          "html": 0.970127
+        },
+        {
+          "dns": 1.5e-05,
+          "connect": 0.0007,
+          "appconnect": 0.500419,
+          "ttfb": 0.753143,
+          "total": 1.984212,
+          "code": "200",
+          "ip": "185.93.88.81",
+          "ssl": "0",
+          "size": "325803",
+          "redir": "0",
+          "tcp": 0.000685,
+          "tls": 0.49971899999999997,
+          "ttfb_after_tls": 0.25272400000000006,
+          "html": 1.2310690000000002
+        }
+      ],
+      "warm": [
+        {
+          "dns": 1.5e-05,
+          "connect": 0.000485,
+          "appconnect": 0.498716,
+          "ttfb": 0.738828,
+          "total": 1.925854,
+          "code": "200",
+          "ip": "185.93.88.81",
+          "ssl": "0",
+          "size": "325803",
+          "redir": "0",
+          "tcp": 0.00047000000000000004,
+          "tls": 0.498231,
+          "ttfb_after_tls": 0.24011200000000005,
+          "html": 1.187026
+        },
+        {
+          "dns": 1.4e-05,
+          "connect": 0.00071,
+          "appconnect": 0.47874,
+          "ttfb": 0.724551,
+          "total": 1.919071,
+          "code": "200",
+          "ip": "185.93.88.81",
+          "ssl": "0",
+          "size": "325803",
+          "redir": "0",
+          "tcp": 0.000696,
+          "tls": 0.47803,
+          "ttfb_after_tls": 0.24581099999999995,
+          "html": 1.19452
+        },
+        {
+          "dns": 1.4e-05,
+          "connect": 0.00059,
+          "appconnect": 0.488175,
+          "ttfb": 0.734267,
+          "total": 1.917937,
+          "code": "200",
+          "ip": "185.93.88.81",
+          "ssl": "0",
+          "size": "325803",
+          "redir": "0",
+          "tcp": 0.000576,
+          "tls": 0.48758500000000005,
+          "ttfb_after_tls": 0.24609199999999998,
+          "html": 1.18367
+        }
+      ],
+      "med_cold": {
+        "dns": 0.0,
+        "tcp": 0.0006,
+        "tls": 0.4916,
+        "ttfb_after_tls": 0.2358,
+        "ttfb": 0.7277,
+        "html": 1.1866,
+        "total": 1.9143
+      },
+      "med_warm": {
+        "dns": 0.0,
+        "tcp": 0.0006,
+        "tls": 0.4876,
+        "ttfb_after_tls": 0.2458,
+        "ttfb": 0.7343,
+        "html": 1.187,
+        "total": 1.9191
+      },
+      "headers": "HTTP/2 200 \nserver: nginx/1.18.0 (Ubuntu)\ndate: Sun, 01 Nov 2026 20:01:56 GMT\ncontent-type: text/html; charset=utf-8\ncontent-length: 325803\nvary: Accept-Encoding\nage: 229\ncache-control: public, max-age=900, s-maxage=900\nx-content-type-options: nosniff\nx-frame-options: SAMEORIGIN\nreferrer-policy: strict-origin-when-cross-origin\npermissions-policy: geolocation=(), microphone=(), camera=()\ncontent-security-policy: default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'\nstrict-transport-security: max-age=0\nx-cache: MISS\n\n",
+      "remote": "185.93.88.81",
+      "ssl": "0",
+      "size": "325803"
+    },
+    "C_ip": {
+      "resolve": null,
+      "cold": [
+        {
+          "dns": 1.9e-05,
+          "connect": 0.000684,
+          "appconnect": 0.481426,
+          "ttfb": 0.958163,
+          "total": 1.683163,
+          "code": "200",
+          "ip": "185.93.88.81",
+          "ssl": "0",
+          "size": "325761",
+          "redir": "0",
+          "tcp": 0.000665,
+          "tls": 0.480742,
+          "ttfb_after_tls": 0.47673699999999997,
+          "html": 0.725
+        },
+        {
+          "dns": 2.1e-05,
+          "connect": 0.000514,
+          "appconnect": 0.504997,
+          "ttfb": 0.752986,
+          "total": 1.936862,
+          "code": "200",
+          "ip": "185.93.88.81",
+          "ssl": "0",
+          "size": "325761",
+          "redir": "0",
+          "tcp": 0.0004930000000000001,
+          "tls": 0.504483,
+          "ttfb_after_tls": 0.24798900000000001,
+          "html": 1.1838760000000002
+        },
+        {
+          "dns": 1.9e-05,
+          "connect": 0.000508,
+          "appconnect": 0.48707,
+          "ttfb": 0.73471,
+          "total": 1.919166,
+          "code": "200",
+          "ip": "185.93.88.81",
+          "ssl": "0",
+          "size": "325761",
+          "redir": "0",
+          "tcp": 0.000489,
+          "tls": 0.486562,
+          "ttfb_after_tls": 0.24763999999999997,
+          "html": 1.184456
+        }
+      ],
+      "warm": [
+        {
+          "dns": 1.8e-05,
+          "connect": 0.000515,
+          "appconnect": 0.496832,
+          "ttfb": 0.750272,
+          "total": 1.731492,
+          "code": "200",
+          "ip": "185.93.88.81",
+          "ssl": "0",
+          "size": "325761",
+          "redir": "0",
+          "tcp": 0.000497,
+          "tls": 0.496317,
+          "ttfb_after_tls": 0.25344000000000005,
+          "html": 0.98122
+        },
+        {
+          "dns": 2e-05,
+          "connect": 0.000484,
+          "appconnect": 0.492297,
+          "ttfb": 0.727656,
+          "total": 1.899789,
+          "code": "200",
+          "ip": "185.93.88.81",
+          "ssl": "0",
+          "size": "325761",
+          "redir": "0",
+          "tcp": 0.000464,
+          "tls": 0.491813,
+          "ttfb_after_tls": 0.23535899999999998,
+          "html": 1.172133
+        },
+        {
+          "dns": 1.9e-05,
+          "connect": 0.000344,
+          "appconnect": 0.490386,
+          "ttfb": 0.732206,
+          "total": 1.942859,
+          "code": "200",
+          "ip": "185.93.88.81",
+          "ssl": "0",
+          "size": "325761",
+          "redir": "0",
+          "tcp": 0.000325,
+          "tls": 0.490042,
+          "ttfb_after_tls": 0.24182000000000003,
+          "html": 1.2106529999999998
+        }
+      ],
+      "med_cold": {
+        "dns": 0.0,
+        "tcp": 0.0005,
+        "tls": 0.4866,
+        "ttfb_after_tls": 0.248,
+        "ttfb": 0.753,
+        "html": 1.1839,
+        "total": 1.9192
+      },
+      "med_warm": {
+        "dns": 0.0,
+        "tcp": 0.0005,
+        "tls": 0.4918,
+        "ttfb_after_tls": 0.2418,
+        "ttfb": 0.7322,
+        "html": 1.1721,
+        "total": 1.8998
+      },
+      "headers": "HTTP/2 200 \nserver: nginx/1.18.0 (Ubuntu)\ndate: Sun, 01 Nov 2026 20:02:08 GMT\ncontent-type: text/html; charset=utf-8\ncontent-length: 325761\nvary: Accept-Encoding\nage: 541\ncache-control: public, max-age=900, s-maxage=900\nx-content-type-options: nosniff\nx-frame-options: SAMEORIGIN\nreferrer-policy: strict-origin-when-cross-origin\npermissions-policy: geolocation=(), microphone=(), camera=()\ncontent-security-policy: default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'\nstrict-transport-security: max-age=0\nx-cache: MISS\n\n",
+      "remote": "185.93.88.81",
+      "ssl": "0",
+      "size": "325761"
+    }
+  },
+  "cdn_cache_probes": [
+    {
+      "age": "100",
+      "cache-control": "public, max-age=900, s-maxage=900",
+      "server": "vira-cdn",
+      "vira-cache-status": "MISS",
+      "x-cache": "HIT",
+      "status": "HTTP/2 200 "
+    },
+    {
+      "age": "100",
+      "cache-control": "public, max-age=900, s-maxage=900",
+      "server": "vira-cdn",
+      "vira-cache-status": "MISS",
+      "x-cache": "HIT",
+      "status": "HTTP/2 200 "
+    },
+    {
+      "age": "100",
+      "cache-control": "public, max-age=900, s-maxage=900",
+      "server": "vira-cdn",
+      "vira-cache-status": "MISS",
+      "x-cache": "HIT",
+      "status": "HTTP/2 200 "
+    },
+    {
+      "server": "nginx/1.18.0 (Ubuntu)",
+      "age": "229",
+      "cache-control": "public, max-age=900, s-maxage=900",
+      "x-cache": "HIT",
+      "status": "HTTP/2 200 "
+    }
+  ]
+}
