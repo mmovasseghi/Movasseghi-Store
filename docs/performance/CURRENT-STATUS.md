@@ -1,14 +1,17 @@
 # وضعیت جاری Performance — Movasseghi-Store
 
-آخرین به‌روزرسانی: 2026-11-01 (پس از publish `c53290e`)
+آخرین به‌روزرسانی: 2026-11-01 (پس از نصب TLS دامنه + dual-vhost)
 
 ## نسخهٔ زنده
 
 | مورد | مقدار |
 |------|--------|
 | **RELEASE** | **`c53290e0a8d554df0311075be7802204b5dfe773`** |
-| URL | `https://185.93.88.81/` |
-| nginx md5 | `a56672754fe83dcb2f370c30f2cac2b6` · gzip **6** |
+| URL دامنه | `https://movasseghistore.com/` (Vira CDN → origin) |
+| URL IP | `https://185.93.88.81/` (گواهی کوتاه‌عمر LE با SAN IP) |
+| TLS origin | دو `server` جدا: IP default + SNI `movasseghistore.com` در `/etc/ssl/movasseghistore.com/` |
+| nginx | dual-vhost + `snippets/movasseghi-shop-proxy.inc` · gzip **6** |
+| `PublicBaseUrl` | `https://movasseghistore.com` |
 | شاخه | تغییرات روی `main` (فیچر `cursor/valid-ab-html-gzip-e83d` ادغام شد) |
 
 ## اصلاح منتشرشده این چرخه
