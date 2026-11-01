@@ -18,3 +18,11 @@ Local CDP trace (desktop cold, live `41a2e55`): before FCP **Layout ~121ms** vs 
 ## Out of scope
 
 preload / display-v2 rework; domain/CDN/new cert; CSS coverage deletion; animation removal.
+
+## Publish + Seattle result
+
+- Landed on `main` + official `quick-republish` → **RELEASE `4934300`**, nginx md5 `a5667275…`, gzip **6**.
+- Local after: Layout before FCP ~79ms, dirtyObjects ~818 (was ~121ms / 1760).
+- Seattle HTTPS: [gV9gP6Ev](https://gtmetrix.com/reports/185.93.88.81/gV9gP6Ev/) B/82/98 LCP1.8s; [AFqU0xtT](https://gtmetrix.com/reports/185.93.88.81/AFqU0xtT/) B/82/98 LCP1.8s.
+- **Grade A not reached.** content-visibility did not move Seattle FCP/LCP.
+- Full handoff: `CODEX-HANDOFF-cycle-style-layout-4934300.md`.
