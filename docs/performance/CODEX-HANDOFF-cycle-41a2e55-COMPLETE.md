@@ -118,7 +118,7 @@
    - LCP element در همهٔ GTهای موفق: همان `01-display-v2-420w.webp`.  
    - FCP≈LCP≈1.8s بعد از gzip6 → رنگ محتوا و LCP تقریباً هم‌زمان‌اند.  
    - فازهای LCP (نمونه Q8T2c8aj): TTFB ~37٪ / Load Delay ~12٪ / Load Time ~13٪ / **Render Delay ~37٪**.  
-   - long task غالب روی خود سند HTML (~330–350ms) به‌خاطر parse استایل اینلاین ~150KB.
+   - **اصلاح تشخیص (Codex روی lighthouse.json):** long-task سند @1228.3ms مدت 332.7ms عمدتاً **Style/Layout 313.6ms** است (Rendering 8.6 / Other 9.5 / ScriptEvaluation 1) — **نه** parse کردن ۱۵۰KB CSS. کل main-thread: Style/Layout **471.3ms** در برابر Parse HTML/CSS فقط **15.9ms**. task بعدی سند @1564.2ms هم ۶۵ms Style/Layout دارد. LCP image download end ~1134ms و FCP=LCP 1809ms → بعد از آماده‌شدن تصویر، Style/Layout پیش از اولین نمایش رخ می‌دهد. CSS بزرگ می‌تواند روی محاسبهٔ استایل اثر بگذارد، ولی علت دقیق از `styleLayout` استخراج می‌شود نه از parse. **TBT=0** به‌معنی نبود کار سنگین نیست؛ این taskها عمدتاً **قبل از FCP** بوده‌اند.
 3. **critical-home.css ≈ 150KB** عمداً «استایل کامل خانه» اینلاین است (`build-critical-home.mjs`). تغییر معماری CSS فقط با حفظ first paint + همه اسلایدهای هیرو + اولین تعامل منو/سبد/ورود/استوری مجاز است؛ حذف coverage یک viewport ممنوع.
 4. **یک اجرای GT با «Lighthouse Error: The page took too long to load (No CPU idle period)»** — احتمال نقش انیمیشن‌های infinite CSS؛ حذف انیمیشن ممنوع؛ اگر idle دوباره بشکند باید با اندازه‌گیری جدا شود.
 5. **Structure=98**؛ فرصت باقی: `use-cdn` (۱۷ منبع، خارج از محدوده فعلی)، `unused-css-rules` ~15KiB (صرفه FCP ثابت نشده)، `dom-size` 1425.

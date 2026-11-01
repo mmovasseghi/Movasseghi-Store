@@ -59,18 +59,39 @@ html.js .ms-page-home img.ms-home-lazy-ready.is-loaded {
   transition: opacity 0.25s ease-out;
 }
 
-/* content-visibility باعث pop-in زشت می‌شد — روی خانه خاموش */
-.ms-page-home .ms-offers,
-.ms-page-home .ms-featured-section,
-.ms-page-home .ms-segments,
-.ms-page-home .ms-news,
-.ms-page-home .ms-closing,
+/* Skip below-fold Style/Layout before first paint.
+   Intrinsic sizes are measured from live mobile/desktop so scroll/CLS stay stable
+   (previous bare `auto` without size caused pop-in). */
+.ms-page-home .ms-offers {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 560px;
+}
+.ms-page-home .ms-cat-section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 280px;
+}
+.ms-page-home .ms-featured-section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 1300px;
+}
+.ms-page-home .ms-segments {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 480px;
+}
+.ms-page-home .ms-news {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 580px;
+}
+.ms-page-home .ms-closing {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 560px;
+}
 .ms-page-home .ms-home-faq {
-  content-visibility: visible;
-  contain-intrinsic-size: auto;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 360px;
 }
 
 .ms-footer {
   content-visibility: auto;
-  contain-intrinsic-size: auto 320px;
+  contain-intrinsic-size: auto 400px;
 }

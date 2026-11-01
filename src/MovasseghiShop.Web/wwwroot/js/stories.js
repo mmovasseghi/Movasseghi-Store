@@ -21,6 +21,7 @@
   const tapNext = modal.querySelector('[data-story-next]');
 
   let stories = [];
+  let storiesLoadPromise = null;
   let viewed = new Set();
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
@@ -70,9 +71,11 @@
     const src = dataEl.getAttribute('data-stories-src');
     if (!src) return Promise.resolve([]);
     return fetch(src, { credentials: 'same-origin' })
-      .then(r => (r.ok ? r.json() : []))
-      .then(raw => (Array.isArray(raw) ? raw : []).map(normalizeStory))
-      .catch(() => []);
+      .then(r => {
+        if (!r.ok) throw new Error(`Stories fetch failed: ${r.status}`);
+        return r.json();
+      })
+      .then(raw => (Array.isArray(raw) ? raw : []).map(normalizeStory));
   }
 
   function markViewed(id) {
@@ -121,7 +124,8 @@
     const slide = story.slides[slideIdx];
     if (slide && slidesEl) {
       const imgSrc = (window.appUrl || (u => u))(slide.image);
-      slidesEl.innerHTML = `<div class="ms-story-slide"><img src="${escapeAttr(imgSrc)}" alt="${escapeAttr(slide.title)}" loading="lazy" decoding="async" /></div>`;
+      // Eager: modal is user-opened; lazy can leave a blank slide until scroll.
+      slidesEl.innerHTML = `<div class="ms-story-slide"><img src="${escapeAttr(imgSrc)}" alt="${escapeAttr(slide.title)}" loading="eager" decoding="async" fetchpriority="high" /></div>`;
     }
     if (ctaEl && slide) {
       ctaEl.href = slide.link || '#';
@@ -305,10 +309,18 @@
 
   function ensureStoriesLoaded() {
     if (stories.length) return Promise.resolve(stories);
-    return loadStoriesPayload().then((list) => {
-      stories = list;
-      return stories;
-    });
+    if (storiesLoadPromise) return storiesLoadPromise;
+    storiesLoadPromise = loadStoriesPayload()
+      .then((list) => {
+        stories = list;
+        return stories;
+      })
+      .catch((err) => {
+        // Allow a later boot/click/early-intent to retry after a failed fetch.
+        storiesLoadPromise = null;
+        throw err;
+      });
+    return storiesLoadPromise;
   }
 
   boot();
