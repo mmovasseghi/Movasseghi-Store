@@ -1,0 +1,46 @@
+{
+  "r1": {
+    "reportUrl": "https://gtmetrix.com/",
+    "data": {
+      "title": "GTmetrix - Test, Monitor, and Optimize Web Performance - GTmetrix",
+      "href": "https://gtmetrix.com/",
+      "testedUrl": null,
+      "generated": null,
+      "location": null,
+      "using": null,
+      "grade": null,
+      "performance": null,
+      "structure": null,
+      "lcp": null,
+      "tbt": null,
+      "cls": null,
+      "fcp": null,
+      "si": null,
+      "ttfb": null,
+      "head": "We use essential cookies to make our site work. With your consent, we may also use non-essential cookies to improve user experience and analyze website traffic. By clicking “Accept,” you agree to our website's cookie use as described in our Cookie Policy and Privacy Policy. You can change your cookie settings at any time by clicking “Preferences.”\nPreferences\nDecline\nAccept\nWhy GTmetrix\nExplore PRO\nAI-Built Sites\nPricing\nResources\nLog In Try for FREE\nFind out why your website is slow\nThen fix it\n\nGTmetrix tests your e-commerce website and shows you exactly how to optimize for performance.\n\nAnalysis Error\nLighthouse Error: The page took too long to load (No CPU idle period)\n\nFor more details on general GTmetrix errors, read our guide.\n\n\n\nTest Now\n\nAnalysis Options:\n\nSeattle, WA, USA\n\nChrome\n\nUnthrottled Connection\n\nChange Options\nDeep Insights to Understand and Optimize Performance\n\nGo beyond simple performance scores with detailed analysis and a breakdown of your page load.\n\nGet Started for FREE (No credit card required)\nWeb Vitals\n\nTrack Google Core Web vitals automatically. Measure the metrics that impact your SEO.\n\nAdvanced Analysis\n\nCustomize your connection speed, user agents, resolution, and cookies.\n\nMonitoring and Alerts\n\nTest your pages on a set schedule. Receive instant notifications when performance drops.\n\nWaterfall Charts\n\nSee how your site loads request-by-request. Pinpoint large files and slow server responses.\n\nReal User Metrics\n\nGet real-world performance with CrUX data. See how actual users experience your site.\n\nGlobal Testing Network\n\nTest performance across 25 global regions. See how international visitors experience your site.\n\n1. Test\n2. Monitor\n3. Collaborate\n4. Integrate with AI\nGain a clear, complete view of your site’s real performance\nGo beyond a single score. See exactly what’s slow, why it’s slow, and what to fix first.\nFull Lighthouse-powered reports with Web Vitals (LCP, TBT, CLS) and structure audits\nReal User Metrics from CrUX data — see how actual visitors experience your site, not just a lab test\nWaterfall, video, and filmstrip views to pinpoint the exact request or script causing the slowdown\nTest the way your visitors actually experience your site\n28 global test locations, from Seattle to Sydney, to catch regional slowdowns\n55+ simulated mobile and tablet devices (iPhone, Galaxy, Pixel, and more)\nStart Testing for FREE\nWorld map showing GTmetrix’s 25 global test locations, with a bright, multi-ring pulse that radiates ",
+      "gradeFromDom": null
+    }
+  },
+  "r2": {
+    "reportUrl": "https://gtmetrix.com/reports/185.93.88.81/5c8n84AR/",
+    "data": {
+      "title": "Latest Performance Report for: https://185.93.88.81/ | GTmetrix",
+      "href": "https://gtmetrix.com/reports/185.93.88.81/5c8n84AR/",
+      "testedUrl": "https://185.93.88.81/",
+      "generated": "Sat, Oct 31, 2026 8:51 PM -0700",
+      "location": "Seattle, WA, USA",
+      "using": "Chrome 154.0.0.0, Lighthouse 12.6.1",
+      "grade": null,
+      "performance": "78",
+      "structure": "98",
+      "lcp": "2.1s",
+      "tbt": "0ms",
+      "cls": "0",
+      "fcp": null,
+      "si": null,
+      "ttfb": null,
+      "head": "We use essential cookies to make our site work. With your consent, we may also use non-essential cookies to improve user experience and analyze website traffic. By clicking “Accept,” you agree to our website's cookie use as described in our Cookie Policy and Privacy Policy. You can change your cookie settings at any time by clicking “Preferences.”\nPreferences\nDecline\nAccept\nWhy GTmetrix\nExplore PRO\nAI-Built Sites\nPricing\nResources\nLog In\nTry for FREE\nRe-Test\n \nCompare\nPage Settings\n \nMonitor\n \nSet Up Alerts\n \nTags\n \nShare\nUncover full report details with a FREE GTmetrix account\n\nGet full report details and more testing capacity with a FREE GTmetrix account.\n\nLog in Create a FREE account\n\t\nLatest Performance Report for:\nhttps://185.93.88.81/\nReport generated:\nSat, Oct 31, 2026 8:51 PM -0700\nTest Server Location:\nSeattle, WA, USA\nUsing:\nChrome 154.0.0.0, Lighthouse 12.6.1\nGTmetrix Grade \nPerformance \n78%\nStructure \n98%\nWeb Vitals \nLCP\n \n2.1s\nTBT\n \n0ms\nCLS\n \n0\nSummary\nPerformance\nStructure\nCrUX\nWaterfall\nVideo\nHistory\nAlerts\nLog in or Sign up to see the rest of the Report\n\nTry out GTmetrix for FREE and get full report details, more tests, monitoring, locations, and more!\n\nLog in or Create a FREE account\n\nMore from GTmetrix\n\nAdditional tips and suggestions based on your page analysis.\n\nNeed optimization guides and advice?\n\nCheck out the GTmetrix blog for tips and how-tos!Read the guide\n\nNeed help with optimization?\n\nFind a developer with our partner Fiverr to optimize your performance\n\nTips and Tricks for using GTmetrix\n\nShortcuts, guides and pointers for making the most out of GTmetrix\n\nUnderstand your GTmetrix Report\n\nLearn everything you need to know about GTmetrix Reports\n\nUnderstand and assess Waterfall Charts\n\nLearn to identify and point out potential issues in your page load\n\nTest your page in multiple locations\n\nAnalyze your page globally with a free GTmetrix account\n\nRead our blog for more performance tips and advice.\n\nCompare with another URL\n\nAnalyze the following URL and compare it to the current report. \n\n\t\nOptions: Seattle, WA, USA using Chrome.\nChange Options\nCompare\nExport History\n\nGet report history for this page in CSV format based on selected settings.\n\nSelect Format \nDownload CSV file\nLink to CSV file (requires API key)\nSelect time range\nLast 5 Reports\nLast 10 Reports\nLast 25 Reports\nLast 50 Reports\nLast 100 Reports (PRO Only)\nLast 250 Reports (PRO Only)\nLast 500 Reports (PRO Only)\nAll available reports (PRO Only)\nSelect columns\nSelect colu",
+      "gradeFromDom": "\n          \n        "
+    }
+  }
+}

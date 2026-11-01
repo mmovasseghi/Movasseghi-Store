@@ -2,9 +2,9 @@
 
 تاریخ تدوین: ۲۰۲۶-۱۰-۳۰؛ آخرین تکمیل: ۲۰۲۶-۱۰-۳۱. هدف اول: **Grade A واقعی**؛ هدف بعدی: Performance و Structure هر دو **بالاتر از ۹۵**، با حفظ قابلیت‌ها، عکس‌ها و انیمیشن‌ها.
 
-**آخرین شاهد واقعی GTmetrix (پس از `07567ba`):** [POzYv29X](https://gtmetrix.com/reports/185.93.88.81/POzYv29X/) — Seattle / Chrome 154 / LH 12.6.1 — **Grade B، Performance=۷۹، Structure=۹۸، LCP=۲٫۱s، TBT=۴۰ms، CLS=۰.**  
-جزئیات چرخهٔ استوری/CLS: [`cycle-story-cls-07567ba.md`](cycle-story-cls-07567ba.md). چرخهٔ HTTPS/IP: [`cycle-https-ip-tls-31f0175.md`](cycle-https-ip-tls-31f0175.md).  
-**هدف A / بالای ۹۵ هنوز در GTmetrix تأیید نشده است.** نتیجهٔ Lighthouse محلی به‌جای GT اعلام نمی‌شود.
+**آخرین شاهد واقعی GTmetrix (پس از `41a2e55`):** [5c8n84AR](https://gtmetrix.com/reports/185.93.88.81/5c8n84AR/) — Seattle / Chrome 154 / LH 12.6.1 — **Grade B، Performance=۷۸، Structure=۹۸، LCP=۲٫۱s، TBT=۰، CLS=۰** (FCP≈۱٫۹s از lighthouse.json). تکرارها: [o3qhorfs](https://gtmetrix.com/reports/185.93.88.81/o3qhorfs/) ۷۸/۹۸/LCP۲٫۲s؛ [8qGeUXxY](https://gtmetrix.com/reports/185.93.88.81/8qGeUXxY/) ۷۴/۹۸/LCP۲٫۴s. یک اجرا با خطای idle شکست.  
+جزئیات چرخهٔ srcset/stories: [`cycle-lcp-srcset-41a2e55.md`](cycle-lcp-srcset-41a2e55.md). استوری/CLS: [`cycle-story-cls-07567ba.md`](cycle-story-cls-07567ba.md). HTTPS/IP: [`cycle-https-ip-tls-31f0175.md`](cycle-https-ip-tls-31f0175.md).
+
 
 ## ۱. چه چیزی دربارهٔ پروژه بررسی شد؟
 

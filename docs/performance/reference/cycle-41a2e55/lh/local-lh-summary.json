@@ -1,0 +1,60 @@
+{
+  "desktop_cold": [
+    {
+      "file": "desktop-cold-1.json",
+      "performance": 0.88,
+      "FCP": 1429.934,
+      "SI": 1995,
+      "LCP": 1461.845,
+      "TBT": 0,
+      "CLS": 0.00927115072212806
+    },
+    {
+      "file": "desktop-cold-2.json",
+      "performance": 0.88,
+      "FCP": 1423.573,
+      "SI": 1987,
+      "LCP": 1452.35,
+      "TBT": 0,
+      "CLS": 0.00927115072212806
+    },
+    {
+      "file": "desktop-cold-3.json",
+      "performance": 0.88,
+      "FCP": 1421.233,
+      "SI": 1981,
+      "LCP": 1454.891,
+      "TBT": 0,
+      "CLS": 0.00927115072212806
+    }
+  ],
+  "mobile_sim": [
+    {
+      "file": "mobile-sim-1.json",
+      "performance": 0.99,
+      "FCP": 1273.6,
+      "SI": 2833.9677824985633,
+      "LCP": 1273.6,
+      "TBT": 35,
+      "CLS": 0.044421010771149114
+    },
+    {
+      "file": "mobile-sim-2.json",
+      "performance": 0.99,
+      "FCP": 1317,
+      "SI": 2758.6405470720697,
+      "LCP": 1317,
+      "TBT": 33.5,
+      "CLS": 0.04761070520690444
+    },
+    {
+      "file": "mobile-sim-3.json",
+      "performance": 0.99,
+      "FCP": 1314,
+      "SI": 2754.508879067525,
+      "LCP": 1314,
+      "TBT": 31.5,
+      "CLS": 0.04762919420427786
+    }
+  ]
+}

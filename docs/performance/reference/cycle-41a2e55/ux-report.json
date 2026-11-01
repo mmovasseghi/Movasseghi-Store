@@ -1,0 +1,301 @@
+{
+  "mobileCurrentSrc": {
+    "info": {
+      "currentSrc": "https://185.93.88.81/images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw",
+      "src": "/images/products/0056/01-lcp.webp?v=kF7UGc6DaLkFai8Uf4ookTKepqHpEdSfHXmpdS_apsk",
+      "srcset": "/images/products/0056/01-64w.webp?v=GDz7K1GyyEnC8Pd0FLGcvY7AB-3Sow9xj2c3GmfcAug 64w, /images/products/0056/01-128w.webp?v=IRgY9lbm-cXJsL7mehJtp5PeT8mp4k7nhMGxsGCb1hk 128w, /images/products/0056/01-160w.webp?v=VMjRgQor3hKw4Kpt5hPAqFKeoCuAi78wUZRSqNMEcrE 160w, /images/products/0056/01-192w.webp?v=Qg1wpoKBdAVkprgOmB0Wah3fYxT8YzJKlyqPdfG-tGI 192w, /images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw 420w, /images/products/0056/01-480w.webp?v=eKaKYulZOLFZbJa4bgW",
+      "sizes": "(min-width: 768px) 420px, (max-width: 480px) 35vw, 240px",
+      "naturalWidth": 144,
+      "clientWidth": 145,
+      "dpr": 2.625,
+      "vw": 412,
+      "preload": [
+        {
+          "href": "/images/products/0056/01-lcp.webp?v=kF7UGc6DaLkFai8Uf4ookTKepqHpEdSfHXmpdS_apsk",
+          "imagesrcset": "/images/products/0056/01-64w.webp?v=GDz7K1GyyEnC8Pd0FLGcvY7AB-3Sow9xj2c3GmfcAug 64w, /images/products/0056/01-128w.webp?v=IRgY9lbm-cXJsL7mehJtp5PeT8mp4k7nhMGxsGCb1hk 128w, /images/products/0056/01-160w.webp?v=VMjRgQor3hKw4Kpt5hPAqFKeoCuAi78wUZRSqNMEcrE 160w, /images/products/0056/01-192w.webp?v=Qg1wpoKBdAVkprgOmB0Wah3fYxT8YzJKlyqPdfG-tGI 192w, /images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw 420w, /images/products/0056/01-480w.webp?v=eKaKYulZOLFZbJa4bgWRUEKevroFcJWJq6SRObwpd8U 480w, /images/products/0056/01-560w.webp?v=fxw0kXLjinNaynzhAnPsNikdF3joFq7FOAjXFUpLdJU 560w, /images/products/0056/01-640w.webp?v=OeCObcshZezb2YrTaiyv0stgGqrtEfs8zdEW7uyfNq8 640w, /images/products/0056/01.webp?v=t6MyRW4MTCMticNObYQ3MQL9FC06PcUNgGetjiTKnaU 800w",
+          "imagesizes": "(min-width: 768px) 420px, (max-width: 480px) 35vw, 240px"
+        }
+      ]
+    },
+    "consoleErrors": [],
+    "failed": [
+      {
+        "url": "https://185.93.88.81/api/analytics/visitor",
+        "err": "net::ERR_ABORTED"
+      }
+    ]
+  },
+  "desktopCurrentSrc": {
+    "info": {
+      "currentSrc": "https://185.93.88.81/images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw",
+      "src": "/images/products/0056/01-lcp.webp?v=kF7UGc6DaLkFai8Uf4ookTKepqHpEdSfHXmpdS_apsk",
+      "srcset": "/images/products/0056/01-64w.webp?v=GDz7K1GyyEnC8Pd0FLGcvY7AB-3Sow9xj2c3GmfcAug 64w, /images/products/0056/01-128w.webp?v=IRgY9lbm-cXJsL7mehJtp5PeT8mp4k7nhMGxsGCb1hk 128w, /images/products/0056/01-160w.webp?v=VMjRgQor3hKw4Kpt5hPAqFKeoCuAi78wUZRSqNMEcrE 160w, /images/products/0056/01-192w.webp?v=Qg1wpoKBdAVkprgOmB0Wah3fYxT8YzJKlyqPdfG-tGI 192w, /images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw 420w, /images/products/0056/01-480w.webp?v=eKaKYulZOLFZbJa4bgW",
+      "sizes": "(min-width: 768px) 420px, (max-width: 480px) 35vw, 240px",
+      "naturalWidth": 420,
+      "clientWidth": 420,
+      "dpr": 1,
+      "vw": 1366,
+      "preload": [
+        {
+          "href": "/images/products/0056/01-lcp.webp?v=kF7UGc6DaLkFai8Uf4ookTKepqHpEdSfHXmpdS_apsk",
+          "imagesrcset": "/images/products/0056/01-64w.webp?v=GDz7K1GyyEnC8Pd0FLGcvY7AB-3Sow9xj2c3GmfcAug 64w, /images/products/0056/01-128w.webp?v=IRgY9lbm-cXJsL7mehJtp5PeT8mp4k7nhMGxsGCb1hk 128w, /images/products/0056/01-160w.webp?v=VMjRgQor3hKw4Kpt5hPAqFKeoCuAi78wUZRSqNMEcrE 160w, /images/products/0056/01-192w.webp?v=Qg1wpoKBdAVkprgOmB0Wah3fYxT8YzJKlyqPdfG-tGI 192w, /images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw 420w, /images/products/0056/01-480w.webp?v=eKaKYulZOLFZbJa4bgWRUEKevroFcJWJq6SRObwpd8U 480w, /images/products/0056/01-560w.webp?v=fxw0kXLjinNaynzhAnPsNikdF3joFq7FOAjXFUpLdJU 560w, /images/products/0056/01-640w.webp?v=OeCObcshZezb2YrTaiyv0stgGqrtEfs8zdEW7uyfNq8 640w, /images/products/0056/01.webp?v=t6MyRW4MTCMticNObYQ3MQL9FC06PcUNgGetjiTKnaU 800w",
+          "imagesizes": "(min-width: 768px) 420px, (max-width: 480px) 35vw, 240px"
+        }
+      ]
+    },
+    "consoleErrors": [],
+    "failed": [
+      {
+        "url": "https://185.93.88.81/api/analytics/visitor",
+        "err": "net::ERR_ABORTED"
+      }
+    ]
+  },
+  "storyAfter": {
+    "before": {
+      "open": false,
+      "modalHidden": true,
+      "storyCount": 12,
+      "storiesInline": 0
+    },
+    "after": {
+      "open": true,
+      "modalHidden": false,
+      "modalOpenClass": true,
+      "label": "همه محصولات"
+    },
+    "consoleErrors": [],
+    "failed": [
+      {
+        "url": "https://185.93.88.81/api/analytics/visitor",
+        "err": "net::ERR_ABORTED"
+      }
+    ]
+  },
+  "storyEarly": {
+    "immediate": {
+      "open": true,
+      "modalHidden": false,
+      "modalOpenClass": true,
+      "busy": false,
+      "storiesLen": null,
+      "earlyIntent": false
+    },
+    "later": {
+      "open": true,
+      "modalHidden": false,
+      "modalOpenClass": true,
+      "label": "همه محصولات"
+    },
+    "consoleErrors": [],
+    "failed": [
+      {
+        "url": "https://185.93.88.81/api/analytics/visitor",
+        "err": "net::ERR_ABORTED"
+      }
+    ]
+  },
+  "storyAfterDesktop": {
+    "before": {
+      "open": false,
+      "modalHidden": true,
+      "storyCount": 12,
+      "storiesInline": 0
+    },
+    "after": {
+      "open": true,
+      "modalHidden": false,
+      "modalOpenClass": true,
+      "label": "همه محصولات"
+    },
+    "consoleErrors": [],
+    "failed": [
+      {
+        "url": "https://185.93.88.81/api/analytics/visitor",
+        "err": "net::ERR_ABORTED"
+      }
+    ]
+  },
+  "clsMobile": {
+    "cls": 0.025975165878261142,
+    "shifts": [
+      {
+        "value": 0.00020147464737733036,
+        "startTime": 2019.8999999985099,
+        "sources": [
+          {
+            "node": "ms-fab-call",
+            "prev": {
+              "y": 771,
+              "h": 56
+            },
+            "cur": {
+              "y": 754,
+              "h": 56
+            }
+          }
+        ]
+      },
+      {
+        "value": 0.0037479804265536255,
+        "startTime": 3617.39999999851,
+        "sources": [
+          {
+            "node": "ms-features-band-inner",
+            "prev": {
+              "y": 613.671875,
+              "h": 49.703125
+            },
+            "cur": {
+              "y": 613.671875,
+              "h": 49.703125
+            }
+          }
+        ]
+      },
+      {
+        "value": 0.0014669358174992687,
+        "startTime": 5434.099999997765,
+        "sources": [
+          {
+            "node": "ms-hero-grid-lines",
+            "prev": {
+              "y": 305.4375,
+              "h": 252.453125
+            },
+            "cur": {
+              "y": 305.4375,
+              "h": 252.453125
+            }
+          },
+          {
+            "node": "ms-hero-trust",
+            "prev": {
+              "y": 521.78125,
+              "h": 36.109375
+            },
+            "cur": {
+              "y": 521.78125,
+              "h": 36.109375
+            }
+          }
+        ]
+      },
+      {
+        "value": 0.020558774986830917,
+        "startTime": 6617.099999997765,
+        "sources": [
+          {
+            "node": "ms-features-band-inner",
+            "prev": {
+              "y": 613.671875,
+              "h": 49.703125
+            },
+            "cur": {
+              "y": 613.671875,
+              "h": 49.703125
+            }
+          }
+        ]
+      }
+    ],
+    "heroDescH": 41.46875,
+    "featuresY": 592.078125,
+    "consoleErrors": [],
+    "failed": [
+      {
+        "url": "https://185.93.88.81/api/analytics/visitor",
+        "err": "net::ERR_ABORTED"
+      }
+    ]
+  },
+  "clsDesktop": {
+    "cls": 0.005359473474729157,
+    "shifts": [
+      {
+        "value": 0.0017420248317815204,
+        "startTime": 1597.7000000029802,
+        "sources": [
+          {
+            "prev": {
+              "y": 668.21875,
+              "h": 87
+            },
+            "cur": {
+              "y": 656.21875,
+              "h": 87
+            }
+          },
+          {
+            "prev": {
+              "y": 742.6875,
+              "h": 25.3125
+            },
+            "cur": {
+              "y": 738.6875,
+              "h": 29.3125
+            }
+          },
+          {
+            "node": "is-active",
+            "prev": {
+              "y": 67.984375,
+              "h": 79.15625
+            },
+            "cur": {
+              "y": 67.984375,
+              "h": 79.15625
+            }
+          },
+          {
+            "node": "ms-promo-cta",
+            "prev": {
+              "y": 0,
+              "h": 52.390625
+            },
+            "cur": {
+              "y": 0,
+              "h": 52.390625
+            }
+          },
+          {
+            "prev": {
+              "y": 18.328125,
+              "h": 20
+            },
+            "cur": {
+              "y": 15.328125,
+              "h": 20
+            }
+          }
+        ]
+      },
+      {
+        "value": 0.003617448642947636,
+        "startTime": 4622.20000000298,
+        "sources": [
+          {
+            "node": "ms-hero-grid-lines",
+            "prev": {
+              "y": 498.09375,
+              "h": 269.90625
+            },
+            "cur": {
+              "y": 498.09375,
+              "h": 269.90625
+            }
+          }
+        ]
+      }
+    ],
+    "heroDescH": 55.40625,
+    "featuresY": 1080.296875,
+    "consoleErrors": [],
+    "failed": [
+      {
+        "url": "https://185.93.88.81/api/analytics/visitor",
+        "err": "net::ERR_ABORTED"
+      }
+    ]
+  }
+}

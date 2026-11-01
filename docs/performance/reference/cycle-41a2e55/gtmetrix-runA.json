@@ -1,0 +1,12 @@
+{
+  "href": "https://gtmetrix.com/reports/185.93.88.81/o3qhorfs/",
+  "generated": "Sat, Oct 31, 2026 8:53 PM -0700",
+  "location": "Seattle, WA, USA",
+  "using": "Chrome 154.0.0.0, Lighthouse 12.6.1",
+  "performance": "78",
+  "structure": "98",
+  "lcp": "2.2s",
+  "tbt": "40ms",
+  "cls": "0",
+  "testedUrl": "https://185.93.88.81/"
+}
