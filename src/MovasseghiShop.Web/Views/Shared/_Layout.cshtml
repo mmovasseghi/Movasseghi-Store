@@ -101,7 +101,9 @@
     }
     else if (isHome)
     {
-        @* CSS بحرانی داخل HTML تا FCP منتظر یک RTT اضافه از Seattle نماند. باندل کامل preload نمی‌شود تا با تصویر LCP رقابت نکند. *@
+        @* CSS بحرانی داخل HTML تا FCP منتظر یک RTT اضافه از Seattle نماند.
+           آزمایش split critical (cycle-critical-split) سود خالص FCP/LCP نداشت و منتشر نشد؛
+           critical-home همچنان استایل کامل خانه است. *@
         var webRoot = string.IsNullOrEmpty(HostEnv.WebRootPath)
             ? global::System.IO.Path.Combine(HostEnv.ContentRootPath, "wwwroot")
             : HostEnv.WebRootPath;

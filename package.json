@@ -7,6 +7,7 @@
     "build:rte": "esbuild src/MovasseghiShop.Web/Client/rich-text-editor.mjs --bundle --format=iife --outfile=src/MovasseghiShop.Web/wwwroot/js/rich-text-editor.bundle.js --minify",
     "build:storefront-css": "node scripts/build-storefront-css.mjs",
     "build:critical-home": "node scripts/build-critical-home.mjs",
+    "build:critical-home-split": "node scripts/build-critical-home-split.mjs",
     "build": "npm run build:rte && npm run build:storefront-css && npm run build:critical-home",
     "test": "node scripts/check-storefront-js.cjs && node --test scripts/home-css-rules.test.mjs"
   },

@@ -1,0 +1,14 @@
+{
+  "url": "https://185.93.88.81/",
+  "label": "live-desktop",
+  "runs": 3,
+  "viewport": "desktop",
+  "vp": {
+    "width": 1366,
+    "height": 768,
+    "deviceScaleFactor": 1
+  },
+  "chrome": "/usr/local/bin/google-chrome",
+  "method": "puppeteer.page.goto cold navigation; Network.clearBrowserCache + setCacheDisabled; no setContent",
+  "createdAt": "2026-11-01T06:17:47.473Z"
+}

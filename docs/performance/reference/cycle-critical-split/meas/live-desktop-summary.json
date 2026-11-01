@@ -1,0 +1,219 @@
+{
+  "settings": {
+    "url": "https://185.93.88.81/",
+    "label": "live-desktop",
+    "runs": 3,
+    "viewport": "desktop",
+    "vp": {
+      "width": 1366,
+      "height": 768,
+      "deviceScaleFactor": 1
+    },
+    "chrome": "/usr/local/bin/google-chrome",
+    "method": "puppeteer.page.goto cold navigation; Network.clearBrowserCache + setCacheDisabled; no setContent",
+    "createdAt": "2026-11-01T06:17:47.473Z"
+  },
+  "rows": [
+    {
+      "label": "live-desktop-1",
+      "wallMs": 3982,
+      "httpStatus": 200,
+      "navigationTTFB_ms": 673.2000000029802,
+      "serverWaiting_ms": 223.35400000000004,
+      "headerReceiveEnd_relRequest_ms": 671.518,
+      "htmlResponseEnd_ms": 1126.9000000059605,
+      "htmlTransfer": 63953,
+      "htmlDecoded": 325375,
+      "FCP": 1384,
+      "FP": 1384,
+      "LCP": 1384,
+      "lcpUrl": "https://185.93.88.81/images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw",
+      "CLS": 0.0017489702250153818,
+      "TBT_approx": 0,
+      "longTasksBeforeFcp": [],
+      "longTasksAfterFcp": [],
+      "styleLayoutBeforeFcp": {
+        "Layout": 88.246,
+        "UpdateLayoutTree": 21.343999999999998,
+        "ParseAuthorStyleSheet": 1.244
+      },
+      "styleLayoutAfterFcp": {
+        "Layout": 0.688,
+        "UpdateLayoutTree": 2.2809999999999997,
+        "ParseAuthorStyleSheet": 0
+      },
+      "topLayout": {
+        "dur": 59.548,
+        "start": 562.446,
+        "dirty": 818,
+        "total": 818,
+        "partial": false,
+        "root": "#document"
+      },
+      "inlineCssBytes": 150310,
+      "remainderLink": null,
+      "currentSrc": "https://185.93.88.81/images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw",
+      "cssResources": [],
+      "fontResources": [
+        {
+          "name": "3.88.81/fonts/Vazirmatn-storefront.woff2",
+          "start": 899.2000000029802,
+          "responseEnd": 1561.2000000029802,
+          "transfer": 86012
+        }
+      ],
+      "lcpResource": {
+        "name": "https://185.93.88.81/images/products/0056/01-display-v2-420w.webp",
+        "initiator": "link",
+        "start": 899,
+        "responseStart": 1127,
+        "responseEnd": 1127.5,
+        "transfer": 22184,
+        "encoded": 21884,
+        "decoded": 21884
+      },
+      "docFromCache": {
+        "fromDiskCache": false,
+        "status": 200,
+        "encoded": 64252
+      }
+    },
+    {
+      "label": "live-desktop-2",
+      "wallMs": 4008,
+      "httpStatus": 200,
+      "navigationTTFB_ms": 677.2000000029802,
+      "serverWaiting_ms": 223.94,
+      "headerReceiveEnd_relRequest_ms": 676.019,
+      "htmlResponseEnd_ms": 1135.2000000029802,
+      "htmlTransfer": 63953,
+      "htmlDecoded": 325375,
+      "FCP": 1384,
+      "FP": 1384,
+      "LCP": 1384,
+      "lcpUrl": "https://185.93.88.81/images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw",
+      "CLS": 0.0017195324429241689,
+      "TBT_approx": 0,
+      "longTasksBeforeFcp": [],
+      "longTasksAfterFcp": [],
+      "styleLayoutBeforeFcp": {
+        "Layout": 94.346,
+        "UpdateLayoutTree": 22.241,
+        "ParseAuthorStyleSheet": 1.329
+      },
+      "styleLayoutAfterFcp": {
+        "Layout": 0.9670000000000001,
+        "UpdateLayoutTree": 2.521,
+        "ParseAuthorStyleSheet": 0
+      },
+      "topLayout": {
+        "dur": 64.314,
+        "start": 563.082,
+        "dirty": 818,
+        "total": 818,
+        "partial": false,
+        "root": "#document"
+      },
+      "inlineCssBytes": 150310,
+      "remainderLink": null,
+      "currentSrc": "https://185.93.88.81/images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw",
+      "cssResources": [],
+      "fontResources": [
+        {
+          "name": "3.88.81/fonts/Vazirmatn-storefront.woff2",
+          "start": 904,
+          "responseEnd": 1567.1000000014901,
+          "transfer": 86012
+        }
+      ],
+      "lcpResource": {
+        "name": "https://185.93.88.81/images/products/0056/01-display-v2-420w.webp",
+        "initiator": "link",
+        "start": 903.8999999985099,
+        "responseStart": 1134.6000000014901,
+        "responseEnd": 1135,
+        "transfer": 22184,
+        "encoded": 21884,
+        "decoded": 21884
+      },
+      "docFromCache": {
+        "fromDiskCache": false,
+        "status": 200,
+        "encoded": 64252
+      }
+    },
+    {
+      "label": "live-desktop-3",
+      "wallMs": 3950,
+      "httpStatus": 200,
+      "navigationTTFB_ms": 674.2000000029802,
+      "serverWaiting_ms": 223.36600000000004,
+      "headerReceiveEnd_relRequest_ms": 673.114,
+      "htmlResponseEnd_ms": 1130.2000000029802,
+      "htmlTransfer": 63953,
+      "htmlDecoded": 325375,
+      "FCP": 1408,
+      "FP": 1408,
+      "LCP": 1408,
+      "lcpUrl": "https://185.93.88.81/images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw",
+      "CLS": 0.0017420248317815204,
+      "TBT_approx": 0,
+      "longTasksBeforeFcp": [],
+      "longTasksAfterFcp": [],
+      "styleLayoutBeforeFcp": {
+        "Layout": 99.435,
+        "UpdateLayoutTree": 26.022,
+        "ParseAuthorStyleSheet": 2.552
+      },
+      "styleLayoutAfterFcp": {
+        "Layout": 0.748,
+        "UpdateLayoutTree": 2.003,
+        "ParseAuthorStyleSheet": 0
+      },
+      "topLayout": {
+        "dur": 64.151,
+        "start": 561.253,
+        "dirty": 818,
+        "total": 818,
+        "partial": false,
+        "root": "#document"
+      },
+      "inlineCssBytes": 150310,
+      "remainderLink": null,
+      "currentSrc": "https://185.93.88.81/images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw",
+      "cssResources": [],
+      "fontResources": [
+        {
+          "name": "3.88.81/fonts/Vazirmatn-storefront.woff2",
+          "start": 901,
+          "responseEnd": 1398.2000000029802,
+          "transfer": 86012
+        }
+      ],
+      "lcpResource": {
+        "name": "https://185.93.88.81/images/products/0056/01-display-v2-420w.webp",
+        "initiator": "link",
+        "start": 900.8999999985099,
+        "responseStart": 1130.5,
+        "responseEnd": 1175.8000000044703,
+        "transfer": 22184,
+        "encoded": 21884,
+        "decoded": 21884
+      },
+      "docFromCache": {
+        "fromDiskCache": false,
+        "status": 200,
+        "encoded": 64252
+      }
+    }
+  ],
+  "medians": {
+    "navigationTTFB_ms": 674.2000000029802,
+    "htmlResponseEnd_ms": 1130.2000000029802,
+    "htmlTransfer": 63953,
+    "FCP": 1384,
+    "LCP": 1384,
+    "CLS": 0.0017420248317815204,
+    "TBT_approx": 0
+  }
+}
