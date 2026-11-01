@@ -8,7 +8,7 @@
       "Microsoft.AspNetCore": "Warning"
     }
   },
-  "AllowedHosts": "movasseghi.ir;www.movasseghi.ir",
+  "AllowedHosts": "movasseghistore.com;www.movasseghistore.com;movasseghi.ir;www.movasseghi.ir;185.93.88.81",
   "PathBase": "",
   "SiteSettings": {
     "PublicBaseUrl": "https://movasseghistore.com"
