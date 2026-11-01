@@ -1,49 +1,58 @@
 # وضعیت جاری Performance — Movasseghi-Store
 
-آخرین به‌روزرسانی: 2026-11-01 (چرخه valid-ab + layout-CV)
+آخرین به‌روزرسانی: 2026-11-01 (پس از publish `c53290e`)
 
-## نسخهٔ زنده (قبل از publish این چرخه)
+## نسخهٔ زنده
 
 | مورد | مقدار |
 |------|--------|
-| RELEASE | `493430039be6dbb535cb15fa8cc47fadcda04310` |
+| **RELEASE** | **`c53290e0a8d554df0311075be7802204b5dfe773`** |
 | URL | `https://185.93.88.81/` |
-| بهترین GT تأییدشده | B / Perf≈79–82 / Struct 98 (Seattle) |
-| شاخهٔ کار | `cursor/valid-ab-html-gzip-e83d` |
+| nginx md5 | `a56672754fe83dcb2f370c30f2cac2b6` · gzip **6** |
+| شاخه | تغییرات روی `main` (فیچر `cursor/valid-ab-html-gzip-e83d` ادغام شد) |
 
-## فرضیهٔ فعال (پذیرفته‌شده برای publish)
+## اصلاح منتشرشده این چرخه
 
-کاهش Style/Layout قبل از FCP با:
-1. `content-visibility:hidden` روی `.ms-hero-slide:not(.is-active)`
+1. `content-visibility:hidden` روی اسلاید هیرو غیرفعال
 2. `content-visibility:auto` روی `#ms-features`
-3. `content-visibility:hidden` روی `.ms-drawer[hidden]` (که با `display:block!important` هنوز Layout می‌شد)
+3. `content-visibility:hidden` روی `.ms-drawer[hidden]` (قبلاً با `display:block!important` Layout کامل می‌شد)
+4. harness معتبر A/B: `prepare-ab-variants` + `ab-prebuilt-server` (gzip6 ازپیش‌ساخته؛ پروکسی معیوب منسوخ)
 
-## آزمایش‌های ردشده
+## A/B معتبر (قبل از publish)
 
-| آزمایش | علت رد |
+| آزمایش | نتیجه |
 |--------|--------|
-| critical-split (چرخه قبل، پروکسی معیوب) | روش اندازه‌گیری: دانلود کامل origin با identity سپس rewrite |
-| critical-split (چرخهٔ valid، gzip6 ازپیش‌ساخته روی VPS) | `htmlTransfer` ≈8KB کمتر شد؛ **FCP/LCP بهتر نشد** (میانه FCP هر دو 944ms). `htmlEnd`≈همان |
+| critical-split gzip6 ازپیش‌ساخته | رد — FCP میانه برابر 944 |
+| layout-CV + drawer | پذیرفته — dirty 654→371، Layout 88→61، FCP 924→904، CLS بهتر، TBT≈0 |
 
-## اندازه‌گیری معتبر (الزامی)
+## اندازه‌گیری زنده پس از publish (لوکال cold×3)
 
-- `scripts/prepare-ab-variants.mjs` — ساخت کنترل/نمونه + gzip6 قبل از انتقال
-- `scripts/ab-prebuilt-server.mjs` — سرو از دیسک با `Content-Encoding:gzip` + stream-proxy دارایی‌ها
-- `scripts/ab-css-proxy.mjs` — **منسوخ** (بدون `MS_ALLOW_LEGACY_AB_PROXY=1` خارج می‌شود)
+| | TTFB | htmlEnd | FCP | LCP | Layout قبل FCP | dirty | CLS |
+|--|------|---------|-----|-----|----------------|-------|-----|
+| میانه `c53290e` | 685 | 1145 | **1392** | **1392** | **~84** | **535** | 0.0011 |
+| مرجع قبلی `4934300` (همین مسیر) | 685 | 1152 | 1416 | 1416 | ~100 | 818 | 0.0017 |
 
-شواهد: `docs/performance/reference/cycle-valid-ab/` و `/opt/cursor/artifacts/cycle-valid-ab/`
+## GTmetrix Seattle پس از publish
 
-### نتیجه layout-CV+drawer (۳ جفت متناوب، همان مسیر VPS)
+| # | لینک | وضعیت | Grade | Perf | Struct | LCP | TBT | CLS |
+|---|------|--------|-------|------|--------|-----|-----|-----|
+| 1 | https://gtmetrix.com/reports/185.93.88.81/xfrCIxd1/ | موفق | B | **76** | **98** | **2.1s** | **0ms** | 0 |
+| 2 | Retest / تست تازه | **مسدود سهمیه guest** (`job_error` / برگشت به خانه بدون گزارش) | — | — | — | — | — | — |
 
-| | FCP میانه | LCP میانه | Layout قبل FCP | dirty | CLS |
-|--|-----------|-----------|----------------|-------|-----|
-| control (4934300 CSS) | 924 | 1008 | 88 | 654 | 0.0046 |
-| experiment | **904** | 1012 | **61** | **371** | **0.0031** |
+جزئیات FCP/SI/Lighthouse کامل پشت دیوار ورود guest است؛ عدد Performance/LCP/TBT/CLS از صفحهٔ عمومی خوانده شد.
+**Grade A اعلام نمی‌شود.**
 
-TBT_approx=0 در هر دو. UX منو/سبد/ورود/اسلاید/هیرو موبایل پذیرفته شد.
+## فرضیه‌های ردشده
 
-## اقدام بعدی پس از publish
+- critical-split با روش معتبر (این چرخه)
+- critical-split با پروکسی معیوب (چرخه قبل)
 
-1. `quick-republish` رسمی از main
-2. GTmetrix Seattle ×۲ روی URL عمومی
-3. اگر هنوز A نیست: گلوگاه گزارش تازه (احتمالاً هنوز FCP/LCP شبکه+باقی Style) → فرضیه بعدی؛ تکرار split بدون شاهد تازه ممنوع
+## مانع بیرونی
+
+سهمیهٔ تست guest GTmetrix اجازهٔ اجرای دوم Seattle را نداد. برای ادامهٔ حلقه با تأیید Grade واقعی: حساب/سهمیه GTmetrix یا صبر تا رفع محدودیت guest لازم است.
+
+## اقدام بعدی
+
+1. تکرار Seattle ×۲ وقتی سهمیه آزاد شد (روی همان `c53290e` یا نسخهٔ بعدی).
+2. گلوگاه باقی‌مانده از تنها گزارش تازه: **LCP≈2.1s** (TBT الان 0). اهرم بعدی باید دریافت/Render مسیر Seattle یا کار Style باقی‌مانده باشد؛ تکرار split بدون شاهد تازه ممنوع.
+3. UX زنده تأیید شد: هیرو کامل، ۱۲ استوری، منو open/close با CV، قوانین CSS در HTML.
