@@ -73,3 +73,15 @@
 ## Artifacts
 
 `docs/performance/reference/cycle-41a2e55/`
+
+
+## Follow-up: gzip_comp_level 6 (nginx only; app SHA still `41a2e55`)
+
+HTML gzip download measured **63616** bytes (was ~68717 at level 4).
+
+| Report | Perf | Struct | LCP | TBT | CLS | FCP† | SI† |
+|--------|------|--------|-----|-----|-----|------|-----|
+| [JVPFNhtX](https://gtmetrix.com/reports/185.93.88.81/JVPFNhtX/) | **81** | **98** | **1.8 s** | 0 ms | 0.002 | **1.8 s** | **2.2 s** |
+| [Q8T2c8aj](https://gtmetrix.com/reports/185.93.88.81/Q8T2c8aj/) | **82** | **98** | **1.8 s** | 0 ms | 0.002 | **1.8 s** | **2.1 s** |
+
+Still **Grade B** — not A / not >95. Best Seattle HTTPS Perf this cycle: **82**.
