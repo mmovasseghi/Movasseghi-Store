@@ -1,0 +1,104 @@
+[
+  {
+    "label": "desktop-cold-1",
+    "vp": {
+      "width": 1366,
+      "height": 768,
+      "deviceScaleFactor": 1
+    },
+    "cpuRate": 1,
+    "FCP": 1396,
+    "TTFB": 680.9000000059605,
+    "CLS": 0.0017420248317815204,
+    "longTaskCount": 0,
+    "longTaskDur": 0,
+    "transferSize": 63953,
+    "currentSrc": "https://185.93.88.81/images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw",
+    "wallMs": 4613
+  },
+  {
+    "label": "desktop-cold-2",
+    "vp": {
+      "width": 1366,
+      "height": 768,
+      "deviceScaleFactor": 1
+    },
+    "cpuRate": 1,
+    "FCP": 924,
+    "TTFB": 459.30000000447035,
+    "CLS": 0.005359473474729157,
+    "longTaskCount": 0,
+    "longTaskDur": 0,
+    "transferSize": 63953,
+    "currentSrc": "https://185.93.88.81/images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw",
+    "wallMs": 4387
+  },
+  {
+    "label": "desktop-cold-3",
+    "vp": {
+      "width": 1366,
+      "height": 768,
+      "deviceScaleFactor": 1
+    },
+    "cpuRate": 1,
+    "FCP": 936,
+    "TTFB": 462.8999999985099,
+    "CLS": 0.005359473474729157,
+    "longTaskCount": 0,
+    "longTaskDur": 0,
+    "transferSize": 63953,
+    "currentSrc": "https://185.93.88.81/images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw",
+    "wallMs": 4360
+  },
+  {
+    "label": "mobile-cpu4-1",
+    "vp": {
+      "width": 412,
+      "height": 823,
+      "deviceScaleFactor": 2.625
+    },
+    "cpuRate": 4,
+    "FCP": 1140,
+    "TTFB": 462.1000000014901,
+    "CLS": 0.055212132201439675,
+    "longTaskCount": 0,
+    "longTaskDur": 0,
+    "transferSize": 63953,
+    "currentSrc": "https://185.93.88.81/images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw",
+    "wallMs": 4443
+  },
+  {
+    "label": "mobile-cpu4-2",
+    "vp": {
+      "width": 412,
+      "height": 823,
+      "deviceScaleFactor": 2.625
+    },
+    "cpuRate": 4,
+    "FCP": 1140,
+    "TTFB": 456.20000000298023,
+    "CLS": 0.055212132201439675,
+    "longTaskCount": 0,
+    "longTaskDur": 0,
+    "transferSize": 63953,
+    "currentSrc": "https://185.93.88.81/images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw",
+    "wallMs": 4414
+  },
+  {
+    "label": "mobile-cpu4-3",
+    "vp": {
+      "width": 412,
+      "height": 823,
+      "deviceScaleFactor": 2.625
+    },
+    "cpuRate": 4,
+    "FCP": 1132,
+    "TTFB": 455.8999999985099,
+    "CLS": 0.055212132201439675,
+    "longTaskCount": 0,
+    "longTaskDur": 0,
+    "transferSize": 63953,
+    "currentSrc": "https://185.93.88.81/images/products/0056/01-display-v2-420w.webp?v=G4JyHdkMUBXaV26thB0anpTgVSVSwMdfoq0wEocyOVw",
+    "wallMs": 4401
+  }
+]

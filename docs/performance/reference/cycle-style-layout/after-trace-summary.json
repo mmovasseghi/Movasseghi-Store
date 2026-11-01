@@ -1,0 +1,44 @@
+{
+  "paints": {
+    "p": {
+      "first-paint": 492,
+      "first-contentful-paint": 492
+    }
+  },
+  "sumsMs": {
+    "UpdateLayoutTree": 21.483000000000004,
+    "Layout": 81.16499999999998
+  },
+  "beforeFcpMs": {
+    "UpdateLayoutTree": 13.463000000000001,
+    "Layout": 78.82099999999998
+  },
+  "topLayout": {
+    "dur": 52.294,
+    "start": 122.855,
+    "dirty": 818,
+    "total": 818,
+    "partial": false,
+    "root": "#document"
+  },
+  "hero": [
+    {
+      "truncated": false,
+      "scrollH": 62,
+      "clientH": 62,
+      "minH": "62.208px"
+    },
+    {
+      "truncated": false,
+      "scrollH": 62,
+      "clientH": 62,
+      "minH": "62.208px"
+    },
+    {
+      "truncated": false,
+      "scrollH": 62,
+      "clientH": 62,
+      "minH": "62.208px"
+    }
+  ]
+}

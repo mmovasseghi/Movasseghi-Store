@@ -1,0 +1,324 @@
+{
+  "heroes": [
+    {
+      "tag": "320",
+      "width": 320,
+      "withVazir": [
+        {
+          "text": "پخش عمده ظروف یکبار مصرف گیاهی — اصل کارخانه، ارسال سراسری، مشاوره رایگان",
+          "scrollH": 62,
+          "clientH": 62,
+          "truncated": false,
+          "clamp": "none",
+          "overflow": "visible",
+          "minH": "62.208px",
+          "font": "Vazirmatn"
+        },
+        {
+          "text": "فله و شیرینگ · تحویل ۲ تا ۷ روز کاری · ضمانت اصالت ۱۰۰٪",
+          "scrollH": 62,
+          "clientH": 62,
+          "truncated": false,
+          "clamp": "none",
+          "overflow": "visible",
+          "minH": "62.208px",
+          "font": "Vazirmatn"
+        },
+        {
+          "text": "کاسه، ظرف غذا، لیوان و ظروف مایکروویوی — تمام کاتالوگ آملون",
+          "scrollH": 62,
+          "clientH": 62,
+          "truncated": false,
+          "clamp": "none",
+          "overflow": "visible",
+          "minH": "62.208px",
+          "font": "Vazirmatn"
+        }
+      ],
+      "withTahoma": [
+        {
+          "scrollH": 83,
+          "clientH": 83,
+          "truncated": false,
+          "minH": "62.208px"
+        },
+        {
+          "scrollH": 62,
+          "clientH": 62,
+          "truncated": false,
+          "minH": "62.208px"
+        },
+        {
+          "scrollH": 62,
+          "clientH": 62,
+          "truncated": false,
+          "minH": "62.208px"
+        }
+      ],
+      "zoomed": [
+        {
+          "truncated": false,
+          "scrollH": 124,
+          "clientH": 124
+        },
+        {
+          "truncated": false,
+          "scrollH": 83,
+          "clientH": 83
+        },
+        {
+          "truncated": false,
+          "scrollH": 104,
+          "clientH": 104
+        }
+      ]
+    },
+    {
+      "tag": "360",
+      "width": 360,
+      "withVazir": [
+        {
+          "text": "پخش عمده ظروف یکبار مصرف گیاهی — اصل کارخانه، ارسال سراسری، مشاوره رایگان",
+          "scrollH": 62,
+          "clientH": 62,
+          "truncated": false,
+          "clamp": "none",
+          "overflow": "visible",
+          "minH": "62.208px",
+          "font": "Vazirmatn"
+        },
+        {
+          "text": "فله و شیرینگ · تحویل ۲ تا ۷ روز کاری · ضمانت اصالت ۱۰۰٪",
+          "scrollH": 62,
+          "clientH": 62,
+          "truncated": false,
+          "clamp": "none",
+          "overflow": "visible",
+          "minH": "62.208px",
+          "font": "Vazirmatn"
+        },
+        {
+          "text": "کاسه، ظرف غذا، لیوان و ظروف مایکروویوی — تمام کاتالوگ آملون",
+          "scrollH": 62,
+          "clientH": 62,
+          "truncated": false,
+          "clamp": "none",
+          "overflow": "visible",
+          "minH": "62.208px",
+          "font": "Vazirmatn"
+        }
+      ],
+      "withTahoma": [
+        {
+          "scrollH": 62,
+          "clientH": 62,
+          "truncated": false,
+          "minH": "62.208px"
+        },
+        {
+          "scrollH": 62,
+          "clientH": 62,
+          "truncated": false,
+          "minH": "62.208px"
+        },
+        {
+          "scrollH": 62,
+          "clientH": 62,
+          "truncated": false,
+          "minH": "62.208px"
+        }
+      ],
+      "zoomed": [
+        {
+          "truncated": false,
+          "scrollH": 104,
+          "clientH": 104
+        },
+        {
+          "truncated": false,
+          "scrollH": 83,
+          "clientH": 83
+        },
+        {
+          "truncated": false,
+          "scrollH": 83,
+          "clientH": 83
+        }
+      ]
+    },
+    {
+      "tag": "390",
+      "width": 390,
+      "withVazir": [
+        {
+          "text": "پخش عمده ظروف یکبار مصرف گیاهی — اصل کارخانه، ارسال سراسری، مشاوره رایگان",
+          "scrollH": 62,
+          "clientH": 62,
+          "truncated": false,
+          "clamp": "none",
+          "overflow": "visible",
+          "minH": "62.208px",
+          "font": "Vazirmatn"
+        },
+        {
+          "text": "فله و شیرینگ · تحویل ۲ تا ۷ روز کاری · ضمانت اصالت ۱۰۰٪",
+          "scrollH": 62,
+          "clientH": 62,
+          "truncated": false,
+          "clamp": "none",
+          "overflow": "visible",
+          "minH": "62.208px",
+          "font": "Vazirmatn"
+        },
+        {
+          "text": "کاسه، ظرف غذا، لیوان و ظروف مایکروویوی — تمام کاتالوگ آملون",
+          "scrollH": 62,
+          "clientH": 62,
+          "truncated": false,
+          "clamp": "none",
+          "overflow": "visible",
+          "minH": "62.208px",
+          "font": "Vazirmatn"
+        }
+      ],
+      "withTahoma": [
+        {
+          "scrollH": 62,
+          "clientH": 62,
+          "truncated": false,
+          "minH": "62.208px"
+        },
+        {
+          "scrollH": 62,
+          "clientH": 62,
+          "truncated": false,
+          "minH": "62.208px"
+        },
+        {
+          "scrollH": 62,
+          "clientH": 62,
+          "truncated": false,
+          "minH": "62.208px"
+        }
+      ],
+      "zoomed": [
+        {
+          "truncated": false,
+          "scrollH": 104,
+          "clientH": 104
+        },
+        {
+          "truncated": false,
+          "scrollH": 62,
+          "clientH": 62
+        },
+        {
+          "truncated": false,
+          "scrollH": 62,
+          "clientH": 62
+        }
+      ]
+    },
+    {
+      "tag": "desk",
+      "width": 1366,
+      "withVazir": [
+        {
+          "text": "پخش عمده ظروف یکبار مصرف گیاهی — اصل کارخانه، ارسال سراسری، مشاوره رایگان",
+          "scrollH": 55,
+          "clientH": 55,
+          "truncated": false,
+          "clamp": "none",
+          "overflow": "visible",
+          "minH": "0px",
+          "font": "Vazirmatn"
+        },
+        {
+          "text": "فله و شیرینگ · تحویل ۲ تا ۷ روز کاری · ضمانت اصالت ۱۰۰٪",
+          "scrollH": 28,
+          "clientH": 28,
+          "truncated": false,
+          "clamp": "none",
+          "overflow": "visible",
+          "minH": "0px",
+          "font": "Vazirmatn"
+        },
+        {
+          "text": "کاسه، ظرف غذا، لیوان و ظروف مایکروویوی — تمام کاتالوگ آملون",
+          "scrollH": 28,
+          "clientH": 28,
+          "truncated": false,
+          "clamp": "none",
+          "overflow": "visible",
+          "minH": "0px",
+          "font": "Vazirmatn"
+        }
+      ],
+      "withTahoma": [
+        {
+          "scrollH": 55,
+          "clientH": 55,
+          "truncated": false,
+          "minH": "0px"
+        },
+        {
+          "scrollH": 28,
+          "clientH": 28,
+          "truncated": false,
+          "minH": "0px"
+        },
+        {
+          "scrollH": 55,
+          "clientH": 55,
+          "truncated": false,
+          "minH": "0px"
+        }
+      ],
+      "zoomed": [
+        {
+          "truncated": false,
+          "scrollH": 55,
+          "clientH": 55
+        },
+        {
+          "truncated": false,
+          "scrollH": 28,
+          "clientH": 28
+        },
+        {
+          "truncated": false,
+          "scrollH": 55,
+          "clientH": 55
+        }
+      ]
+    }
+  ],
+  "interactions": {
+    "counts": {
+      "featured": 8,
+      "offers": 8,
+      "stories": 12,
+      "heroSlides": 3
+    },
+    "storyImg": {
+      "src": "https://185.93.88.81/images/brand/originallogo.png",
+      "w": 310,
+      "h": 114,
+      "complete": true
+    },
+    "scrollAfterClose": {
+      "overflow": "hidden auto",
+      "storyOpen": false
+    },
+    "menuOpen": true,
+    "cartOpen": false,
+    "authOpen": false
+  },
+  "pass": {
+    "heroNoTruncateVazir": true,
+    "heroNoTruncateTahoma": true,
+    "counts": true,
+    "storyImage": true,
+    "scrollFree": true
+  }
+}

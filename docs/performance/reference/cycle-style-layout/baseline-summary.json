@@ -1,0 +1,295 @@
+{
+  "paints": {
+    "p": {
+      "first-paint": 1424,
+      "first-contentful-paint": 1424
+    },
+    "nav": {
+      "responseStart": 676.3999999985099,
+      "domContentLoadedEventEnd": 1584.6999999955297,
+      "loadEventEnd": 1587.1000000014901
+    }
+  },
+  "sumsMs": {
+    "PrePaint": 14.443000000000001,
+    "ScheduleStyleRecalculation": 0,
+    "UpdateLayoutTree": 34.801,
+    "InvalidateLayout": 0,
+    "Layout": 123.35600000000002,
+    "ParseAuthorStyleSheet": 1.352,
+    "Paint": 28.32500000000001,
+    "HitTest": 0.158
+  },
+  "beforeFcpMs": {
+    "PrePaint": 5.161,
+    "ScheduleStyleRecalculation": 0,
+    "UpdateLayoutTree": 20.158,
+    "InvalidateLayout": 0,
+    "Layout": 120.62200000000001,
+    "ParseAuthorStyleSheet": 1.352,
+    "Paint": 9.209000000000003
+  },
+  "topLayout": [
+    {
+      "name": "Layout",
+      "start": 1242.65,
+      "dur": 91.555,
+      "args": {
+        "beginData": {
+          "dirtyObjects": 1760,
+          "frame": "D370EA0CEB7E00D03FFD8048BC923225",
+          "partialLayout": false,
+          "sampleTraceId": 6702419612814416,
+          "totalObjects": 1760
+        },
+        "endData": {
+          "layoutRoots": [
+            {
+              "depth": 1,
+              "nodeId": 3,
+              "nodeName": "#document",
+              "quads": [
+                [
+                  0,
+                  0,
+                  1366,
+                  0,
+                  1366,
+                  768,
+                  0,
+                  768
+                ]
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Layout",
+      "start": 1358.368,
+      "dur": 27.688,
+      "args": {
+        "beginData": {
+          "dirtyObjects": 1745,
+          "frame": "D370EA0CEB7E00D03FFD8048BC923225",
+          "partialLayout": false,
+          "sampleTraceId": 6702419612814971,
+          "totalObjects": 1760
+        },
+        "endData": {
+          "layoutRoots": [
+            {
+              "depth": 1,
+              "nodeId": 3,
+              "nodeName": "#document",
+              "quads": [
+                [
+                  0,
+                  0,
+                  1366,
+                  0,
+                  1366,
+                  768,
+                  0,
+                  768
+                ]
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "UpdateLayoutTree",
+      "start": 1227.528,
+      "dur": 15.112,
+      "args": {
+        "beginData": {
+          "frame": "D370EA0CEB7E00D03FFD8048BC923225",
+          "sampleTraceId": 6702419612814439
+        },
+        "elementCount": 1327
+      }
+    },
+    {
+      "name": "UpdateLayoutTree",
+      "start": 1610.432,
+      "dur": 3.146,
+      "args": {
+        "beginData": {
+          "frame": "D370EA0CEB7E00D03FFD8048BC923225",
+          "sampleTraceId": 6702419612813332,
+          "stackTrace": [
+            {
+              "columnNumber": 36,
+              "functionName": "fill",
+              "lineNumber": 75,
+              "scriptId": "8",
+              "url": "https://185.93.88.81/js/home.js?v=0lCmijdRrZwb0itfkmKBgWKrfxcyrYKO0v8I3vASgmI"
+            }
+          ]
+        },
+        "elementCount": 811
+      }
+    },
+    {
+      "name": "UpdateLayoutTree",
+      "start": 1357.464,
+      "dur": 0.888,
+      "args": {
+        "beginData": {
+          "frame": "D370EA0CEB7E00D03FFD8048BC923225",
+          "sampleTraceId": 6702419612814983
+        },
+        "elementCount": 5
+      }
+    },
+    {
+      "name": "UpdateLayoutTree",
+      "start": 9.686,
+      "dur": 0.756,
+      "args": {
+        "beginData": {
+          "frame": "6B56F76855C03ECCBA2CC984AF963D0D",
+          "sampleTraceId": 8686743847117898
+        },
+        "elementCount": 1
+      }
+    },
+    {
+      "name": "UpdateLayoutTree",
+      "start": 1584.676,
+      "dur": 0.687,
+      "args": {
+        "beginData": {
+          "frame": "D370EA0CEB7E00D03FFD8048BC923225",
+          "sampleTraceId": 6702419612813435
+        },
+        "elementCount": 102
+      }
+    },
+    {
+      "name": "UpdateLayoutTree",
+      "start": 7.148,
+      "dur": 0.652,
+      "args": {
+        "beginData": {
+          "frame": "B456444F18F8225D2C33DC8F8447A33E",
+          "sampleTraceId": 8686743847117927
+        },
+        "elementCount": 2
+      }
+    },
+    {
+      "name": "Layout",
+      "start": 1588.022,
+      "dur": 0.596,
+      "args": {
+        "beginData": {
+          "dirtyObjects": 109,
+          "frame": "D370EA0CEB7E00D03FFD8048BC923225",
+          "partialLayout": false,
+          "sampleTraceId": 6702419612813413,
+          "stackTrace": [
+            {
+              "columnNumber": 19,
+              "functionName": "initHeroTrustMarquee",
+              "lineNumber": 94,
+              "scriptId": "8",
+              "url": "https://185.93.88.81/js/home.js?v=0lCmijdRrZwb0itfkmKBgWKrfxcyrYKO0v8I3vASgmI"
+            },
+            {
+              "columnNumber": 5,
+              "functionName": "bootEnhanced",
+              "lineNumber": 200,
+              "scriptId": "8",
+              "url": "https://185.93.88.81/js/home.js?v=0lCmijdRrZwb0itfkmKBgWKrfxcyrYKO0v8I3vASgmI"
+            }
+          ],
+          "totalObjects": 1832
+        },
+        "endData": {
+          "layoutRoots": [
+            {
+              "depth": 1,
+              "nodeId": 3,
+              "nodeName": "#document",
+              "quads": [
+                [
+                  0,
+                  0,
+                  1366,
+                  0,
+                  1366,
+                  768,
+                  0,
+                  768
+                ]
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "UpdateLayoutTree",
+      "start": 4.098,
+      "dur": 0.59,
+      "args": {
+        "beginData": {
+          "frame": "6B56F76855C03ECCBA2CC984AF963D0D",
+          "sampleTraceId": 8686743847117842
+        },
+        "elementCount": 18
+      }
+    },
+    {
+      "name": "UpdateLayoutTree",
+      "start": 12.912,
+      "dur": 0.574,
+      "args": {
+        "beginData": {
+          "frame": "6B56F76855C03ECCBA2CC984AF963D0D",
+          "sampleTraceId": 8686743847117912
+        },
+        "elementCount": 2
+      }
+    },
+    {
+      "name": "Layout",
+      "start": 7.806,
+      "dur": 0.565,
+      "args": {
+        "beginData": {
+          "dirtyObjects": 9,
+          "frame": "B456444F18F8225D2C33DC8F8447A33E",
+          "partialLayout": false,
+          "sampleTraceId": 8686743847117924,
+          "totalObjects": 9
+        },
+        "endData": {
+          "layoutRoots": [
+            {
+              "depth": 1,
+              "nodeId": 6,
+              "nodeName": "#document",
+              "quads": [
+                [
+                  0,
+                  0,
+                  1172,
+                  0,
+                  1172,
+                  8,
+                  0,
+                  8
+                ]
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

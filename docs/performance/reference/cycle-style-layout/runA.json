@@ -1,0 +1,16 @@
+{
+  "href": "https://gtmetrix.com/reports/185.93.88.81/gV9gP6Ev/",
+  "generated": "Sat, Oct 31, 2026 9:39 PM -0700",
+  "location": "Seattle, WA, USA",
+  "using": "Chrome 154.0.0.0, Lighthouse 12.6.1",
+  "grade": null,
+  "performance": "82",
+  "structure": "98",
+  "lcp": "1.8s",
+  "tbt": "20ms",
+  "cls": "0",
+  "fcp": null,
+  "si": null,
+  "testedUrl": "https://185.93.88.81/",
+  "lighthouseSaved": true
+}
