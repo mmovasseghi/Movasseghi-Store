@@ -1,13 +1,29 @@
 #!/usr/bin/env node
 /**
- * Local reverse proxy for fair cold-nav A/B:
- *  - control: HTML passthrough from live origin
- *  - experiment: replace #msHomeInlineStyles with split critical + remainder link
- * Both modes proxy all other assets to the same origin so network path is comparable.
+ * DEPRECATED measurement harness — DO NOT use for publish decisions.
  *
- * Usage:
+ * Flaw: fetches full origin HTML with accept-encoding:identity, buffers it,
+ * rewrites, then sends — so experiment still paid origin HTML transfer first.
+ * connection:close + local remainder also diverged from production resource path.
+ *
+ * Use instead:
+ *   node scripts/prepare-ab-variants.mjs
+ *   MODE=control|experiment node scripts/ab-prebuilt-server.mjs
+ *
+ * Kept only so old docs/commands do not 404; exits non-zero unless
+ * MS_ALLOW_LEGACY_AB_PROXY=1.
+ *
+ * Usage (legacy only):
  *   MODE=control|experiment PORT=9050 node ab-css-proxy.mjs
  */
+if (process.env.MS_ALLOW_LEGACY_AB_PROXY !== '1') {
+  console.error(JSON.stringify({
+    error: 'ab-css-proxy.mjs is deprecated (buffers origin HTML before rewrite).',
+    use: ['node scripts/prepare-ab-variants.mjs', 'MODE=control PORT=9051 node scripts/ab-prebuilt-server.mjs'],
+    override: 'MS_ALLOW_LEGACY_AB_PROXY=1',
+  }));
+  process.exit(2);
+}
 import http from 'http';
 import https from 'https';
 import fs from 'fs';

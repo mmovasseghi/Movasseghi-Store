@@ -20,6 +20,10 @@ const LABEL = process.env.MS_LABEL || 'run';
 const RUNS = Number(process.env.MS_RUNS || 3);
 const VIEWPORT = process.env.MS_VIEWPORT || 'desktop';
 const OUT = process.env.MS_OUT || '/opt/cursor/artifacts/cycle-critical-split/meas';
+/** Optional CDP throttle so local prebuilt HTML still pays size-proportional transfer (bytes/sec). */
+const THROTTLE_DOWN_BPS = Number(process.env.MS_THROTTLE_DOWN_BPS || 0);
+const THROTTLE_UP_BPS = Number(process.env.MS_THROTTLE_UP_BPS || THROTTLE_DOWN_BPS || 0);
+const THROTTLE_LATENCY_MS = Number(process.env.MS_THROTTLE_LATENCY_MS || 0);
 fs.mkdirSync(OUT, { recursive: true });
 
 const vp = VIEWPORT === 'mobile'
@@ -33,7 +37,10 @@ const settings = {
   viewport: VIEWPORT,
   vp,
   chrome: '/usr/local/bin/google-chrome',
-  method: 'puppeteer.page.goto cold navigation; Network.clearBrowserCache + setCacheDisabled; no setContent',
+  throttle: THROTTLE_DOWN_BPS > 0 || THROTTLE_LATENCY_MS > 0
+    ? { downloadThroughput: THROTTLE_DOWN_BPS, uploadThroughput: THROTTLE_UP_BPS, latency: THROTTLE_LATENCY_MS }
+    : null,
+  method: 'puppeteer.page.goto cold navigation; Network.clearBrowserCache + setCacheDisabled; no setContent; optional CDP Network.emulateNetworkConditions',
   createdAt: new Date().toISOString(),
 };
 fs.writeFileSync(path.join(OUT, `${LABEL}-settings.json`), JSON.stringify(settings, null, 2));
@@ -52,6 +59,14 @@ async function oneRun(i) {
     await client.send('Network.setCacheDisabled', { cacheDisabled: true });
     await client.send('Network.enable');
     await client.send('Performance.enable');
+    if (settings.throttle) {
+      await client.send('Network.emulateNetworkConditions', {
+        offline: false,
+        latency: settings.throttle.latency,
+        downloadThroughput: settings.throttle.downloadThroughput,
+        uploadThroughput: settings.throttle.uploadThroughput,
+      });
+    }
 
     const net = [];
     client.on('Network.responseReceived', (e) => {
@@ -189,7 +204,15 @@ async function oneRun(i) {
     }
 
     // Separate server-response-time style (waiting) from full navigation TTFB
-    const docNet = net.find((n) => n.url.replace(/\/$/, '') === URL.replace(/\/$/, '') || /185\.93\.88\.81\/?$/.test(n.url));
+    const docNet = net.find((n) => {
+      try {
+        const a = new URL(n.url);
+        const b = new URL(URL);
+        return a.origin === b.origin && (a.pathname === '/' || a.pathname === b.pathname);
+      } catch {
+        return n.url.replace(/\/$/, '') === URL.replace(/\/$/, '');
+      }
+    });
     const docFinished = docNet && finished.get(docNet.requestId);
     const timing = docNet?.timing;
     // Chrome timing: requestTime is baseline; receiveHeadersEnd ≈ header TTFB from connection start of request
