@@ -54,7 +54,7 @@
     if (viewed.has(btn.dataset.storyId)) btn.classList.add('is-viewed');
     btn.addEventListener('click', e => {
       e.preventDefault();
-      ensureStoriesLoaded().then(() => open(btn.dataset.storyId));
+      ensureStoriesLoaded().then(() => open(btn.dataset.storyId)).catch(() => {});
     });
   });
   }
@@ -298,7 +298,7 @@
     const id = intent.dataset.storyId;
     intent.removeAttribute('aria-busy');
     if (!id) return;
-    ensureStoriesLoaded().then(() => open(id));
+    ensureStoriesLoaded().then(() => open(id)).catch(() => {});
   }
 
   function boot() {
