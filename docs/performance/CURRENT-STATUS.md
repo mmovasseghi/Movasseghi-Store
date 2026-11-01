@@ -1,14 +1,17 @@
 # وضعیت جاری Performance — Movasseghi-Store
 
-آخرین به‌روزرسانی: 2026-11-01 (پس از publish `c53290e`)
+آخرین به‌روزرسانی: 2026-11-01 (پس از نصب TLS دامنه + dual-vhost)
 
 ## نسخهٔ زنده
 
 | مورد | مقدار |
 |------|--------|
 | **RELEASE** | **`c53290e0a8d554df0311075be7802204b5dfe773`** |
-| URL | `https://185.93.88.81/` |
-| nginx md5 | `a56672754fe83dcb2f370c30f2cac2b6` · gzip **6** |
+| URL دامنه | `https://movasseghistore.com/` (Vira CDN → origin) |
+| URL IP | `https://185.93.88.81/` (گواهی کوتاه‌عمر LE با SAN IP) |
+| TLS origin | دو `server` جدا: IP default + SNI `movasseghistore.com` در `/etc/ssl/movasseghistore.com/` |
+| nginx | dual-vhost + `snippets/movasseghi-shop-proxy.inc` · gzip **6** |
+| `PublicBaseUrl` | `https://movasseghistore.com` |
 | شاخه | تغییرات روی `main` (فیچر `cursor/valid-ab-html-gzip-e83d` ادغام شد) |
 
 ## اصلاح منتشرشده این چرخه
@@ -32,15 +35,16 @@
 | میانه `c53290e` | 685 | 1145 | **1392** | **1392** | **~84** | **535** | 0.0011 |
 | مرجع قبلی `4934300` (همین مسیر) | 685 | 1152 | 1416 | 1416 | ~100 | 818 | 0.0017 |
 
-## GTmetrix Seattle پس از publish
+## GTmetrix Seattle
 
-| # | لینک | وضعیت | Grade | Perf | Struct | LCP | TBT | CLS |
-|---|------|--------|-------|------|--------|-----|-----|-----|
-| 1 | https://gtmetrix.com/reports/185.93.88.81/xfrCIxd1/ | موفق | B | **76** | **98** | **2.1s** | **0ms** | 0 |
-| 2 | Retest / تست تازه | **مسدود سهمیه guest** (`job_error` / برگشت به خانه بدون گزارش) | — | — | — | — | — | — |
+| # | لینک | URL | Perf | Struct | LCP | TBT | CLS | یادداشت |
+|---|------|-----|------|--------|-----|-----|-----|---------|
+| 1 | https://gtmetrix.com/reports/185.93.88.81/xfrCIxd1/ | IP | **76** | **98** | **2.1s** | **0ms** | 0 | پس از publish `c53290e` |
+| 2 | Retest IP | IP | — | — | — | — | — | قبلاً سهمیه guest مسدود |
+| 3 | https://gtmetrix.com/reports/movasseghistore.com/72oFmIEc/ | **دامنه+CDN** | **58** | **96** | **4.7s** | **65ms** | 0 | 2026-11-01 Seattle · TTFB **2.5s** · Conn **1.9s** · Fully **10.2s** · 22 req |
 
-جزئیات FCP/SI/Lighthouse کامل پشت دیوار ورود guest است؛ عدد Performance/LCP/TBT/CLS از صفحهٔ عمومی خوانده شد.
-**Grade A اعلام نمی‌شود.**
+جزئیات FCP/SI/TTI روی تب‌های لاگین‌دار عمومی دیده نشد؛ اعداد بالا از خلاصهٔ عمومی گزارش دامنه خوانده شد.
+**Grade A اعلام نمی‌شود.** مسیر دامنه از Seattle به‌خاطر TTFB/Connection کندتر از IP مستقیم است (Structure همچنان بالا ≈۹۶).
 
 ## فرضیه‌های ردشده
 
@@ -51,8 +55,19 @@
 
 سهمیهٔ تست guest GTmetrix اجازهٔ اجرای دوم Seattle را نداد. برای ادامهٔ حلقه با تأیید Grade واقعی: حساب/سهمیه GTmetrix یا صبر تا رفع محدودیت guest لازم است.
 
+## TLS دامنه (همین نوبت) — **دیپلوی‌شده روی سرور**
+
+- گواهی LE دامنه روی origin نصب شد؛ chain/key match؛ SNI جدا از گواهی IP.
+- تأیید: `openssl` روی `185.93.88.81` با SNI IP → SAN IP؛ با SNI دامنه → `CN=movasseghistore.com`؛ `https://movasseghistore.com/` از CDN → **200**.
+- `verify-home.py --insecure --nginx` روی IP و دامنه (لوکال Host) → **EXIT 0** (۸ featured / ۸ offers / ۱۲ stories / LCP webp / cache HIT).
+- stamp: `/MOVASSEGHISTORE/ops/nginx-domain-ssl-20261101/` · conf md5 `821aa8bce64a64e96d343588e7e6941e`
+- هندآف کامل Codex: `docs/performance/CODEX-HANDOFF-cycle-domain-ssl-dual-vhost-COMPLETE.md`
+- **هشدار امنیتی:** `privkey.pem` در چت عمومی paste شده؛ چرخش/باطل‌سازی و صدور مجدد توصیه می‌شود.
+- PR: https://github.com/mmovasseghi/Movasseghi-Store/pull/9
+
 ## اقدام بعدی
 
-1. تکرار Seattle ×۲ وقتی سهمیه آزاد شد (روی همان `c53290e` یا نسخهٔ بعدی).
-2. گلوگاه باقی‌مانده از تنها گزارش تازه: **LCP≈2.1s** (TBT الان 0). اهرم بعدی باید دریافت/Render مسیر Seattle یا کار Style باقی‌مانده باشد؛ تکرار split بدون شاهد تازه ممنوع.
-3. UX زنده تأیید شد: هیرو کامل، ۱۲ استوری، منو open/close با CV، قوانین CSS در HTML.
+1. چرخش کلید خصوصی دامنه (به خاطر افشا در چت).
+2. تشخیص TTFB/Connection دامنه از Seattle (CDN Vira / مسیر شبکه) در برابر origin IP — Structure خوب است؛ Perf دامنه با LCP 4.7s و TTFB 2.5s عقب است.
+3. تکرار Seattle کنترل‌شده: دامنه در برابر IP روی همان روز، بدون ادعای Grade A.
+4. روی origin IP گلوگاه قبلی: LCP≈2.1s (TBT≈0).
