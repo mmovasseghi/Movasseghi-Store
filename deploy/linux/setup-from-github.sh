@@ -58,6 +58,8 @@ systemctl enable "$SERVICE_NAME"
 systemctl restart "$SERVICE_NAME"
 
 if command -v nginx >/dev/null 2>&1; then
+  mkdir -p /etc/nginx/snippets
+  cp deploy/linux/nginx-movasseghi-proxy.inc /etc/nginx/snippets/movasseghi-shop-proxy.inc
   cp deploy/linux/nginx-movasseghi.conf /etc/nginx/sites-available/movasseghi
   rm -f /etc/nginx/sites-enabled/default
   ln -sf /etc/nginx/sites-available/movasseghi /etc/nginx/sites-enabled/movasseghi

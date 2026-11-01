@@ -11,6 +11,9 @@ SITE="/etc/nginx/sites-available/movasseghi-shop"
 LINK="/etc/nginx/sites-enabled/movasseghi-shop"
 CACHE_CONF="/etc/nginx/conf.d/ms-cache.conf"
 CACHE_DIR="/var/cache/nginx/ms"
+# Shared locations included by nginx-movasseghi.conf (must ship with the site file).
+PROXY_INC="/etc/nginx/snippets/movasseghi-shop-proxy.inc"
+PROXY_SRC="deploy/linux/nginx-movasseghi-proxy.inc"
 MARKER="$INSTALL_DIR/.deploying"
 STAGING=""
 BACKUP=""
@@ -20,14 +23,25 @@ nginx_changed=0
 assets_built=0
 own_marker=0
 committed=0
+proxy_inc_existed=0
 
 restore_nginx() {
   local name destination
-  for name in site link cache; do
-    case "$name" in site) destination="$SITE";; link) destination="$LINK";; cache) destination="$CACHE_CONF";; esac
+  # Restore site + include together so a partial rollback cannot leave an include-less site.
+  for name in site link cache proxy; do
+    case "$name" in
+      site) destination="$SITE";;
+      link) destination="$LINK";;
+      cache) destination="$CACHE_CONF";;
+      proxy) destination="$PROXY_INC";;
+    esac
     rm -f "$destination"
     if [[ -e "$BACKUP/nginx/$name" || -L "$BACKUP/nginx/$name" ]]; then
+      mkdir -p "$(dirname "$destination")"
       cp -a "$BACKUP/nginx/$name" "$destination" || return 1
+    elif [[ "$name" == proxy && "$proxy_inc_existed" == 0 ]]; then
+      # Include was newly introduced this release; remove on rollback.
+      rm -f "$PROXY_INC"
     fi
   done
   nginx -t && systemctl reload nginx
@@ -120,17 +134,31 @@ if [[ "${RUN_OPTIMIZE_IMAGES:-1}" == 1 ]]; then
 fi
 
 # Validate maintenance-capable nginx rules before stopping the old app.
-mkdir -p "$BACKUP/nginx" "$CACHE_DIR"
-for name in site link cache; do
-  case "$name" in site) source="$SITE";; link) source="$LINK";; cache) source="$CACHE_CONF";; esac
-  if [[ -e "$source" || -L "$source" ]]; then cp -a "$source" "$BACKUP/nginx/$name"; fi
+# Site conf includes PROXY_INC — install/backup/rollback both files as one unit.
+[[ -f "$PROXY_SRC" ]] || { echo "Missing $PROXY_SRC (required by nginx site include)" >&2; exit 1; }
+mkdir -p "$BACKUP/nginx" "$CACHE_DIR" "$(dirname "$PROXY_INC")"
+for name in site link cache proxy; do
+  case "$name" in
+    site) source="$SITE";;
+    link) source="$LINK";;
+    cache) source="$CACHE_CONF";;
+    proxy) source="$PROXY_INC";;
+  esac
+  if [[ -e "$source" || -L "$source" ]]; then
+    cp -a "$source" "$BACKUP/nginx/$name"
+    [[ "$name" == proxy ]] && proxy_inc_existed=1
+  fi
 done
 nginx_changed=1
+# Write include first so nginx -t against the new site file can resolve it.
+cp "$PROXY_SRC" "$PROXY_INC.next"
+mv "$PROXY_INC.next" "$PROXY_INC"
 cp deploy/linux/nginx-movasseghi.conf "$SITE.next"
 mv "$SITE.next" "$SITE"
 ln -sfn "$SITE" "$LINK"
 printf '%s\n' "proxy_cache_path $CACHE_DIR levels=1:2 keys_zone=ms_pages:8m max_size=64m inactive=20m use_temp_path=off;" > "$CACHE_CONF.next"
 mv "$CACHE_CONF.next" "$CACHE_CONF"
+# On nginx -t failure the EXIT trap restores site+include+cache from BACKUP (or removes a new include).
 nginx -t
 systemctl reload nginx
 touch "$MARKER"

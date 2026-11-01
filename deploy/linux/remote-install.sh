@@ -176,6 +176,9 @@ systemctl enable "$SERVICE_NAME"
 systemctl restart "$SERVICE_NAME"
 
 # nginx: shop at site root (same as deploy/linux/nginx-movasseghi.conf)
+# Install shared proxy include before the site file that references it.
+mkdir -p /etc/nginx/snippets
+cp "$INSTALL_DIR/src/deploy/linux/nginx-movasseghi-proxy.inc" /etc/nginx/snippets/movasseghi-shop-proxy.inc
 cp "$INSTALL_DIR/src/deploy/linux/nginx-movasseghi.conf" /etc/nginx/sites-available/movasseghi-shop
 rm -f /etc/nginx/sites-enabled/default /etc/nginx/sites-enabled/weswap-landing
 ln -sf /etc/nginx/sites-available/movasseghi-shop /etc/nginx/sites-enabled/movasseghi-shop
