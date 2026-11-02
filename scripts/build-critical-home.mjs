@@ -35,20 +35,21 @@ const keepRule = (header, body) => {
   return selectors.some((sel) => keep.test(sel));
 };
 
+// F1St9hRu (Seattle): TBT fixed but LCP 2.3s — @font-face in critical started an
+// 86KB woff2 download that competed with the hero image on high-RTT paths.
+// Keep fonts (+ keyframes) in the post-LCP remainder only; first paint uses system stack.
 const firstSrc = mapStyleRules(
   raw,
   (header, body, original) => (keepRule(header, body) ? `${original}{${body}}` : ''),
-  // @font-face is an at-rule — must be kept here (mapRule never sees it).
-  // Smoke (verify-home --nginx) probes versioned woff2 urls from inline CSS.
-  (header, body, original) => (/^@font-face\b/i.test(header) ? `${original}{${body}}` : ''),
+  () => '',
 );
 
-// True complement: skip anything already inlined (incl. CV scaffold + fonts).
+// True complement: skip anything already inlined; ship fonts + keyframes here.
 const remSrc = mapStyleRules(
   raw,
   (header, body, original) => (keepRule(header, body) ? '' : `${original}{${body}}`),
   (header, body, original) => {
-    if (/^@font-face\b/i.test(header)) return '';
+    if (/^@font-face\b/i.test(header)) return `${original}{${body}}`;
     if (/^@keyframes\b/i.test(header)) return `${original}{${body}}`;
     return '';
   },

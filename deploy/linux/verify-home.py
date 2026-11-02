@@ -108,14 +108,30 @@ def verify(base, *, host=None, check_nginx=False, insecure=False):
     html_text = html.decode("utf-8")
     home = Home()
     home.feed(html_text)
-    # Home inlines critical CSS and may omit font preload to protect LCP bandwidth.
-    # Still probe versioned fonts declared via @font-face url(...woff2?v=...).
+    # Home may omit @font-face from inline critical CSS so the woff2 does not
+    # compete with LCP (F1St9hRu). Probe versioned fonts from inline CSS and/or
+    # the deferred remainder stylesheet linked in <template>/noscript.
     seen_fonts = {href for href, is_font in home.cache_assets if is_font}
     for match in re.finditer(r"url\((['\"]?)(/fonts/[^)'\"]+\.woff2\?v=[^)'\"]+)\1\)", html_text):
         href = match.group(2)
         if href not in seen_fonts:
             home.cache_assets.append((href, True))
             seen_fonts.add(href)
+    if not any(font for _, font in home.cache_assets):
+        rem_match = re.search(
+            r'href="([^"]*storefront-home-remainder\.css[^"]*)"',
+            html_text,
+        )
+        if rem_match:
+            rem_css, _, _ = get(rem_match.group(1))
+            for match in re.finditer(
+                r"url\((['\"]?)(/fonts/[^)'\"]+\.woff2\?v=[^)'\"]+)\1\)",
+                rem_css.decode("utf-8", "replace"),
+            ):
+                href = match.group(2)
+                if href not in seen_fonts:
+                    home.cache_assets.append((href, True))
+                    seen_fonts.add(href)
     if (home.featured, home.offers) != (8, 8) or not home.stories:
         raise RuntimeError(f"Invalid home counts: featured={home.featured}, offers={home.offers}, stories={home.stories}")
     if not home.heroes or home.heroes[0] not in home.preloads:

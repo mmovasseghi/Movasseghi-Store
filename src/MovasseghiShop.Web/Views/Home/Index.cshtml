@@ -1,5 +1,6 @@
 @using MovasseghiShop.Web.Models
 @inject IWebHostEnvironment Env
+@inject Microsoft.AspNetCore.Mvc.ViewFeatures.IFileVersionProvider FileVersionProvider
 @using MovasseghiShop.Web.Models.Entities
 @using MovasseghiShop.Web.Services
 @{
@@ -42,7 +43,9 @@
                     <span class="ms-story-icon-wrap">
                         @if (!string.IsNullOrWhiteSpace(story.CoverImageUrl))
                         {
-                            <img ms-responsive="true" sizes="76px" asp-append-version="true" src="@AppPath.H(ProductImageHelper.PreferWebp(story.CoverImageUrl, Env), Context)" alt="" class="ms-story-cover" width="76" height="76" loading="lazy" fetchpriority="low" decoding="async" />
+                            @* Defer story bytes until after LCP — covers sit above the hero and
+                               still download with loading=lazy when in-viewport (F1St9hRu). *@
+                            <img class="ms-story-cover" width="76" height="76" alt="" decoding="async" fetchpriority="low" data-ms-after-lcp="@FileVersionProvider.AddFileVersionToPath(Context.Request.PathBase, AppPath.H(ProductImageHelper.PreferWebp(story.CoverImageUrl, Env), Context))" />
                         }
                         else
                         {
