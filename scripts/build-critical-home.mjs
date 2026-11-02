@@ -18,7 +18,9 @@ if (/@import\b|<\/style/i.test(raw)) throw new Error('Inline home CSS must be se
 // complement (not a second copy of the full sheet — re-applying full caused CLS).
 // Include all .ms-promo-* (not only -bar): missing CTA/line/slogan media rules
 // caused desktop CLS ~1.0 when a full duplicate sheet applied.
-const keep = /:root\b|(?:^|[^\w-])(?:html\b|body\b|\.ms-skip-link\b|\.ms-app\b|\.ms-main\b|\.ms-page-home\b|\.ms-body\b|\.ms-wrap\b|\.ms-top(?:-|\b)|\.ms-logo\b|\.ms-icon-btn\b|\.ms-burger\b|\.ms-promo(?:-|\b)|\.ms-search(?:-|\b)|\.ms-hero(?:-|\b)|\.ms-stories\b|\.ms-story(?:-|\b)|\.ms-features\b|\.ms-feature(?:-|\b)|\.ms-featured(?:-|\b)|\.ms-feat-(?:grid|card|icon|title|text|link|head)\b|\.ms-fab\b|\.ms-bottom-nav\b|\.ms-safe\b)/;
+// OvtAqFtf / Seattle: smaller inline sheet → smaller HTML on high-RTT paths.
+// Features/featured/fab stay in the late remainder (below-fold + CV scaffolding).
+const keep = /:root\b|(?:^|[^\w-])(?:html\b|body\b|\.ms-skip-link\b|\.ms-app\b|\.ms-main\b|\.ms-page-home\b|\.ms-body\b|\.ms-wrap\b|\.ms-top(?:-|\b)|\.ms-logo\b|\.ms-icon-btn\b|\.ms-burger\b|\.ms-promo(?:-|\b)|\.ms-search(?:-|\b)|\.ms-hero(?:-|\b)|\.ms-stories\b|\.ms-story(?:-|\b)|\.ms-safe\b)/;
 const isContainScaffold = (body) => /content-visibility|contain-intrinsic-size/.test(body);
 // Global resets (* / img / a) must stay inlined — deferring them with the
 // complement made .ms-skip-link sit in normal flow (~25px) until remainder
