@@ -105,8 +105,17 @@ def verify(base, *, host=None, check_nginx=False, insecure=False):
             return data, response.headers.get_content_type(), response.headers
 
     html, _, _ = get("/")
+    html_text = html.decode("utf-8")
     home = Home()
-    home.feed(html.decode("utf-8"))
+    home.feed(html_text)
+    # Home inlines critical CSS and may omit font preload to protect LCP bandwidth.
+    # Still probe versioned fonts declared via @font-face url(...woff2?v=...).
+    seen_fonts = {href for href, is_font in home.cache_assets if is_font}
+    for match in re.finditer(r"url\((['\"]?)(/fonts/[^)'\"]+\.woff2\?v=[^)'\"]+)\1\)", html_text):
+        href = match.group(2)
+        if href not in seen_fonts:
+            home.cache_assets.append((href, True))
+            seen_fonts.add(href)
     if (home.featured, home.offers) != (8, 8) or not home.stories:
         raise RuntimeError(f"Invalid home counts: featured={home.featured}, offers={home.offers}, stories={home.stories}")
     if not home.heroes or home.heroes[0] not in home.preloads:
