@@ -1,6 +1,7 @@
 @inject MovasseghiShop.Web.Services.ICartService CartService
 @inject IConfiguration Config
 @inject IWebHostEnvironment HostEnv
+@inject Microsoft.AspNetCore.Mvc.ViewFeatures.IFileVersionProvider FileVersionProvider
 @using MovasseghiShop.Web.Services
 @{
     var title = ViewData["Title"]?.ToString() ?? SiteKeywordStrategy.SiteTitle;
@@ -290,7 +291,7 @@
             <a href="@AppPath.H("/", Context)" class="ms-logo-link">
                 @if (isHome)
                 {
-                    <img ms-responsive="true" sizes="(min-width: 768px) 142px, 55vw" src="@AppPath.H(logoUrl, Context)" asp-append-version="true" alt="فروشگاه موثقی" class="ms-logo" width="320" height="104" decoding="async" loading="lazy" fetchpriority="low" />
+                    <img class="ms-logo" width="320" height="104" sizes="(min-width: 768px) 142px, 55vw" alt="فروشگاه موثقی" decoding="async" fetchpriority="low" data-ms-after-lcp="@FileVersionProvider.AddFileVersionToPath(Context.Request.PathBase, AppPath.H(logoUrl, Context))" />
                 }
                 else
                 {
