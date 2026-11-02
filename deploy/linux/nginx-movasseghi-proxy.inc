@@ -97,8 +97,8 @@ location = /index.html {
     charset utf-8;
     gzip_static on;
     access_log off;
-    add_header Cache-Control "public, max-age=900, s-maxage=3600" always;
-    add_header CDN-Cache-Control "public, max-age=3600" always;
+    add_header Cache-Control "public, max-age=120, s-maxage=120" always;
+    add_header CDN-Cache-Control "public, max-age=120" always;
     add_header X-Cache "STATIC" always;
     add_header Strict-Transport-Security "max-age=0" always;
 }
@@ -112,8 +112,8 @@ location = / {
     default_type text/html;
     charset utf-8;
     gzip_static on;
-    add_header Cache-Control "public, max-age=900, s-maxage=3600" always;
-    add_header CDN-Cache-Control "public, max-age=3600" always;
+    add_header Cache-Control "public, max-age=120, s-maxage=120" always;
+    add_header CDN-Cache-Control "public, max-age=120" always;
     add_header X-Cache "STATIC" always;
     add_header Strict-Transport-Security "max-age=0" always;
 }
