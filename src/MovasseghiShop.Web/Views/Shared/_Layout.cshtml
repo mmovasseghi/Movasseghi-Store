@@ -83,7 +83,12 @@
             @await Html.PartialAsync("_AppPathScript")
         }
     }
-    <link rel="preload" href="~/fonts/Vazirmatn-storefront.woff2" asp-append-version="true" as="font" type="font/woff2" crossorigin />
+    @* Home: do not preload the ~86KB storefront font — it races the LCP hero image on slow CDN paths.
+       font-display:swap still paints text; other routes keep the preload. *@
+    @if (!isHome)
+    {
+        <link rel="preload" href="~/fonts/Vazirmatn-storefront.woff2" asp-append-version="true" as="font" type="font/woff2" crossorigin />
+    }
     @* Home scripts stay defer-only: early script preloads competed with the LCP
        image on slow Seattle links and inflated Load Time / Render Delay. *@
     @if (isLocalTunnel)

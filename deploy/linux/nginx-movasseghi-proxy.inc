@@ -108,10 +108,10 @@ location / {
     # Hide Kestrel HSTS (unsafe on short-lived IP certs) and clear any prior pin.
     # Domain edge/CDN may set its own HSTS; origin stays neutral for IP cert safety.
     proxy_hide_header Strict-Transport-Security;
-    # Do not forward nginx Age/X-Cache to the public edge: Vira was observed echoing
-    # origin X-Cache=HIT while vira-cache-status stayed MISS, which confuses diagnosis.
-    # Keep X-Cache only for loopback probes via a separate map if needed later.
+    # Do not forward nginx Age to the public edge (confuses CDN diagnostics).
     proxy_hide_header Age;
+    # Hint shared caches / Vira explicitly; guest HTML already uses public+s-maxage.
+    add_header CDN-Cache-Control "public, max-age=900" always;
     add_header Strict-Transport-Security "max-age=0" always;
     add_header X-Cache $upstream_cache_status always;
 }
