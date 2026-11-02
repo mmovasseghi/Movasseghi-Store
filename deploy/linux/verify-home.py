@@ -163,9 +163,12 @@ def verify(base, *, host=None, check_nginx=False, insecure=False):
         for request_headers in [{}, {"Cookie": "_mv=00000000000000000000000000000000"}]:
             _, _, headers = get("/", request_headers)
             directives = cache_directives(headers)
-            if (headers.get("X-Cache", "").strip().upper() != "HIT" or "public" not in directives
+            # STATIC = guest home snapshot from wwwroot (Vira edge-HIT path);
+            # HIT = nginx microcache on dynamic/Kestrel responses.
+            x_cache = headers.get("X-Cache", "").strip().upper()
+            if (x_cache not in ("HIT", "STATIC") or "public" not in directives
                     or "Set-Cookie" in headers or any(p.split('=')[0] in ('private', 'no-store', 'no-cache') for p in directives)):
-                raise RuntimeError("Public host must return a public guest cache HIT, including with the analytics cookie")
+                raise RuntimeError("Public host must return a public guest cache HIT/STATIC, including with the analytics cookie")
         if not any(font for _, font in home.cache_assets) or not any(not font for _, font in home.cache_assets):
             raise RuntimeError("Missing versioned font or stylesheet cache probe")
         resources = [(hero, image_headers)] + responsive_resources

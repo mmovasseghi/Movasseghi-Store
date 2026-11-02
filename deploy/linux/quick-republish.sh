@@ -200,6 +200,19 @@ for ((i=0; i<60; i++)); do
 done
 [[ "$ready" == 1 ]] || { echo "Kestrel readiness failed" >&2; exit 1; }
 python3 deploy/linux/verify-home.py http://127.0.0.1:5080
+# Guest home snapshot for nginx location = / (Vira can edge-HIT static HTML).
+curl -fsS -H 'Accept-Encoding: identity' --max-time 20 http://127.0.0.1:5080/ \
+  -o "$INSTALL_DIR/publish/wwwroot/index.html"
+python3 - "$INSTALL_DIR/publish/wwwroot/index.html" <<'PY'
+import gzip, pathlib, sys
+src = pathlib.Path(sys.argv[1])
+html = src.read_bytes()
+if len(html) < 10_000 or b"ms-hero" not in html:
+    raise SystemExit("home snapshot looks invalid")
+src.with_suffix(".html.gz").write_bytes(gzip.compress(html, compresslevel=6))
+print(f"home-snapshot:{len(html)} gzip:{src.with_suffix('.html.gz').stat().st_size}")
+PY
+chown www-data:www-data "$INSTALL_DIR/publish/wwwroot/index.html" "$INSTALL_DIR/publish/wwwroot/index.html.gz"
 find "$CACHE_DIR" -type f -delete
 # Public edge is HTTPS. Smoke through loopback so the .deploying maintenance
 # bypass ($ms_local_probe) still applies, with Host = public IP / vhost.
