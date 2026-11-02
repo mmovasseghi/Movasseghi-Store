@@ -15,7 +15,9 @@ if (/@import\b|<\/style/i.test(raw)) throw new Error('Inline home CSS must be se
 // Broad tokens (.js, .ms-motion, .ms-reveal, .ms-scroll, .ms-drawer, .ms-nav,
 // bare .ms-page) previously kept ~100KB+ of Style/Layout work in the TBT window
 // (yaFJoKbZ ~311ms). Everything else + @keyframes ship in the deferred remainder.
-const keep = /:root\b|(?:^|[^\w-])(?:html\b|body\b|\.ms-app\b|\.ms-main\b|\.ms-page-home\b|\.ms-body\b|\.ms-wrap\b|\.ms-top(?:-|\b)|\.ms-logo\b|\.ms-icon-btn\b|\.ms-burger\b|\.ms-promo-bar\b|\.ms-search(?:-|\b)|\.ms-hero(?:-|\b)|\.ms-stories\b|\.ms-story(?:-|\b)|\.ms-features\b|\.ms-feature(?:-|\b)|\.ms-featured(?:-|\b)|\.ms-feat-(?:grid|card|icon|title|text|link|head)\b|\.ms-fab\b|\.ms-bottom-nav\b|\.ms-safe\b)/;
+// Include all .ms-promo-* (not only -bar): missing CTA/line/slogan media rules
+// caused desktop CLS ~1.0 when remainder applied (promo height 104→53).
+const keep = /:root\b|(?:^|[^\w-])(?:html\b|body\b|\.ms-app\b|\.ms-main\b|\.ms-page-home\b|\.ms-body\b|\.ms-wrap\b|\.ms-top(?:-|\b)|\.ms-logo\b|\.ms-icon-btn\b|\.ms-burger\b|\.ms-promo(?:-|\b)|\.ms-search(?:-|\b)|\.ms-hero(?:-|\b)|\.ms-stories\b|\.ms-story(?:-|\b)|\.ms-features\b|\.ms-feature(?:-|\b)|\.ms-featured(?:-|\b)|\.ms-feat-(?:grid|card|icon|title|text|link|head)\b|\.ms-fab\b|\.ms-bottom-nav\b|\.ms-safe\b)/;
 const isContainScaffold = (body) => /content-visibility|contain-intrinsic-size/.test(body);
 
 const firstSrc = mapStyleRules(
