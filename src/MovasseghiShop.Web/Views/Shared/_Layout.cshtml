@@ -121,14 +121,16 @@
         {
             <link id="msHomeStyles" rel="stylesheet" href="~/css/storefront-home.bundle.css" asp-append-version="true" onload="this.media='all'" onerror="this.dataset.msFailed='1'" />
         }
-        @* F1St9hRu: media=print still DOWNLOADS remainder immediately and stole LCP
-           bandwidth on Seattle RTT (Perf 74 / LCP 2.3s after TBT was fixed). Inject
-           only after LCP (2.5s cap). Skip-link + resets stay in critical to avoid CLS. *@
+        @* OvtAqFtf: injecting ~96KB remainder+fonts AT LCP cut LCP to 1.9s but raised
+           TBT to 207ms (parse/apply in the FCP→TTI window). Keep LCP bandwidth free
+           (no early remainder/font download), hydrate light images after LCP, and
+           defer the heavy stylesheet until AFTER the TBT window (~7s) or interaction. *@
         <noscript><link rel="stylesheet" href="~/css/storefront-home-remainder.css" asp-append-version="true" /></noscript>
         <template id="msHomeRemainderCss"><link rel="stylesheet" href="~/css/storefront-home-remainder.css" asp-append-version="true" /></template>
         <script>
         (function () {
           var injected = false;
+          var hydrated = false;
           function injectRemainderCss() {
             if (injected || document.getElementById('msHomeRemainder')) return;
             injected = true;
@@ -140,6 +142,8 @@
             document.head.appendChild(link);
           }
           function hydrateAfterLcp() {
+            if (hydrated) return;
+            hydrated = true;
             document.querySelectorAll('img[data-ms-after-lcp]').forEach(function (img) {
               var url = img.getAttribute('data-ms-after-lcp');
               if (!url || img.getAttribute('src')) return;
@@ -147,14 +151,9 @@
               img.removeAttribute('data-ms-after-lcp');
             });
           }
-          function arm() {
+          function armHydrate() {
             var done = false;
-            var finish = function () {
-              if (done) return;
-              done = true;
-              injectRemainderCss();
-              hydrateAfterLcp();
-            };
+            var finish = function () { if (done) return; done = true; hydrateAfterLcp(); };
             try {
               if (window.PerformanceObserver) {
                 var po = new PerformanceObserver(function (list) {
@@ -163,10 +162,16 @@
                 po.observe({ type: 'largest-contentful-paint', buffered: true });
               }
             } catch (e) {}
-            setTimeout(finish, 2500);
+            setTimeout(finish, 3000);
           }
-          if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', arm, { once: true });
-          else arm();
+          // Heavy CSS/fonts: minimum delay past lab TBT window (not tied to LCP).
+          window.addEventListener('load', function () {
+            setTimeout(injectRemainderCss, 7000);
+          }, { once: true });
+          if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', armHydrate, { once: true });
+          else armHydrate();
+          // Expose for interaction boot path.
+          window.__msInjectHomeRemainder = injectRemainderCss;
         })();
         </script>
             <script>
@@ -662,10 +667,14 @@ else
             return pending;
           }
           function loadRemainderCss() {
+            if (window.__msInjectHomeRemainder) window.__msInjectHomeRemainder();
             var link = document.getElementById('msHomeRemainder');
             if (link) {
               if (link.media && link.media !== 'all') link.media = 'all';
-              return Promise.resolve();
+              return link.sheet ? Promise.resolve() : new Promise(function (resolve) {
+                link.addEventListener('load', resolve, { once: true });
+                link.addEventListener('error', resolve, { once: true });
+              });
             }
             var tpl = document.getElementById('msHomeRemainderCss');
             var node = tpl && tpl.content && tpl.content.querySelector('link');
