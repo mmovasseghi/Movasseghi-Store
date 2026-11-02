@@ -120,6 +120,11 @@
         {
             <link id="msHomeStyles" rel="stylesheet" href="~/css/storefront-home.bundle.css" asp-append-version="true" onload="this.media='all'" onerror="this.dataset.msFailed='1'" />
         }
+        @* Non-blocking full sheet: late inject at 7s caused ~0.62 CLS when hero/features
+           reflowed (lab CPU 4×). media=print + onload keeps HTML parse free while styles
+           settle before the TBT/CLS window closes. JS stays idle separately. *@
+        <link id="msHomeRemainder" rel="stylesheet" href="~/css/storefront-home-remainder.css" asp-append-version="true" media="print" onload="this.media='all'" />
+        <noscript><link rel="stylesheet" href="~/css/storefront-home-remainder.css" asp-append-version="true" /></noscript>
         <template id="msHomeRemainderCss"><link rel="stylesheet" href="~/css/storefront-home-remainder.css" asp-append-version="true" /></template>
             <script>
             // Preserve the latest intent until the complete document loader exists.
@@ -614,20 +619,26 @@ else
             return pending;
           }
           function loadRemainderCss() {
-            if (document.getElementById('msHomeRemainder')) return Promise.resolve();
+            var link = document.getElementById('msHomeRemainder');
+            if (link) {
+              if (link.media && link.media !== 'all') link.media = 'all';
+              return Promise.resolve();
+            }
             var tpl = document.getElementById('msHomeRemainderCss');
             var node = tpl && tpl.content && tpl.content.querySelector('link');
             if (!node) return Promise.resolve();
             return new Promise(function (resolve) {
-              var link = node.cloneNode(true);
-              link.id = 'msHomeRemainder';
-              link.onload = resolve;
-              link.onerror = resolve;
-              document.head.appendChild(link);
+              var clone = node.cloneNode(true);
+              clone.id = 'msHomeRemainder';
+              clone.onload = resolve;
+              clone.onerror = resolve;
+              document.head.appendChild(clone);
             });
           }
           function bootHeavy() {
             if (loading) return loading;
+            // Remainder CSS is already requested non-blocking from <head>; only wait on
+            // it as a safety net. Idle scripts stay deferred for TBT.
             loading = Promise.all([baseStylesReady(), loadRemainderCss()].concat(Array.from(document.querySelectorAll('script[data-ms-idle][src]')).map(loadScript))).then(function () {
               ready = true;
               fetch('@AppPath.H("/api/analytics/visitor", Context)', { credentials: 'same-origin', keepalive: true }).catch(function () {});

@@ -83,6 +83,12 @@ async function oneRun(i) {
           for (const e of list.getEntries()) if (!e.hadRecentInput) window.__shifts.push(e.value);
         }).observe({ type: 'layout-shift', buffered: true });
       } catch {}
+      window.__lcp = [];
+      try {
+        new PerformanceObserver((list) => {
+          for (const e of list.getEntries()) window.__lcp.push(e.startTime);
+        }).observe({ type: 'largest-contentful-paint', buffered: true });
+      } catch {}
     });
     const t0 = Date.now();
     const resp = await page.goto(URL, { waitUntil: 'networkidle2', timeout: 90000 });
@@ -92,7 +98,8 @@ async function oneRun(i) {
       const paints = performance.getEntriesByType('paint');
       const fcp = paints.find((p) => p.name === 'first-contentful-paint')?.startTime ?? null;
       const lcpEntries = performance.getEntriesByType('largest-contentful-paint');
-      const lcp = lcpEntries.length ? lcpEntries[lcpEntries.length - 1].startTime : null;
+      const lcpObs = window.__lcp || [];
+      const lcp = (lcpObs.length ? lcpObs[lcpObs.length-1] : null) ?? (lcpEntries.length ? lcpEntries[lcpEntries.length - 1].startTime : null);
       const styles = [...document.querySelectorAll('style')].reduce((n, s) => n + (s.textContent?.length || 0), 0);
       const snap = (document.documentElement.innerHTML.match(/ms-home-snap:([a-f0-9]+)/) || [])[1] || null;
       const TBT = (window.__lt || [])
