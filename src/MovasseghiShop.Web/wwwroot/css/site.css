@@ -240,11 +240,12 @@ body.ms-drawer-open,body.ms-modal-open,body.ms-sheet-open{overflow:hidden}
 .ms-hero-particles{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden;opacity:.35}
 .ms-hero-particle{position:absolute;width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.28)}
 .ms-hero-viewport{position:relative;z-index:3;flex:1;display:grid;padding:2.5rem clamp(1.25rem,4vw,2.75rem) 1.65rem;min-width:0;max-width:100%;overflow:hidden}
-/* Do NOT use content-visibility + contain-intrinsic-size on stacked hero slides:
-   inactive slides sharing grid-area:1/1 forced a 520px intrinsic box and blew out
-   mobile width (~390px), shifting product/copy off-screen. */
+/* Inactive stacked slides: skip layout + keep lazy images from intersecting the
+   viewport. contain-intrinsic-size MUST stay 0 — auto 520px previously forced a
+   520px grid box on ~390px phones and shoved the hero off-screen. */
 .ms-hero-slide{grid-area:1/1;display:flex;align-items:center;width:100%;max-width:100%;min-width:0;padding:0;color:#fff;opacity:0;visibility:hidden;pointer-events:none;z-index:0;backface-visibility:hidden;transform:translateZ(0)}
-.ms-hero-slide.is-active{opacity:1;visibility:visible;pointer-events:auto;z-index:1;will-change:opacity}
+.ms-hero-slide:not(.is-active){content-visibility:hidden;contain-intrinsic-size:0px 0px}
+.ms-hero-slide.is-active{content-visibility:visible;opacity:1;visibility:visible;pointer-events:auto;z-index:1;will-change:opacity}
 .ms-hero-grid{display:grid;direction:ltr;grid-template-columns:minmax(0,2fr) minmax(0,3fr);align-items:center;gap:clamp(1rem,3vw,2.5rem);width:100%}
 .ms-hero-copy{direction:rtl;grid-column:2;grid-row:1;min-width:0;padding-top:.15rem;position:relative;z-index:5}
 .ms-hero-product{direction:rtl;grid-column:1;grid-row:1;position:relative;width:100%;max-width:100%;flex-shrink:0;perspective:600px;display:grid;place-items:center;justify-self:center}
