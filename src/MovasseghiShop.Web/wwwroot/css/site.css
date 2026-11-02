@@ -239,11 +239,12 @@ body.ms-drawer-open,body.ms-modal-open,body.ms-sheet-open{overflow:hidden}
 .ms-hero-orb-b{width:180px;height:180px;bottom:15%;right:8%;background:rgba(95,138,114,.35)}
 .ms-hero-particles{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden;opacity:.35}
 .ms-hero-particle{position:absolute;width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.28)}
-.ms-hero-viewport{position:relative;z-index:3;flex:1;display:grid;padding:2.5rem clamp(1.25rem,4vw,2.75rem) 1.65rem}
-.ms-hero-slide{grid-area:1/1;display:flex;align-items:center;width:100%;padding:0;color:#fff;opacity:0;visibility:hidden;pointer-events:none;z-index:0;backface-visibility:hidden;transform:translateZ(0)}
-/* Skip Style/Layout for inactive hero slides until activated (same grid slot). */
-.ms-hero-slide:not(.is-active){content-visibility:hidden;contain-intrinsic-size:auto 520px}
-.ms-hero-slide.is-active{content-visibility:visible;opacity:1;visibility:visible;pointer-events:auto;z-index:1;will-change:opacity}
+.ms-hero-viewport{position:relative;z-index:3;flex:1;display:grid;padding:2.5rem clamp(1.25rem,4vw,2.75rem) 1.65rem;min-width:0;max-width:100%;overflow:hidden}
+/* Do NOT use content-visibility + contain-intrinsic-size on stacked hero slides:
+   inactive slides sharing grid-area:1/1 forced a 520px intrinsic box and blew out
+   mobile width (~390px), shifting product/copy off-screen. */
+.ms-hero-slide{grid-area:1/1;display:flex;align-items:center;width:100%;max-width:100%;min-width:0;padding:0;color:#fff;opacity:0;visibility:hidden;pointer-events:none;z-index:0;backface-visibility:hidden;transform:translateZ(0)}
+.ms-hero-slide.is-active{opacity:1;visibility:visible;pointer-events:auto;z-index:1;will-change:opacity}
 .ms-hero-grid{display:grid;direction:ltr;grid-template-columns:minmax(0,2fr) minmax(0,3fr);align-items:center;gap:clamp(1rem,3vw,2.5rem);width:100%}
 .ms-hero-copy{direction:rtl;grid-column:2;grid-row:1;min-width:0;padding-top:.15rem;position:relative;z-index:5}
 .ms-hero-product{direction:rtl;grid-column:1;grid-row:1;position:relative;width:100%;max-width:100%;flex-shrink:0;perspective:600px;display:grid;place-items:center;justify-self:center}
@@ -961,9 +962,9 @@ body.ms-drawer-open,body.ms-modal-open,body.ms-sheet-open{overflow:hidden}
   .ms-hero .ms-hero-wrap{width:100%!important;margin:0!important;padding-inline:8px!important;max-width:100%!important}
   .ms-hero-stage{border-radius:16px;width:100%;max-width:100%}
   .ms-hero-beams{display:none}
-  .ms-hero-viewport{padding:1.65rem 1rem 1.25rem}
-  .ms-hero-slide{padding:0}
-  .ms-hero-grid{grid-template-columns:minmax(0,2fr) minmax(0,3fr);gap:.65rem;align-items:center}
+  .ms-hero-viewport{padding:1.65rem 1rem 1.25rem;min-width:0;max-width:100%;overflow:hidden}
+  .ms-hero-slide{padding:0;min-width:0;max-width:100%}
+  .ms-hero-grid{grid-template-columns:minmax(0,2fr) minmax(0,3fr);gap:.65rem;align-items:center;min-width:0;max-width:100%;width:100%}
   .ms-hero-copy{grid-column:2;grid-row:1;width:auto;min-width:0;padding-inline:0}
   .ms-hero-product{grid-column:1;grid-row:1;width:100%;justify-self:center;margin-top:0;min-width:0}
   .ms-hero-product img{max-height:clamp(88px,22vw,118px);max-width:100%}
