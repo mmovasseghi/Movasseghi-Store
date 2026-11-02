@@ -1,43 +1,44 @@
 # وضعیت جاری Performance — Movasseghi-Store
 
-آخرین به‌روزرسانی: 2026-11-02 (yaFJoKbZ TBT/CLS → lab Perf >95)
+آخرین به‌روزرسانی: 2026-11-02 (F1St9hRu LCP bandwidth)
 
 ## نسخهٔ زنده
 
 | مورد | مقدار |
 |------|--------|
-| **RELEASE** | **`033bd86`** (tight critical ~56KB + complement remainder + skip-link in critical) |
-| Snap | `ms-home-snap:033bd869384f` |
-| URL دامنه | `https://movasseghistore.com/` (NS: viracdn.ir → Vira; HTML `s-maxage=120`) |
-| URL IP | `https://185.93.88.81/` (کنترل؛ نتیجهٔ دامنه نیست) |
+| **RELEASE** | **`ad69008`** (post-LCP remainder/fonts/stories/logo) |
+| Snap | `ms-home-snap:ad69008…` پس از republish |
+| URL دامنه | `https://movasseghistore.com/` |
 
-## GTmetrix دامنه (Seattle) — مرجع
+## GTmetrix Seattle
 
-| لینک | Perf | Struct | LCP | TBT | CLS |
-|------|------|--------|-----|-----|-----|
-| [yaFJoKbZ](https://gtmetrix.com/reports/movasseghistore.com/yaFJoKbZ/) | **71** | **98** | **1.9s** | **311ms** | 0.01 |
-| [ZthGFkBz](https://gtmetrix.com/reports/movasseghistore.com/ZthGFkBz/) | 76 | 98 | 2.2s | 10ms | 0 |
+| لینک | Perf | Struct | LCP | TBT | CLS | نکته |
+|------|------|--------|-----|-----|-----|------|
+| [F1St9hRu](https://gtmetrix.com/reports/movasseghistore.com/F1St9hRu/) | **74** | **98** | **2.3s** | **9ms** | 0 | TBT درست شد؛ LCP بدتر از قبل |
+| [yaFJoKbZ](https://gtmetrix.com/reports/movasseghistore.com/yaFJoKbZ/) | 71 | 98 | 1.9s | 311ms | 0.01 | TBT از Style/Layout |
 
-هدف کاربر: **Performance > 95** (وزن GT: TBT 30% · LCP 25% · CLS 25% · FCP 10% · SI 10%).
+## اشکال روند قبلی
 
-## خود-اندازه‌گیری (Chrome CPU ۴×، همان وزن‌ها) — پس از `033bd86`
+آزمایش لوکال با RTT پایین، TBT را خوب نشان می‌داد ولی **رقابت پهنای‌باند روی مسیر Seattle** را نمی‌دید:
 
-| Viewport | FCP میانه | LCP میانه | TBT میانه | CLS میانه | approxPerf میانه |
-|----------|-----------|-----------|-----------|-----------|------------------|
-| Desktop 1366×768 | ~1.37s | ~1.46s | **~7ms** | **~0.003** | **~99.6** |
-| Mobile 412×823 | ~1.43s | ~1.53s | **~16ms** | ~0.067 | **~97.3** |
+1. `media=print` همچنان remainder را **دانلود** می‌کرد
+2. `@font-face` در critical → woff2 حدود **۸۶KB** همزمان با هیرو
+3. کاور استوری‌های بالای هیرو با `loading=lazy` در viewport باز هم لود می‌شدند
 
-artifact: `/opt/cursor/artifacts/gt-perf95/desktop-033bd86.jsonl`, `mobile-033bd86.jsonl`.
+نتیجه: TBT↓ ولی LCP↑ → Perf تقریباً ثابت (~74).
 
-## ریشهٔ yaFJoKbZ و اصلاحات
+## اصلاح `8c4b042` / `ad69008`
 
-1. **TBT 311ms:** Style/Layout روی ~150KB CSS اینلاین + JS زود. → critical اول‌نمای ~56KB؛ enhancement JS با `data-ms-idle` + `setTimeout(7000)`.
-2. **`@font-face` از دست می‌رفت:** چک در `mapRule` بی‌اثر بود (at-rule → `mapAtRule`). → نگه داشتن فونت در `mapAtRule` (smoke `verify-home --nginx`).
-3. **CLS دسکتاپ ~0.13→1.0:** `.ms-skip-link` و resetهای `*`/`img`/`a` فقط در remainder بودند → لینک skip ~۲۵px در جریان عادی، بعد `position:absolute` → پرش `.ms-app`. همچنین remainder قبلاً **کپی کامل** شیت بود. → skip+reset در critical؛ remainder = مکمل below-fold + `@keyframes`؛ بارگذاری غیرمسدود `media=print`/`onload`.
-4. **CDN stale:** `s-maxage=120` + مهر `ms-home-snap:SHA`.
+- تزریق remainder فقط بعد از LCP (سقف ۲.۵s)
+- فونت فقط در remainder
+- `data-ms-after-lcp` برای استوری و لوگو
+- skip-link/reset همچنان در critical (CLS دسکتاپ)
 
-## اقدام بعدی
+## خود-اندازه (CPU۴× + latency~۱۸۰ms)
 
-1. GTmetrix Seattle تازه روی دامنه برای تأیید رسمی Perf >95 / Grade A.
-2. Warm چندبارهٔ `/` برای HIT پایدار روی PoPهای Vira.
-3. اختیاری: کاهش CLS موبایل (~0.07) اگر GT موبایل هم هدف شد.
+| | LCP | TBT | approxPerf |
+|--|-----|-----|------------|
+| قبل (033bd86، همان throttle) | ~2.0s | کم | — |
+| بعد (8c4b042) | **~1.45–1.7s** | ~90–120ms | **~98–99** |
+
+نیاز: گزارش تازهٔ GTmetrix Seattle روی دامنه.
