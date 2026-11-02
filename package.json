@@ -9,7 +9,7 @@
     "build:critical-home": "node scripts/build-critical-home.mjs",
     "build:critical-home-split": "node scripts/build-critical-home-split.mjs",
     "build": "npm run build:rte && npm run build:storefront-css && npm run build:critical-home",
-    "test": "node scripts/check-storefront-js.cjs && node --test scripts/home-css-rules.test.mjs"
+    "test": "node scripts/check-storefront-js.cjs && node --test scripts/home-css-rules.test.mjs scripts/critical-home-size.test.mjs"
   },
   "devDependencies": {
     "esbuild": "^0.25.0"
