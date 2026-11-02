@@ -106,9 +106,8 @@
     }
     else if (isHome)
     {
-        @* CSS بحرانی داخل HTML تا FCP منتظر یک RTT اضافه از Seattle نماند.
-           آزمایش split critical (cycle-critical-split) سود خالص FCP/LCP نداشت و منتشر نشد؛
-           critical-home همچنان استایل کامل خانه است. *@
+        @* First-viewport CSS inlined; below-fold remainder loads after the TBT window
+           (yaFJoKbZ: ~311ms TBT from Style/Layout of the full ~150KB sheet). *@
         var webRoot = string.IsNullOrEmpty(HostEnv.WebRootPath)
             ? global::System.IO.Path.Combine(HostEnv.ContentRootPath, "wwwroot")
             : HostEnv.WebRootPath;
@@ -121,6 +120,7 @@
         {
             <link id="msHomeStyles" rel="stylesheet" href="~/css/storefront-home.bundle.css" asp-append-version="true" onload="this.media='all'" onerror="this.dataset.msFailed='1'" />
         }
+        <template id="msHomeRemainderCss"><link rel="stylesheet" href="~/css/storefront-home-remainder.css" asp-append-version="true" /></template>
             <script>
             // Preserve the latest intent until the complete document loader exists.
             // Stories keep a dedicated capture until stories.js boots (defer), because
@@ -613,9 +613,22 @@ else
             scripts.set(n, pending);
             return pending;
           }
+          function loadRemainderCss() {
+            if (document.getElementById('msHomeRemainder')) return Promise.resolve();
+            var tpl = document.getElementById('msHomeRemainderCss');
+            var node = tpl && tpl.content && tpl.content.querySelector('link');
+            if (!node) return Promise.resolve();
+            return new Promise(function (resolve) {
+              var link = node.cloneNode(true);
+              link.id = 'msHomeRemainder';
+              link.onload = resolve;
+              link.onerror = resolve;
+              document.head.appendChild(link);
+            });
+          }
           function bootHeavy() {
             if (loading) return loading;
-            loading = Promise.all([baseStylesReady()].concat(Array.from(document.querySelectorAll('script[data-ms-idle][src]')).map(loadScript))).then(function () {
+            loading = Promise.all([baseStylesReady(), loadRemainderCss()].concat(Array.from(document.querySelectorAll('script[data-ms-idle][src]')).map(loadScript))).then(function () {
               ready = true;
               fetch('@AppPath.H("/api/analytics/visitor", Context)', { credentials: 'same-origin', keepalive: true }).catch(function () {});
             }).catch(function (error) {
