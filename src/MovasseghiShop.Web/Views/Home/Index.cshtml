@@ -97,7 +97,7 @@
                                     var img = ProductImageHelper.GetLcpDisplayUrl(ProductImageHelper.GetPrimary(hp.Images), Env);
                                     <div class="ms-hero-product">
                                         <span class="ms-hero-ring" aria-hidden="true"></span>
-                                        <img ms-responsive="true" asp-append-version="true" src="@AppPath.H(img, Context)" alt="@hp.Name" width="240" height="240" sizes="@ResponsiveImageService.HeroSizes" decoding="async" loading="eager" fetchpriority="@(si == 0 ? "high" : "low")" />
+                                        <img ms-responsive="true" asp-append-version="true" src="@AppPath.H(img, Context)" alt="@hp.Name" width="240" height="240" sizes="@ResponsiveImageService.HeroSizes" decoding="async" loading="@(si == 0 ? "eager" : "lazy")" fetchpriority="@(si == 0 ? "high" : "low")" />
                                     </div>
                                 }
                             </div>
