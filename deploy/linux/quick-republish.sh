@@ -203,12 +203,21 @@ python3 deploy/linux/verify-home.py http://127.0.0.1:5080
 # Guest home snapshot for nginx location = / (Vira can edge-HIT static HTML).
 curl -fsS -H 'Accept-Encoding: identity' --max-time 20 http://127.0.0.1:5080/ \
   -o "$INSTALL_DIR/publish/wwwroot/index.html"
-python3 - "$INSTALL_DIR/publish/wwwroot/index.html" <<'PY'
+python3 - "$INSTALL_DIR/publish/wwwroot/index.html" "$SHA" <<'PY'
 import gzip, pathlib, sys
 src = pathlib.Path(sys.argv[1])
+sha = sys.argv[2]
 html = src.read_bytes()
 if len(html) < 10_000 or b"ms-hero" not in html:
     raise SystemExit("home snapshot looks invalid")
+# Stamp helps verify which snapshot the edge is serving after TTL.
+marker = f"<!-- ms-home-snap:{sha[:12]} -->".encode()
+if b"ms-home-snap:" in html:
+    import re
+    html = re.sub(br"<!-- ms-home-snap:[^>]*-->", marker, html, count=1)
+else:
+    html = html.replace(b"</head>", marker + b"</head>", 1)
+src.write_bytes(html)
 src.with_suffix(".html.gz").write_bytes(gzip.compress(html, compresslevel=9))
 print(f"home-snapshot:{len(html)} gzip:{src.with_suffix('.html.gz').stat().st_size}")
 PY
