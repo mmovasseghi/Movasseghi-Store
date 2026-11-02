@@ -1,44 +1,38 @@
 # وضعیت جاری Performance — Movasseghi-Store
 
-آخرین به‌روزرسانی: 2026-11-02 (F1St9hRu LCP bandwidth)
+آخرین به‌روزرسانی: 2026-11-02 (OvtAqFtf TBT/LCP decouple)
 
 ## نسخهٔ زنده
 
 | مورد | مقدار |
 |------|--------|
-| **RELEASE** | **`ad69008`** (post-LCP remainder/fonts/stories/logo) |
-| Snap | `ms-home-snap:ad69008…` پس از republish |
-| URL دامنه | `https://movasseghistore.com/` |
+| **RELEASE** | **`cbe285b`** (critical ~34KB; remainder بعد از load+7s؛ تصاویر بعد از LCP) |
+| URL | `https://movasseghistore.com/` |
 
-## GTmetrix Seattle
+## GTmetrix Seattle — روند
 
-| لینک | Perf | Struct | LCP | TBT | CLS | نکته |
-|------|------|--------|-----|-----|-----|------|
-| [F1St9hRu](https://gtmetrix.com/reports/movasseghistore.com/F1St9hRu/) | **74** | **98** | **2.3s** | **9ms** | 0 | TBT درست شد؛ LCP بدتر از قبل |
-| [yaFJoKbZ](https://gtmetrix.com/reports/movasseghistore.com/yaFJoKbZ/) | 71 | 98 | 1.9s | 311ms | 0.01 | TBT از Style/Layout |
+| گزارش | Perf | LCP | TBT | علت |
+|-------|------|-----|-----|-----|
+| yaFJoKbZ | 71 | 1.9s | **311ms** | CSS اینلاین ~150KB |
+| F1St9hRu | 74 | **2.3s** | 9ms | remainder زود دانلود → LCP↑ |
+| OvtAqFtf | 77 | 1.9s | **207ms** | inject remainder روی LCP → TBT↑ |
 
-## اشکال روند قبلی
+## اشکال روند
 
-آزمایش لوکال با RTT پایین، TBT را خوب نشان می‌داد ولی **رقابت پهنای‌باند روی مسیر Seattle** را نمی‌دید:
+بهینه‌سازی لوکال یک متریک را درست می‌کرد و متریک دیگر را خراب. باید **پهنای‌باند LCP** و **پنجره TBT** جدا شوند:
 
-1. `media=print` همچنان remainder را **دانلود** می‌کرد
-2. `@font-face` در critical → woff2 حدود **۸۶KB** همزمان با هیرو
-3. کاور استوری‌های بالای هیرو با `loading=lazy` در viewport باز هم لود می‌شدند
+- تا LCP: بدون دانلود remainder/فونت/استوری
+- تا پایان پنجره TBT (~۵–۷s): بدون parse سنگین CSS
+- بعداً: remainder + فونت
 
-نتیجه: TBT↓ ولی LCP↑ → Perf تقریباً ثابت (~74).
+## اصلاحات `ba7ef96` → `cbe285b`
 
-## اصلاح `8c4b042` / `ad69008`
+1. hydrate تصاویر سبک بعد از LCP
+2. remainder+fonts فقط `load + 7s` (یا تعامل)
+3. critical ~34KB (chrome+hero + stub استوری)
 
-- تزریق remainder فقط بعد از LCP (سقف ۲.۵s)
-- فونت فقط در remainder
-- `data-ms-after-lcp` برای استوری و لوگو
-- skip-link/reset همچنان در critical (CLS دسکتاپ)
+## سقف Seattle
 
-## خود-اندازه (CPU۴× + latency~۱۸۰ms)
+Conn/TTFB از Seattle به CDN ایران اغلب **>500ms** است؛ با LCP~2s و TBT~0 همگزارش‌های قبلی Perf حدود **۷۵–۸۰** می‌دادند. Perf>۹۵ بدون PoP نزدیک‌تر یا HIT پایدار لبه سخت است.
 
-| | LCP | TBT | approxPerf |
-|--|-----|-----|------------|
-| قبل (033bd86، همان throttle) | ~2.0s | کم | — |
-| بعد (8c4b042) | **~1.45–1.7s** | ~90–120ms | **~98–99** |
-
-نیاز: گزارش تازهٔ GTmetrix Seattle روی دامنه.
+اقدام: گزارش تازه روی `cbe285b`؛ در صورت ماندن LCP≥1.9s → CDN/edge (نه فقط CSS).
