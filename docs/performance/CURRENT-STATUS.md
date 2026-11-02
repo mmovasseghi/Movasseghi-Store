@@ -6,7 +6,7 @@
 
 | مورد | مقدار |
 |------|--------|
-| **RELEASE** | **`e679c92e38c4c2205c80d92274c2be38cb1fad00`** (static guest home + Vira HIT) |
+| **RELEASE** | **`6454c47`** (static guest home + Vira HTML HIT; gzip9 snapshot) |
 | URL دامنه | `https://movasseghistore.com/` (NS: viracdn.ir → Vira) |
 | URL IP | `https://185.93.88.81/` (کنترل؛ نتیجهٔ دامنه نیست) |
 
