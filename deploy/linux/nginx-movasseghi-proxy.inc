@@ -88,6 +88,59 @@ location ^~ /Account/ {
     add_header Strict-Transport-Security "max-age=0" always;
 }
 
+# Guest home as a static gzip snapshot so Vira can edge-HIT HTML (/).
+# Logged-in / cart visitors fall through to Kestrel via 418 → @ms_home_dynamic.
+# Snapshot is written by quick-republish after smoke (wwwroot/index.html[.gz]).
+location = /index.html {
+    root /MOVASSEGHISTORE/publish/wwwroot;
+    default_type text/html;
+    charset utf-8;
+    gzip_static on;
+    access_log off;
+    add_header Cache-Control "public, max-age=900, s-maxage=3600" always;
+    add_header CDN-Cache-Control "public, max-age=3600" always;
+    add_header X-Cache "STATIC" always;
+    add_header Strict-Transport-Security "max-age=0" always;
+}
+
+location = / {
+    error_page 418 = @ms_home_dynamic;
+    if ($http_cookie ~* "(Identity|AspNetCore|ms_cart_n=)") { return 418; }
+    if ($http_authorization != "") { return 418; }
+    root /MOVASSEGHISTORE/publish/wwwroot;
+    try_files /index.html =418;
+    default_type text/html;
+    charset utf-8;
+    gzip_static on;
+    add_header Cache-Control "public, max-age=900, s-maxage=3600" always;
+    add_header CDN-Cache-Control "public, max-age=3600" always;
+    add_header X-Cache "STATIC" always;
+    add_header Strict-Transport-Security "max-age=0" always;
+}
+
+location @ms_home_dynamic {
+    proxy_pass http://127.0.0.1:5080;
+    proxy_http_version 1.1;
+    proxy_set_header Accept-Encoding "";
+    proxy_set_header Connection "";
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto https;
+    proxy_cache ms_pages;
+    proxy_cache_methods GET HEAD;
+    proxy_cache_valid 200 30m;
+    proxy_cache_key "$host$request_method$request_uri|$http_accept_encoding";
+    proxy_cache_bypass $ms_skip_cache;
+    proxy_no_cache $ms_skip_cache;
+    proxy_cache_lock on;
+    proxy_hide_header Strict-Transport-Security;
+    proxy_hide_header Age;
+    add_header CDN-Cache-Control "public, max-age=900" always;
+    add_header Strict-Transport-Security "max-age=0" always;
+    add_header X-Cache $upstream_cache_status always;
+}
+
 location / {
     proxy_pass http://127.0.0.1:5080;
     proxy_http_version 1.1;
