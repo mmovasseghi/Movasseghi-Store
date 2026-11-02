@@ -209,7 +209,7 @@ src = pathlib.Path(sys.argv[1])
 html = src.read_bytes()
 if len(html) < 10_000 or b"ms-hero" not in html:
     raise SystemExit("home snapshot looks invalid")
-src.with_suffix(".html.gz").write_bytes(gzip.compress(html, compresslevel=6))
+src.with_suffix(".html.gz").write_bytes(gzip.compress(html, compresslevel=9))
 print(f"home-snapshot:{len(html)} gzip:{src.with_suffix('.html.gz').stat().st_size}")
 PY
 chown www-data:www-data "$INSTALL_DIR/publish/wwwroot/index.html" "$INSTALL_DIR/publish/wwwroot/index.html.gz"

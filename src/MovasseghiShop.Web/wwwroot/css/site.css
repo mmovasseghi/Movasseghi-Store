@@ -970,8 +970,8 @@ body.ms-drawer-open,body.ms-modal-open,body.ms-sheet-open{overflow:hidden}
   .ms-hero-product{grid-column:1;grid-row:1;width:100%;justify-self:center;margin-top:0;min-width:0}
   .ms-hero-product img{max-height:clamp(88px,22vw,118px);max-width:100%}
   .ms-page-home .ms-hero .ms-hero-wrap{padding-inline:6px!important}
-  .ms-page-home .ms-hero-viewport{padding:1.55rem .85rem 1.2rem}
-  .ms-page-home .ms-hero-grid{gap:.72rem}
+  .ms-page-home .ms-hero-viewport{padding:1.45rem .95rem 1.15rem}
+  .ms-page-home .ms-hero-grid{gap:.8rem;column-gap:.9rem}
   .ms-page-home .ms-hero-product img{max-height:clamp(96px,24vw,128px);filter:drop-shadow(0 12px 26px rgba(0,0,0,.32))}
   .ms-page-home .ms-hero-ring{opacity:.4;border-width:1px}
   .ms-page-home .ms-hero-orb{filter:blur(28px);opacity:.85}
