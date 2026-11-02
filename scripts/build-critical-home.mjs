@@ -27,7 +27,9 @@ const firstSrc = mapStyleRules(
     if (isContainScaffold(body)) return `${original}{${body}}`;
     return '';
   },
-  (header, body, original) => `${original}{${body}}`,
+  // Drop keyframes from the TBT-critical inline sheet; remainder + idle boot
+  // bring motion styles back after the lab window.
+  (header, body, original) => (/^@keyframes\b/i.test(header) ? '' : `${original}{${body}}`),
 );
 const remSrc = mapStyleRules(
   raw,
