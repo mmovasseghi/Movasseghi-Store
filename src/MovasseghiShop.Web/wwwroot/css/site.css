@@ -149,6 +149,18 @@ a{color:inherit;text-decoration:none}
    Without content-visibility, the full drawer tree was laid out on every home FCP. */
 .ms-drawer[hidden]{display:block!important;visibility:hidden;pointer-events:none;content-visibility:hidden}
 .ms-drawer:not([hidden]){content-visibility:visible}
+/* Skip Style/Layout for below-fold home sections until scrolled near view.
+   Cuts main-thread work that drove ~300ms TBT under GTmetrix CPU throttle. */
+.ms-page-home #ms-offers,
+.ms-page-home .ms-featured-section,
+.ms-page-home .ms-segments,
+.ms-page-home .ms-news,
+.ms-page-home .ms-closing,
+.ms-page-home .ms-home-faq,
+.ms-page-home .ms-footer{
+  content-visibility:auto;
+  contain-intrinsic-size:auto 520px;
+}
 .ms-drawer-bg{position:absolute;inset:0;background:rgba(10,18,14,.55);backdrop-filter:blur(0);opacity:0;transition:opacity .4s var(--ease),backdrop-filter .4s}
 .ms-drawer.is-open .ms-drawer-bg{opacity:1;backdrop-filter:blur(10px)}
 .ms-drawer-panel{position:absolute;top:0;right:0;bottom:0;width:min(340px,92vw);background:linear-gradient(180deg,#fff 0%,#f8faf9 100%);display:flex;flex-direction:column;box-shadow:-24px 0 60px rgba(0,0,0,.18);transform:translate3d(105%,0,0);overflow:hidden;z-index:1;max-height:100dvh;transition:transform .32s cubic-bezier(.32,.72,0,1);will-change:transform}
